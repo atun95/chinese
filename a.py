@@ -1,6 +1,9 @@
 import streamlit as st
 import random
 import streamlit.components.v1 as components
+import csv
+from datetime import datetime
+from pathlib import Path
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Pinyin Tiếng Trung", page_icon="🇨🇳", layout="wide")
@@ -49,6 +52,40 @@ tu_vung_bo_sung = [
 
 if "scores" not in st.session_state:
     st.session_state.scores = {}
+
+SCORES_FILE = Path(__file__).with_name("scores.csv")
+
+
+def save_score_row(row_data):
+    file_exists = SCORES_FILE.exists()
+    with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "thoi_gian",
+                "hoc_vien",
+                "tong_diem",
+                "tong_cau",
+                "phan_tram",
+                "bai1",
+                "bai2",
+                "bai3",
+                "bai4",
+                "bai5",
+                "bai6",
+            ],
+        )
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row_data)
+
+
+def load_all_scores():
+    if not SCORES_FILE.exists():
+        return []
+    with open(SCORES_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        return list(reader)
 
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
@@ -383,20 +420,62 @@ elif menu == "Tổng kết điểm":
         st.warning("Bạn chưa hoàn thành đủ các bài sau:")
         for label in missing:
             st.write(f"- {label}")
-        st.info("Làm xong từng bài và bấm nút chấm điểm của bài đó, rồi quay lại đây.")
+        st.info("cố lên !! ")
     else:
         earned_total = 0
         max_total = 0
         st.subheader("Kết quả chi tiết")
+        per_lesson_score = {}
         for key, label in labels.items():
             earned, total = st.session_state.scores[key]
             earned_total += earned
             max_total += total
+            per_lesson_score[key] = f"{earned}/{total}"
             st.write(f"- {label}: {earned}/{total}")
 
         st.markdown("---")
         percent = round((earned_total / max_total) * 100, 1)
         st.success(f"Điểm overall: {earned_total}/{max_total} ({percent}%)")
+
+        st.markdown("---")
+        st.subheader("Nộp bài và lưu điểm")
+        student_name = st.text_input("Ghi chú tên học viên", key="student_name")
+        if st.button("Nộp bài (lưu điểm)"):
+            if not student_name.strip():
+                st.error("Vui lòng nhập tên học viên trước khi nộp bài.")
+            else:
+                row = {
+                    "thoi_gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "hoc_vien": student_name.strip(),
+                    "tong_diem": earned_total,
+                    "tong_cau": max_total,
+                    "phan_tram": percent,
+                    "bai1": per_lesson_score["bai1"],
+                    "bai2": per_lesson_score["bai2"],
+                    "bai3": per_lesson_score["bai3"],
+                    "bai4": per_lesson_score["bai4"],
+                    "bai5": per_lesson_score["bai5"],
+                    "bai6": per_lesson_score["bai6"],
+                }
+                save_score_row(row)
+                st.success("Đã lưu điểm thành công.")
+
+        st.subheader("Xem lại điểm số đã lưu")
+        all_scores = load_all_scores()
+        if all_scores:
+            keyword = st.text_input("Tìm theo tên học viên (không bắt buộc)", key="search_score_name")
+            if keyword.strip():
+                filtered = [
+                    r
+                    for r in all_scores
+                    if keyword.strip().lower()
+                    in (r.get("hoc_vien") or r.get("hoc_sinh") or "").lower()
+                ]
+            else:
+                filtered = all_scores
+            st.dataframe(filtered, use_container_width=True)
+        else:
+            st.info("Chưa có dữ liệu điểm nào được lưu.")
 
 
 # Footer
