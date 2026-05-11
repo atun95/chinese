@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 # Cấu hình trang
-st.set_page_config(page_title="Học Pinyin Tiếng Trung", page_icon="🇨🇳", layout="wide")
+st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
 
 # --- DỮ LIỆU ---
 thanh_mau = {
