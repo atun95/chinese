@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import json
 import streamlit.components.v1 as components
 import csv
 from datetime import datetime
@@ -21,6 +22,48 @@ st.markdown(
     }
     .lesson-card b { font-size: 1.02rem; }
     .lesson-muted { color: #6b7280; }
+    
+    /* Table Redesign */
+    .chinese-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 24px;
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
+    }
+    .chinese-table th {
+        padding: 18px;
+        text-align: left;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .chinese-table td {
+        padding: 14px 18px;
+        border: 1px solid #f1f5f9;
+        color: #1e293b;
+        font-size: 1.1rem;
+    }
+    .tm-header { background-color: #0f172a; color: white; }
+    .vm-header { background-color: #fbbf24; color: #0f172a; }
+    .cat-col { 
+        background-color: #f8fafc; 
+        font-weight: 600; 
+        width: 25%; 
+        color: #475569;
+        border-right: 2px solid #e2e8f0 !important;
+    }
+    .pinyin-text {
+        font-family: 'Inter', system-ui, sans-serif;
+        font-weight: 700;
+        color: #2563eb;
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -68,6 +111,114 @@ tu_vung_bo_sung = [
     {"Chữ Hán": "不", "Pinyin": "bù", "Nghĩa tiếng Việt": "không"}
 ]
 
+# Bài 2 — vận mẫu kép (theo slide) + bảng luyện tập thanh mẫu × vận mẫu
+B2_VAN_KEP_SLIDES = [
+    {
+        "vận": "ai",
+        "hướng_dẫn": "Miệng mở rộng, đọc giống “ai” trong tiếng Việt.",
+        "ví_dụ_hán": "来",
+        "ví_dụ_py": "lái",
+        "nghe": "来",
+    },
+    {
+        "vận": "ei",
+        "hướng_dẫn": "Khẩu hình miệng hơi dẹt, đọc gần giống “ây” trong tiếng Việt.",
+        "ví_dụ_hán": "内",
+        "ví_dụ_py": "nèi",
+        "nghe": "内",
+    },
+    {
+        "vận": "ao",
+        "hướng_dẫn": "Miệng mở rộng, đọc gần giống “ao” trong tiếng Việt.",
+        "ví_dụ_hán": "宝贝",
+        "ví_dụ_py": "bǎobèi",
+        "nghe": "宝贝",
+    },
+    {
+        "vận": "ou",
+        "hướng_dẫn": "Miệng ngậm hơi tròn, đọc gần giống “âu” trong tiếng Việt.",
+        "ví_dụ_hán": "狗",
+        "ví_dụ_py": "gǒu",
+        "nghe": "狗",
+    },
+]
+
+B2_THANH_MAU_DATA = [
+    {
+        "ky_hieu": "j / q / x",
+        "ten": "Nhóm mặt lưỡi",
+        "items": [
+            {"chu": "j", "hdsd": "Mặt lưỡi áp sát ngạc cứng, không bật hơi.", "vd_han": "鸡", "vd_py": "jī", "nghe": "jī"},
+            {"chu": "q", "hdsd": "Vị trí giống 'j' nhưng cần bật hơi mạnh.", "vd_han": "七", "vd_py": "qī", "nghe": "qī"},
+            {"chu": "x", "hdsd": "Âm xát nhẹ, luồng hơi đi ra đều.", "vd_han": "西", "vd_py": "xī", "nghe": "xī"},
+        ]
+    },
+    {
+        "ky_hieu": "zh / ch / sh / r",
+        "ten": "Nhóm uốn lưỡi",
+        "items": [
+            {"chu": "zh", "hdsd": "Đầu lưỡi uốn ngược chạm ngạc cứng, không bật hơi.", "vd_han": "这", "vd_py": "zhè", "nghe": "zhè"},
+            {"chu": "ch", "hdsd": "Vị trí giống 'zh' nhưng bật hơi mạnh.", "vd_han": "吃", "vd_py": "chī", "nghe": "chī"},
+            {"chu": "sh", "hdsd": "Uốn lưỡi, để khe hở nhỏ cho hơi thoát ra.", "vd_han": "是", "vd_py": "shì", "nghe": "shì"},
+            {"chu": "r", "hdsd": "Âm uốn lưỡi, có độ rung nhẹ của dây thanh.", "vd_han": "日", "vd_py": "rì", "nghe": "rì"},
+        ]
+    },
+    {
+        "ky_hieu": "z / c / s",
+        "ten": "Nhóm đầu lưỡi - răng",
+        "items": [
+            {"chu": "z", "hdsd": "Đầu lưỡi chạm mặt sau răng trên, không bật hơi.", "vd_han": "字", "vd_py": "zì", "nghe": "zì"},
+            {"chu": "c", "hdsd": "Vị trí giống 'z' nhưng bật hơi mạnh.", "vd_han": "词", "vd_py": "cí", "nghe": "cí"},
+            {"chu": "s", "hdsd": "Đầu lưỡi để hở khe nhỏ với răng trên, âm xát.", "vd_han": "四", "vd_py": "sì", "nghe": "sì"},
+        ]
+    },
+    {
+        "ky_hieu": "y / w",
+        "ten": "Âm đệm",
+        "items": [
+            {"chu": "y", "hdsd": "Phát âm gần giống 'i' nhưng đi kèm vận mẫu khác.", "vd_han": "一", "vd_py": "yī", "nghe": "yī"},
+            {"chu": "w", "hdsd": "Phát âm gần giống 'u' nhưng đi kèm vận mẫu khác.", "vd_han": "五", "vd_py": "wǔ", "nghe": "wǔ"},
+        ]
+    }
+]
+
+B2_VAN_MAU_KEP_DATA = [
+    {
+        "nhom": "Nhóm mở rộng từ i",
+        "items": [
+            {"chu": "ia", "hdsd": "Đọc i mở nhanh sang a.", "vd_han": "家", "vd_py": "jiā", "nghe": "jiā"},
+            {"chu": "ie", "hdsd": "Đọc i trượt sang e.", "vd_han": "姐", "vd_py": "jiě", "nghe": "jiě"},
+            {"chu": "iao", "hdsd": "Đọc i -> a -> o liền mạch.", "vd_han": "小", "vd_py": "xiǎo", "nghe": "xiǎo"},
+            {"chu": "iu", "hdsd": "Thực chất là i + ou.", "vd_han": "六", "vd_py": "liù", "nghe": "liù"},
+        ]
+    },
+    {
+        "nhom": "Nhóm mở rộng từ u/ü",
+        "items": [
+            {"chu": "ua", "hdsd": "Tròn môi u mở sang a.", "vd_han": "花", "vd_py": "huā", "nghe": "huā"},
+            {"chu": "uo", "hdsd": "Tròn môi u mở sang o.", "vd_han": "我", "vd_py": "wǒ", "nghe": "wǒ"},
+            {"chu": "uai", "hdsd": "Đọc u -> a -> i nhanh.", "vd_han": "快", "vd_py": "kuài", "nghe": "kuài"},
+            {"chu": "ui", "hdsd": "Thực chất là u + ei.", "vd_han": "水", "vd_py": "shuǐ", "nghe": "shuǐ"},
+            {"chu": "üe", "hdsd": "Tròn môi ü mở sang e.", "vd_han": "月", "vd_py": "yuè", "nghe": "yuè"},
+        ]
+    }
+]
+
+B2_LUYEN_TAP_FINALS = ["a", "o", "e", "i", "u", "ü", "ai", "ei", "ao", "ou"]
+B2_LUYEN_TAP_ROWS = {
+    "b": ["ba", "bo", "", "bi", "bu", "", "bai", "bei", "bao", ""],
+    "p": ["pa", "po", "", "pi", "pu", "", "pai", "pei", "pao", "pou"],
+    "m": ["ma", "mo", "me", "mi", "mu", "", "mai", "mei", "mao", "mou"],
+    "f": ["fa", "fo", "", "", "fu", "", "", "fei", "", "fou"],
+    "d": ["da", "", "de", "di", "du", "", "dai", "dei", "dao", "dou"],
+    "t": ["ta", "", "te", "ti", "tu", "", "tai", "", "tao", "tou"],
+    "n": ["na", "", "ne", "ni", "nu", "nü", "nai", "nei", "nao", "nou"],
+    "l": ["la", "", "le", "li", "lu", "lü", "lai", "lei", "lao", "lou"],
+    "g": ["ga", "", "ge", "", "gu", "", "gai", "gei", "gao", "gou"],
+    "k": ["ka", "", "ke", "", "ku", "", "kai", "kei", "kao", "kou"],
+    "h": ["ha", "", "he", "", "hu", "", "hai", "hei", "hao", "hou"],
+}
+
 if "scores" not in st.session_state:
     st.session_state.scores = {}
 
@@ -112,10 +263,75 @@ def shuffled_options(options, seed_text):
     rnd.shuffle(opts)
     return opts
 
+
+def add_tones(base):
+    # Quy tắc đánh dấu thanh điệu: a > o/e > i/u (thứ tự ưu tiên)
+    # Riêng iu và ui thì đánh vào âm sau
+    vowels = {
+        'a': ['ā', 'á', 'ǎ', 'à'],
+        'o': ['ō', 'ó', 'ǒ', 'ò'],
+        'e': ['ē', 'é', 'ě', 'è'],
+        'i': ['ī', 'í', 'ǐ', 'ì'],
+        'u': ['ū', 'ú', 'ǔ', 'ù'],
+        'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+    }
+    
+    tones = []
+    for i in range(4):
+        res = base
+        if 'a' in res:
+            res = res.replace('a', vowels['a'][i])
+        elif 'e' in res:
+            res = res.replace('e', vowels['e'][i])
+        elif 'o' in res:
+            res = res.replace('o', vowels['o'][i])
+        elif 'iu' in res:
+            res = res.replace('u', vowels['u'][i])
+        elif 'ui' in res:
+            res = res.replace('i', vowels['i'][i])
+        elif 'i' in res:
+            res = res.replace('i', vowels['i'][i])
+        elif 'u' in res:
+            res = res.replace('u', vowels['u'][i])
+        elif 'ü' in res:
+            res = res.replace('ü', vowels['ü'][i])
+        tones.append(res)
+    return tones
+
+
+def render_pronunciation_card(item, key_prefix):
+    st.markdown(f"### {item['chu']}")
+    st.write(item["hdsd"])
+    st.write(f"Ví dụ: **{item['vd_han']}** — *{item['vd_py']}*.")
+    if st.button("🔊 Nghe ví dụ", key=f"{key_prefix}_{item['chu']}"):
+        safe_txt = json.dumps(item["nghe"], ensure_ascii=False)
+        components.html(
+            f"""
+            <script>
+            const text = {safe_txt};
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = "zh-CN";
+            u.rate = 0.9;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(u);
+            </script>
+            """,
+            height=0,
+        )
+
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 st.caption("Trình bày theo giáo án từng bài, gọn và dễ theo dõi trên lớp.")
-st.markdown("---")
+st.markdown("""
+<style>
+    .chinese-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .chinese-table th, .chinese-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    .tm-header { background-color: #0f172a; color: white; }
+    .vm-header { background-color: #fbbf24; color: #0f172a; }
+    .cat-col { font-weight: bold; background-color: #f8fafc; }
+    .pinyin-text { font-family: 'Courier New', monospace; font-weight: bold; }
+</style>
+""", unsafe_allow_html=True)
 
 # Sidebar - Điều hướng bài tập
 st.sidebar.header("Danh mục giáo án")
@@ -143,6 +359,83 @@ if menu == "Bài 1 - Phiên âm cơ bản":
         """,
         unsafe_allow_html=True,
     )
+
+    with st.expander("📊 Bảng tổng hợp Thanh mẫu & Vận mẫu (Xem trước)", expanded=True):
+        # 1. Thanh mẫu table
+        st.markdown(
+            """
+            <div style='margin-bottom: 10px;'>
+                <span style='background-color: #0f172a; color: white; padding: 5px 15px; border-radius: 5px; font-weight: bold;'>1</span>
+                <span style='font-size: 1.3rem; font-weight: bold; margin-left: 10px;'>声母 Thanh mẫu (Initials)</span>
+            </div>
+            <table class="chinese-table">
+                <tr class="tm-header">
+                    <th style="width: 30%;">Vị trí phát âm</th>
+                    <th>Thanh mẫu</th>
+                </tr>
+                <tr><td class="cat-col">Âm môi</td><td><span class="pinyin-text">b &nbsp; p &nbsp; m</span></td></tr>
+                <tr><td class="cat-col">Âm môi răng</td><td><span class="pinyin-text">f</span></td></tr>
+                <tr><td class="cat-col">Âm tròn môi</td><td><span class="pinyin-text">w</span></td></tr>
+                <tr><td class="cat-col">Âm đầu lưỡi trước</td><td><span class="pinyin-text">z &nbsp; c &nbsp; s</span></td></tr>
+                <tr><td class="cat-col">Âm đầu lưỡi giữa</td><td><span class="pinyin-text">d &nbsp; t &nbsp; n &nbsp; l</span></td></tr>
+                <tr><td class="cat-col">Âm đầu lưỡi sau</td><td><span class="pinyin-text">zh &nbsp; ch &nbsp; sh &nbsp; r</span></td></tr>
+                <tr><td class="cat-col">Âm mặt lưỡi</td><td><span class="pinyin-text">j &nbsp; q &nbsp; x</span></td></tr>
+                <tr><td class="cat-col">Âm cuống lưỡi</td><td><span class="pinyin-text">g &nbsp; k &nbsp; h &nbsp; y</span></td></tr>
+            </table>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # 2. Vận mẫu table
+        st.markdown(
+            """
+            <div style='margin-bottom: 10px; margin-top: 20px;'>
+                <span style='background-color: #fbbf24; color: #0f172a; padding: 5px 15px; border-radius: 5px; font-weight: bold;'>2</span>
+                <span style='font-size: 1.3rem; font-weight: bold; margin-left: 10px;'>韵母 Vận mẫu (Finals)</span>
+            </div>
+            <table class="chinese-table">
+                <tr class="vm-header">
+                    <th style="width: 20%;">Loại</th>
+                    <th style="text-align: center;">a</th>
+                    <th style="text-align: center;">o</th>
+                    <th style="text-align: center;">e</th>
+                    <th style="text-align: center;">i</th>
+                    <th style="text-align: center;">u</th>
+                    <th style="text-align: center;">ü</th>
+                </tr>
+                <tr>
+                    <td class="cat-col">Đơn</td>
+                    <td style="text-align: center;"><span class="pinyin-text">a</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">o</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">e</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">i</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">u</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ü</span></td>
+                </tr>
+                <tr>
+                    <td class="cat-col">Kép</td>
+                    <td style="text-align: center;"><span class="pinyin-text">ai ao</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ou</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ei</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ia ie<br>iao iu</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ua uo<br>uai ui</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">üe</span></td>
+                </tr>
+                <tr>
+                    <td class="cat-col">Mũi</td>
+                    <td style="text-align: center;"><span class="pinyin-text">an ang</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ong</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">en eng</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">ian in<br>iang ing<br>iong</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">uan un<br>uang</span></td>
+                    <td style="text-align: center;"><span class="pinyin-text">üan ün</span></td>
+                </tr>
+            </table>
+            """,
+            unsafe_allow_html=True
+        )
+
+    st.markdown("---")
     col1, col2 = st.columns(2)
     
     with col1:
@@ -453,86 +746,75 @@ elif menu == "Bài 2 - Phiên âm nâng cao (đang khóa)":
             """
             <div class="lesson-card">
                 <b>Mục tiêu</b><br/>
-                <span class="lesson-muted">Học thanh mẫu còn lại, vận mẫu kép và ghép âm theo cụm để luyện đọc trơn.</span>
+                <span class="lesson-muted">Học thanh mẫu còn lại và vận mẫu kép .</span>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-        col1, col2 = st.columns(2)
+        st.markdown("---")
+        st.subheader("Vận mẫu kép (Finals) - Nhóm cơ bản")
+        st.markdown("#### Nhóm cơ bản (ai, ei, ao, ou)")
+        c_ai, c_ei, c_ao, c_ou = st.columns(4)
+        for col, item in zip((c_ai, c_ei, c_ao, c_ou), B2_VAN_KEP_SLIDES):
+            with col:
+                render_pronunciation_card({
+                    "chu": item["vận"],
+                    "hdsd": item["hướng_dẫn"],
+                    "vd_han": item["ví_dụ_hán"],
+                    "vd_py": item["ví_dụ_py"],
+                    "nghe": item["nghe"]
+                }, "b2_vk_base")
 
-        with col1:
-            st.subheader("Thanh mẫu còn lại: cách đọc")
-            st.markdown("**Nhóm j / q / x (mặt lưỡi):**")
-            st.info("j: đặt mặt lưỡi gần ngạc cứng, không bật hơi")
-            st.info("q: vị trí giống j nhưng bật hơi mạnh hơn")
-            st.info("x: âm xát nhẹ, luồng hơi ra đều")
+        st.subheader("练习 liànxí — Luyện tập")
+        st.caption("Tập đọc thanh mẫu kết hợp vận.")
 
-            st.markdown("**Nhóm zh / ch / sh / r (uốn lưỡi):**")
-            st.info("zh: uốn lưỡi nhẹ, không bật hơi")
-            st.info("ch: uốn lưỡi nhẹ, bật hơi")
-            st.info("sh: uốn lưỡi nhẹ, âm xát")
-            st.info("r: uốn lưỡi nhẹ, âm rung/xát nhẹ")
-
-            st.markdown("**Nhóm z / c / s (đầu lưỡi-răng):**")
-            st.info("z: không bật hơi")
-            st.info("c: bật hơi")
-            st.info("s: âm xát, hơi đi liên tục")
-
-            st.markdown("**Âm đệm y / w:**")
-            st.info("y: thường đi với i/ü (ví dụ: yī)")
-            st.info("w: thường đi với u (ví dụ: wū)")
-
-        with col2:
-            st.subheader("phát âm")
-            with st.expander("Nhóm 1: j / q / x", expanded=True):
-                st.write("- **j -> jī**")
-                st.write("- **q -> qī**")
-                st.write("- **x -> xī**")
-            with st.expander("Nhóm 2: zh / ch / sh / r", expanded=False):
-                st.write("- **ch -> chī**")
-                st.write("- **sh -> shī**")
-                st.write("- **zh -> zhī**")
-                st.write("- **r -> rì**")
-            with st.expander("Nhóm 3: z / c / s", expanded=False):
-                st.write("- **z -> zī**")
-                st.write("- **c -> cī**")
-                st.write("- **s -> sī**")
-            with st.expander("Nhóm 4: y / w", expanded=False):
-                st.write("- **y -> yī**")
-                st.write("- **w -> wū**")
+        # Tạo tiêu đề bảng (Hàng đầu tiên)
+        header_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
+        header_cols[0].markdown("**Thanh mẫu/Vận mẫu**")
+        for i, final in enumerate(B2_LUYEN_TAP_FINALS):
+            header_cols[i+1].markdown(f"**{final}**")
+        
+        # Tạo các hàng dữ liệu
+        for init in ["b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h"]:
+            row_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
+            row_cols[0].markdown(f"**{init}**")
+            
+            combos = B2_LUYEN_TAP_ROWS[init]
+            for i, combo in enumerate(combos):
+                if combo:
+                    with row_cols[i+1]:
+                        with st.popover(combo, use_container_width=True):
+                            tones = add_tones(combo)
+                            for t in tones:
+                                st.write(f"- {t}")
+                else:
+                    row_cols[i+1].write("") # Ô trống
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
 
         st.markdown("---")
-        st.subheader("Vận mẫu kép: khẩu hình và cách đọc")
-        col_vm1, col_vm2 = st.columns(2)
+        st.subheader("Thanh mẫu còn lại (Initials)")
+        for group in B2_THANH_MAU_DATA:
+            st.markdown(f"#### {group['ten']} ({group['ky_hieu']})")
+            cols = st.columns(4)
+            for i, item in enumerate(group["items"]):
+                with cols[i % 4]:
+                    render_pronunciation_card(item, "b2_tm")
+            st.markdown("<br/>", unsafe_allow_html=True)
 
-        with col_vm1:
-            st.markdown("**Nhóm mở rộng từ a/e/o:**")
-            st.info("ai: mở miệng từ a, trượt nhanh về i (ví dụ: bái, zài)")
-            st.info("ei: bắt đầu e, khép dần về i (ví dụ: měi, běi)")
-            st.info("ao: mở a rồi tròn môi về o/u ngắn (ví dụ: hǎo, lǎo)")
-            st.info("ou: môi tròn nhẹ từ o, khép lại về u (ví dụ: dōu, zǒu)")
+        st.markdown("---")
+        st.subheader("Vận mẫu kép (Finals) - Nhóm mở rộng")
+        # Rows for extended finals
+        for group in B2_VAN_MAU_KEP_DATA:
+            st.markdown(f"#### {group['nhom']}")
+            cols = st.columns(4)
+            for i, item in enumerate(group["items"]):
+                with cols[i % 4]:
+                    render_pronunciation_card(item, "b2_vk_ext")
+            st.markdown("<br/>", unsafe_allow_html=True)
 
-            st.markdown("**Nhóm có i ở đầu (i + âm sau):**")
-            st.info("ia: i mở nhanh sang a, giữ rõ âm chính a (ví dụ: jiā, xià)")
-            st.info("ie: i chuyển sang e, miệng mở vừa (ví dụ: jiě, xiè)")
-            st.info("iao: i -> a -> o, đọc liền mạch (ví dụ: jiào, xiǎo)")
-            st.info("iu (iou): i chuyển nhanh sang ou, âm chính nằm ở ou (ví dụ: liù, qiú)")
-
-        with col_vm2:
-            st.markdown("**Nhóm có u ở đầu (u + âm sau):**")
-            st.info("ua: môi tròn u rồi mở ra a (ví dụ: huā, guā)")
-            st.info("uo: môi tròn u chuyển sang o (ví dụ: wǒ, duō)")
-            st.info("uai: u -> a -> i, chú ý nhấn âm a ở giữa (ví dụ: kuài, huài)")
-            st.info("ui (uei): u chuyển nhanh sang ei (ví dụ: shuǐ, duì)")
-
-            st.markdown("**Nhóm ü ghép:**")
-            st.info("üe: môi tròn như đọc ü rồi mở nhẹ sang e (ví dụ: xué, yuè)")
-
-            
-            st.success("Đọc chậm tách 2 phần trước (u + ai), sau đó đọc liền thành 1 nhịp.")
-
-        st.subheader("Ghép âm mẫu để học viên tập đọc")
+        st.subheader("Tập đọc vận mẫu kép")
         with st.expander("Mẫu 1: j / q / x + vận mẫu kép", expanded=True):
             c1, c2, c3 = st.columns(3)
             with c1:
@@ -611,13 +893,6 @@ elif menu == "Bài 2 - Phiên âm nâng cao (đang khóa)":
                 st.write("yào")
                 st.write("yuè")
 
-        st.subheader("Cụm từ ngắn để luyện đọc nối âm")
-        cum_tu_doc = [
-            "nǐ hǎo", "wǒ hěn hǎo", "lǎoshī hǎo", "xuéshēng hěn máng",
-            "zhōng guó", "shuǐ guǒ", "xiǎo xué", "duì bu qǐ", "wǒ yào xué",
-        ]
-        for item in cum_tu_doc:
-            st.write(f"- **{item}**")
 
 # --- 5. BÀI 2: NÉT CHỮ HÁN CƠ BẢN (KHÓA) ---
 elif menu == "Bài 2 - Nét chữ Hán cơ bản (đang khóa)":
