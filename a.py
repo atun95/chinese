@@ -78,9 +78,32 @@ thanh_mau = {
 }
 
 van_mau = {
-    'a': 'a (miệng mở rộng)', 'e': 'ơ (miệng hơi mở)', 'i': 'i (miệng hẹp, ngang)',
-    'u': 'u (môi tròn)', 'ü': 'uy (môi tròn, lưỡi cao)'
+    'a': 'a (miệng mở rộng)', 'o': 'ô (miệng tròn)', 'e': 'ơ/ưa (miệng hơi mở)', 
+    'i': 'i (miệng hẹp, ngang)', 'u': 'u (môi tròn)', 'ü': 'uy (môi tròn, lưỡi cao)'
 }
+
+B1_INITIALS_CARDS = [
+    {"chu": "b", "hdsd": "Âm môi, không bật hơi. Đọc gần giống 'p' nhẹ.", "vd_han": "爸爸", "vd_py": "bàba", "nghe": "爸爸"},
+    {"chu": "p", "hdsd": "Âm môi, bật hơi mạnh. Đọc giống 'ph' nhưng mím môi.", "vd_han": "跑步", "vd_py": "pǎobù", "nghe": "跑步"},
+    {"chu": "m", "hdsd": "Âm môi, âm mũi. Đọc giống 'm'.", "vd_han": "妈妈", "vd_py": "māma", "nghe": "妈妈"},
+    {"chu": "f", "hdsd": "Âm răng môi. Đọc giống 'ph'.", "vd_han": "饭", "vd_py": "fàn", "nghe": "饭"},
+    {"chu": "d", "hdsd": "Âm đầu lưỡi, không bật hơi. Đọc gần giống 't'.", "vd_han": "弟弟", "vd_py": "dìdi", "nghe": "弟弟"},
+    {"chu": "t", "hdsd": "Âm đầu lưỡi, bật hơi mạnh. Đọc giống 'th'.", "vd_han": "他", "vd_py": "tā", "nghe": "他"},
+    {"chu": "n", "hdsd": "Âm đầu lưỡi, âm mũi. Đọc giống 'n'.", "vd_han": "你", "vd_py": "nǐ", "nghe": "你"},
+    {"chu": "l", "hdsd": "Âm đầu lưỡi, âm bên. Đọc giống 'l'.", "vd_han": "老师", "vd_py": "lǎoshī", "nghe": "老师"},
+    {"chu": "g", "hdsd": "Âm cuống lưỡi, không bật hơi. Đọc gần giống 'c/k'.", "vd_han": "哥哥", "vd_py": "gēge", "nghe": "哥哥"},
+    {"chu": "k", "hdsd": "Âm cuống lưỡi, bật hơi mạnh. Đọc gần giống 'kh'.", "vd_han": "渴", "vd_py": "kě", "nghe": "渴"},
+    {"chu": "h", "hdsd": "Âm cuống lưỡi, âm xát. Đọc giống 'h'.", "vd_han": "好", "vd_py": "hǎo", "nghe": "好"},
+]
+
+B1_FINALS_CARDS = [
+    {"chu": "a", "hdsd": "Miệng mở rộng, lưỡi hạ thấp. Đọc giống 'a'.", "vd_han": "爸", "vd_py": "bà", "nghe": "爸"},
+    {"chu": "o", "hdsd": "Miệng hơi tròn, lưỡi rút về sau. Đọc giống 'ô'.", "vd_han": "我", "vd_py": "wǒ", "nghe": "我"},
+    {"chu": "e", "hdsd": "Miệng hơi mở, lưỡi rút về sau. Đọc giống 'ưa' hoặc 'ơ'.", "vd_han": "鹅", "vd_py": "é", "nghe": "鹅"},
+    {"chu": "i", "hdsd": "Miệng dẹt, lưỡi nâng cao. Đọc giống 'i'.", "vd_han": "一", "vd_py": "yī", "nghe": "一"},
+    {"chu": "u", "hdsd": "Môi tròn, lưỡi rút về sau. Đọc giống 'u'.", "vd_han": "五", "vd_py": "wǔ", "nghe": "五"},
+    {"chu": "ü", "hdsd": "Môi tròn (giống u), lưỡi nâng cao (giống i). Đọc giống 'uy'.", "vd_han": "绿", "vd_py": "lǜ", "nghe": "绿"},
+]
 
 xung_ho_tu_lay = [
     {"Chữ Hán": "爸爸", "Pinyin": "bàba", "Nghĩa tiếng Việt": "ba/bố"},
@@ -223,30 +246,70 @@ if "scores" not in st.session_state:
     st.session_state.scores = {}
 
 SCORES_FILE = Path(__file__).with_name("scores.csv")
+PROGRESS_FILE = Path(__file__).with_name("progress_lesson1.json")
+
+
+def save_progress():
+    """Lưu tiến độ làm bài hiện tại vào file JSON"""
+    try:
+        # Chỉ lưu các phím liên quan đến bài tập
+        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "student_name"))]
+        data = {
+            "scores": st.session_state.scores,
+            "values": {k: st.session_state[k] for k in quiz_keys}
+        }
+        with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Lỗi lưu tiến độ: {e}")
+
+
+def load_progress():
+    """Tải tiến độ đã lưu từ file JSON"""
+    if PROGRESS_FILE.exists():
+        try:
+            with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if "scores" in data:
+                    st.session_state.scores = data["scores"]
+                if "values" in data:
+                    for k, v in data["values"].items():
+                        st.session_state[k] = v
+        except Exception as e:
+            print(f"Lỗi tải tiến độ: {e}")
+
+
+# Tải tiến độ ngay khi khởi động
+load_progress()
 
 
 def save_score_row(row_data):
     file_exists = SCORES_FILE.exists()
-    with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                "thoi_gian",
-                "hoc_vien",
-                "tong_diem",
-                "tong_cau",
-                "phan_tram",
-                "bai1",
-                "bai2",
-                "bai3",
-                "bai4",
-                "bai5",
-                "bai6",
-            ],
-        )
-        if not file_exists:
-            writer.writeheader()
-        writer.writerow(row_data)
+    try:
+        with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(
+                f,
+                fieldnames=[
+                    "thoi_gian",
+                    "hoc_vien",
+                    "tong_diem",
+                    "tong_cau",
+                    "phan_tram",
+                    "bai1",
+                    "bai2",
+                    "bai3",
+                    "bai4",
+                    "bai5",
+                    "bai6",
+                ],
+            )
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV: {e}")
+        return False
 
 
 def load_all_scores():
@@ -299,25 +362,29 @@ def add_tones(base):
     return tones
 
 
+def play_audio(text):
+    safe_txt = json.dumps(text, ensure_ascii=False)
+    components.html(
+        f"""
+        <script>
+        const text = {safe_txt};
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "zh-CN";
+        u.rate = 0.9;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+        </script>
+        """,
+        height=0,
+    )
+
+
 def render_pronunciation_card(item, key_prefix):
     st.markdown(f"### {item['chu']}")
     st.write(item["hdsd"])
     st.write(f"Ví dụ: **{item['vd_han']}** — *{item['vd_py']}*.")
     if st.button("🔊 Nghe ví dụ", key=f"{key_prefix}_{item['chu']}"):
-        safe_txt = json.dumps(item["nghe"], ensure_ascii=False)
-        components.html(
-            f"""
-            <script>
-            const text = {safe_txt};
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = "zh-CN";
-            u.rate = 0.9;
-            window.speechSynthesis.cancel();
-            window.speechSynthesis.speak(u);
-            </script>
-            """,
-            height=0,
-        )
+        play_audio(item["nghe"])
 
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
@@ -340,10 +407,11 @@ menu = st.sidebar.radio(
     "Chọn mục:",
     [
         "Bài 1 - Phiên âm cơ bản",
-        "Bài 1 - Từ vựng xưng hô",
+        "Bài 1 - TỪ VỰNG CƠ BẢN",
         "Bài 1 - Bài tập",
-        "Bài 2 - Phiên âm nâng cao (đang khóa)",
-        "Bài 2 - Nét chữ Hán cơ bản (đang khóa)"
+        "Bài 2 - Vận mẫu kép & Luyện tập",
+        "Bài 3 - Phiên âm nâng cao (đang khóa)",
+        "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"
     ]
 )
 
@@ -360,8 +428,7 @@ if menu == "Bài 1 - Phiên âm cơ bản":
         unsafe_allow_html=True,
     )
 
-    with st.expander("📊 Bảng tổng hợp Thanh mẫu & Vận mẫu (Xem trước)", expanded=True):
-        # 1. Thanh mẫu table
+    with st.expander("📊 Bảng tổng hợp Thanh mẫu & Vận mẫu", expanded=True):
         st.markdown(
             """
             <div style='margin-bottom: 10px;'>
@@ -436,50 +503,40 @@ if menu == "Bài 1 - Phiên âm cơ bản":
         )
 
     st.markdown("---")
-    col1, col2 = st.columns(2)
+    st.subheader("1. Thanh mẫu và vận mẫu cơ bản")
     
-    with col1:
-        st.subheader("Thanh mẫu (Initials)")
-        initials_can_nho = {
-            "b": "môi, không bật hơi",
-            "p": "môi, bật hơi",
-            "m": "môi, âm mũi",
-            "f": "răng - môi, âm xát",
-            "d": "đầu lưỡi, không bật hơi",
-            "t": "đầu lưỡi, bật hơi",
-            "n": "đầu lưỡi, âm mũi",
-            "l": "đầu lưỡi, âm bên",
-            "g": "cuống lưỡi, không bật hơi",
-            "k": "cuống lưỡi, bật hơi",
-            "h": "cuống lưỡi, âm xát"
-        }
-        for x, mo_ta in initials_can_nho.items():
-            st.info(f"**{x}**: {mo_ta}")
-        
+    st.markdown("#### 1.1. Thanh mẫu (Initials)")
+    cols_tm = st.columns(4)
+    for i, item in enumerate(B1_INITIALS_CARDS):
+        with cols_tm[i % 4]:
+            render_pronunciation_card(item, "b1_tm")
             
-    with col2:
-        st.subheader("Vận mẫu (Finals)")
-        for k, v in van_mau.items():
-            st.success(f"**{k}**: {v}")
+    st.markdown("---")
+    st.markdown("#### 1.2. Vận mẫu (Finals)")
+    cols_vm = st.columns(4)
+    for i, item in enumerate(B1_FINALS_CARDS):
+        with cols_vm[i % 4]:
+            render_pronunciation_card(item, "b1_vm")
     
     st.markdown("---")
-    st.subheader("4 thanh điệu cơ bản")
+    st.subheader("2. Thanh điệu (Tones)")
+    
+    st.markdown("#### 2.1. Bốn thanh điệu cơ bản")
     st.write("1️⃣ Thanh 1: **mā** (cao và ngang)")
     st.write("2️⃣ Thanh 2: **má** (đi lên)")
     st.write("3️⃣ Thanh 3: **mǎ** (hạ xuống rồi lên)")
     st.write("4️⃣ Thanh 4: **mà** (đi xuống mạnh)")
     st.write("5️⃣ Thanh nhẹ: **ma** (nhẹ, ngắn, không nhấn)")
 
-    st.subheader("Thanh nhẹ (轻声)")
-    st.info("Thanh nhẹ thường xuất hiện ở âm tiết thứ hai trong từ láy hoặc một số từ thông dụng.")
-    st.write("Ví dụ từ láy đọc thanh nhẹ ở âm tiết sau:")
+    st.markdown("#### 2.2. Thanh nhẹ (轻声)")
+    st.write("Ví dụ từ láy đọc thanh nhẹ ở âm tiết thứ hai:")
     st.write("- **māma** (妈妈): âm tiết **ma** thứ hai là thanh nhẹ")
     st.write("- **bàba** (爸爸): âm tiết **ba** thứ hai là thanh nhẹ")
     st.write("- **gēge** (哥哥): âm tiết **ge** thứ hai là thanh nhẹ")
     st.write("- **jiějie** (姐姐): âm tiết **jie** thứ hai là thanh nhẹ")
     st.write("- **dìdi** (弟弟): âm tiết **di** thứ hai là thanh nhẹ")
 
-    st.subheader("Quy tắc biến điệu thanh 3")
+    st.markdown("#### 2.3. Quy tắc biến điệu thanh 3")
     st.info(
         "Quy tắc chuẩn: khi **hai thanh 3 liền nhau (3 + 3)**, "
         "âm tiết đứng trước phải đổi thành **thanh 2**."
@@ -491,9 +548,9 @@ if menu == "Bài 1 - Phiên âm cơ bản":
         "Ví dụ: **nǐ wǒ hǎo** thường đọc gần như **ní wó hǎo** (2 + 2 + 3)."
     )
 
-# --- 2. BÀI 1: TỪ VỰNG XƯNG HÔ ---
-elif menu == "Bài 1 - Từ vựng xưng hô":
-    st.header("👨‍👩‍👧‍👦 Bài 1: Học từ vựng xưng hô")
+# --- 2. BÀI 1: TỪ VỰNG CƠ BẢN ---
+elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
+    st.header("👨‍👩‍👧‍👦 Bài 1: Học TỪ VỰNG CƠ BẢN")
     st.markdown(
         """
         <div class="lesson-card">
@@ -513,7 +570,7 @@ elif menu == "Bài 1 - Từ vựng xưng hô":
 # --- 3. BÀI TẬP BÀI 1 ---
 elif menu == "Bài 1 - Bài tập":
     st.header("📝 Bài 1: Bài tập tổng hợp")
-    st.info("Bấm từng mục để làm bài tập. Hoàn thành đủ các mục để mở tổng điểm overall.")
+    
 
     with st.expander("Bài tập 1: Mini quiz từ vựng", expanded=True):
         st.caption("Chọn nghĩa đúng nhất cho từng từ.")
@@ -530,16 +587,26 @@ elif menu == "Bài 1 - Bài tập":
         score = 0
         for idx, item in enumerate(bai1_questions):
             choices = shuffled_options(item["choices"], f"mini-{idx}-{item['q']}")
+            key = f"bai1_q_{idx}"
+            
+            # Lấy index đã lưu nếu có
+            saved_val = st.session_state.get(key)
+            default_idx = 0
+            if saved_val in choices:
+                default_idx = choices.index(saved_val)
+                
             selected = st.radio(
                 f"Câu {idx + 1}: {item['q']} nghĩa là gì?",
                 choices,
-                key=f"bai1_{idx}",
+                index=default_idx,
+                key=key,
             )
             if selected == item["answer"]:
                 score += 1
         if st.button("Chấm điểm mini quiz từ vựng"):
             total = len(bai1_questions)
             st.session_state.scores["bai1"] = (score, total)
+            save_progress()
             st.success(f"Bạn đúng {score}/{total} câu.")
 
     with st.expander("Bài tập 2: Âm bật hơi", expanded=False):
@@ -547,14 +614,14 @@ elif menu == "Bài 1 - Bài tập":
         st.write("Chọn các âm là **ÂM BẬT HƠI**:")
         col1, col2, col3 = st.columns(3)
         with col1:
-            b = st.checkbox("B")
-            p = st.checkbox("P")
+            b = st.checkbox("B", key="q2_b")
+            p = st.checkbox("P", key="q2_p")
         with col2:
-            d = st.checkbox("D")
-            t = st.checkbox("T")
+            d = st.checkbox("D", key="q2_d")
+            t = st.checkbox("T", key="q2_t")
         with col3:
-            g = st.checkbox("G")
-            k = st.checkbox("K")
+            g = st.checkbox("G", key="q2_g")
+            k = st.checkbox("K", key="q2_k")
 
         if st.button("Kiểm tra kết quả"):
             correct = (p and t and k) and not (b or d or g)
@@ -565,6 +632,7 @@ elif menu == "Bài 1 - Bài tập":
             else:
                 st.error("Sai rồi! Nhớ nhé: P, T, K là các âm bật hơi.")
                 st.session_state.scores["bai2"] = (0, 1)
+            save_progress()
 
     with st.expander("Bài tập 3: Điền vận mẫu", expanded=False):
         st.caption("Điền đúng vận mẫu để hoàn chỉnh pinyin.")
@@ -581,10 +649,17 @@ elif menu == "Bài 1 - Bài tập":
         options = ["...", "ā", "á", "ǎ", "à", "ē", "é", "ě", "è", "ǐ", "ǒ", "ù"]
         score = 0
         for idx, (q, ans) in enumerate(questions):
+            key = f"vanmau_q_{idx}"
+            saved_val = st.session_state.get(key)
+            default_idx = 0
+            if saved_val in options:
+                default_idx = options.index(saved_val)
+                
             res = st.selectbox(
                 f"Câu {idx + 1}: Chọn vận mẫu đúng cho {q}",
                 options,
-                key=f"vanmau_{idx}",
+                index=default_idx,
+                key=key,
             )
             if res == ans:
                 score += 1
@@ -592,6 +667,7 @@ elif menu == "Bài 1 - Bài tập":
         if st.button("Chấm điểm điền vận mẫu"):
             total = len(questions)
             st.session_state.scores["bai3"] = (score, total)
+            save_progress()
             st.success(f"Bạn đúng {score}/{total} câu.")
 
     with st.expander("Bài tập 4: Đọc & viết pinyin", expanded=False):
@@ -609,13 +685,15 @@ elif menu == "Bài 1 - Bài tập":
 
         score = 0
         for py, nghia in tu_vung.items():
-            user_ans = st.text_input(f"Nghĩa của từ '{py}' là gì?", key=f"docviet_{py}")
+            key = f"docviet_{py}"
+            user_ans = st.text_input(f"Nghĩa của từ '{py}' là gì?", key=key)
             if user_ans.strip().lower() == nghia:
                 score += 1
 
         if st.button("Chấm điểm đọc & viết"):
             total = len(tu_vung)
             st.session_state.scores["bai4"] = (score, total)
+            save_progress()
             st.success(f"Bạn đúng {score}/{total} câu.")
 
     with st.expander("Bài tập 5: Luyện thanh điệu (nghe)", expanded=False):
@@ -645,13 +723,21 @@ elif menu == "Bài 1 - Bài tập":
                     """,
                     height=0,
                 )
-            selected = st.radio("Chọn đáp án:", q["choices"], key=f"tone_{idx}")
+            
+            key = f"tone_q_{idx}"
+            saved_val = st.session_state.get(key)
+            default_idx = 0
+            if saved_val in q["choices"]:
+                default_idx = q["choices"].index(saved_val)
+                
+            selected = st.radio("Chọn đáp án:", q["choices"], index=default_idx, key=key)
             if selected == q["answer"]:
                 score += 1
 
         if st.button("Chấm điểm thanh điệu"):
             total = len(tone_questions)
             st.session_state.scores["bai5"] = (score, total)
+            save_progress()
             st.success(f"Bạn đúng {score}/{total} câu.")
 
     with st.expander("Bài tập 6: Câu ngắn", expanded=False):
@@ -664,15 +750,22 @@ elif menu == "Bài 1 - Bài tập":
         ]
         score = 0
         for idx, item in enumerate(short_sentence_questions):
-            selected = st.radio(f"Câu {idx + 1}: {item['q']}", item["choices"], key=f"cau_ngan_{idx}")
+            key = f"cau_ngan_q_{idx}"
+            saved_val = st.session_state.get(key)
+            default_idx = 0
+            if saved_val in item["choices"]:
+                default_idx = item["choices"].index(saved_val)
+                
+            selected = st.radio(f"Câu {idx + 1}: {item['q']}", item["choices"], index=default_idx, key=key)
             if selected == item["answer"]:
                 score += 1
         if st.button("Chấm điểm câu ngắn"):
             total = len(short_sentence_questions)
             st.session_state.scores["bai6"] = (score, total)
+            save_progress()
             st.success(f"Bạn đúng {score}/{total} câu.")
 
-    with st.expander("Tổng kết điểm & lưu kết quả", expanded=False):
+    with st.expander("Tổng kết điểm & lưu kết quả", expanded=True):
         labels = {
             "bai1": "Bài tập 1: Mini quiz từ vựng",
             "bai2": "Bài tập 2: Âm bật hơi",
@@ -681,9 +774,10 @@ elif menu == "Bài 1 - Bài tập":
             "bai5": "Bài tập 5: Thanh điệu nghe",
             "bai6": "Bài tập 6: Câu ngắn",
         }
+        
         missing = [label for key, label in labels.items() if key not in st.session_state.scores]
         if missing:
-            st.warning("Bạn chưa hoàn thành đủ các bài sau:")
+            st.warning("Bạn chưa hoàn thành đủ các bài sau để tính điểm tổng kết:")
             for label in missing:
                 st.write(f"- {label}")
         else:
@@ -717,190 +811,181 @@ elif menu == "Bài 1 - Bài tập":
                         "bai5": per_lesson_score["bai5"],
                         "bai6": per_lesson_score["bai6"],
                     }
-                    save_score_row(row)
-                    st.success("Đã lưu điểm thành công.")
+                    if save_score_row(row):
+                        st.success("Đã lưu điểm thành công vào hệ thống.")
+                        # Xóa file tiến độ sau khi đã nộp bài thành công (tùy chọn)
+                        if PROGRESS_FILE.exists():
+                            PROGRESS_FILE.unlink()
+                        st.session_state.scores = {}
+                        st.rerun()
 
-            all_scores = load_all_scores()
-            if all_scores:
-                keyword = st.text_input("Tìm theo tên học viên (không bắt buộc)", key="search_score_name")
-                if keyword.strip():
-                    filtered = [
-                        r
-                        for r in all_scores
-                        if keyword.strip().lower() in (r.get("hoc_vien") or r.get("hoc_sinh") or "").lower()
-                    ]
-                else:
-                    filtered = all_scores
-                st.dataframe(filtered, use_container_width=True)
+    with st.expander("📊 Lịch sử điểm đã lưu", expanded=False):
+        all_scores = load_all_scores()
+        if all_scores:
+            keyword = st.text_input("Tìm theo tên học viên", key="search_score_name")
+            if keyword.strip():
+                filtered = [
+                    r
+                    for r in all_scores
+                    if keyword.strip().lower() in (r.get("hoc_vien") or "").lower()
+                ]
             else:
-                st.info("Chưa có dữ liệu điểm nào được lưu.")
+                filtered = all_scores
+            st.dataframe(filtered, use_container_width=True)
+        else:
+            st.info("Chưa có dữ liệu điểm nào được lưu.")
 
 # --- 4. BÀI 2: PHIÊN ÂM NÂNG CAO (KHÓA) ---
-elif menu == "Bài 2 - Phiên âm nâng cao (đang khóa)":
-    st.header("🔒 Bài 2: Phiên âm nâng cao")
+elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
+    st.header("📚 Bài 2: Vận mẫu kép & Luyện tập ghép âm")
+    st.markdown(
+        """
+        <div class="lesson-card">
+            <b>Mục tiêu</b><br/>
+            <span class="lesson-muted">Nắm vững 4 vận mẫu kép cơ bản (ai, ei, ao, ou) và luyện tập ghép âm với thanh mẫu đã học.</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.subheader("1. Vận mẫu kép (Finals) - Nhóm cơ bản")
+    c_ai, c_ei, c_ao, c_ou = st.columns(4)
+    for col, item in zip((c_ai, c_ei, c_ao, c_ou), B2_VAN_KEP_SLIDES):
+        with col:
+            render_pronunciation_card({
+                "chu": item["vận"],
+                "hdsd": item["hướng_dẫn"],
+                "vd_han": item["ví_dụ_hán"],
+                "vd_py": item["ví_dụ_py"],
+                "nghe": item["nghe"]
+            }, "b2_vk_base")
+
+    st.markdown("---")
+    st.subheader("2. 练习 liànxí — Bảng luyện tập ghép âm")
+    st.caption("Click vào từng âm để xem 4 thanh điệu.")
+
+    # Tiêu đề bảng
+    header_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
+    header_cols[0].markdown("**Thanh/Vận**")
+    for i, final in enumerate(B2_LUYEN_TAP_FINALS):
+        header_cols[i+1].markdown(f"**{final}**")
+    
+    for init in ["b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h"]:
+        row_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
+        row_cols[0].markdown(f"**{init}**")
+        combos = B2_LUYEN_TAP_ROWS[init]
+        for i, combo in enumerate(combos):
+            if combo:
+                with row_cols[i+1]:
+                    with st.popover(combo, use_container_width=True):
+                        tones = add_tones(combo)
+                        for t in tones:
+                            st.write(f"- {t}")
+            else:
+                row_cols[i+1].write("")
+
+    st.markdown("---")
+    st.subheader("3. 💡 Luyện tập đọc từ và câu ngắn")
+    st.info("Ghép các thanh mẫu đã học với vận mẫu kép để tạo thành từ có nghĩa. Hãy tập đọc to!")
+
+    col_t1, col_t2 = st.columns(2)
+    with col_t1:
+        st.markdown("**🔹 Từ vựng thực hành:**")
+        st.write("- **你好** (nǐ hǎo): Chào bạn")
+        st.write("- **老师** (lǎoshī): Thầy/Cô giáo")
+        st.write("- **大** (dà): Lớn / To")
+        st.write("- **好** (hǎo): Tốt / Khỏe / Ngon")
+        st.write("- **买** (mǎi): Mua")
+        st.write("- **卖** (mài): Bán")
+        st.write("- **猫** (māo): Con mèo")
+        st.write("- **马** (mǎ): Con ngựa")
+        st.write("- **口** (kǒu): Miệng / Nhân khẩu")
+        st.write("- **白** (bái): Màu trắng")
+        st.write("- **开** (kāi): Mở / Nở (hoa)")
+
+    with col_t2:
+        st.markdown("**🔹 Câu nói thực hành:**")
+        st.write("- **你好吗?** (nǐ hǎo ma?): Bạn khỏe không?")
+        st.write("- **我很好。** (wǒ hěn hǎo): Tôi rất khỏe.")
+        st.write("- **他不来。** (tā bù lái): Anh ấy không đến.")
+        st.write("- **妈妈买猫。** (māma mǎi māo): Mẹ mua mèo.")
+        st.write("- **爸爸 mǎi mǎ.** (bàba mǎi mǎ): Ba mua ngựa.")
+        st.write("- **老师忙吗?** (lǎoshī máng ma?): Thầy cô bận không?")
+        st.write("- **他不忙。** (tā bù máng): Anh ấy không bận.")
+        st.write("- **大马。** (dà mǎ): Ngựa lớn.")
+        st.write("- **白猫。** (bái māo): Mèo trắng.")
+        st.write("- **开门。** (kāi mén): Mở cửa (m-en bài sau sẽ học kỹ hơn)")
+
+    if st.button("🔊 Nghe mẫu toàn bộ phần thực hành"):
+        full_practice_text = (
+            "nǐ hǎo. lǎoshī. dà. hǎo. mǎi. mài. māo. mǎ. kǒu. bái. kāi. "
+            "nǐ hǎo ma? wǒ hěn hǎo. tā bù lái. māma mǎi māo. bàba mǎi mǎ. "
+            "lǎoshī máng ma? tā bù máng. dà mǎ. bái māo. kāi mén."
+        )
+        play_audio(full_practice_text)
+
+# --- 4. BÀI 3: PHIÊN ÂM NÂNG CAO (KHÓA) ---
+elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
+    st.header("🔒 Bài 3: Phiên âm nâng cao")
     if not teacher_unlock:
         st.warning("Nội dung này đang khóa. Bật 'Mở khóa nội dung Bài 2 (GV)' ở sidebar để xem.")
     else:
-        st.success("Chế độ giáo viên đã bật. Đây là nội dung giảng dạy Bài 2.")
+        st.success("Chế độ giáo viên đã bật. Đây là nội dung giảng dạy Bài 3.")
         st.markdown(
             """
             <div class="lesson-card">
                 <b>Mục tiêu</b><br/>
-                <span class="lesson-muted">Học thanh mẫu còn lại và vận mẫu kép .</span>
+                <span class="lesson-muted">Học các thanh mẫu khó (j, q, x, zh, ch, sh, r...) và vận mẫu kép mở rộng.</span>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-        st.markdown("---")
-        st.subheader("Vận mẫu kép (Finals) - Nhóm cơ bản")
-        st.markdown("#### Nhóm cơ bản (ai, ei, ao, ou)")
-        c_ai, c_ei, c_ao, c_ou = st.columns(4)
-        for col, item in zip((c_ai, c_ei, c_ao, c_ou), B2_VAN_KEP_SLIDES):
-            with col:
-                render_pronunciation_card({
-                    "chu": item["vận"],
-                    "hdsd": item["hướng_dẫn"],
-                    "vd_han": item["ví_dụ_hán"],
-                    "vd_py": item["ví_dụ_py"],
-                    "nghe": item["nghe"]
-                }, "b2_vk_base")
-
-        st.subheader("练习 liànxí — Luyện tập")
-        st.caption("Tập đọc thanh mẫu kết hợp vận.")
-
-        # Tạo tiêu đề bảng (Hàng đầu tiên)
-        header_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-        header_cols[0].markdown("**Thanh mẫu/Vận mẫu**")
-        for i, final in enumerate(B2_LUYEN_TAP_FINALS):
-            header_cols[i+1].markdown(f"**{final}**")
-        
-        # Tạo các hàng dữ liệu
-        for init in ["b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h"]:
-            row_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-            row_cols[0].markdown(f"**{init}**")
-            
-            combos = B2_LUYEN_TAP_ROWS[init]
-            for i, combo in enumerate(combos):
-                if combo:
-                    with row_cols[i+1]:
-                        with st.popover(combo, use_container_width=True):
-                            tones = add_tones(combo)
-                            for t in tones:
-                                st.write(f"- {t}")
-                else:
-                    row_cols[i+1].write("") # Ô trống
-        
-        st.markdown("<br/>", unsafe_allow_html=True)
-
-        st.markdown("---")
-        st.subheader("Thanh mẫu còn lại (Initials)")
+        st.subheader("1. Thanh mẫu còn lại (Initials)")
         for group in B2_THANH_MAU_DATA:
             st.markdown(f"#### {group['ten']} ({group['ky_hieu']})")
             cols = st.columns(4)
             for i, item in enumerate(group["items"]):
                 with cols[i % 4]:
-                    render_pronunciation_card(item, "b2_tm")
+                    render_pronunciation_card(item, "b3_tm")
             st.markdown("<br/>", unsafe_allow_html=True)
 
         st.markdown("---")
-        st.subheader("Vận mẫu kép (Finals) - Nhóm mở rộng")
-        # Rows for extended finals
+        st.subheader("2. Vận mẫu kép (Finals) - Nhóm mở rộng")
         for group in B2_VAN_MAU_KEP_DATA:
             st.markdown(f"#### {group['nhom']}")
             cols = st.columns(4)
             for i, item in enumerate(group["items"]):
                 with cols[i % 4]:
-                    render_pronunciation_card(item, "b2_vk_ext")
+                    render_pronunciation_card(item, "b3_vk_ext")
             st.markdown("<br/>", unsafe_allow_html=True)
 
-        st.subheader("Tập đọc vận mẫu kép")
+        st.subheader("3. Luyện tập đọc âm tiết khó")
         with st.expander("Mẫu 1: j / q / x + vận mẫu kép", expanded=True):
             c1, c2, c3 = st.columns(3)
             with c1:
                 st.write("**j-**")
-                st.write("jiā")
-                st.write("jiě")
-                st.write("jiào")
-                st.write("jiǔ")
+                st.write("jiā, jiě, jiào, jiǔ")
             with c2:
                 st.write("**q-**")
-                st.write("qiā")
-                st.write("qié")
-                st.write("qiào")
-                st.write("qiú")
+                st.write("qiā, qié, qiào, qiú")
             with c3:
                 st.write("**x-**")
-                st.write("xiā")
-                st.write("xiě")
-                st.write("xiǎo")
-                st.write("xué")
+                st.write("xiā, xiě, xiǎo, xué")
 
         with st.expander("Mẫu 2: zh / ch / sh + ai/ei/ao/ou", expanded=False):
             c1, c2, c3 = st.columns(3)
-            with c1:
-                st.write("**zh-**")
-                st.write("zhāi")
-                st.write("zhēi")
-                st.write("zhāo")
-                st.write("zhōu")
-            with c2:
-                st.write("**ch-**")
-                st.write("chái")
-                st.write("chēi")
-                st.write("chāo")
-                st.write("chōu")
-            with c3:
-                st.write("**sh-**")
-                st.write("shài")
-                st.write("shéi")
-                st.write("shāo")
-                st.write("shōu")
+            with c1: st.write("**zh-**: zhāi, zhēi, zhāo, zhōu")
+            with c2: st.write("**ch-**: chái, chēi, chāo, chōu")
+            with c3: st.write("**sh-**: shài, shéi, shāo, shōu")
 
-        with st.expander("Mẫu 3: z / c / s + ai/ei/ao/ou", expanded=False):
-            c1, c2, c3 = st.columns(3)
-            with c1:
-                st.write("**z-**")
-                st.write("zāi")
-                st.write("zéi")
-                st.write("zāo")
-                st.write("zōu")
-            with c2:
-                st.write("**c-**")
-                st.write("cāi")
-                st.write("céi")
-                st.write("cāo")
-                st.write("cōu")
-            with c3:
-                st.write("**s-**")
-                st.write("sāi")
-                st.write("séi")
-                st.write("sāo")
-                st.write("sōu")
-
-        with st.expander("Mẫu 4: w / y + ua/uo/uai/ui", expanded=False):
-            c1, c2 = st.columns(2)
-            with c1:
-                st.write("**w-**")
-                st.write("wā")
-                st.write("wǒ")
-                st.write("wài")
-                st.write("wèi")
-            with c2:
-                st.write("**y-**")
-                st.write("yā")
-                st.write("yě")
-                st.write("yào")
-                st.write("yuè")
-
-
-# --- 5. BÀI 2: NÉT CHỮ HÁN CƠ BẢN (KHÓA) ---
-elif menu == "Bài 2 - Nét chữ Hán cơ bản (đang khóa)":
-    st.header("🔒 Bài 2: Nét chữ Hán cơ bản")
+# --- 5. BÀI 3: NÉT CHỮ HÁN CƠ BẢN (KHÓA) ---
+elif menu == "Bài 3 - Nét chữ Hán cơ bản (đang khóa)":
+    st.header("🔒 Bài 3: Nét chữ Hán cơ bản")
     if not teacher_unlock:
         st.warning("Nội dung này đang khóa. Bật 'Mở khóa nội dung Bài 2 (GV)' ở sidebar để xem.")
     else:
-        st.success("Chế độ giáo viên đã bật. Đây là phần chữ Hán tách riêng.")
+        st.success("Chế độ giáo viên đã bật.")
         st.markdown(
             """
             <div class="lesson-card">
