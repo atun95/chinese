@@ -216,26 +216,33 @@ elif menu == "Bài 1 - Bài tập":
         missing = [v for k, v in labels.items() if k not in st.session_state.scores]
         if missing: st.warning(f"Chưa xong: {', '.join(missing)}")
         else:
-            earned = sum(s[0] for s in st.session_state.scores.values()); total = sum(s[1] for s in st.session_state.scores.values())
-            st.success(f"Tổng: {earned}/{total} ({round(earned/total*100,1)}%)")
+            earned = sum(s[0] for s in st.session_state.scores.values())
+            total = sum(s[1] for s in st.session_state.scores.values())
+            score_10 = round((earned / total) * 10, 2)
+            percent = round((earned / total) * 100, 1)
+            
+            st.success(f"📈 Kết quả tổng quát: **{score_10} / 10** điểm ({percent}%)")
+            st.info(f"Chi tiết: Đúng {earned} trên tổng số {total} câu hỏi.")
+            
             name = st.text_input("Tên học viên", key="student_name")
             if st.button("Nộp bài"):
                 if name: 
-                    if save_score_row({
+                    row = {
                         "thoi_gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                         "hoc_vien": name, 
-                        "tong_diem": earned, 
+                        "tong_diem": score_10, 
                         "tong_cau": total, 
-                        "phan_tram": round(earned/total*100,1), 
+                        "phan_tram": percent, 
                         "bai1": st.session_state.scores.get("bai1",""), 
                         "bai2": st.session_state.scores.get("bai2",""), 
                         "bai3": st.session_state.scores.get("bai3",""), 
                         "bai4": st.session_state.scores.get("bai4",""), 
                         "bai5": st.session_state.scores.get("bai5",""), 
                         "bai6": st.session_state.scores.get("bai6","")
-                    }):
-                        st.success("Đã lưu!"); st.session_state.scores = {}; st.rerun()
-                else: st.error("Nhập tên!")
+                    }
+                    if save_score_row(row):
+                        st.success("Đã lưu điểm thành công!"); st.session_state.scores = {}; st.rerun()
+                else: st.error("Vui lòng nhập tên học viên!")
         
         all_s = load_all_scores()
         if all_s: st.dataframe(all_s, use_container_width=True)
