@@ -228,17 +228,17 @@ elif menu == "Bài 1 - Bài tập":
             if st.button("Nộp bài"):
                 if name: 
                     row = {
-                        "thoi_gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
-                        "hoc_vien": name, 
-                        "tong_diem": score_10, 
-                        "tong_cau": total, 
-                        "phan_tram": percent, 
-                        "bai1": st.session_state.scores.get("bai1",""), 
-                        "bai2": st.session_state.scores.get("bai2",""), 
-                        "bai3": st.session_state.scores.get("bai3",""), 
-                        "bai4": st.session_state.scores.get("bai4",""), 
-                        "bai5": st.session_state.scores.get("bai5",""), 
-                        "bai6": st.session_state.scores.get("bai6","")
+                        "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
+                        "học viên": name, 
+                        "tổng điểm": score_10, 
+                        "tổng câu": total, 
+                        "phần trăm": percent, 
+                        "bài 1": st.session_state.scores.get("bai1",""), 
+                        "bài 2": st.session_state.scores.get("bai2",""), 
+                        "bài 3": st.session_state.scores.get("bai3",""), 
+                        "bài 4": st.session_state.scores.get("bai4",""), 
+                        "bài 5": st.session_state.scores.get("bai5",""), 
+                        "bài 6": st.session_state.scores.get("bai6","")
                     }
                     if save_score_row(row):
                         st.success("Đã lưu điểm thành công!"); st.session_state.scores = {}; st.rerun()
