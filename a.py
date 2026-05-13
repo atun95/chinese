@@ -257,7 +257,7 @@ elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
     st.markdown("---")
     st.subheader("2. Bảng luyện tập ghép âm")
     h_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-    h_cols[0].markdown("**T/V**")
+    h_cols[0].markdown("**Thanh mẫu / Vận mẫu**")
     for i, f in enumerate(B2_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
     for init in B2_LUYEN_TAP_ROWS.keys():
         r_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
