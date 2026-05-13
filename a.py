@@ -59,7 +59,7 @@ def save_score_row(row_data):
     file_exists = SCORES_FILE.exists()
     try:
         with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thoi_gian","hoc_vien","tong_diem","tong_cau","phan_tram","bai1","bai2","bai3","bai4","bai5","bai6"])
+            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","tổng điểm","tổng câu","phần trăm","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
             if not file_exists: writer.writeheader()
             writer.writerow(row_data)
         return True
