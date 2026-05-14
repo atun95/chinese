@@ -178,13 +178,17 @@ elif menu == "Bài 1 - Bài tập":
             if res == ans: score += 1
         if st.button("Chấm điểm bài 3"): st.session_state.scores["bai3"] = (score, len(qs)); save_progress(); st.success(f"Bạn đúng {score}/{len(qs)} câu.")
 
-    with st.expander("Bài tập 4: Đọc & viết pinyin", expanded=False):
-        tu_vung = {"wǒ": "tôi/mình", "nǐ": "bạn/cậu", "māma": "mẹ/má", "lǎoshī": "thầy/cô giáo", "xuéshēng": "học sinh", "hěn": "rất", "máng": "bận", "bù": "không"}
-        score = 0
-        for py, nghia in tu_vung.items():
-            ans = st.text_input(f"Nghĩa của '{py}' là gì?", key=f"docviet_{py}")
-            if ans.strip().lower() == nghia: score += 1
-        if st.button("Chấm điểm bài 4"): st.session_state.scores["bai4"] = (score, len(tu_vung)); save_progress(); st.success(f"Bạn đúng {score}/{len(tu_vung)} câu.")
+    q4 = [
+        {"q": "tôi/mình", "choices": ["wǒ", "nǐ", "tā"], "answer": "wǒ"},
+        {"q": "bạn/cậu", "choices": ["nǐ", "wǒ", "tā"], "answer": "nǐ"},
+        {"q": "mẹ/má", "choices": ["māma", "bàba", "mèimei"], "answer": "māma"},
+        {"q": "thầy/cô giáo", "choices": ["lǎoshī", "xuéshēng", "lǎobǎn"], "answer": "lǎoshī"},
+        {"q": "học sinh", "choices": ["xuéshēng", "lǎoshī", "tóngxué"], "answer": "xuéshēng"},
+        {"q": "rất", "choices": ["hěn", "tài", "zhēn"], "answer": "hěn"},
+        {"q": "bận", "choices": ["máng", "lèi", "è"], "answer": "máng"},
+        {"q": "không", "choices": ["bù", "méi", "shì"], "answer": "bù"},
+    ]
+    render_quiz_section(q4, "bai4", "Bài tập 4: Dịch sang Pinyin", "Chọn Pinyin đúng cho nghĩa tiếng Việt tương ứng.", save_progress)
 
     # Bài tập 5 & 6
     tone_qs = [
