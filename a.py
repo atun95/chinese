@@ -169,12 +169,21 @@ elif menu == "Bài 1 - Bài tập":
             save_progress()
 
     with st.expander("Bài tập 3: Điền vận mẫu", expanded=False):
-        qs = [("m___ma", "ā"), ("n___", "ǐ"), ("l___oshī", "ǎ"), ("xu___shēng", "é"), ("h___n", "ě"), ("m___ng", "á"), ("b___", "ù"), ("w___", "ǒ")]
+        qs = [
+            ("m___ma", "ā", "mẹ"), 
+            ("n___", "ǐ", "bạn/cậu"), 
+            ("l___oshī", "ǎ", "thầy/cô giáo"), 
+            ("xu___shēng", "é", "học sinh"), 
+            ("h___n", "ě", "rất"), 
+            ("m___ng", "á", "bận"), 
+            ("b___", "ù", "không"), 
+            ("w___", "ǒ", "tôi/mình")
+        ]
         opts = ["...", "ā", "á", "ǎ", "à", "ē", "é", "ě", "è", "ǐ", "ǒ", "ù"]
         score = 0
-        for i, (q, ans) in enumerate(qs):
+        for i, (q, ans, meaning) in enumerate(qs):
             key = f"vanmau_q_{i}"
-            res = st.selectbox(f"Chọn vận mẫu cho {q}", opts, index=opts.index(st.session_state.get(key, "...")), key=key)
+            res = st.selectbox(f"Chọn vận mẫu cho {q} ({meaning})", opts, index=opts.index(st.session_state.get(key, "...")), key=key)
             if res == ans: score += 1
         if st.button("Chấm điểm bài 3"): st.session_state.scores["bai3"] = (score, len(qs)); save_progress(); st.success(f"Bạn đúng {score}/{len(qs)} câu.")
 
