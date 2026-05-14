@@ -83,7 +83,10 @@ def add_tones(base):
         tones.append(res)
     return tones
 
-load_progress()
+# Chỉ tải tiến độ một lần khi khởi tạo session
+if "initialized" not in st.session_state:
+    load_progress()
+    st.session_state.initialized = True
 
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
@@ -257,7 +260,7 @@ elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
     st.markdown("---")
     st.subheader("2. Bảng luyện tập ghép âm")
     h_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-    h_cols[0].markdown("**Thanh mẫu / Vận mẫu**")
+    h_cols[0].markdown("**T/V**")
     for i, f in enumerate(B2_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
     for init in B2_LUYEN_TAP_ROWS.keys():
         r_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
