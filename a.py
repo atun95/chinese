@@ -60,7 +60,7 @@ def save_score_row(row_data):
     file_exists = SCORES_FILE.exists()
     try:
         with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","bài học","tổng điểm","tổng câu","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT1: Từ vựng", "BT2: Âm bật hơi", "BT3: Vận mẫu", "BT4: Pinyin", "BT5: Nghe", "BT6: Câu ngắn"])
             if not file_exists: writer.writeheader()
             writer.writerow(row_data)
         return True
@@ -267,15 +267,13 @@ elif menu == "Bài 1 - Bài tập":
                     row = {
                         "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                         "học viên": name, 
-                        "bài học": "Bài 1",
                         "tổng điểm": score_10, 
-                        "tổng câu": total, 
-                        "bài 1": fmt_b1("bai1"), 
-                        "bài 2": fmt_b1("bai2"), 
-                        "bài 3": fmt_b1("bai3"), 
-                        "bài 4": fmt_b1("bai4"), 
-                        "bài 5": fmt_b1("bai5"), 
-                        "bài 6": fmt_b1("bai6")
+                        "BT1: Từ vựng": fmt_b1("bai1"), 
+                        "BT2: Âm bật hơi": fmt_b1("bai2"), 
+                        "BT3: Vận mẫu": fmt_b1("bai3"), 
+                        "BT4: Pinyin": fmt_b1("bai4"), 
+                        "BT5: Nghe": fmt_b1("bai5"), 
+                        "BT6: Câu ngắn": fmt_b1("bai6")
                     }
                     if save_score_row(row):
                         st.success("Đã lưu điểm Bài 1 thành công!"); st.session_state.scores = {}; st.rerun()
