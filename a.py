@@ -39,7 +39,7 @@ PROGRESS_FILE = Path(__file__).with_name("progress_lesson1.json")
 
 def save_progress():
     try:
-        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "student_name"))]
+        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "student_name"))]
         data = {"scores": st.session_state.scores, "values": {k: st.session_state[k] for k in quiz_keys}}
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -59,7 +59,7 @@ def save_score_row(row_data):
     file_exists = SCORES_FILE.exists()
     try:
         with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","tổng điểm","tổng câu","phần trăm","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
+            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","bài học","tổng điểm","tổng câu","phần trăm","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
             if not file_exists: writer.writeheader()
             writer.writerow(row_data)
         return True
@@ -92,7 +92,7 @@ if "initialized" not in st.session_state:
 st.title("Học Pinyin Cơ Bản")
 st.sidebar.header("Danh mục giáo án")
 teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung Bài 2 (GV)")
-menu = st.sidebar.radio("Chọn mục:", ["Bài 1 - Phiên âm cơ bản", "Bài 1 - TỪ VỰNG CƠ BẢN", "Bài 1 - Bài tập", "Bài 2 - Vận mẫu kép & Luyện tập", "Bài 3 - Phiên âm nâng cao (đang khóa)", "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"])
+menu = st.sidebar.radio("Chọn mục:", ["Bài 1 - Phiên âm cơ bản", "Bài 1 - TỪ VỰNG CƠ BẢN", "Bài 1 - Bài tập", "Bài 2 - Vận mẫu kép & Luyện tập", "Bài 2 - Bài tập", "Bài 3 - Phiên âm nâng cao (đang khóa)", "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"])
 
 if menu == "Bài 1 - Phiên âm cơ bản":
     render_lesson_intro("📚 Bài 1: Học phiên âm cơ bản", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
@@ -246,6 +246,7 @@ elif menu == "Bài 1 - Bài tập":
                     row = {
                         "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                         "học viên": name, 
+                        "bài học": "Bài 1",
                         "tổng điểm": score_10, 
                         "tổng câu": total, 
                         "phần trăm": percent, 
@@ -283,6 +284,74 @@ elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
                 with r_cols[i+1]:
                     with st.popover(combo, use_container_width=True):
                         for t in add_tones(combo): st.write(f"- {t}")
+
+elif menu == "Bài 2 - Bài tập":
+    st.header("📝 Bài 2: Bài tập vận mẫu kép")
+    
+    # 1. Mini quiz từ vựng
+    render_quiz_section(B2_QUIZ_VOCAB, "b2_vcb", "Bài tập 1: Mini quiz từ vựng", "Chọn nghĩa đúng nhất cho từng từ.", save_progress)
+
+    # 2. Luyện nghe
+    with st.expander("Bài tập 2: Luyện nghe và chọn Pinyin", expanded=False):
+        score_b2_ls = 0
+        for i, q in enumerate(B2_QUIZ_LISTENING):
+            st.write(f"**Câu {i+1}:** Nghe từ '{q['q']}' và chọn pinyin đúng")
+            if st.button(f"🔊 Nghe mẫu", key=f"b2_listen_{i}"): play_audio(q["hanzi"])
+            key = f"b2_tone_q_{i}"
+            choices = q["choices"]
+            saved_val = st.session_state.get(key)
+            default_idx = 0
+            if saved_val in choices: default_idx = choices.index(saved_val)
+            res = st.radio("Chọn đáp án:", choices, index=default_idx, key=key)
+            if res == q["answer"]: score_b2_ls += 1
+        if st.button("Chấm điểm bài 2", key="btn_b2_ls"): 
+            st.session_state.scores["b2_ls"] = (score_b2_ls, len(B2_QUIZ_LISTENING))
+            save_progress()
+            st.success(f"Bạn đúng {score_b2_ls}/{len(B2_QUIZ_LISTENING)} câu.")
+
+    # 3. Điền vận mẫu
+    with st.expander("Bài tập 3: Điền vận mẫu & thanh điệu", expanded=False):
+        score_b2_fill = 0
+        opts = ["...", "ā", "á", "ǎ", "à", "ē", "é", "ě", "è", "ǐ", "ǒ", "ù", "ái", "ǎi", "èi", "ǎo", "ǒu", "áng"]
+        for i, q in enumerate(B2_QUIZ_FILL_BLANKS):
+            key = f"b2_fill_q_{i}"
+            saved_val = st.session_state.get(key, "...")
+            default_idx = opts.index(saved_val) if saved_val in opts else 0
+            res = st.selectbox(f"Chọn phần còn thiếu cho {q['q']} ({q['meaning']})", opts, index=default_idx, key=key)
+            if res == q["ans"]: score_b2_fill += 1
+        if st.button("Chấm điểm bài 3", key="btn_b2_fill"):
+            st.session_state.scores["b2_fill"] = (score_b2_fill, len(B2_QUIZ_FILL_BLANKS))
+            save_progress()
+            st.success(f"Bạn đúng {score_b2_fill}/{len(B2_QUIZ_FILL_BLANKS)} câu.")
+
+    with st.expander("📊 Lịch sử & Tổng kết Bài 2", expanded=True):
+        labels_b2 = {"b2_vcb": "BT1: Từ vựng", "b2_ls": "BT2: Nghe", "b2_fill": "BT3: Điền âm"}
+        missing_b2 = [v for k, v in labels_b2.items() if k not in st.session_state.scores]
+        if missing_b2: st.warning(f"Chưa xong: {', '.join(missing_b2)}")
+        else:
+            b2_earned = sum(st.session_state.scores[k][0] for k in labels_b2.keys())
+            b2_total = sum(st.session_state.scores[k][1] for k in labels_b2.keys())
+            b2_score_10 = round((b2_earned / b2_total) * 10, 2)
+            st.success(f"📈 Kết quả Bài 2: **{b2_score_10} / 10** điểm")
+            
+            name = st.text_input("Tên học viên (Bài 2)", key="student_name_b2")
+            if st.button("Nộp bài tập Bài 2"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
+                        "học viên": name, 
+                        "bài học": "Bài 2",
+                        "tổng điểm": b2_score_10, 
+                        "tổng câu": b2_total, 
+                        "phần trăm": round((b2_earned / b2_total) * 100, 1),
+                        "bài 1": st.session_state.scores.get("b2_vcb",""), 
+                        "bài 2": st.session_state.scores.get("b2_ls",""), 
+                        "bài 3": st.session_state.scores.get("b2_fill",""), 
+                        "bài 4": "", "bài 5": "", "bài 6": ""
+                    }
+                    if save_score_row(row):
+                        st.success("Đã lưu điểm thành công!"); st.rerun()
+                else: st.error("Vui lòng nhập tên học viên!")
 
 elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa. Bật mở khóa ở sidebar.")
