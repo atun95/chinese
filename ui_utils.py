@@ -49,7 +49,7 @@ def render_quiz_section(questions, key_prefix, title, caption, save_func):
         st.caption(caption)
         score = 0
         for idx, item in enumerate(questions):
-            choices = shuffled_options(item["choices"], f"{key_prefix}-{idx}")
+            choices = ["..."] + shuffled_options(item["choices"], f"{key_prefix}-{idx}")
             key = f"{key_prefix}_q_{idx}"
             
             saved_val = st.session_state.get(key)
