@@ -159,17 +159,28 @@ elif menu == "Bài 4 - Bài tập (đang khóa)":
     else: lesson4.show_lesson4_exercises(save_progress)
 
 st.sidebar.markdown("---")
-st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
-
-st.sidebar.markdown("---")
 st.sidebar.markdown("#### 📝 Ghi chú giáo viên")
 note_key = "teacher_note"
 if note_key not in st.session_state:
     st.session_state[note_key] = ""
 st.session_state[note_key] = st.sidebar.text_area(
-    "Ghi chú / Nội dung bổ sung:",
+    "Nhập ghi chú:",
     value=st.session_state[note_key],
-    height=200,
+    height=150,
     key="teacher_note_area",
-    placeholder="Nhập ghi chú, nội dung dạy thêm, nhận xét học viên..."
+    placeholder="Nhập nội dung muốn hiển thị cho học viên..."
 )
+show_note = st.sidebar.toggle("📢 Hiện ghi chú cho học viên", key="show_note_toggle")
+
+if show_note and st.session_state[note_key].strip():
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #fef9c3, #fef08a); border-left: 6px solid #f59e0b;
+    border-radius: 12px; padding: 20px 24px; margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(245,158,11,0.2);'>
+    <div style='font-size: 1.1rem; font-weight: bold; color: #92400e; margin-bottom: 8px;'>📌 Ghi chú từ giáo viên</div>
+    <div style='font-size: 1.3rem; line-height: 1.8; color: #1c1917; white-space: pre-wrap;'>{}</div>
+    </div>
+    """.format(st.session_state[note_key]), unsafe_allow_html=True)
+
+st.sidebar.markdown("---")
+st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
