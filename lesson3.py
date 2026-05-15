@@ -12,7 +12,7 @@ def show_lesson3_pinyin():
     
     st.markdown("---")
     st.info("""
-    📌 **Mối liên quan giữa y, w và i, u**
+    📌 **Mối liên quan giữa cặp y-i và w-u**
 
     **y** và **w** không phải là thanh mẫu thực sự. Chúng là ký hiệu viết xuất hiện khi vận mẫu bắt đầu bằng **i** hoặc **u** mà đứng một mình (không có thanh mẫu đi trước):
 
