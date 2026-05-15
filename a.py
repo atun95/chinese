@@ -108,7 +108,7 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 st.sidebar.header("Danh mục giáo án")
-teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung Bài 2 (GV)")
+teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung Bài học")
 menu = st.sidebar.radio("Chọn mục:", ["Bài 1 - Phiên âm cơ bản", "Bài 1 - TỪ VỰNG CƠ BẢN", "Bài 1 - Bài tập", "Bài 2 - Vận mẫu kép & Luyện tập", "Bài 2 - Bài tập", "Bài 3 - Phiên âm nâng cao (đang khóa)", "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"])
 
 if menu == "Bài 1 - Phiên âm cơ bản":
