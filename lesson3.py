@@ -11,6 +11,35 @@ def show_lesson3_pinyin():
             with cols[i%4]: render_pronunciation_card(item, "b3_tm")
     
     st.markdown("---")
+    st.subheader("2. Luyện tập đọc Thanh mẫu nâng cao")
+    col_lt1, col_lt2 = st.columns(2)
+    with col_lt1:
+        st.write("**Nhóm mặt lưỡi (j, q, x):**")
+        st.write("- **jī** (鸡: con gà)")
+        st.write("- **qī** (七: số 7)")
+        st.write("- **xǐ** (洗: rửa/giặt)")
+        st.write("- **jiā** (家: nhà/gia đình)")
+        
+        st.write("**Nhóm đầu lưỡi (z, c, s):**")
+        st.write("- **zì** (字: chữ)")
+        st.write("- **cí** (词: từ/từ vựng)")
+        st.write("- **sì** (四: số 4)")
+        st.write("- **sān** (三: số 3)")
+
+    with col_lt2:
+        st.write("**Nhóm uốn lưỡi (zh, ch, sh, r):**")
+        st.write("- **zhè** (这: đây/này)")
+        st.write("- **chī** (吃: ăn)")
+        st.write("- **shì** (是: là/phải)")
+        st.write("- **rì** (日: ngày/mặt trời)")
+        st.write("- **rén** (人: người)")
+        
+        st.write("**Âm đệm (y, w):**")
+        st.write("- **yī** (一: số 1)")
+        st.write("- **wǔ** (五: số 5)")
+        st.write("- **yú** (鱼: con cá)")
+    
+    st.markdown("---")
     st.subheader("3. Biến điệu của '不' (bù)")
     st.info("""
     **Quy tắc:**
