@@ -35,6 +35,7 @@ if "scores" not in st.session_state:
     st.session_state.scores = {}
 
 SCORES_FILE = Path(__file__).with_name("scores.csv")
+SCORES_B2_FILE = Path(__file__).with_name("scores_b2.csv")
 PROGRESS_FILE = Path(__file__).with_name("progress_lesson1.json")
 
 def save_progress():
@@ -59,7 +60,7 @@ def save_score_row(row_data):
     file_exists = SCORES_FILE.exists()
     try:
         with open(SCORES_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","bài học","tổng điểm","tổng câu","phần trăm","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
+            writer = csv.DictWriter(f, fieldnames=["thời gian","học viên","bài học","tổng điểm","tổng câu","bài 1","bài 2","bài 3","bài 4","bài 5","bài 6"])
             if not file_exists: writer.writeheader()
             writer.writerow(row_data)
         return True
@@ -69,6 +70,22 @@ def save_score_row(row_data):
 def load_all_scores():
     if not SCORES_FILE.exists(): return []
     with open(SCORES_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+def save_score_row_b2(row_data):
+    file_exists = SCORES_B2_FILE.exists()
+    try:
+        with open(SCORES_B2_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT1: Từ vựng", "BT2: Nghe", "BT3: Điền âm"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 2: {e}"); return False
+
+def load_all_scores_b2():
+    if not SCORES_B2_FILE.exists(): return []
+    with open(SCORES_B2_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
 def add_tones(base):
@@ -243,22 +260,25 @@ elif menu == "Bài 1 - Bài tập":
             name = st.text_input("Tên học viên", key="student_name")
             if st.button("Nộp bài"):
                 if name: 
+                    def fmt_b1(key):
+                        s = st.session_state.scores.get(key)
+                        return f"{s[0]}/{s[1]}" if s else ""
+
                     row = {
                         "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                         "học viên": name, 
                         "bài học": "Bài 1",
                         "tổng điểm": score_10, 
                         "tổng câu": total, 
-                        "phần trăm": percent, 
-                        "bài 1": st.session_state.scores.get("bai1",""), 
-                        "bài 2": st.session_state.scores.get("bai2",""), 
-                        "bài 3": st.session_state.scores.get("bai3",""), 
-                        "bài 4": st.session_state.scores.get("bai4",""), 
-                        "bài 5": st.session_state.scores.get("bai5",""), 
-                        "bài 6": st.session_state.scores.get("bai6","")
+                        "bài 1": fmt_b1("bai1"), 
+                        "bài 2": fmt_b1("bai2"), 
+                        "bài 3": fmt_b1("bai3"), 
+                        "bài 4": fmt_b1("bai4"), 
+                        "bài 5": fmt_b1("bai5"), 
+                        "bài 6": fmt_b1("bai6")
                     }
                     if save_score_row(row):
-                        st.success("Đã lưu điểm thành công!"); st.session_state.scores = {}; st.rerun()
+                        st.success("Đã lưu điểm Bài 1 thành công!"); st.session_state.scores = {}; st.rerun()
                 else: st.error("Vui lòng nhập tên học viên!")
         
         all_s = load_all_scores()
@@ -337,24 +357,24 @@ elif menu == "Bài 2 - Bài tập":
             name = st.text_input("Tên học viên (Bài 2)", key="student_name_b2")
             if st.button("Nộp bài tập Bài 2"):
                 if name:
+                    def fmt(key):
+                        s = st.session_state.scores.get(key)
+                        return f"{s[0]}/{s[1]}" if s else ""
+                    
                     row = {
                         "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
                         "học viên": name, 
-                        "bài học": "Bài 2",
                         "tổng điểm": b2_score_10, 
-                        "tổng câu": b2_total, 
-                        "phần trăm": round((b2_earned / b2_total) * 100, 1),
-                        "bài 1": st.session_state.scores.get("b2_vcb",""), 
-                        "bài 2": st.session_state.scores.get("b2_ls",""), 
-                        "bài 3": st.session_state.scores.get("b2_fill",""), 
-                        "bài 4": "", "bài 5": "", "bài 6": ""
+                        "BT1: Từ vựng": fmt("b2_vcb"), 
+                        "BT2: Nghe": fmt("b2_ls"), 
+                        "BT3: Điền âm": fmt("b2_fill")
                     }
-                    if save_score_row(row):
-                        st.success("Đã lưu điểm thành công!"); st.rerun()
+                    if save_score_row_b2(row):
+                        st.success("Đã lưu điểm Bài 2 thành công!"); st.rerun()
                 else: st.error("Vui lòng nhập tên học viên!")
         
-        all_s = load_all_scores()
-        if all_s: st.dataframe(all_s, use_container_width=True)
+        all_s2 = load_all_scores_b2()
+        if all_s2: st.dataframe(all_s2, use_container_width=True)
 
 elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa. Bật mở khóa ở sidebar.")
