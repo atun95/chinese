@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from lessons_data import *
 from ui_utils import *
 
@@ -111,7 +111,7 @@ def show_lesson1_exercises(save_progress, save_score_row, load_all_scores):
                         s = st.session_state.scores.get(key)
                         return f"{s[0]}/{s[1]}" if s else ""
                     row = {
-                        "thời gian": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "học viên": name, 
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"), "học viên": name, 
                         "tổng điểm": score_10, "BT1: Từ vựng": fmt_b1("bai1"), 
                         "BT2: Âm bật hơi": fmt_b1("bai2"), "BT3: Vận mẫu": fmt_b1("bai3"), 
                         "BT4: Pinyin": fmt_b1("bai4"), "BT5: Nghe": fmt_b1("bai5"), 
