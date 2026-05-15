@@ -3,17 +3,12 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson3_pinyin():
-    render_lesson_intro("🔒 Bài 3: Phiên âm nâng cao", "Học các thanh mẫu khó và vận mẫu kép mở rộng.")
+    render_lesson_intro("🔒 Bài 3: Thanh mẫu nâng cao & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
     for g in B2_THANH_MAU_DATA:
         st.markdown(f"#### {g['ten']}")
         cols = st.columns(4)
         for i, item in enumerate(g["items"]):
             with cols[i%4]: render_pronunciation_card(item, "b3_tm")
-    for g in B2_VAN_MAU_KEP_DATA:
-        st.markdown(f"#### {g['nhom']}")
-        cols = st.columns(4)
-        for i, item in enumerate(g["items"]):
-            with cols[i%4]: render_pronunciation_card(item, "b3_vk")
     
     st.markdown("---")
     st.subheader("3. Biến điệu của '不' (bù)")
