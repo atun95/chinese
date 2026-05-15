@@ -22,18 +22,16 @@ def show_lesson3_pinyin():
     Khi đứng trước âm tiết mang **thanh 4**.
     """)
     
-    col_ex1, col_ex2 = st.columns(2)
-    with col_ex1:
-        st.success("**Ví dụ biến thành thanh 2 (bú):**")
-        st.write("- bù qù → **bú qù** (không đi)")
-        st.write("- bù shì → **bú shì** (không phải)")
-    with col_ex2:
-        st.warning("**Ví dụ giữ nguyên thanh 4 (bù):**")
-        st.write("- bù hē (không uống) - *Thanh 1*")
-        st.write("- bù lái (không đến) - *Thanh 2*")
-        st.write("- bù nán (không khó) - *Thanh 2*")
-        st.write("- bù hǎo (không tốt) - *Thanh 3*")
-        st.write("- bù xiǎo (không nhỏ) - *Thanh 3*")
+    st.success("**Ví dụ biến thành thanh 2 (bú):**")
+    st.write("- bù qù → **bú qù** (không đi)")
+    st.write("- bù shì → **bú shì** (không phải)")
+    
+    st.warning("**Ví dụ giữ nguyên thanh 4 (bù):**")
+    st.write("- bù hē (không uống) - *Thanh 1*")
+    st.write("- bù lái (không đến) - *Thanh 2*")
+    st.write("- bù nán (không khó) - *Thanh 2*")
+    st.write("- bù hǎo (không tốt) - *Thanh 3*")
+    st.write("- bù xiǎo (không nhỏ) - *Thanh 3*")
     
     st.markdown("#### Luyện tập thêm & Câu ngắn:")
     col_ex3, col_ex4 = st.columns(2)
