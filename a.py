@@ -235,7 +235,7 @@ elif menu == "Bài 1 - Bài tập":
             if choices[0] == q["answer"] and len(choices) > 1:
                 choices[0], choices[1] = choices[1], choices[0]
             
-            res = st.radio("Chọn đáp án:", choices, index=choices.index(st.session_state.get(key, choices[0])), key=key)
+            res = st.radio("Chọn đáp án:", choices, index=0, key=key)
             if res == q["answer"]: score_5 += 1
         if st.button("Chấm điểm bài 5"): st.session_state.scores["bai5"] = (score_5, len(tone_qs)); save_progress(); st.success(f"Bạn đúng {score_5}/{len(tone_qs)} câu.")
 
@@ -324,10 +324,7 @@ elif menu == "Bài 2 - Bài tập":
             if choices[0] == q["answer"] and len(choices) > 1:
                 choices[0], choices[1] = choices[1], choices[0]
                 
-            saved_val = st.session_state.get(key)
-            default_idx = 0
-            if saved_val in choices: default_idx = choices.index(saved_val)
-            res = st.radio("Chọn đáp án:", choices, index=default_idx, key=key)
+            res = st.radio("Chọn đáp án:", choices, index=0, key=key)
             if res == q["answer"]: score_b2_ls += 1
         if st.button("Chấm điểm bài 2", key="btn_b2_ls"): 
             st.session_state.scores["b2_ls"] = (score_b2_ls, len(B2_QUIZ_LISTENING))
@@ -340,9 +337,7 @@ elif menu == "Bài 2 - Bài tập":
         opts = ["...", "ā", "á", "ǎ", "à", "ē", "é", "ě", "è", "ǐ", "ǒ", "ù", "ái", "ǎi", "èi", "ǎo", "ǒu", "áng"]
         for i, q in enumerate(B2_QUIZ_FILL_BLANKS):
             key = f"b2_fill_q_{i}"
-            saved_val = st.session_state.get(key, "...")
-            default_idx = opts.index(saved_val) if saved_val in opts else 0
-            res = st.selectbox(f"Chọn phần còn thiếu cho {q['q']} ({q['meaning']})", opts, index=default_idx, key=key)
+            res = st.selectbox(f"Chọn phần còn thiếu cho {q['q']} ({q['meaning']})", opts, index=0, key=key)
             if res == q["ans"]: score_b2_fill += 1
         if st.button("Chấm điểm bài 3", key="btn_b2_fill"):
             st.session_state.scores["b2_fill"] = (score_b2_fill, len(B2_QUIZ_FILL_BLANKS))
