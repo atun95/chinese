@@ -108,7 +108,7 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 st.sidebar.header("Danh mục giáo án")
-teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung Bài học")
+teacher_unlock = st.sidebar.checkbox("Nội dung Bài học")
 menu = st.sidebar.radio("Chọn mục:", ["Bài 1 - Phiên âm cơ bản", "Bài 1 - TỪ VỰNG CƠ BẢN", "Bài 1 - Bài tập", "Bài 2 - Vận mẫu kép & Luyện tập", "Bài 2 - Bài tập", "Bài 3 - Phiên âm nâng cao (đang khóa)", "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"])
 
 if menu == "Bài 1 - Phiên âm cơ bản":
@@ -231,8 +231,8 @@ elif menu == "Bài 1 - Bài tập":
             st.write(f"**Câu {i+1}:** Nghe và chọn pinyin đúng")
             if st.button(f"🔊 Nghe mẫu", key=f"listen_{i}"): play_audio(q["hanzi"])
             key = f"tone_q_{i}"
-            choices = q["choices"]
-            res = st.radio("Chọn đáp án:", choices, index=choices.index(st.session_state.get(key, choices[0])), key=key)
+            choices = ["..."] + q["choices"]
+            res = st.radio("Chọn đáp án:", choices, index=choices.index(st.session_state.get(key, "...")), key=key)
             if res == q["answer"]: score_5 += 1
         if st.button("Chấm điểm bài 5"): st.session_state.scores["bai5"] = (score_5, len(tone_qs)); save_progress(); st.success(f"Bạn đúng {score_5}/{len(tone_qs)} câu.")
 
@@ -316,7 +316,7 @@ elif menu == "Bài 2 - Bài tập":
             st.write(f"**Câu {i+1}:** Nghe từ '{q['q']}' và chọn pinyin đúng")
             if st.button(f"🔊 Nghe mẫu", key=f"b2_listen_{i}"): play_audio(q["hanzi"])
             key = f"b2_tone_q_{i}"
-            choices = shuffled_options(q["choices"], f"b2_ls-{i}")
+            choices = ["..."] + shuffled_options(q["choices"], f"b2_ls-{i}")
             saved_val = st.session_state.get(key)
             default_idx = 0
             if saved_val in choices: default_idx = choices.index(saved_val)
