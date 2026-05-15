@@ -31,6 +31,12 @@ st.markdown(
     .vm-header { background-color: #fbbf24; color: #0f172a; }
     .cat-col { font-weight: bold; background-color: #f8fafc; }
     .pinyin-text { font-family: 'Courier New', monospace; font-weight: bold; }
+    section[data-testid="stSidebar"] textarea {
+        resize: both !important;
+        min-height: 300px !important;
+        min-width: 100% !important;
+        font-size: 1rem !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -166,7 +172,7 @@ if note_key not in st.session_state:
 st.session_state[note_key] = st.sidebar.text_area(
     "Nhập ghi chú:",
     value=st.session_state[note_key],
-    height=150,
+    height=300,
     key="teacher_note_area",
     placeholder="Nhập nội dung muốn hiển thị cho học viên..."
 )
