@@ -49,9 +49,14 @@ def render_quiz_section(questions, key_prefix, title, caption, save_func):
         st.caption(caption)
         score = 0
         for idx, item in enumerate(questions):
-            choices = ["..."] + shuffled_options(item["choices"], f"{key_prefix}-{idx}")
-            key = f"{key_prefix}_q_{idx}"
+            raw_choices = item["choices"]
+            choices = shuffled_options(raw_choices, f"{key_prefix}-{idx}")
             
+            # Đảm bảo câu đầu tiên không phải đáp án đúng để học viên phải chọn
+            if choices[0] == item["answer"] and len(choices) > 1:
+                choices[0], choices[1] = choices[1], choices[0]
+                
+            key = f"{key_prefix}_q_{idx}"
             saved_val = st.session_state.get(key)
             default_idx = 0
             if saved_val in choices:
