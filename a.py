@@ -298,7 +298,7 @@ elif menu == "Bài 2 - Bài tập":
             st.write(f"**Câu {i+1}:** Nghe từ '{q['q']}' và chọn pinyin đúng")
             if st.button(f"🔊 Nghe mẫu", key=f"b2_listen_{i}"): play_audio(q["hanzi"])
             key = f"b2_tone_q_{i}"
-            choices = q["choices"]
+            choices = shuffled_options(q["choices"], f"b2_ls-{i}")
             saved_val = st.session_state.get(key)
             default_idx = 0
             if saved_val in choices: default_idx = choices.index(saved_val)
@@ -352,6 +352,9 @@ elif menu == "Bài 2 - Bài tập":
                     if save_score_row(row):
                         st.success("Đã lưu điểm thành công!"); st.rerun()
                 else: st.error("Vui lòng nhập tên học viên!")
+        
+        all_s = load_all_scores()
+        if all_s: st.dataframe(all_s, use_container_width=True)
 
 elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa. Bật mở khóa ở sidebar.")
