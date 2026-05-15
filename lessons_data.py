@@ -157,3 +157,32 @@ NET_CO_BAN = [
     {"Nét": "折", "Pinyin": "zhé", "Mô tả": "nét gập"},
     {"Nét": "钩", "Pinyin": "gōu", "Mô tả": "nét móc"},
 ]
+
+B2_QUIZ_VOCAB = [
+    {"q": "lái", "choices": ["đến/lại", "đi", "về"], "answer": "đến/lại"},
+    {"q": "nèi", "choices": ["trong/nội", "ngoài", "trên"], "answer": "trong/nội"},
+    {"q": "bǎobèi", "choices": ["bảo bối/em bé", "người lớn", "bạn bè"], "answer": "bảo bối/em bé"},
+    {"q": "gǒu", "choices": ["con chó", "con mèo", "con lợn"], "answer": "con chó"},
+    {"q": "máng", "choices": ["bận", "rất", "không"], "answer": "bận"},
+    {"q": "hǎo", "choices": ["tốt/ngon/được", "xấu", "không"], "answer": "tốt/ngon/được"},
+    {"q": "mā", "choices": ["mẹ", "bố", "anh"], "answer": "mẹ"},
+    {"q": "bà", "choices": ["bố", "mẹ", "em"], "answer": "bố"}
+]
+
+B2_QUIZ_LISTENING = [
+    {"q": "Bảo bối", "hanzi": "宝贝", "choices": ["bǎobèi", "bǎobēi", "bàobèi"], "answer": "bǎobèi"},
+    {"q": "Đến đây", "hanzi": "来", "choices": ["lái", "lāi", "lài"], "answer": "lái"},
+    {"q": "Con chó", "hanzi": "狗", "choices": ["gǒu", "kǒu", "hǒu"], "answer": "gǒu"},
+    {"q": "Bên trong", "hanzi": "内", "choices": ["nèi", "mèi", "lèi"], "answer": "nèi"},
+    {"q": "Chúng tôi", "hanzi": "我们", "choices": ["wǒmen", "wǒmèn", "wǒmēn"], "answer": "wǒmen"},
+    {"q": "Bà nội", "hanzi": "奶奶", "choices": ["nǎinai", "nǎinái", "nāinai"], "answer": "nǎinai"}
+]
+
+B2_QUIZ_FILL_BLANKS = [
+    {"q": "l___", "ans": "ái", "meaning": "đến/lại"},
+    {"q": "g___", "ans": "ǒu", "meaning": "con chó"},
+    {"q": "bǎob___", "ans": "èi", "meaning": "bảo bối"},
+    {"q": "n___", "ans": "èi", "meaning": "bên trong/nội"},
+    {"q": "h___", "ans": "ǎo", "meaning": "tốt/ngon"},
+    {"q": "m___", "ans": "áng", "meaning": "bận"}
+]
