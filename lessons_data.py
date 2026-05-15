@@ -186,3 +186,49 @@ B2_QUIZ_FILL_BLANKS = [
     {"q": "h___", "ans": "ǎo", "meaning": "tốt/ngon"},
     {"q": "m___", "ans": "áng", "meaning": "bận"}
 ]
+
+B1_QUIZ_VOCAB = [
+    {"q": "lǎoshī", "choices": ["thầy/cô giáo", "học sinh", "rất"], "answer": "thầy/cô giáo"},
+    {"q": "xuéshēng", "choices": ["không", "học sinh", "bận"], "answer": "học sinh"},
+    {"q": "hěn", "choices": ["rất", "không", "bận"], "answer": "rất"},
+    {"q": "máng", "choices": ["bận", "mẹ", "bố"], "answer": "bận"},
+    {"q": "bù", "choices": ["không", "rất", "bạn"], "answer": "không"},
+    {"q": "wǒ", "choices": ["tôi/mình", "bạn/cậu", "anh ấy/cô ấy"], "answer": "tôi/mình"},
+    {"q": "nǐ", "choices": ["không", "bạn/cậu", "rất"], "answer": "bạn/cậu"},
+    {"q": "mā", "choices": ["mẹ", "bố", "anh"], "answer": "mẹ"},
+    {"q": "bà", "choices": ["bố", "mẹ", "em"], "answer": "bố"}
+]
+
+B1_QUIZ_FILL_VM = [
+    ("m___ma", "ā", "mẹ"), ("n___", "ǐ", "bạn/cậu"), 
+    ("l___oshī", "ǎ", "thầy/cô giáo"), ("xu___shēng", "é", "học sinh"), 
+    ("h___n", "ě", "rất"), ("m___ng", "á", "bận"), 
+    ("b___", "ù", "không"), ("w___", "ǒ", "tôi/mình")
+]
+
+B1_QUIZ_PY = [
+    {"q": "tôi/mình", "choices": ["wǒ", "nǐ", "tā"], "answer": "wǒ"},
+    {"q": "bạn/cậu", "choices": ["nǐ", "wǒ", "tā"], "answer": "nǐ"},
+    {"q": "mẹ/má", "choices": ["māma", "bàba", "mèimei"], "answer": "māma"},
+    {"q": "thầy/cô giáo", "choices": ["lǎoshī", "xuéshēng", "lǎobǎn"], "answer": "lǎoshī"},
+    {"q": "học sinh", "choices": ["xuéshēng", "lǎoshī", "tóngxué"], "answer": "xuéshēng"},
+    {"q": "rất", "choices": ["hěn", "tài", "zhēn"], "answer": "hěn"},
+    {"q": "bận", "choices": ["máng", "lèi", "è"], "answer": "máng"},
+    {"q": "không", "choices": ["bù", "méi", "shì"], "answer": "bù"},
+]
+
+B1_QUIZ_TONE = [
+    {"q": "妈妈 (māma)", "hanzi": "妈妈", "choices": ["māma", "máng", "mǎma"], "answer": "māma"},
+    {"q": "老师 (lǎoshī)", "hanzi": "老师", "choices": ["làoshī", "lǎoshī", "láoshī"], "answer": "lǎoshī"},
+    {"q": "学生 (xuéshēng)", "hanzi": "学生", "choices": ["xuěshēng", "xuéshēng", "xuesheng"], "answer": "xuéshēng"},
+    {"q": "很 (hěn)", "hanzi": "很", "choices": ["hèn", "hén", "hěn"], "answer": "hěn"},
+    {"q": "忙 (máng)", "hanzi": "忙", "choices": ["máng", "mǎng", "màng"], "answer": "máng"},
+    {"q": "不 (bù)", "hanzi": "不", "choices": ["bù", "bú", "bǔ"], "answer": "bù"},
+]
+
+B1_QUIZ_SENTENCE = [
+    {"q": "wǒ hěn máng", "choices": ["tôi rất bận", "tôi không bận", "bạn rất bận"], "answer": "tôi rất bận"},
+    {"q": "nǐ bù máng", "choices": ["bạn không bận", "bạn rất bận", "tôi không bận"], "answer": "bạn không bận"},
+    {"q": "wǒ shì xuéshēng", "choices": ["tôi là học sinh", "tôi là thầy giáo", "bạn là học sinh"], "answer": "tôi là học sinh"},
+    {"q": "tā shì lǎoshī", "choices": ["anh ấy/cô ấy là thầy cô giáo", "anh ấy/cô ấy là học sinh", "tôi là thầy cô giáo"], "answer": "anh ấy/cô ấy là thầy cô giáo"},
+]
