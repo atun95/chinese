@@ -11,6 +11,7 @@ from ui_utils import *
 import lesson1
 import lesson2
 import lesson3
+import lesson4
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
@@ -121,7 +122,9 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 2 - Vận mẫu kép & Luyện tập", 
     "Bài 2 - Bài tập", 
     "Bài 3 - Phiên âm nâng cao (đang khóa)", 
-    "Bài 3 - Nét chữ Hán cơ bản (đang khóa)"
+    "Bài 3 - Nét chữ Hán cơ bản (đang khóa)",
+    "Bài 4 - Vận mẫu kép mở rộng (đang khóa)",
+    "Bài 4 - Bài tập (đang khóa)"
 ])
 
 if menu == "Bài 1 - Phiên âm cơ bản":
@@ -146,6 +149,14 @@ elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
 elif menu == "Bài 3 - Nét chữ Hán cơ bản (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
     else: lesson3.show_lesson3_hanzi()
+
+elif menu == "Bài 4 - Vận mẫu kép mở rộng (đang khóa)":
+    if not teacher_unlock: st.warning("Đang khóa.")
+    else: lesson4.show_lesson4_finals()
+
+elif menu == "Bài 4 - Bài tập (đang khóa)":
+    if not teacher_unlock: st.warning("Đang khóa.")
+    else: lesson4.show_lesson4_exercises(save_progress)
 
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
