@@ -57,15 +57,10 @@ def render_quiz_section(questions, key_prefix, title, caption, save_func):
                 choices[0], choices[1] = choices[1], choices[0]
                 
             key = f"{key_prefix}_q_{idx}"
-            saved_val = st.session_state.get(key)
-            default_idx = 0
-            if saved_val in choices:
-                default_idx = choices.index(saved_val)
-                
             selected = st.radio(
                 f"Câu {idx + 1}: {item['q']}?",
                 choices,
-                index=default_idx,
+                index=0,
                 key=key,
             )
             if selected == item["answer"]:
