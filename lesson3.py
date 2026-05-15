@@ -11,6 +11,17 @@ def show_lesson3_pinyin():
             with cols[i%4]: render_pronunciation_card(item, "b3_tm")
     
     st.markdown("---")
+    st.info("""
+    📌 **Mối liên quan giữa y, w và i, u**
+
+    **y** và **w** không phải là thanh mẫu thực sự. Chúng là ký hiệu viết xuất hiện khi vận mẫu bắt đầu bằng **i** hoặc **u** mà đứng một mình (không có thanh mẫu đi trước):
+
+    - i → **y**: yī (一: số 1), yě (也: cũng), yuè (月: trăng)
+    - u → **w**: wǔ (五: số 5), wǒ (我: tôi), wén (文: văn)
+
+    🔑 y và w là "áo khoác" của i và u khi chúng đứng đầu âm tiết. Phát âm hoàn toàn giống nhau!
+    """)
+    st.markdown("---")
     st.subheader("2. Luyện tập đọc Thanh mẫu nâng cao")
     col_lt1, col_lt2 = st.columns(2)
     with col_lt1:
