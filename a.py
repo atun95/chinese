@@ -160,3 +160,16 @@ elif menu == "Bài 4 - Bài tập (đang khóa)":
 
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("#### 📝 Ghi chú giáo viên")
+note_key = "teacher_note"
+if note_key not in st.session_state:
+    st.session_state[note_key] = ""
+st.session_state[note_key] = st.sidebar.text_area(
+    "Ghi chú / Nội dung bổ sung:",
+    value=st.session_state[note_key],
+    height=200,
+    key="teacher_note_area",
+    placeholder="Nhập ghi chú, nội dung dạy thêm, nhận xét học viên..."
+)
