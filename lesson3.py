@@ -51,7 +51,48 @@ def show_lesson3_pinyin():
         st.write("- **yú** (鱼: con cá)")
     
     st.markdown("---")
-    st.subheader("3. Biến điệu của '不' (bù)")
+    st.subheader("3. Ngữ pháp: Động từ 是 (shì) — \"là\"")
+
+    st.info("""
+    **Cấu trúc:** Chủ ngữ + **是** + Danh từ
+
+    - ✅ Dùng với **danh từ**: Wǒ shì xuéshēng. (Tôi là học sinh.)
+    - ❌ **Không** dùng với tính từ: ~~Wǒ shì máng~~ → Phải dùng **很**: Wǒ hěn máng.
+    """)
+
+    col_shi1, col_shi2 = st.columns(2)
+    with col_shi1:
+        st.success("**Câu khẳng định (是):**")
+        st.write("- Wǒ shì xuéshēng. (我是学生: Tôi là học sinh.)")
+        st.write("- Nǐ shì lǎoshī. (你是老师: Bạn là giáo viên.)")
+        st.write("- Tā shì wǒ māma. (她是我妈妈: Cô ấy là mẹ tôi.)")
+    with col_shi2:
+        st.error("**Câu phủ định (不是 → bú shì):**")
+        st.write("- Wǒ bú shì lǎoshī. (我不是老师: Tôi không phải giáo viên.)")
+        st.write("- Tā bú shì xuéshēng. (他不是学生: Anh ấy không phải học sinh.)")
+
+    st.warning("**Câu hỏi (是...吗?):**")
+    st.write("- Nǐ shì xuéshēng **ma**? (你是学生吗？: Bạn có phải học sinh không?)")
+    st.write("  → Trả lời đúng: **Shì de**, wǒ shì xuéshēng. (是的，我是学生。)")
+    st.write("  → Trả lời sai: **Bú shì**, wǒ shì lǎoshī. (不是，我是老师。)")
+
+    with st.expander("💬 Hội thoại mẫu", expanded=False):
+        st.code("""
+A: 你好！你是老师吗？
+   Nǐ hǎo! Nǐ shì lǎoshī ma?
+   (Xin chào! Bạn có phải giáo viên không?)
+
+B: 不是，我是学生。你呢？
+   Bú shì, wǒ shì xuéshēng. Nǐ ne?
+   (Không phải, tôi là học sinh. Còn bạn?)
+
+A: 我是老师。很高兴认识你！
+   Wǒ shì lǎoshī. Hěn gāoxìng rènshi nǐ!
+   (Tôi là giáo viên. Rất vui được gặp bạn!)
+        """, language="text")
+
+    st.markdown("---")
+    st.subheader("4. Biến điệu của '不' (bù)")
     st.info("""
     **Quy tắc:**
     
