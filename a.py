@@ -231,8 +231,11 @@ elif menu == "Bài 1 - Bài tập":
             st.write(f"**Câu {i+1}:** Nghe và chọn pinyin đúng")
             if st.button(f"🔊 Nghe mẫu", key=f"listen_{i}"): play_audio(q["hanzi"])
             key = f"tone_q_{i}"
-            choices = ["..."] + q["choices"]
-            res = st.radio("Chọn đáp án:", choices, index=choices.index(st.session_state.get(key, "...")), key=key)
+            choices = q["choices"][:] # Copy list
+            if choices[0] == q["answer"] and len(choices) > 1:
+                choices[0], choices[1] = choices[1], choices[0]
+            
+            res = st.radio("Chọn đáp án:", choices, index=choices.index(st.session_state.get(key, choices[0])), key=key)
             if res == q["answer"]: score_5 += 1
         if st.button("Chấm điểm bài 5"): st.session_state.scores["bai5"] = (score_5, len(tone_qs)); save_progress(); st.success(f"Bạn đúng {score_5}/{len(tone_qs)} câu.")
 
@@ -316,7 +319,11 @@ elif menu == "Bài 2 - Bài tập":
             st.write(f"**Câu {i+1}:** Nghe từ '{q['q']}' và chọn pinyin đúng")
             if st.button(f"🔊 Nghe mẫu", key=f"b2_listen_{i}"): play_audio(q["hanzi"])
             key = f"b2_tone_q_{i}"
-            choices = ["..."] + shuffled_options(q["choices"], f"b2_ls-{i}")
+            choices = shuffled_options(q["choices"], f"b2_ls-{i}")
+            # Đảm bảo câu đầu tiên không phải đáp án đúng
+            if choices[0] == q["answer"] and len(choices) > 1:
+                choices[0], choices[1] = choices[1], choices[0]
+                
             saved_val = st.session_state.get(key)
             default_idx = 0
             if saved_val in choices: default_idx = choices.index(saved_val)
