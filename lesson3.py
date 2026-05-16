@@ -241,12 +241,6 @@ def show_lesson3_vocab():
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
     
-    st.success("""
-    💡 **So sánh: 我叫青 và 我是青**
-    
-    - **我叫青** (Wǒ jiào Qīng - Tôi tên là Thanh): Dùng để **giới thiệu tên**. Từ 叫 (jiào) mang nghĩa "gọi là, tên là". Đây là cách giới thiệu tên tự nhiên và phổ biến nhất khi gặp mặt.
-    - **我是青** (Wǒ shì Qīng - Tôi là Thanh): Nhấn mạnh **đúng là người này** (xác nhận thân phận). Thường dùng khi ai đó đang tìm bạn và bạn xác nhận "Tôi chính là Thanh đây", rất ít khi dùng để giới thiệu ban đầu.
-    """)
     
     st.markdown("---")
     st.subheader("2. Cấu trúc câu & Từ để hỏi")
@@ -307,6 +301,13 @@ A: 我叫薇。很高兴认识你。
    Wǒ jiào Wēi. Hěn gāoxìng rènshi nǐ.
    (Tôi tên Vy. Rất vui được gặp bạn.)
         """, language="text")
+    
+    st.success("""
+    💡 **So sánh: 我叫青 và 我是青**
+    
+    - **我叫青** (Wǒ jiào Qīng - Tôi tên là Thanh): Dùng để **giới thiệu tên**. Từ 叫 (jiào) mang nghĩa "gọi là, tên là". Đây là cách giới thiệu tên tự nhiên và phổ biến nhất khi gặp mặt.
+    - **我是青** (Wǒ shì Qīng - Tôi là Thanh): Nhấn mạnh **đúng là người này** (xác nhận thân phận). Thường dùng khi ai đó đang tìm bạn và bạn xác nhận "Tôi chính là Thanh đây".
+    """)
 
     with st.expander("💬 Hội thoại 2: Hỏi thăm sức khỏe & Công việc", expanded=True):
         st.code("""
