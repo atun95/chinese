@@ -127,8 +127,8 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 1 - Bài tập", 
     "Bài 2 - Vận mẫu kép & Luyện tập", 
     "Bài 2 - Bài tập", 
-    "Bài 3 - Phiên âm nâng cao (đang khóa)", 
-    "Bài 3 - Quy tắc viết Pinyin (đang khóa)",
+    "Bài 3 - Phiên âm nâng cao", 
+    "Bài 3 - Quy tắc viết Pinyin",
     "Bài 4 - Vận mẫu kép mở rộng (đang khóa)",
     "Bài 4 - Nét chữ Hán cơ bản (đang khóa)",
     "Bài 4 - Bài tập (đang khóa)"
@@ -149,13 +149,11 @@ elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
 elif menu == "Bài 2 - Bài tập":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
-elif menu == "Bài 3 - Phiên âm nâng cao (đang khóa)":
-    if not teacher_unlock: st.warning("Đang khóa. Bật mở khóa ở sidebar.")
-    else: lesson3.show_lesson3_pinyin()
+elif menu == "Bài 3 - Phiên âm nâng cao":
+    lesson3.show_lesson3_pinyin()
 
-elif menu == "Bài 3 - Quy tắc viết Pinyin (đang khóa)":
-    if not teacher_unlock: st.warning("Đang khóa.")
-    else: lesson3.show_lesson3_pinyin_rules()
+elif menu == "Bài 3 - Quy tắc viết Pinyin":
+    lesson3.show_lesson3_pinyin_rules()
 
 elif menu == "Bài 4 - Vận mẫu kép mở rộng (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
