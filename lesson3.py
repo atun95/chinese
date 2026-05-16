@@ -134,6 +134,68 @@ A: 我是老师。很高兴认识你！
         st.write("- Nǐ hǎo **bù hǎo**? (你好不好: Bạn khỏe không?)")
         st.write("- Chī **bù chī**? (吃不吃: Ăn không?)")
 
-def show_lesson3_hanzi():
-    render_lesson_intro("🔒 Bài 3: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
-    st.table(NET_CO_BAN)
+def show_lesson3_pinyin_rules():
+    render_lesson_intro("🔒 Bài 3: Quy tắc viết Pinyin", "Nắm vững các quy tắc biến đổi chữ viết của i, u, ü trong bính âm.")
+    
+    st.subheader("1. Quy tắc phát âm chữ 'i'")
+    st.info("Chữ 'i' có 2 cách đọc chính tùy thuộc vào chữ cái đi trước nó.")
+    col_i1, col_i2 = st.columns(2)
+    with col_i1:
+        st.success("**Đọc là 'i' như tiếng Việt**")
+        st.write("- **Khi nào đọc:** Khi 'i' đứng một mình (viết thành **yi**) hoặc đi sau các phụ âm: **b, p, m, f, d, t, n, l, j, q, x, y**.")
+        st.write("- **Cách phát âm:** Khóe môi hơi dẹt, bè sang hai bên. Giống hệt âm 'i' tiếng Việt.")
+        st.write("- **Ví dụ:**\n  - **yī** (一 - số một) đọc là 'i'\n  - **nǐ** (你 - bạn) đọc là 'ni'")
+    with col_i2:
+        st.warning("**Đọc là 'ư'**")
+        st.write("- **Khi nào đọc:** Khi 'i' đứng sau 7 phụ âm uốn lưỡi và đầu lưỡi: **zh, ch, sh, r, z, c, s**.")
+        st.write("- **Cách phát âm:** Đọc kéo dài âm 'ư' của tiếng Việt.")
+        st.write("- **Ví dụ:**\n  - **shī** (师 - giáo viên) đọc là 'sư'\n  - **sī** (私 - riêng tư) đọc là 'sư'")
+        
+    st.markdown("---")
+    st.subheader("2. Quy tắc viết i, u, ü khi không có thanh mẫu")
+    st.write("Khi một âm tiết không có phụ âm đầu (thanh mẫu), ta cần thêm hoặc đổi chữ cái đầu thành **y** hoặc **w**.")
+    
+    tab1, tab2, tab3 = st.tabs(["Quy tắc của i", "Quy tắc của u", "Quy tắc của ü"])
+    with tab1:
+        st.markdown("**i → thêm y** (*Nhớ: i đầu câu → đổi thành y*)")
+        st.write("- **i** → **yi** (yī 一)")
+        st.write("- **ia** → **ya** (yā 压)")
+        st.write("- **iao** → **yao** (yào 要)")
+        st.write("- **ie** → **ye** (yě 也)")
+        st.write("- **iu** → **you** (yǒu 有)")
+        st.write("- **ian** → **yan** (yán 言)")
+        st.write("- **in** → **yin** (yīn 音)")
+        st.write("- **ing** → **ying** (yīng 英)")
+    with tab2:
+        st.markdown("**u → thêm w** (*Nhớ: u đầu câu → đổi thành w*)")
+        st.write("- **u** → **wu** (wú 五)")
+        st.write("- **ua** → **wa** (wá 娃)")
+        st.write("- **uo** → **wo** (wǒ 我)")
+        st.write("- **uai** → **wai** (wài 外)")
+        st.write("- **ui** → **wei** (wèi 为)")
+        st.write("- **uan** → **wan** (wán 完)")
+        st.write("- **un** → **wen** (wén 文)")
+    with tab3:
+        st.markdown("**ü → thêm y** (*Nhớ: ü đầu câu → viết y + phần còn lại*)")
+        st.write("- **ü** → **yu** (yú 鱼)")
+        st.write("- **üe** → **yue** (yuè 月)")
+        st.write("- **üan** → **yuan** (yuán 元)")
+        st.write("- **ün** → **yun** (yún 云)")
+
+    st.markdown("---")
+    st.subheader("3. Các thanh mẫu kết hợp với ü và quy tắc bỏ dấu chấm")
+    st.write("Nguyên âm **ü** không kết hợp với tất cả thanh mẫu. Nó chủ yếu đi với: **j, q, x, n, l, y**.")
+    
+    col_u1, col_u2 = st.columns(2)
+    with col_u1:
+        st.success("**Nhóm 1: Dấu ü BỊ BỎ CHẤM (j, q, x, y)**")
+        st.write("Sau 4 âm này, viết là **u** nhưng vẫn đọc là **ü**:")
+        st.write("- j + ü = **ju** (jū)")
+        st.write("- q + ü = **qu** (qù)")
+        st.write("- x + ü = **xue** (xué)")
+        st.write("- y + ü = **yue** (yuè)")
+    with col_u2:
+        st.error("**Nhóm 2: Phải GIỮ DẤU CHẤM (n, l)**")
+        st.write("Vì n, l còn ghép được với u thường, nên phải viết rõ dấu hai chấm để phân biệt:")
+        st.write("- **nǔ** (n + u) ≠ **nǚ** (n + ü)")
+        st.write("- **lù** (l + u) ≠ **lǜ** (l + ü)")
