@@ -224,6 +224,10 @@ def show_lesson3_vocab():
         {"han": "女", "pinyin": "nǚ", "mean": "nữ"},
         {"han": "男朋友", "pinyin": "nánpéngyou", "mean": "bạn trai"},
         {"han": "女朋友", "pinyin": "nǚpéngyou", "mean": "bạn gái"},
+        {"han": "叫", "pinyin": "jiào", "mean": "gọi, tên là"},
+        {"han": "名字", "pinyin": "míngzi", "mean": "tên"},
+        {"han": "高兴", "pinyin": "gāoxìng", "mean": "vui vẻ"},
+        {"han": "认识", "pinyin": "rènshi", "mean": "quen biết"},
         {"han": "叫什么名字？", "pinyin": "jiào shénme míngzi?", "mean": "hỏi tên gì?"},
         {"han": "青", "pinyin": "Qīng", "mean": "tên Thanh"},
         {"han": "薇", "pinyin": "Wēi", "mean": "tên Vy"},
@@ -236,6 +240,13 @@ def show_lesson3_vocab():
         html += f'<tr><td style="text-align:center; font-size: 1.2em;"><b>{v["han"]}</b></td><td class="pinyin-text" style="text-align:center;">{v["pinyin"]}</td><td>{v["mean"]}</td></tr>'
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
+    
+    st.success("""
+    💡 **So sánh: 我叫青 và 我是青**
+    
+    - **我叫青** (Wǒ jiào Qīng - Tôi tên là Thanh): Dùng để **giới thiệu tên**. Từ 叫 (jiào) mang nghĩa "gọi là, tên là". Đây là cách giới thiệu tên tự nhiên và phổ biến nhất khi gặp mặt.
+    - **我是青** (Wǒ shì Qīng - Tôi là Thanh): Nhấn mạnh **đúng là người này** (xác nhận thân phận). Thường dùng khi ai đó đang tìm bạn và bạn xác nhận "Tôi chính là Thanh đây", rất ít khi dùng để giới thiệu ban đầu.
+    """)
     
     st.markdown("---")
     st.subheader("2. Cấu trúc câu & Từ để hỏi")
@@ -255,6 +266,29 @@ def show_lesson3_vocab():
     html_gr += '</tbody></table>'
     st.markdown(html_gr, unsafe_allow_html=True)
     
+    st.markdown("#### 💡 Cách đặt câu hỏi với 是 và 有")
+    col_q1, col_q2 = st.columns(2)
+    with col_q1:
+        st.success("**Động từ 是 (shì - là)**")
+        st.write("Có 2 cách để hỏi 'có phải là... không?':")
+        st.write("1. Dùng trợ từ **吗 (ma)** ở cuối câu:")
+        st.write("👉 Chủ ngữ + **是** + [Danh từ] + **吗**？")
+        st.write("*(Ví dụ: 你**是**青**吗**？ - Bạn là Thanh phải không?)*")
+        st.write("2. Dùng mẫu câu chính phản **是不是 (shì bú shì)**:")
+        st.write("👉 Chủ ngữ + **是不是** + [Danh từ]？")
+        st.write("*(Ví dụ: 你**是不是**青？ - Bạn có phải là Thanh không?)*")
+        
+    with col_q2:
+        st.warning("**Động từ 有 (yǒu - có)**")
+        st.write("Có 2 cách để hỏi 'có... không?':")
+        st.write("1. Dùng trợ từ **吗 (ma)** ở cuối câu:")
+        st.write("👉 Chủ ngữ + **有** + [Danh từ] + **吗**？")
+        st.write("*(Ví dụ: 你**有**男朋友**吗**？ - Bạn có bạn trai không?)*")
+        st.write("2. Dùng mẫu câu chính phản **有没有 (yǒu méiyǒu)**:")
+        st.write("👉 Chủ ngữ + **有没有** + [Danh từ]？")
+        st.write("*(Ví dụ: 你**有没有**男朋友？ - Bạn có bạn trai không?)*")
+    
+    st.info("📌 **Mẹo nhỏ:** Khi đã dùng **是不是** hoặc **有没有** thì tuyệt đối KHÔNG dùng thêm **吗** ở cuối câu nữa nhé!")    
     st.markdown("---")
     st.subheader("3. Hội thoại giao tiếp mẫu")
     st.info("Luyện tập các mẫu câu chào hỏi và ứng dụng từ vựng vừa học.")
