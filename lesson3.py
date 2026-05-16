@@ -11,17 +11,6 @@ def show_lesson3_pinyin():
             with cols[i%4]: render_pronunciation_card(item, "b3_tm")
     
     st.markdown("---")
-    st.info("""
-    📌 **Mối liên quan giữa cặp y-i và w-u**
-
-    **y** và **w** không phải là thanh mẫu thực sự. Chúng là ký hiệu viết xuất hiện khi vận mẫu bắt đầu bằng **i** hoặc **u** mà đứng một mình (không có thanh mẫu đi trước):
-
-    - i → **y**: yī (一: số 1), yě (也: cũng), yuè (月: trăng)
-    - u → **w**: wǔ (五: số 5), wǒ (我: tôi), wén (文: văn)
-
-    🔑 y và w là "áo khoác" của i và u khi chúng đứng đầu âm tiết. Phát âm hoàn toàn giống nhau!
-    """)
-    st.markdown("---")
     st.subheader("2. Luyện tập đọc Thanh mẫu nâng cao")
     col_lt1, col_lt2 = st.columns(2)
     with col_lt1:
@@ -202,12 +191,24 @@ def show_lesson3_pinyin_rules():
 
     st.markdown("#### Bảng ghép âm ü với 4 thanh điệu")
     st.markdown("""
-| Thanh mẫu | Ghép với ü | Thanh 1 | Thanh 2 | Thanh 3 | Thanh 4 |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| **j** | ju | jū | jú | jǔ | jù |
-| **q** | qu | qū | qú | qǔ | qù |
-| **x** | xu | xū | xú | xǔ | xù |
-| **y** | yu | yū | yú | yǔ | yù |
-| **n** | nü | nǖ | nǘ | nǚ | nǜ |
-| **l** | lü | lǖ | lǘ | lǚ | lǜ |
-    """)
+    <table class="chinese-table" style="width:100%; text-align:center;">
+        <thead>
+            <tr>
+                <th class="tm-header" style="text-align:center;">Thanh mẫu</th>
+                <th class="tm-header" style="text-align:center;">Ghép với ü</th>
+                <th class="tm-header" style="text-align:center;">Thanh 1</th>
+                <th class="tm-header" style="text-align:center;">Thanh 2</th>
+                <th class="tm-header" style="text-align:center;">Thanh 3</th>
+                <th class="tm-header" style="text-align:center;">Thanh 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><b>j</b></td><td class="pinyin-text">ju</td><td class="pinyin-text">jū</td><td class="pinyin-text">jú</td><td class="pinyin-text">jǔ</td><td class="pinyin-text">jù</td></tr>
+            <tr><td><b>q</b></td><td class="pinyin-text">qu</td><td class="pinyin-text">qū</td><td class="pinyin-text">qú</td><td class="pinyin-text">qǔ</td><td class="pinyin-text">qù</td></tr>
+            <tr><td><b>x</b></td><td class="pinyin-text">xu</td><td class="pinyin-text">xū</td><td class="pinyin-text">xú</td><td class="pinyin-text">xǔ</td><td class="pinyin-text">xù</td></tr>
+            <tr><td><b>y</b></td><td class="pinyin-text">yu</td><td class="pinyin-text">yū</td><td class="pinyin-text">yú</td><td class="pinyin-text">yǔ</td><td class="pinyin-text">yù</td></tr>
+            <tr><td><b>n</b></td><td class="pinyin-text">nü</td><td class="pinyin-text">nǖ</td><td class="pinyin-text">nǘ</td><td class="pinyin-text">nǚ</td><td class="pinyin-text">nǜ</td></tr>
+            <tr><td><b>l</b></td><td class="pinyin-text">lü</td><td class="pinyin-text">lǖ</td><td class="pinyin-text">lǘ</td><td class="pinyin-text">lǚ</td><td class="pinyin-text">lǜ</td></tr>
+        </tbody>
+    </table>
+    """, unsafe_allow_html=True)
