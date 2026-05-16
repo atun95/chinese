@@ -212,3 +212,102 @@ def show_lesson3_pinyin_rules():
         </tbody>
     </table>
     """, unsafe_allow_html=True)
+
+def show_lesson3_vocab():
+    render_lesson_intro("📚 Bài 3: Từ vựng & Cấu trúc câu", "Học từ vựng mới, tên riêng và cách đặt câu cơ bản.")
+    
+    st.subheader("1. Từ vựng & Tên riêng")
+    vocab_data = [
+        {"han": "律师", "pinyin": "lǜshī", "mean": "luật sư"},
+        {"han": "朋友", "pinyin": "péngyou", "mean": "bạn, bạn bè"},
+        {"han": "男", "pinyin": "nán", "mean": "nam"},
+        {"han": "女", "pinyin": "nǚ", "mean": "nữ"},
+        {"han": "男朋友", "pinyin": "nánpéngyou", "mean": "bạn trai"},
+        {"han": "女朋友", "pinyin": "nǚpéngyou", "mean": "bạn gái"},
+        {"han": "叫什么名字？", "pinyin": "jiào shénme míngzi?", "mean": "hỏi tên gì?"},
+        {"han": "青", "pinyin": "Qīng", "mean": "tên Thanh"},
+        {"han": "薇", "pinyin": "Wēi", "mean": "tên Vy"},
+        {"han": "珍", "pinyin": "Zhēn", "mean": "tên Trân"},
+        {"han": "仙", "pinyin": "Xiān", "mean": "tên Tiên"},
+    ]
+    
+    html = '<table class="chinese-table"><thead><tr><th style="text-align:center;">Chữ Hán</th><th style="text-align:center;">Phiên âm</th><th>Nghĩa tiếng Việt</th></tr></thead><tbody>'
+    for v in vocab_data:
+        html += f'<tr><td style="text-align:center; font-size: 1.2em;"><b>{v["han"]}</b></td><td class="pinyin-text" style="text-align:center;">{v["pinyin"]}</td><td>{v["mean"]}</td></tr>'
+    html += '</tbody></table>'
+    st.markdown(html, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.subheader("2. Cấu trúc câu & Từ để hỏi")
+    st.info("Các từ dùng để cấu tạo câu khẳng định, phủ định và câu hỏi.")
+    
+    grammar_data = [
+        {"han": "是", "pinyin": "shì", "mean": "là"},
+        {"han": "不是", "pinyin": "bú shì", "mean": "không phải (là)"},
+        {"han": "有", "pinyin": "yǒu", "mean": "có"},
+        {"han": "没有", "pinyin": "méiyǒu", "mean": "không có"},
+        {"han": "你呢", "pinyin": "nǐ ne", "mean": "còn bạn thì sao?"},
+        {"han": "吗", "pinyin": "ma", "mean": "không? (đặt ở cuối câu hỏi)"},
+    ]
+    html_gr = '<table class="chinese-table"><thead><tr><th style="text-align:center;">Chữ Hán</th><th style="text-align:center;">Phiên âm</th><th>Cách dùng / Nghĩa</th></tr></thead><tbody>'
+    for g in grammar_data:
+        html_gr += f'<tr><td style="text-align:center; font-size: 1.2em;"><b>{g["han"]}</b></td><td class="pinyin-text" style="text-align:center;">{g["pinyin"]}</td><td>{g["mean"]}</td></tr>'
+    html_gr += '</tbody></table>'
+    st.markdown(html_gr, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.subheader("3. Hội thoại giao tiếp mẫu")
+    st.info("Luyện tập các mẫu câu chào hỏi và ứng dụng từ vựng vừa học.")
+    
+    with st.expander("💬 Hội thoại 1: Chào hỏi & Tên tuổi", expanded=True):
+        st.code("""
+A: 你好！你叫什么名字？
+   Nǐ hǎo! Nǐ jiào shénme míngzi?
+   (Xin chào! Bạn tên là gì?)
+
+B: 你好！我叫青。你呢？
+   Nǐ hǎo! Wǒ jiào Qīng. Nǐ ne?
+   (Xin chào! Tôi tên Thanh. Còn bạn thì sao?)
+
+A: 我叫薇。很高兴认识你。
+   Wǒ jiào Wēi. Hěn gāoxìng rènshi nǐ.
+   (Tôi tên Vy. Rất vui được gặp bạn.)
+        """, language="text")
+
+    with st.expander("💬 Hội thoại 2: Hỏi thăm sức khỏe & Công việc", expanded=True):
+        st.code("""
+A: 你好吗？
+   Nǐ hǎo ma?
+   (Bạn có khỏe không?)
+
+B: 我很好。你忙吗？
+   Wǒ hěn hǎo. Nǐ máng ma?
+   (Tôi rất khỏe. Bạn có bận không?)
+
+A: 我不忙。
+   Wǒ bù máng.
+   (Tôi không bận.)
+        """, language="text")
+
+    with st.expander("💬 Hội thoại 3: Sử dụng 是, 不是, 有, 没有", expanded=True):
+        st.code("""
+A: 你是律师吗？
+   Nǐ shì lǜshī ma?
+   (Bạn có phải là luật sư không?)
+
+B: 不是，我不是律师。
+   Bú shì, wǒ bú shì lǜshī.
+   (Không phải, tôi không phải là luật sư.)
+
+A: 你有男朋友吗？
+   Nǐ yǒu nánpéngyou ma?
+   (Bạn có bạn trai chưa?)
+
+B: 我没有男朋友。你呢？
+   Wǒ méiyǒu nánpéngyou. Nǐ ne?
+   (Tôi không có bạn trai. Còn bạn?)
+
+A: 我有女朋友。
+   Wǒ yǒu nǚpéngyou.
+   (Tôi có bạn gái rồi.)
+        """, language="text")
