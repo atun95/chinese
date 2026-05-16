@@ -3,7 +3,7 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson3_pinyin():
-    render_lesson_intro("🔒 Bài 3: Thanh mẫu nâng cao & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
+    render_lesson_intro("📚 Bài 3: Thanh mẫu nâng cao & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
     for g in B2_THANH_MAU_DATA:
         st.markdown(f"#### {g['ten']}")
         cols = st.columns(4)
@@ -135,7 +135,7 @@ A: 我是老师。很高兴认识你！
         st.write("- Chī **bù chī**? (吃不吃: Ăn không?)")
 
 def show_lesson3_pinyin_rules():
-    render_lesson_intro("🔒 Bài 3: Quy tắc viết Pinyin", "Nắm vững các quy tắc biến đổi chữ viết của i, u, ü trong bính âm.")
+    render_lesson_intro("📚 Bài 3: Quy tắc viết Pinyin", "Nắm vững các quy tắc biến đổi chữ viết của i, u, ü trong bính âm.")
     
     st.subheader("1. Quy tắc phát âm chữ 'i'")
     st.info("Chữ 'i' có 2 cách đọc chính tùy thuộc vào chữ cái đi trước nó.")
@@ -155,8 +155,8 @@ def show_lesson3_pinyin_rules():
     st.subheader("2. Quy tắc viết i, u, ü khi không có thanh mẫu")
     st.write("Khi một âm tiết không có phụ âm đầu (thanh mẫu), ta cần thêm hoặc đổi chữ cái đầu thành **y** hoặc **w**.")
     
-    tab1, tab2, tab3 = st.tabs(["Quy tắc của i", "Quy tắc của u", "Quy tắc của ü"])
-    with tab1:
+    col1, col2, col3 = st.columns(3)
+    with col1:
         st.markdown("**i → thêm y** (*Nhớ: i đầu câu → đổi thành y*)")
         st.write("- **i** → **yi** (yī 一)")
         st.write("- **ia** → **ya** (yā 压)")
@@ -166,7 +166,7 @@ def show_lesson3_pinyin_rules():
         st.write("- **ian** → **yan** (yán 言)")
         st.write("- **in** → **yin** (yīn 音)")
         st.write("- **ing** → **ying** (yīng 英)")
-    with tab2:
+    with col2:
         st.markdown("**u → thêm w** (*Nhớ: u đầu câu → đổi thành w*)")
         st.write("- **u** → **wu** (wú 五)")
         st.write("- **ua** → **wa** (wá 娃)")
@@ -175,7 +175,7 @@ def show_lesson3_pinyin_rules():
         st.write("- **ui** → **wei** (wèi 为)")
         st.write("- **uan** → **wan** (wán 完)")
         st.write("- **un** → **wen** (wén 文)")
-    with tab3:
+    with col3:
         st.markdown("**ü → thêm y** (*Nhớ: ü đầu câu → viết y + phần còn lại*)")
         st.write("- **ü** → **yu** (yú 鱼)")
         st.write("- **üe** → **yue** (yuè 月)")
@@ -199,3 +199,15 @@ def show_lesson3_pinyin_rules():
         st.write("Vì n, l còn ghép được với u thường, nên phải viết rõ dấu hai chấm để phân biệt:")
         st.write("- **nǔ** (n + u) ≠ **nǚ** (n + ü)")
         st.write("- **lù** (l + u) ≠ **lǜ** (l + ü)")
+
+    st.markdown("#### Bảng ghép âm ü với 4 thanh điệu")
+    st.markdown("""
+| Thanh mẫu | Ghép với ü | Thanh 1 | Thanh 2 | Thanh 3 | Thanh 4 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **j** | ju | jū | jú | jǔ | jù |
+| **q** | qu | qū | qú | qǔ | qù |
+| **x** | xu | xū | xú | xǔ | xù |
+| **y** | yu | yū | yú | yǔ | yù |
+| **n** | nü | nǖ | nǘ | nǚ | nǜ |
+| **l** | lü | lǖ | lǘ | lǚ | lǜ |
+    """)
