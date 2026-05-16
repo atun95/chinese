@@ -228,7 +228,7 @@ def show_lesson3_vocab():
         {"han": "名字", "pinyin": "míngzi", "mean": "tên"},
         {"han": "高兴", "pinyin": "gāoxìng", "mean": "vui vẻ"},
         {"han": "认识", "pinyin": "rènshi", "mean": "quen biết"},
-        {"han": "叫什么名字？", "pinyin": "jiào shénme míngzi?", "mean": "hỏi tên gì?"},
+        {"han": "你叫什么名字？", "pinyin": "Nǐ jiào shénme míngzi?", "mean": "Bạn tên là gì?"},
         {"han": "青", "pinyin": "Qīng", "mean": "tên Thanh"},
         {"han": "薇", "pinyin": "Wēi", "mean": "tên Vy"},
         {"han": "珍", "pinyin": "Zhēn", "mean": "tên Trân"},
