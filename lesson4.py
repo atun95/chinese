@@ -13,3 +13,7 @@ def show_lesson4_finals():
 def show_lesson4_exercises(save_progress):
     st.header("📝 Bài 4: Bài tập vận mẫu kép mở rộng")
     st.info("Phần bài tập đang được soạn thảo...")
+
+def show_lesson4_hanzi():
+    render_lesson_intro("🔒 Bài 4: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
+    st.table(NET_CO_BAN)
