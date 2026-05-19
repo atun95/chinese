@@ -214,7 +214,7 @@ def show_lesson3_pinyin_rules():
     """, unsafe_allow_html=True)
 
 def show_lesson3_vocab():
-    render_lesson_intro("📚asd", "Học từ vựng mới, tên riêng và cách đặt câu cơ bản.")
+    render_lesson_intro("📚 Bài 3: Từ vựng & Cấu trúc câu", "Học từ vựng mới, tên riêng và cách đặt câu cơ bản.")
     
     st.subheader("1. Từ vựng & Tên riêng")
     vocab_data = [
