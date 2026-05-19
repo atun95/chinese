@@ -313,10 +313,7 @@ Ngày xưa trong nhiều phương ngữ Trung Quốc (đặc biệt là <b>miề
     st.markdown("<br/>", unsafe_allow_html=True)
     st.markdown("""
 <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 8px;">
-<h5 style="color: #1e3a8a; margin-top:0; margin-bottom: 8px; font-weight: bold;">🌍 Có phải ai cũng dùng "阿" không?</h5>
-<p style="font-size: 0.95em; color: #1e40af; line-height: 1.5; margin-bottom: 0;">
-<b>Không hẳn.</b> Cách dùng này phổ biến hơn nhiều ở <b>Miền Nam Trung Quốc, Hong Kong, và Đài Loan</b> so với miền Bắc. Đặc biệt trong các bộ phim truyền hình TVB hay phim xã hội đen Hong Kong thì cực kỳ phổ biến với các tên gọi như: <b>阿杰 (A Kiệt), 阿乐 (A Nhạc), 阿龙 (A Long)</b>.
-</p>
+
 </div>
 """, unsafe_allow_html=True)
  
