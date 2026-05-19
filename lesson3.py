@@ -68,8 +68,8 @@ def show_lesson3_pinyin():
     with st.expander("💬 Hội thoại mẫu", expanded=False):
         st.code("""
 A: 你好！你是老师吗？
+   Nǐ hǎo! Nǐ...
    (Xin chào! Bạn có phải giáo viên không?)
-   Nǐ hǎo! Nǐ shì lǎo shī ma ?
 
 B: 不是，我是学生。你呢？
    Bú shì, wǒ shì xuéshēng. Nǐ ne?
@@ -313,7 +313,10 @@ Ngày xưa trong nhiều phương ngữ Trung Quốc (đặc biệt là <b>miề
     st.markdown("<br/>", unsafe_allow_html=True)
     st.markdown("""
 <div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 8px;">
-
+<h5 style="color: #1e3a8a; margin-top:0; margin-bottom: 8px; font-weight: bold;">🌍 Có phải ai cũng dùng "阿" không?</h5>
+<p style="font-size: 0.95em; color: #1e40af; line-height: 1.5; margin-bottom: 0;">
+<b>Không hẳn.</b> Cách dùng này phổ biến hơn nhiều ở <b>Miền Nam Trung Quốc, Hong Kong, và Đài Loan</b> so với miền Bắc. Đặc biệt trong các bộ phim truyền hình TVB hay phim xã hội đen Hong Kong thì cực kỳ phổ biến với các tên gọi như: <b>阿杰 (A Kiệt), 阿乐 (A Nhạc), 阿龙 (A Long)</b>.
+</p>
 </div>
 """, unsafe_allow_html=True)
  
@@ -439,13 +442,31 @@ B: 你好！我叫青。你呢？
 
 A: 我叫薇。很高兴认识你。
    Tôi tên Vy. Rất vui được gặp bạn.
-
---------------------------------------------------
-So sánh: 我叫青 và 我是青
-
-我叫青 (Wǒ jiào Qīng - Tôi tên là Thanh): Dùng để giới thiệu tên. Từ 叫 (jiào) mang nghĩa "gọi là, tên là". Đây là cách giới thiệu tên tự nhiên và phổ biến nhất khi gặp mặt.
-我是青 (Wǒ shì Qīng - Tôi là Thanh): Nhấn mạnh đúng là người này (xác nhận thân phận). Thường dùng khi ai đó đang tìm bạn và bạn xác nhận "Tôi chính là Thanh đây".
 """, language="text")
+        st.markdown("""
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+            border-left: 5px solid #10b981; 
+            border-radius: 8px; 
+            padding: 15px; 
+            margin-top: 15px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+            max-width: 650px;">
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+        <span style="font-size: 1.2em;">💡</span>
+        <strong style="color: #0f172a; font-size: 1.05em;">So sánh: 我叫青 (Wǒ jiào Qīng) và 我是青 (Wǒ shì Qīng)</strong>
+    </div>
+    <div style="font-size: 0.95em; line-height: 1.5; color: #334155;">
+        <div style="margin-bottom: 10px; padding-left: 8px; border-left: 3px solid #3b82f6;">
+            <strong style="color: #2563eb;">我叫青</strong> <span class="pinyin-text" style="color: #475569;">(Wǒ jiào Qīng)</span>: <i>"Tôi tên là Thanh"</i><br/>
+            👉 Dùng để <b>giới thiệu tên tự nhiên và phổ biến nhất</b> khi gặp mặt. Từ <b>叫 (jiào)</b> mang nghĩa là "gọi là, tên là".
+        </div>
+        <div style="padding-left: 8px; border-left: 3px solid #f59e0b;">
+            <strong style="color: #d97706;">我是青</strong> <span class="pinyin-text" style="color: #475569;">(Wǒ shì Qīng)</span>: <i>"Tôi là Thanh"</i><br/>
+            👉 Nhấn mạnh <b>xác nhận thân phận</b>. Thường dùng khi ai đó đang tìm bạn và bạn lên tiếng xác nhận <i>"Tôi chính là Thanh đây"</i>.
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
  
     with st.expander("💬 Hội thoại 2: Hỏi thăm sức khỏe", expanded=True):
         st.code("""
