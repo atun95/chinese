@@ -68,8 +68,8 @@ def show_lesson3_pinyin():
     with st.expander("💬 Hội thoại mẫu", expanded=False):
         st.code("""
 A: 你好！你是老师吗？
-   Nǐ hǎo! Nǐ...
    (Xin chào! Bạn có phải giáo viên không?)
+   Nǐ hǎo! Nǐ shì lǎo shī ma ?
 
 B: 不是，我是学生。你呢？
    Bú shì, wǒ shì xuéshēng. Nǐ ne?
