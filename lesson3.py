@@ -564,7 +564,7 @@ def show_lesson3_dialogues():
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "你好，阿青！很高兴认识你！", "Nǐ hǎo, Ā Qīng! Hěn gāoxìng rènshi nǐ!", "Chào cậu, A Thanh! Rất vui được quen biết cậu!")}
             {dialogue_row("A Thanh (阿青)", "#2563eb", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào cậu, A Tiên! Tớ cũng rất vui được quen biết cậu. Cậu là học sinh à?")}
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "不是，我是律师。阿青，你是老师吗？", "Bùshì, wǒ shì lǜshī。. Ā Qīng, nǐ shì lǎoshī ma?", "Không phải , tớ là luật sư. A Thanh, cậu là giáo viên phải không?")}
-            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是实习律师。", "Bú ... wǒ bú ... lǎoshī. Wǒ shì shí xí lǜ shī.", "Không phải, tớ không phải giáo viên. Tớ cũng là luật sư.")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是实习律师。", "Bú ... wǒ bú ... lǎoshī. Wǒ shì shí xí lǜ shī.", "Không phải, tớ không phải giáo viên. Tớ là luật sư tập sự.")}
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "你是实习律师！那你忙吗？", "Nǐ shì shí xí lǜshī! Nà nǐ máng ma?", "Cậu là luật sư tập sự ! Thế cậu có bận không?")}
             {dialogue_row("A Thanh (阿青)", "#2563eb", "我不忙。今天我不忙。", "Wǒ bù máng. Jīntiān wǒ bù máng.", "Tớ không bận. Hôm nay tớ không bận.")}
             {dialogue_row("A Trân (阿珍)", "#8b5cf6", "你们累吗？去喝奶茶吧？", "Nǐmen lèi ma? Qù hē nǎichá ba?", "Các cậu có mệt không? Chúng ta đi uống nước nhé?")}
@@ -587,8 +587,8 @@ def show_lesson3_dialogues():
             {dialogue_row("A Vy (阿薇)", "#10b981", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě ... gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào A Tiên! Tôi cũng rất vui được quen biết bạn. Bạn là học sinh à?")}
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "不是，我不是学生。我是律师。", "Bú ... wǒ bú ... xuéshēng. Wǒ shì lǜshī.", "Không phải, tôi không phải học sinh. Tôi là luật sư.")}
             {dialogue_row("A Vy (阿薇)", "#10b981", "太好了！你有男朋友吗？", "Tài hǎo le! Nǐ yǒu nánpéngyou ma?", "Tuyệt vời quá! Bạn có bạn trai chưa?")}
-            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我没有男朋友。你呢？", "Wǒ méiyǒu nánpéngyou. Nǐ ne?", "Tôi không có bạn trai. Còn bạn?")}
-            {dialogue_row("A Vy (阿薇)", "#10b981", "我也没有。阿青，你呢？你有女朋友吗？", "Wǒ yě ... Ā Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi cũng không có. A Thanh, còn bạn? Bạn có bạn gái chưa?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我有老公了。你呢？", "Wǒ yǒu lǎo gōng le. Nǐ ne?", "Tôi có chồng rồi . Còn bạn?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我没有男朋友。阿青，你呢？你有女朋友吗？", "Wǒ méiyǒu nán péngyǒu. Ā Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi chưa có bạn trai . A Thanh, còn bạn? Bạn có bạn gái chưa?")}
             {dialogue_row("A Thanh (阿青)", "#2563eb", "我有。她叫青，她很好。", "Wǒ yǒu. Tā jiào Qīng, tā hěn hǎo.", "Tôi có rồi. Cô ấy tên là Thanh, cô ấy tốt lắm.")}
             {dialogue_row("A Trân (阿珍)", "#8b5cf6", "好了好了，你们累吗？你们饿吗？", "Hǎo le hǎo le, nǐmen lèi ma? Nǐmen è ma?", "Được rồi được rồi, các bạn có mệt không? Có đói không?")}
             {dialogue_row("A Vy (阿薇)", "#10b981", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi.")}
