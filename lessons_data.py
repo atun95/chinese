@@ -147,6 +147,20 @@ B2_LUYEN_TAP_ROWS = {
     "h": ["ha", "", "he", "", "hu", "", "hai", "hei", "hao", "hou"],
 }
 
+B3_LUYEN_TAP_FINALS = ["a", "o", "e", "i", "u", "ü", "ai", "ao", "ou", "ei"]
+B3_LUYEN_TAP_ROWS = {
+    "z": ["za", "", "ze", "zi", "zu", "", "zai", "zao", "zou", "zei"],
+    "c": ["ca", "", "ce", "ci", "cu", "", "cai", "cao", "cou", ""],
+    "s": ["sa", "", "se", "si", "su", "", "sai", "sao", "sou", ""],
+    "zh": ["zha", "", "zhe", "zhi", "zhu", "", "zhai", "zhao", "zhou", "zhei"],
+    "ch": ["cha", "", "che", "chi", "chu", "", "chai", "chao", "chou", ""],
+    "sh": ["sha", "", "she", "shi", "shu", "", "shai", "shao", "shou", "shei"],
+    "r": ["", "", "re", "ri", "ru", "", "", "rao", "rou", ""],
+    "j": ["", "", "", "ji", "", "ju", "", "", "", ""],
+    "q": ["", "", "", "qi", "", "qu", "", "", "", ""],
+    "x": ["", "", "", "xi", "", "xu", "", "", "", ""],
+}
+
 NET_CO_BAN = [
     {"Nét": "横", "Pinyin": "héng", "Mô tả": "nét ngang"},
     {"Nét": "竖", "Pinyin": "shù", "Mô tả": "nét sổ"},
