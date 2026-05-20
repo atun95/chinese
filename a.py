@@ -131,6 +131,7 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 3 - Quy tắc viết Pinyin",
     "Bài 3 - Luyện tập ghép âm",
     "Bài 3 - TỪ VỰNG",
+    "Bài 3 - Hội thoại thực hành",
     "Bài 4 - Vận mẫu kép mở rộng (đang khóa)",
     "Bài 4 - Nét chữ Hán cơ bản (đang khóa)",
     "Bài 4 - Bài tập (đang khóa)"
@@ -162,6 +163,9 @@ elif menu == "Bài 3 - Luyện tập ghép âm":
 
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
+
+elif menu == "Bài 3 - Hội thoại thực hành":
+    lesson3.show_lesson3_dialogues()
 
 elif menu == "Bài 4 - Vận mẫu kép mở rộng (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
