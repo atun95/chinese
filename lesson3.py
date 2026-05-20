@@ -507,3 +507,95 @@ def show_lesson3_practice(add_tones):
                         for t in add_tones(combo): st.write(f"- {t}")
             else:
                 r_cols[i+1].write("")
+
+
+
+
+
+def show_lesson3_dialogues():
+    render_lesson_intro("📚 Bài 3: Hội thoại thực hành", "Ứng dụng các thanh mẫu nâng cao, quy tắc viết bính âm và từ vựng đã học vào các ngữ cảnh hội thoại giao tiếp 2 người, 3 người và 4 người.")
+    
+    # Helper to render a compact dialogue row
+    def dialogue_row(speaker_name, speaker_color, hanzi, pinyin, translation):
+        return f"""
+        <div style="display: flex; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.95em;">
+            <div style="width: 140px; min-width: 140px; font-weight: 700; color: {speaker_color}; font-size: 0.9em; padding-top: 4px;">👤 {speaker_name}</div>
+            <div style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-left: 10px;">
+                <span style="font-size: 1.15em; font-weight: 700; color: #0f172a; min-width: 180px; display: inline-block;">{hanzi}</span>
+                <span style="font-family: 'Courier New', monospace; font-weight: 700; color: #2563eb; font-size: 0.95em; background-color: #eff6ff; padding: 2px 8px; border-radius: 4px;">{pinyin}</span>
+                <span style="color: #64748b; font-size: 0.92em; font-style: italic;">{translation}</span>
+            </div>
+        </div>
+        """
+
+    tab1, tab2, tab3 = st.tabs(["👥 Hội thoại 2 người", "👥 Hội thoại 3 người", "👥 Hội thoại 4 người"])
+
+    with tab1:
+        st.markdown(f"""
+        <div style="background-color: #f8fafc; border-left: 4px solid #3b82f6; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.92em;">
+            <strong>🗣️ Ngữ cảnh:</strong> A Thanh (Ā Qīng - Học sinh) gặp A Vy (Ā Wēi - Luật sư). Họ chào nhau, giới thiệu tên, nghề nghiệp và rủ nhau đi ăn.
+        </div>
+        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);">
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "你好！", "Nǐ hǎo!", "Xin chào!")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "你好！力叫什么名字？", "Nǐ hǎo! Nǐ jiào shénme míngzi?", "Xin chào! Bạn tên là gì vậy?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "我叫阿青。你呢？", "Wǒ jiào Ā Qīng. Nǐ ne?", "Tôi tên là A Thanh. Còn bạn?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我叫阿薇。", "Wǒ jiào Ā Wēi.", "Tôi tên là A Vy.")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "很高兴认识你，阿薇。你是老师吗？", "Hěn gāoxìng rènshi nǐ, Ā Wēi. Nǐ shì lǎoshī ma?", "Rất vui được gặp bạn, A Vy. Bạn là giáo viên phải không?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "不是，我不是老师。我是律师。你呢？你是律师吗？", "Bú shì, wǒ bú shì lǎoshī. Wǒ shì lǜshī. Nǐ ne? Nǐ shì lǜshī ma?", "Không phải, tôi không phải giáo viên. Tôi là luật sư. Còn bạn? Bạn cũng là luật sư à?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我是学生。我不忙。你忙吗？", "Bú shì, wǒ shì xuéshēng. Wǒ bù máng. Nǐ máng ma?", "Không phải, tôi là học sinh. Tôi không bận. Bạn có bận không?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我很忙。", "Wǒ hěn máng.", "Tôi rất bận.")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "你有男朋友吗？", "Nǐ yǒu nánpéngyou ma?", "Bạn có bạn trai chưa?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我没有男朋友。你呢？", "Wǒ méiyǒu nánpéngyou. Nǐ ne?", "Tôi không có bạn trai. Còn bạn?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "我有女朋友。她很好。", "Wǒ yǒu nǚpéngyou. Tā hěn hǎo.", "Tôi có bạn gái rồi. Cô ấy rất tốt.")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "你饿吗？去吃吗？", "Nǐ è ma? Qù chī ma?", "Bạn có đói không? Có đi ăn không?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "我很饿。去吧，去吃鸡！", "Wǒ hěn è. Qù ba, qù chī jī!", "Tôi rất đói. Đi thôi, đi ăn thịt gà nào!")}
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab2:
+        st.markdown(f"""
+        <div style="background-color: #f8fafc; border-left: 4px solid #8b5cf6; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.92em;">
+            <strong>🗣️ Ngữ cảnh:</strong> A Trân (Ā Zhēn) tình cờ gặp A Tiên (Ā Xiān) trên đường và giới thiệu người bạn đi cùng mình là A Thanh (Ā Qīng) cho A Tiên làm quen.
+        </div>
+        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);">
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "阿仙，你好吗？", "Ā Xiān, nǐ hǎo ma?", "A Tiên, bạn khỏe không?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我很好！你呢，阿珍？", "Wǒ hěn hǎo! Nǐ ne, Ā Zhēn?", "Tôi rất khỏe! Còn bạn thì sao, A Trân?")}
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "我也很好。这是我朋友，他叫阿青。", "Wǒ yě hěn hǎo. Zhè shì wǒ péngyou, tā jiào Ā Qīng.", "Tôi cũng rất khỏe. Đây là bạn của tôi, cậu ấy tên là A Thanh.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "你好，阿青！很高兴认识你！", "Nǐ hǎo, Ā Qīng! Hěn gāoxìng rènshi nǐ!", "Chào cậu, A Thanh! Rất vui được quen biết cậu!")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào cậu, A Tiên! Tớ cũng rất vui được quen biết cậu. Cậu là học sinh à?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "是的，我是学生。阿青，你是老师吗？", "Shì de, wǒ shì xuéshēng. Ā Qīng, nǐ shì lǎoshī ma?", "Đúng vậy, tớ là học sinh. A Thanh, cậu là giáo viên phải không?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是律师。", "Bú ... wǒ bú ... lǎoshī. Wǒ shì lǜshī.", "Không phải, tớ không phải giáo viên. Tớ là luật sư.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "哇，你是律师！那你忙吗？", "Wa, nǐ shì lǜshī! Nà nǐ máng ma?", "Oa, cậu là luật sư cơ à! Thế cậu có bận không?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "我不忙。今天我不忙。", "Wǒ bù máng. Jīntiān wǒ bù máng.", "Tớ không bận. Hôm nay tớ không bận.")}
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "你们累吗？去喝奶茶吧？", "Nǐmen lèi ma? Qù hē nǎichá ba?", "Các cậu có mệt không? Chúng ta đi uống nước nhé?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我不累。去吧！", "Wǒ bú lèi. Qù ba!", "Tớ không mệt. Đi thôi nào!")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "去吧！", "Qù ba!", "Đi thôi!")}
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab3:
+        st.markdown(f"""
+        <div style="background-color: #f8fafc; border-left: 4px solid #f59e0b; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px; font-size: 0.92em;">
+            <strong>🗣️ Ngữ cảnh:</strong> Cuộc tụ họp cuối tuần vui vẻ giữa 4 người bạn: A Vy, A Thanh, A Trân và A Tiên. Họ trao đổi về công việc, đời sống và cùng bàn bạc xem hôm nay ăn gì.
+        </div>
+        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 6px 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);">
+            {dialogue_row("A Vy (阿薇)", "#10b981", "你们好！", "Nǐmen hǎo!", "Chào các bạn!")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "阿薇，你好！你忙吗？", "Ā Wēi, nǐ hǎo! Nǐ máng ma?", "A Vy, chào bạn! Bạn bận không?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我很忙。你们呢？", "Wǒ hěn máng. Nǐmen ne?", "Tôi rất bận. Còn các bạn thì sao?")}
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "我们不忙。这是阿仙，她是我的好朋友。", "Wǒmen bù máng. Zhè ... Ā Xiān, tā shì wǒ de hǎo péngyou.", "Chúng tôi không bận. Đây là A Tiên, cô ấy là bạn thân của tôi.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "阿薇，你好！很高兴认识你。", "Ā Wēi, nǐ hǎo! Hěn gāoxìng rènshi nǐ.", "Chào A Vy! Rất vui được quen biết bạn.")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě ... gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào A Tiên! Tôi cũng rất vui được quen biết bạn. Bạn là học sinh à?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "不是，我不是学生。我是律师。", "Bú ... wǒ bú ... xuéshēng. Wǒ shì lǜshī.", "Không phải, tôi không phải học sinh. Tôi là luật sư.")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "太好了！你有男朋友吗？", "Tài hǎo le! Nǐ yǒu nánpéngyou ma?", "Tuyệt vời quá! Bạn có bạn trai chưa?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我没有男朋友。你呢？", "Wǒ méiyǒu nánpéngyou. Nǐ ne?", "Tôi không có bạn trai. Còn bạn?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我也没有。阿青，你呢？你有女朋友吗？", "Wǒ yě ... Ā Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi cũng không có. A Thanh, còn bạn? Bạn có bạn gái chưa?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "我有。她叫青，她很好。", "Wǒ yǒu. Tā jiào Qīng, tā hěn hǎo.", "Tôi có rồi. Cô ấy tên là Thanh, cô ấy tốt lắm.")}
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "好了好了，你们累吗？你们饿吗？", "Hǎo le hǎo le, nǐmen lèi ma? Nǐmen è ma?", "Được rồi được rồi, các bạn có mệt không? Có đói không?")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我也很饿。我们吃什么？", "Wǒ yě hěn è. Wǒmen chī shénme?", "Tôi cũng rất đói. Chúng ta ăn gì đây?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "吃鸡还是吃鱼？", "Chī jī hái shì chī yú?", "Ăn thịt gà hay ăn cá đây?")}
+            {dialogue_row("A Trân (阿珍)", "#8b5cf6", "吃鱼吧！鱼很好。", "Chī yú ba! Yú hěn hǎo.", "Ăn cá đi! Cá ngon lắm đấy.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "好！去吃鱼吧！", "Hǎo! Qù chī yú ba!", "Được! Đi ăn cá thôi nào!")}
+            {dialogue_row("A Vy (阿薇)", "#10b981", "去吧！", "Qù ba!", "Đi thôi!")}
+        </div>
+        """, unsafe_allow_html=True)
