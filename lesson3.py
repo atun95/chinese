@@ -563,9 +563,9 @@ def show_lesson3_dialogues():
             {dialogue_row("A Trân (阿珍)", "#8b5cf6", "我也很好。这是我朋友，他叫阿青。", "Wǒ yě hěn hǎo. Zhè shì wǒ péngyou, tā jiào Ā Qīng.", "Tôi cũng rất khỏe. Đây là bạn của tôi, cậu ấy tên là A Thanh.")}
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "你好，阿青！很高兴认识你！", "Nǐ hǎo, Ā Qīng! Hěn gāoxìng rènshi nǐ!", "Chào cậu, A Thanh! Rất vui được quen biết cậu!")}
             {dialogue_row("A Thanh (阿青)", "#2563eb", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào cậu, A Tiên! Tớ cũng rất vui được quen biết cậu. Cậu là học sinh à?")}
-            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "不是，我是律师。阿青，你是老师吗？", "Bùshì, wǒ shì lǜshī。. Ā Qīng, nǐ shì lǎoshī ma?", "Đúng vậy, tớ là học sinh. A Thanh, cậu là giáo viên phải không?")}
-            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是律师。", "Bú ... wǒ bú ... lǎoshī. Wǒ shì lǜshī.", "Không phải, tớ không phải giáo viên. Tớ là luật sư.")}
-            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "哇，你是律师！那你忙吗？", "Wa, nǐ shì lǜshī! Nà nǐ máng ma?", "Oa, cậu là luật sư cơ à! Thế cậu có bận không?")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "不是，我是律师。阿青，你是老师吗？", "Bùshì, wǒ shì lǜshī。. Ā Qīng, nǐ shì lǎoshī ma?", "Không phải , tớ là luật sư. A Thanh, cậu là giáo viên phải không?")}
+            {dialogue_row("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是实习律师。", "Bú ... wǒ bú ... lǎoshī. Wǒ shì shí xí lǜ shī.", "Không phải, tớ không phải giáo viên. Tớ cũng là luật sư.")}
+            {dialogue_row("A Tiên (阿仙)", "#f59e0b", "你是实习律师！那你忙吗？", "Nǐ shì shí xí lǜshī! Nà nǐ máng ma?", "Cậu là luật sư tập sự ! Thế cậu có bận không?")}
             {dialogue_row("A Thanh (阿青)", "#2563eb", "我不忙。今天我不忙。", "Wǒ bù máng. Jīntiān wǒ bù máng.", "Tớ không bận. Hôm nay tớ không bận.")}
             {dialogue_row("A Trân (阿珍)", "#8b5cf6", "你们累吗？去喝奶茶吧？", "Nǐmen lèi ma? Qù hē nǎichá ba?", "Các cậu có mệt không? Chúng ta đi uống nước nhé?")}
             {dialogue_row("A Tiên (阿仙)", "#f59e0b", "我不累。去吧！", "Wǒ bú lèi. Qù ba!", "Tớ không mệt. Đi thôi nào!")}
