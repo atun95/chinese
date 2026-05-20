@@ -490,6 +490,7 @@ A: 我有女朋友。
 
 
 def show_lesson3_practice(add_tones):
+    from lessons_data import B3_LUYEN_TAP_FINALS, B3_LUYEN_TAP_ROWS
     render_lesson_intro("📚 Bài 3: Luyện tập ghép âm", "Luyện ghép các thanh mẫu nâng cao (z, c, s, zh, ch, sh, r, j, q, x) với các vận mẫu cơ bản và vận mẫu kép.")
     st.subheader("Bảng luyện tập ghép âm nâng cao")
     
