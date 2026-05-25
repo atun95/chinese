@@ -133,6 +133,7 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 3 - TỪ VỰNG",
     "Bài 3 - Hội thoại thực hành",
     "Bài 4 - Vận mẫu kép mở rộng (đang khóa)",
+    "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
     "Bài 4 - Nét chữ Hán cơ bản (đang khóa)",
     "Bài 4 - Bài tập (đang khóa)"
 ])
@@ -170,6 +171,10 @@ elif menu == "Bài 3 - Hội thoại thực hành":
 elif menu == "Bài 4 - Vận mẫu kép mở rộng (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
     else: lesson4.show_lesson4_finals()
+
+elif menu == "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)":
+    if not teacher_unlock: st.warning("Đang khóa.")
+    else: lesson4.show_lesson4_female_comparison()
 
 elif menu == "Bài 4 - Nét chữ Hán cơ bản (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
