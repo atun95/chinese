@@ -114,20 +114,182 @@ B2_VAN_MAU_KEP_DATA = [
     {
         "nhom": "Nhóm mở rộng từ i",
         "items": [
-            {"chu": "ia", "hdsd": "Đọc i mở nhanh sang a.", "vd_han": "家", "vd_py": "jiā", "nghe": "jiā"},
-            {"chu": "ie", "hdsd": "Đọc i trượt sang e.", "vd_han": "姐", "vd_py": "jiě", "nghe": "jiě"},
-            {"chu": "iao", "hdsd": "Đọc i -> a -> o liền mạch.", "vd_han": "小", "vd_py": "xiǎo", "nghe": "xiǎo"},
-            {"chu": "iu", "hdsd": "Thực chất là i + ou.", "vd_han": "六", "vd_py": "liù", "nghe": "liù"},
+            {
+                "chu": "ia", 
+                "hdsd": "Đọc i mở nhanh sang a.", 
+                "cach_doc_sau": "Khởi đầu bằng nguyên âm /i/, sau đó nhanh chóng mở rộng miệng sang nguyên âm /a/.",
+                "tuong_duong": "Gần giống âm **ia** hoặc **ya** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình (không có thanh mẫu), âm này viết thành **ya**.",
+                "vd_han": "家", 
+                "vd_py": "jiā", 
+                "nghe": "家",
+                "vietnamese": "Nhà / Gia đình",
+                "more_examples": [
+                    {"han": "牙", "py": "yá", "vi": "răng"},
+                    {"han": "鸭", "py": "yā", "vi": "con vịt"},
+                    {"han": "虾", "py": "xiā", "vi": "con tôm"}
+                ],
+                "color": "linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)",
+                "border_color": "#F43F5E",
+                "text_color": "#9F1239"
+            },
+            {
+                "chu": "ie", 
+                "hdsd": "Đọc i trượt sang e (ê).", 
+                "cach_doc_sau": "Phát âm âm /i/ trước, rồi trượt lưỡi hạ xuống để phát âm /ê/ (nguyên âm nửa mở). Hai hàm răng khép hờ.",
+                "tuong_duong": "Gần giống âm **iê** hoặc **yê** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình viết thành **ye**. Lưu ý nguyên âm ở đây đọc là 'ê' chứ không đọc là 'e' hay 'ơ'.",
+                "vd_han": "姐", 
+                "vd_py": "jiě", 
+                "nghe": "姐",
+                "vietnamese": "Chị gái",
+                "more_examples": [
+                    {"han": "爷", "py": "yé", "vi": "ông nội"},
+                    {"han": "写", "py": "xiě", "vi": "viết"},
+                    {"han": "鞋", "py": "xié", "vi": "đôi giày"}
+                ],
+                "color": "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)",
+                "border_color": "#EC4899",
+                "text_color": "#9D174D"
+            },
+            {
+                "chu": "iao", 
+                "hdsd": "Đọc i -> a -> o liền mạch.", 
+                "cach_doc_sau": "Đây là vận mẫu kép ba. Bắt đầu tròn môi ở /i/, trượt thật mượt sang /a/ rộng, rồi thu nhỏ môi lại sang /o/.",
+                "tuong_duong": "Gần giống âm **i-ao** hay **yeo** (như từ 'miêu' đọc lướt nhanh).",
+                "luu_y": "Khi không có thanh mẫu đứng trước, âm này viết thành **yao**.",
+                "vd_han": "小", 
+                "vd_py": "xiǎo", 
+                "nghe": "小",
+                "vietnamese": "Nhỏ / Bé",
+                "more_examples": [
+                    {"han": "药", "py": "yào", "vi": "thuốc"},
+                    {"han": "鸟", "py": "niǎo", "vi": "con chim"},
+                    {"han": "叫", "py": "jiào", "vi": "gọi/tên là"}
+                ],
+                "color": "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)",
+                "border_color": "#8B5CF6",
+                "text_color": "#5B21B6"
+            },
+            {
+                "chu": "iu", 
+                "hdsd": "Đọc i -> u nhanh (thực chất là i + ou).", 
+                "cach_doc_sau": "Bắt đầu bằng âm /i/, sau đó chuyển nhanh và thu tròn môi sang âm /ou/ (gần giống âu).",
+                "tuong_duong": "Gần giống âm **yêu** hay **iu** trong tiếng Việt.",
+                "luu_y": "Đây là dạng viết gọn của **iou**. Khi có thanh mẫu viết là **iu** (như *liù*), khi đứng một mình viết là **you**.",
+                "vd_han": "六", 
+                "vd_py": "liù", 
+                "nghe": "六",
+                "vietnamese": "Số sáu",
+                "more_examples": [
+                    {"han": "九", "py": "jiǔ", "vi": "số chín"},
+                    {"han": "牛", "py": "niú", "vi": "con bò"},
+                    {"han": "秋", "py": "qiū", "vi": "mùa thu"}
+                ],
+                "color": "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)",
+                "border_color": "#3B82F6",
+                "text_color": "#1E40AF"
+            }
         ]
     },
     {
         "nhom": "Nhóm mở rộng từ u/ü",
         "items": [
-            {"chu": "ua", "hdsd": "Tròn môi u mở sang a.", "vd_han": "花", "vd_py": "huā", "nghe": "huā"},
-            {"chu": "uo", "hdsd": "Tròn môi u mở sang o.", "vd_han": "我", "vd_py": "wǒ", "nghe": "wǒ"},
-            {"chu": "uai", "hdsd": "Đọc u -> a -> i nhanh.", "vd_han": "快", "vd_py": "kuài", "nghe": "kuài"},
-            {"chu": "ui", "hdsd": "Thực chất là u + ei.", "vd_han": "水", "vd_py": "shuǐ", "nghe": "shuǐ"},
-            {"chu": "üe", "hdsd": "Tròn môi ü mở sang e.", "vd_han": "月", "vd_py": "yuè", "nghe": "yuè"},
+            {
+                "chu": "ua", 
+                "hdsd": "Tròn môi u mở sang a.", 
+                "cach_doc_sau": "Tròn môi phát âm /u/ làm đệm trước, sau đó mở rộng khẩu hình phát âm nguyên âm /a/ thật nhanh chóng.",
+                "tuong_duong": "Đọc gần giống âm **oa** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình không có thanh mẫu, âm này viết thành **wa**.",
+                "vd_han": "花", 
+                "vd_py": "huā", 
+                "nghe": "花",
+                "vietnamese": "Bông hoa",
+                "more_examples": [
+                    {"han": "袜", "py": "wà", "vi": "đôi tất/vớ"},
+                    {"han": "画", "py": "huà", "vi": "vẽ / bức tranh"},
+                    {"han": "挂", "py": "guà", "vi": "treo lên"}
+                ],
+                "color": "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)",
+                "border_color": "#10B981",
+                "text_color": "#065F46"
+            },
+            {
+                "chu": "uo", 
+                "hdsd": "Tròn môi u mở sang o.", 
+                "cach_doc_sau": "Tròn môi phát âm /u/ làm đệm trước, rồi chuyển thật nhanh sang âm /o/ (hoặc ô).",
+                "tuong_duong": "Đọc gần giống âm **uô** hoặc **ua** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình viết thành **wo**. Khi đứng sau các thanh mẫu môi như *b, p, m, f*, ta chỉ viết là *o* (ví dụ: *bo, po, mo, fo*) nhưng vẫn giữ âm đệm nhẹ.",
+                "vd_han": "我", 
+                "vd_py": "wǒ", 
+                "nghe": "我",
+                "vietnamese": "Tôi / Tớ",
+                "more_examples": [
+                    {"han": "火", "py": "huǒ", "vi": "lửa"},
+                    {"han": "国", "py": "guó", "vi": "đất nước"},
+                    {"han": "多", "py": "duō", "vi": "nhiều"}
+                ],
+                "color": "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
+                "border_color": "#D97706",
+                "text_color": "#92400E"
+            },
+            {
+                "chu": "uai", 
+                "hdsd": "Đọc u -> a -> i nhanh.", 
+                "cach_doc_sau": "Vận mẫu kép ba. Tròn môi bắt đầu từ /u/ làm đệm, chuyển mượt sang /a/ rộng miệng rồi kết thúc khép môi ở /i/.",
+                "tuong_duong": "Đọc gần giống âm **oai** trong tiếng Việt.",
+                "luu_y": "Khi đứng độc lập không có thanh mẫu đứng trước, viết thành **wai**.",
+                "vd_han": "快", 
+                "vd_py": "kuài", 
+                "nghe": "快",
+                "vietnamese": "Nhanh / Nhanh chóng",
+                "more_examples": [
+                    {"han": "外", "py": "wài", "vi": "bên ngoài"},
+                    {"han": "怪", "py": "guài", "vi": "quái vật / kỳ lạ"},
+                    {"han": "帅", "py": "shuài", "vi": "đẹp trai"}
+                ],
+                "color": "linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%)",
+                "border_color": "#0D9488",
+                "text_color": "#0F766E"
+            },
+            {
+                "chu": "ui", 
+                "hdsd": "Đọc u -> i nhanh (thực chất là u + ei).", 
+                "cach_doc_sau": "Tròn môi phát âm /u/ làm đệm, sau đó lướt nhanh sang âm /ei/ (gần giống ây).",
+                "tuong_duong": "Gần giống âm **uây** trong tiếng Việt.",
+                "luu_y": "Đây là dạng viết rút gọn của **uei**. Khi có thanh mẫu đứng trước viết là **ui** (như *shuǐ*), đứng một mình viết là **wei**.",
+                "vd_han": "水", 
+                "vd_py": "shuǐ", 
+                "nghe": "水",
+                "vietnamese": "Nước",
+                "more_examples": [
+                    {"han": "回", "py": "huí", "vi": "trở về"},
+                    {"han": "喂", "py": "wèi", "vi": "alo / cho ăn"},
+                    {"han": "贵", "py": "guì", "vi": "đắt / quý"}
+                ],
+                "color": "linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%)",
+                "border_color": "#0284C7",
+                "text_color": "#0369A1"
+            },
+            {
+                "chu": "üe", 
+                "hdsd": "Tròn môi ü mở sang e (ê).", 
+                "cach_doc_sau": "Giữ nguyên môi tròn của âm /ü/ (như âm uy), sau đó mở rộng nhanh khẩu hình để chuyển sang /e/ (ê).",
+                "tuong_duong": "Đọc gần giống âm **uyê** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình viết là **yue**. Khi đi sau **j, q, x**, hai dấu chấm trên đầu chữ ü sẽ biến mất, viết thành **ue** (nhưng vẫn đọc là tròn môi *üe*).",
+                "vd_han": "月", 
+                "vd_py": "yuè", 
+                "nghe": "月",
+                "vietnamese": "Mặt trăng / Tháng",
+                "more_examples": [
+                    {"han": "雪", "py": "xuě", "vi": "tuyết"},
+                    {"han": "学", "py": "xué", "vi": "học"},
+                    {"han": "缺", "py": "quē", "vi": "thiếu thốn"}
+                ],
+                "color": "linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)",
+                "border_color": "#A855F7",
+                "text_color": "#7E22CE"
+            }
         ]
     }
 ]
