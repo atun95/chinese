@@ -2,13 +2,265 @@ import streamlit as st
 from lessons_data import *
 from ui_utils import *
 
+def check_spelling_rule(initial, final, tone_idx):
+    # tone_idx: 0 to 4 (0: None/light, 1: tone 1, 2: tone 2, 3: tone 3, 4: tone 4)
+    spelled = ""
+    if not initial or initial == "(Không có)":
+        if final == "ia": spelled = "ya"
+        elif final == "ie": spelled = "ye"
+        elif final == "iao": spelled = "yao"
+        elif final == "iu": spelled = "you"
+        elif final == "ua": spelled = "wa"
+        elif final == "uo": spelled = "wo"
+        elif final == "uai": spelled = "wai"
+        elif final == "ui": spelled = "wei"
+        elif final == "üe": spelled = "yue"
+    else:
+        # j, q, x compatibility
+        if initial in ['j', 'q', 'x']:
+            if final in ['ua', 'uo', 'uai', 'ui']:
+                return None, f"❌ Lỗi ghép âm: Thanh mẫu <b>{initial}</b> không thể đi cùng nhóm vận mẫu bắt đầu bằng <b>u</b> ({final})!"
+            if final == "üe":
+                spelled = f"{initial}ue"
+            else:
+                spelled = f"{initial}{final}"
+        # b, p, m, f compatibility
+        elif initial in ['b', 'p', 'm', 'f']:
+            if final in ['ua', 'uai', 'ui']:
+                return None, f"❌ Lỗi ghép âm: Âm môi <b>{initial}</b> không thể đi cùng vận mẫu <b>{final}</b>!"
+            if final == "üe":
+                return None, f"❌ Lỗi ghép âm: Thanh mẫu <b>{initial}</b> không thể đi cùng vận mẫu <b>üe</b>!"
+            if final == 'uo':
+                spelled = f"{initial}o"
+            else:
+                spelled = f"{initial}{final}"
+        # d, t, g, k, h, zh, ch, sh, r, z, c, s compatibility
+        elif initial in ['d', 't', 'g', 'k', 'h', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's']:
+            if final == "üe":
+                return None, f"❌ Lỗi ghép âm: Thanh mẫu <b>{initial}</b> không thể đi cùng vận mẫu <b>üe</b>!"
+            spelled = f"{initial}{final}"
+        # n, l compatibility
+        elif initial in ['n', 'l']:
+            spelled = f"{initial}{final}"
+            
+    # Apply Tone Placement rules in Pinyin:
+    if tone_idx == 0:
+        return spelled, None
+        
+    tone_vowels = {
+        'a': ['ā', 'á', 'ǎ', 'à'],
+        'o': ['ō', 'ó', 'ǒ', 'ò'],
+        'e': ['ē', 'é', 'ě', 'è'],
+        'i': ['ī', 'í', 'ǐ', 'ì'],
+        'u': ['ū', 'ú', 'ǔ', 'ù'],
+        'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+    }
+    
+    res = spelled
+    if 'a' in res:
+        res = res.replace('a', tone_vowels['a'][tone_idx - 1])
+    elif 'o' in res:
+        res = res.replace('o', tone_vowels['o'][tone_idx - 1])
+    elif 'e' in res:
+        res = res.replace('e', tone_vowels['e'][tone_idx - 1])
+    elif 'iu' in res:
+        res = res.replace('u', tone_vowels['u'][tone_idx - 1])
+    elif 'ui' in res:
+        res = res.replace('i', tone_vowels['i'][tone_idx - 1])
+    elif 'ü' in res:
+        res = res.replace('ü', tone_vowels['ü'][tone_idx - 1])
+    elif 'u' in res:
+        res = res.replace('u', tone_vowels['u'][tone_idx - 1])
+    elif 'i' in res:
+        res = res.replace('i', tone_vowels['i'][tone_idx - 1])
+        
+    return res, None
+
 def show_lesson4_finals():
     render_lesson_intro("📚 Bài 4: Vận mẫu kép mở rộng", "Học các vận mẫu kép mở rộng và quy tắc ghép âm nâng cao.")
+    
+    st.markdown(
+        """
+        <style>
+        .final-card {
+            border-radius: 12px; 
+            padding: 22px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid #e2e8f0; 
+            transition: all 0.3s ease;
+        }
+        .final-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .rule-badge {
+            background-color: #f1f5f9;
+            color: #475569;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.88em;
+            font-weight: 500;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .final-letter {
+            font-size: 2.2em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            line-height: 1;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    st.write(
+        "Chào mừng bạn đến với nội dung **Vận mẫu kép mở rộng**! Đây là nhóm các vận mẫu ghép có cấu trúc phức tạp hơn, bắt đầu bằng các nguyên âm đệm **i, u, ü** đi kèm sau đó là các nguyên âm khác. Nắm vững nhóm âm này sẽ giúp bạn phát âm chuẩn xác hầu hết các từ vựng tiếng Trung trung-cao cấp."
+    )
+    
+    st.subheader("1. Chi tiết 9 vận mẫu kép mở rộng")
+    
     for g in B2_VAN_MAU_KEP_DATA:
-        st.markdown(f"#### {g['nhom']}")
-        cols = st.columns(4)
-        for i, item in enumerate(g["items"]):
-            with cols[i%4]: render_pronunciation_card(item, "b4_vk")
+        st.markdown(f"#### 📌 {g['nhom']}")
+        for idx, item in enumerate(g["items"]):
+            cols = st.columns([3.5, 1.5])
+            with cols[0]:
+                card_html = f"""
+                <div class="final-card" style="background: {item['color']}; border-left: 6px solid {item['border_color']};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span class="final-letter" style="color: {item['text_color']};">{item['chu']}</span>
+                        <span style="background: white; border: 1px solid {item['border_color']}; color: {item['text_color']}; padding: 3px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; font-family: 'Courier New', monospace;">/{item['chu']}/</span>
+                    </div>
+                    <div style="font-size: 1.05em; font-weight: bold; margin-bottom: 8px; color: #0f172a;">👉 Đọc nhanh: {item['hdsd']}</div>
+                    <p style="color: #334155; font-size: 0.95em; line-height: 1.5; margin-bottom: 8px;"><b>Cách đọc chi tiết:</b> {item['cach_doc_sau']}</p>
+                    <div style="font-size: 0.92em; color: #475569; margin-bottom: 10px;">📣 <b>Âm tương đương:</b> {item['tuong_duong']}</div>
+                    <div class="rule-badge" style="border-left: 3px solid {item['border_color']}; background-color: rgba(255, 255, 255, 0.7);">
+                        ⚠️ <b>Quy tắc chính tả:</b> {item['luu_y']}
+                    </div>
+                    <div style="background: rgba(255,255,255,0.85); border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0; margin-top: 12px;">
+                        <span style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase;">Ví dụ từ khóa chính:</span>
+                        <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
+                            <span style="font-size: 1.6em; font-weight: bold; color: #0f172a;">{item['vd_han']}</span>
+                            <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #2563eb; font-size: 1.1em;">{item['vd_py']}</span>
+                            <span style="color: #475569; font-style: italic; font-size: 0.95em;">({item['vietnamese']})</span>
+                        </div>
+                    </div>
+                </div>
+                """
+                st.markdown(card_html, unsafe_allow_html=True)
+            with cols[1]:
+                st.markdown("<br/>", unsafe_allow_html=True)
+                if st.button(f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_main_{item['chu']}_{idx}", use_container_width=True):
+                    play_audio(item["vd_han"])
+                
+                st.markdown("<div style='font-size:0.8em; font-weight:bold; color:#64748b; margin-top:12px; margin-bottom:4px;'>LUYỆN TẬP ÂM KHÁC:</div>", unsafe_allow_html=True)
+                for s_idx, sub in enumerate(item["more_examples"]):
+                    sub_key = f"btn_sub_{item['chu']}_{idx}_{s_idx}"
+                    if st.button(f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key, use_container_width=True):
+                        play_audio(sub["han"])
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.subheader("🔑 2. Bí mật chính tả Pinyin (Spelling Secrets)")
+    st.write(
+        "Đối với các vận mẫu kép mở rộng, có **3 quy tắc chính tả cực kỳ quan trọng** mà bất kỳ người học tiếng Trung nào cũng phải nằm lòng để tránh nhầm lẫn khi đọc viết:"
+    )
+    
+    st.markdown(
+        """
+        <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border-left: 6px solid #D97706; border-radius: 12px; padding: 18px; border: 1px solid #FDE68A; margin-bottom: 20px;">
+            <h4 style="color: #92400E; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 1: Viết gọn của -iu và -ui</h4>
+            <p style="color: #78350F; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
+                Bản chất của <b>iu</b> là <b>iou</b>, và <b>ui</b> là <b>uei</b>. 
+                <br/>• Khi có thanh mẫu đứng trước, ta viết rút gọn thành <b>iu</b> và <b>ui</b> (Ví dụ: <i>l + iou ➔ liù</i>; <i>sh + uei ➔ shuǐ</i>).
+                <br/>• Khi không có thanh mẫu đứng trước, ta viết ở dạng đầy đủ là <b>you</b> và <b>wei</b>.
+            </p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-left: 6px solid #3B82F6; border-radius: 12px; padding: 18px; border: 1px solid #BFDBFE; margin-bottom: 20px;">
+            <h4 style="color: #1E40AF; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 2: Biến đổi âm đệm khi đứng một mình</h4>
+            <p style="color: #1E3A8A; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
+                Khi các vận mẫu này không có thanh mẫu đi kèm (đứng độc lập), ta không được viết trực tiếp chữ cái <b>i</b> hay <b>u</b> ở đầu từ:
+                <br/>• Nguyên âm đệm <b>i</b> sẽ chuyển thành âm bán nguyên âm <b>y</b> (Ví dụ: <i>ia ➔ ya</i>, <i>ie ➔ ye</i>, <i>iao ➔ yao</i>).
+                <br/>• Nguyên âm đệm <b>u</b> sẽ chuyển thành âm bán nguyên âm <b>w</b> (Ví dụ: <i>ua ➔ wa</i>, <i>uo ➔ wo</i>, <i>uai ➔ wai</i>).
+                <br/>• Nguyên âm đệm <b>ü</b> sẽ viết thêm chữ <b>y</b> đằng trước và bỏ dấu 2 chấm (Ví dụ: <i>üe ➔ yue</i>).
+            </p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); border-left: 6px solid #8B5CF6; border-radius: 12px; padding: 18px; border: 1px solid #DDD6FE; margin-bottom: 25px;">
+            <h4 style="color: #5B21B6; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 3: Triệt tiêu dấu hai chấm của âm tròn môi ü</h4>
+            <p style="color: #4C1D95; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
+                Vận mẫu tròn môi <b>üe</b> khi đi sau nhóm thanh mẫu mặt lưỡi <b>j, q, x</b> và âm đệm <b>y</b> sẽ được lược bỏ hoàn toàn dấu hai chấm trên đầu, chỉ viết là <b>ue</b> nhưng cách đọc vẫn giữ nguyên âm tròn môi /ü/ (Ví dụ: <i>j + üe ➔ jué</i>, <i>q + üe ➔ què</i>, <i>x + üe ➔ xuě</i>).
+                <br/>⚠️ <i>Lưu ý:</i> Đối với hai thanh mẫu uốn lưỡi <b>n, l</b>, dấu hai chấm <b>bắt buộc giữ nguyên</b> (<i>nüe</i>, <i>lüe</i>) để phân biệt với âm thường <i>nue</i>, <i>lue</i> (nếu có).
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("---")
+    st.subheader("🎮 3. Công cụ Ghép âm Tương tác (Spelling Sandbox)")
+    st.write(
+        "Hãy thử sức tự mình tạo ra các âm tiết tiếng Trung! Hãy chọn một **Thanh mẫu**, một **Vận mẫu kép mở rộng** và một **Thanh điệu** dưới đây. Hệ thống sẽ tự động ghép âm chuẩn xác theo quy tắc Pinyin và cho bạn nghe phát âm trực tiếp!"
+    )
+    
+    cols_sel = st.columns(3)
+    
+    with cols_sel[0]:
+        initials_list = ["(Không có)", "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh", "r", "z", "c", "s"]
+        sel_initial = st.selectbox("Chọn Thanh mẫu (Initial):", initials_list, index=0, key="sandbox_initial")
+        
+    with cols_sel[1]:
+        finals_list = ["ia", "ie", "iao", "iu", "ua", "uo", "uai", "ui", "üe"]
+        sel_final = st.selectbox("Chọn Vận mẫu kép mở rộng (Final):", finals_list, index=0, key="sandbox_final")
+        
+    with cols_sel[2]:
+        tones_list = [
+            "Thanh nhẹ (Không dấu) - e.g. a",
+            "Thanh 1 (Ngang) - e.g. ā",
+            "Thanh 2 (Sắc) - e.g. á",
+            "Thanh 3 (Hỏi) - e.g. ǎ",
+            "Thanh 4 (Nặng) - e.g. à"
+        ]
+        sel_tone = st.selectbox("Chọn Thanh điệu (Tone):", tones_list, index=1, key="sandbox_tone")
+        
+    tone_idx = tones_list.index(sel_tone)
+    
+    spelled_res, err = check_spelling_rule(sel_initial, sel_final, tone_idx)
+    
+    st.markdown("<br/>", unsafe_allow_html=True)
+    if err:
+        st.markdown(
+            f"""
+            <div style="background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; padding: 18px; text-align: center;">
+                <span style="font-size: 1.1em; color: #DC2626; font-weight: bold;">{err}</span>
+                <p style="color: #991B1B; font-size: 0.9em; margin-top: 6px; margin-bottom: 0;">
+                    Vui lòng chọn tổ hợp ghép âm hợp lệ khác để tiếp tục thực hành.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            f"""
+            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+                <div style="font-size: 0.85em; color: #065F46; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">KẾT QUẢ PHIÊN ÂM CHUẨN XÁC:</div>
+                <div style="font-size: 3.5em; font-weight: bold; color: #047857; font-family: 'Courier New', monospace; margin: 10px 0; text-shadow: 0 1px 2px rgba(0,0,0,0.05);">{spelled_res}</div>
+                <div style="font-size: 0.95em; color: #065F46; font-style: italic;">
+                    Ghép từ: <b>{sel_initial if sel_initial != '(Không có)' else ''}</b> + <b>{sel_final}</b> + <b>{sel_tone.split(' - ')[0]}</b>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        col_btn = st.columns([1, 2, 1])
+        with col_btn[1]:
+            if st.button("🔊 Phát âm Âm tiết vừa ghép", type="primary", use_container_width=True, key="sandbox_play_btn"):
+                play_audio(spelled_res)
 
 def show_lesson4_exercises(save_progress):
     st.header("📝 Bài 4: Bài tập vận mẫu kép mở rộng")
