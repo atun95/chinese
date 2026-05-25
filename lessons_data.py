@@ -246,3 +246,154 @@ B1_QUIZ_SENTENCE = [
     {"q": "wǒ shì xuéshēng", "choices": ["tôi là học sinh", "tôi là thầy giáo", "bạn là học sinh"], "answer": "tôi là học sinh"},
     {"q": "tā shì lǎoshī", "choices": ["anh ấy/cô ấy là thầy cô giáo", "anh ấy/cô ấy là học sinh", "tôi là thầy cô giáo"], "answer": "anh ấy/cô ấy là thầy cô giáo"},
 ]
+
+# --- DỮ LIỆU SO SÁNH TỪ VỰNG CHỈ NỮ GIỚI (BÀI 4) ---
+FEMALE_VOCAB_COMPARISON_DATA = [
+    {
+        "word": "女人",
+        "pinyin": "nǚrén",
+        "vietnamese": "Phụ nữ / Đàn bà",
+        "antonym": "男人 (nánrén - đàn ông)",
+        "formality": 2,
+        "age": "Trưởng thành (trên 18 tuổi)",
+        "context": "Khẩu ngữ & Giao tiếp đời sống",
+        "explanation": "Chỉ người nữ đã trưởng thành một cách chung chung. Mang tính khẩu ngữ tự nhiên, đôi khi hơi suồng sã hoặc mang sắc thái tình cảm đời thường.",
+        "example_han": "她是一个非常有魅力的女人。",
+        "example_py": "Tā shì yí gè fēi cháng yǒu mèilì de nǚrén.",
+        "example_vi": "Cô ấy là một người phụ nữ vô cùng quyến rũ.",
+        "color": "linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)",
+        "border_color": "#F43F5E",
+        "text_color": "#9F1239"
+    },
+    {
+        "word": "女孩",
+        "pinyin": "nǚhái",
+        "vietnamese": "Cô bé / Cô gái trẻ / Con gái",
+        "antonym": "男孩 (nánhái - cậu bé)",
+        "formality": 2,
+        "age": "Trẻ em & Thiếu nữ (dưới 20 tuổi)",
+        "context": "Khẩu ngữ & Đời sống thân mật",
+        "explanation": "Chỉ các bé gái hoặc cô gái trẻ chưa kết hôn, mang sắc thái đáng yêu, trẻ trung, thân mật và ngọt ngào.",
+        "example_han": "那个可爱的小女孩是谁的女儿？",
+        "example_py": "Nàge kě'ài de xiǎo nǚhái shì shéi de nǚ'ér?",
+        "example_vi": "Cô bé đáng yêu kia là con gái của ai thế?",
+        "color": "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)",
+        "border_color": "#EC4899",
+        "text_color": "#9D174D"
+    },
+    {
+        "word": "女儿",
+        "pinyin": "nǚ'ér",
+        "vietnamese": "Con gái (quan hệ gia đình)",
+        "antonym": "儿子 (érzi - con trai)",
+        "formality": 3,
+        "age": "Mọi lứa tuổi (trong mối quan hệ với bố mẹ)",
+        "context": "Xưng hô gia đình & Huyết thống",
+        "explanation": "Chỉ mối quan hệ huyết thống hoặc nuôi nấng (con gái của ai đó). Tuyệt đối không dùng để chỉ người phụ nữ xa lạ ngoài xã hội.",
+        "example_han": "我有两个女儿，她们都听话。",
+        "example_py": "Wǒ yǒu liǎng gè nǚ'ér, tāmen dōu tīnghuà.",
+        "example_vi": "Tôi có hai đứa con gái, chúng đều rất nghe lời.",
+        "color": "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)",
+        "border_color": "#8B5CF6",
+        "text_color": "#5B21B6"
+    },
+    {
+        "word": "女生",
+        "pinyin": "nǚshēng",
+        "vietnamese": "Nữ sinh / Bạn nữ / Cô gái trẻ",
+        "antonym": "男生 (nánshēng - bạn nam)",
+        "formality": 2,
+        "age": "Học sinh, sinh viên & Cô gái trẻ (12 - 30 tuổi)",
+        "context": "Trường học, giới trẻ & Khẩu ngữ hiện đại",
+        "explanation": "Ban đầu dùng trong học đường (nữ sinh). Ngày nay, giới trẻ dùng rất rộng rãi để gọi các cô gái trẻ một cách lịch sự, thời thượng, dễ thương, tránh cảm giác già dặn của từ '女人' hay '妇女'.",
+        "example_han": "我们班的女生都非常聪明。",
+        "example_py": "Wǒmen bān de nǚshēng dōu fēi cháng cōngming.",
+        "example_vi": "Các bạn nữ trong lớp chúng tôi đều vô cùng thông minh.",
+        "color": "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)",
+        "border_color": "#3B82F6",
+        "text_color": "#1E40AF"
+    },
+    {
+        "word": "女性",
+        "pinyin": "nǚxìng",
+        "vietnamese": "Nữ giới / Phái nữ / Phụ nữ (trang trọng)",
+        "antonym": "男性 (nánxìng - nam giới)",
+        "formality": 5,
+        "age": "Mọi lứa tuổi (chủ yếu là người lớn)",
+        "context": "Văn bản, Báo chí, Khoa học, Y tế, Hội thảo",
+        "explanation": "Từ mang tính trang trọng, khách quan để chỉ giới tính sinh học hoặc nhóm xã hội của nữ giới. Hay dùng trong tin tức thời sự, nghiên cứu hoặc văn bản luật pháp.",
+        "example_han": "现代女性在社会中发挥着重要作用。",
+        "example_py": "Xiàndài nǚxìng zài shèhuì zhōng fāhuī zhe zhòngyào zuòyòng.",
+        "example_vi": "Phụ nữ hiện đại đóng vai trò quan trọng trong xã hội.",
+        "color": "linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%)",
+        "border_color": "#64748B",
+        "text_color": "#334155"
+    },
+    {
+        "word": "女子",
+        "pinyin": "nǚzǐ",
+        "vietnamese": "Nữ / Nữ tử / Phụ nữ",
+        "antonym": "男子 (nánzǐ - nam / nam tử)",
+        "formality": 4,
+        "age": "Mọi lứa tuổi",
+        "context": "Văn viết, Sự kiện thể thao, Tiêu đề chính thống",
+        "explanation": "Mang sắc thái cổ kính hoặc trang trọng. Trong tiếng Trung hiện đại, từ này xuất hiện cực kỳ phổ biến trong các giải đấu thể thao hoặc tên tổ chức chính quy.",
+        "example_han": "她获得了女子单打网球比赛的冠军。",
+        "example_py": "Tā huòdéle nǚzǐ dāndǎ wǎngqiú bǐsài de guànjūn.",
+        "example_vi": "Cô ấy đã giành chức vô địch nội dung đơn nữ quần vợt.",
+        "color": "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)",
+        "border_color": "#10B981",
+        "text_color": "#065F46"
+    },
+    {
+        "word": "妇女",
+        "pinyin": "fùnǚ",
+        "vietnamese": "Phụ nữ (trưởng thành / trung niên / đã kết hôn)",
+        "antonym": "Không có từ đối lập trực tiếp (thường đi với nam giới)",
+        "formality": 4,
+        "age": "Người lớn, phụ nữ đã kết hôn / trung niên (trên 25-30 tuổi)",
+        "context": "Chính trị, Pháp luật, Lễ kỷ niệm, Tổ chức xã hội",
+        "explanation": "Chỉ phụ nữ trưởng thành nói chung dưới góc độ pháp lý và xã hội. Thường mang hàm ý người phụ nữ đã kết hôn hoặc có gia đình. Tránh dùng gọi các cô gái trẻ tuổi vì dễ tạo cảm giác già dặn.",
+        "example_han": "三八国际妇女节是全人类的节日。",
+        "example_py": "Sānbā Guójì Fùnǚjié shì quán rénlèi de jiérì.",
+        "example_vi": "Ngày Quốc tế Phụ nữ 8/3 là ngày hội của toàn nhân loại.",
+        "color": "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
+        "border_color": "#D97706",
+        "text_color": "#92400E"
+    }
+]
+
+# --- DỮ LIỆU TRẮC NGHIỆM PHÂN BIỆT TỪ VỰNG CHỈ NỮ GIỚI (BÀI 4) ---
+FEMALE_VOCAB_QUIZ_DATA = [
+    {
+        "q": "Bạn muốn gửi lời chúc mừng nhân ngày Quốc tế Phụ nữ 8/3 một cách trang trọng trên báo chí hoặc diễn đàn chính thức, từ nào là chuẩn xác nhất?",
+        "choices": ["妇女 (fùnǚ)", "女孩 (nǚhái)", "女生 (nǚshēng)"],
+        "answer": "妇女 (fùnǚ)",
+        "explain": "Tên chính thức của ngày Quốc tế Phụ nữ là '三八妇女节' (Sānbā Fùnǚjié). Từ '妇女' mang sắc thái trang trọng, xã hội và pháp lý, cực kỳ thích hợp cho các ngày lễ và tổ chức chính thống."
+    },
+    {
+        "q": "Bạn đang giao tiếp với một nhóm các bạn nữ trẻ trung năng động trong trường học hoặc đồng nghiệp trẻ tuổi ngoài đời. Để tạo không khí gần gũi, tôn trọng và thời thượng, bạn nên dùng từ nào?",
+        "choices": ["妇女 (fùnǚ)", "女生 (nǚshēng)", "女性 (nǚxìng)"],
+        "answer": "女生 (nǚshēng)",
+        "explain": "Trong ngôn ngữ hiện đại của giới trẻ, '女生' là từ vô cùng phổ biến để chỉ các cô gái/bạn nữ trẻ tuổi, mang cảm giác nhẹ nhàng, trẻ trung và tôn trọng, tránh được sự già dặn của '妇女' hay '女人'."
+    },
+    {
+        "q": "Trong một tờ khai hành chính chính thức bằng tiếng Trung (ví dụ như hồ sơ xin visa hoặc hồ sơ khám bệnh ở bệnh viện), phần giới tính ghi 'Nữ' sẽ dùng từ nào?",
+        "choices": ["女儿 (nǚ'ér)", "女孩 (nǚhái)", "女性 (nǚxìng)"],
+        "answer": "女性 (nǚxìng)",
+        "explain": "Trong khoa học, y tế và thủ tục hành chính, '女性' (Nữ giới) và '男性' (Nam giới) là hai thuật ngữ chuẩn quy nhất để chỉ giới tính sinh học của con người."
+    },
+    {
+        "q": "Người mẹ tự hào giới thiệu đứa con gái ruột của mình với các đồng nghiệp ở cơ quan. Người mẹ bắt buộc phải dùng từ nào sau đây?",
+        "choices": ["女儿 (nǚ'ér)", "女孩 (nǚhái)", "女生 (nǚshēng)"],
+        "answer": "女儿 (nǚ'ér)",
+        "explain": "Để chỉ mối quan hệ gia đình (con gái của bố mẹ), tiếng Trung dùng duy nhất từ '女儿'. Các từ khác chỉ dùng để gọi ngoài xã hội."
+    },
+    {
+        "q": "Trên chương trình thể thao quốc tế Olympic, ở hạng mục thi đấu tranh huy chương 'Bóng đá Nữ' hoặc 'Đơn Nữ quần vợt', ban tổ chức sẽ ghi tiêu đề dùng từ nào?",
+        "choices": ["女人 (nǚrén)", "女子 (nǚzǐ)", "女生 (nǚshēng)"],
+        "answer": "女子 (nǚzǐ)",
+        "explain": "Trong các văn bản viết trang trọng, cổ kính và đặc biệt là các hạng mục thi đấu thể thao chính quy, tiếng Trung luôn dùng từ '女子' (ví dụ: 女子足球 - bóng đá nữ, 女子单打 - đơn nữ)."
+    }
+]
+
