@@ -214,7 +214,7 @@ def show_lesson3_pinyin_rules():
     """, unsafe_allow_html=True)
 
 def show_lesson3_vocab():
-    render_lesson_intro("📚 Bài 3: Từ vựng & Cấu trúc câu", "Học từ vựng mới, tên riêng và cách đặt câu cơ bản.")
+    render_lesson_intro("📚 Bài 3: Từ vựng & Tên riêng", "Học từ vựng mới và tên riêng cơ bản.")
     
     st.subheader("1. Từ vựng & Tên riêng")
     vocab_data = [
@@ -228,7 +228,7 @@ def show_lesson3_vocab():
         {"han": "名字", "pinyin": "míngzi", "mean": "tên"},
         {"han": "高兴", "pinyin": "gāoxìng", "mean": "vui vẻ"},
         {"han": "认识", "pinyin": "rènshi", "mean": "quen biết"},
-        {"han": "你叫什么名字？", "pinyin": "Nǐ jiào shénme míngzi?", "mean": "Bạn tên là gì?"},
+        {"han": "nǐ jiào shénme míngzi？", "pinyin": "Nǐ jiào shénme míngzi?", "mean": "Bạn tên là gì?"},
         {"han": "青", "pinyin": "Qīng", "mean": "tên Thanh"},
         {"han": "薇", "pinyin": "Wēi", "mean": "tên Vy"},
         {"han": "珍", "pinyin": "Zhēn", "mean": "tên Trân"},
@@ -240,223 +240,7 @@ def show_lesson3_vocab():
         html += f'<tr><td style="text-align:center; font-size: 1.2em;"><b>{v["han"]}</b></td><td class="pinyin-text" style="text-align:center;">{v["pinyin"]}</td><td>{v["mean"]}</td></tr>'
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
-    
-    st.markdown("---")
-    st.subheader("2. Văn hóa & Cách gọi tên thân mật (阿, 小, 老...)")
-    
-    st.markdown("""
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-<div style="background-color: #3b82f6; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.85em; font-weight: bold; display: inline-block; margin-bottom: 12px;">🏮 GÓC VĂN HÓA & NGÔN NGỮ</div>
-<h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 10px; font-weight: bold;">Chữ 阿 (ā) trước tên trong tiếng Trung</h4>
-<p style="color: #334155; line-height: 1.6; margin-bottom: 15px;">
-Chữ <b>阿 (ā)</b> đặt trước tên trong tiếng Trung là cách gọi <b>thân mật, gần gũi</b> — hơi tương đương với cách xưng hô <i>“anh/chị/em”</i> hoặc các kiểu gọi nickname thân quen trong tiếng Việt.
-</p>
-<div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-<div style="flex: 1; min-width: 220px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;">
-<div style="font-weight: bold; color: #0f172a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;">Ví dụ tiêu biểu:</div>
-<ul style="margin: 0; padding-left: 20px; color: #475569; line-height: 1.8;">
-<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿俊</span> (ā jùn) = “A Tuấn”</li>
-<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿恒</span> (ā héng) = “A Hằng”</li>
-<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿明</span> (ā míng) = “A Minh”</li>
-</ul>
-</div>
-<div style="flex: 1; min-width: 220px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;">
-<div style="font-weight: bold; color: #0f172a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;">Sắc thái biểu đạt:</div>
-<span style="color: #475569;">Không mang nghĩa thực tế mạnh, chủ yếu tạo cảm giác:</span>
-<div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
-<span style="background:#f1f5f9; padding:2px 8px; border-radius:4px; font-size:0.9em; color:#0f172a; border: 1px solid #cbd5e1; font-weight: 500;">Thân quen</span>
-<span style="background:#f1f5f9; padding:2px 8px; border-radius:4px; font-size:0.9em; color:#0f172a; border: 1px solid #cbd5e1; font-weight: 500;">Bình dân</span>
-<span style="background:#f1f5f9; padding:2px 8px; border-radius:4px; font-size:0.9em; color:#0f172a; border: 1px solid #cbd5e1; font-weight: 500;">Gần gũi</span>
-</div>
-<div style="margin-top: 10px; font-size: 0.9em; color: #64748b;">
-👉 Dùng gọi trong: <i>Gia đình, bạn bè thân thiết, hàng xóm, hoặc... giang hồ xã hội đen</i> 😄
-</div>
-</div>
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    col_og1, col_og2 = st.columns(2)
-    with col_og1:
-        st.markdown("""
-<div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 15px; border-radius: 8px; height: 100%;">
-<h5 style="color: #14532d; margin-top:0; font-weight: bold;">❓ Vì sao lại dùng "阿"?</h5>
-<p style="font-size: 0.95em; color: #166534; line-height: 1.5; margin-bottom: 8px;">
-Ngày xưa trong nhiều phương ngữ Trung Quốc (đặc biệt là <b>miền Nam</b> như: <i>Quảng Đông, Mân Nam, Triều Châu, Ngô/Thượng Hải</i>), người ta hay thêm âm đệm <b>"阿"</b> trước tên để gọi cho thuận miệng. Sau này, nó đã trở thành một thói quen văn hóa ăn sâu vào đời sống hàng ngày.
-</p>
-<div style="background: white; padding: 10px; border-radius: 6px; border: 1px solid #bbf7d0; margin-top: 10px;">
-<b>Ví dụ phổ biến:</b><br/>
-- <b>阿强</b> (ā qiáng) ~ "thằng Cường"<br/>
-- <b>阿玲</b> (ā líng) ~ "con Linh"<br/>
-- <b>阿华</b> (ā huá) ~ "anh Hoa"<br/>
-<span style="font-size: 0.85em; color: #666;">(Mang sắc thái thân mật giống tiếng Việt nhưng lịch sự, nhẹ nhàng hơn)</span>
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    with col_og2:
-        st.markdown("""
-<div style="background-color: #fffaf0; border-left: 4px solid #dd6b20; padding: 15px; border-radius: 8px; height: 100%;">
-<h5 style="color: #7b341e; margin-top:0; font-weight: bold;">👥 Đối tượng sử dụng & Lưu ý</h5>
-<ul style="font-size: 0.95em; color: #7b341e; line-height: 1.5; padding-left: 20px; margin-bottom: 10px;">
-<li><b>Hay dùng với:</b> Bạn bè thân thiết, người yêu, người trong nhà, người lớn gọi trẻ con, hoặc các nhân vật trong phim ảnh Hong Kong.</li>
-<li><b>Không dùng:</b> Trong các hoàn cảnh trang trọng, công sở lịch sự.</li>
-</ul>
-<div style="background: white; padding: 10px; border-radius: 6px; border: 1px solid #fed7aa; margin-top: 5px;">
-<b>⚠️ Cực kỳ quan trọng:</b> Bạn sẽ không tự giới thiệu bản thân bằng "阿"!<br/>
-- ❌ Không nói: <span style="color:#e53e3e; font-weight:bold;">我叫阿俊</span> (Wǒ jiào Ā Jùn)<br/>
-- ✔️ Nên nói: <span style="color:#38a169; font-weight:bold;">我叫... (tên đầy đủ)</span> (Ví dụ: 我叫<b>俊杰</b>)
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    st.markdown("<br/>", unsafe_allow_html=True)
-    st.markdown("#### 💡 Các cách gọi thân mật phổ biến khác")
-    
-    col_alt1, col_alt2, col_alt3 = st.columns(3)
-    with col_alt1:
-        st.markdown("""
-<div style="background-color: #fdf2f8; border-top: 4px solid #db2777; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-<div>
-<h5 style="color: #831843; margin-top:0; font-weight: bold;">1. 小 (xiǎo) - "Tiểu / Nhỏ"</h5>
-<p style="font-size: 0.9em; color: #9d174d; line-height: 1.4;">
-Thường dùng để gọi những người <b>trẻ tuổi hơn</b> hoặc có dáng người nhỏ nhắn, thể hiện sự dễ thương, thân thiết.
-</p>
-</div>
-<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #fbcfe8;">
-<b>Ví dụ:</b><br/>
-- <b>小王</b> (Xiǎo Wáng): Tiểu Vương<br/>
-- <b>小李</b> (Xiǎo Lǐ): Tiểu Lý
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    with col_alt2:
-        st.markdown("""
-<div style="background-color: #f0fdfa; border-top: 4px solid #0d9488; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-<div>
-<h5 style="color: #115e59; margin-top:0; font-weight: bold;">2. 老 (lǎo) - "Lão"</h5>
-<p style="font-size: 0.9em; color: #134e4a; line-height: 1.4;">
-Dành cho người <b>lớn tuổi hơn</b> hoặc bạn bè chơi thân lâu năm. Không mang nghĩa là "già cỗi", mà thể hiện sự tôn trọng, xu hướng dân dã.
-</p>
-</div>
-<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #99f6e4;">
-<b>Ví dụ:</b><br/>
-- <b>老张</b> (Lǎo Zhāng): Lão Trương / Ông Trương<br/>
-- <b>老陈</b> (Lǎo Chén): Lão Trần / Ông Trần
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    with col_alt3:
-        st.markdown("""
-<div style="background-color: #f5f3ff; border-top: 4px solid #7c3aed; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-<div>
-<h5 style="color: #4c1d95; margin-top:0; font-weight: bold;">3. Tên lặp đôi</h5>
-<p style="font-size: 0.9em; color: #5b21b6; line-height: 1.4;">
-Lặp lại từ cuối cùng trong tên riêng. Cách gọi này cực kỳ ngọt ngào, phổ biến để gọi <b>trẻ con, con gái, hoặc người yêu</b>.
-</p>
-</div>
-<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #ddd6fe;">
-<b>Ví dụ:</b><br/>
-- <b>明明</b> (Míngmíng): Minh Minh<br/>
-- <b>婷婷</b> (Tíngting): Đình Đình<br/>
-- <b>乐乐</b> (Lèlè): Nhạc Nhạc
-</div>
-</div>
-""", unsafe_allow_html=True)
- 
-    st.markdown("<br/>", unsafe_allow_html=True)
-    st.markdown("""
-<div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 10px; padding: 15px; color: #f8fafc; border: 1px solid #334155;">
-<span style="color:#38bdf8; font-weight:bold; font-size:0.9em; text-transform:uppercase; letter-spacing:1px;">💡 Tóm lại nhanh:</span>
-<ul style="margin: 8px 0 0 0; padding-left: 20px; font-size: 0.95em; color: #cbd5e1; line-height: 1.6;">
-<li><b>阿 (ā) + Tên</b>: Cách gọi thân mật đậm chất phương ngữ miền Nam Trung Quốc (không dịch sát nghĩa, tương đương "A + tên" hoặc nickname thân quen).</li>
-<li><b>Không</b> dùng khi tự giới thiệu bản thân trong tình huống trang trọng!</li>
-</ul>
-</div>
-""", unsafe_allow_html=True)
- 
-    st.markdown("---")
-    st.subheader("3. Cấu trúc câu & Từ để hỏi")
-    st.info("Các từ dùng để cấu tạo câu khẳng định, phủ định và câu hỏi.")
-    
-    grammar_data = [
-        {"han": "是", "pinyin": "shì", "mean": "là"},
-        {"han": "不是", "pinyin": "bú shì", "mean": "không phải (là)"},
-        {"han": "有", "pinyin": "yǒu", "mean": "có"},
-        {"han": "没有", "pinyin": "méiyǒu", "mean": "không có"},
-        {"han": "你呢", "pinyin": "nǐ ne", "mean": "còn bạn thì sao?"},
-        {"han": "吗", "pinyin": "ma", "mean": "không? (đặt ở cuối câu hỏi)"},
-    ]
-    html_gr = '<table class="chinese-table"><thead><tr><th style="text-align:center;">Chữ Hán</th><th style="text-align:center;">Phiên âm</th><th>Cách dùng / Nghĩa</th></tr></thead><tbody>'
-    for g in grammar_data:
-        html_gr += f'<tr><td style="text-align:center; font-size: 1.2em;"><b>{g["han"]}</b></td><td class="pinyin-text" style="text-align:center;">{g["pinyin"]}</td><td>{g["mean"]}</td></tr>'
-    html_gr += '</tbody></table>'
-    st.markdown(html_gr, unsafe_allow_html=True)
- 
-    st.markdown("#### 💡 Cách đặt câu hỏi với 是 và 有")
-    col_q1, col_q2 = st.columns(2)
-    with col_q1:
-        st.success("**Động từ 是 (shì - là)**")
-        st.write("Có 2 cách để hỏi 'có phải là... không?':")
-        st.write("1. Dùng trợ từ **吗 (ma)** ở cuối câu:")
-        st.write("👉 Chủ ngữ + **是** + [Danh từ] + **吗**？")
-        st.write("*(Ví dụ: 你**是**青**吗**？ - Bạn là Thanh phải không?)*")
-        st.write("2. Dùng mẫu câu chính phản **chính phản**:")
-        st.write("👉 Chủ ngữ + **是不是** + [Danh từ]？")
-        st.write("*(Ví dụ: 你**是不是**青？ - Bạn có phải là Thanh không?)*")
-        
-    with col_q2:
-        st.warning("**Động từ 有 (yǒu - có)**")
-        st.write("Có 2 cách để hỏi 'có... không?':")
-        st.write("1. Dùng trợ từ **吗 (ma)** ở cuối câu:")
-        st.write("👉 Chủ ngữ + **有** + [Danh từ] + **吗**？")
-        st.write("*(Ví dụ: 你**有**男朋友**吗**？ - Bạn có bạn trai không?)*")
-        st.write("2. Dùng mẫu câu chính phản **有没有 (yǒu méiyǒu)**:")
-        st.write("👉 Chủ ngữ + **有没有** + [Danh từ]？")
-        st.write("*(Ví dụ: 你**有没有**男朋友？ - Bạn có bạn trai không?)*")
-    
-    st.info("📌 **Mẹo nhỏ:** Khi đã dùng **是不是** hoặc **有没有** thì tuyệt đối KHÔNG dùng thêm **吗** ở cuối câu nữa nhé!")
-    st.markdown("---")
-    st.subheader("4. Hội thoại giao tiếp mẫu")
-    st.info("Luyện tập các mẫu câu chào hỏi và ứng dụng từ vựng vừa học.")
-    
-    with st.expander("💬 Hội thoại 1: Chào hỏi & Tên tuổi", expanded=True):
-        st.code("""
-A: 你好！
-   Xin chào!
 
-B: 你好！我叫青。你呢？
-   Xin chào! Tôi tên Thanh. Còn bạn?
-
-A: 我叫薇。很高兴认识你。
-   Tôi tên Vy. Rất vui được gặp bạn.
-""", language="text")
-        st.markdown("""
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
-            border-left: 5px solid #10b981; 
-            border-radius: 8px; 
-            padding: 15px; 
-            margin-top: 15px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
-            max-width: 650px;">
-    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-        <span style="font-size: 1.2em;">💡</span>
-        <strong style="color: #0f172a; font-size: 1.05em;">So sánh: 我叫青 (Wǒ jiào Qīng) và 我是青 (Wǒ shì Qīng)</strong>
-    </div>
-    <div style="font-size: 0.95em; line-height: 1.5; color: #334155;">
-        <div style="margin-bottom: 10px; padding-left: 8px; border-left: 3px solid #3b82f6;">
-            <strong style="color: #2563eb;">我叫青</strong> <span class="pinyin-text" style="color: #475569;">(Wǒ jiào Qīng)</span>: <i>"Tôi tên là Thanh"</i><br/>
-            👉 Dùng để <b>giới thiệu tên tự nhiên và phổ biến nhất</b> khi gặp mặt. Từ <b>叫 (jiào)</b> mang nghĩa là "gọi là, tên là".
-        </div>
-        <div style="padding-left: 8px; border-left: 3px solid #f59e0b;">
-            <strong style="color: #d97706;">我是青</strong> <span class="pinyin-text" style="color: #475569;">(Wǒ shì Qīng)</span>: <i>"Tôi là Thanh"</i><br/>
-            👉 Nhấn mạnh <b>xác nhận thân phận</b>. Thường dùng khi ai đó đang tìm bạn và bạn lên tiếng xác nhận <i>"Tôi chính là Thanh đây"</i>.
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
  
     with st.expander("💬 Hội thoại 2: Hỏi thăm sức khỏe", expanded=True):
         st.code("""
@@ -599,3 +383,307 @@ def show_lesson3_dialogues():
             {dialogue_row("A Vy (阿薇)", "#10b981", "去吧！", "Qù ba!", "Đi thôi!")}
         </div>
         """, unsafe_allow_html=True)
+
+def show_lesson3_culture_grammar():
+    render_lesson_intro(
+        "📚 Bài 3: Văn hóa gọi tên & Cấu trúc câu", 
+        "Tìm hiểu các nét văn hóa thú vị trong cách xưng hô thân mật của người Trung Quốc và làm chủ hai cấu trúc ngữ pháp quan trọng nhất: Động từ 是 (là) và 有 (có)."
+    )
+    
+    # ----------------------------------------------------
+    # PHẦN 1: VĂN HÓA GỌI TÊN
+    # ----------------------------------------------------
+    st.subheader("1. Văn hóa & Cách gọi tên thân mật (阿, 小, 老...)")
+    st.write(
+        "Trong đời sống hàng ngày, người Trung Quốc hiếm khi gọi trực tiếp tên đầy đủ của bạn bè, người thân mà hay dùng các tiền tố thân mật hoặc lặp lại tên để thể hiện sự gần gũi. Dưới đây là 4 cách xưng hô cực kỳ phổ biến:"
+    )
+    
+    st.markdown("""
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+<div style="background-color: #3b82f6; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.85em; font-weight: bold; display: inline-block; margin-bottom: 12px;">🏮 GÓC VĂN HÓA & NGÔN NGỮ</div>
+<h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 10px; font-weight: bold;">Chữ 阿 (ā) trước tên trong tiếng Trung</h4>
+<p style="color: #334155; line-height: 1.6; margin-bottom: 15px;">
+Chữ <b>阿 (ā)</b> đặt trước tên là cách gọi <b>thân mật, gần gũi</b> đậm chất phương ngữ miền Nam Trung Quốc (như Quảng Đông, Thượng Hải, Mân Nam). Nó không mang nghĩa thực tế mà tạo cảm giác dân dã, yêu mến.
+</p>
+<div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+<div style="flex: 1; min-width: 220px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;">
+<div style="font-weight: bold; color: #0f172a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;">Ví dụ tiêu biểu:</div>
+<ul style="margin: 0; padding-left: 20px; color: #475569; line-height: 1.8;">
+<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿青</span> (ā qīng) = "A Thanh"</li>
+<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿薇</span> (ā wēi) = "A Vy"</li>
+<li><span class="pinyin-text" style="font-size:1.1em; color:#2563eb;">阿仙</span> (ā xiān) = "A Tiên"</li>
+</ul>
+</div>
+<div style="flex: 1; min-width: 220px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border: 1px solid #e2e8f0;">
+<div style="font-weight: bold; color: #0f172a; margin-bottom: 8px; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px;">Phạm vi sử dụng:</div>
+<span style="color: #475569;">Giao tiếp hàng ngày, bạn bè cùng trang lứa, người lớn tuổi gọi con cháu, hoặc xưng hô thân thiết trong nhà.</span>
+<div style="margin-top: 10px; font-size: 0.9em; color: #e11d48; font-weight: bold;">
+⚠️ KHÔNG dùng "阿" khi tự giới thiệu tên mình một cách trang trọng! (Ví dụ không nói "我叫阿青" mà nói "我叫青" hoặc "我叫林青").
+</div>
+</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+    col_alt1, col_alt2, col_alt3 = st.columns(3)
+    with col_alt1:
+        st.markdown("""
+<div style="background-color: #fdf2f8; border-top: 4px solid #db2777; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+<div>
+<h5 style="color: #831843; margin-top:0; font-weight: bold;">1. 小 (xiǎo) - "Tiểu / Nhỏ"</h5>
+<p style="font-size: 0.9em; color: #9d174d; line-height: 1.4;">
+Thường ghép trước <b>Họ (Surname)</b> để gọi người <b>nhỏ tuổi hơn</b> mình trong công việc hoặc cuộc sống, thể hiện sự thân ái, dìu dắt.
+</p>
+</div>
+<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #fbcfe8;">
+<b>Ví dụ:</b><br/>
+- <b>小王</b> (Xiǎo Wáng): Tiểu Vương<br/>
+- <b>小张</b> (Xiǎo Zhāng): Tiểu Trương
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with col_alt2:
+        st.markdown("""
+<div style="background-color: #f0fdfa; border-top: 4px solid #0d9488; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+<div>
+<h5 style="color: #115e59; margin-top:0; font-weight: bold;">2. 老 (lǎo) - "Lão"</h5>
+<p style="font-size: 0.9em; color: #134e4a; line-height: 1.4;">
+Ghép trước <b>Họ</b> để gọi bạn bè lâu năm hoặc đồng nghiệp <b>lớn tuổi hơn</b>. Không mang sắc thái chê già mà là tôn kính, xu hướng dân dã kiểu tri kỷ.
+</p>
+</div>
+<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #99f6e4;">
+<b>Ví dụ:</b><br/>
+- <b>老李</b> (Lǎo Lǐ): Lão Lý / Ông Lý<br/>
+- <b>老陈</b> (Lǎo Chén): Lão Trần / Ông Trần
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with col_alt3:
+        st.markdown("""
+<div style="background-color: #f5f3ff; border-top: 4px solid #7c3aed; padding: 15px; border-radius: 8px; height: 260px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+<div>
+<h5 style="color: #4c1d95; margin-top:0; font-weight: bold;">3. Tên lặp đôi</h5>
+<p style="font-size: 0.9em; color: #5b21b6; line-height: 1.4;">
+Lặp lại chữ cuối trong tên (ví dụ Vy ➔ Vy Vy). Cách gọi này cực kỳ ngọt ngào, cưng chiều.
+</p>
+</div>
+<div style="background: white; padding: 8px; border-radius: 6px; border: 1px solid #ddd6fe;">
+<b>Ví dụ:</b><br/>
+- <b>薇薇</b> (Wēiwēi): Vy Vy<br/>
+- <b>珍珍</b> (Zhēnzhēn): Trân Trân
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+    # ----------------------------------------------------
+    # PHẦN 2: CẤU TRÚC CÂU CHI TIẾT
+    # ----------------------------------------------------
+    st.markdown("<br/>", unsafe_allow_html=True)
+    st.markdown("---")
+    st.subheader("2. Cấu trúc câu & Từ để hỏi (Mở rộng chi tiết)")
+    st.write(
+        "Trong tiếng Trung sơ cấp, hai động từ cốt lõi được sử dụng nhiều nhất là **是 (shì - là)** và **有 (yǒu - có)**. Hãy cùng nghiên cứu chi tiết 3 thể (Khẳng định, Phủ định, Nghi vấn) của từng cấu trúc."
+    )
+    
+    # Custom CSS cho các khung ngữ pháp
+    st.markdown(
+        """
+        <style>
+        .grammar-box {
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+        }
+        .formula-tag {
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.05em;
+            display: inline-block;
+            margin: 10px 0;
+            border: 1px dashed #cbd5e1;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    tab_shi, tab_you = st.tabs(["✨ Động từ 是 (shì) - LÀ", "✨ Động từ 有 (yǒu) - CÓ"])
+    
+    with tab_shi:
+        # ĐỘNG TỪ SHI
+        st.markdown(
+            """
+            <div class="grammar-box" style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-left: 6px solid #2563EB;">
+                <h4 style="color: #1E40AF; margin-top: 0; margin-bottom: 8px;">1. Động từ 是 (shì) - "Là"</h4>
+                <p style="color: #3b82f6; font-size: 0.9em; font-weight: bold; text-transform: uppercase; margin-bottom: 12px;">Dùng để xác định danh tính, nghề nghiệp, mối quan hệ.</p>
+                
+                <strong style="color: #1E3A8A;">🟢 A. THỂ KHẲNG ĐỊNH:</strong><br/>
+                <div class="formula-tag" style="color: #2563EB;">Chủ ngữ + 是 + Danh từ</div><br/>
+                <span style="color: #334155;">• Ví dụ: <b>我是学生。</b> (Wǒ shì xuéshēng.) = Tôi là học sinh.</span><br/>
+                <span style="color: #334155;">• Ví dụ: <b>他是律师。</b> (Tā shì lǜshī.) = Anh ấy là luật sư.</span>
+                
+                <br/><br/>
+                <strong style="color: #1E3A8A;">🔴 B. THỂ PHỦ ĐỊNH:</strong><br/>
+                <div class="formula-tag" style="color: #DC2626;">Chủ ngữ + 不是 + Danh từ</div><br/>
+                <span style="color: #334155;">⚠️ <i>Lưu ý biến điệu:</i> Chữ <b>不</b> (bù - thanh 4) đứng trước <b>是</b> (shì - thanh 4) sẽ tự động biến điệu thành <b>bú</b> ➔ Đọc và viết pinyin là <b>bú shì</b>.</span><br/>
+                <span style="color: #334155;">• Ví dụ: <b>我不是老师。</b> (Wǒ bú shì lǎoshī.) = Tôi không phải là giáo viên.</span><br/>
+                <span style="color: #334155;">• Ví dụ: <b>she không phải là luật sư.</b> (Tā bú ... lǜshī.) = Cô ấy không phải là luật sư.</span>
+                
+                <br/><br/>
+                <strong style="color: #1E3A8A;">🔵 C. THỂ NGHI VẤN (CÂU HỎI): Có 2 cách đặt câu hỏi tương đương</strong><br/>
+                <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #bfdbfe; margin-top: 8px;">
+                    <b style="color: #1e3a8a;">Cách 1: Dùng trợ từ hỏi "吗" (ma - không?) đặt ở cuối câu khẳng định</b><br/>
+                    <div class="formula-tag" style="color: #0d9488; margin-top: 5px;">Chủ ngữ + 是 + Danh từ + 吗？</div><br/>
+                    <span style="color: #334155;">• Ví dụ: <b>你是学生吗？</b> (Nǐ shì xuéshēng ma?) = Bạn là học sinh phải không?</span>
+                    <br/><br/>
+                    <b style="color: #1e3a8a;">Cách 2: Câu hỏi Chính-Phản dùng "是不是" (shì bú shì - có phải... không)</b><br/>
+                    <div class="formula-tag" style="color: #0d9488; margin-top: 5px;">Chủ ngữ + 是不是 + Danh từ？</div><br/>
+                    <span style="color: #334155;">• Ví dụ: <b>nǐ shì bú shì xuéshēng？</b> (Nǐ shì bú shì xuéshēng?) = Bạn có phải là học sinh không?</span>
+                </div>
+                
+                <br/>
+                <div style="background-color: #FEF3C7; border: 1px solid #FCD34D; border-radius: 8px; padding: 12px; color: #92400E; font-size: 0.92em;">
+                    ❌ <b>LƯU Ý CỰC KỲ QUAN TRỌNG:</b>
+                    <br/>1. **Tuyệt đối không dùng "是" đi trực tiếp với Tính từ:** Không được nói <i>"Wǒ shì máng"</i>. Thay vào đó, phải dùng phó từ chỉ mức độ <b>很</b> (hěn - rất) đứng trước tính từ: ➔ <b>我很忙。</b> (Wǒ hěn máng.)
+                    <br/>2. **Không dùng trùng lặp:** Đã dùng câu hỏi chính phản <i>是不是</i> thì tuyệt đối KHÔNG dùng thêm trợ từ <i>ma (吗)</i> ở cuối câu! 
+                    (❌ Không nói: <i>Nǐ shì bú shì xuéshēng ma?</i> ➔ ✔️ Phải nói: <i>Nǐ shì bú shì xuéshēng?</i>)
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+    with tab_you:
+        # ĐỘNG TỪ YOU
+        st.markdown(
+            """
+            <div class="grammar-box" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-left: 6px solid #10B981;">
+                <h4 style="color: #065F46; margin-top: 0; margin-bottom: 8px;">2. Động từ 有 (yǒu) - "Có"</h4>
+                <p style="color: #059669; font-size: 0.9em; font-weight: bold; text-transform: uppercase; margin-bottom: 12px;">Dùng để biểu đạt sở hữu (đồ vật, bạn bè, người yêu...) hoặc sự tồn tại.</p>
+                
+                <strong style="color: #064E3B;">🟢 A. THỂ KHẲNG ĐỊNH:</strong><br/>
+                <div class="formula-tag" style="color: #059669;">Chủ ngữ + 有 + Danh từ</div><br/>
+                <span style="color: #334155;">• Ví dụ: <b>我有男朋友。</b> (Wǒ yǒu nánpéngyou.) = Tôi có bạn trai.</span><br/>
+                <span style="color: #334155;">• Ví dụ: <b>他有朋友。</b> (Tā yǒu péngyou.) = Anh ấy có bạn bè.</span>
+                
+                <br/><br/>
+                <strong style="color: #064E3B;">🔴 B. THỂ PHỦ ĐỊNH:</strong><br/>
+                <div class="formula-tag" style="color: #DC2626;">Chủ ngữ + 没有 + Danh từ</div><br/>
+                <span style="color: #334155;">⚠️ <i>QUY TẮC BẮT BUỘC TRONG TIẾNG TRUNG:</i> Phủ định của động từ <b>有</b> (có) LUÔN LUÔN là phó từ <b>没</b> đứng trước ➔ <b>没有</b> (méiyǒu - không có). Tuyệt đối không bao giờ được nói <s>"bù yǒu"</s>!</span><br/>
+                <span style="color: #334155;">• Ví dụ: <b>我没有女朋友。</b> (Wǒ méiyǒu nǚpéngyou.) = Tôi không có bạn gái.</span>
+                
+                <br/><br/>
+                <strong style="color: #064E3B;">🔵 C. THỂ NGHI VẤN (CÂU HỎI): Có 2 cách đặt câu hỏi tương đương</strong><br/>
+                <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #a7f3d0; margin-top: 8px;">
+                    <b style="color: #064E3B;">Cách 1: Dùng trợ từ hỏi "吗" (ma) đặt cuối câu khẳng định</b><br/>
+                    <div class="formula-tag" style="color: #059669; margin-top: 5px;">Chủ ngữ + 有 + Danh từ + 吗？</div><br/>
+                    <span style="color: #334155;">• Ví dụ: <b>你有男朋友吗？</b> (Nǐ yǒu nánpéngyou ma?) = Bạn có bạn trai không?</span>
+                    <br/><br/>
+                    <b style="color: #064E3B;">Cách 2: Câu hỏi Chính-Phản dùng "有没有" (yǒu méiyǒu)</b><br/>
+                    <div class="formula-tag" style="color: #059669; margin-top: 5px;">Chủ ngữ + 有没有 + Danh từ？</div><br/>
+                    <span style="color: #334155;">• Ví dụ: <b>你有没有男朋友？</b> (Nǐ yǒu méiyǒu nánpéngyou?) = Bạn có bạn trai không? (Lưu ý không dùng thêm "吗")</span>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # Bảng tóm tắt so sánh
+    st.markdown("<br/>", unsafe_allow_html=True)
+    st.subheader("💡 Bảng tổng đối chiếu Ngữ pháp cấu trúc")
+    st.markdown(
+        """
+        <table class="chinese-table" style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr class="tm-header">
+                    <th style="padding: 10px; text-align:center; width: 12%;">Động từ</th>
+                    <th style="text-align:center; width: 22%;">Thể khẳng định (Có/Là)</th>
+                    <th style="text-align:center; width: 22%;">Thể phủ định (Không)</th>
+                    <th style="text-align:center; width: 22%;">Thể nghi vấn với "吗"</th>
+                    <th style="text-align:center; width: 22%;">Thể câu hỏi Chính - Phản</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align:center; font-weight: bold; background-color: #f8fafc; color: #2563eb;">是 (shì)</td>
+                    <td class="pinyin-text" style="color:#15803d; text-align:center;">Chủ ngữ + <b>是</b> + N<br/><span style="font-size:0.8em; color:#64748b;">(Wǒ shì xuéshēng)</span></td>
+                    <td class="pinyin-text" style="color:#b91c1c; text-align:center;">Chủ ngữ + <b>不是</b> + N<br/><span style="font-size:0.8em; color:#64748b;">(Wǒ bú shì lǎoshī)</span></td>
+                    <td class="pinyin-text" style="color:#0369a1; text-align:center;">Chủ ngữ + <b>是</b> + N + <b>ma (吗)</b>？<br/><span style="font-size:0.8em; color:#64748b;">(Nǐ shì xuéshēng ma?)</span></td>
+                    <td class="pinyin-text" style="color:#4c1d95; text-align:center;">Chủ ngữ + <b>是不是</b> + N？<br/><span style="font-size:0.8em; color:#64748b;">(Nǐ shì bú shì xuéshēng?)</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center; font-weight: bold; background-color: #f8fafc; color: #10b981;">有 (yǒu)</td>
+                    <td class="pinyin-text" style="color:#15803d; text-align:center;">Chủ ngữ + <b>有</b> + N<br/><span style="font-size:0.8em; color:#64748b;">(Wǒ yǒu péngyou)</span></td>
+                    <td class="pinyin-text" style="color:#b91c1c; text-align:center;">Chủ ngữ + <b>没有</b> + N<br/><span style="font-size:0.8em; color:#64748b;">(Wǒ méiyǒu péngyou)</span></td>
+                    <td class="pinyin-text" style="color:#0369a1; text-align:center;">Chủ ngữ + <b>有</b> + N + <b>ma (吗)</b>？<br/><span style="font-size:0.8em; color:#64748b;">(Nǐ yǒu péngyou ma?)</span></td>
+                    <td class="pinyin-text" style="color:#4c1d95; text-align:center;">Chủ ngữ + <b>有没有</b> + N？<br/><span style="font-size:0.8em; color:#64748b;">(Nǐ yǒu méiyǒu péngyou?)</span></td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # ----------------------------------------------------
+    # PHẦN 3: HỘI THOẠI MẪU
+    # ----------------------------------------------------
+    st.markdown("<br/>", unsafe_allow_html=True)
+    st.markdown("---")
+    st.subheader("3. Hội thoại thực hành giao tiếp mẫu")
+    st.info("Áp dụng cấu trúc câu vừa học vào các đoạn hội thoại thực tế ngắn.")
+    
+    with st.expander("💬 Hội thoại 1: Giới thiệu tên & Hỏi thăm sức khỏe", expanded=True):
+        st.code("""
+A: 你好！你好吗？
+   (Nǐ hǎo! Nǐ hǎo ma?)
+   Xin chào! Bạn khỏe không?
+
+B: 我很好。我叫青。你呢？
+   (Wǒ hěn hǎo. Wǒ jiào Qīng. Nǐ ne?)
+   Tôi rất khỏe. Tôi tên là Thanh. Còn bạn?
+
+A: 我叫薇。很高兴认识你。
+   (Wǒ jiào Wēi. Hěn gāoxìng rènshi nǐ.)
+   Tôi tên là Vy. Rất vui được quen biết bạn.
+""", language="text")
+
+    with st.expander("💬 Hội thoại 2: Hỏi về Nghề nghiệp (Dùng 是 và 不是)", expanded=True):
+        st.code("""
+A: 你是老师吗？
+   (Nǐ shì lǎoshī ma?)
+   Bạn có phải là giáo viên không?
+
+B: 不是，我不是老师。我是学生。
+   (Bú shì, wǒ bú shì lǎoshī. Wǒ shì xuéshēng.)
+   Không phải, tôi không phải giáo viên. Tôi là học sinh.
+
+A: 你是不是律师？
+   (Nǐ shì bú shì lǜshī?)
+   Bạn có phải là luật sư không?
+
+B: 是dđ, 我 là luật sư. (Thực chất là: 是的，我是律师。)
+   (Shì de, wǒ shì lǜshī.)
+   Đúng vậy, tôi là luật sư.
+""", language="text")
+
+    with st.expander("💬 Hội thoại 3: Hỏi về mối quan hệ (Dùng 有 và 没有)", expanded=True):
+        st.code("""
+A: 你有男朋友吗？
+   (Nǐ yǒu nánpéngyou ma?)
+   Bạn có bạn trai không?
+
+B: 我没有男朋友。你呢？你有女朋友吗？
+   (Wǒ méiyǒu nánpéngyou. Nǐ ne? Nǐ yǒu nǚpéngyou ma?)
+   Tôi không có bạn trai. Còn bạn? Bạn có bạn gái chưa?
+
+A: 我有女朋友. Cô ấy rất tốt. (Thực chất là: 我有女朋友。她很好。)
+   (Wǒ yǒu nǚpéngyou. Tā hěn hǎo.)
+   Tôi có bạn gái rồi. Cô ấy rất tốt.
+""", language="text")
