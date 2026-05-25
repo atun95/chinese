@@ -131,6 +131,7 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 3 - Quy tắc viết Pinyin",
     "Bài 3 - Luyện tập ghép âm",
     "Bài 3 - TỪ VỰNG",
+    "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
     "Bài 3 - Hội thoại thực hành",
     "Bài 4 - Vận mẫu kép mở rộng (đang khóa)",
     "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
@@ -164,6 +165,9 @@ elif menu == "Bài 3 - Luyện tập ghép âm":
 
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
+
+elif menu == "Bài 3 - Văn hóa gọi tên & Cấu trúc câu":
+    lesson3.show_lesson3_culture_grammar()
 
 elif menu == "Bài 3 - Hội thoại thực hành":
     lesson3.show_lesson3_dialogues()
