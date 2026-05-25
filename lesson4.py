@@ -114,10 +114,7 @@ def show_lesson4_finals():
         """,
         unsafe_allow_html=True
     )
-    
-    st.write(
-        "Chào mừng bạn đến với nội dung **Vận mẫu kép mở rộng**! Đây là nhóm các vận mẫu ghép có cấu trúc phức tạp hơn, bắt đầu bằng các nguyên âm đệm **i, u, ü** đi kèm sau đó là các nguyên âm khác. Nắm vững nhóm âm này sẽ giúp bạn phát âm chuẩn xác hầu hết các từ vựng tiếng Trung trung-cao cấp."
-    )
+
     
     st.subheader("1. Chi tiết 9 vận mẫu kép mở rộng")
     
