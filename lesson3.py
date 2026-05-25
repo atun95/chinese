@@ -228,7 +228,7 @@ def show_lesson3_vocab():
         {"han": "名字", "pinyin": "míngzi", "mean": "tên"},
         {"han": "高兴", "pinyin": "gāoxìng", "mean": "vui vẻ"},
         {"han": "认识", "pinyin": "rènshi", "mean": "quen biết"},
-        {"han": "nǐ jiào shénme míngzi？", "pinyin": "Nǐ jiào shénme míngzi?", "mean": "Bạn tên là gì?"},
+        {"han": "你叫什么名字", "pinyin": "Nǐ jiào shénme míngzi?", "mean": "Bạn tên là gì?"},
         {"han": "青", "pinyin": "Qīng", "mean": "tên Thanh"},
         {"han": "薇", "pinyin": "Wēi", "mean": "tên Vy"},
         {"han": "珍", "pinyin": "Zhēn", "mean": "tên Trân"},
@@ -667,7 +667,7 @@ A: 你是不是律师？
    (Nǐ shì bú shì lǜshī?)
    Bạn có phải là luật sư không?
 
-B: 是dđ, 我 là luật sư. (Thực chất là: 是的，我是律师。)
+B: 是的, 我是律师. 
    (Shì de, wǒ shì lǜshī.)
    Đúng vậy, tôi là luật sư.
 """, language="text")
@@ -682,7 +682,7 @@ B: 我没有男朋友。你呢？你有女朋友吗？
    (Wǒ méiyǒu nánpéngyou. Nǐ ne? Nǐ yǒu nǚpéngyou ma?)
    Tôi không có bạn trai. Còn bạn? Bạn có bạn gái chưa?
 
-A: 我有女朋友. Cô ấy rất tốt. (Thực chất là: 我有女朋友。她很好。)
+A: 我有女朋友. 她很好。
    (Wǒ yǒu nǚpéngyou. Tā hěn hǎo.)
    Tôi có bạn gái rồi. Cô ấy rất tốt.
 """, language="text")
