@@ -263,7 +263,7 @@ note_key = "teacher_note"
 if note_key not in st.session_state:
     st.session_state[note_key] = ""
 st.session_state[note_key] = st.sidebar.text_area(
-    "✍️ Soạn ghi chú gửi học viên:",
+    "✍️ Soạn ghi chú ",
     value=st.session_state[note_key],
     height=200,
     key="teacher_note_area")
