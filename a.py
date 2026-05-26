@@ -266,8 +266,6 @@ st.session_state[note_key] = st.sidebar.text_area(
     "✍️ Soạn ghi chú gửi học viên:",
     value=st.session_state[note_key],
     height=200,
-    key="teacher_note_area",
-    placeholder="Nhập ghi chú... Nội dung sẽ hiển thị ngay lập tức thành một bảng thông báo to, rõ ràng ở màn hình chính cho học viên."
-)
+    key="teacher_note_area")
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
