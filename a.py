@@ -137,42 +137,120 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 
-# Hiển thị ghi chú của giáo viên ở khu vực chính nếu có nội dung (Khung ấm áp nguyên bản, có tích hợp kéo ngang)
+# Hiển thị ghi chú của giáo viên ở khu vực chính nếu có nội dung (Khung di động, có thể kéo thả và co giãn kích thước)
 note_key = "teacher_note"
 if note_key in st.session_state and st.session_state[note_key].strip():
     st.markdown(
         f"""
-        <div style="
+        <div id="teacherNoteBox" style="
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 420px;
+            min-width: 250px;
+            min-height: 150px;
+            max-width: 90vw;
+            max-height: 80vh;
+            z-index: 99999;
             background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-            border-left: 8px solid #ea580c;
+            border: 2px solid #fdba74;
             border-radius: 16px;
-            padding: 24px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.1), 0 8px 10px -6px rgba(234, 88, 12, 0.1);
-            border: 1px solid #fed7aa;
+            box-shadow: 0 20px 25px -5px rgba(234, 88, 12, 0.2), 0 10px 10px -5px rgba(234, 88, 12, 0.1);
+            resize: both;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         ">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; border-bottom: 2px solid #fdba74; padding-bottom: 8px;">
-                <span style="font-size: 1.6em; filter: drop-shadow(0 2px 4px rgba(234,88,12,0.2));">📢</span>
-                <span style="font-weight: 800; color: #c2410c; font-size: 1.3em; letter-spacing: 0.5px; text-transform: uppercase;">
-                    Lời nhắc & Ghi chú từ Giáo viên:
-                </span>
+            <!-- Header (Drag Handle) -->
+            <div id="teacherNoteHeader" style="
+                padding: 12px 18px;
+                background-color: #ffedd5;
+                border-bottom: 2px solid #fdba74;
+                cursor: move;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                user-select: none;
+                font-weight: 800;
+                color: #c2410c;
+            ">
+                <span style="font-size: 1.4em;">📢</span>
+                <span style="flex-grow: 1; font-size: 1.05em; text-transform: uppercase; letter-spacing: 0.5px;">Ghi chú từ Giáo viên:</span>
+                <span style="font-size: 1.2em; opacity: 0.6; cursor: move;">✥</span>
             </div>
+            
+            <!-- Body content -->
             <div style="
+                padding: 18px;
+                flex-grow: 1;
+                overflow: auto;
                 color: #431407; 
-                font-size: 1.3em; 
-                line-height: 1.7; 
-                white-space: pre; 
-                overflow-x: auto;
+                font-size: 1.2em; 
+                line-height: 1.6; 
+                white-space: pre-wrap; 
                 font-weight: 600;
                 font-family: inherit;
-                padding-bottom: 8px;
-                scrollbar-width: thin;
-                scrollbar-color: #ea580c #fed7aa;
-            ">
-{st.session_state[note_key]}
-            </div>
+            ">{st.session_state[note_key]}</div>
         </div>
+
+        <script>
+        (function() {{
+            const box = document.getElementById("teacherNoteBox");
+            const header = document.getElementById("teacherNoteHeader");
+            if (!box || !header) return;
+
+            let active = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            header.addEventListener("mousedown", dragStart);
+            document.addEventListener("mousemove", drag);
+            document.addEventListener("mouseup", dragEnd);
+
+            header.addEventListener("touchstart", dragStart, {{passive: true}});
+            document.addEventListener("touchmove", drag, {{passive: false}});
+            document.addEventListener("touchend", dragEnd);
+
+            function dragStart(e) {{
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                
+                initialX = clientX - xOffset;
+                initialY = clientY - yOffset;
+
+                active = true;
+            }}
+
+            function drag(e) {{
+                if (!active) return;
+                
+                if (e.cancelable) e.preventDefault();
+
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                currentX = clientX - initialX;
+                currentY = clientY - initialY;
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, box);
+            }}
+
+            function setTranslate(xPos, yPos, el) {{
+                el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+            }}
+
+            function dragEnd() {{
+                active = false;
+            }}
+        }})();
+        </script>
         """,
         unsafe_allow_html=True
     )
@@ -263,9 +341,11 @@ note_key = "teacher_note"
 if note_key not in st.session_state:
     st.session_state[note_key] = ""
 st.session_state[note_key] = st.sidebar.text_area(
-    "✍️ Soạn ghi chú ",
+    "✍️ Soạn ghi chú gửi học viên:",
     value=st.session_state[note_key],
     height=200,
-    key="teacher_note_area")
+    key="teacher_note_area",
+    placeholder="Nhập ghi chú... Nội dung sẽ hiển thị ngay lập tức thành một bảng thông báo to, rõ ràng ở màn hình chính cho học viên."
+)
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
