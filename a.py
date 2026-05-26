@@ -48,11 +48,12 @@ if "scores" not in st.session_state:
 
 SCORES_FILE = Path(__file__).with_name("scores.csv")
 SCORES_B2_FILE = Path(__file__).with_name("scores_b2.csv")
+SCORES_B3_FILE = Path(__file__).with_name("scores_b3.csv")
 PROGRESS_FILE = Path(__file__).with_name("progress_lesson1.json")
 
 def save_progress():
     try:
-        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "student_name"))]
+        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "b3_", "student_name"))]
         data = {"scores": st.session_state.scores, "values": {k: st.session_state[k] for k in quiz_keys}}
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -100,6 +101,22 @@ def load_all_scores_b2():
     with open(SCORES_B2_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_b3(row_data):
+    file_exists = SCORES_B3_FILE.exists()
+    try:
+        with open(SCORES_B3_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT1: Từ vựng", "BT2: Chính tả", "BT3: Điền âm", "BT4: Luyện nghe", "BT5: Hội thoại"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 3: {e}"); return False
+
+def load_all_scores_b3():
+    if not SCORES_B3_FILE.exists(): return []
+    with open(SCORES_B3_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def add_tones(base):
     vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
     tones = []
@@ -133,6 +150,7 @@ menu = st.sidebar.radio("Chọn mục:", [
     "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
     "Bài 3 - TỪ VỰNG",
     "Bài 3 - Hội thoại thực hành",
+    "Bài 3 - Bài tập",
     "Bài 4 - Vận mẫu kép mở rộng",
     "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
     "Bài 4 - Nét chữ Hán cơ bản (đang khóa)",
@@ -171,6 +189,9 @@ elif menu == "Bài 3 - Văn hóa gọi tên & Cấu trúc câu":
 
 elif menu == "Bài 3 - Hội thoại thực hành":
     lesson3.show_lesson3_dialogues()
+
+elif menu == "Bài 3 - Bài tập":
+    lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
 elif menu == "Bài 4 - Vận mẫu kép mở rộng":
     lesson4.show_lesson4_finals()
