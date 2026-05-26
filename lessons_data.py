@@ -559,3 +559,53 @@ FEMALE_VOCAB_QUIZ_DATA = [
     }
 ]
 
+# --- DỮ LIỆU BÀI TẬP BÀI 3 ---
+B3_QUIZ_VOCAB = [
+    {"q": "lǜshī", "choices": ["luật sư", "bạn bè", "thầy giáo"], "answer": "luật sư"},
+    {"q": "péngyou", "choices": ["bạn, bạn bè", "người yêu", "học sinh"], "answer": "bạn, bạn bè"},
+    {"q": "nánpéngyou", "choices": ["bạn trai", "bạn gái", "anh trai"], "answer": "bạn trai"},
+    {"q": "nǚpéngyou", "choices": ["bạn gái", "bạn trai", "chị gái"], "answer": "bạn gái"},
+    {"q": "míngzi", "choices": ["tên", "chữ Hán", "họ"], "answer": "tên"},
+    {"q": "gāoxìng", "choices": ["vui vẻ/mừng", "bận rộn", "mệt mỏi"], "answer": "vui vẻ/mừng"},
+    {"q": "rènshi", "choices": ["quen biết", "học tập", "gọi là"], "answer": "quen biết"},
+    {"q": "lǎoshī (Ôn tập)", "choices": ["thầy/cô giáo", "học sinh", "luật sư"], "answer": "thầy/cô giáo"},
+    {"q": "xuéshēng (Ôn tập)", "choices": ["học sinh", "giáo viên", "bạn bè"], "answer": "học sinh"},
+    {"q": "máng (Ôn tập)", "choices": ["bận rộn", "rất", "không"], "answer": "bận rộn"},
+]
+
+B3_QUIZ_SPELLING = [
+    {"q": "Trong Pinyin, chữ 'i' đứng sau thanh mẫu nào sau đây sẽ phát âm là 'ư'?", "choices": ["sh, zh, s", "j, q, x", "b, p, m"], "answer": "sh, zh, s"},
+    {"q": "Khi nguyên âm 'üe' đứng độc lập không có thanh mẫu phía trước, nó sẽ được viết thành dạng nào?", "choices": ["yue", "wue", "yüe"], "answer": "yue"},
+    {"q": "Khi vận mẫu tròn môi 'ü' đi sau thanh mẫu 'q', quy tắc chính tả viết chữ là gì?", "choices": ["Bỏ dấu 2 chấm trên đầu (qu)", "Giữ nguyên dấu 2 chấm (qü)", "Đổi ü thành w (qw)"], "answer": "Bỏ dấu 2 chấm trên đầu (qu)"},
+    {"q": "Khi vận mẫu tròn môi 'ü' đi sau thanh mẫu 'l', quy tắc chính tả viết chữ là gì?", "choices": ["Bắt buộc giữ nguyên dấu 2 chấm (lü)", "Lược bỏ dấu 2 chấm (lu)", "Viết thêm y ở trước (lyu)"], "answer": "Bắt buộc giữ nguyên dấu 2 chấm (lü)"},
+    {"q": "Nguyên âm 'i' trong từ 'nǐ' (nǐ - bạn) phát âm như thế nào?", "choices": ["Đọc là 'i' như tiếng Việt", "Đọc là 'ư' như tiếng Việt", "Đọc là 'u'"], "answer": "Đọc là 'i' như tiếng Việt"},
+    {"q": "Khi nguyên âm 'u' đứng một mình không có thanh mẫu, nó viết biến đổi thành gì?", "choices": ["wu", "yu", "w"], "answer": "wu"}
+]
+
+B3_QUIZ_FILL_BLANKS = [
+    {"q": "l___shī", "ans": "ǜ", "meaning": "luật sư"},
+    {"q": "péngy___", "ans": "ou", "meaning": "bạn bè"},
+    {"q": "nánp___ngyou", "ans": "é", "meaning": "bạn trai"},
+    {"q": "n___péngyou", "ans": "ǚ", "meaning": "bạn gái"},
+    {"q": "míngz___", "ans": "i", "meaning": "tên"},
+    {"q": "gāox___ng", "ans": "ì", "meaning": "vui vẻ/mừng"},
+    {"q": "r___nshi", "ans": "è", "meaning": "quen biết/nhận biết"}
+]
+
+B3_QUIZ_LISTENING = [
+    {"q": "Số bảy (Thanh mẫu bật hơi q)", "hanzi": "七", "choices": ["qī", "jī", "xī"], "answer": "qī"},
+    {"q": "Ăn uống (Thanh mẫu uốn lưỡi ch)", "hanzi": "吃", "choices": ["chī", "cī", "shī"], "answer": "chī"},
+    {"q": "Số bốn (Thanh mẫu đầu lưỡi s)", "hanzi": "四", "choices": ["sì", "shì", "zì"], "answer": "sì"},
+    {"q": "Thầy giáo / Cô giáo (Thanh mẫu uốn lưỡi sh - Ôn tập)", "hanzi": "老师", "choices": ["lǎoshī", "lǎosī", "làoshī"], "answer": "lǎoshī"},
+    {"q": "Con gà (Thanh mẫu mặt lưỡi j)", "hanzi": "鸡", "choices": ["jī", "qī", "xī"], "answer": "jī"},
+    {"q": "Biến điệu thanh 3: Rất khỏe (3 + 3 - Ôn tập)", "hanzi": "很好", "choices": ["hěnhǎo", "hěnhāo", "hènhǎo"], "answer": "hěnhǎo"}
+]
+
+B3_QUIZ_DIALOGUE = [
+    {"q": "Học viên A: Nǐ jiào shénme míngzi? (Bạn tên là gì vậy?) \n Học viên B: ______", "choices": ["Wǒ jiào Ā Qīng. (Tôi tên là A Thanh.)", "Wǒ hěn hǎo. (Tôi rất khỏe.)", "Wǒ shì lǜshī. (Tôi là luật sư.)"], "answer": "Wǒ jiào Ā Qīng. (Tôi tên là A Thanh.)"},
+    {"q": "Học viên A: Zhè shì wǒ péngyou, tā jiào Ā Qīng. (Đây là bạn tôi, cậu ấy tên A Thanh.) \n Học viên B: Nǐ hǎo, Ā Qīng! ______", "choices": ["Hěn gāoxìng rènshi nǐ! (Rất vui quen biết bạn!)", "Wǒ bú shì xuéshēng. (Tôi không phải học sinh.)", "Wǒ hěn máng. (Tôi rất bận.)"], "answer": "Hěn gāoxìng rènshi nǐ! (Rất vui quen biết bạn!)"},
+    {"q": "Học viên A: Nǐ è ma? Qù chī ma? (Bạn có đói không? Có đi ăn không?) \n Học viên B: Wǒ hěn è. ______", "choices": ["Qù ba, qù chī jī! (Đi thôi, đi ăn thịt gà!)", "Tā méiyǒu nánpéngyou. (Cô ấy không có bạn trai.)", "Wǒ bú shì lǜshī. (Tôi không phải luật sư.)"], "answer": "Qù ba, qù chī jī! (Đi thôi, đi ăn thịt gà!)"},
+    {"q": "Học viên A: Nǐmen lèi ma? Qù hē nǎichá ba? (Các bạn mệt không? Đi uống trà sữa nhé?) \n Học viên B: ______", "choices": ["Wǒmen bú lèi. Qù ba! (Chúng tôi không mệt. Đi thôi!)", "Wǒ yǒu nǚpéngyou. (Tôi có bạn gái rồi.)", "Tā hěn hǎo. (Cô ấy rất tốt.)"], "answer": "Wǒmen bú lèi. Qù ba! (Chúng tôi không mệt. Đi thôi!)"}
+]
+
+
