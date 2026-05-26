@@ -138,22 +138,25 @@ if "initialized" not in st.session_state:
 st.title("Học Pinyin Cơ Bản")
 st.sidebar.header("Danh mục giáo án")
 teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Từ vựng", "📝 Hệ thống bài tập"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Phát âm", "📖 Từ vựng & Hội thoại", "📝 Hệ thống bài tập"])
 
-if mode == "📚 Lý thuyết & Từ vựng":
+if mode == "📚 Lý thuyết & Phát âm":
     menu = st.sidebar.radio("Chọn bài học:", [
         "Bài 1 - Phiên âm cơ bản", 
-        "Bài 1 - TỪ VỰNG CƠ BẢN", 
         "Bài 2 - Vận mẫu kép & Luyện tập", 
         "Bài 3 - Phiên âm nâng cao", 
         "Bài 3 - Quy tắc viết Pinyin",
         "Bài 3 - Luyện tập ghép âm",
-        "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
-        "Bài 3 - TỪ VỰNG",
-        "Bài 3 - Hội thoại thực hành",
         "Bài 4 - Vận mẫu kép mở rộng",
-        "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
         "Bài 4 - Nét chữ Hán cơ bản (đang khóa)"
+    ])
+elif mode == "📖 Từ vựng & Hội thoại":
+    menu = st.sidebar.radio("Chọn từ vựng & hội thoại:", [
+        "Bài 1 - TỪ VỰNG CƠ BẢN", 
+        "Bài 3 - TỪ VỰNG",
+        "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
+        "Bài 3 - Hội thoại thực hành",
+        "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)"
     ])
 else:
     menu = st.sidebar.radio("Chọn bài tập:", [
