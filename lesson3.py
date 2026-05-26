@@ -483,7 +483,7 @@ def show_lesson3_dialogues():
         ("A Tiên (阿仙)", "#f59e0b", "我没有。阿青，你呢？你有女朋友吗？", "Wǒ méiyǒu nánpéngyou. Ā Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi cũng không có. A Thanh, còn bạn? Bạn có bạn gái chưa?"),
         ("A Thanh (阿青)", "#2563eb", "我有。她叫青，她很好。", "Wǒ yǒu. Tā jiào Qīng, tā hěn hǎo.", "Tôi có rồi. Cô ấy tên là Thanh, cô ấy tốt lắm."),
         ("A Vy (阿薇)", "#10b981", "好了好了，你们累吗？你们饿吗？", "Hǎo le hǎo le, nǐmen lèi ma? Nǐmen è ma?", "Được rồi được rồi, các bạn có mệt không? Có đói không?"),
-        ("A Trân (阿珍)", "#8b5cf6", "我不累，但我 hěn 饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi."),
+        ("A Trân (阿珍)", "#8b5cf6", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi."),
         ("A Tiên (阿仙)", "#f59e0b", "我也很饿。我们吃什么？", "Wǒ yě hěn è. Wǒmen chī shénme?", "Tôi cũng rất đói. Chúng ta ăn gì đây?"),
         ("A Thanh (阿青)", "#2563eb", "吃鸡还是吃鱼？", "Chī jī hái shì chī yú?", "Ăn thịt gà hay ăn cá đây?"),
         ("A Tiên (阿仙)", "#f59e0b", "吃鱼吧！鱼很好。", "Chī yú ba! Yú hěn hǎo.", "Ăn cá đi! Cá ngon lắm đấy."),
