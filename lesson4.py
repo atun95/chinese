@@ -464,7 +464,7 @@ def show_lesson4_female_comparison():
     )
     
     st.markdown("<br/>", unsafe_allow_html=True)
-    st.subheader("3. So sánh chuyên sâu (Deep-dive Comparison)")
+    st.subheader("3. So sánh ")
     
     tab1, tab2, tab3, tab4 = st.tabs([
         "👩‍🦰 女人 vs 妇女 (Phụ nữ)", 
@@ -541,7 +541,7 @@ def show_lesson4_female_comparison():
         )
         
     st.markdown("---")
-    st.subheader("4. Thử tài phân biệt (Interactive Quick Quiz)")
+    st.subheader("4. Quick Quiz")
     st.info("Hãy áp dụng các quy tắc vừa học để giải quyết các tình huống giao tiếp thực tế dưới đây.")
     
     # State quản lý quiz
