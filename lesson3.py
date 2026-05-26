@@ -486,7 +486,7 @@ def show_lesson3_dialogues():
         ("A Trân (阿珍)", "#8b5cf6", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi."),
         ("A Tiên (阿仙)", "#f59e0b", "我也很饿。我们吃什么？", "Wǒ yě hěn è. Wǒmen chī shénme?", "Tôi cũng rất đói. Chúng ta ăn gì đây?"),
         ("A Thanh (阿青)", "#2563eb", "吃鸡还是吃鱼？", "Chī jī hái shì chī yú?", "Ăn thịt gà hay ăn cá đây?"),
-        ("A Tiên (阿仙)", "#f59e0b", "吃鱼吧！鱼很好。", "Chī yú ba! Yú hěn hǎo.", "Ăn cá đi! Cá ngon lắm đấy."),
+        ("A Tiên (阿仙)", "#f59e0b", "吃鱼吧！鱼很好吃。", "Chī yú ba! Yú hěn hǎo chī.", "Ăn cá đi! Cá ngon lắm đấy."),
         ("A Vy (阿薇)", "#10b981", "好！去吃鱼吧！", "Hǎo! Qù chī yú ba!", "Được! Đi ăn cá thôi nào!")
     ]
     for idx, (speaker, color, chinese, pinyin, meaning) in enumerate(dlg3):
