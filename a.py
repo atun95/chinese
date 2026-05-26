@@ -137,45 +137,6 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 
-# Hiển thị ghi chú của giáo viên ở khu vực chính nếu có nội dung (Khung ấm áp nguyên bản, có tích hợp kéo ngang)
-note_key = "teacher_note"
-if note_key in st.session_state and st.session_state[note_key].strip():
-    st.markdown(
-        f"""
-        <div style="
-            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-            border-left: 8px solid #ea580c;
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.1), 0 8px 10px -6px rgba(234, 88, 12, 0.1);
-            border: 1px solid #fed7aa;
-        ">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; border-bottom: 2px solid #fdba74; padding-bottom: 8px;">
-                <span style="font-size: 1.6em; filter: drop-shadow(0 2px 4px rgba(234,88,12,0.2));">📢</span>
-                <span style="font-weight: 800; color: #c2410c; font-size: 1.3em; letter-spacing: 0.5px; text-transform: uppercase;">
-                    Lời nhắc & Ghi chú từ Giáo viên:
-                </span>
-            </div>
-            <div style="
-                color: #431407; 
-                font-size: 1.3em; 
-                line-height: 1.7; 
-                white-space: pre; 
-                overflow-x: auto;
-                font-weight: 600;
-                font-family: inherit;
-                padding-bottom: 8px;
-                scrollbar-width: thin;
-                scrollbar-color: #ea580c #fed7aa;
-            ">
-{st.session_state[note_key]}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 st.sidebar.header("Danh mục giáo án")
 teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
 mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập"])
