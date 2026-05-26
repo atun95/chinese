@@ -137,25 +137,31 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 st.sidebar.header("Danh mục giáo án")
-teacher_unlock = st.sidebar.checkbox("Nội dung Bài học")
-menu = st.sidebar.radio("Chọn mục:", [
-    "Bài 1 - Phiên âm cơ bản", 
-    "Bài 1 - TỪ VỰNG CƠ BẢN", 
-    "Bài 1 - Bài tập", 
-    "Bài 2 - Vận mẫu kép & Luyện tập", 
-    "Bài 2 - Bài tập", 
-    "Bài 3 - Phiên âm nâng cao", 
-    "Bài 3 - Quy tắc viết Pinyin",
-    "Bài 3 - Luyện tập ghép âm",
-    "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
-    "Bài 3 - TỪ VỰNG",
-    "Bài 3 - Hội thoại thực hành",
-    "Bài 3 - Bài tập",
-    "Bài 4 - Vận mẫu kép mở rộng",
-    "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
-    "Bài 4 - Nét chữ Hán cơ bản (đang khóa)",
-    "Bài 4 - Bài tập (đang khóa)"
-])
+teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Từ vựng", "📝 Hệ thống bài tập"])
+
+if mode == "📚 Lý thuyết & Từ vựng":
+    menu = st.sidebar.radio("Chọn bài học:", [
+        "Bài 1 - Phiên âm cơ bản", 
+        "Bài 1 - TỪ VỰNG CƠ BẢN", 
+        "Bài 2 - Vận mẫu kép & Luyện tập", 
+        "Bài 3 - Phiên âm nâng cao", 
+        "Bài 3 - Quy tắc viết Pinyin",
+        "Bài 3 - Luyện tập ghép âm",
+        "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
+        "Bài 3 - TỪ VỰNG",
+        "Bài 3 - Hội thoại thực hành",
+        "Bài 4 - Vận mẫu kép mở rộng",
+        "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
+        "Bài 4 - Nét chữ Hán cơ bản (đang khóa)"
+    ])
+else:
+    menu = st.sidebar.radio("Chọn bài tập:", [
+        "Bài tập Bài 1",
+        "Bài tập Bài 2",
+        "Bài tập Bài 3",
+        "Bài tập Bài 4 (đang khóa)"
+    ])
 
 if menu == "Bài 1 - Phiên âm cơ bản":
     lesson1.show_lesson1_intro()
@@ -163,13 +169,13 @@ if menu == "Bài 1 - Phiên âm cơ bản":
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
     lesson1.show_lesson1_vocab()
 
-elif menu == "Bài 1 - Bài tập":
+elif menu == "Bài tập Bài 1":
     lesson1.show_lesson1_exercises(save_progress, save_score_row, load_all_scores)
 
 elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
     lesson2.show_lesson2_intro(add_tones)
 
-elif menu == "Bài 2 - Bài tập":
+elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
 elif menu == "Bài 3 - Phiên âm nâng cao":
@@ -190,7 +196,7 @@ elif menu == "Bài 3 - Văn hóa gọi tên & Cấu trúc câu":
 elif menu == "Bài 3 - Hội thoại thực hành":
     lesson3.show_lesson3_dialogues()
 
-elif menu == "Bài 3 - Bài tập":
+elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
 elif menu == "Bài 4 - Vận mẫu kép mở rộng":
@@ -204,7 +210,7 @@ elif menu == "Bài 4 - Nét chữ Hán cơ bản (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
     else: lesson4.show_lesson4_hanzi()
 
-elif menu == "Bài 4 - Bài tập (đang khóa)":
+elif menu == "Bài tập Bài 4 (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
     else: lesson4.show_lesson4_exercises(save_progress)
 
