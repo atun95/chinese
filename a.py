@@ -137,34 +137,36 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 
-# Hiển thị ghi chú của giáo viên ở khu vực chính nếu có nội dung (khung to, rõ ràng, thiết kế premium cho học viên thấy)
+# Hiển thị ghi chú của giáo viên ở khu vực chính nếu có nội dung (Bảng tin lớp học Siêu To, Rõ Ràng, Cực Kỳ Nổi Bật)
 note_key = "teacher_note"
 if note_key in st.session_state and st.session_state[note_key].strip():
     st.markdown(
         f"""
         <div style="
-            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-            border-left: 8px solid #ea580c;
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.1), 0 8px 10px -6px rgba(234, 88, 12, 0.1);
-            border: 1px solid #fed7aa;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 12px solid #f59e0b;
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 15px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.15), 0 10px 10px -5px rgba(245, 158, 11, 0.15);
+            border: 2px solid #334155;
         ">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; border-bottom: 2px solid #fdba74; padding-bottom: 8px;">
-                <span style="font-size: 1.6em; filter: drop-shadow(0 2px 4px rgba(234,88,12,0.2));">📢</span>
-                <span style="font-weight: 800; color: #c2410c; font-size: 1.3em; letter-spacing: 0.5px; text-transform: uppercase;">
-                    Lời nhắc & Ghi chú từ Giáo viên:
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; border-bottom: 3px solid #f59e0b; padding-bottom: 12px;">
+                <span style="font-size: 2.2em; filter: drop-shadow(0 0 8px rgba(245,158,11,0.6));">📢</span>
+                <span style="font-weight: 900; color: #f59e0b; font-size: 1.65em; letter-spacing: 1.2px; text-transform: uppercase;">
+                    BẢNG TIN LỚP HỌC - LỜI NHẮC CỦA THẦY CÔ:
                 </span>
             </div>
             <div style="
-                color: #431407; 
-                font-size: 1.25em; 
-                line-height: 1.7; 
+                color: #f8fafc; 
+                font-size: 1.75em; 
+                line-height: 1.8; 
                 white-space: pre-wrap; 
-                font-weight: 600;
+                font-weight: 700;
                 font-family: inherit;
+                letter-spacing: 0.5px;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.5);
             ">
 {st.session_state[note_key]}
             </div>
