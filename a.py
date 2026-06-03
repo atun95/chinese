@@ -46,14 +46,28 @@ st.markdown(
 if "scores" not in st.session_state:
     st.session_state.scores = {}
 
-SCORES_FILE = Path(__file__).with_name("scores.csv")
-SCORES_B2_FILE = Path(__file__).with_name("scores_b2.csv")
-SCORES_B3_FILE = Path(__file__).with_name("scores_b3.csv")
-PROGRESS_FILE = Path(__file__).with_name("progress_lesson1.json")
+# Lưu trữ điểm số và tiến trình ở thư mục Home để không bị mất khi cập nhật code
+USER_DATA_DIR = Path.home() / ".chinese_learning_app"
+USER_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+SCORES_FILE = USER_DATA_DIR / "scores.csv"
+SCORES_B2_FILE = USER_DATA_DIR / "scores_b2.csv"
+SCORES_B3_FILE = USER_DATA_DIR / "scores_b3.csv"
+PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
+
+# Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "progress_lesson1.json"]:
+    local_file = Path(__file__).parent / filename
+    dest_file = USER_DATA_DIR / filename
+    if local_file.exists() and not dest_file.exists():
+        try:
+            shutil.copy2(local_file, dest_file)
+        except Exception as e:
+            print(f"Lỗi copy file dữ liệu cũ {filename}: {e}")
 
 def save_progress():
     try:
-        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "b3_", "student_name"))]
+        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "b3_", "b4_", "student_name"))]
         data = {"scores": st.session_state.scores, "values": {k: st.session_state[k] for k in quiz_keys}}
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -208,7 +222,7 @@ elif menu == "Bài 4 - Vận mẫu kép mở rộng":
 
 elif menu == "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")
-    else: lesson4.show_lesson4_female_comparison()
+    else: lesson4.show_lesson4_female_comparison(save_progress)
 
 elif menu == "Bài 4 - Nét chữ Hán cơ bản (đang khóa)":
     if not teacher_unlock: st.warning("Đang khóa.")

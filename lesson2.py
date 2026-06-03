@@ -44,6 +44,7 @@ def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
             if selected == item["answer"]: score_b2_vcb += 1
         if st.button("Chấm điểm Bài 1", key="btn_b2_vcb"):
             st.session_state.b2_current["b2_vcb"] = (score_b2_vcb, len(B2_QUIZ_VOCAB))
+            save_progress()
             st.success(f"Bạn đúng {score_b2_vcb}/{len(B2_QUIZ_VOCAB)} câu.")
 
     # 2. Luyện nghe
@@ -60,6 +61,7 @@ def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
             if res == q["answer"]: score_b2_ls += 1
         if st.button("Chấm điểm Bài 2", key="btn_b2_ls"):
             st.session_state.b2_current["b2_ls"] = (score_b2_ls, len(B2_QUIZ_LISTENING))
+            save_progress()
             st.success(f"Bạn đúng {score_b2_ls}/{len(B2_QUIZ_LISTENING)} câu.")
 
     # 3. Điền vận mẫu
@@ -72,6 +74,7 @@ def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
             if res == q["ans"]: score_b2_fill += 1
         if st.button("Chấm điểm Bài 3", key="btn_b2_fill"):
             st.session_state.b2_current["b2_fill"] = (score_b2_fill, len(B2_QUIZ_FILL_BLANKS))
+            save_progress()
             st.success(f"Bạn đúng {score_b2_fill}/{len(B2_QUIZ_FILL_BLANKS)} câu.")
 
     # Tổng kết — chỉ hiện khi học viên đã chấm đủ 3 bài trong phiên này

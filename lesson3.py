@@ -511,6 +511,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
             if selected == item["answer"]: score_b3_vcb += 1
         if st.button("Chấm điểm Bài 1", key="btn_b3_vcb"):
             st.session_state.b3_current["b3_vcb"] = (score_b3_vcb, len(B3_QUIZ_VOCAB))
+            save_progress()
             st.success(f"Bạn đúng {score_b3_vcb}/{len(B3_QUIZ_VOCAB)} câu.")
 
     # 2. Quy tắc chính tả Pinyin
@@ -526,6 +527,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
             if selected == item["answer"]: score_b3_sp += 1
         if st.button("Chấm điểm Bài 2", key="btn_b3_sp"):
             st.session_state.b3_current["b3_sp"] = (score_b3_sp, len(B3_QUIZ_SPELLING))
+            save_progress()
             st.success(f"Bạn đúng {score_b3_sp}/{len(B3_QUIZ_SPELLING)} câu.")
 
     # 3. Điền vận mẫu còn thiếu
@@ -539,6 +541,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
             if selected == item["ans"]: score_b3_fill += 1
         if st.button("Chấm điểm Bài 3", key="btn_b3_fill"):
             st.session_state.b3_current["b3_fill"] = (score_b3_fill, len(B3_QUIZ_FILL_BLANKS))
+            save_progress()
             st.success(f"Bạn đúng {score_b3_fill}/{len(B3_QUIZ_FILL_BLANKS)} câu.")
 
     # 4. Luyện nghe nhận dạng
@@ -557,6 +560,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
             if selected == item["answer"]: score_b3_ls += 1
         if st.button("Chấm điểm Bài 4", key="btn_b3_ls"):
             st.session_state.b3_current["b3_ls"] = (score_b3_ls, len(B3_QUIZ_LISTENING))
+            save_progress()
             st.success(f"Bạn đúng {score_b3_ls}/{len(B3_QUIZ_LISTENING)} câu.")
 
     # 5. Thực hành hoàn thành hội thoại
@@ -572,6 +576,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
             if selected == item["answer"]: score_b3_dlg += 1
         if st.button("Chấm điểm Bài 5", key="btn_b3_dlg"):
             st.session_state.b3_current["b3_dlg"] = (score_b3_dlg, len(B3_QUIZ_DIALOGUE))
+            save_progress()
             st.success(f"Bạn đúng {score_b3_dlg}/{len(B3_QUIZ_DIALOGUE)} câu.")
 
     # Tổng kết — chỉ hiện khi học viên đã chấm đủ 5 bài trong phiên này

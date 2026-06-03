@@ -267,7 +267,7 @@ def show_lesson4_hanzi():
     render_lesson_intro("🔒 Bài 4: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
     st.table(NET_CO_BAN)
 
-def show_lesson4_female_comparison():
+def show_lesson4_female_comparison(save_progress):
     render_lesson_intro(
         "📚 Bài 4: Phân biệt từ vựng chỉ Nữ giới", 
         "Học cách phân biệt 7 từ vựng chỉ nữ giới phổ biến dựa trên độ tuổi, sắc thái biểu đạt và văn cảnh giao tiếp."
@@ -586,6 +586,7 @@ def show_lesson4_female_comparison():
         if st.button("📝 Chấm điểm Bài tập", type="primary", use_container_width=True):
             st.session_state[quiz_submitted_key] = True
             st.session_state.scores["b4_female_vocab"] = (score, total)
+            save_progress()
             st.rerun()
     else:
         # Hiển thị điểm số chung cuộc
@@ -608,5 +609,6 @@ def show_lesson4_female_comparison():
             st.session_state[quiz_submitted_key] = False
             if "b4_female_vocab" in st.session_state.scores:
                 del st.session_state.scores["b4_female_vocab"]
+            save_progress()
             st.rerun()
 
