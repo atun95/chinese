@@ -265,3 +265,170 @@ st.session_state[note_key] = st.sidebar.text_area(
 )
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
+
+# --- HIỂN THỊ GHI CHÚ NỔI CỦA GIÁO VIÊN ---
+teacher_note = st.session_state.get("teacher_note", "").strip()
+
+if teacher_note:
+    import urllib.parse
+    
+    safe_note_text = json.dumps(teacher_note, ensure_ascii=False)
+    js_template = """
+const note = document.getElementById("teacher-floating-note");
+const header = document.getElementById("teacher-note-header");
+const closeBtn = document.getElementById("teacher-note-close");
+const body = document.getElementById("teacher-note-body");
+if (note && header && closeBtn && body) {
+    const noteText = __NOTE_TEXT__;
+    body.innerText = noteText;
+
+    // Xử lý ẩn hiện theo sessionStorage
+    const lastText = sessionStorage.getItem("teacher_note_last_text") || "";
+    if (noteText !== lastText) {
+        sessionStorage.removeItem("teacher_note_closed");
+        sessionStorage.setItem("teacher_note_last_text", noteText);
+    }
+
+    const isClosed = sessionStorage.getItem("teacher_note_closed") === "true";
+    if (isClosed) {
+        note.style.display = "none";
+    }
+
+    closeBtn.onclick = function() {
+        note.style.display = "none";
+        sessionStorage.setItem("teacher_note_closed", "true");
+    };
+
+    // Khôi phục vị trí & kích thước đã lưu
+    let savedTop = sessionStorage.getItem("teacher_note_top");
+    let savedLeft = sessionStorage.getItem("teacher_note_left");
+    let savedWidth = sessionStorage.getItem("teacher_note_width");
+    let savedHeight = sessionStorage.getItem("teacher_note_height");
+
+    if (savedTop) note.style.top = savedTop;
+    if (savedLeft) {
+        note.style.left = savedLeft;
+        note.style.right = "auto";
+    }
+    if (savedWidth) note.style.width = savedWidth;
+    if (savedHeight) note.style.height = savedHeight;
+
+    // Xử lý kéo thả (Drag)
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    header.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        if (e.target.id === "teacher-note-close") return;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        note.style.top = (note.offsetTop - pos2) + "px";
+        note.style.left = (note.offsetLeft - pos1) + "px";
+        note.style.right = "auto";
+
+        sessionStorage.setItem("teacher_note_top", note.style.top);
+        sessionStorage.setItem("teacher_note_left", note.style.left);
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    // Xử lý co giãn (Resize) bằng ResizeObserver
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            sessionStorage.setItem("teacher_note_width", entry.target.style.width);
+            sessionStorage.setItem("teacher_note_height", entry.target.style.height);
+        }
+    });
+    resizeObserver.observe(note);
+}
+"""
+    js_code = js_template.replace("__NOTE_TEXT__", safe_note_text)
+    encoded_js = urllib.parse.quote(js_code)
+    
+    st.markdown(
+        f"""
+        <style>
+        .floating-note {{
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 320px;
+            height: 220px;
+            min-width: 220px;
+            min-height: 140px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid #e11d48;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 999999;
+            resize: both;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }}
+        .floating-note-header {{
+            padding: 10px 14px;
+            cursor: move;
+            background-color: #e11d48;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            font-size: 0.95em;
+        }}
+        .floating-note-body {{
+            padding: 14px;
+            flex: 1;
+            overflow-y: auto;
+            font-size: 0.95em;
+            color: #1e293b;
+            white-space: pre-wrap;
+            background: #ffffff;
+            line-height: 1.5;
+        }}
+        .close-btn {{
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4em;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+        }}
+        .close-btn:hover {{
+            color: #ffe4e6;
+        }}
+        </style>
+
+        <div id="teacher-floating-note" class="floating-note">
+            <div id="teacher-note-header" class="floating-note-header">
+                <span>📌 Ghi chú từ Giáo viên</span>
+                <button id="teacher-note-close" class="close-btn">&times;</button>
+            </div>
+            <div class="floating-note-body" id="teacher-note-body"></div>
+        </div>
+
+        <svg onload='eval(decodeURIComponent("{encoded_js}"))' style='display:none;'></svg>
+        """,
+        unsafe_allow_html=True
+    )
+
