@@ -153,7 +153,7 @@ st.title("Học Pinyin Cơ Bản")
 
 st.sidebar.header("Danh mục giáo án")
 teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập", "🏆 Bảng điểm tổng hợp"])
 
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
@@ -173,15 +173,34 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 1 - TỪ VỰNG CƠ BẢN", 
         "Bài 3 - TỪ VỰNG"
     ])
-else:
+elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
         "Bài tập Bài 1",
         "Bài tập Bài 2",
         "Bài tập Bài 3",
         "Bài tập Bài 4 (đang khóa)"
     ])
+else:
+    menu = "Bảng điểm"
 
-if menu == "Bài 1 - Phiên âm cơ bản":
+if mode == "🏆 Bảng điểm tổng hợp":
+    st.header("🏆 Bảng điểm tổng hợp các bài học")
+    st.write("Dưới đây là lịch sử điểm số của các học viên đã nộp bài tập. Điểm số này được lưu trữ an toàn và không bị mất khi cập nhật ứng dụng.")
+    tab_b1, tab_b2, tab_b3 = st.tabs(["📝 Bài tập Bài 1", "📝 Bài tập Bài 2", "📝 Bài tập Bài 3"])
+    with tab_b1:
+        s1 = load_all_scores()
+        if s1: st.dataframe(s1, use_container_width=True)
+        else: st.info("Chưa có học viên nào nộp bài tập Bài 1.")
+    with tab_b2:
+        s2 = load_all_scores_b2()
+        if s2: st.dataframe(s2, use_container_width=True)
+        else: st.info("Chưa có học viên nào nộp bài tập Bài 2.")
+    with tab_b3:
+        s3 = load_all_scores_b3()
+        if s3: st.dataframe(s3, use_container_width=True)
+        else: st.info("Chưa có học viên nào nộp bài tập Bài 3.")
+
+elif menu == "Bài 1 - Phiên âm cơ bản":
     lesson1.show_lesson1_intro()
 
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
