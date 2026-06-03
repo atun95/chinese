@@ -30,19 +30,198 @@ def show_lesson1_intro():
     with col_t4: st.info("**Thanh 4: mà**\n\n(Đi xuống mạnh)")
     st.write("💡 *Thanh nhẹ: nhẹ, ngắn, không nhấn*")
 
-    st.markdown("#### 2.2. Thanh nhẹ (轻声)")
-    st.write("Thanh nhẹ thường xuất hiện ở âm tiết thứ hai trong từ láy hoặc một số từ thông dụng.")
-    st.write("Ví dụ:")
-    st.write("- **māma** (妈妈): âm tiết **ma** thứ hai là thanh nhẹ")
-    st.write("- **bàba** (爸爸): âm tiết **ba** thứ hai là thanh nhẹ")
-    st.write("- **gēge** (哥哥), **jiějie** (姐姐), **dìdi** (弟弟)")
+    st.markdown("#### 2.2. Thanh nhẹ (轻声 - Qīngshēng)")
+    st.write("Thanh nhẹ không có dấu trên Pinyin, đọc nhẹ và ngắn hơn các thanh khác.")
+    
+    st.markdown("""
+    <table class="chinese-table">
+      <tr style="background-color: #f1f5f9; font-weight: bold;">
+        <th style="width: 25%;">Loại từ / Vị trí</th>
+        <th style="width: 25%;">Ví dụ chữ Hán</th>
+        <th style="width: 25%;">Pinyin & Cách đọc</th>
+        <th style="width: 25%;">Ghi chú</th>
+      </tr>
+      <tr>
+        <td><b>Trợ từ ngữ pháp</b></td>
+        <td>的、吗、呢、吧、了</td>
+        <td>de, ma, ne, ba, le</td>
+        <td>Đọc nhẹ, không nhấn</td>
+      </tr>
+      <tr>
+        <td><b>Hậu tố danh từ</b></td>
+        <td>子、头</td>
+        <td>zi, tou</td>
+        <td>Âm cuối nhẹ, lướt nhanh</td>
+      </tr>
+      <tr>
+        <td><b>Hậu tố đại từ</b></td>
+        <td>们</td>
+        <td>men</td>
+        <td>Trong Chúng tôi (wǒ·men), Các bạn (nǐ·men)</td>
+      </tr>
+      <tr>
+        <td><b>Từ chỉ phương vị</b></td>
+        <td>上、下、里、边</td>
+        <td>shang, xia, li, bian</td>
+        <td>Khi làm hậu tố khinh thanh</td>
+      </tr>
+      <tr>
+        <td><b>Từ láy / Thân thuộc</b></td>
+        <td>爸爸、妈妈、哥哥</td>
+        <td>bà·ba, mā·ma, gē·ge</td>
+        <td>Âm thứ hai đọc nhẹ</td>
+      </tr>
+      <tr>
+        <td><b>Động từ lặp</b></td>
+        <td>看看、想想、试试</td>
+        <td>kàn·kan, xiǎng·xiang, shì·shi</td>
+        <td>Âm thứ hai đọc nhẹ</td>
+      </tr>
+      <tr>
+        <td><b>Từ cố định</b></td>
+        <td>知道、漂亮、葡萄</td>
+        <td>zhī·dao, piào·liang, pú·tao</td>
+        <td>Âm thứ hai đọc nhẹ</td>
+      </tr>
+    </table>
+    """, unsafe_allow_html=True)
 
-    st.markdown("#### 2.3. Quy tắc biến điệu thanh 3")
-    st.success("**Quy tắc chuẩn:** Khi hai thanh 3 đi liền nhau (**3 + 3**), âm tiết thứ nhất đổi thành **thanh 2**.")
-    col_ex1, col_ex2 = st.columns(2)
-    with col_ex1: st.code("nǐ + hǎo → ní hǎo", language="text")
-    with col_ex2: st.code("wǒ + hěn → wó hěn", language="text")
-    st.warning("⚠️ Với chuỗi **3 + 3 + 3**: Thường đổi 2 âm đầu thành thanh 2 (Ví dụ: nǐ wǒ hǎo → ní wó hǎo).")
+    st.markdown("<div style='margin-top: 15px; font-weight: bold;'>🔊 Luyện nghe & đọc theo các ví dụ thanh nhẹ thông dụng:</div>", unsafe_allow_html=True)
+    
+    neutral_tone_examples = [
+        {"word": "妈妈", "pinyin": "mā·ma", "meaning": "mẹ"},
+        {"word": "爸爸", "pinyin": "bà·ba", "meaning": "bố"},
+        {"word": "哥哥", "pinyin": "gē·ge", "meaning": "anh trai"},
+        {"word": "姐姐", "pinyin": "jiě·jie", "meaning": "chị gái"},
+        {"word": "弟弟", "pinyin": "dì·di", "meaning": "em trai"},
+        {"word": "妹妹", "pinyin": "mèi·mei", "meaning": "em gái"},
+        {"word": "爷爷", "pinyin": "yé·ye", "meaning": "ông nội"},
+        {"word": "奶奶", "pinyin": "nǎi·nai", "meaning": "bà nội"},
+        {"word": "看看", "pinyin": "kàn·kan", "meaning": "xem xem"},
+        {"word": "知道", "pinyin": "zhī·dao", "meaning": "biết"},
+        {"word": "漂亮", "pinyin": "piào·liang", "meaning": "đẹp"},
+        {"word": "葡萄", "pinyin": "pú·tao", "meaning": "nho"},
+    ]
+    
+    cols = st.columns(4)
+    for idx, ex in enumerate(neutral_tone_examples):
+        with cols[idx % 4]:
+            st.markdown(
+                f"""
+                <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; margin-bottom: 5px; background-color: #f8fafc; text-align: center;">
+                    <div style="font-size: 1.25rem; font-weight: bold; color: #0f172a;">{ex['word']}</div>
+                    <div style="color: #475569; font-family: monospace; font-weight: bold; margin: 2px 0;">{ex['pinyin']}</div>
+                    <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 4px;">({ex['meaning']})</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            if st.button("🔊 Nghe", key=f"btn_neutral_{idx}"):
+                play_audio(ex['word'])
+
+    st.markdown("---")
+    st.markdown("#### 2.3. Quy tắc biến điệu thanh 3 (三声变调 - Sānshēng biàndiào)")
+    st.write("Khi các âm tiết mang thanh 3 đi liền nhau, cao độ sẽ thay đổi để tạo sự uyển chuyển.")
+    
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown("""
+        <div style="border-left: 4px solid #3b82f6; background-color: #eff6ff; padding: 12px; border-radius: 4px; height: 100%;">
+            <h5 style="margin-top:0; color: #1e3a8a;">1. Hai thanh 3 cạnh nhau (3 + 3)</h5>
+            <p style="margin-bottom: 8px;"><b>Quy tắc:</b> Thanh 3 thứ nhất biến đổi thành <b>Thanh 2</b> (đọc giống sắc - hỏi).</p>
+            <p style="margin-bottom: 4px; font-family: monospace;"><b>Công thức:</b> 3 + 3 ➔ 2 + 3</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.write("Ví dụ:")
+        col_ex_1a, col_ex_1b = st.columns(2)
+        with col_ex_1a:
+            st.markdown("""
+            <div style="padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; text-align: center; background-color: #fafafa;">
+                <span style="font-size: 1.1rem; font-weight: bold;">你好</span><br/>
+                <span style="font-size: 0.85rem; color: #64748b;">nǐ + hǎo ➔ <b>ní hǎo</b></span><br/>
+                <span style="font-size: 0.8rem; color: #94a3b8;">(Xin chào)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🔊 Nghe ní hǎo", key="btn_bd_1a"):
+                play_audio("你好")
+                
+        with col_ex_1b:
+            st.markdown("""
+            <div style="padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; text-align: center; background-color: #fafafa;">
+                <span style="font-size: 1.1rem; font-weight: bold;">很好</span><br/>
+                <span style="font-size: 0.85rem; color: #64748b;">hěn + hǎo ➔ <b>hén hǎo</b></span><br/>
+                <span style="font-size: 0.8rem; color: #94a3b8;">(Rất tốt)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🔊 Nghe hén hǎo", key="btn_bd_1b"):
+                play_audio("很好")
+
+    with c2:
+        st.markdown("""
+        <div style="border-left: 4px solid #10b981; background-color: #ecfdf5; padding: 12px; border-radius: 4px; height: 100%;">
+            <h5 style="margin-top:0; color: #064e3b;">2. Ba thanh 3 cạnh nhau (3 + 3 + 3)</h5>
+            <p style="margin-bottom: 8px;"><b>Quy tắc:</b> Âm ở giữa (hoặc cả 2 âm đầu) biến thành <b>Thanh 2</b>. Phổ biến nhất là âm giữa biến điệu.</p>
+            <p style="margin-bottom: 4px; font-family: monospace;"><b>Công thức:</b> 3 + 3 + 3 ➔ 3 + 2 + 3</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.write("Ví dụ:")
+        col_ex_2a, col_ex_2b = st.columns(2)
+        with col_ex_2a:
+            st.markdown("""
+            <div style="padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; text-align: center; background-color: #fafafa;">
+                <span style="font-size: 1.1rem; font-weight: bold;">好想你</span><br/>
+                <span style="font-size: 0.85rem; color: #64748b;">hǎo xiǎng nǐ ➔ <b>háo xiáng nǐ</b></span><br/>
+                <span style="font-size: 0.8rem; color: #94a3b8;">(Rất nhớ bạn)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🔊 Nghe háo xiáng nǐ", key="btn_bd_2a"):
+                play_audio("好想你")
+                
+        with col_ex_2b:
+            st.markdown("""
+            <div style="padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; text-align: center; background-color: #fafafa;">
+                <span style="font-size: 1.1rem; font-weight: bold;">我很好</span><br/>
+                <span style="font-size: 0.85rem; color: #64748b;">wǒ hěn hǎo ➔ <b>wó hén hǎo</b></span><br/>
+                <span style="font-size: 0.8rem; color: #94a3b8;">(Tôi rất khỏe)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🔊 Nghe wó hén hǎo", key="btn_bd_2b"):
+                play_audio("我很好")
+
+    st.write("")
+    st.markdown("""
+    <div style="border-left: 4px solid #f59e0b; background-color: #fffbeb; padding: 12px; border-radius: 4px; margin-top: 10px;">
+        <h5 style="margin-top:0; color: #78350f; font-size: 1rem;">3. Bốn thanh 3 cạnh nhau (3 + 3 + 3 + 3)</h5>
+        <p style="margin-bottom: 6px;"><b>Quy tắc:</b> Ngắt nhịp 2-2 để đọc tự nhiên. Thanh thứ nhất và thứ ba đổi thành <b>Thanh 2</b>.</p>
+        <p style="margin-bottom: 4px; font-family: monospace;"><b>Công thức:</b> 3 + 3 + 3 + 3 ➔ 2 + 3 + 2 + 3</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_ex_3 = st.columns(3)
+    with col_ex_3[0]:
+        st.write("Ví dụ:")
+        st.markdown("""
+        <div style="padding: 8px; border: 1px dashed #cbd5e1; border-radius: 6px; text-align: center; background-color: #fafafa;">
+            <span style="font-size: 1.1rem; font-weight: bold;">我也很好</span><br/>
+            <span style="font-size: 0.85rem; color: #64748b;">wǒ yě hěn hǎo ➔ <b>wó yě hén hǎo</b></span><br/>
+            <span style="font-size: 0.8rem; color: #94a3b8;">(Tôi cũng rất khỏe)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("🔊 Nghe wó yě hén hǎo", key="btn_bd_3"):
+            play_audio("我也很好")
+
+    st.markdown("""
+    <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-top: 15px;">
+        <span style="font-size: 1.1rem; font-weight: bold; color: #0f172a;">💡 Mẹo ghi nhớ nhanh:</span>
+        <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+            <li><b>Thanh nhẹ:</b> Coi như một "dấu huyền" rất ngắn và nhẹ trong tiếng Việt.</li>
+            <li><b>Biến điệu:</b> Luôn nhớ quy tắc cửa miệng <b>nǐ hǎo ➔ ní hǎo</b>. Đây là quy tắc cốt lõi và phổ biến nhất khi mới bắt đầu.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
 
 def show_lesson1_vocab():
     render_lesson_intro("👨‍👩‍👧‍👦 Bài 1: Học TỪ VỰNG CƠ BẢN", "Học từ xưng hô, đại từ thường dùng và từ mở rộng để ghép câu ngắn.")
