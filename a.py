@@ -166,7 +166,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.5 - Hội thoại thực hành",
         "Bài 4.1 - Vận mẫu kép mở rộng",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 4.3 - Nét chữ Hán cơ bản"
+        "Bài 4.3 - Đấu trường Luyện tập",
+        "Bài 5 - Nét chữ Hán cơ bản"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -242,7 +243,10 @@ elif menu == "Bài 4.1 - Vận mẫu kép mở rộng":
 elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
 
-elif menu == "Bài 4.3 - Nét chữ Hán cơ bản":
+elif menu == "Bài 4.3 - Đấu trường Luyện tập":
+    lesson4.show_lesson4_exercises(save_progress)
+
+elif menu == "Bài 5 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
 
 elif menu == "Bài tập Bài 4":
