@@ -162,12 +162,12 @@ def show_lesson4_finals():
                 st.markdown(card_html, unsafe_allow_html=True)
             with cols[1]:
                 st.markdown("<br/>", unsafe_allow_html=True)
-                render_play_button(item["vd_han"], f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_main_{item['chu']}_{idx}")
+                render_play_button(item["vd_py"], f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_main_{item['chu']}_{idx}")
                 
                 st.markdown("<div style='font-size:0.8em; font-weight:bold; color:#64748b; margin-top:12px; margin-bottom:4px;'>LUYỆN TẬP ÂM KHÁC:</div>", unsafe_allow_html=True)
                 for s_idx, sub in enumerate(item["more_examples"]):
                     sub_key = f"btn_sub_{item['chu']}_{idx}_{s_idx}"
-                    render_play_button(sub["han"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
+                    render_play_button(sub["py"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
             st.markdown("<br/>", unsafe_allow_html=True)
 
     st.markdown("---")
