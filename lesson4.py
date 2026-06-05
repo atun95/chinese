@@ -299,20 +299,18 @@ def show_lesson4_classroom_arena():
         student_list_raw = st.text_input("Nhập tên các học viên (cách nhau bằng dấu phẩy):", "Lan, Nam, Vy, Tuấn, Minh, Khánh", key="classroom_students_input")
         students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
         
-        # Danh sách từ vựng & câu thực hành ngữ cảnh dựa trên bài 1 - 4
+        # Danh sách từ vựng & câu thực hành ngữ cảnh dựa trên bài 1 - 4 (không chứa vận mẫu mũi)
         RANDOM_CALL_POOL = [
-            {"pinyin": "wǒ", "hanzi": "我", "meaning": "Tôi", "sentence_pinyin": "Wǒ jiào Lán.", "sentence_hanzi": "我叫兰。", "sentence_meaning": "Tôi tên là Lan."},
+            {"pinyin": "wǒ", "hanzi": "我", "meaning": "Tôi", "sentence_pinyin": "Wǒ yéye ài zāihuā.", "sentence_hanzi": "我爷爷爱栽花。", "sentence_meaning": "Ông nội tôi yêu thích việc trồng hoa."},
             {"pinyin": "nǐ", "hanzi": "你", "meaning": "Bạn / Anh / Chị", "sentence_pinyin": "Nǐ hǎo ma?", "sentence_hanzi": "你好吗？", "sentence_meaning": "Bạn khỏe không?"},
-            {"pinyin": "māma", "hanzi": "妈妈", "meaning": "Mẹ", "sentence_pinyin": "Wǒ ài māma.", "sentence_hanzi": "我爱妈妈。", "sentence_meaning": "Tôi yêu mẹ."},
+            {"pinyin": "māma", "hanzi": "妈妈", "meaning": "Mẹ", "sentence_pinyin": "Māma ài wǒ.", "sentence_hanzi": "妈妈爱我。", "sentence_meaning": "Mẹ yêu tôi."},
             {"pinyin": "nǚ'ér", "hanzi": "女儿", "meaning": "Con gái", "sentence_pinyin": "Tā shì wǒ de nǚ'ér.", "sentence_hanzi": "她是我的女儿。", "sentence_meaning": "Cô ấy là con gái của tôi."},
-            {"pinyin": "huā", "hanzi": "花", "meaning": "Đóa hoa / Hoa", "sentence_pinyin": "Zhè shì huā.", "sentence_hanzi": "这是花。", "sentence_meaning": "Đây là hoa."},
+            {"pinyin": "huā", "hanzi": "花", "meaning": "Đóa hoa / Hoa", "sentence_pinyin": "Zhè shì wǒ de huā.", "sentence_hanzi": "这是我的花。", "sentence_meaning": "Đây là hoa của tôi."},
             {"pinyin": "shuǐ", "hanzi": "水", "meaning": "Nước", "sentence_pinyin": "Wǒ hē shuǐ.", "sentence_hanzi": "我喝水。", "sentence_meaning": "Tôi uống nước."},
-            {"pinyin": "liù", "hanzi": "六", "meaning": "Số sáu", "sentence_pinyin": "Wǒ yǒu liù ge.", "sentence_hanzi": "我有六个。", "sentence_meaning": "Tôi có sáu cái."},
-            {"pinyin": "nǚshēng", "hanzi": "女生", "meaning": "Bạn nữ / Nữ sinh", "sentence_pinyin": "Tā shì nǚshēng.", "sentence_hanzi": "她是女生。", "sentence_meaning": "Cô ấy là bạn nữ (học sinh nữ)."},
-            {"pinyin": "nǚhái", "hanzi": "女孩", "meaning": "Bé gái / Cô bé", "sentence_pinyin": "Tā shì hǎo nǚhái.", "sentence_hanzi": "她是好女孩。", "sentence_meaning": "Cô ấy là một bé gái ngoan."},
-            {"pinyin": "bàba", "hanzi": "爸爸", "meaning": "Bố / Cha", "sentence_pinyin": "Bàba ài wǒ.", "sentence_hanzi": "爸爸爱我。", "sentence_meaning": "Bố yêu tôi."},
-            {"pinyin": "yuè", "hanzi": "月", "meaning": "Mặt trăng", "sentence_pinyin": "Yuèliang hěn měi.", "sentence_hanzi": "月亮很美。", "sentence_meaning": "Mặt trăng rất đẹp."},
-            {"pinyin": "nǐ hǎo", "hanzi": "你好", "meaning": "Xin chào", "sentence_pinyin": "Nǐ hǎo, lǎoshī!", "sentence_hanzi": "你好，老师！", "sentence_meaning": "Em chào thầy/cô ạ!"}
+            {"pinyin": "liù", "hanzi": "六", "meaning": "Số sáu", "sentence_pinyin": "Wǒ yǒu liù ge wáwa.", "sentence_hanzi": "我有六个娃娃。", "sentence_meaning": "Tôi có sáu búp bê."},
+            {"pinyin": "jiějie", "hanzi": "姐姐", "meaning": "Chị gái", "sentence_pinyin": "Jiějie ài wáwa.", "sentence_hanzi": "姐姐爱娃娃。", "sentence_meaning": "Chị gái yêu búp bê."},
+            {"pinyin": "yéye", "hanzi": "爷爷", "meaning": "Ông nội", "sentence_pinyin": "Yéye ài nǚ'ér.", "sentence_hanzi": "爷爷爱女儿。", "sentence_meaning": "Ông nội yêu con gái."},
+            {"pinyin": "bàba", "hanzi": "爸爸", "meaning": "Bố / Cha", "sentence_pinyin": "Bàba ài māma.", "sentence_hanzi": "爸爸爱妈妈。", "sentence_meaning": "Bố yêu mẹ."}
         ]
         
         if "arena_item" not in st.session_state:
@@ -374,7 +372,9 @@ def show_lesson4_classroom_arena():
         imposter_questions = [
             {"title": "Thử thách 1: j + üe + thanh 2 (sắc)", "options": ["1. jüé", "2. qué", "3. jué"], "correct_idx": 2, "explain": "Quy tắc 3: Sau thanh mẫu mặt lưỡi 'j, q, x', üe lược bỏ dấu hai chấm viết thành ue (nhưng vẫn giữ nguyên cách đọc tròn môi)."},
             {"title": "Thử thách 2: sh + uei + thanh 3 (hỏi)", "options": ["1. shuǐ", "2. shueǐ", "3. shǔi"], "correct_idx": 0, "explain": "Quy tắc 1: 'uei' khi đi sau thanh mẫu viết rút gọn thành 'ui'. Dấu thanh điệu đặt trên chữ cái 'i' đứng sau."},
-            {"title": "Thử thách 3: Vận mẫu 'uei' đứng một mình không có thanh mẫu", "options": ["1. uēi", "2. wei", "3. yui"], "correct_idx": 1, "explain": "Quy tắc 1: Khi đứng độc lập không có thanh mẫu đi kèm, 'uei' viết ở dạng đầy đủ là 'wei'."}
+            {"title": "Thử thách 3: Vận mẫu 'uei' đứng một mình không có thanh mẫu", "options": ["1. uēi", "2. wei", "3. yui"], "correct_idx": 1, "explain": "Quy tắc 1: Khi đứng độc lập không có thanh mẫu đi kèm, 'uei' viết ở dạng đầy đủ là 'wei'."},
+            {"title": "Thử thách 4: y + ia + thanh 1 (ngang) (con vịt)", "options": ["1. yia", "2. ya", "3. iā"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'i' đứng độc lập không có thanh mẫu đi kèm, 'i' được viết thành 'y' (ia viết thành ya)."},
+            {"title": "Thử thách 5: w + uo + thanh 3 (hỏi) (tôi)", "options": ["1. uǒ", "2. wǒ", "3. wuǒ"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'u' đứng độc lập không có thanh mẫu đi kèm, 'u' được viết thành 'w' (uo viết thành wo)."}
         ]
         
         if "imposter_q_idx" not in st.session_state:
@@ -395,8 +395,15 @@ def show_lesson4_classroom_arena():
             word_text = opt.split('. ')[1]
             with cols_imp[idx]:
                 if st.session_state.imposter_selected_idx is None:
-                    # Interactive clickable button
-                    if st.button(f"👉 {word_text}", use_container_width=True, key=f"imp_opt_btn_{q_idx}_{idx}"):
+                    # Square card before selection
+                    st.markdown(
+                        f"""<div style="border: 2px solid #cbd5e1; background-color: #f8fafc; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s; margin-bottom: 8px;">
+<span style="font-weight: bold; color: #64748b; font-size: 0.85em; text-transform: uppercase;">❓ ĐANG CHỜ</span>
+<div style="font-size: 1.8em; font-weight: bold; color: #1e293b; margin-top: 10px; font-family: 'Courier New', monospace;">{word_text}</div>
+</div>""",
+                        unsafe_allow_html=True
+                    )
+                    if st.button(f"Chọn {word_text}", use_container_width=True, key=f"imp_opt_btn_{q_idx}_{idx}"):
                         st.session_state.imposter_selected_idx = idx
                         st.session_state.imposter_revealed = True
                         if idx == q_data["correct_idx"]:
@@ -420,7 +427,7 @@ def show_lesson4_classroom_arena():
                         label_icon = "⚪ MẠO DANH"
                         
                     st.markdown(
-                        f"""<div style="border: 2px solid {border_color}; background-color: {bg_color}; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s;">
+                        f"""<div style="border: 2px solid {border_color}; background-color: {bg_color}; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s; min-height: 120px;">
 <span style="font-weight: bold; color: {border_color}; font-size: 0.85em; text-transform: uppercase;">{label_icon}</span>
 <div style="font-size: 1.8em; font-weight: bold; color: #1e293b; margin-top: 10px; font-family: 'Courier New', monospace;">{word_text}</div>
 </div>""",
@@ -457,40 +464,58 @@ def show_lesson4_classroom_arena():
     with tab_game3:
         st.markdown("### 🧩 Thử thách Lắp ráp Câu thần tốc (Sentence Builder)")
         st.write("Học viên lắp ráp các mảnh ghép từ vựng rời rạc thành một câu tiếng Trung hoàn chỉnh và chính xác theo nghĩa gợi ý.")
-        
         builder_puzzles = [
             {
                 "meaning": "Đây là nhà của tôi.",
-                "correct": ["这 (Zhè)", "是 (shì)", "我 (wǒ)", "nghiệm (de)", "家 (jiā)"],
+                "correct": ["这 (Zhè)", "是 (shì)", "我 (wǒ)", "... (de)", "家 (jiā)"],
                 "full_pinyin": "Zhè shì wǒ de jiā.",
                 "full_hanzi": "这是我的家。",
                 "tip": "Chú ý định ngữ sở hữu '我的' (của tôi) đứng trước danh từ '家' (nhà)."
             },
             {
-                "meaning": "Chị gái tôi rất đẹp.",
-                "correct": ["我 (wǒ)", "的 (de)", "姐姐 (jiějie)", "很 (hěn)", "美 (měi)"],
-                "full_pinyin": "Wǒ de jiějie hěn měi.",
-                "full_hanzi": "我的姐姐很美。",
-                "tip": "Định ngữ sở hữu '我的' đứng trước danh từ '姐姐', và trạng từ mức độ 'hěn' (hẹn - 很) đứng trước tính từ 'měi' (mỹ - 美)."
+                "meaning": "Chị gái tôi thích búp bê.",
+                "correct": ["我 (wǒ)", "的 (de)", "姐姐 (jiějie)", "喜欢 (xǐhuān)", "我 (wǒ)"],
+                "full_pinyin": "Wǒ de jiějie xǐhuān wáwa.",
+                "full_hanzi": "我的姐姐喜欢娃娃。",
+                "tip": "Định ngữ sở hữu '我的' đứng trước danh từ '姐姐'."
             },
             {
-                "meaning": "Tôi học tiếng Trung.",
-                "correct": ["我 (wǒ)", "学 (xué)", "汉语 (Hànyǔ)"],
-                "full_pinyin": "Wǒ xué Hànyǔ.",
-                "full_hanzi": "我学汉语。",
-                "tip": "Cấu trúc câu cơ bản: Chủ ngữ (我) + Động từ (学) + Tân ngữ (汉语)."
+                "meaning": "Bố yêu mẹ.",
+                "correct": ["爸爸 (Bàba)", "爱 (ài)", "妈妈 (māma)"],
+                "full_pinyin": "Bàba ài māma.",
+                "full_hanzi": "爸爸爱妈妈。",
+                "tip": "Cấu trúc cơ bản: Chủ ngữ (爸爸) + Động từ (爱) + Tân ngữ (妈妈)."
             },
             {
                 "meaning": "Cô ấy là một bé gái ngoan.",
                 "correct": ["她 (Tā)", "是 (shì)", "好 (hǎo)", "女孩 (nǚhái)"],
-                "full_pinyin": "Tā shì hǎo nǚhái.",
+                "full_pinyin": "Tā ...",
                 "full_hanzi": "她是好女孩。",
                 "tip": "Động từ hệ '是' đi kèm cụm danh từ '好女孩' (tính từ '好' đứng liền trước bổ nghĩa cho danh từ '女孩')."
+            },
+            {
+                "meaning": "Anh trai có bạn gái.",
+                "correct": ["哥哥 (Gēge)", "有 (yǒu)", "女朋友 (nǚ péngyǒu)"],
+                "full_pinyin": "Gēge yǒu nǚ péngyǒu.",
+                "full_hanzi": "哥哥有女朋友。",
+                "tip": "Cấu trúc biểu thị quyền sở hữu: Chủ ngữ (哥哥) + Động từ (yǒu - 有) + Tân ngữ (nǚ péngyǒu)."
+            },
+            {
+                "meaning": "Đây là búp bê của chị gái.",
+                "correct": ["这 (Zhè)", "是 (shì)", "姐姐 (jiějie)", "的 (de)", "娃娃 (wáwa)"],
+                "full_pinyin": "Zhè... (Zhè)",
+                "full_hanzi": "这是姐姐的娃娃。",
+                "tip": "Định ngữ sở hữu '姐姐的' (của chị gái) đứng trước trung tâm ngữ '娃娃' (búp bê)."
             }
         ]
         
-        # Correct typo in puzzle 0: "nghiệm (de)" should be "的 (de)"
+        # Post-correct correct lists and full_hanzi/full_pinyin values to ensure no placeholders
         builder_puzzles[0]["correct"] = ["这 (Zhè)", "是 (shì)", "我 (wǒ)", "的 (de)", "家 (jiā)"]
+        builder_puzzles[1]["full_hanzi"] = "我的姐姐爱我。"
+        builder_puzzles[3]["full_pinyin"] = "Tā shì hǎo nǚhái."
+        builder_puzzles[5]["full_pinyin"] = "Zhè... (Zhè)"
+        builder_puzzles[5]["full_pinyin"] = "Zhè shì jiějie de wáwa."
+        
 
         if "builder_q_idx" not in st.session_state:
             st.session_state.builder_q_idx = 0
@@ -1311,7 +1336,7 @@ def show_lesson4_vocab():
         }, "ia_jia")
         render_vocab_card({
             "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt",
-            "example_han": "鸭子在游泳。", "example_py": "Yāzi zài yóuyõng.", "example_vi": "Con vịt đang bơi."
+            "example_han": "鸭子很可爱。", "example_py": "Yāzi hěn kě'ài.", "example_vi": "Con vịt rất đáng yêu."
         }, "ia_ya")
 
     with tab_ie:
@@ -1322,7 +1347,7 @@ def show_lesson4_vocab():
         }, "ie_jie")
         render_vocab_card({
             "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội",
-            "example_han": "爷爷爱我。", "example_py": "Yéye ài wǒ.", "example_vi": "Ông nội yêu tôi."
+            "example_han": "爷爷爱栽花。", "example_py": "Yéye ài zāihuā.", "example_vi": "Ông nội thích trồng hoa."
         }, "ie_ye")
 
     with tab_iao:
@@ -1340,7 +1365,7 @@ def show_lesson4_vocab():
         st.markdown("### 6️⃣ Nhóm Vận mẫu: iu / you")
         render_vocab_card({
             "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu",
-            "example_han": "我有六个苹果。", "example_py": "Wǒ yǒu liù ge píngguǒ.", "example_vi": "Tôi có 6 quả táo."
+            "example_han": "我有六个女朋友。", "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.", "example_vi": "Tôi có 6 người bạn gái."
         }, "iu_liu")
         render_vocab_card({
             "emoji": "🤝", "word": "有", "pinyin": "yǒu", "vietnamese": "Có",
@@ -1395,7 +1420,7 @@ def show_lesson4_vocab():
         st.markdown("### 🌙 Nhóm Vận mẫu: üe / yue")
         render_vocab_card({
             "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng",
-            "example_han": "月亮很亮。", "example_py": "Yuèliang hěn liàng.", "example_vi": "Mặt trăng rất sáng."
+            "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."
         }, "ue_yue")
         render_vocab_card({
             "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học",
