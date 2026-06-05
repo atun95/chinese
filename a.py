@@ -244,7 +244,7 @@ elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
 
 elif menu == "Bài 4.3 - Đấu trường Luyện tập":
-    lesson4.show_lesson4_exercises(save_progress)
+    lesson4.show_lesson4_classroom_arena()
 
 elif menu == "Bài 5 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()

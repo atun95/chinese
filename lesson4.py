@@ -285,9 +285,6 @@ def show_lesson4_finals():
 def show_lesson4_classroom_arena():
     render_lesson_intro("📚 Bài 4.3: Đấu trường Luyện tập (Tương tác Lớp học)", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
     
-    st.write(
-        "Giáo viên có thể chia sẻ màn hình và điều phối các trò chơi dưới đây để giúp học viên luyện tập trực tiếp và tương tác sôi nổi trong giờ học!"
-    )
     
     tab_game1, tab_game2, tab_game3 = st.tabs([
         "🎲 1. Vòng quay May mắn (Random Call)",
@@ -298,43 +295,74 @@ def show_lesson4_classroom_arena():
     # ------------------ GAME 1: RANDOM CALL ------------------
     with tab_game1:
         st.markdown("### 🎲 Thử thách Gọi tên Ngẫu nhiên")
-        st.write("Giáo viên nhập danh sách học viên, bấm quay để hệ thống chọn ngẫu nhiên 1 học viên đọc 1 âm tiết ngẫu nhiên.")
         
         student_list_raw = st.text_input("Nhập tên các học viên (cách nhau bằng dấu phẩy):", "Lan, Nam, Vy, Tuấn, Minh, Khánh", key="classroom_students_input")
         students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
         
-        syllable_pool = ["yā", "yě", "yáo", "yòu", "wā", "wǒ", "wài", "wèi", "yuè", "qià", "jiě", "huā", "shuǐ", "liù", "jué", "nüè", "lüè"]
+        # Danh sách từ vựng & câu thực hành ngữ cảnh dựa trên bài 1 - 4
+        RANDOM_CALL_POOL = [
+            {"pinyin": "wǒ", "hanzi": "我", "meaning": "Tôi", "sentence_pinyin": "Wǒ jiào Lán.", "sentence_hanzi": "我叫兰。", "sentence_meaning": "Tôi tên là Lan."},
+            {"pinyin": "nǐ", "hanzi": "你", "meaning": "Bạn / Anh / Chị", "sentence_pinyin": "Nǐ hǎo ma?", "sentence_hanzi": "你好吗？", "sentence_meaning": "Bạn khỏe không?"},
+            {"pinyin": "māma", "hanzi": "妈妈", "meaning": "Mẹ", "sentence_pinyin": "Wǒ ài māma.", "sentence_hanzi": "我爱妈妈。", "sentence_meaning": "Tôi yêu mẹ."},
+            {"pinyin": "nǚ'ér", "hanzi": "女儿", "meaning": "Con gái", "sentence_pinyin": "Tā shì wǒ de nǚ'ér.", "sentence_hanzi": "她是我的女儿。", "sentence_meaning": "Cô ấy là con gái của tôi."},
+            {"pinyin": "huā", "hanzi": "花", "meaning": "Đóa hoa / Hoa", "sentence_pinyin": "Zhè shì huā.", "sentence_hanzi": "这是花。", "sentence_meaning": "Đây là hoa."},
+            {"pinyin": "shuǐ", "hanzi": "水", "meaning": "Nước", "sentence_pinyin": "Wǒ hē shuǐ.", "sentence_hanzi": "我喝水。", "sentence_meaning": "Tôi uống nước."},
+            {"pinyin": "liù", "hanzi": "六", "meaning": "Số sáu", "sentence_pinyin": "Wǒ yǒu liù ge.", "sentence_hanzi": "我有六个。", "sentence_meaning": "Tôi có sáu cái."},
+            {"pinyin": "nǚshēng", "hanzi": "女生", "meaning": "Bạn nữ / Nữ sinh", "sentence_pinyin": "Tā shì nǚshēng.", "sentence_hanzi": "她是女生。", "sentence_meaning": "Cô ấy là bạn nữ (học sinh nữ)."},
+            {"pinyin": "nǚhái", "hanzi": "女孩", "meaning": "Bé gái / Cô bé", "sentence_pinyin": "Tā shì hǎo nǚhái.", "sentence_hanzi": "她是好女孩。", "sentence_meaning": "Cô ấy là một bé gái ngoan."},
+            {"pinyin": "bàba", "hanzi": "爸爸", "meaning": "Bố / Cha", "sentence_pinyin": "Bàba ài wǒ.", "sentence_hanzi": "爸爸爱我。", "sentence_meaning": "Bố yêu tôi."},
+            {"pinyin": "yuè", "hanzi": "月", "meaning": "Mặt trăng", "sentence_pinyin": "Yuèliang hěn měi.", "sentence_hanzi": "月亮很美。", "sentence_meaning": "Mặt trăng rất đẹp."},
+            {"pinyin": "nǐ hǎo", "hanzi": "你好", "meaning": "Xin chào", "sentence_pinyin": "Nǐ hǎo, lǎoshī!", "sentence_hanzi": "你好，老师！", "sentence_meaning": "Em chào thầy/cô ạ!"}
+        ]
         
-        if "arena_word" not in st.session_state:
-            st.session_state.arena_word = syllable_pool[0]
+        if "arena_item" not in st.session_state:
+            st.session_state.arena_item = RANDOM_CALL_POOL[0]
         if "arena_student" not in st.session_state:
             st.session_state.arena_student = "Học viên"
             
         if st.button("🎲 QUAY NGẪU NHIÊN (Chọn Học viên & Từ)", type="primary", use_container_width=True):
-            st.session_state.arena_word = random.choice(syllable_pool)
+            st.session_state.arena_item = random.choice(RANDOM_CALL_POOL)
             if students:
                 st.session_state.arena_student = random.choice(students)
             else:
                 st.session_state.arena_student = "Học viên"
             st.rerun()
             
+        item = st.session_state.arena_item
+        
         st.markdown(
-            f"""
-            <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 2px solid #FDE68A; border-radius: 16px; padding: 30px; text-align: center; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                <div style="font-size: 1.1em; color: #92400E; font-weight: bold; text-transform: uppercase;">🌟 Lượt đọc của học viên:</div>
-                <div style="font-size: 2.8em; font-weight: 800; color: #D97706; margin: 10px 0;">👉 {st.session_state.arena_student} 👈</div>
-                <div style="font-size: 0.95em; color: #78350F; font-weight: 500; margin-bottom: 15px;">Hãy phát âm thật to từ khóa dưới đây:</div>
-                <div style="font-family: 'Courier New', monospace; font-size: 4em; font-weight: bold; color: #1e293b; background: white; padding: 15px 30px; display: inline-block; border-radius: 12px; border: 2px solid #FCD34D; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">{st.session_state.arena_word}</div>
-            </div>
-            """,
+            f"""<div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 2px solid #FDE68A; border-radius: 16px; padding: 30px; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+<div style="font-size: 1.1em; color: #92400E; font-weight: bold; text-transform: uppercase; text-align: center;">🌟 Lượt đọc của học viên:</div>
+<div style="font-size: 2.8em; font-weight: 800; color: #D97706; margin: 10px 0; text-align: center;">👉 {st.session_state.arena_student} 👈</div>
+<hr style="border: 0; border-top: 1px solid #FCD34D; margin: 20px 0;"/>
+<div style="display: flex; flex-direction: column; gap: 20px;">
+<div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid #FCD34D;">
+<span style="font-size: 0.95em; font-weight: bold; color: #b45309; text-transform: uppercase;">🔹 Bước 1: Đọc từ khóa</span>
+<div style="font-size: 2.5em; font-weight: bold; color: #1e293b; font-family: 'Courier New', monospace; margin: 8px 0;">
+{item['pinyin']} <span style="font-size: 0.75em; color: #64748b; font-weight: normal;">({item['hanzi']})</span>
+</div>
+<span style="color: #475569; font-size: 1em;">Nghĩa: <b>{item['meaning']}</b></span>
+</div>
+<div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid #FCD34D;">
+<span style="font-size: 0.95em; font-weight: bold; color: #b45309; text-transform: uppercase;">🔸 Bước 2: Đọc câu mở rộng (Đầy đủ ngữ cảnh)</span>
+<div style="font-size: 1.8em; font-weight: bold; color: #0f172a; margin: 10px 0; font-family: 'Courier New', monospace; line-height: 1.4;">
+{item['sentence_pinyin']}<br/>
+<span style="font-size: 0.85em; color: #047857; font-weight: normal; font-family: inherit;">{item['sentence_hanzi']}</span>
+</div>
+<span style="color: #475569; font-size: 1em;">Nghĩa: <b>{item['sentence_meaning']}</b></span>
+</div>
+</div>
+</div>""",
             unsafe_allow_html=True
         )
         
         st.markdown("<br/>", unsafe_allow_html=True)
-        col_btns = st.columns([1, 1])
+        col_btns = st.columns([1, 1, 1])
         with col_btns[0]:
-            render_play_button(st.session_state.arena_word, "🔊 Phát âm chuẩn bản xứ", key="arena_play_native", type="secondary")
+            render_play_button(item['pinyin'], "🔊 Phát âm Từ khóa", key="arena_play_word", type="secondary")
         with col_btns[1]:
+            render_play_button(item['sentence_hanzi'], "🔊 Phát âm Câu mở rộng", key="arena_play_sentence", type="secondary")
+        with col_btns[2]:
             if st.button("🎉 Đọc đúng! Thưởng điểm", use_container_width=True, key="arena_reward_btn"):
                 st.balloons()
                 st.success(f"Cộng 10 điểm thưởng cho bạn **{st.session_state.arena_student}**! 🏆")
