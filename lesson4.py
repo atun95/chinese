@@ -283,7 +283,7 @@ def show_lesson4_finals():
             render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="sandbox_play_btn", type="primary")
 
 def show_lesson4_classroom_arena():
-    render_lesson_intro("📚 Bài 4.3: Đấu trường Luyện tập (Tương tác Lớp học)", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
+    render_lesson_intro("📚 Bài 4.3: Luyện tập", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
     
     
     tab_game1, tab_game2, tab_game3 = st.tabs([
@@ -309,7 +309,6 @@ def show_lesson4_classroom_arena():
             {"pinyin": "shuǐ", "hanzi": "水", "meaning": "Nước", "sentence_pinyin": "Wǒ hē shuǐ.", "sentence_hanzi": "我喝水。", "sentence_meaning": "Tôi uống nước."},
             {"pinyin": "liù", "hanzi": "六", "meaning": "Số sáu", "sentence_pinyin": "Wǒ yǒu liù ge wáwa.", "sentence_hanzi": "我有六个娃娃。", "sentence_meaning": "Tôi có sáu búp bê."},
             {"pinyin": "jiějie", "hanzi": "姐姐", "meaning": "Chị gái", "sentence_pinyin": "Jiějie ài wáwa.", "sentence_hanzi": "姐姐爱娃娃。", "sentence_meaning": "Chị gái yêu búp bê."},
-            {"pinyin": "yéye", "hanzi": "爷爷", "meaning": "Ông nội", "sentence_pinyin": "Yéye ài nǚ'ér.", "sentence_hanzi": "爷爷爱女儿。", "sentence_meaning": "Ông nội yêu con gái."},
             {"pinyin": "bàba", "hanzi": "爸爸", "meaning": "Bố / Cha", "sentence_pinyin": "Bàba ài māma.", "sentence_hanzi": "爸爸爱妈妈。", "sentence_meaning": "Bố yêu mẹ."}
         ]
         
@@ -462,7 +461,7 @@ def show_lesson4_classroom_arena():
 
     # ------------------ GAME 3: SENTENCE BUILDER ------------------
     with tab_game3:
-        st.markdown("### 🧩 Thử thách Lắp ráp Câu thần tốc (Sentence Builder)")
+        st.markdown("### 🧩 Sentence Builder")
         st.write("Học viên lắp ráp các mảnh ghép từ vựng rời rạc thành một câu tiếng Trung hoàn chỉnh và chính xác theo nghĩa gợi ý.")
         builder_puzzles = [
             {
@@ -645,7 +644,7 @@ def show_lesson4_classroom_arena():
                 )
 
 def show_lesson4_exercises(save_progress):
-    st.header("🎯 Bài 4: Đấu trường Luyện tập Vận mẫu kép mở rộng")
+    st.header("🎯 Bài 4: Luyện tập Vận mẫu kép mở rộng")
    
     
     st.markdown(
