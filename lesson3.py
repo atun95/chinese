@@ -266,12 +266,12 @@ Chữ <b>阿 (ā)</b> đặt trước tên là cách gọi <b>thân mật, gần
 </p>
 <div style="font-weight: bold; color: #0f172a; margin-bottom: 8px; padding-bottom: 4px;">Ví dụ tiêu biểu:</div>
 <ul style="margin: 0; padding-left: 20px; color: #475569; line-height: 1.8;">
-<li><b>阿青</b> (ā qīng) = "A Thanh"</li>
-<li><b>阿薇</b> (ā wēi) = "A Vy"</li>
-<li><b>阿仙</b> (ā xiān) = "A Tiên"</li>
+<li><b>阿青</b> (qīng) = "Thanh"</li>
+<li><b>阿薇</b> (wēi) = "Vy"</li>
+<li><b>阿仙</b> (xiān) = "Tiên"</li>
 </ul>
 <div style="margin-top: 10px; font-size: 0.9em; color: #e11d48; font-weight: bold;">
-⚠️ KHÔNG dùng "阿" khi tự giới thiệu tên mình một cách trang trọng! (Ví dụ không nói "我叫阿青" mà nói "我叫青" hoặc "我叫林青").
+⚠️ KHÔNG dùng "阿" khi tự giới thiệu tên mình một cách trang trọng! (Ví dụ không nói "我叫青" mà nói "我叫青" hoặc "我叫林青").
 </div>
 </div>""", unsafe_allow_html=True)
 
@@ -425,68 +425,68 @@ def show_lesson3_dialogues():
     render_lesson_intro("📚 Bài 3: Hội thoại thực hành", "Ứng dụng các thanh mẫu nâng cao, quy tắc viết bính âm và từ vựng đã học vào các ngữ cảnh hội thoại giao tiếp 2 người, 3 người và 4 người.")
     
     st.subheader("💬 Hội thoại 1: Giới thiệu & Kết bạn (2 Học viên)")
-    st.info("🗣️ **Ngữ cảnh:** A Thanh (Ā Qīng - Học sinh) gặp A Vy (Ā Wēi - Luật sư). Họ chào hỏi, làm quen và giới thiệu nghề nghiệp.")
+    st.info("🗣️ **Ngữ cảnh:** Thanh (Qīng - Học sinh) gặp Vy (Wēi - Luật sư). Họ chào hỏi, làm quen và giới thiệu nghề nghiệp.")
     
     dlg1 = [
-        ("A Thanh (阿青)", "#2563eb", "你好！", "Nǐ hǎo!", "Xin chào!"),
-        ("A Vy (阿薇)", "#10b981", "你好！你叫什么名字？", "Nǐ hǎo! Nǐ jiào shénme míngzi?", "Xin chào! Bạn tên là gì vậy?"),
-        ("A Thanh (阿青)", "#2563eb", "我叫阿青。你呢？", "Wǒ jiào Ā Qīng. Nǐ ne?", "Tôi tên là A Thanh. Còn bạn?"),
-        ("A Vy (阿薇)", "#10b981", "我叫阿薇。", "Wǒ jiào Ā Wēi.", "Tôi tên là A Vy."),
-        ("A Thanh (阿青)", "#2563eb", "很高兴认识你，阿薇。你是老师吗？", "Hěn gāoxìng rènshi nǐ, Ā Wēi. Nǐ shì lǎoshī ma?", "Rất vui được gặp bạn, A Vy. Bạn là giáo viên phải không?"),
-        ("A Vy (阿薇)", "#10b981", "不是，我不是老师。我是律师。你呢？你是律师吗？", "Bú shì, wǒ bú shì lǎoshī. Wǒ shì lǜshī. Nǐ ne? Nǐ shì lǜshī ma?", "Không phải, tôi không phải giáo viên. Tôi là luật sư. Còn bạn? Bạn cũng là luật sư à?"),
-        ("A Thanh (阿青)", "#2563eb", "不是，我是学生. 我不忙。你忙吗？", "Bú shì, wǒ shì xuéshēng. Wǒ bù máng. Nǐ máng ma?", "Không phải, tôi là học sinh. Tôi không bận. Bạn có bận không?"),
-        ("A Vy (阿薇)", "#10b981", "我很忙。", "Wǒ hěn máng.", "Tôi rất bận."),
-        ("A Thanh (阿青)", "#2563eb", "你有男朋友吗？", "Nǐ yǒu nánpéngyou ma?", "Bạn có bạn trai chưa?"),
-        ("A Vy (阿薇)", "#10b981", "我没有男朋友。你呢？", "Wǒ méiyǒu nánpéngyou. Nǐ ne?", "Tôi không có bạn trai. Còn bạn?"),
-        ("A Thanh (阿青)", "#2563eb", "我有女朋友。她很好。", "Wǒ yǒu nǚpéngyou. Tā hěn hǎo.", "Tôi có bạn gái rồi. Cô ấy rất tốt."),
-        ("A Vy (阿薇)", "#10b981", "你饿嗎？去吃吗？", "Nǐ è ma? Qù chī ma?", "Bạn có đói không? Có đi ăn không?"),
-        ("A Thanh (阿青)", "#2563eb", "我很饿。去吧，去吃鸡！", "Wǒ hěn è. Qù ba, qù chī jī!", "Tôi rất đói. Đi thôi, đi ăn thịt gà nào!")
+        ("Thanh (青)", "#2563eb", "你好！", "Nǐ hǎo!", "Xin chào!"),
+        ("Vy (薇)", "#10b981", "你好！你叫什么名字？", "Nǐ hǎo! Nǐ jiào shénme míngzi?", "Xin chào! Bạn tên là gì vậy?"),
+        ("Thanh (青)", "#2563eb", "我叫青。你呢？", "Wǒ jiào Qīng. Nǐ ne?", "Tôi tên là Thanh. Còn bạn?"),
+        ("Vy (薇)", "#10b981", "我叫薇。", "Wǒ jiào Wēi.", "Tôi tên là Vy."),
+        ("Thanh (青)", "#2563eb", "很高兴认识你，阿薇。你是老师吗？", "Hěn gāoxìng rènshi nǐ, Wēi. Nǐ shì lǎoshī ma?", "Rất vui được gặp bạn, Vy. Bạn là giáo viên phải không?"),
+        ("Vy (薇)", "#10b981", "不是，我不是老师。我是律师。你呢？你是律师吗？", "Bú shì, wǒ bú shì lǎoshī. Wǒ shì lǜshī. Nǐ ne? Nǐ shì lǜshī ma?", "Không phải, tôi không phải giáo viên. Tôi là luật sư. Còn bạn? Bạn cũng là luật sư à?"),
+        ("Thanh (青)", "#2563eb", "不是，我是学生. 我不忙。你忙吗？", "Bú shì, wǒ shì xuéshēng. Wǒ bù máng. Nǐ máng ma?", "Không phải, tôi là học sinh. Tôi không bận. Bạn có bận không?"),
+        ("Vy (薇)", "#10b981", "我很忙。", "Wǒ hěn máng.", "Tôi rất bận."),
+        ("Thanh (青)", "#2563eb", "你有男朋友吗？", "Nǐ yǒu nánpéngyou ma?", "Bạn có bạn trai chưa?"),
+        ("Vy (薇)", "#10b981", "我没有男朋友。你呢？", "Wǒ méiyǒu nánpéngyou. Nǐ ne?", "Tôi không có bạn trai. Còn bạn?"),
+        ("Thanh (青)", "#2563eb", "我有女朋友。她很好。", "Wǒ yǒu nǚpéngyou. Tā hěn hǎo.", "Tôi có bạn gái rồi. Cô ấy rất tốt."),
+        ("Vy (薇)", "#10b981", "你饿嗎？去吃吗？", "Nǐ è ma? Qù chī ma?", "Bạn có đói không? Có đi ăn không?"),
+        ("Thanh (青)", "#2563eb", "我很饿。去吧，去吃鸡！", "Wǒ hěn è. Qù ba, qù chī jī!", "Tôi rất đói. Đi thôi, đi ăn thịt gà nào!")
     ]
     for idx, (speaker, color, chinese, pinyin, meaning) in enumerate(dlg1):
         render_dialogue_line(speaker, color, chinese, pinyin, meaning, f"dlg1_{idx}")
         
     st.markdown("---")
     st.subheader("💬 Hội thoại 2: Giới thiệu bạn mới (3 Học viên)")
-    st.info("🗣️ **Ngữ cảnh:** A Trân (Ā Zhēn) tình cờ gặp A Tiên (Ā Xiān) trên đường và giới thiệu người bạn đi cùng mình là A Thanh (Ā Qīng) cho A Tiên làm quen.")
+    st.info("🗣️ **Ngữ cảnh:** Trân (Zhēn) tình cờ gặp Tiên (Xiān) trên đường và giới thiệu người bạn đi cùng mình là Thanh (Qīng) cho Tiên làm quen.")
     
     dlg2 = [
-        ("A Trân (阿珍)", "#8b5cf6", "阿仙，你好吗？", "Ā Xiān, nǐ hǎo ma?", "A Tiên, bạn khỏe không?"),
-        ("A Tiên (阿仙)", "#f59e0b", "我很好！你呢，阿珍？", "Wǒ hěn hǎo! Nǐ ne, Ā Zhēn?", "Tôi rất khỏe! Còn bạn thì sao, A Trân?"),
-        ("A Trân (阿珍)", "#8b5cf6", "我也很好。这是我朋友，他叫阿青。", "Wǒ yě hěn hǎo. Zhè shì wǒ péngyou, tā jiào Ā Qīng.", "Tôi cũng rất khỏe. Đây là bạn của tôi, cậu ấy tên là A Thanh."),
-        ("A Tiên (阿仙)", "#f59e0b", "你好，阿青！很高兴认识你！", "Nǐ hǎo, Ā Qīng! Hěn gāoxìng rènshi nǐ!", "Chào cậu, A Thanh! Rất vui được quen biết cậu!"),
-        ("A Thanh (阿青)", "#2563eb", "你好，阿仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào cậu, A Tiên! Tớ cũng rất vui được quen biết cậu. Cậu là học sinh à?"),
-        ("A Tiên (阿仙)", "#f59e0b", "是的，我是学生。阿青，你是老师吗？", "Shì de, wǒ shì xuéshēng. Ā Qīng, nǐ shì lǎoshī ma?", "Đúng vậy, tớ là học sinh. A Thanh, cậu là giáo viên phải không?"),
-        ("A Thanh (阿青)", "#2563eb", "不是，我不是老师。我是律师。", "Bú shì, wǒ bú shì lǎoshī. Wǒ shì lǜshī.", "Không phải, tớ không phải giáo viên. Tớ là luật sư."),
-        ("A Tiên (阿仙)", "#f59e0b", "哇，你是律师！那你忙吗？", "Wa, nǐ shì lǜshī! Nà nǐ máng ma?", "Oa, cậu là luật sư cơ à! Thế cậu có bận không?"),
-        ("A Thanh (阿青)", "#2563eb", "我不忙。今天我不忙。", "Wǒ bù máng. Jīntiān wǒ bù máng.", "Tớ không bận. Hôm nay tớ không bận."),
-        ("A Trân (阿珍)", "#8b5cf6", "你们累吗？去喝奶茶吧？", "Nǐmen lèi ma? Qù hē nǎichá ba?", "Các cậu có mệt không? Chúng ta đi uống trà sữa nhé?"),
-        ("A Tiên (阿仙)", "#f59e0b", "我不累。去吧！", "Wǒ bú lèi. Qù ba!", "Tớ không mệt. Đi thôi nào!"),
-        ("A Thanh (阿青)", "#2563eb", "去吧！", "Qù ba!", "Đi thôi!")
+        ("Trân (珍)", "#8b5cf6", "仙，你好吗？", " Xiān, nǐ hǎo ma?", "Tiên, bạn khỏe không?"),
+        ("Tiên (仙)", "#f59e0b", "我很好！你呢，珍？", "Wǒ hěn hǎo! Nǐ ne,  Zhēn?", "Tôi rất khỏe! Còn bạn thì sao, Trân?"),
+        ("Trân (珍)", "#8b5cf6", "我也很好。这是我朋友，他叫青。", "Wǒ yě hěn hǎo. Zhè shì wǒ péngyou, tā jiào Qīng.", "Tôi cũng rất khỏe. Đây là bạn của tôi, cậu ấy tên là Thanh."),
+        ("Tiên (仙)", "#f59e0b", "你好，青！很高兴认识你！", "Nǐ hǎo, Qīng! Hěn gāoxìng rènshi nǐ!", "Chào cậu, Thanh! Rất vui được quen biết cậu!"),
+        ("Thanh (青)", "#2563eb", "你好，仙！我也很高兴认识你。你是学生吗？", "Nǐ hǎo, Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào cậu, Tiên! Tớ cũng rất vui được quen biết cậu. Cậu là học sinh à?"),
+        ("Tiên (仙)", "#f59e0b", "是的，我是学生。阿青，你是老师吗？", "Shì de, wǒ shì xuéshēng. Qīng, nǐ shì lǎoshī ma?", "Đúng vậy, tớ là học sinh. Thanh, cậu là giáo viên phải không?"),
+        ("Thanh (青)", "#2563eb", "不是，我不是老师。我是律师。", "Bú shì, wǒ bú shì lǎoshī. Wǒ shì lǜshī.", "Không phải, tớ không phải giáo viên. Tớ là luật sư."),
+        ("Tiên (仙)", "#f59e0b", "哇，你是律师！那你忙吗？", "Wa, nǐ shì lǜshī! Nà nǐ máng ma?", "Oa, cậu là luật sư cơ à! Thế cậu có bận không?"),
+        ("Thanh (青)", "#2563eb", "我不忙。今天我不忙。", "Wǒ bù máng. Jīntiān wǒ bù máng.", "Tớ không bận. Hôm nay tớ không bận."),
+        ("Trân (珍)", "#8b5cf6", "你们累吗？去喝奶茶吧？", "Nǐmen lèi ma? Qù hē nǎichá ba?", "Các cậu có mệt không? Chúng ta đi uống trà sữa nhé?"),
+        ("Tiên (阿仙)", "#f59e0b", "我不累。去吧！", "Wǒ bú lèi. Qù ba!", "Tớ không mệt. Đi thôi nào!"),
+        ("Thanh (阿青)", "#2563eb", "去吧！", "Qù ba!", "Đi thôi!")
     ]
     for idx, (speaker, color, chinese, pinyin, meaning) in enumerate(dlg2):
         render_dialogue_line(speaker, color, chinese, pinyin, meaning, f"dlg2_{idx}")
 
     st.markdown("---")
     st.subheader("💬 Hội thoại 3: Cuộc tụ họp cuối tuần (4 Học viên)")
-    st.info("🗣️ **Ngữ cảnh:** Cuộc tụ họp cuối tuần vui vẻ giữa 4 người bạn: A Vy, A Thanh, A Trân và A Tiên. Họ cùng bàn bạc xem hôm nay ăn gì.")
+    st.info("🗣️ **Ngữ cảnh:** Cuộc tụ họp cuối tuần vui vẻ giữa 4 người bạn: Vy, Thanh, Trân và Tiên. Họ cùng bàn bạc xem hôm nay ăn gì.")
     
     dlg3 = [
-        ("A Vy (阿薇)", "#10b981", "你们好！", "Nǐmen hǎo!", "Chào các bạn!"),
-        ("A Trân (阿珍)", "#8b5cf6", "阿薇，你好！你忙吗？", "Ā Wēi, nǐ hǎo! Nǐ máng ma?", "A Vy, chào bạn! Bạn bận không?"),
-        ("A Vy (阿薇)", "#10b981", "我很忙。你们呢？", "Wǒ hěn máng. Nǐmen ne?", "Tôi rất bận. Còn các bạn thì sao?"),
-        ("A Trân (阿珍)", "#8b5cf6", "我们不忙。这是阿仙，她是我的好朋友。", "Wǒmen bù máng. Zhè shì Ā Xiān, tā shì wǒ de hǎo péngyou.", "Chúng tôi không bận. Đây là A Tiên, cô ấy là bạn thân của tôi."),
-        ("A Tiên (阿仙)", "#f59e0b", "阿薇，你好！很高兴认识你。", "Ā Wēi, nǐ hǎo! Hěn gāoxìng rènshi nǐ.", "Chào A Vy! Rất vui được quen biết bạn."),
-        ("A Vy (阿薇)", "#10b981", "你好，阿仙！我也很高兴认识你. 你是学生吗？", "Nǐ hǎo, Ā Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào A Tiên! Tôi cũng rất vui được quen biết bạn. Bạn là học sinh à?"),
-        ("A Tiên (阿仙)", "#f59e0b", "不是，我不是学生。我是律师。", "Bú shì, wǒ bú shì xuéshēng. Wǒ shì lǜshī.", "Không phải, tôi không phải học sinh. Tôi là luật sư."),
-        ("A Trân (阿珍)", "#8b5cf6", "太好了！你有男朋友吗？", "Tài hǎo le! Nǐ yǒu nánpéngyou ma?", "Tuyệt vời quá! Bạn có bạn trai chưa?"),
-        ("A Tiên (阿仙)", "#f59e0b", "我没有。阿青，你呢？你有女朋友吗？", "Wǒ méiyǒu nánpéngyou. Ā Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi cũng không có. A Thanh, còn bạn? Bạn có bạn gái chưa?"),
-        ("A Thanh (阿青)", "#2563eb", "我有。她叫青，她很好。", "Wǒ yǒu. Tā jiào Qīng, tā hěn hǎo.", "Tôi có rồi. Cô ấy tên là Thanh, cô ấy tốt lắm."),
-        ("A Vy (阿薇)", "#10b981", "好了好了，你们累吗？你们饿吗？", "Hǎo le hǎo le, nǐmen lèi ma? Nǐmen è ma?", "Được rồi được rồi, các bạn có mệt không? Có đói không?"),
-        ("A Trân (阿珍)", "#8b5cf6", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi."),
-        ("A Tiên (阿仙)", "#f59e0b", "我也很饿。我们吃什么？", "Wǒ yě hěn è. Wǒmen chī shénme?", "Tôi cũng rất đói. Chúng ta ăn gì đây?"),
-        ("A Thanh (阿青)", "#2563eb", "吃鸡还是吃鱼？", "Chī jī hái shì chī yú?", "Ăn thịt gà hay ăn cá đây?"),
-        ("A Tiên (阿仙)", "#f59e0b", "吃鱼吧！鱼很好吃。", "Chī yú ba! Yú hěn hǎo chī.", "Ăn cá đi! Cá ngon lắm đấy."),
-        ("A Vy (阿薇)", "#10b981", "好！去吃鱼吧！", "Hǎo! Qù chī yú ba!", "Được! Đi ăn cá thôi nào!")
+        ("Vy (阿薇)", "#10b981", "你们好！", "Nǐmen hǎo!", "Chào các bạn!"),
+        ("Trân (阿珍)", "#8b5cf6", "阿薇，你好！你忙吗？", "Wēi, nǐ hǎo! Nǐ máng ma?", "Vy, chào bạn! Bạn bận không?"),
+        ("Vy (阿薇)", "#10b981", "我很忙。你们呢？", "Wǒ hěn máng. Nǐmen ne?", "Tôi rất bận. Còn các bạn thì sao?"),
+        ("Trân (阿珍)", "#8b5cf6", "我们不忙。这是阿仙，她是我的好朋友。", "Wǒmen bù máng. Zhè shì Xiān, tā shì wǒ de hǎo péngyou.", "Chúng tôi không bận. Đây là Tiên, cô ấy là bạn thân của tôi."),
+        ("Tiên (阿仙)", "#f59e0b", "阿薇，你好！很高兴认识你。", "Wēi, nǐ hǎo! Hěn gāoxìng rènshi nǐ.", "Chào Vy! Rất vui được quen biết bạn."),
+        ("Vy (阿薇)", "#10b981", "你好，阿仙！我也很高兴认识你. 你是学生吗？", "Nǐ hǎo, Xiān! Wǒ yě hěn gāoxìng rènshi nǐ. Nǐ shì xuéshēng ma?", "Chào Tiên! Tôi cũng rất vui được quen biết bạn. Bạn là học sinh à?"),
+        ("Tiên (阿仙)", "#f59e0b", "不是，我不是学生。我是律师。", "Bú shì, wǒ bú shì xuéshēng. Wǒ shì lǜshī.", "Không phải, tôi không phải học sinh. Tôi là luật sư."),
+        ("Trân (阿珍)", "#8b5cf6", "太好了！你有男朋友吗？", "Tài hǎo le! Nǐ yǒu nánpéngyou ma?", "Tuyệt vời quá! Bạn có bạn trai chưa?"),
+        ("Tiên (阿仙)", "#f59e0b", "我没有。阿青，你呢？你有女朋友吗？", "Wǒ méiyǒu nánpéngyou. Qīng, nǐ ne? Nǐ yǒu nǚpéngyou ma?", "Tôi cũng không có. Thanh, còn bạn? Bạn có bạn gái chưa?"),
+        ("Thanh (阿青)", "#2563eb", "我有。她叫青，她很好。", "Wǒ yǒu. Tā jiào Qīng, tā hěn hǎo.", "Tôi có rồi. Cô ấy tên là Thanh, cô ấy tốt lắm."),
+        ("Vy (阿薇)", "#10b981", "好了好了，你们累吗？你们饿吗？", "Hǎo le hǎo le, nǐmen lèi ma? Nǐmen è ma?", "Được rồi được rồi, các bạn có mệt không? Có đói không?"),
+        ("Trân (阿珍)", "#8b5cf6", "我不累，但我很饿。", "Wǒ bú lèi, dàn wǒ hěn è.", "Tôi không mệt, nhưng tôi rất đói rồi."),
+        ("Tiên (阿仙)", "#f59e0b", "我也很饿。我们吃什么？", "Wǒ yě hěn è. Wǒmen chī shénme?", "Tôi cũng rất đói. Chúng ta ăn gì đây?"),
+        ("Thanh (阿青)", "#2563eb", "吃鸡还是吃鱼？", "Chī jī hái shì chī yú?", "Ăn thịt gà hay ăn cá đây?"),
+        ("Tiên (阿仙)", "#f59e0b", "吃鱼吧！鱼很好吃。", "Chī yú ba! Yú hěn hǎo chī.", "Ăn cá đi! Cá ngon lắm đấy."),
+        ("Vy (阿薇)", "#10b981", "好！去吃鱼吧！", "Hǎo! Qù chī yú ba!", "Được! Đi ăn cá thôi nào!")
     ]
     for idx, (speaker, color, chinese, pinyin, meaning) in enumerate(dlg3):
         render_dialogue_line(speaker, color, chinese, pinyin, meaning, f"dlg3_{idx}")

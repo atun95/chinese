@@ -296,7 +296,7 @@ def show_lesson4_classroom_arena():
     with tab_game1:
         st.markdown("### 🎲 Thử thách Gọi tên Ngẫu nhiên")
         
-        student_list_raw = st.text_input("Nhập tên các học viên (cách nhau bằng dấu phẩy):", "Lan, Nam, Vy, Tuấn, Minh, Khánh", key="classroom_students_input")
+        student_list_raw = st.text_input("Nhập tên các học viên (cách nhau bằng dấu phẩy):", "Tiên, Vy, Trân, Thanh", key="classroom_students_input")
         students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
         
         # Danh sách từ vựng & câu thực hành ngữ cảnh dựa trên bài 1 - 4 (không chứa vận mẫu mũi)
