@@ -289,7 +289,7 @@ def show_lesson4_classroom_arena():
     tab_game1, tab_game2, tab_game3 = st.tabs([
         "🎲 1. Vòng quay May mắn (Random Call)",
         "🕵️ 2. Kẻ mạo danh Chính tả (Spot the Imposter)",
-        "⚡ 3. Đua tốc độ phản xạ (Rapid Fire)"
+        "🧩 3. Lắp ráp Câu thần tốc (Sentence Builder)"
     ])
     
     # ------------------ GAME 1: RANDOM CALL ------------------
@@ -370,7 +370,6 @@ def show_lesson4_classroom_arena():
     # ------------------ GAME 2: IMPOSTER ------------------
     with tab_game2:
         st.markdown("### 🕵️ Tìm kiếm Kẻ mạo danh Chính tả")
-        st.write("Giáo viên yêu cầu học viên bình luận số thứ tự của từ viết ĐÚNG CHÍNH TẢ. Bấm nút Tiết lộ để xem đáp án.")
         
         imposter_questions = [
             {"title": "Thử thách 1: j + üe + thanh 2 (sắc)", "options": ["1. jüé", "2. qué", "3. jué"], "correct_idx": 2, "explain": "Quy tắc 3: Sau thanh mẫu mặt lưỡi 'j, q, x', üe lược bỏ dấu hai chấm viết thành ue (nhưng vẫn giữ nguyên cách đọc tròn môi)."},
@@ -382,53 +381,64 @@ def show_lesson4_classroom_arena():
             st.session_state.imposter_q_idx = 0
         if "imposter_revealed" not in st.session_state:
             st.session_state.imposter_revealed = False
+        if "imposter_selected_idx" not in st.session_state:
+            st.session_state.imposter_selected_idx = None
             
         q_idx = st.session_state.imposter_q_idx
         q_data = imposter_questions[q_idx]
         
         st.markdown(f"#### {q_data['title']}")
+        st.write("👇 Hãy click vào ô đáp án mà bạn tin là viết **ĐÚNG CHÍNH TẢ**:")
         
         cols_imp = st.columns(3)
         for idx, opt in enumerate(q_data["options"]):
+            word_text = opt.split('. ')[1]
             with cols_imp[idx]:
-                if st.session_state.imposter_revealed:
+                if st.session_state.imposter_selected_idx is None:
+                    # Interactive clickable button
+                    if st.button(f"👉 {word_text}", use_container_width=True, key=f"imp_opt_btn_{q_idx}_{idx}"):
+                        st.session_state.imposter_selected_idx = idx
+                        st.session_state.imposter_revealed = True
+                        if idx == q_data["correct_idx"]:
+                            st.toast("🎉 Chính xác!", icon="✅")
+                        else:
+                            st.toast("❌ Sai rồi!", icon="❌")
+                        st.rerun()
+                else:
+                    # Reveal status cards
                     if idx == q_data["correct_idx"]:
                         border_color = "#10B981"
                         bg_color = "#ECFDF5"
-                        label_icon = "✅ ĐÚNG"
-                    else:
+                        label_icon = "✅ ĐÚNG (Chuẩn)"
+                    elif idx == st.session_state.imposter_selected_idx:
                         border_color = "#EF4444"
                         bg_color = "#FEF2F2"
-                        label_icon = "❌ MẠO DANH"
-                else:
-                    border_color = "#cbd5e1"
-                    bg_color = "#f8fafc"
-                    label_icon = "❓ Đang chờ"
-                    
-                st.markdown(
-                    f"""
-                    <div style="border: 2px solid {border_color}; background-color: {bg_color}; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s;">
-                        <span style="font-weight: bold; color: {border_color}; font-size: 0.85em; text-transform: uppercase;">{label_icon}</span>
-                        <div style="font-size: 1.8em; font-weight: bold; color: #1e293b; margin-top: 10px; font-family: 'Courier New', monospace;">{opt.split('. ')[1]}</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                        label_icon = "❌ BẠN ĐÃ CHỌN SAI"
+                    else:
+                        border_color = "#cbd5e1"
+                        bg_color = "#f8fafc"
+                        label_icon = "⚪ MẠO DANH"
+                        
+                    st.markdown(
+                        f"""<div style="border: 2px solid {border_color}; background-color: {bg_color}; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s;">
+<span style="font-weight: bold; color: {border_color}; font-size: 0.85em; text-transform: uppercase;">{label_icon}</span>
+<div style="font-size: 1.8em; font-weight: bold; color: #1e293b; margin-top: 10px; font-family: 'Courier New', monospace;">{word_text}</div>
+</div>""",
+                        unsafe_allow_html=True
+                    )
         
         st.markdown("<br/>", unsafe_allow_html=True)
-        col_imp_actions = st.columns([1, 1, 1])
+        col_imp_actions = st.columns(2)
         with col_imp_actions[0]:
-            if st.button("👁️ Tiết lộ đáp án", use_container_width=True, key="reveal_imp_btn"):
-                st.session_state.imposter_revealed = True
-                st.rerun()
-        with col_imp_actions[1]:
             if st.button("⏭️ Thử thách tiếp theo", use_container_width=True, key="next_imp_btn"):
                 st.session_state.imposter_q_idx = (q_idx + 1) % len(imposter_questions)
+                st.session_state.imposter_selected_idx = None
                 st.session_state.imposter_revealed = False
                 st.rerun()
-        with col_imp_actions[2]:
+        with col_imp_actions[1]:
             if st.button("🔄 Khởi động lại", use_container_width=True, key="reset_imp_btn"):
                 st.session_state.imposter_q_idx = 0
+                st.session_state.imposter_selected_idx = None
                 st.session_state.imposter_revealed = False
                 st.rerun()
                 
@@ -443,73 +453,171 @@ def show_lesson4_classroom_arena():
                 unsafe_allow_html=True
             )
 
-    # ------------------ GAME 3: RAPID FIRE ------------------
+    # ------------------ GAME 3: SENTENCE BUILDER ------------------
     with tab_game3:
-        st.markdown("### ⚡ Thử thách Đọc trơn Phản xạ nhanh (Rapid Fire)")
-        st.write("Học viên phải đọc trơn một chuỗi 3 từ ghép ngẫu nhiên trước khi thời gian 3 giây đếm ngược kết thúc!")
+        st.markdown("### 🧩 Thử thách Lắp ráp Câu thần tốc (Sentence Builder)")
+        st.write("Học viên lắp ráp các mảnh ghép từ vựng rời rạc thành một câu tiếng Trung hoàn chỉnh và chính xác theo nghĩa gợi ý.")
         
-        if "rapid_chain" not in st.session_state:
-            st.session_state.rapid_chain = ["huā", "shuǐ", "liù"]
-            
-        if st.button("⚡ Tạo chuỗi phản xạ ngẫu nhiên mới", type="primary", use_container_width=True, key="rapid_gen_btn"):
-            st.session_state.rapid_chain = random.sample(syllable_pool, 3)
-            st.rerun()
-            
-        chain_str = " ➔ ".join(st.session_state.rapid_chain)
+        builder_puzzles = [
+            {
+                "meaning": "Đây là nhà của tôi.",
+                "correct": ["这 (Zhè)", "是 (shì)", "我 (wǒ)", "nghiệm (de)", "家 (jiā)"],
+                "full_pinyin": "Zhè shì wǒ de jiā.",
+                "full_hanzi": "这是我的家。",
+                "tip": "Chú ý định ngữ sở hữu '我的' (của tôi) đứng trước danh từ '家' (nhà)."
+            },
+            {
+                "meaning": "Chị gái tôi rất đẹp.",
+                "correct": ["我 (wǒ)", "的 (de)", "姐姐 (jiějie)", "很 (hěn)", "美 (měi)"],
+                "full_pinyin": "Wǒ de jiějie hěn měi.",
+                "full_hanzi": "我的姐姐很美。",
+                "tip": "Định ngữ sở hữu '我的' đứng trước danh từ '姐姐', và trạng từ mức độ 'hěn' (hẹn - 很) đứng trước tính từ 'měi' (mỹ - 美)."
+            },
+            {
+                "meaning": "Tôi học tiếng Trung.",
+                "correct": ["我 (wǒ)", "学 (xué)", "汉语 (Hànyǔ)"],
+                "full_pinyin": "Wǒ xué Hànyǔ.",
+                "full_hanzi": "我学汉语。",
+                "tip": "Cấu trúc câu cơ bản: Chủ ngữ (我) + Động từ (学) + Tân ngữ (汉语)."
+            },
+            {
+                "meaning": "Cô ấy là một bé gái ngoan.",
+                "correct": ["她 (Tā)", "是 (shì)", "好 (hǎo)", "女孩 (nǚhái)"],
+                "full_pinyin": "Tā shì hǎo nǚhái.",
+                "full_hanzi": "她是好女孩。",
+                "tip": "Động từ hệ '是' đi kèm cụm danh từ '好女孩' (tính từ '好' đứng liền trước bổ nghĩa cho danh từ '女孩')."
+            }
+        ]
         
+        # Correct typo in puzzle 0: "nghiệm (de)" should be "的 (de)"
+        builder_puzzles[0]["correct"] = ["这 (Zhè)", "是 (shì)", "我 (wǒ)", "的 (de)", "家 (jiā)"]
+
+        if "builder_q_idx" not in st.session_state:
+            st.session_state.builder_q_idx = 0
+            
+        b_idx = st.session_state.builder_q_idx
+        puzzle = builder_puzzles[b_idx]
+        
+        scramble_key = f"scrambled_words_{b_idx}"
+        if scramble_key not in st.session_state:
+            words = list(puzzle["correct"])
+            random.seed(b_idx + 42)
+            random.shuffle(words)
+            st.session_state[scramble_key] = words
+            
+        if "builder_assembled" not in st.session_state:
+            st.session_state.builder_assembled = []
+            
+        if "builder_checked" not in st.session_state:
+            st.session_state.builder_checked = False
+            
+        if "builder_correct" not in st.session_state:
+            st.session_state.builder_correct = False
+
         st.markdown(
-            f"""
-            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #A7F3D0; border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px;">
-                <div style="font-size: 0.9em; color: #065F46; font-weight: bold; text-transform: uppercase;">CHUỖI TỪ ĐỌC PHẢN XẠ:</div>
-                <div style="font-family: 'Courier New', monospace; font-size: 3em; font-weight: bold; color: #047857; margin: 15px 0;">{chain_str}</div>
-            </div>
-            """,
+            f"""<div style="background: linear-gradient(135deg, #EEF2F6 0%, #E2E8F0 100%); border: 2px solid #CBD5E1; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 15px;">
+<span style="font-size: 0.85em; color: #475569; font-weight: bold; text-transform: uppercase;">DỊCH CÂU SAU SANG TIẾNG TRUNG:</span>
+<div style="font-size: 1.8em; font-weight: bold; color: #1E293B; margin-top: 5px;">"{puzzle['meaning']}"</div>
+</div>""",
             unsafe_allow_html=True
         )
+
+        st.markdown("#### 📥 Câu của bạn:")
+        assembled = st.session_state.builder_assembled
         
-        components.html(
-            """
-            <div style="text-align: center; font-family: sans-serif; background: transparent; padding: 10px 0;">
-                <div id="timer-bar-bg" style="width: 100%; height: 16px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-bottom: 8px; border: 1px solid #cbd5e1;">
-                    <div id="timer-bar" style="width: 100%; height: 100%; background: linear-gradient(90deg, #3b82f6, #ef4444); transition: width 0.1s linear;"></div>
-                </div>
-                <div id="timer-text" style="font-size: 1.4em; font-weight: bold; color: #1e293b;">3.0s</div>
-                <button onclick="startTimer()" style="margin-top: 10px; padding: 10px 24px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 6px rgba(37,99,235,0.2); transition: all 0.2s;">⏱️ BẮT ĐẦU ĐẾM NGƯỢC</button>
-            </div>
-            <script>
-            let interval = null;
-            function startTimer() {
-                clearInterval(interval);
-                let timeLeft = 3.0;
-                const bar = document.getElementById("timer-bar");
-                const text = document.getElementById("timer-text");
-                bar.style.width = "100%";
-                text.innerText = timeLeft.toFixed(1) + "s";
+        if not assembled:
+            st.info("💡 Hãy click vào các mảnh ghép từ vựng phía dưới để lắp ghép câu.")
+        else:
+            cols_as = st.columns(len(assembled) + 1)
+            for a_idx, word in enumerate(assembled):
+                with cols_as[a_idx]:
+                    if st.button(f"{word} ❌", key=f"as_word_{a_idx}", use_container_width=True):
+                        assembled.pop(a_idx)
+                        st.session_state.builder_checked = False
+                        st.rerun()
+            with cols_as[-1]:
+                st.caption("👈 Nhấp để xóa")
+
+        st.markdown("#### 🧩 Các mảnh ghép từ vựng:")
+        available_words = st.session_state[scramble_key]
+        
+        cols_av = st.columns(len(available_words))
+        for w_idx, word in enumerate(available_words):
+            with cols_av[w_idx]:
+                is_selected = word in assembled
+                if st.button(word, key=f"av_word_{w_idx}", disabled=is_selected, use_container_width=True, type="secondary" if is_selected else "primary"):
+                    assembled.append(word)
+                    st.session_state.builder_checked = False
+                    st.rerun()
+
+        st.markdown("<br/>", unsafe_allow_html=True)
+        
+        col_actions = st.columns(4)
+        with col_actions[0]:
+            if st.button("🧹 Xóa hết", use_container_width=True, key="builder_clear_btn", disabled=len(assembled) == 0):
+                st.session_state.builder_assembled = []
+                st.session_state.builder_checked = False
+                st.rerun()
                 
-                const start = Date.now();
-                const duration = 3000;
-                interval = setInterval(() => {
-                    const elapsed = Date.now() - start;
-                    const remaining = Math.max(0, duration - elapsed);
-                    timeLeft = remaining / 1000;
-                    text.innerText = timeLeft.toFixed(1) + "s";
-                    bar.style.width = (remaining / duration * 100) + "%";
-                    
-                    if (remaining <= 0) {
-                        clearInterval(interval);
-                        text.innerText = "⏰ HẾT GIỜ!";
-                        try {
-                            const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-84.wav");
-                            audio.volume = 0.5;
-                            audio.play();
-                        } catch(e) {}
-                    }
-                }, 50);
-            }
-            </script>
-            """,
-            height=130,
-        )
+        with col_actions[1]:
+            if st.button("✅ Kiểm tra", use_container_width=True, key="builder_check_btn", type="primary", disabled=len(assembled) < len(puzzle["correct"])):
+                st.session_state.builder_checked = True
+                st.session_state.builder_correct = (assembled == puzzle["correct"])
+                if st.session_state.builder_correct:
+                    st.toast("🎉 Chính xác!", icon="✅")
+                else:
+                    st.toast("❌ Chưa chính xác!", icon="❌")
+                st.rerun()
+                
+        with col_actions[2]:
+            if st.button("⏭️ Câu tiếp theo", use_container_width=True, key="builder_next_btn"):
+                st.session_state.builder_q_idx = (b_idx + 1) % len(builder_puzzles)
+                st.session_state.builder_assembled = []
+                st.session_state.builder_checked = False
+                st.session_state.builder_correct = False
+                next_key = f"scrambled_words_{(b_idx + 1) % len(builder_puzzles)}"
+                if next_key in st.session_state:
+                    del st.session_state[next_key]
+                st.rerun()
+                
+        with col_actions[3]:
+            if st.button("🔄 Bắt đầu lại", use_container_width=True, key="builder_reset_btn"):
+                st.session_state.builder_q_idx = 0
+                st.session_state.builder_assembled = []
+                st.session_state.builder_checked = False
+                st.session_state.builder_correct = False
+                for i in range(len(builder_puzzles)):
+                    k = f"scrambled_words_{i}"
+                    if k in st.session_state:
+                        del st.session_state[k]
+                st.rerun()
+
+        if st.session_state.builder_checked:
+            if st.session_state.builder_correct:
+                st.balloons()
+                st.markdown(
+                    f"""<div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #A7F3D0; border-radius: 12px; padding: 20px; margin-top: 15px;">
+<h4 style="color: #065F46; margin-top: 0; margin-bottom: 5px;">🎉 GHÉP CÂU CHUẨN XÁC HOÀN TOÀN!</h4>
+<div style="font-size: 2.2em; font-weight: bold; color: #047857; margin-bottom: 2px;">{puzzle['full_hanzi']}</div>
+<div style="font-family: 'Courier New', monospace; font-size: 1.3em; font-weight: bold; color: #065F46;">{puzzle['full_pinyin']}</div>
+</div>""",
+                    unsafe_allow_html=True
+                )
+                
+                st.markdown("<br/>🔊 <b>Nghe đọc phát âm chuẩn cả câu:</b>", unsafe_allow_html=True)
+                cols_aud = st.columns([1.5, 4.5])
+                with cols_aud[0]:
+                    render_play_button(puzzle['full_hanzi'], "🔊 Nghe cả câu", key=f"builder_audio_play_{b_idx}")
+            else:
+                st.markdown(
+                    f"""<div style="background: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 12px; padding: 20px; margin-top: 15px; color: #991B1B;">
+<h4 style="margin-top: 0; margin-bottom: 5px; color: #991B1B;">❌ TRẬT TỰ TỪ CHƯA ĐÚNG!</h4>
+<p style="font-size: 0.95em; margin-bottom: 0; color: #7F1D1D;">
+<b>Gợi ý cú pháp:</b> {puzzle['tip']}
+</p>
+</div>""",
+                    unsafe_allow_html=True
+                )
 
 def show_lesson4_exercises(save_progress):
     st.header("🎯 Bài 4: Đấu trường Luyện tập Vận mẫu kép mở rộng")
@@ -1162,4 +1270,135 @@ def show_lesson4_female_comparison(save_progress):
                 del st.session_state.scores["b4_female_vocab"]
             save_progress()
             st.rerun()
+
+def show_lesson4_vocab():
+    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng được phân loại theo 9 vận mẫu kép mở rộng đã học.")
+    
+   
+    
+    tab_ia, tab_ie, tab_iao, tab_iu, tab_ua, tab_uo, tab_uai, tab_ui, tab_ue = st.tabs([
+        "ia (ya)", "ie (ye)", "iao (yao)", "iu (you)", "ua (wa)", "uo (wo)", "uai (wai)", "ui (wei)", "üe (yue)"
+    ])
+    
+    def render_vocab_card(w, key_prefix):
+        card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
+<div style="font-size: 2.2em; font-weight: bold; color: #1e293b;">{w['emoji']} {w['word']}</div>
+<div style="font-family: 'Courier New', monospace; font-size: 1.4em; font-weight: bold; color: #2563eb; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid #dbeafe;">{w['pinyin']}</div>
+</div>
+<div style="font-size: 1.1em; font-weight: bold; margin: 10px 0; color: #334155;">Nghĩa: {w['vietnamese']}</div>
+<hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
+<div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
+<div style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">Ví dụ thực tế:</div>
+<div style="font-size: 1.25em; font-weight: bold; color: #0f172a; margin-bottom: 2px;">{w['example_han']}</div>
+<div style="font-family: 'Courier New', monospace; font-weight: bold; color: #047857; font-size: 0.95em; margin-bottom: 4px;">{w['example_py']}</div>
+<div style="color: #475569; font-style: italic; font-size: 0.9em; border-left: 2px solid #cbd5e1; padding-left: 6px;">{w['example_vi']}</div>
+</div>
+</div>"""
+        cols = st.columns([4.2, 1.8])
+        with cols[0]:
+            st.markdown(card_html, unsafe_allow_html=True)
+        with cols[1]:
+            st.markdown("<br/>", unsafe_allow_html=True)
+            render_play_button(w['word'], "🔊 Phát âm từ", key=f"{key_prefix}_word")
+            render_play_button(w['example_han'], "🔊 Nghe cả câu", key=f"{key_prefix}_ex")
+
+    with tab_ia:
+        st.markdown("### 🏠 Nhóm Vận mẫu: ia / ya")
+        render_vocab_card({
+            "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà, gia đình",
+            "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."
+        }, "ia_jia")
+        render_vocab_card({
+            "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt",
+            "example_han": "鸭子在游泳。", "example_py": "Yāzi zài yóuyõng.", "example_vi": "Con vịt đang bơi."
+        }, "ia_ya")
+
+    with tab_ie:
+        st.markdown("### 👩‍🦰 Nhóm Vận mẫu: ie / ye")
+        render_vocab_card({
+            "emoji": "👩‍🦰", "word": "姐姐", "pinyin": "jiějie", "vietnamese": "Chị gái",
+            "example_han": "我的姐姐很美。", "example_py": "Wǒ de jiějie hěn měi.", "example_vi": "Chị gái tôi rất đẹp."
+        }, "ie_jie")
+        render_vocab_card({
+            "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội",
+            "example_han": "爷爷爱我。", "example_py": "Yéye ài wǒ.", "example_vi": "Ông nội yêu tôi."
+        }, "ie_ye")
+
+    with tab_iao:
+        st.markdown("### 👶 Nhóm Vận mẫu: iao / yao")
+        render_vocab_card({
+            "emoji": "👶", "word": "小", "pinyin": "xiǎo", "vietnamese": "Nhỏ, bé",
+            "example_han": "他很小。", "example_py": "Tā hěn xiǎo.", "example_vi": "Cậu bé ấy rất nhỏ."
+        }, "iao_xiao")
+        render_vocab_card({
+            "emoji": "💊", "word": "药", "pinyin": "yào", "vietnamese": "Thuốc",
+            "example_han": "我吃药。", "example_py": "Wǒ chī yào.", "example_vi": "Tôi uống thuốc."
+        }, "iao_yao")
+
+    with tab_iu:
+        st.markdown("### 6️⃣ Nhóm Vận mẫu: iu / you")
+        render_vocab_card({
+            "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu",
+            "example_han": "我有六个苹果。", "example_py": "Wǒ yǒu liù ge píngguǒ.", "example_vi": "Tôi có 6 quả táo."
+        }, "iu_liu")
+        render_vocab_card({
+            "emoji": "🤝", "word": "有", "pinyin": "yǒu", "vietnamese": "Có",
+            "example_han": "我有一个姐姐。", "example_py": "Wǒ yǒu yī ge jiějie.", "example_vi": "Tôi có một người chị gái."
+        }, "iu_you")
+
+    with tab_ua:
+        st.markdown("### 🌸 Nhóm Vận mẫu: ua / wa")
+        render_vocab_card({
+            "emoji": "🌸", "word": "花", "pinyin": "huā", "vietnamese": "Đóa hoa, hoa",
+            "example_han": "花很美。", "example_py": "Huā hěn měi.", "example_vi": "Hoa rất đẹp."
+        }, "ua_hua")
+        render_vocab_card({
+            "emoji": "🧸", "word": "娃娃", "pinyin": "wáwa", "vietnamese": "Búp bê, em bé",
+            "example_han": "我喜欢娃娃。", "example_py": "Wǒ xǐhuān wáwa.", "example_vi": "Tôi thích búp bê."
+        }, "ua_wawa")
+
+    with tab_uo:
+        st.markdown("### 🙋‍♂️ Nhóm Vận mẫu: uo / wo")
+        render_vocab_card({
+            "emoji": "🙋‍♂️", "word": "我", "pinyin": "wǒ", "vietnamese": "Tôi, tớ, mình",
+            "example_han": "我是学生。", "example_py": "Wǒ shì xuéshēng.", "example_vi": "Tôi là học sinh."
+        }, "uo_wo")
+        render_vocab_card({
+            "emoji": "🇨🇳", "word": "国家", "pinyin": "guójiā", "vietnamese": "Quốc gia, đất nước",
+            "example_han": "我的国家很美。", "example_py": "Wǒ de guójiā hěn měi.", "example_vi": "Đất nước của tôi rất đẹp."
+        }, "uo_guojia")
+
+    with tab_uai:
+        st.markdown("### 🚪 Nhóm Vận mẫu: uai / wai")
+        render_vocab_card({
+            "emoji": "🚪", "word": "外", "pinyin": "wài", "vietnamese": "Ngoài, bên ngoài",
+            "example_han": "外面很美。", "example_py": "Wài mian hěn měi.", "example_vi": "Bên ngoài rất đẹp."
+        }, "uai_wai")
+        render_vocab_card({
+            "emoji": "😎", "word": "帅", "pinyin": "shuài", "vietnamese": "Đẹp trai",
+            "example_han": "他很帅。", "example_py": "Tā hěn shuài.", "example_vi": "Anh ấy rất đẹp trai."
+        }, "uai_shuai")
+
+    with tab_ui:
+        st.markdown("### 💧 Nhóm Vận mẫu: ui / wei")
+        render_vocab_card({
+            "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước",
+            "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."
+        }, "ui_shui")
+        render_vocab_card({
+            "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo",
+            "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"
+        }, "ui_wei")
+
+    with tab_ue:
+        st.markdown("### 🌙 Nhóm Vận mẫu: üe / yue")
+        render_vocab_card({
+            "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng",
+            "example_han": "月亮很亮。", "example_py": "Yuèliang hěn liàng.", "example_vi": "Mặt trăng rất sáng."
+        }, "ue_yue")
+        render_vocab_card({
+            "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học",
+            "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học tiếng Trung."
+        }, "ue_xue")
 

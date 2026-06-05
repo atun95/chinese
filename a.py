@@ -172,7 +172,8 @@ if mode == "📚 Lý thuyết & Bài học":
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
         "Bài 1 - TỪ VỰNG CƠ BẢN", 
-        "Bài 3 - TỪ VỰNG"
+        "Bài 3 - TỪ VỰNG",
+        "Bài 4 - TỪ VỰNG"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -227,6 +228,9 @@ elif menu == "Bài 3.3 - Luyện tập ghép âm":
 
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
+
+elif menu == "Bài 4 - TỪ VỰNG":
+    lesson4.show_lesson4_vocab()
 
 elif menu == "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
