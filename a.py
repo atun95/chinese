@@ -159,14 +159,14 @@ if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
         "Bài 1 - Phiên âm cơ bản", 
         "Bài 2 - Vận mẫu kép & Luyện tập", 
-        "Bài 3 - Phiên âm nâng cao", 
-        "Bài 3 - Quy tắc viết Pinyin",
-        "Bài 3 - Luyện tập ghép âm",
-        "Bài 3 - Văn hóa gọi tên & Cấu trúc câu",
-        "Bài 3 - Hội thoại thực hành",
-        "Bài 4 - Vận mẫu kép mở rộng",
-        "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)",
-        "Bài 4 - Nét chữ Hán cơ bản (đang khóa)"
+        "Bài 3.1 - Phiên âm nâng cao", 
+        "Bài 3.2 - Quy tắc viết Pinyin",
+        "Bài 3.3 - Luyện tập ghép âm",
+        "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
+        "Bài 3.5 - Hội thoại thực hành",
+        "Bài 4.1 - Vận mẫu kép mở rộng",
+        "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
+        "Bài 4.3 - Nét chữ Hán cơ bản"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -178,7 +178,7 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 1",
         "Bài tập Bài 2",
         "Bài tập Bài 3",
-        "Bài tập Bài 4 (đang khóa)"
+        "Bài tập Bài 4"
     ])
 else:
     menu = "Bảng điểm"
@@ -215,41 +215,38 @@ elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
-elif menu == "Bài 3 - Phiên âm nâng cao":
+elif menu == "Bài 3.1 - Phiên âm nâng cao":
     lesson3.show_lesson3_pinyin()
 
-elif menu == "Bài 3 - Quy tắc viết Pinyin":
+elif menu == "Bài 3.2 - Quy tắc viết Pinyin":
     lesson3.show_lesson3_pinyin_rules()
 
-elif menu == "Bài 3 - Luyện tập ghép âm":
+elif menu == "Bài 3.3 - Luyện tập ghép âm":
     lesson3.show_lesson3_practice(add_tones)
 
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
 
-elif menu == "Bài 3 - Văn hóa gọi tên & Cấu trúc câu":
+elif menu == "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
 
-elif menu == "Bài 3 - Hội thoại thực hành":
+elif menu == "Bài 3.5 - Hội thoại thực hành":
     lesson3.show_lesson3_dialogues()
 
 elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
-elif menu == "Bài 4 - Vận mẫu kép mở rộng":
+elif menu == "Bài 4.1 - Vận mẫu kép mở rộng":
     lesson4.show_lesson4_finals()
 
-elif menu == "Bài 4 - Phân biệt từ vựng chỉ Nữ giới (đang khóa)":
-    if not teacher_unlock: st.warning("Đang khóa.")
-    else: lesson4.show_lesson4_female_comparison(save_progress)
+elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
+    lesson4.show_lesson4_female_comparison(save_progress)
 
-elif menu == "Bài 4 - Nét chữ Hán cơ bản (đang khóa)":
-    if not teacher_unlock: st.warning("Đang khóa.")
-    else: lesson4.show_lesson4_hanzi()
+elif menu == "Bài 4.3 - Nét chữ Hán cơ bản":
+    lesson4.show_lesson4_hanzi()
 
-elif menu == "Bài tập Bài 4 (đang khóa)":
-    if not teacher_unlock: st.warning("Đang khóa.")
-    else: lesson4.show_lesson4_exercises(save_progress)
+elif menu == "Bài tập Bài 4":
+    lesson4.show_lesson4_exercises(save_progress)
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("#### 📝 Ghi chú giáo viên")
