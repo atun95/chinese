@@ -238,11 +238,11 @@ def show_lesson4_finals():
         
     with cols_sel[2]:
         tones_list = [
-            "Thanh nhẹ (Không dấu) - e.g. a",
-            "Thanh 1 (Ngang) - e.g. ā",
-            "Thanh 2 (Sắc) - e.g. á",
-            "Thanh 3 (Hỏi) - e.g. ǎ",
-            "Thanh 4 (Nặng) - e.g. à"
+            "Thanh nhẹ",
+            "Thanh 1",
+            "Thanh 2",
+            "Thanh 3",
+            "Thanh 4"
         ]
         sel_tone = st.selectbox("Chọn Thanh điệu (Tone):", tones_list, index=1, key="sandbox_tone")
         
@@ -370,11 +370,11 @@ def show_lesson4_classroom_arena():
         st.markdown("### 🕵️ Tìm kiếm Kẻ mạo danh Chính tả")
         
         imposter_questions = [
-            {"title": "Thử thách 1: j + üe + thanh 2 (sắc)", "options": ["1. jüé", "2. qué", "3. jué"], "correct_idx": 2, "explain": "Quy tắc 3: Sau thanh mẫu mặt lưỡi 'j, q, x', üe lược bỏ dấu hai chấm viết thành ue (nhưng vẫn giữ nguyên cách đọc tròn môi)."},
-            {"title": "Thử thách 2: sh + uei + thanh 3 (hỏi)", "options": ["1. shuǐ", "2. shueǐ", "3. shǔi"], "correct_idx": 0, "explain": "Quy tắc 1: 'uei' khi đi sau thanh mẫu viết rút gọn thành 'ui'. Dấu thanh điệu đặt trên chữ cái 'i' đứng sau."},
-            {"title": "Thử thách 3: Vận mẫu 'uei' đứng một mình không có thanh mẫu", "options": ["1. uēi", "2. wei", "3. yui"], "correct_idx": 1, "explain": "Quy tắc 1: Khi đứng độc lập không có thanh mẫu đi kèm, 'uei' viết ở dạng đầy đủ là 'wei'."},
-            {"title": "Thử thách 4: y + ia + thanh 1 (ngang) (con vịt)", "options": ["1. yia", "2. ya", "3. iā"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'i' đứng độc lập không có thanh mẫu đi kèm, 'i' được viết thành 'y' (ia viết thành ya)."},
-            {"title": "Thử thách 5: w + uo + thanh 3 (hỏi) (tôi)", "options": ["1. uǒ", "2. wǒ", "3. wuǒ"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'u' đứng độc lập không có thanh mẫu đi kèm, 'u' được viết thành 'w' (uo viết thành wo)."}
+            {"title": "Thử thách 1: j + üe + thanh 2", "options": ["1. jüé", "2. qué", "3. jué"], "correct_idx": 2, "explain": "Quy tắc 3: Sau thanh mẫu mặt lưỡi 'j, q, x', üe lược bỏ dấu hai chấm viết thành ue (nhưng vẫn giữ nguyên cách đọc tròn môi)."},
+            {"title": "Thử thách 2: sh + uei + thanh 3", "options": ["1. shuǐ", "2. shueǐ", "3. shǔi"], "correct_idx": 0, "explain": "Quy tắc 1: 'uei' khi đi sau thanh mẫu viết rút gọn thành 'ui'. Dấu thanh điệu đặt trên chữ cái 'i' đứng sau."},
+            {"title": "Thử thách 3: Vận mẫu 'uei' đứng một mình", "options": ["1. uēi", "2. wei", "3. yui"], "correct_idx": 1, "explain": "Quy tắc 1: Khi đứng độc lập không có thanh mẫu đi kèm, 'uei' viết ở dạng đầy đủ là 'wei'."},
+            {"title": "Thử thách 4: y + ia + thanh 1  (con vịt)", "options": ["1. yia", "2. ya", "3. iā"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'i' đứng độc lập không có thanh mẫu đi kèm, 'i' được viết thành 'y' (ia viết thành ya)."},
+            {"title": "Thử thách 5: w + uo + thanh 3  (tôi)", "options": ["1. uǒ", "2. wǒ", "3. wuǒ"], "correct_idx": 1, "explain": "Quy tắc viết Pinyin: Khi vận mẫu bắt đầu bằng 'u' đứng độc lập không có thanh mẫu đi kèm, 'u' được viết thành 'w' (uo viết thành wo)."}
         ]
         
         if "imposter_q_idx" not in st.session_state:
@@ -646,9 +646,7 @@ def show_lesson4_classroom_arena():
 
 def show_lesson4_exercises(save_progress):
     st.header("🎯 Bài 4: Đấu trường Luyện tập Vận mẫu kép mở rộng")
-    st.write(
-        "Chào mừng bạn đến với Đấu trường Thực hành! Hãy vượt qua 3 thử thách tương tác dưới đây để làm chủ hoàn toàn các vận mẫu kép mở rộng và quy tắc chính tả nhé."
-    )
+   
     
     st.markdown(
         """
@@ -912,10 +910,10 @@ def show_lesson4_exercises(save_progress):
                 sel_a_final = st.selectbox("Chọn Vận mẫu gốc:", a_finals, key=f"assem_final_{cur_idx}")
             with cols_assembly[2]:
                 a_tones = [
-                    "Thanh 1 (Ngang) - e.g. ā",
-                    "Thanh 2 (Sắc) - e.g. á",
-                    "Thanh 3 (Hỏi) - e.g. ǎ",
-                    "Thanh 4 (Nặng) - e.g. à"
+                    "Thanh 1",
+                    "Thanh 2 ",
+                    "Thanh 3 ",
+                    "Thanh 4 "
                 ]
                 sel_a_tone = st.selectbox("Chọn Thanh điệu:", a_tones, key=f"assem_tone_{cur_idx}")
                 
@@ -940,7 +938,7 @@ def show_lesson4_exercises(save_progress):
                 with col_actions[0]:
                     render_play_button(assembled_pinyin, "🔊 Phát âm thử âm tiết", key=f"assem_play_{cur_idx}", type="secondary")
                 with col_actions[1]:
-                    if st.button("🚀 Kiểm tra & Xác nhận Lắp ráp", type="primary", use_container_width=True, key=f"assem_check_{cur_idx}"):
+                    if st.button("🚀 Kiểm tra & Xác nhận", type="primary", use_container_width=True, key=f"assem_check_{cur_idx}"):
                         if assembled_pinyin == item["target"]:
                             st.success(f"🎉 Tuyệt vời! Bạn đã lắp ráp chính xác từ '{item['meaning']}' thành công là **{assembled_pinyin}**!")
                             st.balloons()
