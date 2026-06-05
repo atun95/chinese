@@ -219,8 +219,8 @@ def show_lesson3_practice(add_tones):
                         for t in add_tones(combo):
                             col_t, col_btn = st.columns([2, 1])
                             col_t.write(f"- {t}")
-                            if col_btn.button("🔊", key=f"btn_p_{init}_{combo}_{t}"):
-                                play_audio(t)
+                            with col_btn:
+                                render_play_button(t, "🔊", key=f"btn_p_{init}_{combo}_{t}", height=45)
             else:
                 r_cols[i+1].write("")
 
@@ -419,8 +419,7 @@ def render_dialogue_line(speaker, color, chinese, pinyin, meaning, idx):
     with col_content:
         st.markdown(f"<span style='font-size: 1.1em; font-weight: bold;'>{chinese}</span> &nbsp;&nbsp; <span style='font-family: monospace; color: #2563eb; font-size: 0.9em; background-color: #eff6ff; padding: 2px 6px; border-radius: 4px;'>{pinyin}</span><br/><span style='color: #64748b; font-style: italic; font-size: 0.9em;'>{meaning}</span>", unsafe_allow_html=True)
     with col_audio:
-        if st.button("🔊", key=f"audio_dlg_{idx}"):
-            play_audio(chinese)
+        render_play_button(chinese, "🔊", key=f"audio_dlg_{idx}")
 
 def show_lesson3_dialogues():
     render_lesson_intro("📚 Bài 3: Hội thoại thực hành", "Ứng dụng các thanh mẫu nâng cao, quy tắc viết bính âm và từ vựng đã học vào các ngữ cảnh hội thoại giao tiếp 2 người, 3 người và 4 người.")
@@ -550,8 +549,7 @@ def show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
         score_b3_ls = 0
         for idx, item in enumerate(B3_QUIZ_LISTENING):
             st.write(f"**Câu {idx+1}:** Nghe từ '{item['q']}'")
-            if st.button("🔊 Nghe mẫu phát âm", key=f"b3_listen_btn_{idx}"):
-                play_audio(item["hanzi"])
+            render_play_button(item["hanzi"], "🔊 Nghe mẫu phát âm", key=f"b3_listen_btn_{idx}")
             choices = shuffled_options(item["choices"], f"b3_ls-{idx}")
             if choices[0] == item["answer"] and len(choices) > 1:
                 choices[0], choices[1] = choices[1], choices[0]

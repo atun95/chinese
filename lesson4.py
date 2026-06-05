@@ -95,14 +95,27 @@ def show_lesson4_finals():
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         .rule-badge {
-            background-color: #f1f5f9;
-            color: #475569;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 0.88em;
+            background-color: #fffbeb;
+            color: #451a03;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.9em;
             font-weight: 500;
-            margin-top: 10px;
+            margin-top: 12px;
             margin-bottom: 5px;
+            border: 1px solid #fef3c7;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.05);
+        }
+        .spelling-highlight {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #fde047;
+            margin: 0 2px;
+            display: inline-block;
         }
         .final-letter {
             font-size: 2.2em;
@@ -111,6 +124,7 @@ def show_lesson4_finals():
             line-height: 1;
         }
         </style>
+        
         """,
         unsafe_allow_html=True
     )
@@ -132,7 +146,7 @@ def show_lesson4_finals():
                     <div style="font-size: 1.05em; font-weight: bold; margin-bottom: 8px; color: #0f172a;">👉 Đọc nhanh: {item['hdsd']}</div>
                     <p style="color: #334155; font-size: 0.95em; line-height: 1.5; margin-bottom: 8px;"><b>Cách đọc chi tiết:</b> {item['cach_doc_sau']}</p>
                     <div style="font-size: 0.92em; color: #475569; margin-bottom: 10px;">📣 <b>Âm tương đương:</b> {item['tuong_duong']}</div>
-                    <div class="rule-badge" style="border-left: 3px solid {item['border_color']}; background-color: rgba(255, 255, 255, 0.7);">
+                    <div class="rule-badge" style="border-left: 5px solid {item['border_color']};">
                         ⚠️ <b>Quy tắc chính tả:</b> {item['luu_y']}
                     </div>
                     <div style="background: rgba(255,255,255,0.85); border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0; margin-top: 12px;">
@@ -148,18 +162,16 @@ def show_lesson4_finals():
                 st.markdown(card_html, unsafe_allow_html=True)
             with cols[1]:
                 st.markdown("<br/>", unsafe_allow_html=True)
-                if st.button(f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_main_{item['chu']}_{idx}", use_container_width=True):
-                    play_audio(item["vd_han"])
+                render_play_button(item["vd_han"], f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_main_{item['chu']}_{idx}")
                 
                 st.markdown("<div style='font-size:0.8em; font-weight:bold; color:#64748b; margin-top:12px; margin-bottom:4px;'>LUYỆN TẬP ÂM KHÁC:</div>", unsafe_allow_html=True)
                 for s_idx, sub in enumerate(item["more_examples"]):
                     sub_key = f"btn_sub_{item['chu']}_{idx}_{s_idx}"
-                    if st.button(f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key, use_container_width=True):
-                        play_audio(sub["han"])
+                    render_play_button(sub["han"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
             st.markdown("<br/>", unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("🔑 2. Bí mật chính tả Pinyin (Spelling Secrets)")
+    st.subheader("🔑 2. Bí mật chính tả Pinyin")
     st.write(
         "Đối với các vận mẫu kép mở rộng, có **3 quy tắc chính tả cực kỳ quan trọng** mà bất kỳ người học tiếng Trung nào cũng phải nằm lòng để tránh nhầm lẫn khi đọc viết:"
     )
@@ -167,29 +179,41 @@ def show_lesson4_finals():
     st.markdown(
         """
         <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border-left: 6px solid #D97706; border-radius: 12px; padding: 18px; border: 1px solid #FDE68A; margin-bottom: 20px;">
-            <h4 style="color: #92400E; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 1: Viết gọn của -iu và -ui</h4>
-            <p style="color: #78350F; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
-                Bản chất của <b>iu</b> là <b>iou</b>, và <b>ui</b> là <b>uei</b>. 
-                <br/>• Khi có thanh mẫu đứng trước, ta viết rút gọn thành <b>iu</b> và <b>ui</b> (Ví dụ: <i>l + iou ➔ liù</i>; <i>sh + uei ➔ shuǐ</i>).
-                <br/>• Khi không có thanh mẫu đứng trước, ta viết ở dạng đầy đủ là <b>you</b> và <b>wei</b>.
-            </p>
+            <h4 style="color: #92400E; margin-top: 0; margin-bottom: 12px;">🌟 Quy tắc 1: Viết gọn của -iu và -ui</h4>
+            <div style="color: #78350F; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
+                Bản chất: Vận mẫu <span class="spelling-highlight">iu</span> gốc là <b>iou</b>, còn <span class="spelling-highlight">ui</span> gốc là <b>uei</b>. Cách viết thay đổi tùy theo việc đi kèm thanh mẫu:
+                <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="background: rgba(255, 255, 255, 0.6); padding: 12px; border-radius: 8px; border: 1px dashed #FCD34D;">
+                        <b style="color: #92400E;">1. Có thanh mẫu đứng trước:</b>
+                        <br/><i>(Lược bỏ chữ cái ở giữa 'o' hoặc 'e')</i>
+                        <br/>• <span class="spelling-highlight">iou</span> ➔ <span class="spelling-highlight">iu</span> (Ví dụ: l + iou ➔ <b>liù</b>)
+                        <br/>• <span class="spelling-highlight">uei</span> ➔ <span class="spelling-highlight">ui</span> (Ví dụ: sh + uei ➔ <b>shuǐ</b>)
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.6); padding: 12px; border-radius: 8px; border: 1px dashed #FCD34D;">
+                        <b style="color: #92400E;">2. Đứng độc lập (Không có thanh mẫu):</b>
+                        <br/><i>(Viết ở dạng đầy đủ, đổi i ➔ y, u ➔ w)</i>
+                        <br/>• <span class="spelling-highlight">iou</span> ➔ <span class="spelling-highlight">you</span>
+                        <br/>• <span class="spelling-highlight">uei</span> ➔ <span class="spelling-highlight">wei</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-left: 6px solid #3B82F6; border-radius: 12px; padding: 18px; border: 1px solid #BFDBFE; margin-bottom: 20px;">
             <h4 style="color: #1E40AF; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 2: Biến đổi âm đệm khi đứng một mình</h4>
             <p style="color: #1E3A8A; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
-                Khi các vận mẫu này không có thanh mẫu đi kèm (đứng độc lập), ta không được viết trực tiếp chữ cái <b>i</b> hay <b>u</b> ở đầu từ:
-                <br/>• Nguyên âm đệm <b>i</b> sẽ chuyển thành âm bán nguyên âm <b>y</b> (Ví dụ: <i>ia ➔ ya</i>, <i>ie ➔ ye</i>, <i>iao ➔ yao</i>).
-                <br/>• Nguyên âm đệm <b>u</b> sẽ chuyển thành âm bán nguyên âm <b>w</b> (Ví dụ: <i>ua ➔ wa</i>, <i>uo ➔ wo</i>, <i>uai ➔ wai</i>).
-                <br/>• Nguyên âm đệm <b>ü</b> sẽ viết thêm chữ <b>y</b> đằng trước và bỏ dấu 2 chấm (Ví dụ: <i>üe ➔ yue</i>).
+                Khi các vận mẫu này không có thanh mẫu đi kèm (đứng độc lập), ta không được viết trực tiếp chữ cái <span class="spelling-highlight">i</span> hay <span class="spelling-highlight">u</span> ở đầu từ:
+                <br/>• Nguyên âm đệm <span class="spelling-highlight">i</span> sẽ chuyển thành âm bán nguyên âm <span class="spelling-highlight">y</span> (Ví dụ: <i>ia ➔ ya</i>, <i>ie ➔ ye</i>, <i>iao ➔ yao</i>).
+                <br/>• Nguyên âm đệm <span class="spelling-highlight">u</span> sẽ chuyển thành âm bán nguyên âm <span class="spelling-highlight">w</span> (Ví dụ: <i>ua ➔ wa</i>, <i>uo ➔ wo</i>, <i>uai ➔ wai</i>).
+                <br/>• Nguyên âm đệm <span class="spelling-highlight">ü</span> sẽ viết thêm chữ <span class="spelling-highlight">y</span> đằng trước và bỏ dấu 2 chấm (Ví dụ: <i>üe ➔ yue</i>).
             </p>
         </div>
         
         <div style="background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%); border-left: 6px solid #8B5CF6; border-radius: 12px; padding: 18px; border: 1px solid #DDD6FE; margin-bottom: 25px;">
             <h4 style="color: #5B21B6; margin-top: 0; margin-bottom: 10px;">🌟 Quy tắc 3: Triệt tiêu dấu hai chấm của âm tròn môi ü</h4>
             <p style="color: #4C1D95; font-size: 0.95em; line-height: 1.6; margin-bottom: 0;">
-                Vận mẫu tròn môi <b>üe</b> khi đi sau nhóm thanh mẫu mặt lưỡi <b>j, q, x</b> và âm đệm <b>y</b> sẽ được lược bỏ hoàn toàn dấu hai chấm trên đầu, chỉ viết là <b>ue</b> nhưng cách đọc vẫn giữ nguyên âm tròn môi /ü/ (Ví dụ: <i>j + üe ➔ jué</i>, <i>q + üe ➔ què</i>, <i>x + üe ➔ xuě</i>).
-                <br/>⚠️ <i>Lưu ý:</i> Đối với hai thanh mẫu uốn lưỡi <b>n, l</b>, dấu hai chấm <b>bắt buộc giữ nguyên</b> (<i>nüe</i>, <i>lüe</i>) để phân biệt với âm thường <i>nue</i>, <i>lue</i> (nếu có).
+                Vận mẫu tròn môi <span class="spelling-highlight">üe</span> khi đi sau nhóm thanh mẫu mặt lưỡi <span class="spelling-highlight">j, q, x</span> và âm đệm <span class="spelling-highlight">y</span> sẽ được lược bỏ hoàn toàn dấu hai chấm trên đầu, chỉ viết là <span class="spelling-highlight">ue</span> nhưng cách đọc vẫn giữ nguyên âm tròn môi /ü/ (Ví dụ: <i>j + üe ➔ jué</i>, <i>q + üe ➔ què</i>, <i>x + üe ➔ xuě</i>).
+                <br/>⚠️ <i>Lưu ý:</i> Đối với hai thanh mẫu uốn lưỡi <span class="spelling-highlight">n, l</span>, dấu hai chấm <b>bắt buộc giữ nguyên</b> (<i>nüe</i>, <i>lüe</i>) .
             </p>
         </div>
         """,
@@ -197,7 +221,7 @@ def show_lesson4_finals():
     )
 
     st.markdown("---")
-    st.subheader("🎮 3. Công cụ Ghép âm Tương tác (Spelling Sandbox)")
+    st.subheader("🎮 3. Công cụ Ghép âm Tương tác ")
     st.write(
         "Hãy thử sức tự mình tạo ra các âm tiết tiếng Trung! Hãy chọn một **Thanh mẫu**, một **Vận mẫu kép mở rộng** và một **Thanh điệu** dưới đây. Hệ thống sẽ tự động ghép âm chuẩn xác theo quy tắc Pinyin và cho bạn nghe phát âm trực tiếp!"
     )
@@ -256,8 +280,7 @@ def show_lesson4_finals():
         st.markdown("<br/>", unsafe_allow_html=True)
         col_btn = st.columns([1, 2, 1])
         with col_btn[1]:
-            if st.button("🔊 Phát âm Âm tiết vừa ghép", type="primary", use_container_width=True, key="sandbox_play_btn"):
-                play_audio(spelled_res)
+            render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="sandbox_play_btn", type="primary")
 
 def show_lesson4_exercises(save_progress):
     st.header("📝 Bài 4: Bài tập vận mẫu kép mở rộng")
@@ -350,10 +373,8 @@ def show_lesson4_female_comparison(save_progress):
             st.markdown(card_html, unsafe_allow_html=True)
         with cols[1]:
             st.markdown("<br/>", unsafe_allow_html=True)
-            if st.button("🔊 Phát âm từ", key=f"btn_word_{w['word']}_{idx}", use_container_width=True):
-                play_audio(w['word'])
-            if st.button("🔊 Nghe ví dụ", key=f"btn_ex_{w['word']}_{idx}", use_container_width=True):
-                play_audio(w['example_han'])
+            render_play_button(w['word'], "🔊 Phát âm từ", key=f"btn_word_{w['word']}_{idx}")
+            render_play_button(w['example_han'], "🔊 Nghe ví dụ", key=f"btn_ex_{w['word']}_{idx}")
             st.caption("<div style='text-align: center; color: #94a3b8; font-size:0.8em;'>Bấm để nghe giọng Bắc Kinh chuẩn</div>", unsafe_allow_html=True)
             
     st.markdown("---")

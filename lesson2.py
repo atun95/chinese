@@ -52,7 +52,7 @@ def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
         score_b2_ls = 0
         for i, q in enumerate(B2_QUIZ_LISTENING):
             st.write(f"**Câu {i+1}:** Nghe từ '{q['q']}' và chọn pinyin đúng")
-            if st.button(f"🔊 Nghe mẫu", key=f"b2_listen_{i}"): play_audio(q["hanzi"])
+            render_play_button(q["hanzi"], "🔊 Nghe mẫu", key=f"b2_listen_{i}")
             key = f"b2_tone_q_{i}"
             choices = shuffled_options(q["choices"], f"b2_ls-{i}")
             if choices[0] == q["answer"] and len(choices) > 1:

@@ -116,8 +116,7 @@ def show_lesson1_intro():
                 """,
                 unsafe_allow_html=True,
             )
-            if st.button("🔊 Nghe", key=f"btn_neutral_{idx}"):
-                play_audio(ex['word'])
+            render_play_button(ex['word'], "🔊 Nghe", key=f"btn_neutral_{idx}")
 
     st.markdown("---")
     st.markdown("#### 2.3. Quy tắc biến điệu thanh 3 (三声变调 - Sānshēng biàndiào)")
@@ -143,8 +142,7 @@ def show_lesson1_intro():
                 <span style="font-size: 0.8rem; color: #94a3b8;">(Xin chào)</span>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("🔊 Nghe ní hǎo", key="btn_bd_1a"):
-                play_audio("你好")
+            render_play_button("你好", "🔊 Nghe ní hǎo", key="btn_bd_1a")
                 
         with col_ex_1b:
             st.markdown("""
@@ -154,8 +152,7 @@ def show_lesson1_intro():
                 <span style="font-size: 0.8rem; color: #94a3b8;">(Rất tốt)</span>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("🔊 Nghe hén hǎo", key="btn_bd_1b"):
-                play_audio("很好")
+            render_play_button("很好", "🔊 Nghe hén hǎo", key="btn_bd_1b")
 
     with c2:
         st.markdown("""
@@ -176,8 +173,7 @@ def show_lesson1_intro():
                 <span style="font-size: 0.8rem; color: #94a3b8;">(Rất nhớ bạn)</span>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("🔊 Nghe háo xiáng nǐ", key="btn_bd_2a"):
-                play_audio("好想你")
+            render_play_button("好想你", "🔊 Nghe háo xiáng nǐ", key="btn_bd_2a")
                 
         with col_ex_2b:
             st.markdown("""
@@ -187,8 +183,7 @@ def show_lesson1_intro():
                 <span style="font-size: 0.8rem; color: #94a3b8;">(Tôi rất khỏe)</span>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("🔊 Nghe wó hén hǎo", key="btn_bd_2b"):
-                play_audio("我很好")
+            render_play_button("我很好", "🔊 Nghe wó hén hǎo", key="btn_bd_2b")
 
     st.write("")
     st.markdown("""
@@ -209,8 +204,7 @@ def show_lesson1_intro():
             <span style="font-size: 0.8rem; color: #94a3b8;">(Tôi cũng rất khỏe)</span>
         </div>
         """, unsafe_allow_html=True)
-        if st.button("🔊 Nghe wó yě hén hǎo", key="btn_bd_3"):
-            play_audio("我也很好")
+        render_play_button("我也很好", "🔊 Nghe wó yě hén hǎo", key="btn_bd_3")
 
     st.markdown("""
     <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-top: 15px;">
@@ -260,7 +254,7 @@ def show_lesson1_exercises(save_progress, save_score_row, load_all_scores):
         score_5 = 0
         for i, q in enumerate(B1_QUIZ_TONE):
             st.write(f"**Câu {i+1}:** Nghe và chọn pinyin đúng")
-            if st.button(f"🔊 Nghe mẫu", key=f"listen_{i}"): play_audio(q["hanzi"])
+            render_play_button(q["hanzi"], "🔊 Nghe mẫu", key=f"listen_{i}")
             key = f"tone_q_{i}"
             choices = q["choices"][:]
             if choices[0] == q["answer"] and len(choices) > 1:
