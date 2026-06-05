@@ -282,6 +282,207 @@ def show_lesson4_finals():
         with col_btn[1]:
             render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="sandbox_play_btn", type="primary")
 
+def show_lesson4_classroom_arena():
+    render_lesson_intro("📚 Bài 4.3: Đấu trường Luyện tập (Tương tác Lớp học)", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
+    
+    st.write(
+        "Giáo viên có thể chia sẻ màn hình và điều phối các trò chơi dưới đây để giúp học viên luyện tập trực tiếp và tương tác sôi nổi trong giờ học!"
+    )
+    
+    tab_game1, tab_game2, tab_game3 = st.tabs([
+        "🎲 1. Vòng quay May mắn (Random Call)",
+        "🕵️ 2. Kẻ mạo danh Chính tả (Spot the Imposter)",
+        "⚡ 3. Đua tốc độ phản xạ (Rapid Fire)"
+    ])
+    
+    # ------------------ GAME 1: RANDOM CALL ------------------
+    with tab_game1:
+        st.markdown("### 🎲 Thử thách Gọi tên Ngẫu nhiên")
+        st.write("Giáo viên nhập danh sách học viên, bấm quay để hệ thống chọn ngẫu nhiên 1 học viên đọc 1 âm tiết ngẫu nhiên.")
+        
+        student_list_raw = st.text_input("Nhập tên các học viên (cách nhau bằng dấu phẩy):", "Lan, Nam, Vy, Tuấn, Minh, Khánh", key="classroom_students_input")
+        students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
+        
+        syllable_pool = ["yā", "yě", "yáo", "yòu", "wā", "wǒ", "wài", "wèi", "yuè", "qià", "jiě", "huā", "shuǐ", "liù", "jué", "nüè", "lüè"]
+        
+        if "arena_word" not in st.session_state:
+            st.session_state.arena_word = syllable_pool[0]
+        if "arena_student" not in st.session_state:
+            st.session_state.arena_student = "Học viên"
+            
+        if st.button("🎲 QUAY NGẪU NHIÊN (Chọn Học viên & Từ)", type="primary", use_container_width=True):
+            st.session_state.arena_word = random.choice(syllable_pool)
+            if students:
+                st.session_state.arena_student = random.choice(students)
+            else:
+                st.session_state.arena_student = "Học viên"
+            st.rerun()
+            
+        st.markdown(
+            f"""
+            <div style="background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 2px solid #FDE68A; border-radius: 16px; padding: 30px; text-align: center; margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <div style="font-size: 1.1em; color: #92400E; font-weight: bold; text-transform: uppercase;">🌟 Lượt đọc của học viên:</div>
+                <div style="font-size: 2.8em; font-weight: 800; color: #D97706; margin: 10px 0;">👉 {st.session_state.arena_student} 👈</div>
+                <div style="font-size: 0.95em; color: #78350F; font-weight: 500; margin-bottom: 15px;">Hãy phát âm thật to từ khóa dưới đây:</div>
+                <div style="font-family: 'Courier New', monospace; font-size: 4em; font-weight: bold; color: #1e293b; background: white; padding: 15px 30px; display: inline-block; border-radius: 12px; border: 2px solid #FCD34D; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">{st.session_state.arena_word}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        col_btns = st.columns([1, 1])
+        with col_btns[0]:
+            render_play_button(st.session_state.arena_word, "🔊 Phát âm chuẩn bản xứ", key="arena_play_native", type="secondary")
+        with col_btns[1]:
+            if st.button("🎉 Đọc đúng! Thưởng điểm", use_container_width=True, key="arena_reward_btn"):
+                st.balloons()
+                st.success(f"Cộng 10 điểm thưởng cho bạn **{st.session_state.arena_student}**! 🏆")
+
+    # ------------------ GAME 2: IMPOSTER ------------------
+    with tab_game2:
+        st.markdown("### 🕵️ Tìm kiếm Kẻ mạo danh Chính tả")
+        st.write("Giáo viên yêu cầu học viên bình luận số thứ tự của từ viết ĐÚNG CHÍNH TẢ. Bấm nút Tiết lộ để xem đáp án.")
+        
+        imposter_questions = [
+            {"title": "Thử thách 1: j + üe + thanh 2 (sắc)", "options": ["1. jüé", "2. qué", "3. jué"], "correct_idx": 2, "explain": "Quy tắc 3: Sau thanh mẫu mặt lưỡi 'j, q, x', üe lược bỏ dấu hai chấm viết thành ue (nhưng vẫn giữ nguyên cách đọc tròn môi)."},
+            {"title": "Thử thách 2: sh + uei + thanh 3 (hỏi)", "options": ["1. shuǐ", "2. shueǐ", "3. shǔi"], "correct_idx": 0, "explain": "Quy tắc 1: 'uei' khi đi sau thanh mẫu viết rút gọn thành 'ui'. Dấu thanh điệu đặt trên chữ cái 'i' đứng sau."},
+            {"title": "Thử thách 3: Vận mẫu 'uei' đứng một mình không có thanh mẫu", "options": ["1. uēi", "2. wei", "3. yui"], "correct_idx": 1, "explain": "Quy tắc 1: Khi đứng độc lập không có thanh mẫu đi kèm, 'uei' viết ở dạng đầy đủ là 'wei'."}
+        ]
+        
+        if "imposter_q_idx" not in st.session_state:
+            st.session_state.imposter_q_idx = 0
+        if "imposter_revealed" not in st.session_state:
+            st.session_state.imposter_revealed = False
+            
+        q_idx = st.session_state.imposter_q_idx
+        q_data = imposter_questions[q_idx]
+        
+        st.markdown(f"#### {q_data['title']}")
+        
+        cols_imp = st.columns(3)
+        for idx, opt in enumerate(q_data["options"]):
+            with cols_imp[idx]:
+                if st.session_state.imposter_revealed:
+                    if idx == q_data["correct_idx"]:
+                        border_color = "#10B981"
+                        bg_color = "#ECFDF5"
+                        label_icon = "✅ ĐÚNG"
+                    else:
+                        border_color = "#EF4444"
+                        bg_color = "#FEF2F2"
+                        label_icon = "❌ MẠO DANH"
+                else:
+                    border_color = "#cbd5e1"
+                    bg_color = "#f8fafc"
+                    label_icon = "❓ Đang chờ"
+                    
+                st.markdown(
+                    f"""
+                    <div style="border: 2px solid {border_color}; background-color: {bg_color}; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s;">
+                        <span style="font-weight: bold; color: {border_color}; font-size: 0.85em; text-transform: uppercase;">{label_icon}</span>
+                        <div style="font-size: 1.8em; font-weight: bold; color: #1e293b; margin-top: 10px; font-family: 'Courier New', monospace;">{opt.split('. ')[1]}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        col_imp_actions = st.columns([1, 1, 1])
+        with col_imp_actions[0]:
+            if st.button("👁️ Tiết lộ đáp án", use_container_width=True, key="reveal_imp_btn"):
+                st.session_state.imposter_revealed = True
+                st.rerun()
+        with col_imp_actions[1]:
+            if st.button("⏭️ Thử thách tiếp theo", use_container_width=True, key="next_imp_btn"):
+                st.session_state.imposter_q_idx = (q_idx + 1) % len(imposter_questions)
+                st.session_state.imposter_revealed = False
+                st.rerun()
+        with col_imp_actions[2]:
+            if st.button("🔄 Khởi động lại", use_container_width=True, key="reset_imp_btn"):
+                st.session_state.imposter_q_idx = 0
+                st.session_state.imposter_revealed = False
+                st.rerun()
+                
+        if st.session_state.imposter_revealed:
+            st.markdown(
+                f"""
+                <div style="background-color: #EFF6FF; border-left: 6px solid #3B82F6; border-radius: 10px; padding: 15px; margin-top: 15px;">
+                    <b style="color: #1E40AF;">💡 Giải thích chính tả:</b><br/>
+                    <span style="color: #1E3A8A; font-size: 0.95em;">{q_data['explain']}</span>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+    # ------------------ GAME 3: RAPID FIRE ------------------
+    with tab_game3:
+        st.markdown("### ⚡ Thử thách Đọc trơn Phản xạ nhanh (Rapid Fire)")
+        st.write("Học viên phải đọc trơn một chuỗi 3 từ ghép ngẫu nhiên trước khi thời gian 3 giây đếm ngược kết thúc!")
+        
+        if "rapid_chain" not in st.session_state:
+            st.session_state.rapid_chain = ["huā", "shuǐ", "liù"]
+            
+        if st.button("⚡ Tạo chuỗi phản xạ ngẫu nhiên mới", type="primary", use_container_width=True, key="rapid_gen_btn"):
+            st.session_state.rapid_chain = random.sample(syllable_pool, 3)
+            st.rerun()
+            
+        chain_str = " ➔ ".join(st.session_state.rapid_chain)
+        
+        st.markdown(
+            f"""
+            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #A7F3D0; border-radius: 16px; padding: 25px; text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 0.9em; color: #065F46; font-weight: bold; text-transform: uppercase;">CHUỖI TỪ ĐỌC PHẢN XẠ:</div>
+                <div style="font-family: 'Courier New', monospace; font-size: 3em; font-weight: bold; color: #047857; margin: 15px 0;">{chain_str}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        
+        components.html(
+            """
+            <div style="text-align: center; font-family: sans-serif; background: transparent; padding: 10px 0;">
+                <div id="timer-bar-bg" style="width: 100%; height: 16px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-bottom: 8px; border: 1px solid #cbd5e1;">
+                    <div id="timer-bar" style="width: 100%; height: 100%; background: linear-gradient(90deg, #3b82f6, #ef4444); transition: width 0.1s linear;"></div>
+                </div>
+                <div id="timer-text" style="font-size: 1.4em; font-weight: bold; color: #1e293b;">3.0s</div>
+                <button onclick="startTimer()" style="margin-top: 10px; padding: 10px 24px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 6px rgba(37,99,235,0.2); transition: all 0.2s;">⏱️ BẮT ĐẦU ĐẾM NGƯỢC</button>
+            </div>
+            <script>
+            let interval = null;
+            function startTimer() {
+                clearInterval(interval);
+                let timeLeft = 3.0;
+                const bar = document.getElementById("timer-bar");
+                const text = document.getElementById("timer-text");
+                bar.style.width = "100%";
+                text.innerText = timeLeft.toFixed(1) + "s";
+                
+                const start = Date.now();
+                const duration = 3000;
+                interval = setInterval(() => {
+                    const elapsed = Date.now() - start;
+                    const remaining = Math.max(0, duration - elapsed);
+                    timeLeft = remaining / 1000;
+                    text.innerText = timeLeft.toFixed(1) + "s";
+                    bar.style.width = (remaining / duration * 100) + "%";
+                    
+                    if (remaining <= 0) {
+                        clearInterval(interval);
+                        text.innerText = "⏰ HẾT GIỜ!";
+                        try {
+                            const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-84.wav");
+                            audio.volume = 0.5;
+                            audio.play();
+                        } catch(e) {}
+                    }
+                }, 50);
+            }
+            </script>
+            """,
+            height=130,
+        )
+
 def show_lesson4_exercises(save_progress):
     st.header("🎯 Bài 4: Đấu trường Luyện tập Vận mẫu kép mở rộng")
     st.write(
