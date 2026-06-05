@@ -171,7 +171,7 @@ def show_lesson4_finals():
             st.markdown("<br/>", unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("🔑 2. Bí mật chính tả Pinyin")
+    st.subheader("🔑 2. Chính tả Pinyin")
     st.write(
         "Đối với các vận mẫu kép mở rộng, có **3 quy tắc chính tả cực kỳ quan trọng** mà bất kỳ người học tiếng Trung nào cũng phải nằm lòng để tránh nhầm lẫn khi đọc viết:"
     )
