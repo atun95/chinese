@@ -238,166 +238,284 @@ elif menu == "Bài tập Bài 4":
     lesson4.show_lesson4_exercises(save_progress)
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("#### 📝 Ghi chú giáo viên")
-note_key = "teacher_note"
-if note_key not in st.session_state:
-    st.session_state[note_key] = ""
-
-# Dùng st.sidebar.form để ngăn việc gõ phím liên tục kích hoạt rerun Streamlit làm treo/lag bảng
-with st.sidebar.form(key="teacher_note_form"):
-    teacher_note_val = st.text_area(
-        "✍️ Soạn ghi chú gửi học viên:",
-        value=st.session_state[note_key],
-        height=200,
-        placeholder="Nhập ghi chú... Nhấn nút 'Cập nhật' để hiển thị bảng thông báo cho học viên."
-    )
-    submit_note = st.form_submit_button("Cập nhật ghi chú")
-    if submit_note:
-        st.session_state[note_key] = teacher_note_val
-        st.rerun()
-
-st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
 
-# --- HIỂN THỊ GHI CHÚ NỔI CỦA GIÁO VIÊN ---
-teacher_note = st.session_state.get("teacher_note", "").strip()
+# --- HIỂN THỊ GHI CHÚ NỔI CỦA GIÁO VIÊN (EDIT TRỰC TIẾP TRÊN POPUP) ---
+import streamlit.components.v1 as components
 
-if teacher_note:
-    import streamlit.components.v1 as components
-    
-    st.markdown(
-        """
-        <style>
-        .floating-note {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            width: 320px;
-            height: 220px;
-            min-width: 220px;
-            min-height: 140px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 2px solid #e11d48;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            z-index: 999999;
-            resize: both;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .floating-note-header {
-            padding: 10px 14px;
-            cursor: move;
-            background-color: #e11d48;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            font-size: 0.95em;
-        }
-        .floating-note-body {
-            padding: 14px;
-            flex: 1;
-            overflow-y: auto;
-            font-size: 0.95em;
-            color: #1e293b;
-            white-space: pre-wrap;
-            background: #ffffff;
-            line-height: 1.5;
-        }
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.4em;
-            cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            margin: 0;
-        }
-        .close-btn:hover {
-            color: #ffe4e6;
-        }
-        </style>
+st.markdown(
+    """
+    <style>
+    .floating-note {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        width: 340px;
+        height: 260px;
+        min-width: 240px;
+        min-height: 120px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border: 2px solid #e11d48;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 999999;
+        resize: both;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: height 0.15s ease, width 0.15s ease;
+    }
+    .floating-note.minimized {
+        height: 42px !important;
+        min-height: 42px !important;
+        resize: none !important;
+    }
+    .floating-note-header {
+        padding: 8px 12px;
+        cursor: move;
+        background-color: #e11d48;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+        font-size: 0.9em;
+        height: 42px;
+        box-sizing: border-box;
+    }
+    .floating-note-header .title-area {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .floating-note-header .control-buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .floating-note-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.1em;
+        cursor: pointer;
+        padding: 2px 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s;
+        height: 24px;
+        width: 24px;
+        box-sizing: border-box;
+    }
+    .floating-note-header button:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .floating-note-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        overflow: hidden;
+    }
+    .floating-note-textarea {
+        width: 100%;
+        height: 100%;
+        border: none;
+        resize: none;
+        outline: none;
+        padding: 12px;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #1e293b;
+        background: transparent;
+        box-sizing: border-box;
+    }
 
-        <div id="teacher-floating-note" class="floating-note">
-            <div id="teacher-note-header" class="floating-note-header">
-                <span>📌 Ghi chú từ Giáo viên</span>
-                <button id="teacher-note-close" class="close-btn">&times;</button>
+    /* Nút kích hoạt nổi (FAB) */
+    .note-fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+        box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+        z-index: 999998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: white;
+        font-size: 1.4em;
+        border: none;
+        outline: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .note-fab:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6);
+    }
+    .note-fab:active {
+        transform: scale(0.95);
+    }
+    </style>
+
+    <!-- Floating Note Container -->
+    <div id="teacher-floating-note" class="floating-note" style="display: none;">
+        <div id="teacher-note-header" class="floating-note-header">
+            <div class="title-area">
+                <span>📌 Ghi chú</span>
             </div>
-            <div class="floating-note-body" id="teacher-note-body"></div>
+            <div class="control-buttons">
+                <button id="teacher-note-font-dec" title="Chữ nhỏ hơn" style="font-weight: bold; font-size: 0.85em;">A-</button>
+                <button id="teacher-note-font-inc" title="Chữ to hơn" style="font-weight: bold; font-size: 0.85em;">A+</button>
+                <button id="teacher-note-minimize" title="Thu nhỏ/Mở rộng" style="font-weight: bold; font-size: 1.1em;">−</button>
+                <button id="teacher-note-close" title="Đóng bảng" style="font-size: 1.3em;">&times;</button>
+            </div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+        <div class="floating-note-body" id="teacher-note-body">
+            <textarea id="teacher-note-textarea" class="floating-note-textarea" placeholder="Nhập ghi chú tại đây..."></textarea>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="teacher-note-fab" class="note-fab" style="display: none;" title="Mở bảng ghi chú">📝</button>
+    """,
+    unsafe_allow_html=True
+)
+
+components.html(
+    """
+    <script>
+    const storage = window.parent.localStorage;
     
-    safe_note_text = json.dumps(teacher_note, ensure_ascii=False)
-    
-    components.html(
-        f"""
-        <script>
+    function initNote() {
         const parentDoc = window.parent.document;
         const note = parentDoc.getElementById("teacher-floating-note");
         const header = parentDoc.getElementById("teacher-note-header");
         const closeBtn = parentDoc.getElementById("teacher-note-close");
-        const body = parentDoc.getElementById("teacher-note-body");
-        
-        if (note && header && closeBtn && body) {{
-            const noteText = {safe_note_text};
-            body.innerText = noteText;
+        const minBtn = parentDoc.getElementById("teacher-note-minimize");
+        const fontIncBtn = parentDoc.getElementById("teacher-note-font-inc");
+        const fontDecBtn = parentDoc.getElementById("teacher-note-font-dec");
+        const textarea = parentDoc.getElementById("teacher-note-textarea");
+        const fab = parentDoc.getElementById("teacher-note-fab");
 
-            // Xử lý ẩn hiện theo sessionStorage
-            const lastText = sessionStorage.getItem("teacher_note_last_text") || "";
-            if (noteText !== lastText) {{
-                sessionStorage.removeItem("teacher_note_closed");
-                sessionStorage.setItem("teacher_note_last_text", noteText);
-            }}
+        if (note && header && closeBtn && minBtn && fontIncBtn && fontDecBtn && textarea && fab) {
+            // 1. Khôi phục text từ localStorage
+            const savedText = storage.getItem("teacher_note_text") || "";
+            textarea.value = savedText;
+            
+            textarea.oninput = function() {
+                storage.setItem("teacher_note_text", textarea.value);
+            };
 
-            const isClosed = sessionStorage.getItem("teacher_note_closed") === "true";
-            if (isClosed) {{
-                note.style.display = "none";
-            }} else {{
+            // 2. Khôi phục Font Size
+            let currentFontSize = parseInt(storage.getItem("teacher_note_fontsize")) || 16;
+            textarea.style.fontSize = currentFontSize + "px";
+
+            fontIncBtn.onclick = function(e) {
+                e.stopPropagation();
+                if (currentFontSize < 32) {
+                    currentFontSize += 2;
+                    textarea.style.fontSize = currentFontSize + "px";
+                    storage.setItem("teacher_note_fontsize", currentFontSize);
+                }
+            };
+
+            fontDecBtn.onclick = function(e) {
+                e.stopPropagation();
+                if (currentFontSize > 12) {
+                    currentFontSize -= 2;
+                    textarea.style.fontSize = currentFontSize + "px";
+                    storage.setItem("teacher_note_fontsize", currentFontSize);
+                }
+            };
+
+            // 3. Khôi phục trạng thái thu nhỏ (Minimize)
+            let isMinimized = storage.getItem("teacher_note_minimized") === "true";
+            if (isMinimized) {
+                note.classList.add("minimized");
+                minBtn.innerText = "▢";
+            } else {
+                note.classList.remove("minimized");
+                minBtn.innerText = "−";
+            }
+
+            minBtn.onclick = function(e) {
+                e.stopPropagation();
+                isMinimized = !isMinimized;
+                if (isMinimized) {
+                    note.classList.add("minimized");
+                    minBtn.innerText = "▢";
+                    storage.setItem("teacher_note_minimized", "true");
+                } else {
+                    note.classList.remove("minimized");
+                    minBtn.innerText = "−";
+                    storage.setItem("teacher_note_minimized", "false");
+                    let savedHeight = storage.getItem("teacher_note_height");
+                    if (savedHeight) note.style.height = savedHeight;
+                }
+            };
+
+            // 4. Khôi phục hiển thị (Visible/Closed)
+            let isVisible = storage.getItem("teacher_note_visible") !== "false";
+            if (isVisible) {
                 note.style.display = "flex";
-            }}
-
-            closeBtn.onclick = function() {{
+                fab.style.display = "none";
+            } else {
                 note.style.display = "none";
-                sessionStorage.setItem("teacher_note_closed", "true");
-            }};
+                fab.style.display = "flex";
+            }
 
-            // Khôi phục vị trí & kích thước đã lưu
-            let savedTop = sessionStorage.getItem("teacher_note_top");
-            let savedLeft = sessionStorage.getItem("teacher_note_left");
-            let savedWidth = sessionStorage.getItem("teacher_note_width");
-            let savedHeight = sessionStorage.getItem("teacher_note_height");
+            closeBtn.onclick = function(e) {
+                e.stopPropagation();
+                note.style.display = "none";
+                fab.style.display = "flex";
+                storage.setItem("teacher_note_visible", "false");
+            };
+
+            fab.onclick = function(e) {
+                e.stopPropagation();
+                note.style.display = "flex";
+                fab.style.display = "none";
+                storage.setItem("teacher_note_visible", "true");
+            };
+
+            // 5. Khôi phục vị trí & kích thước
+            let savedTop = storage.getItem("teacher_note_top");
+            let savedLeft = storage.getItem("teacher_note_left");
+            let savedWidth = storage.getItem("teacher_note_width");
+            let savedHeight = storage.getItem("teacher_note_height");
 
             if (savedTop) note.style.top = savedTop;
-            if (savedLeft) {{
+            if (savedLeft) {
                 note.style.left = savedLeft;
                 note.style.right = "auto";
-            }}
+            }
             if (savedWidth) note.style.width = savedWidth;
-            if (savedHeight) note.style.height = savedHeight;
+            if (savedHeight && !isMinimized) note.style.height = savedHeight;
 
-            // Xử lý kéo thả (Drag)
+            // 6. Xử lý kéo thả (Drag)
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
             header.onmousedown = dragMouseDown;
 
-            function dragMouseDown(e) {{
+            function dragMouseDown(e) {
                 e = e || window.event;
-                if (e.target.id === "teacher-note-close") return;
+                if (e.target.tagName === "BUTTON") return;
                 e.preventDefault();
                 pos3 = e.clientX;
                 pos4 = e.clientY;
                 parentDoc.onmouseup = closeDragElement;
                 parentDoc.onmousemove = elementDrag;
-            }}
+            }
 
-            function elementDrag(e) {{
+            function elementDrag(e) {
                 e = e || window.event;
                 e.preventDefault();
                 pos1 = pos3 - e.clientX;
@@ -408,29 +526,45 @@ if teacher_note:
                 note.style.left = (note.offsetLeft - pos1) + "px";
                 note.style.right = "auto";
 
-                sessionStorage.setItem("teacher_note_top", note.style.top);
-                sessionStorage.setItem("teacher_note_left", note.style.left);
-            }}
+                storage.setItem("teacher_note_top", note.style.top);
+                storage.setItem("teacher_note_left", note.style.left);
+            }
 
-            function closeDragElement() {{
+            function closeDragElement() {
                 parentDoc.onmouseup = null;
                 parentDoc.onmousemove = null;
-            }}
+            }
 
-            // Xử lý co giãn (Resize) bằng ResizeObserver
-            if (window.parent.teacherNoteResizeObserver) {{
+            // 7. Xử lý co giãn (Resize) bằng ResizeObserver
+            if (window.parent.teacherNoteResizeObserver) {
                 window.parent.teacherNoteResizeObserver.disconnect();
-            }}
-            window.parent.teacherNoteResizeObserver = new window.parent.ResizeObserver(entries => {{
-                for (let entry of entries) {{
-                    sessionStorage.setItem("teacher_note_width", entry.target.style.width);
-                    sessionStorage.setItem("teacher_note_height", entry.target.style.height);
-                }}
-            }});
+            }
+            window.parent.teacherNoteResizeObserver = new window.parent.ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (!note.classList.contains("minimized")) {
+                        storage.setItem("teacher_note_width", entry.target.style.width);
+                        storage.setItem("teacher_note_height", entry.target.style.height);
+                    }
+                }
+            });
             window.parent.teacherNoteResizeObserver.observe(note);
-        }}
-        </script>
-        """,
-        height=0,
-    )
+
+            return true;
+        }
+        return false;
+    }
+
+    const intervalId = setInterval(() => {
+        try {
+            if (initNote()) {
+                clearInterval(intervalId);
+            }
+        } catch (e) {
+            console.error("Teacher note init error:", e);
+        }
+    }, 100);
+    </script>
+    """,
+    height=0,
+)
 
