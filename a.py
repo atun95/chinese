@@ -153,7 +153,7 @@ st.title("Học Pinyin Cơ Bản")
 
 st.sidebar.header("Danh mục giáo án")
 teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập", "🏆 Bảng điểm tổng hợp"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập"])
 
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
@@ -182,27 +182,8 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 3",
         "Bài tập Bài 4"
     ])
-else:
-    menu = "Bảng điểm"
 
-if mode == "🏆 Bảng điểm tổng hợp":
-    st.header("🏆 Bảng điểm tổng hợp các bài học")
-    st.write("Dưới đây là lịch sử điểm số của các học viên đã nộp bài tập. Điểm số này được lưu trữ an toàn và không bị mất khi cập nhật ứng dụng.")
-    tab_b1, tab_b2, tab_b3 = st.tabs(["📝 Bài tập Bài 1", "📝 Bài tập Bài 2", "📝 Bài tập Bài 3"])
-    with tab_b1:
-        s1 = load_all_scores()
-        if s1: st.dataframe(s1, use_container_width=True)
-        else: st.info("Chưa có học viên nào nộp bài tập Bài 1.")
-    with tab_b2:
-        s2 = load_all_scores_b2()
-        if s2: st.dataframe(s2, use_container_width=True)
-        else: st.info("Chưa có học viên nào nộp bài tập Bài 2.")
-    with tab_b3:
-        s3 = load_all_scores_b3()
-        if s3: st.dataframe(s3, use_container_width=True)
-        else: st.info("Chưa có học viên nào nộp bài tập Bài 3.")
-
-elif menu == "Bài 1 - Phiên âm cơ bản":
+if menu == "Bài 1 - Phiên âm cơ bản":
     lesson1.show_lesson1_intro()
 
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
@@ -261,13 +242,20 @@ st.sidebar.markdown("#### 📝 Ghi chú giáo viên")
 note_key = "teacher_note"
 if note_key not in st.session_state:
     st.session_state[note_key] = ""
-st.session_state[note_key] = st.sidebar.text_area(
-    "✍️ Soạn ghi chú gửi học viên:",
-    value=st.session_state[note_key],
-    height=200,
-    key="teacher_note_area",
-    placeholder="Nhập ghi chú... Nội dung sẽ hiển thị ngay lập tức thành một bảng thông báo to, rõ ràng ở màn hình chính cho học viên."
-)
+
+# Dùng st.sidebar.form để ngăn việc gõ phím liên tục kích hoạt rerun Streamlit làm treo/lag bảng
+with st.sidebar.form(key="teacher_note_form"):
+    teacher_note_val = st.text_area(
+        "✍️ Soạn ghi chú gửi học viên:",
+        value=st.session_state[note_key],
+        height=200,
+        placeholder="Nhập ghi chú... Nhấn nút 'Cập nhật' để hiển thị bảng thông báo cho học viên."
+    )
+    submit_note = st.form_submit_button("Cập nhật ghi chú")
+    if submit_note:
+        st.session_state[note_key] = teacher_note_val
+        st.rerun()
+
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
 
@@ -353,13 +341,16 @@ if (note && header && closeBtn && body) {
     }
 
     // Xử lý co giãn (Resize) bằng ResizeObserver
-    const resizeObserver = new ResizeObserver(entries => {
+    if (window.teacherNoteResizeObserver) {
+        window.teacherNoteResizeObserver.disconnect();
+    }
+    window.teacherNoteResizeObserver = new ResizeObserver(entries => {
         for (let entry of entries) {
             sessionStorage.setItem("teacher_note_width", entry.target.style.width);
             sessionStorage.setItem("teacher_note_height", entry.target.style.height);
         }
     });
-    resizeObserver.observe(note);
+    window.teacherNoteResizeObserver.observe(note);
 }
 """
     js_code = js_template.replace("__NOTE_TEXT__", safe_note_text)
