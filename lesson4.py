@@ -645,7 +645,7 @@ def show_lesson4_classroom_arena():
                     unsafe_allow_html=True
                 )
 
-def show_lesson4_exercises(save_progress):
+def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_scores_b4=None):
     st.header("🎯 Bài 4: Luyện tập Vận mẫu kép mở rộng")
    
     
@@ -875,6 +875,7 @@ def show_lesson4_exercises(save_progress):
         cur_idx = st.session_state.assembly_idx
         
         if cur_idx >= len(ASSEMBLY_TARGETS):
+            st.session_state.scores["b4_assembly"] = (4, 4)
             st.markdown(
                 """
                 <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center;">
@@ -887,6 +888,8 @@ def show_lesson4_exercises(save_progress):
             )
             if st.button("🔄 Chơi lại Thử thách Lắp ráp từ đầu", use_container_width=True):
                 st.session_state.assembly_idx = 0
+                if "b4_assembly" in st.session_state.scores:
+                    del st.session_state.scores["b4_assembly"]
                 st.rerun()
         else:
             item = ASSEMBLY_TARGETS[cur_idx]
@@ -957,6 +960,67 @@ def show_lesson4_exercises(save_progress):
                             st.rerun()
                         else:
                             st.error(f"❌ Chưa chính xác! Âm vừa ghép là '{assembled_pinyin}', nhưng từ '{item['meaning']}' cần cách viết khác. Hãy thử lại theo gợi ý!")
+
+
+    # Tổng kết — chỉ hiện khi học viên đã chấm đủ các bài tập
+    st.markdown("---")
+    with st.expander("📊 Lịch sử & Tổng kết Bài 4", expanded=True):
+        from datetime import datetime, timezone, timedelta
+        cur = st.session_state.scores
+        labels_b4 = {
+            "b4_listening": "BT1: Luyện nghe", 
+            "b4_spelling": "BT2: Chính tả", 
+            "b4_assembly": "BT3: Lắp ráp Bính âm", 
+            "b4_female_vocab": "BT4: Phân biệt Nữ giới"
+        }
+        missing_b4 = [v for k, v in labels_b4.items() if k not in cur]
+
+        if missing_b4:
+            st.warning(f"Chưa chấm điểm đủ bài tập. Các bài còn thiếu: {', '.join(missing_b4)}")
+        else:
+            b4_earned = sum(cur[k][0] for k in labels_b4.keys())
+            b4_total  = sum(cur[k][1] for k in labels_b4.keys())
+            b4_score_10 = round((b4_earned / b4_total) * 10, 2)
+            st.success(f"📈 Điểm số tổng quát Bài 4: **{b4_score_10} / 10** điểm")
+            for k, lbl in labels_b4.items():
+                s = cur[k]
+                st.write(f"- {lbl}: Đúng **{s[0]}/{s[1]}** câu")
+
+            st.markdown("---")
+            name = st.text_input("Tên học viên (Bài 4)", key="student_name_b4")
+            if st.button("Nộp bài tập Bài 4"):
+                if name:
+                    def fmt(k):
+                        s = cur.get(k)
+                        return f"{s[0]}/{s[1]}" if s else ""
+                    
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"), 
+                        "học viên": name,
+                        "tổng điểm": b4_score_10, 
+                        "BT1: Luyện nghe": fmt("b4_listening"),
+                        "BT2: Chính tả": fmt("b4_spelling"),
+                        "BT3: Lắp ráp Bính âm": fmt("b4_assembly"),
+                        "BT4: Phân biệt Nữ giới": fmt("b4_female_vocab")
+                    }
+                    if save_score_row_b4 and save_score_row_b4(row):
+                        st.success("Đã lưu điểm Bài 4 thành công!")
+                        # Clean up session state scores for Lesson 4
+                        for k in labels_b4.keys():
+                            if k in st.session_state.scores:
+                                del st.session_state.scores[k]
+                        if "assembly_idx" in st.session_state:
+                            st.session_state.assembly_idx = 0
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên học viên để lưu điểm!")
+
+        st.write("### 🏆 Bảng điểm học viên đã nộp:")
+        if load_all_scores_b4:
+            all_s4 = load_all_scores_b4()
+            if all_s4: 
+                st.dataframe(all_s4, use_container_width=True)
 
 def show_lesson4_hanzi():
     render_lesson_intro("📚 Bài 5: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
@@ -1306,10 +1370,10 @@ def show_lesson4_female_comparison(save_progress):
             st.rerun()
 
 def show_lesson4_vocab():
-    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
+    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép")
 
     VOCAB_LIST = [
-        {"group": "ia (ya)", "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà, gia đình", "key_prefix": "ia_jia", "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."},
+        {"group": "ia (ya)", "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà", "key_prefix": "ia_jia", "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."},
         {"group": "ia (ya)", "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt", "key_prefix": "ia_ya", "example_han": "鸭子很可爱。", "example_py": "Yāzi hěn kě'ài.", "example_vi": "Con vịt rất đáng yêu."},
         {"group": "ie (ye)", "emoji": "👩‍🦰", "word": "姐姐", "pinyin": "jiějie", "vietnamese": "Chị gái", "key_prefix": "ie_jie", "example_han": "我的姐姐很美。", "example_py": "Wǒ de jiějie hěn měi.", "example_vi": "Chị gái tôi rất đẹp."},
         {"group": "ie (ye)", "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội", "key_prefix": "ie_ye", "example_han": "爷爷爱栽花。", "example_py": "Yéye ài zāihuā.", "example_vi": "Ông nội thích trồng hoa."},
@@ -1317,7 +1381,7 @@ def show_lesson4_vocab():
         {"group": "iao (yao)", "emoji": "💊", "word": "药", "pinyin": "yào", "vietnamese": "Thuốc", "key_prefix": "iao_yao", "example_han": "我吃药。", "example_py": "Wǒ chī yào.", "example_vi": "Tôi uống thuốc."},
         {"group": "iu (you)", "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu", "key_prefix": "iu_liu", "example_han": "我有六个女朋友。", "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.", "example_vi": "Tôi có 6 người bạn gái."},
         {"group": "iu (you)", "emoji": "🤝", "word": "有", "pinyin": "yǒu", "vietnamese": "Có", "key_prefix": "iu_you", "example_han": "我有一个姐姐。", "example_py": "Wǒ yǒu yī ge jiějie.", "example_vi": "Tôi có một người chị gái."},
-        {"group": "ua (wa)", "emoji": "🌸", "word": "花", "pinyin": "huā", "vietnamese": "Đóa hoa, hoa", "key_prefix": "ua_hua", "example_han": "花很美。", "example_py": "Huā hěn měi.", "example_vi": "Hoa rất đẹp."},
+        {"group": "ua (wa)", "emoji": "🌸", "word": "花", "pinyin": "huā", "vietnamese": "Bông hoa, hoa", "key_prefix": "ua_hua", "example_han": "花很美。", "example_py": "Huā hěn měi.", "example_vi": "Hoa rất đẹp."},
         {"group": "ua (wa)", "emoji": "🧸", "word": "娃娃", "pinyin": "wáwa", "vietnamese": "Búp bê, em bé", "key_prefix": "ua_wawa", "example_han": "我喜欢娃娃。", "example_py": "Wǒ xǐhuān wáwa.", "example_vi": "Tôi thích búp bê."},
         {"group": "uo (wo)", "emoji": "🙋‍♂️", "word": "我", "pinyin": "wǒ", "vietnamese": "Tôi, tớ, mình", "key_prefix": "uo_wo", "example_han": "我是学生。", "example_py": "Wǒ shì xuéshēng.", "example_vi": "Tôi là học sinh."},
         {"group": "uo (wo)", "emoji": "🇨🇳", "word": "国家", "pinyin": "guójiā", "vietnamese": "Quốc gia, đất nước", "key_prefix": "uo_guojia", "example_han": "我的国家很美。", "example_py": "Wǒ de guójiā hěn měi.", "example_vi": "Đất nước của tôi rất đẹp."},
