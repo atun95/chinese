@@ -1323,21 +1323,31 @@ def show_lesson4_vocab():
                 img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
 
         if img_base64:
-            word_header_html = f"""<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
-<img src="{img_base64}" style="width: 75px; height: 75px; border-radius: 12px; border: 1px solid #e2e8f0; object-fit: cover; background: white; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"/>
-<div>
-<div style="font-size: 2.2em; font-weight: bold; color: #1e293b; line-height: 1;">{w['word']}</div>
-<div style="font-family: 'Courier New', monospace; font-size: 1.15em; font-weight: bold; color: #2563eb; margin-top: 6px; background: white; padding: 2px 10px; border-radius: 12px; border: 1px solid #dbeafe; display: inline-block;">{w['pinyin']}</div>
+            card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 22px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+<div style="display: flex; gap: 20px; align-items: center; margin-bottom: 15px;">
+    <img src="{img_base64}" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid #e2e8f0; object-fit: cover; background: white; padding: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex-shrink: 0;"/>
+    <div style="flex-grow: 1;">
+        <div style="font-size: 2.8em; font-weight: bold; color: #1e293b; line-height: 1.1;">{w['word']}</div>
+        <div style="margin-top: 8px;">
+            <span style="font-family: 'Courier New', monospace; font-size: 1.3em; font-weight: bold; color: #2563eb; background: white; padding: 4px 14px; border-radius: 20px; border: 1px solid #dbeafe; display: inline-block;">{w['pinyin']}</span>
+        </div>
+        <div style="font-size: 1.25em; font-weight: bold; color: #334155; margin-top: 12px;">Nghĩa: {w['vietnamese']}</div>
+    </div>
+</div>
+<hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
+<div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
+<div style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">Ví dụ thực tế:</div>
+<div style="font-size: 1.25em; font-weight: bold; color: #0f172a; margin-bottom: 2px;">{w['example_han']}</div>
+<div style="font-family: 'Courier New', monospace; font-weight: bold; color: #047857; font-size: 0.95em; margin-bottom: 4px;">{w['example_py']}</div>
+<div style="color: #475569; font-style: italic; font-size: 0.9em; border-left: 2px solid #cbd5e1; padding-left: 6px;">{w['example_vi']}</div>
 </div>
 </div>"""
         else:
-            word_header_html = f"""<div style="display: flex; align-items: center; justify-content: space-between;">
+            card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+<div style="display: flex; align-items: center; justify-content: space-between;">
 <div style="font-size: 2.2em; font-weight: bold; color: #1e293b;">{w['emoji']} {w['word']}</div>
 <div style="font-family: 'Courier New', monospace; font-size: 1.4em; font-weight: bold; color: #2563eb; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid #dbeafe;">{w['pinyin']}</div>
-</div>"""
-
-        card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-{word_header_html}
+</div>
 <div style="font-size: 1.1em; font-weight: bold; margin: 10px 0; color: #334155;">Nghĩa: {w['vietnamese']}</div>
 <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
 <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
