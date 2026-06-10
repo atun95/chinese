@@ -229,16 +229,31 @@ def render_pronunciation_card(item, key_prefix):
     st.write(f"Ví dụ: **{item['vd_han']}** — *{item['vd_py']}*.")
     render_play_button(item["nghe"], "🔊 Nghe ví dụ", key=f"{key_prefix}_{item['chu']}")
 
-def render_lesson_intro(title, objective):
-    st.header(title)
+def render_lesson_intro(title, objective=None):
     st.markdown(
         f"""
-        <div class="lesson-card">
-            <b>Mục tiêu</b><br/>
-            <span class="lesson-muted">{objective}</span>
-        </div>
+        <style>
+        .lesson-title {{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: calc(1.3rem + 0.8vw);
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #0f172a;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }}
+        @media (max-width: 768px) {{
+            .lesson-title {{
+                font-size: 1.25rem;
+            }}
+        }}
+        </style>
+        <h1 class="lesson-title">{title}</h1>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
 def shuffled_options(options, seed_text):

@@ -1390,7 +1390,17 @@ def show_lesson4_vocab():
         {"group": "ui (wei)", "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước", "key_prefix": "ui_shui", "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."},
         {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
         {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."},
-        {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học Hán ngữ."}
+        {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học Hán ngữ."},
+        {"group": "Từ vựng mở rộng", "emoji": "😎", "word": "帅哥", "pinyin": "shuàigē", "vietnamese": "Soái ca, trai đẹp", "key_prefix": "ext_shuaige", "example_han": "这里有很多帅哥。", "example_py": "Zhèlǐ yǒu hěn duō shuàigē.", "example_vi": "Ở đây có rất nhiều trai đẹp."},
+        {"group": "Từ vựng mở rộng", "emoji": "👸", "word": "美女", "pinyin": "měinǚ", "vietnamese": "Mỹ nữ, gái đẹp", "key_prefix": "ext_meinu", "example_han": "她是我们的美女。", "example_py": "Tā shì wǒmen de měinǚ.", "example_vi": "Cô ấy là mỹ nữ của chúng tôi."},
+        {"group": "Từ vựng mở rộng", "emoji": "🥛", "word": "喝", "pinyin": "hē", "vietnamese": "Uống", "key_prefix": "ext_he", "example_han": "我想喝奶茶。", "example_py": "Wǒ xiǎng hē nǎichá.", "example_vi": "Tôi muốn uống trà sữa."},
+        {"group": "Từ vựng mở rộng", "emoji": "🍚", "word": "吃", "pinyin": "chī", "vietnamese": "Ăn", "key_prefix": "ext_chi", "example_han": "你吃什么肉？", "example_py": "Nǐ chī shénme ròu?", "example_vi": "Bạn ăn thịt gì?"},
+        {"group": "Từ vựng mở rộng", "emoji": "🧋", "word": "奶茶", "pinyin": "nǎichá", "vietnamese": "Trà sữa", "key_prefix": "ext_naicha", "example_han": "我爱喝奶茶。", "example_py": "Wǒ ài hē nǎichá.", "example_vi": "Tôi yêu thích uống trà sữa."},
+        {"group": "Từ vựng mở rộng", "emoji": "😋", "word": "饿", "pinyin": "è", "vietnamese": "Đói", "key_prefix": "ext_e", "example_han": "我很饿。", "example_py": "Wǒ hěn è.", "example_vi": "Tôi rất đói."},
+        {"group": "Từ vựng mở rộng", "emoji": "😫", "word": "累", "pinyin": "lèi", "vietnamese": "Mệt", "key_prefix": "ext_lei", "example_han": "你累吗？", "example_py": "Nǐ lèi ma?", "example_vi": "Bạn mệt không?"},
+        {"group": "Từ vựng mở rộng", "emoji": "🍗", "word": "鸡肉", "pinyin": "jīròu", "vietnamese": "Thịt gà", "key_prefix": "ext_jirou", "example_han": "我喜欢吃鸡肉。", "example_py": "Wǒ xǐhuān chī jīròu.", "example_vi": "Tôi thích ăn thịt gà."},
+        {"group": "Từ vựng mở rộng", "emoji": "🐟", "word": "鱼肉", "pinyin": "yúròu", "vietnamese": "Thịt cá", "key_prefix": "ext_yurou", "example_han": "鱼肉很好吃。", "example_py": "Yúròu hěn hǎochī.", "example_vi": "Thịt cá rất ngon."},
+        {"group": "Từ vựng mở rộng", "emoji": "🥩", "word": "牛肉", "pinyin": "niúròu", "vietnamese": "Thịt bò", "key_prefix": "ext_niurou", "example_han": "牛肉很贵。", "example_py": "Niúròu hěn guì.", "example_vi": "Thịt bò rất đắt."}
     ]
 
     st.markdown(
@@ -1510,7 +1520,7 @@ def show_lesson4_vocab():
         unsafe_allow_html=True
     )
 
-    groups = ["Tất cả (18 từ)"] + sorted(list(set(w["group"] for w in VOCAB_LIST)))
+    groups = [f"Tất cả ({len(VOCAB_LIST)} từ)"] + sorted(list(set(w["group"] for w in VOCAB_LIST)))
     sel_group = st.selectbox("🔍 Chọn Nhóm Vận mẫu để học:", groups)
 
     if sel_group.startswith("Tất cả"):
@@ -1576,12 +1586,12 @@ def show_lesson4_vocab():
         
         col_prev, col_next = st.columns(2)
         with col_prev:
-            if st.button("⬅️ Từ trước", disabled=(cur_idx == 0), use_container_width=True, key=f"btn_prev_{sel_group}"):
-                st.session_state[slide_key] -= 1
+            if st.button("⬅️ Từ trước", use_container_width=True, key=f"btn_prev_{sel_group}"):
+                st.session_state[slide_key] = (cur_idx - 1) % len(filtered_vocab)
                 st.rerun()
         with col_next:
-            if st.button("Từ sau ➡️", disabled=(cur_idx == len(filtered_vocab) - 1), use_container_width=True, key=f"btn_next_{sel_group}"):
-                st.session_state[slide_key] += 1
+            if st.button("Từ sau ➡️", use_container_width=True, key=f"btn_next_{sel_group}"):
+                st.session_state[slide_key] = (cur_idx + 1) % len(filtered_vocab)
                 st.rerun()
                 
         st.markdown(f"<div style='text-align: center; font-size: 1.25em; font-weight: bold; margin-top: 10px; color:#475569;'>Từ {cur_idx + 1} / {len(filtered_vocab)}</div>", unsafe_allow_html=True)
