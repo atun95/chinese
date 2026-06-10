@@ -211,7 +211,7 @@ elif mode == "📝 Hệ thống bài tập":
 if menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
     lesson1.show_lesson1_summary_table()
 
-elif menu == "Bài 1.2 - Phiên âm cơ bản":
+elif menu == "Bài 1.2 - Thanh mẫu và vận mẫu đơn":
     lesson1.show_lesson1_intro()
 
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
@@ -220,7 +220,7 @@ elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
 elif menu == "Bài tập Bài 1":
     lesson1.show_lesson1_exercises(save_progress, save_score_row, load_all_scores)
 
-elif menu == "Bài 2.1 - Vận mẫu kép cơ bản":
+elif menu == "Bài 2.1 - Vận mẫu kép":
     lesson2.show_lesson2_intro(add_tones)
 
 elif menu == "Ghép âm Bài 2 - Vận mẫu kép cơ bản":
@@ -235,7 +235,7 @@ elif menu == "Ghép âm Bài 4 - Vận mẫu kép mở rộng":
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
-elif menu == "Bài 3.1 - Phiên âm nâng cao":
+elif menu == "Bài 3.1 - Thanh mẫu":
     lesson3.show_lesson3_pinyin()
 
 elif menu == "Bài 3.2 - Quy tắc viết Pinyin":
@@ -262,7 +262,7 @@ elif menu == "Bài 3.5 - Hội thoại thực hành":
 elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
-elif menu == "Bài 4.1 - Vận mẫu kép mở rộng":
+elif menu == "Bài 4.1 - Vận mẫu kép":
     lesson4.show_lesson4_finals()
 
 elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
