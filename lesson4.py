@@ -1539,12 +1539,26 @@ def show_lesson4_vocab():
         st.session_state[slide_key] = 0
 
     w = filtered_vocab[cur_idx]
-    img_name = w["key_prefix"].split('_')[-1] + '.png'
-    img_path = os.path.join("assets", "lesson4", img_name)
+    img_name_prefix = w["key_prefix"].split('_')[-1]
+    img_path = ""
+    for ext in [".png", ".jpg", ".jpeg", ".gif"]:
+        p = os.path.join("assets", "lesson4", img_name_prefix + ext)
+        if os.path.exists(p):
+            img_path = p
+            break
+
     img_base64 = ""
-    if os.path.exists(img_path):
+    if img_path and os.path.exists(img_path):
         with open(img_path, "rb") as f:
-            img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+            data = f.read()
+            mime = "image/png"
+            if data.startswith(b'\xff\xd8'):
+                mime = "image/jpeg"
+            elif data.startswith(b'\x89PNG'):
+                mime = "image/png"
+            elif data.startswith(b'GIF8'):
+                mime = "image/gif"
+            img_base64 = f"data:{mime};base64,{base64.b64encode(data).decode('utf-8')}"
 
     if img_base64:
         img_tag = f'<img src="{img_base64}" class="flashcard-image" />'

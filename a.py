@@ -181,7 +181,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.2 - Quy tắc viết Pinyin",
         "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 3.5 - Hội thoại thực hành",
-        "Bài 4.1 - Từ vựng mở rộng",
+        "Bài 4.1 - Vận mẫu kép mở rộng",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
         "Bài 4.3 - Đấu trường Luyện tập",
         "Bài 5 - Nét chữ Hán cơ bản"
@@ -190,7 +190,7 @@ elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
         "Bài 1 - TỪ VỰNG CƠ BẢN", 
         "Bài 3 - TỪ VỰNG",
-        "Bài 4 - TỪ VỰNG"
+        "Bài 4.1 - Từ vựng mở rộng"
     ])
 elif mode == "🗣️ Luyện tập ghép âm":
     menu = st.sidebar.radio("Chọn bảng ghép âm:", [
@@ -245,7 +245,7 @@ elif menu == "Bài 3.3 - Luyện tập ghép âm":
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
 
-elif menu == "Bài 4 - TỪ VỰNG":
+elif menu == "Bài 4.1 - Từ vựng mở rộng":
     lesson4.show_lesson4_vocab()
 
 elif menu == "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu":
@@ -257,8 +257,8 @@ elif menu == "Bài 3.5 - Hội thoại thực hành":
 elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
-elif menu == "Bài 4.1 - Từ vựng mở rộng":
-    lesson4.show_lesson4_vocab()
+elif menu == "Bài 4.1 - Vận mẫu kép mở rộng":
+    lesson4.show_lesson4_finals()
 
 elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
