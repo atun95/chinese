@@ -257,7 +257,7 @@ def show_lesson1_summary_table():
 
 def show_lesson1_intro():
     render_lesson_intro("📚 Bài 1.2: Phiên âm cơ bản", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
-    st.subheader("1. Thanh mẫu và vận mẫu cơ bản")
+    st.subheader("1. Thanh mẫu đơn và vận mẫu đơn")
     st.markdown("#### 1.1. Thanh mẫu (Initials)")
     cols_tm = st.columns(4)
     for i, item in enumerate(B1_INITIALS_CARDS):

@@ -4,7 +4,7 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson2_intro(add_tones):
-    render_lesson_intro("📚 Bài 2.1: Vận mẫu kép cơ bản", "Nắm vững 4 vận mẫu kép cơ bản và ví dụ thực tế.")
+    render_lesson_intro("📚 Bài 2.1: Vận mẫu kép", "Nắm vững 4 vận mẫu kép cơ bản và ví dụ thực tế.")
     st.subheader("Vận mẫu kép cơ bản")
     cols = st.columns(4)
     for i, item in enumerate(B2_VAN_KEP_SLIDES):

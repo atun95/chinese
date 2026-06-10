@@ -4,7 +4,7 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson3_pinyin():
-    render_lesson_intro("🔒 Bài 3: Thanh mẫu nâng cao & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
+    render_lesson_intro("🔒 Bài 3: Thanh mẫu & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
     for g in B2_THANH_MAU_DATA:
         st.markdown(f"#### {g['ten']}")
         cols = st.columns(4)

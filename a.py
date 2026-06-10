@@ -175,13 +175,13 @@ mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
         "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
-        "Bài 1.2 - Phiên âm cơ bản",
-        "Bài 2.1 - Vận mẫu kép cơ bản",
-        "Bài 3.1 - Phiên âm nâng cao", 
+        "Bài 1.2 - Thanh mẫu và vận mẫu đơn",
+        "Bài 2.1 - Vận mẫu kép",
+        "Bài 3.1 - Thanh mẫu", 
         "Bài 3.2 - Quy tắc viết Pinyin",
         "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 3.5 - Hội thoại thực hành",
-        "Bài 4.1 - Vận mẫu kép mở rộng",
+        "Bài 4.1 - Vận mẫu kép",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
         "Bài 4.3 - Đấu trường Luyện tập",
         "Bài 5 - Nét chữ Hán cơ bản"

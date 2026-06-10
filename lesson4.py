@@ -1373,7 +1373,7 @@ def show_lesson4_vocab(extended_only=False):
     if extended_only:
         render_lesson_intro("📚 Bài 4.1: Từ vựng mở rộng", "Học các từ vựng mở rộng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
     else:
-        render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
+        render_lesson_intro("📚 Bài 4: từ vựng")
 
     VOCAB_LIST = [
         {"group": "ia (ya)", "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà", "key_prefix": "ia_jia", "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."},
