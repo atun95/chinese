@@ -1,4 +1,6 @@
 import streamlit as st
+import os
+import base64
 from lessons_data import *
 from ui_utils import *
 
@@ -694,9 +696,9 @@ def show_lesson4_exercises(save_progress):
     )
     
     tab_challenge1, tab_challenge2, tab_challenge3 = st.tabs([
-        "🎧 1. Đôi tai vàng (Listening)", 
-        "✍️ 2. Chiến binh Chính tả (Spelling)", 
-        "🧩 3. Lắp ráp Bính âm (Assembler Puzzle)"
+        "🎧 1. Listening", 
+        "✍️ 2. Spelling", 
+        "🧩 3. Assembler Puzzle"
     ])
     
     # ------------------ CHALLENGE 1: LISTENING ------------------
@@ -861,10 +863,10 @@ def show_lesson4_exercises(save_progress):
         )
         
         ASSEMBLY_TARGETS = [
-            {"target": "huā", "meaning": "Đóa hoa 🌸", "hint": "Gợi ý: Thanh mẫu bắt đầu bằng 'h', vận mẫu kép 'ua', thanh 1"},
-            {"target": "shuǐ", "meaning": "Nước 💧", "hint": "Gợi ý: Thanh mẫu uốn lưỡi 'sh', vận mẫu gốc 'uei' (nhớ quy tắc rút gọn), thanh 3"},
-            {"target": "liù", "meaning": "Số sáu 6️⃣", "hint": "Gợi ý: Thanh mẫu 'l', vận mẫu gốc 'iou' (nhớ quy tắc rút gọn), thanh 4"},
-            {"target": "yuè", "meaning": "Mặt trăng 🌙", "hint": "Gợi ý: Không có thanh mẫu, vận mẫu tròn môi 'üe' đứng độc lập (nhớ quy tắc biến đổi), thanh 4"}
+            {"target": "huā", "meaning": "Đóa hoa / Hoa", "image": "hua.png", "hint": "Gợi ý: Thanh mẫu bắt đầu bằng 'h', vận mẫu kép 'ua', thanh 1"},
+            {"target": "shuǐ", "meaning": "Nước", "image": "shui.png", "hint": "Gợi ý: Thanh mẫu uốn lưỡi 'sh', vận mẫu gốc 'uei' (nhớ quy tắc rút gọn), thanh 3"},
+            {"target": "liù", "meaning": "Số sáu", "image": "liu.png", "hint": "Gợi ý: Thanh mẫu 'l', vận mẫu gốc 'iou' (nhớ quy tắc rút gọn), thanh 4"},
+            {"target": "yuè", "meaning": "Mặt trăng / Tháng", "image": "yue.png", "hint": "Gợi ý: Không có thanh mẫu, vận mẫu tròn môi 'üe' đứng độc lập (nhớ quy tắc biến đổi), thanh 4"}
         ]
         
         if "assembly_idx" not in st.session_state:
@@ -889,10 +891,20 @@ def show_lesson4_exercises(save_progress):
         else:
             item = ASSEMBLY_TARGETS[cur_idx]
             
+            img_base64 = ""
+            if "image" in item:
+                img_path = os.path.join("assets", "lesson4", item["image"])
+                if os.path.exists(img_path):
+                    with open(img_path, "rb") as f:
+                        img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+
+            img_html = f'<div style="margin: 15px 0;"><img src="{img_base64}" style="width: 130px; height: 130px; border-radius: 16px; border: 1px solid #e2e8f0; object-fit: cover; background: white; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);"/></div>' if img_base64 else ""
+
             st.markdown(
                 f"""
                 <div class="puzzle-card">
                     <span style="font-size: 0.9em; color: #64748b; font-weight: bold; text-transform: uppercase;">MỤC TIÊU LẮP RÁP ({cur_idx + 1}/{len(ASSEMBLY_TARGETS)}):</span>
+                    {img_html}
                     <h2 style="color: #0f172a; margin: 5px 0;">"{item['meaning']}"</h2>
                     <p style="color: #475569; font-style: italic; font-size: 0.9em; margin-bottom: 0;">{item['hint']}</p>
                 </div>
@@ -1303,11 +1315,29 @@ def show_lesson4_vocab():
     ])
     
     def render_vocab_card(w, key_prefix):
-        card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-<div style="display: flex; align-items: center; justify-content: space-between;">
+        img_name = key_prefix.split('_')[-1] + '.png'
+        img_path = os.path.join("assets", "lesson4", img_name)
+        img_base64 = ""
+        if os.path.exists(img_path):
+            with open(img_path, "rb") as f:
+                img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+
+        if img_base64:
+            word_header_html = f"""<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+<img src="{img_base64}" style="width: 75px; height: 75px; border-radius: 12px; border: 1px solid #e2e8f0; object-fit: cover; background: white; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"/>
+<div>
+<div style="font-size: 2.2em; font-weight: bold; color: #1e293b; line-height: 1;">{w['word']}</div>
+<div style="font-family: 'Courier New', monospace; font-size: 1.15em; font-weight: bold; color: #2563eb; margin-top: 6px; background: white; padding: 2px 10px; border-radius: 12px; border: 1px solid #dbeafe; display: inline-block;">{w['pinyin']}</div>
+</div>
+</div>"""
+        else:
+            word_header_html = f"""<div style="display: flex; align-items: center; justify-content: space-between;">
 <div style="font-size: 2.2em; font-weight: bold; color: #1e293b;">{w['emoji']} {w['word']}</div>
 <div style="font-family: 'Courier New', monospace; font-size: 1.4em; font-weight: bold; color: #2563eb; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid #dbeafe;">{w['pinyin']}</div>
-</div>
+</div>"""
+
+        card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+{word_header_html}
 <div style="font-size: 1.1em; font-weight: bold; margin: 10px 0; color: #334155;">Nghĩa: {w['vietnamese']}</div>
 <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
 <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
