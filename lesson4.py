@@ -1369,8 +1369,11 @@ def show_lesson4_female_comparison(save_progress):
             save_progress()
             st.rerun()
 
-def show_lesson4_vocab():
-    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
+def show_lesson4_vocab(extended_only=False):
+    if extended_only:
+        render_lesson_intro("📚 Bài 4.1: Từ vựng mở rộng", "Học các từ vựng mở rộng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
+    else:
+        render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
 
     VOCAB_LIST = [
         {"group": "ia (ya)", "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà", "key_prefix": "ia_jia", "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."},
@@ -1520,13 +1523,22 @@ def show_lesson4_vocab():
         unsafe_allow_html=True
     )
 
-    groups = [f"Tất cả ({len(VOCAB_LIST)} từ)"] + sorted(list(set(w["group"] for w in VOCAB_LIST)))
-    sel_group = st.selectbox("🔍 Chọn Nhóm Vận mẫu để học:", groups)
+    if extended_only:
+        vocab_pool = [w for w in VOCAB_LIST if w["group"] == "Từ vựng mở rộng"]
+    else:
+        vocab_pool = [w for w in VOCAB_LIST if w["group"] != "Từ vựng mở rộng"]
+
+    groups = [f"Tất cả ({len(vocab_pool)} từ)"] + sorted(list(set(w["group"] for w in vocab_pool)))
+    
+    if len(groups) > 1:
+        sel_group = st.selectbox("🔍 Chọn Nhóm Vận mẫu để học:", groups, key=f"sel_group_{extended_only}")
+    else:
+        sel_group = groups[0]
 
     if sel_group.startswith("Tất cả"):
-        filtered_vocab = VOCAB_LIST
+        filtered_vocab = vocab_pool
     else:
-        filtered_vocab = [w for w in VOCAB_LIST if w["group"] == sel_group]
+        filtered_vocab = [w for w in vocab_pool if w["group"] == sel_group]
 
     slide_key = f"b4_vocab_slide_idx_{sel_group}"
     if slide_key not in st.session_state:
