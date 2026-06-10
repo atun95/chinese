@@ -174,8 +174,10 @@ mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài
 
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
-        "Bài 1 - Phiên âm cơ bản", 
-        "Bài 2 - Vận mẫu kép & Luyện tập", 
+        "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
+        "Bài 1.2 - Phiên âm cơ bản",
+        "Bài 2.1 - Vận mẫu kép cơ bản",
+        "Bài 2.2 - Luyện tập ghép âm", 
         "Bài 3.1 - Phiên âm nâng cao", 
         "Bài 3.2 - Quy tắc viết Pinyin",
         "Bài 3.3 - Luyện tập ghép âm",
@@ -200,7 +202,10 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 4"
     ])
 
-if menu == "Bài 1 - Phiên âm cơ bản":
+if menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
+    lesson1.show_lesson1_summary_table()
+
+elif menu == "Bài 1.2 - Phiên âm cơ bản":
     lesson1.show_lesson1_intro()
 
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
@@ -209,8 +214,11 @@ elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
 elif menu == "Bài tập Bài 1":
     lesson1.show_lesson1_exercises(save_progress, save_score_row, load_all_scores)
 
-elif menu == "Bài 2 - Vận mẫu kép & Luyện tập":
+elif menu == "Bài 2.1 - Vận mẫu kép cơ bản":
     lesson2.show_lesson2_intro(add_tones)
+
+elif menu == "Bài 2.2 - Luyện tập ghép âm":
+    lesson2.show_lesson2_spelling(add_tones)
 
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)

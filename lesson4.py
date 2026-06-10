@@ -1390,7 +1390,7 @@ def show_lesson4_vocab():
         {"group": "ui (wei)", "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước", "key_prefix": "ui_shui", "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."},
         {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
         {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."},
-        {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học tiếng Trung."}
+        {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học Hán ngữ."}
     ]
 
     st.markdown(

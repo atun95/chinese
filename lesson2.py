@@ -4,14 +4,15 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson2_intro(add_tones):
-    render_lesson_intro("📚 Bài 2: Vận mẫu kép & Luyện tập ghép âm", "Nắm vững 4 vận mẫu kép cơ bản và luyện tập ghép âm.")
-    st.subheader("1. Vận mẫu kép cơ bản")
+    render_lesson_intro("📚 Bài 2.1: Vận mẫu kép cơ bản", "Nắm vững 4 vận mẫu kép cơ bản và ví dụ thực tế.")
+    st.subheader("Vận mẫu kép cơ bản")
     cols = st.columns(4)
     for i, item in enumerate(B2_VAN_KEP_SLIDES):
         with cols[i]: render_pronunciation_card({"chu": item["vận"], "hdsd": item["hướng_dẫn"], "vd_han": item["ví_dụ_hán"], "vd_py": item["ví_dụ_py"], "nghe": item["nghe"]}, "b2_vk")
-    
-    st.markdown("---")
-    st.subheader("2. Bảng luyện tập ghép âm")
+
+def show_lesson2_spelling(add_tones):
+    render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
+    st.subheader("Bảng luyện tập ghép âm")
     h_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
     h_cols[0].markdown("**T/V**")
     for i, f in enumerate(B2_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
