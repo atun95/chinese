@@ -1306,161 +1306,220 @@ def show_lesson4_female_comparison(save_progress):
             st.rerun()
 
 def show_lesson4_vocab():
-    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng được phân loại theo 9 vận mẫu kép mở rộng đã học.")
-    
-   
-    
-    tab_ia, tab_ie, tab_iao, tab_iu, tab_ua, tab_uo, tab_uai, tab_ui, tab_ue = st.tabs([
-        "ia (ya)", "ie (ye)", "iao (yao)", "iu (you)", "ua (wa)", "uo (wo)", "uai (wai)", "ui (wei)", "üe (yue)"
-    ])
-    
-    def render_vocab_card(w, key_prefix):
-        img_name = key_prefix.split('_')[-1] + '.png'
-        img_path = os.path.join("assets", "lesson4", img_name)
-        img_base64 = ""
-        if os.path.exists(img_path):
-            with open(img_path, "rb") as f:
-                img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+    render_lesson_intro("📚 Bài 4: Hệ thống từ vựng Vận mẫu kép mở rộng", "Học các từ vựng thông dụng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
 
-        if img_base64:
-            card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 22px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
-<div style="display: flex; gap: 20px; align-items: center; margin-bottom: 15px;">
-    <img src="{img_base64}" style="width: 140px; height: 140px; border-radius: 16px; border: 2px solid #e2e8f0; object-fit: cover; background: white; padding: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex-shrink: 0;"/>
-    <div style="flex-grow: 1;">
-        <div style="font-size: 2.8em; font-weight: bold; color: #1e293b; line-height: 1.1;">{w['word']}</div>
-        <div style="margin-top: 8px;">
-            <span style="font-family: 'Courier New', monospace; font-size: 1.3em; font-weight: bold; color: #2563eb; background: white; padding: 4px 14px; border-radius: 20px; border: 1px solid #dbeafe; display: inline-block;">{w['pinyin']}</span>
+    VOCAB_LIST = [
+        {"group": "ia (ya)", "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà, gia đình", "key_prefix": "ia_jia", "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."},
+        {"group": "ia (ya)", "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt", "key_prefix": "ia_ya", "example_han": "鸭子很可爱。", "example_py": "Yāzi hěn kě'ài.", "example_vi": "Con vịt rất đáng yêu."},
+        {"group": "ie (ye)", "emoji": "👩‍🦰", "word": "姐姐", "pinyin": "jiějie", "vietnamese": "Chị gái", "key_prefix": "ie_jie", "example_han": "我的姐姐很美。", "example_py": "Wǒ de jiějie hěn měi.", "example_vi": "Chị gái tôi rất đẹp."},
+        {"group": "ie (ye)", "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội", "key_prefix": "ie_ye", "example_han": "爷爷爱栽花。", "example_py": "Yéye ài zāihuā.", "example_vi": "Ông nội thích trồng hoa."},
+        {"group": "iao (yao)", "emoji": "👶", "word": "小", "pinyin": "xiǎo", "vietnamese": "Nhỏ, bé", "key_prefix": "iao_xiao", "example_han": "他很小。", "example_py": "Tā hěn xiǎo.", "example_vi": "Cậu bé ấy rất nhỏ."},
+        {"group": "iao (yao)", "emoji": "💊", "word": "药", "pinyin": "yào", "vietnamese": "Thuốc", "key_prefix": "iao_yao", "example_han": "我吃药。", "example_py": "Wǒ chī yào.", "example_vi": "Tôi uống thuốc."},
+        {"group": "iu (you)", "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu", "key_prefix": "iu_liu", "example_han": "我有六个女朋友。", "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.", "example_vi": "Tôi có 6 người bạn gái."},
+        {"group": "iu (you)", "emoji": "🤝", "word": "有", "pinyin": "yǒu", "vietnamese": "Có", "key_prefix": "iu_you", "example_han": "我有一个姐姐。", "example_py": "Wǒ yǒu yī ge jiějie.", "example_vi": "Tôi có một người chị gái."},
+        {"group": "ua (wa)", "emoji": "🌸", "word": "花", "pinyin": "huā", "vietnamese": "Đóa hoa, hoa", "key_prefix": "ua_hua", "example_han": "花很美。", "example_py": "Huā hěn měi.", "example_vi": "Hoa rất đẹp."},
+        {"group": "ua (wa)", "emoji": "🧸", "word": "娃娃", "pinyin": "wáwa", "vietnamese": "Búp bê, em bé", "key_prefix": "ua_wawa", "example_han": "我喜欢娃娃。", "example_py": "Wǒ xǐhuān wáwa.", "example_vi": "Tôi thích búp bê."},
+        {"group": "uo (wo)", "emoji": "🙋‍♂️", "word": "我", "pinyin": "wǒ", "vietnamese": "Tôi, tớ, mình", "key_prefix": "uo_wo", "example_han": "我是学生。", "example_py": "Wǒ shì xuéshēng.", "example_vi": "Tôi là học sinh."},
+        {"group": "uo (wo)", "emoji": "🇨🇳", "word": "国家", "pinyin": "guójiā", "vietnamese": "Quốc gia, đất nước", "key_prefix": "uo_guojia", "example_han": "我的国家很美。", "example_py": "Wǒ de guójiā hěn měi.", "example_vi": "Đất nước của tôi rất đẹp."},
+        {"group": "uai (wai)", "emoji": "🚪", "word": "外", "pinyin": "wài", "vietnamese": "Ngoài, bên ngoài", "key_prefix": "uai_wai", "example_han": "外面很美。", "example_py": "Wài mian hěn měi.", "example_vi": "Bên ngoài rất đẹp."},
+        {"group": "uai (wai)", "emoji": "😎", "word": "帅", "pinyin": "shuài", "vietnamese": "Đẹp trai", "key_prefix": "uai_shuai", "example_han": "他很帅。", "example_py": "Tā hěn shuài.", "example_vi": "Anh ấy rất đẹp trai."},
+        {"group": "ui (wei)", "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước", "key_prefix": "ui_shui", "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."},
+        {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
+        {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."},
+        {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học tiếng Trung."}
+    ]
+
+    st.markdown(
+        """
+        <style>
+        .flashcard-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .flashcard-image-container {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 3px solid #f1f5f9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flashcard-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .flashcard-content {
+            flex-grow: 1;
+        }
+        .flashcard-word {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+        .flashcard-pinyin {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            background: #eff6ff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 1px solid #dbeafe;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .flashcard-vietnamese {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+        .flashcard-example-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+        }
+        .flashcard-example-title {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+        .flashcard-example-han {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+        .flashcard-example-py {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #059669;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+        .flashcard-example-vi {
+            color: #475569;
+            font-style: italic;
+            font-size: 0.95rem;
+            border-left: 2px solid #cbd5e1;
+            padding-left: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .flashcard-container {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+                gap: 20px;
+            }
+            .flashcard-image-container {
+                width: 160px;
+                height: 160px;
+            }
+            .flashcard-example-vi {
+                border-left: none;
+                padding-left: 0;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    groups = ["Tất cả (18 từ)"] + sorted(list(set(w["group"] for w in VOCAB_LIST)))
+    sel_group = st.selectbox("🔍 Chọn Nhóm Vận mẫu để học:", groups)
+
+    if sel_group.startswith("Tất cả"):
+        filtered_vocab = VOCAB_LIST
+    else:
+        filtered_vocab = [w for w in VOCAB_LIST if w["group"] == sel_group]
+
+    slide_key = f"b4_vocab_slide_idx_{sel_group}"
+    if slide_key not in st.session_state:
+        st.session_state[slide_key] = 0
+
+    cur_idx = st.session_state[slide_key]
+
+    if cur_idx >= len(filtered_vocab):
+        cur_idx = 0
+        st.session_state[slide_key] = 0
+
+    w = filtered_vocab[cur_idx]
+    img_name = w["key_prefix"].split('_')[-1] + '.png'
+    img_path = os.path.join("assets", "lesson4", img_name)
+    img_base64 = ""
+    if os.path.exists(img_path):
+        with open(img_path, "rb") as f:
+            img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+
+    if img_base64:
+        img_tag = f'<img src="{img_base64}" class="flashcard-image" />'
+    else:
+        img_tag = f'<div style="font-size: 4rem;">{w["emoji"]}</div>'
+
+    card_html = f"""
+    <div class="flashcard-container">
+        <div class="flashcard-image-container">
+            {img_tag}
         </div>
-        <div style="font-size: 1.25em; font-weight: bold; color: #334155; margin-top: 12px;">Nghĩa: {w['vietnamese']}</div>
+        <div class="flashcard-content">
+            <div class="flashcard-word">{w['word']}</div>
+            <div>
+                <span class="flashcard-pinyin">{w['pinyin']}</span>
+            </div>
+            <div class="flashcard-vietnamese">Nghĩa: {w['vietnamese']}</div>
+            <div class="flashcard-example-box">
+                <div class="flashcard-example-title">Ví dụ mẫu:</div>
+                <div class="flashcard-example-han">{w['example_han']}</div>
+                <div class="flashcard-example-py">{w['example_py']}</div>
+                <div class="flashcard-example-vi">{w['example_vi']}</div>
+            </div>
+        </div>
     </div>
-</div>
-<hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
-<div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
-<div style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">Ví dụ thực tế:</div>
-<div style="font-size: 1.25em; font-weight: bold; color: #0f172a; margin-bottom: 2px;">{w['example_han']}</div>
-<div style="font-family: 'Courier New', monospace; font-weight: bold; color: #047857; font-size: 0.95em; margin-bottom: 4px;">{w['example_py']}</div>
-<div style="color: #475569; font-style: italic; font-size: 0.9em; border-left: 2px solid #cbd5e1; padding-left: 6px;">{w['example_vi']}</div>
-</div>
-</div>"""
-        else:
-            card_html = f"""<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-left: 6px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-<div style="display: flex; align-items: center; justify-content: space-between;">
-<div style="font-size: 2.2em; font-weight: bold; color: #1e293b;">{w['emoji']} {w['word']}</div>
-<div style="font-family: 'Courier New', monospace; font-size: 1.4em; font-weight: bold; color: #2563eb; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid #dbeafe;">{w['pinyin']}</div>
-</div>
-<div style="font-size: 1.1em; font-weight: bold; margin: 10px 0; color: #334155;">Nghĩa: {w['vietnamese']}</div>
-<hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 15px 0;"/>
-<div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
-<div style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 4px;">Ví dụ thực tế:</div>
-<div style="font-size: 1.25em; font-weight: bold; color: #0f172a; margin-bottom: 2px;">{w['example_han']}</div>
-<div style="font-family: 'Courier New', monospace; font-weight: bold; color: #047857; font-size: 0.95em; margin-bottom: 4px;">{w['example_py']}</div>
-<div style="color: #475569; font-style: italic; font-size: 0.9em; border-left: 2px solid #cbd5e1; padding-left: 6px;">{w['example_vi']}</div>
-</div>
-</div>"""
-        cols = st.columns([4.2, 1.8])
-        with cols[0]:
-            st.markdown(card_html, unsafe_allow_html=True)
-        with cols[1]:
-            st.markdown("<br/>", unsafe_allow_html=True)
-            render_play_button(w['word'], "🔊 Phát âm từ", key=f"{key_prefix}_word")
-            render_play_button(w['example_han'], "🔊 Nghe cả câu", key=f"{key_prefix}_ex")
+    """
 
-    with tab_ia:
-        st.markdown("### 🏠 Nhóm Vận mẫu: ia / ya")
-        render_vocab_card({
-            "emoji": "🏠", "word": "家", "pinyin": "jiā", "vietnamese": "Nhà, gia đình",
-            "example_han": "这是我的家。", "example_py": "Zhè shì wǒ de jiā.", "example_vi": "Đây là nhà của tôi."
-        }, "ia_jia")
-        render_vocab_card({
-            "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt",
-            "example_han": "鸭子很可爱。", "example_py": "Yāzi hěn kě'ài.", "example_vi": "Con vịt rất đáng yêu."
-        }, "ia_ya")
-
-    with tab_ie:
-        st.markdown("### 👩‍🦰 Nhóm Vận mẫu: ie / ye")
-        render_vocab_card({
-            "emoji": "👩‍🦰", "word": "姐姐", "pinyin": "jiějie", "vietnamese": "Chị gái",
-            "example_han": "我的姐姐很美。", "example_py": "Wǒ de jiějie hěn měi.", "example_vi": "Chị gái tôi rất đẹp."
-        }, "ie_jie")
-        render_vocab_card({
-            "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội",
-            "example_han": "爷爷爱栽花。", "example_py": "Yéye ài zāihuā.", "example_vi": "Ông nội thích trồng hoa."
-        }, "ie_ye")
-
-    with tab_iao:
-        st.markdown("### 👶 Nhóm Vận mẫu: iao / yao")
-        render_vocab_card({
-            "emoji": "👶", "word": "小", "pinyin": "xiǎo", "vietnamese": "Nhỏ, bé",
-            "example_han": "他很小。", "example_py": "Tā hěn xiǎo.", "example_vi": "Cậu bé ấy rất nhỏ."
-        }, "iao_xiao")
-        render_vocab_card({
-            "emoji": "💊", "word": "药", "pinyin": "yào", "vietnamese": "Thuốc",
-            "example_han": "我吃药。", "example_py": "Wǒ chī yào.", "example_vi": "Tôi uống thuốc."
-        }, "iao_yao")
-
-    with tab_iu:
-        st.markdown("### 6️⃣ Nhóm Vận mẫu: iu / you")
-        render_vocab_card({
-            "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu",
-            "example_han": "我有六个女朋友。", "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.", "example_vi": "Tôi có 6 người bạn gái."
-        }, "iu_liu")
-        render_vocab_card({
-            "emoji": "🤝", "word": "有", "pinyin": "yǒu", "vietnamese": "Có",
-            "example_han": "我有一个姐姐。", "example_py": "Wǒ yǒu yī ge jiějie.", "example_vi": "Tôi có một người chị gái."
-        }, "iu_you")
-
-    with tab_ua:
-        st.markdown("### 🌸 Nhóm Vận mẫu: ua / wa")
-        render_vocab_card({
-            "emoji": "🌸", "word": "花", "pinyin": "huā", "vietnamese": "Đóa hoa, hoa",
-            "example_han": "花很美。", "example_py": "Huā hěn měi.", "example_vi": "Hoa rất đẹp."
-        }, "ua_hua")
-        render_vocab_card({
-            "emoji": "🧸", "word": "娃娃", "pinyin": "wáwa", "vietnamese": "Búp bê, em bé",
-            "example_han": "我喜欢娃娃。", "example_py": "Wǒ xǐhuān wáwa.", "example_vi": "Tôi thích búp bê."
-        }, "ua_wawa")
-
-    with tab_uo:
-        st.markdown("### 🙋‍♂️ Nhóm Vận mẫu: uo / wo")
-        render_vocab_card({
-            "emoji": "🙋‍♂️", "word": "我", "pinyin": "wǒ", "vietnamese": "Tôi, tớ, mình",
-            "example_han": "我是学生。", "example_py": "Wǒ shì xuéshēng.", "example_vi": "Tôi là học sinh."
-        }, "uo_wo")
-        render_vocab_card({
-            "emoji": "🇨🇳", "word": "国家", "pinyin": "guójiā", "vietnamese": "Quốc gia, đất nước",
-            "example_han": "我的国家很美。", "example_py": "Wǒ de guójiā hěn měi.", "example_vi": "Đất nước của tôi rất đẹp."
-        }, "uo_guojia")
-
-    with tab_uai:
-        st.markdown("### 🚪 Nhóm Vận mẫu: uai / wai")
-        render_vocab_card({
-            "emoji": "🚪", "word": "外", "pinyin": "wài", "vietnamese": "Ngoài, bên ngoài",
-            "example_han": "外面很美。", "example_py": "Wài mian hěn měi.", "example_vi": "Bên ngoài rất đẹp."
-        }, "uai_wai")
-        render_vocab_card({
-            "emoji": "😎", "word": "帅", "pinyin": "shuài", "vietnamese": "Đẹp trai",
-            "example_han": "他很帅。", "example_py": "Tā hěn shuài.", "example_vi": "Anh ấy rất đẹp trai."
-        }, "uai_shuai")
-
-    with tab_ui:
-        st.markdown("### 💧 Nhóm Vận mẫu: ui / wei")
-        render_vocab_card({
-            "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước",
-            "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."
-        }, "ui_shui")
-        render_vocab_card({
-            "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo",
-            "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"
-        }, "ui_wei")
-
-    with tab_ue:
-        st.markdown("### 🌙 Nhóm Vận mẫu: üe / yue")
-        render_vocab_card({
-            "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng",
-            "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."
-        }, "ue_yue")
-        render_vocab_card({
-            "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học",
-            "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học tiếng Trung."
-        }, "ue_xue")
-
+    col_card, col_ctrl = st.columns([4.2, 1.8])
+    with col_card:
+        st.markdown(card_html, unsafe_allow_html=True)
+    with col_ctrl:
+        st.markdown("<h4 style='color:#1e293b; margin-top:0;'>🔊 Phát âm</h4>", unsafe_allow_html=True)
+        render_play_button(w['word'], "🔊 Phát âm từ", key=f"slide_{w['key_prefix']}_word")
+        st.write("")
+        render_play_button(w['example_han'], "🔊 Nghe cả câu", key=f"slide_{w['key_prefix']}_ex")
+        
+        st.markdown("<hr style='margin:15px 0;'/>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#1e293b;'>🎮 Điều khiển</h4>", unsafe_allow_html=True)
+        
+        col_prev, col_next = st.columns(2)
+        with col_prev:
+            if st.button("⬅️ Từ trước", disabled=(cur_idx == 0), use_container_width=True, key=f"btn_prev_{sel_group}"):
+                st.session_state[slide_key] -= 1
+                st.rerun()
+        with col_next:
+            if st.button("Từ sau ➡️", disabled=(cur_idx == len(filtered_vocab) - 1), use_container_width=True, key=f"btn_next_{sel_group}"):
+                st.session_state[slide_key] += 1
+                st.rerun()
+                
+        st.markdown(f"<div style='text-align: center; font-size: 1.25em; font-weight: bold; margin-top: 10px; color:#475569;'>Từ {cur_idx + 1} / {len(filtered_vocab)}</div>", unsafe_allow_html=True)
+        progress_val = (cur_idx + 1) / len(filtered_vocab)
+        st.progress(progress_val)

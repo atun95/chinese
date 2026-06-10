@@ -53,10 +53,11 @@ USER_DATA_DIR.mkdir(parents=True, exist_ok=True)
 SCORES_FILE = USER_DATA_DIR / "scores.csv"
 SCORES_B2_FILE = USER_DATA_DIR / "scores_b2.csv"
 SCORES_B3_FILE = USER_DATA_DIR / "scores_b3.csv"
+SCORES_B4_FILE = USER_DATA_DIR / "scores_b4.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -129,6 +130,22 @@ def save_score_row_b3(row_data):
 def load_all_scores_b3():
     if not SCORES_B3_FILE.exists(): return []
     with open(SCORES_B3_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+def save_score_row_b4(row_data):
+    file_exists = SCORES_B4_FILE.exists()
+    try:
+        with open(SCORES_B4_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT1: Luyện nghe", "BT2: Chính tả", "BT3: Lắp ráp Bính âm", "BT4: Phân biệt Nữ giới"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 4: {e}"); return False
+
+def load_all_scores_b4():
+    if not SCORES_B4_FILE.exists(): return []
+    with open(SCORES_B4_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
 def add_tones(base):
@@ -235,7 +252,7 @@ elif menu == "Bài 5 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
 
 elif menu == "Bài tập Bài 4":
-    lesson4.show_lesson4_exercises(save_progress)
+    lesson4.show_lesson4_exercises(save_progress, save_score_row_b4, load_all_scores_b4)
 
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
