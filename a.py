@@ -177,12 +177,11 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
         "Bài 1.2 - Phiên âm cơ bản",
         "Bài 2.1 - Vận mẫu kép cơ bản",
-        "Bài 2.2 - Luyện tập ghép âm", 
         "Bài 3.1 - Phiên âm nâng cao", 
         "Bài 3.2 - Quy tắc viết Pinyin",
         "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 3.5 - Hội thoại thực hành",
-        "Bài 4.1 - Vận mẫu kép mở rộng",
+        "Bài 4.1 - Từ vựng mở rộng",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
         "Bài 4.3 - Đấu trường Luyện tập",
         "Bài 5 - Nét chữ Hán cơ bản"
@@ -258,8 +257,8 @@ elif menu == "Bài 3.5 - Hội thoại thực hành":
 elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
-elif menu == "Bài 4.1 - Vận mẫu kép mở rộng":
-    lesson4.show_lesson4_finals()
+elif menu == "Bài 4.1 - Từ vựng mở rộng":
+    lesson4.show_lesson4_vocab()
 
 elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
