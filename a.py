@@ -169,8 +169,8 @@ if "initialized" not in st.session_state:
 st.title("Học Pinyin Cơ Bản")
 
 st.sidebar.header("Danh mục giáo án")
-teacher_unlock = st.sidebar.checkbox("Mở khóa nội dung nâng cao")
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "📝 Hệ thống bài tập"])
+
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "📝 Hệ thống bài tập"])
 
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
@@ -180,7 +180,6 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 2.2 - Luyện tập ghép âm", 
         "Bài 3.1 - Phiên âm nâng cao", 
         "Bài 3.2 - Quy tắc viết Pinyin",
-        "Bài 3.3 - Luyện tập ghép âm",
         "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 3.5 - Hội thoại thực hành",
         "Bài 4.1 - Vận mẫu kép mở rộng",
@@ -193,6 +192,12 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 1 - TỪ VỰNG CƠ BẢN", 
         "Bài 3 - TỪ VỰNG",
         "Bài 4 - TỪ VỰNG"
+    ])
+elif mode == "🗣️ Luyện tập ghép âm":
+    menu = st.sidebar.radio("Chọn bảng ghép âm:", [
+        "Ghép âm Bài 2 - Vận mẫu kép cơ bản",
+        "Ghép âm Bài 3 - Thanh mẫu nâng cao",
+        "Ghép âm Bài 4 - Vận mẫu kép mở rộng"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -217,8 +222,14 @@ elif menu == "Bài tập Bài 1":
 elif menu == "Bài 2.1 - Vận mẫu kép cơ bản":
     lesson2.show_lesson2_intro(add_tones)
 
-elif menu == "Bài 2.2 - Luyện tập ghép âm":
+elif menu == "Ghép âm Bài 2 - Vận mẫu kép cơ bản":
     lesson2.show_lesson2_spelling(add_tones)
+
+elif menu == "Ghép âm Bài 3 - Thanh mẫu nâng cao":
+    lesson3.show_lesson3_practice(add_tones)
+
+elif menu == "Ghép âm Bài 4 - Vận mẫu kép mở rộng":
+    lesson4.show_lesson4_spelling(add_tones)
 
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)

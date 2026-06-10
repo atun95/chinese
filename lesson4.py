@@ -1587,3 +1587,50 @@ def show_lesson4_vocab():
         st.markdown(f"<div style='text-align: center; font-size: 1.25em; font-weight: bold; margin-top: 10px; color:#475569;'>Từ {cur_idx + 1} / {len(filtered_vocab)}</div>", unsafe_allow_html=True)
         progress_val = (cur_idx + 1) / len(filtered_vocab)
         st.progress(progress_val)
+
+def show_lesson4_spelling(add_tones):
+    render_lesson_intro("📚 Bài 4: Luyện tập ghép âm mở rộng", "Luyện tập ghép âm các thanh mẫu với 9 vận mẫu kép mở rộng (ia, ie, iao, iu, ua, uo, uai, ui, üe).")
+    
+    B4_LUYEN_TAP_FINALS = ["ia", "ie", "iao", "iu", "ua", "uo", "uai", "ui", "üe"]
+    B4_LUYEN_TAP_ROWS = {
+        "b": ["", "bie", "biao", "", "", "bo", "", "", ""],
+        "p": ["", "pie", "piao", "", "", "po", "", "", ""],
+        "m": ["", "mie", "miao", "miu", "", "mo", "", "", ""],
+        "f": ["", "", "", "", "", "fo", "", "", ""],
+        "d": ["", "die", "diao", "diu", "", "duo", "", "dui", ""],
+        "t": ["", "tie", "tiao", "", "", "tuo", "", "tui", ""],
+        "n": ["", "nie", "niao", "niu", "", "nuo", "", "", "nüe"],
+        "l": ["", "lie", "liao", "liu", "", "luo", "", "", "lüe"],
+        "g": ["", "", "", "", "gua", "guo", "guai", "gui", ""],
+        "k": ["", "", "", "", "kua", "kuo", "kuai", "kui", ""],
+        "h": ["", "", "", "", "hua", "huo", "huai", "hui", ""],
+        "j": ["jia", "jie", "jiao", "jiu", "", "", "", "", "jue"],
+        "q": ["qia", "qie", "qiao", "qiu", "", "", "", "", "que"],
+        "x": ["xia", "xie", "xiao", "xiu", "", "", "", "", "xue"],
+        "zh": ["", "", "", "", "zhua", "zhuo", "zhuai", "zhui", ""],
+        "ch": ["", "", "", "", "chua", "chuo", "chuai", "chui", ""],
+        "sh": ["", "", "", "", "shua", "shuo", "shuai", "shui", ""],
+        "r": ["", "", "", "", "", "ruo", "", "rui", ""],
+        "z": ["", "", "", "", "", "zuo", "", "zui", ""],
+        "c": ["", "", "", "", "", "cuo", "", "cui", ""],
+        "s": ["", "", "", "", "", "suo", "", "sui", ""]
+    }
+    
+    st.subheader("Bảng luyện tập ghép âm mở rộng (Bài 4)")
+    h_cols = st.columns([1.5] + [1] * len(B4_LUYEN_TAP_FINALS))
+    h_cols[0].markdown("**T/V**")
+    for i, f in enumerate(B4_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
+    for init in B4_LUYEN_TAP_ROWS.keys():
+        r_cols = st.columns([1.5] + [1] * len(B4_LUYEN_TAP_FINALS))
+        r_cols[0].markdown(f"**{init}**")
+        for i, combo in enumerate(B4_LUYEN_TAP_ROWS[init]):
+            if combo:
+                with r_cols[i+1]:
+                    with st.popover(combo, use_container_width=True):
+                        for t in add_tones(combo):
+                            col_t, col_btn = st.columns([2, 1])
+                            col_t.write(f"- {t}")
+                            with col_btn:
+                                render_play_button(t, "🔊", key=f"btn_p_b4_{init}_{combo}_{t}", height=45)
+            else:
+                r_cols[i+1].write("")
