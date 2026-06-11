@@ -914,7 +914,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                 "explain": "Chú ý vận mẫu 'iao' trong 'piào' và nguyên âm 'ü' trong 'nǚ' (phải giữ nguyên dấu hai chấm khi kết hợp với n-)."
             },
             {
-                "meaning": "A Thanh là một luật sư thực tập",
+                "meaning": "A Thanh là một luật sư tập sự",
                 "audio": "阿青是一个实习律师",
                 "image": "lǜshī.png",
                 "emoji": "⚖️",
@@ -1086,8 +1086,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
         labels_b4 = {
             "b4_listening": "BT1: Luyện nghe", 
             "b4_spelling": "BT2: Chính tả", 
-            "b4_assembly": "BT3: Hỏi đáp Bính âm", 
-            "b4_female_vocab": "BT4: Phân biệt Nữ giới"
+            "b4_assembly": "BT3: Hỏi đáp Bính âm"
         }
         missing_b4 = [v for k, v in labels_b4.items() if k not in cur]
 
@@ -1116,8 +1115,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                         "tổng điểm": b4_score_10, 
                         "BT1: Luyện nghe": fmt("b4_listening"),
                         "BT2: Chính tả": fmt("b4_spelling"),
-                        "BT3: Hỏi đáp Bính âm": fmt("b4_assembly"),
-                        "BT4: Phân biệt Nữ giới": fmt("b4_female_vocab")
+                        "BT3: Hỏi đáp Bính âm": fmt("b4_assembly")
                     }
                     if save_score_row_b4 and save_score_row_b4(row):
                         st.success("Đã lưu điểm Bài 4 thành công!")
