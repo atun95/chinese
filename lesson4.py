@@ -884,44 +884,44 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
         
         QA_TARGETS = [
             {
-                "meaning": "Đóa hoa / Hoa",
-                "audio": "huā",
-                "image": "hua.png",
-                "emoji": "🌸",
-                "question": "Nghe âm thanh và chọn cách viết Bính âm (Pinyin) chuẩn xác nhất biểu thị nghĩa của từ sau:",
-                "choices": ["A. huō", "B. hāu", "C. huā", "D. huāi"],
-                "answer": "C. huā",
-                "explain": "Thanh mẫu 'h' kết hợp với vận mẫu kép 'ua' và thanh 1 tạo thành 'huā'. Cách viết này giữ nguyên không viết gọn hay biến đổi âm đệm."
+                "meaning": "A Trân thích uống trà sữa",
+                "audio": "阿珍喜欢喝奶茶",
+                "image": "naichá.png",
+                "emoji": "🥤",
+                "question": "Chọn cách viết Bính âm (Pinyin) chuẩn xác nhất cho câu: \"阿珍喜欢喝奶茶\"",
+                "choices": ["A. Āzhēn xǐhuan hē nǎichá", "B. Āzhēn xǐhuān hē nǎicá", "C. Āzhēn xǐhuān hē lǎichá", "D. Āzhēn xǐhuan hē nǎishá"],
+                "answer": "A. Āzhēn xǐhuan hē nǎichá",
+                "explain": "Chú ý phụ âm đầu n- và l- trong 'nǎi', âm đầu ch- trong 'chá', và thanh điệu chính xác của các từ."
             },
             {
-                "meaning": "Nước",
-                "audio": "shuǐ",
-                "image": "shui.png",
-                "emoji": "💧",
-                "question": "Chọn từ viết đúng chính tả Pinyin cho từ biểu thị nghĩa dưới đây (chú ý quy tắc viết gọn của 'uei' và vị trí đặt dấu thanh):",
-                "choices": ["A. shueǐ", "B. shǔi", "C. shuěi", "D. shuǐ"],
-                "answer": "D. shuǐ",
-                "explain": "Quy tắc viết gọn: Vận mẫu gốc 'uei' khi đi sau thanh mẫu 'sh' rút gọn thành 'ui'. Quy tắc đặt dấu thanh: đặt trên nguyên âm chính đứng sau 'i', tạo thành 'shuǐ'."
+                "meaning": "Thầy giáo không có bạn gái",
+                "audio": "老师没有女朋友",
+                "image": "nǚpéngyou.png",
+                "emoji": "👩‍❤️‍👨",
+                "question": "Chọn cách viết Bính âm (Pinyin) chuẩn xác nhất cho câu: \"老师没有女朋友\"",
+                "choices": ["A. Lǎoshī méiyǒu nǚpényou", "B. Lǎoshī méiyǒu nǔpéngyou", "C. Lǎoshī méiyǒu nǚpénggǒu", "D. Lǎoshī méiyǒu nǚpéngyou"],
+                "answer": "D. Lǎoshī méiyǒu nǚpéngyou",
+                "explain": "Chú ý nguyên âm 'ü' trong từ 'nǚ' (phải giữ nguyên dấu hai chấm khi kết hợp với n-), và vận mẫu 'eng' trong 'péng'."
             },
             {
-                "meaning": "Số sáu",
-                "audio": "liù",
-                "image": "liu.png",
-                "emoji": "6️⃣",
-                "question": "Chọn cách viết chính tả Pinyin chuẩn xác của tổ hợp thanh mẫu 'l' + vận mẫu gốc 'iou' + thanh 4 (Số sáu):",
-                "choices": ["A. liù", "B. liòu", "C. liò", "D. lù"],
-                "answer": "A. liù",
-                "explain": "Quy tắc viết gọn: Vận mẫu gốc 'iou' khi đi sau thanh mẫu 'l' được viết rút gọn là 'iu'. Dấu thanh điệu đặt trên chữ cái sau cùng 'u', tạo thành 'liù'."
+                "meaning": "Chị Vy là một người phụ nữ đẹp",
+                "audio": "薇姐是一个漂亮女人",
+                "image": "piàoliang.png",
+                "emoji": "💃",
+                "question": "Chọn cách viết Bính âm (Pinyin) chuẩn xác nhất cho câu: \"薇姐是一个漂亮女人\"",
+                "choices": ["A. Wēijiě shì yíge piàolang nǚrén", "B. Wēijiě shì yíge piàoliang nǚrén", "C. Wēijiě shì yíge piàoliang nǔrén", "D. Wēijiě shì yíge piāoliang nǚrén"],
+                "answer": "B. Wēijiě shì yíge piàoliang nǚrén",
+                "explain": "Chú ý vận mẫu 'iao' trong 'piào' và nguyên âm 'ü' trong 'nǚ' (phải giữ nguyên dấu hai chấm khi kết hợp với n-)."
             },
             {
-                "meaning": "Mặt trăng / Tháng",
-                "audio": "yuè",
-                "image": "yue.png",
-                "emoji": "🌙",
-                "question": "Khi vận mẫu tròn môi 'üe' đứng độc lập (không đi kèm thanh mẫu phía trước), cách viết chính tả Bính âm chuẩn là gì?",
-                "choices": ["A. yüè", "B. yuè", "C. iè", "D. yě"],
-                "answer": "B. yuè",
-                "explain": "Quy tắc biến đổi độc lập: Vận mẫu 'üe' khi đứng một mình đổi 'ü' thành 'y' và bỏ dấu hai chấm trên đầu, tạo thành 'yuè'."
+                "meaning": "A Thanh là một luật sư thực tập",
+                "audio": "阿青是一个实习律师",
+                "image": "lǜshī.png",
+                "emoji": "⚖️",
+                "question": "Chọn cách viết Bính âm (Pinyin) chuẩn xác nhất cho câu: \"阿青是一个实习律师\"",
+                "choices": ["A. Āqīng shì yíge shíxí lǜshī", "B. Āqīng shì yíge shíxí lùshī", "C. Āqīng shì yíge shíxí lüshī", "D. Āqǐng shì yíge shíxí lǜshī"],
+                "answer": "A. Āqīng shì yíge shíxí lǜshī",
+                "explain": "Chú ý âm đầu 'q' trong 'qīng' và nguyên âm 'ü' có dấu thanh điệu 'ǜ' trong 'lǜ' (phải giữ nguyên dấu hai chấm khi kết hợp với l-)."
             }
         ]
         
