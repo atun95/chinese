@@ -876,7 +876,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
             }
             </style>
-            <div class="challenge-header">🧩 Thử thách: Hỏi đáp Bính âm (Pinyin Quiz)</div>
+            <div class="challenge-header">🧩 Thử thách: Pinyin Quiz</div>
             <p style='color: #475569;'>Quan sát nghĩa của từ, nghe phát âm và chọn đáp án Bính âm (Pinyin) đúng quy tắc chính tả nhất.</p>
             """, 
             unsafe_allow_html=True
@@ -944,7 +944,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                 f"""
                 <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center;">
                     <span style="font-size: 2.5em;">🏆</span>
-                    <h3 style="color: #065F46; margin-top: 5px;">Chúc mừng bạn đã hoàn thành Thử thách Hỏi đáp Bính âm!</h3>
+                    <h3 style="color: #065F46; margin-top: 5px;">Chúc mừng bạn đã hoàn thành Thử thách Pinyin Quiz!</h3>
                     <p style="color: #047857; font-size: 1.1em; margin-bottom: 5px;">Kết quả đạt được: <b>{correct_count} / {len(QA_TARGETS)}</b> câu đúng</p>
                     <p style="color: #047857; margin-bottom: 15px;">Bạn đã làm chủ hoàn toàn các quy luật chính tả Pinyin rút gọn/biến đổi!</p>
                 </div>
@@ -1086,7 +1086,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
         labels_b4 = {
             "b4_listening": "BT1: Luyện nghe", 
             "b4_spelling": "BT2: Chính tả", 
-            "b4_assembly": "BT3: Hỏi đáp Bính âm"
+            "b4_assembly": "BT3: Pinyin Quiz"
         }
         missing_b4 = [v for k, v in labels_b4.items() if k not in cur]
 
@@ -1115,7 +1115,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                         "tổng điểm": b4_score_10, 
                         "BT1: Luyện nghe": fmt("b4_listening"),
                         "BT2: Chính tả": fmt("b4_spelling"),
-                        "BT3: Hỏi đáp Bính âm": fmt("b4_assembly")
+                        "BT3: Pinyin Quiz": fmt("b4_assembly")
                     }
                     if save_score_row_b4 and save_score_row_b4(row):
                         st.success("Đã lưu điểm Bài 4 thành công!")

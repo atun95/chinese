@@ -135,7 +135,7 @@ def load_all_scores_b3():
 
 def save_score_row_b4(row_data):
     file_exists = SCORES_B4_FILE.exists()
-    new_fields = ["thời gian", "học viên", "tổng điểm", "BT1: Luyện nghe", "BT2: Chính tả", "BT3: Hỏi đáp Bính âm"]
+    new_fields = ["thời gian", "học viên", "tổng điểm", "BT1: Luyện nghe", "BT2: Chính tả", "BT3: Pinyin Quiz"]
     
     if file_exists:
         try:
@@ -154,7 +154,7 @@ def save_score_row_b4(row_data):
                             "tổng điểm": r.get("tổng điểm", ""),
                             "BT1: Luyện nghe": r.get("BT1: Luyện nghe", ""),
                             "BT2: Chính tả": r.get("BT2: Chính tả", ""),
-                            "BT3: Hỏi đáp Bính âm": r.get("BT3: Lắp ráp Bính âm", "") or r.get("BT3: Hỏi đáp Bính âm", "")
+                            "BT3: Pinyin Quiz": r.get("BT3: Lắp ráp Bính âm", "") or r.get("BT3: Pinyin Quiz", "")
                         }
                         rows.append(new_row)
                 
