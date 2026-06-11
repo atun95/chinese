@@ -707,7 +707,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
     tab_challenge1, tab_challenge2, tab_challenge3 = st.tabs([
         "🎧 1. Listening", 
         "✍️ 2. Spelling", 
-        "🧩 3. Hỏi đáp Bính âm"
+        "🧩 3. Pinyin Quiz"
     ])
     
     # ------------------ CHALLENGE 1: LISTENING ------------------
