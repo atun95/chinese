@@ -707,7 +707,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
     tab_challenge1, tab_challenge2, tab_challenge3 = st.tabs([
         "🎧 1. Listening", 
         "✍️ 2. Spelling", 
-        "🧩 3. Assembler Puzzle"
+        "🧩 3. Hỏi đáp Bính âm"
     ])
     
     # ------------------ CHALLENGE 1: LISTENING ------------------
@@ -861,127 +861,106 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                 save_progress()
                 st.rerun()
 
-    # ------------------ CHALLENGE 3: ASSEMBLER PUZZLE ------------------
+    # ------------------ CHALLENGE 3: QA PUZZLE (HỎI ĐÁP BÍNH ÂM) ------------------
     with tab_challenge3:
         st.markdown(
             """
             <style>
-            .tile-label {
-                font-size: 0.92rem;
-                font-weight: bold;
-                color: #475569;
-                margin-top: 15px;
-                margin-bottom: 8px;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                border-left: 3px solid #2563eb;
-                padding-left: 8px;
-            }
             .puzzle-goal-card {
                 background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
                 border: 2px dashed #cbd5e1;
                 border-radius: 16px;
                 padding: 24px;
                 text-align: center;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
             }
             </style>
-            <div class="challenge-header">🧩 Thử thách: Siêu Nhân Ghép Âm (Pinyin Builder)</div>
-            <p style='color: #475569;'>Học viên click trực tiếp vào các mảnh ghép (Thanh mẫu, Vận mẫu gốc, Thanh điệu) để tự mình lắp ráp nên Bính âm đúng.</p>
+            <div class="challenge-header">🧩 Thử thách: Hỏi đáp Bính âm (Pinyin Quiz)</div>
+            <p style='color: #475569;'>Quan sát nghĩa của từ, nghe phát âm và chọn đáp án Bính âm (Pinyin) đúng quy tắc chính tả nhất.</p>
             """, 
             unsafe_allow_html=True
         )
         
-        ASSEMBLY_TARGETS = [
+        QA_TARGETS = [
             {
-                "target": "huā",
                 "meaning": "Đóa hoa / Hoa",
+                "audio": "huā",
                 "image": "hua.png",
                 "emoji": "🌸",
-                "hint": "Gợi ý: Thanh mẫu bắt đầu bằng 'h', vận mẫu kép 'ua', thanh 1.",
-                "choices_initial": ["h", "sh", "g", "(Không có)"],
-                "choices_final": ["ua", "uo", "uai", "ia"],
-                "correct_initial": "h",
-                "correct_final": "ua",
-                "correct_tone": 1
+                "question": "Nghe âm thanh và chọn cách viết Bính âm (Pinyin) chuẩn xác nhất biểu thị nghĩa của từ sau:",
+                "choices": ["A. huō", "B. hāu", "C. huā", "D. huāi"],
+                "answer": "C. huā",
+                "explain": "Thanh mẫu 'h' kết hợp với vận mẫu kép 'ua' và thanh 1 tạo thành 'huā'. Cách viết này giữ nguyên không viết gọn hay biến đổi âm đệm."
             },
             {
-                "target": "shuǐ",
                 "meaning": "Nước",
+                "audio": "shuǐ",
                 "image": "shui.png",
                 "emoji": "💧",
-                "hint": "Gợi ý: Thanh mẫu uốn lưỡi 'sh', vận mẫu gốc 'uei' (áp dụng quy tắc rút gọn 'uei' ➔ 'ui'), thanh 3.",
-                "choices_initial": ["sh", "zh", "s", "h"],
-                "choices_final": ["uei", "ui", "uai", "ua"],
-                "correct_initial": "sh",
-                "correct_final": "uei",
-                "correct_tone": 3
+                "question": "Chọn từ viết đúng chính tả Pinyin cho từ biểu thị nghĩa dưới đây (chú ý quy tắc viết gọn của 'uei' và vị trí đặt dấu thanh):",
+                "choices": ["A. shueǐ", "B. shǔi", "C. shuěi", "D. shuǐ"],
+                "answer": "D. shuǐ",
+                "explain": "Quy tắc viết gọn: Vận mẫu gốc 'uei' khi đi sau thanh mẫu 'sh' rút gọn thành 'ui'. Quy tắc đặt dấu thanh: đặt trên nguyên âm chính đứng sau 'i', tạo thành 'shuǐ'."
             },
             {
-                "target": "liù",
                 "meaning": "Số sáu",
+                "audio": "liù",
                 "image": "liu.png",
                 "emoji": "6️⃣",
-                "hint": "Gợi ý: Thanh mẫu 'l', vận mẫu gốc 'iou' (áp dụng quy tắc rút gọn 'iou' ➔ 'iu'), thanh 4.",
-                "choices_initial": ["l", "n", "m", "d"],
-                "choices_final": ["iou", "iu", "ie", "iao"],
-                "correct_initial": "l",
-                "correct_final": "iou",
-                "correct_tone": 4
+                "question": "Chọn cách viết chính tả Pinyin chuẩn xác của tổ hợp thanh mẫu 'l' + vận mẫu gốc 'iou' + thanh 4 (Số sáu):",
+                "choices": ["A. liù", "B. liòu", "C. liò", "D. lù"],
+                "answer": "A. liù",
+                "explain": "Quy tắc viết gọn: Vận mẫu gốc 'iou' khi đi sau thanh mẫu 'l' được viết rút gọn là 'iu'. Dấu thanh điệu đặt trên chữ cái sau cùng 'u', tạo thành 'liù'."
             },
             {
-                "target": "yuè",
                 "meaning": "Mặt trăng / Tháng",
+                "audio": "yuè",
                 "image": "yue.png",
                 "emoji": "🌙",
-                "hint": "Gợi ý: Không có thanh mẫu, vận mẫu tròn môi 'üe' đứng độc lập (áp dụng quy tắc chuyển üe ➔ yue), thanh 4.",
-                "choices_initial": ["(Không có)", "y", "j", "q"],
-                "choices_final": ["üe", "ue", "ie", "iao"],
-                "correct_initial": "(Không có)",
-                "correct_final": "üe",
-                "correct_tone": 4
+                "question": "Khi vận mẫu tròn môi 'üe' đứng độc lập (không đi kèm thanh mẫu phía trước), cách viết chính tả Bính âm chuẩn là gì?",
+                "choices": ["A. yüè", "B. yuè", "C. iè", "D. yě"],
+                "answer": "B. yuè",
+                "explain": "Quy tắc biến đổi độc lập: Vận mẫu 'üe' khi đứng một mình đổi 'ü' thành 'y' và bỏ dấu hai chấm trên đầu, tạo thành 'yuè'."
             }
         ]
         
         if "assembly_idx" not in st.session_state:
             st.session_state.assembly_idx = 0
+        if "assembly_answers" not in st.session_state:
+            st.session_state.assembly_answers = {}
+        if "assembly_checked" not in st.session_state:
+            st.session_state.assembly_checked = {}
             
         cur_idx = st.session_state.assembly_idx
         
-        if cur_idx >= len(ASSEMBLY_TARGETS):
-            st.session_state.scores["b4_assembly"] = (len(ASSEMBLY_TARGETS), len(ASSEMBLY_TARGETS))
+        if cur_idx >= len(QA_TARGETS):
+            # Calculate and save score
+            correct_count = sum(1 for i, q in enumerate(QA_TARGETS) if st.session_state.assembly_answers.get(i) == q["answer"])
+            st.session_state.scores["b4_assembly"] = (correct_count, len(QA_TARGETS))
+            save_progress()
+            
             st.markdown(
-                """
+                f"""
                 <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center;">
                     <span style="font-size: 2.5em;">🏆</span>
-                    <h3 style="color: #065F46; margin-top: 5px;">Chúc mừng bạn đã hoàn thành xuất sắc Thử thách Lắp ráp!</h3>
-                    <p style="color: #047857; margin-bottom: 15px;">Bạn đã làm chủ hoàn toàn cách ghép âm và các quy luật viết Pinyin rút gọn/biến đổi!</p>
+                    <h3 style="color: #065F46; margin-top: 5px;">Chúc mừng bạn đã hoàn thành Thử thách Hỏi đáp Bính âm!</h3>
+                    <p style="color: #047857; font-size: 1.1em; margin-bottom: 5px;">Kết quả đạt được: <b>{correct_count} / {len(QA_TARGETS)}</b> câu đúng</p>
+                    <p style="color: #047857; margin-bottom: 15px;">Bạn đã làm chủ hoàn toàn các quy luật chính tả Pinyin rút gọn/biến đổi!</p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
-            if st.button("🔄 Chơi lại Thử thách Lắp ráp từ đầu", use_container_width=True, key="reset_assembly_final_btn"):
+            if st.button("🔄 Làm lại phần Hỏi đáp từ đầu", use_container_width=True, key="reset_qa_final_btn"):
                 st.session_state.assembly_idx = 0
+                st.session_state.assembly_answers = {}
+                st.session_state.assembly_checked = {}
                 if "b4_assembly" in st.session_state.scores:
                     del st.session_state.scores["b4_assembly"]
-                st.session_state.assembly_initial = None
-                st.session_state.assembly_final = None
-                st.session_state.assembly_tone = None
-                st.session_state.assembly_checked = False
-                st.session_state.assembly_correct = False
+                save_progress()
                 st.rerun()
         else:
-            # Sync session states for choices when question changes
-            if "assembly_cur_idx" not in st.session_state or st.session_state.assembly_cur_idx != cur_idx:
-                st.session_state.assembly_cur_idx = cur_idx
-                st.session_state.assembly_initial = None
-                st.session_state.assembly_final = None
-                st.session_state.assembly_tone = None
-                st.session_state.assembly_checked = False
-                st.session_state.assembly_correct = False
-                
-            item = ASSEMBLY_TARGETS[cur_idx]
+            item = QA_TARGETS[cur_idx]
             
             img_base64 = ""
             if "image" in item:
@@ -991,243 +970,112 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                         img_base64 = f"data:image/png;base64,{base64.b64encode(f.read()).decode('utf-8')}"
 
             if img_base64:
-                img_html = f'<div style="margin: 15px 0;"><img src="{img_base64}" style="width: 120px; height: 120px; border-radius: 16px; border: 1px solid #e2e8f0; object-fit: cover; background: white; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);"/></div>'
+                img_html = f'<div style="margin: 10px 0;"><img src="{img_base64}" style="width: 120px; height: 120px; border-radius: 16px; border: 1px solid #e2e8f0; object-fit: cover; background: white; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);"/></div>'
             else:
-                img_html = f'<div style="margin: 15px 0; font-size: 3.5rem; background: white; width: 120px; height: 120px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">{item["emoji"]}</div>'
+                img_html = f'<div style="margin: 10px 0; font-size: 3.5rem; background: white; width: 120px; height: 120px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">{item["emoji"]}</div>'
 
             st.markdown(
                 f"""
                 <div class="puzzle-goal-card">
-                    <span style="font-size: 0.9em; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">MỤC TIÊU LẮP RÁP ({cur_idx + 1}/{len(ASSEMBLY_TARGETS)}):</span>
+                    <span style="font-size: 0.9em; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">CÂU HỎI ({cur_idx + 1}/{len(QA_TARGETS)}):</span>
                     <br/>
                     {img_html}
-                    <h2 style="color: #0f172a; margin: 5px 0;">"{item['meaning']}"</h2>
-                    <p style="color: #64748b; font-style: italic; font-size: 0.9rem; margin-bottom: 0;">{item['hint']}</p>
+                    <h3 style="color: #0f172a; margin: 10px 0 5px 0;">Nghĩa: "{item['meaning']}"</h3>
+                    <p style="color: #475569; font-size: 1rem; font-weight: 500; margin-bottom: 0;">{item['question']}</p>
                 </div>
                 """,
                 unsafe_allow_html=True
             )
             
-            # --- Work Arena ---
-            st.markdown("#### 🛠️ Bàn làm việc lắp ráp:")
-            arena_cols = st.columns(3)
-            
-            init_val = st.session_state.assembly_initial
-            init_disp = "Ø (Không)" if init_val == "(Không có)" else (init_val if init_val else "Chưa chọn")
-            init_border = "#3b82f6" if init_val else "#cbd5e1"
-            init_bg = "#eff6ff" if init_val else "#f8fafc"
-            
-            with arena_cols[0]:
-                st.markdown(
-                    f"""<div style="border: 2px solid {init_border}; background-color: {init_bg}; border-radius: 10px; padding: 12px; text-align: center; height: 100%;">
-                        <span style="font-size: 0.78em; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Thanh mẫu</span>
-                        <div style="font-size: 1.35em; font-weight: bold; color: #1e293b; margin-top: 4px;">{init_disp}</div>
-                    </div>""",
-                    unsafe_allow_html=True
-                )
+            # Speaker button
+            cols_aud = st.columns([1.5, 3, 1.5])
+            with cols_aud[1]:
+                render_play_button(item["audio"], "🔊 Nghe phát âm từ khóa", key=f"qa_play_target_{cur_idx}", type="secondary")
                 
-            final_val = st.session_state.assembly_final
-            final_disp = final_val if final_val else "Chưa chọn"
-            final_border = "#10b981" if final_val else "#cbd5e1"
-            final_bg = "#ecfdf5" if final_val else "#f8fafc"
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;'/>", unsafe_allow_html=True)
             
-            with arena_cols[1]:
-                st.markdown(
-                    f"""<div style="border: 2px solid {final_border}; background-color: {final_bg}; border-radius: 10px; padding: 12px; text-align: center; height: 100%;">
-                        <span style="font-size: 0.78em; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Vận mẫu gốc</span>
-                        <div style="font-size: 1.35em; font-weight: bold; color: #1e293b; margin-top: 4px;">{final_disp}</div>
-                    </div>""",
-                    unsafe_allow_html=True
-                )
-                
-            tone_val = st.session_state.assembly_tone
-            tone_labels = ["Thanh 1 (¯)", "Thanh 2 (ˊ)", "Thanh 3 (ˇ)", "Thanh 4 (ˋ)"]
-            tone_disp = tone_labels[tone_val - 1] if tone_val else "Chưa chọn"
-            tone_border = "#f59e0b" if tone_val else "#cbd5e1"
-            tone_bg = "#fffbeb" if tone_val else "#f8fafc"
+            # --- Choices Selector ---
+            is_checked = st.session_state.assembly_checked.get(cur_idx, False)
+            selected_choice = st.session_state.assembly_answers.get(cur_idx, None)
             
-            with arena_cols[2]:
-                st.markdown(
-                    f"""<div style="border: 2px solid {tone_border}; background-color: {tone_bg}; border-radius: 10px; padding: 12px; text-align: center; height: 100%;">
-                        <span style="font-size: 0.78em; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Thanh điệu</span>
-                        <div style="font-size: 1.35em; font-weight: bold; color: #1e293b; margin-top: 4px;">{tone_disp}</div>
-                    </div>""",
-                    unsafe_allow_html=True
-                )
-            
-            # Show live preview
-            assembled_pinyin = ""
-            err_msg = ""
-            if init_val and final_val and tone_val:
-                assembled_pinyin, err_msg = check_spelling_rule(init_val, final_val, tone_val)
-                
-            if err_msg:
-                st.markdown(
-                    f"""<div style="background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 8px; padding: 10px 15px; margin-top: 15px; color: #B91C1C; font-size: 0.95em; text-align: center; font-weight: 500;">
-                        {err_msg}
-                    </div>""",
-                    unsafe_allow_html=True
-                )
-            elif assembled_pinyin:
-                st.markdown(
-                    f"""<div style="text-align: center; margin-top: 15px; background-color: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; padding: 15px;">
-                        <span style="font-size: 0.85em; color: #065F46; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">BÍNH ÂM LẮP RÁP ĐƯỢC:</span>
-                        <div style="font-family: 'Courier New', monospace; font-size: 2.8rem; font-weight: bold; color: #047857; margin: 4px 0;">{assembled_pinyin}</div>
-                    </div>""",
-                    unsafe_allow_html=True
-                )
-                
-                audio_cols = st.columns([1.5, 3, 1.5])
-                with audio_cols[1]:
-                    render_play_button(assembled_pinyin, "🔊 Phát âm thử âm tiết này", key=f"assem_play_live_{cur_idx}_{assembled_pinyin}", type="secondary")
-            else:
-                st.markdown(
-                    """<div style="background-color: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 15px; margin-top: 15px; text-align: center; color: #64748b; font-size: 0.9rem;">
-                        💡 Vui lòng bấm chọn các mảnh ghép phía dưới để tiến hành ghép âm.
-                    </div>""",
-                    unsafe_allow_html=True
-                )
-                
-            st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;'/>", unsafe_allow_html=True)
-            
-            # --- Tile Selector ---
-            st.markdown("#### 🧩 Chọn các Mảnh ghép:")
-            
-            # 1. Initials
-            st.markdown("<div class='tile-label'>1. Chọn Thanh mẫu (Initial)</div>", unsafe_allow_html=True)
-            cols_init = st.columns(len(item["choices_initial"]))
-            for idx, val in enumerate(item["choices_initial"]):
-                with cols_init[idx]:
-                    is_sel = (st.session_state.assembly_initial == val)
-                    btn_label = "Ø (Không)" if val == "(Không có)" else val
+            st.markdown("#### 👇 Chọn đáp án của bạn:")
+            cols_choice = st.columns(2)
+            for idx, choice in enumerate(item["choices"]):
+                col_to_use = cols_choice[idx % 2]
+                with col_to_use:
+                    is_sel = (selected_choice == choice)
+                    btn_label = choice
+                    btn_type = "secondary"
+                    
+                    if is_checked:
+                        if choice == item["answer"]:
+                            btn_label = f"✅ {choice} (Đúng)"
+                            btn_type = "primary"
+                        elif is_sel:
+                            btn_label = f"❌ {choice} (Bạn chọn)"
+                            btn_type = "primary"
+                    else:
+                        if is_sel:
+                            btn_label = f"👉 {choice}"
+                            btn_type = "primary"
+                            
                     if st.button(
                         btn_label,
-                        key=f"tile_init_{cur_idx}_{val}_{idx}",
-                        type="primary" if is_sel else "secondary",
-                        use_container_width=True
+                        key=f"qa_btn_{cur_idx}_{idx}",
+                        type=btn_type,
+                        use_container_width=True,
+                        disabled=is_checked
                     ):
-                        st.session_state.assembly_initial = val
-                        st.session_state.assembly_checked = False
+                        st.session_state.assembly_answers[cur_idx] = choice
                         st.rerun()
 
-            # 2. Finals
-            st.markdown("<div class='tile-label'>2. Chọn Vận mẫu gốc (Final)</div>", unsafe_allow_html=True)
-            cols_final = st.columns(len(item["choices_final"]))
-            for idx, val in enumerate(item["choices_final"]):
-                with cols_final[idx]:
-                    is_sel = (st.session_state.assembly_final == val)
-                    if st.button(
-                        val,
-                        key=f"tile_final_{cur_idx}_{val}_{idx}",
-                        type="primary" if is_sel else "secondary",
-                        use_container_width=True
-                    ):
-                        st.session_state.assembly_final = val
-                        st.session_state.assembly_checked = False
-                        st.rerun()
-
-            # 3. Tones
-            st.markdown("<div class='tile-label'>3. Chọn Thanh điệu (Tone)</div>", unsafe_allow_html=True)
-            cols_tone = st.columns(4)
-            for idx in range(4):
-                val = idx + 1
-                with cols_tone[idx]:
-                    is_sel = (st.session_state.assembly_tone == val)
-                    if st.button(
-                        tone_labels[idx],
-                        key=f"tile_tone_{cur_idx}_{val}_{idx}",
-                        type="primary" if is_sel else "secondary",
-                        use_container_width=True
-                    ):
-                        st.session_state.assembly_tone = val
-                        st.session_state.assembly_checked = False
-                        st.rerun()
-                        
-            # --- Action Panel ---
-            st.markdown("<br/>", unsafe_allow_html=True)
-            col_actions = st.columns(3)
-            
-            with col_actions[0]:
-                clear_disabled = (init_val is None and final_val is None and tone_val is None)
-                if st.button("🧹 Xóa lựa chọn", use_container_width=True, key=f"assem_clear_{cur_idx}", disabled=clear_disabled):
-                    st.session_state.assembly_initial = None
-                    st.session_state.assembly_final = None
-                    st.session_state.assembly_tone = None
-                    st.session_state.assembly_checked = False
-                    st.session_state.assembly_correct = False
-                    st.rerun()
-                    
-            with col_actions[1]:
-                check_disabled = not (init_val and final_val and tone_val) or err_msg != ""
-                if st.button("🚀 Kiểm tra & Xác nhận", type="primary", use_container_width=True, key=f"assem_check_{cur_idx}", disabled=check_disabled):
-                    st.session_state.assembly_checked = True
-                    is_correct = (
-                        init_val == item["correct_initial"] and
-                        final_val == item["correct_final"] and
-                        tone_val == item["correct_tone"]
-                    )
-                    st.session_state.assembly_correct = is_correct
-                    
-                    if is_correct:
-                        st.toast("🎉 Chính xác tuyệt đối!", icon="✅")
-                    else:
-                        if assembled_pinyin == item["target"]:
-                            st.toast("⚠️ Gần đúng rồi! Hãy chú ý quy tắc Vận mẫu gốc.", icon="⚠️")
-                        else:
-                            st.toast("❌ Chưa chính xác!", icon="❌")
-                    st.rerun()
-                    
-            with col_actions[2]:
-                next_disabled = not (st.session_state.assembly_checked and st.session_state.assembly_correct)
-                if st.button("⏭️ Câu tiếp theo", use_container_width=True, key=f"assem_next_{cur_idx}", disabled=next_disabled):
-                    st.session_state.assembly_idx = cur_idx + 1
-                    st.session_state.assembly_initial = None
-                    st.session_state.assembly_final = None
-                    st.session_state.assembly_tone = None
-                    st.session_state.assembly_checked = False
-                    st.session_state.assembly_correct = False
-                    st.rerun()
-
-            # --- Feedback Messaging ---
-            if st.session_state.assembly_checked:
-                if st.session_state.assembly_correct:
-                    st.balloons()
+            # --- Feedback messaging ---
+            if is_checked:
+                is_correct = (selected_choice == item["answer"])
+                if is_correct:
                     st.markdown(
-                        f"""<div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #A7F3D0; border-radius: 12px; padding: 20px; margin-top: 15px;">
-                            <h4 style="color: #065F46; margin-top: 0; margin-bottom: 5px;">🎉 CHÍNH XÁC HOÀN TOÀN!</h4>
-                            <p style="color: #047857; font-size: 0.95em; margin-bottom: 10px;">
-                                Bạn đã chọn đúng <b>Thanh mẫu</b>, <b>Vận mẫu gốc</b> và <b>Thanh điệu</b>!
-                            </p>
-                            <div style="font-size: 2.2em; font-weight: bold; color: #047857; margin-bottom: 2px;">{assembled_pinyin}</div>
-                            <div style="color: #065F46; font-size: 1.05em; font-weight: 500;">Từ khóa nghĩa là: "{item['meaning']}"</div>
+                        f"""<div style="background-color: #ECFDF5; border: 2px solid #A7F3D0; border-radius: 10px; padding: 15px; margin-top: 15px; color: #065F46;">
+                            <b>🎉 CHÍNH XÁC!</b> Bạn đã chọn đúng đáp án: <b>{selected_choice}</b>
                         </div>""",
                         unsafe_allow_html=True
                     )
                 else:
-                    if assembled_pinyin == item["target"]:
-                        st.markdown(
-                            f"""<div style="background-color: #FFFBEB; border: 2px solid #FCD34D; border-radius: 12px; padding: 20px; margin-top: 15px; color: #92400E;">
-                                <h4 style="margin-top: 0; margin-bottom: 5px; color: #B45309;">⚠️ GẦN ĐÚNG RỒI!</h4>
-                                <p style="font-size: 0.95em; margin-bottom: 0; line-height: 1.5;">
-                                    Âm ghép ra đúng là <b>{assembled_pinyin}</b>, nhưng bạn đã chọn dạng viết gọn. 
-                                    Hãy chọn đúng <b>Vận mẫu gốc</b> (gốc của 'ui' là 'uei', của 'iu' là 'iou') theo hướng dẫn ở quy tắc viết để nắm vững bản chất nhé!
-                                </p>
-                            </div>""",
-                            unsafe_allow_html=True
-                        )
+                    st.markdown(
+                        f"""<div style="background-color: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 10px; padding: 15px; margin-top: 15px; color: #991B1B;">
+                            <b>❌ CHƯA CHÍNH XÁC!</b> Bạn chọn: <i>{selected_choice}</i>. Đáp án đúng là: <b>{item['answer']}</b>
+                        </div>""",
+                        unsafe_allow_html=True
+                    )
+                
+                st.markdown(
+                    f"""<div style="background-color: #EFF6FF; border-left: 6px solid #3B82F6; border-radius: 10px; padding: 15px; margin-top: 10px;">
+                        <b style="color: #1E40AF;">💡 Giải thích chính tả:</b><br/>
+                        <span style="color: #1E3A8A; font-size: 0.95em;">{item['explain']}</span>
+                    </div>""",
+                    unsafe_allow_html=True
+                )
+                
+            # --- Action buttons ---
+            st.markdown("<br/>", unsafe_allow_html=True)
+            col_acts = st.columns(2)
+            
+            with col_acts[0]:
+                check_disabled = is_checked or (selected_choice is None)
+                if st.button("🚀 Xác nhận đáp án", type="primary", use_container_width=True, key=f"qa_check_btn_{cur_idx}", disabled=check_disabled):
+                    st.session_state.assembly_checked[cur_idx] = True
+                    is_correct = (selected_choice == item["answer"])
+                    if is_correct:
+                        st.toast("🎉 Chính xác!", icon="✅")
                     else:
-                        st.markdown(
-                            f"""<div style="background: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 12px; padding: 20px; margin-top: 15px; color: #991B1B;">
-                                <h4 style="margin-top: 0; margin-bottom: 5px; color: #991B1B;">❌ CHƯA CHÍNH XÁC!</h4>
-                                <p style="font-size: 0.95em; margin-bottom: 10px;">
-                                    Âm <b>'{assembled_pinyin}'</b> bạn ghép ra chưa khớp với từ khóa nghĩa là <b>"{item['meaning']}"</b>.
-                                </p>
-                                <p style="font-size: 0.9em; margin-bottom: 0; color: #7F1D1D; font-style: italic; border-top: 1px dashed #FCA5A5; padding-top: 8px;">
-                                    <b>💡 Gợi ý:</b> {item['hint']}
-                                </p>
-                            </div>""",
-                            unsafe_allow_html=True
-                        )
+                        st.toast("❌ Chưa đúng rồi!", icon="❌")
+                    st.rerun()
+                    
+            with col_acts[1]:
+                next_disabled = not is_checked
+                btn_label = "Xem kết quả chung cuộc 📊" if cur_idx == len(QA_TARGETS) - 1 else "⏭️ Câu tiếp theo"
+                if st.button(btn_label, use_container_width=True, key=f"qa_next_btn_{cur_idx}", disabled=next_disabled):
+                    st.session_state.assembly_idx = cur_idx + 1
+                    st.rerun()
 
 
     # Tổng kết — chỉ hiện khi học viên đã chấm đủ các bài tập
@@ -1238,7 +1086,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
         labels_b4 = {
             "b4_listening": "BT1: Luyện nghe", 
             "b4_spelling": "BT2: Chính tả", 
-            "b4_assembly": "BT3: Lắp ráp Bính âm", 
+            "b4_assembly": "BT3: Hỏi đáp Bính âm", 
             "b4_female_vocab": "BT4: Phân biệt Nữ giới"
         }
         missing_b4 = [v for k, v in labels_b4.items() if k not in cur]
@@ -1268,7 +1116,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                         "tổng điểm": b4_score_10, 
                         "BT1: Luyện nghe": fmt("b4_listening"),
                         "BT2: Chính tả": fmt("b4_spelling"),
-                        "BT3: Lắp ráp Bính âm": fmt("b4_assembly"),
+                        "BT3: Hỏi đáp Bính âm": fmt("b4_assembly"),
                         "BT4: Phân biệt Nữ giới": fmt("b4_female_vocab")
                     }
                     if save_score_row_b4 and save_score_row_b4(row):
