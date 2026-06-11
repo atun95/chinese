@@ -135,10 +135,41 @@ def load_all_scores_b3():
 
 def save_score_row_b4(row_data):
     file_exists = SCORES_B4_FILE.exists()
+    new_fields = ["thời gian", "học viên", "tổng điểm", "BT1: Luyện nghe", "BT2: Chính tả", "BT3: Hỏi đáp Bính âm"]
+    
+    if file_exists:
+        try:
+            with open(SCORES_B4_FILE, "r", newline="", encoding="utf-8-sig") as f:
+                reader = csv.DictReader(f)
+                headers = reader.fieldnames
+            
+            if headers and ("BT3: Lắp ráp Bính âm" in headers or "BT4: Phân biệt Nữ giới" in headers):
+                rows = []
+                with open(SCORES_B4_FILE, "r", newline="", encoding="utf-8-sig") as f:
+                    reader = csv.DictReader(f)
+                    for r in reader:
+                        new_row = {
+                            "thời gian": r.get("thời gian", ""),
+                            "học viên": r.get("học viên", ""),
+                            "tổng điểm": r.get("tổng điểm", ""),
+                            "BT1: Luyện nghe": r.get("BT1: Luyện nghe", ""),
+                            "BT2: Chính tả": r.get("BT2: Chính tả", ""),
+                            "BT3: Hỏi đáp Bính âm": r.get("BT3: Lắp ráp Bính âm", "") or r.get("BT3: Hỏi đáp Bính âm", "")
+                        }
+                        rows.append(new_row)
+                
+                with open(SCORES_B4_FILE, "w", newline="", encoding="utf-8-sig") as f:
+                    writer = csv.DictWriter(f, fieldnames=new_fields)
+                    writer.writeheader()
+                    writer.writerows(rows)
+        except Exception as e:
+            print(f"Lỗi di trú file CSV Bài 4: {e}")
+
     try:
         with open(SCORES_B4_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT1: Luyện nghe", "BT2: Chính tả", "BT3: Lắp ráp Bính âm", "BT4: Phân biệt Nữ giới"])
-            if not file_exists: writer.writeheader()
+            writer = csv.DictWriter(f, fieldnames=new_fields)
+            if not SCORES_B4_FILE.exists() or SCORES_B4_FILE.stat().st_size == 0:
+                writer.writeheader()
             writer.writerow(row_data)
         return True
     except Exception as e:
