@@ -927,9 +927,9 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
         
         if "assembly_idx" not in st.session_state:
             st.session_state.assembly_idx = 0
-        if "assembly_answers" not in st.session_state:
+        if "assembly_answers" not in st.session_state or not isinstance(st.session_state.assembly_answers, dict):
             st.session_state.assembly_answers = {}
-        if "assembly_checked" not in st.session_state:
+        if "assembly_checked" not in st.session_state or not isinstance(st.session_state.assembly_checked, dict):
             st.session_state.assembly_checked = {}
             
         cur_idx = st.session_state.assembly_idx
