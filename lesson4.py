@@ -1059,9 +1059,6 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
         st.markdown("---")
         
     with tab_game:
-        st.markdown("### 🎮 Đấu trường Phản xạ & Tương tác")
-        st.markdown("Trò chơi phản xạ nhanh giúp học viên ôn tập từ vựng, cụm từ và phát âm của Bài 4 ngay tại lớp học.")
-        
         # Get student list from the shared input
         students_raw = st.session_state.get("dialogue_students_input", "Tiên, Vy, Trân, Thanh")
         students = [s.strip() for s in students_raw.split(",") if s.strip()]
@@ -1125,9 +1122,6 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 ]
                 
                 if "Reflex Spin" in game_mode:
-                    st.markdown("#### 🎯 Vòng xoay Thử thách")
-                    st.write("Giáo viên nhấn nút **Quay số** để chỉ định ngẫu nhiên Học viên, từ vựng và hành động cần thực hiện.")
-                    
                     if "spin_student" not in st.session_state:
                         st.session_state.spin_student = None
                     if "spin_prompt" not in st.session_state:
@@ -1143,9 +1137,13 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                             "✍️ Đặt câu nhanh (Đặt 1 câu tiếng Trung có nghĩa chứa từ này)",
                             "🔄 Dịch nhanh (Giáo viên che màn hình, học viên dịch nhanh từ tiếng Việt sang tiếng Trung)"
                         ])
+                        st.session_state.reveal_spin_meaning = False
                         st.rerun()
                         
                     if st.session_state.spin_student and st.session_state.spin_prompt:
+                        reveal = st.session_state.get("reveal_spin_meaning", False)
+                        meaning_text = st.session_state.spin_prompt['vietnamese'] if reveal else "❓ (Bấm nút hiện nghĩa bên dưới để xem)"
+                        
                         st.markdown(f"""
                         <div style='background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border-radius: 12px; padding: 20px; text-align: center; margin-top: 15px;'>
                             <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>👤 LƯỢT CHƠI CỦA:</div>
@@ -1154,7 +1152,7 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                             <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>📝 TỪ VỰNG THỬ THÁCH:</div>
                             <div style='font-size: 2.5em; font-weight: bold; margin-top: 5px;'>{st.session_state.spin_prompt['hanzi']}</div>
                             <div style='font-family: monospace; font-size: 1.3em; opacity: 0.9;'>{st.session_state.spin_prompt['pinyin']}</div>
-                            <div style='font-style: italic; opacity: 0.8;'>Nghĩa: {st.session_state.spin_prompt['vietnamese']}</div>
+                            <div style='font-style: italic; opacity: 0.8;'>Nghĩa: {meaning_text}</div>
                             <hr style='border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 15px 0;'/>
                             <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>⚡ YÊU CẦU:</div>
                             <div style='font-size: 1.25em; font-weight: bold; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 12px; display: inline-block; margin-top: 5px;'>{st.session_state.spin_action}</div>
@@ -1162,26 +1160,34 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                         """, unsafe_allow_html=True)
                         
                         st.markdown("<br/>", unsafe_allow_html=True)
-                        col_btns = st.columns(2)
+                        col_btns = st.columns([1.5, 1.5, 1.2])
                         with col_btns[0]:
-                            if st.button("✅ Trả lời đúng (+10đ)", type="primary", use_container_width=True, key="spin_correct"):
+                            if not reveal:
+                                if st.button("👁️ Hiện nghĩa", use_container_width=True, key="spin_reveal"):
+                                    st.session_state.reveal_spin_meaning = True
+                                    st.rerun()
+                            else:
+                                if st.button("👁️ Ẩn nghĩa", use_container_width=True, key="spin_hide"):
+                                    st.session_state.reveal_spin_meaning = False
+                                    st.rerun()
+                        with col_btns[1]:
+                            if st.button("✅ Đúng (+10đ)", type="primary", use_container_width=True, key="spin_correct"):
                                 st.session_state.game_scores[st.session_state.spin_student] += 10
                                 st.balloons()
                                 st.toast(f"Đã cộng 10 điểm cho {st.session_state.spin_student}!", icon="✅")
                                 st.session_state.spin_student = None
                                 st.session_state.spin_prompt = None
+                                st.session_state.reveal_spin_meaning = False
                                 st.rerun()
-                        with col_btns[1]:
-                            if st.button("❌ Bỏ qua / Trả lời sai", use_container_width=True, key="spin_incorrect"):
+                        with col_btns[2]:
+                            if st.button("❌ Bỏ qua", use_container_width=True, key="spin_incorrect"):
                                 st.toast("Lượt chơi đã qua!", icon="ℹ️")
                                 st.session_state.spin_student = None
                                 st.session_state.spin_prompt = None
+                                st.session_state.reveal_spin_meaning = False
                                 st.rerun()
                                 
                 else:
-                    st.markdown("#### ⚔️ Song đấu Phản xạ")
-                    st.write("Giáo viên nhấn nút để chọn cặp song đấu và từ vựng ngẫu nhiên. Ai đọc chính xác và nhanh nhất sẽ ghi điểm!")
-                    
                     if "duel_p1" not in st.session_state:
                         st.session_state.duel_p1 = None
                     if "duel_p2" not in st.session_state:
