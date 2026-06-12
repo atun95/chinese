@@ -7,100 +7,67 @@ NUMBERS_DATA = [
         "digit": "0",
         "hanzi": "零",
         "pinyin": "líng",
-        "vietnamese": "Không",
-        "read_guide": "Linh",
         "img_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/0_in_Chinese_charactar.svg/320px-0_in_Chinese_charactar.svg.png",
-        "desc": "Thường được viết tắt là 〇 trong các tài liệu hoặc số điện thoại."
     },
     {
         "digit": "1",
         "hanzi": "一",
         "pinyin": "yī",
-        "vietnamese": "Một",
-        "read_guide": "Y / I",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Eins.jpg",
-        "desc": "Cử chỉ tay: Chỉ duy nhất ngón trỏ lên."
     },
     {
         "digit": "2",
         "hanzi": "二",
         "pinyin": "èr",
-        "vietnamese": "Hai",
-        "read_guide": "Ơ-r (uốn lưỡi)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Zwei.jpg",
-        "desc": "Cử chỉ tay: Giơ ngón trỏ và ngón giữa (như hình chữ V)."
     },
     {
         "digit": "3",
         "hanzi": "三",
         "pinyin": "sān",
-        "vietnamese": "Ba",
-        "read_guide": "San",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Drei.jpg",
-        "desc": "Cử chỉ tay: Giơ ngón trỏ, ngón giữa và ngón áp út."
     },
     {
         "digit": "4",
         "hanzi": "四",
         "pinyin": "sì",
-        "vietnamese": "Bốn",
-        "read_guide": "Sư (thanh 4, dứt khoát)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Vier.jpg",
-        "desc": "Cử chỉ tay: Giơ 4 ngón tay từ ngón trỏ đến ngón út."
     },
     {
         "digit": "5",
         "hanzi": "五",
         "pinyin": "wǔ",
-        "vietnamese": "Năm",
-        "read_guide": "Ủ (xuống giọng và lên giọng)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Fuenf.jpg",
-        "desc": "Cử chỉ tay: Xòe cả 5 ngón tay."
     },
     {
         "digit": "6",
         "hanzi": "六",
         "pinyin": "liù",
-        "vietnamese": "Sáu",
-        "read_guide": "Liêu (thanh 4)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Sechs.jpg",
-        "desc": "Cử chỉ tay: Giơ ngón cái và ngón út (giống biểu tượng điện thoại)."
     },
     {
         "digit": "7",
         "hanzi": "七",
         "pinyin": "qī",
-        "vietnamese": "Bảy",
-        "read_guide": "Chi (âm gió bật hơi nhẹ)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Sieben.jpg",
-        "desc": "Cử chỉ tay: Chụm ngón cái, ngón trỏ và ngón giữa lại với nhau."
     },
     {
         "digit": "8",
         "hanzi": "八",
         "pinyin": "bā",
-        "vietnamese": "Tám",
-        "read_guide": "Pa (không bật hơi)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Acht.jpg",
-        "desc": "Cử chỉ tay: Giơ ngón cái và ngón trỏ (giống hình khẩu súng chĩa xuống)."
     },
     {
         "digit": "9",
         "hanzi": "九",
         "pinyin": "jiǔ",
-        "vietnamese": "Chín",
-        "read_guide": "Chiểu (thanh 3)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Neun.jpg",
-        "desc": "Cử chỉ tay: Cong ngón trỏ thành hình cái móc, các ngón khác nắm lại."
     },
     {
         "digit": "10",
         "hanzi": "十",
         "pinyin": "shí",
-        "vietnamese": "Mười",
-        "read_guide": "Sứ (uốn lưỡi)",
         "img_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Chinesische.Zahl.Zehn.jpg",
-        "desc": "Cử chỉ tay: Đan chéo ngón trỏ của hai tay thành hình chữ thập 十 (hoặc nắm tay lại)."
     }
 ]
 
