@@ -1,13 +1,33 @@
 import streamlit as st
 import random
+import base64
+import os
 from ui_utils import render_lesson_intro, render_play_button
+
+def get_image_src(img_path_or_url):
+    if img_path_or_url.startswith("http"):
+        return img_path_or_url
+    try:
+        if os.path.exists(img_path_or_url):
+            ext = os.path.splitext(img_path_or_url)[1].lower()
+            mime = "image/jpeg"
+            if ext == ".png":
+                mime = "image/png"
+            elif ext == ".webp":
+                mime = "image/webp"
+            with open(img_path_or_url, "rb") as f:
+                encoded = base64.b64encode(f.read()).decode("utf-8")
+                return f"data:{mime};base64,{encoded}"
+    except Exception:
+        pass
+    return img_path_or_url
 
 NUMBERS_DATA = [
     {
         "digit": "0",
         "hanzi": "零",
         "pinyin": "líng",
-        "img_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/0_in_Chinese_charactar.svg/320px-0_in_Chinese_charactar.svg.png",
+        "img_url": "assets/0.jpg",
     },
     {
         "digit": "1",
@@ -135,11 +155,9 @@ def show_lesson5_numbers():
                         <div class="number-digit">{item['digit']}</div>
                         <div class="number-hanzi">{item['hanzi']}</div>
                         <div class="number-pinyin">{item['pinyin']}</div>
-                        <div class="number-vietnamese">{item['vietnamese']} ({item['read_guide']})</div>
                         <div style="margin: 12px 0; display: flex; justify-content: center; align-items: center; height: 110px;">
-                            <img src="{item['img_url']}" style="max-width: 100%; max-height: 110px; object-fit: contain; border-radius: 8px; border: 1px solid #f1f5f9;"/>
+                            <img src="{get_image_src(item['img_url'])}" style="max-width: 100%; max-height: 110px; object-fit: contain; border-radius: 8px; border: 1px solid #f1f5f9;"/>
                         </div>
-                        <div class="number-desc">{item['desc']}</div>
                     </div>
                     """, unsafe_allow_html=True)
                     render_play_button(item['hanzi'], "🔊 Phát âm", key=f"play_num_{item['digit']}")
@@ -166,11 +184,10 @@ def show_lesson5_numbers():
             <div style='text-align: center; margin-top: 10px; margin-bottom: 20px;'>
                 <h3 style='margin: 0; color: #0f172a;'>Chữ Hán: <span style='font-size: 1.6em; font-weight: bold;'>{num['hanzi']}</span></h3>
                 <p style='font-size: 1.25em; font-family: monospace; font-weight: bold; color: #2563eb; margin: 5px 0;'>Bính âm: {num['pinyin']}</p>
-                <p style='font-size: 1.15em; font-style: italic; color: #4b5563; margin: 0;'>Nghĩa: {num['vietnamese']} ({num['read_guide']})</p>
             </div>
             """, unsafe_allow_html=True)
             
             col_img_left, col_img_center, col_img_right = st.columns([1, 2, 1])
             with col_img_center:
                 st.image(num['img_url'], caption=f"Ký hiệu tay cho số {num['digit']}", use_container_width=True)
-            render_play_button(num['hanzi'], "🔊 Phát âm", key="play_rand_num_challenge_inside")
+            render_play_button(num['hanzi'], "🔊 Phát âm", key=f"play_rand_num_{num['digit']}")
