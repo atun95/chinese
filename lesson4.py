@@ -659,13 +659,11 @@ def show_lesson4_qa_and_dialogues():
     render_lesson_intro("🗣️ Bài 4.2: Phản xạ & Giao tiếp", "Thực hành phản xạ hỏi đáp nhanh và đóng vai giao tiếp theo nhóm/cặp trên lớp học.")
     
     tab_qa, tab_dialogues = st.tabs([
-        "🗣️ 1. Phản xạ Q&A (Q&A Reading Challenge)",
-        "👥 2. Đóng vai Hội thoại (Role-Play Dialogues)"
+        "🗣️ Q&A Reading Challenge",
+        "👥 Role-Play Dialogues"
     ])
     
     with tab_qa:
-        st.markdown("### 🗣️ Phản xạ Q&A (Q&A Reading Challenge)")
-        st.write("Hoạt động luyện đọc giao tiếp phản xạ trực tiếp trên lớp. Học viên trả lời câu hỏi và thực hành đọc to cả câu hỏi lẫn câu trả lời.")
         
         QA_CLASSROOM_CHALLENGES = [
             {
@@ -788,24 +786,23 @@ def show_lesson4_qa_and_dialogues():
         c_idx = st.session_state.qa_class_idx
         c_data = QA_CLASSROOM_CHALLENGES[c_idx]
         
-        st.markdown(
-            f"""<div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid #BFDBFE; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-<span style="font-size: 0.9em; color: #1E40AF; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">CÂU HỎI THỰC HÀNH ({c_idx + 1}/{len(QA_CLASSROOM_CHALLENGES)}):</span>
-<div style="font-size: 2.2em; font-weight: bold; color: #1E3A8A; margin: 10px 0; font-family: 'Courier New', monospace; line-height: 1.2;">
-{c_data['question_pinyin']}<br/>
-<span style="font-size: 0.85em; color: #2563EB; font-weight: normal; font-family: inherit;">{c_data['question_hanzi']}</span>
+        cols_q = st.columns([8, 2])
+        with cols_q[0]:
+            st.markdown(
+                f"""<div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1px solid #BFDBFE; border-radius: 10px; padding: 12px 18px; margin-bottom: 5px;">
+<span style="font-size: 0.8em; color: #1E40AF; font-weight: bold; text-transform: uppercase;">CÂU HỎI {c_idx + 1}/{len(QA_CLASSROOM_CHALLENGES)}:</span>
+<div style="font-size: 1.8em; font-weight: bold; color: #1E3A8A; font-family: 'Courier New', monospace; margin-top: 2px;">
+{c_data['question_pinyin']} &nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 0.9em; color: #2563EB;">{c_data['question_hanzi']}</span>
 </div>
-<span style="color: #475569; font-size: 1.1em;">Nghĩa tiếng Việt: <b>"{c_data['question_meaning']}"</b></span>
+<span style="color: #475569; font-size: 0.95em;">Nghĩa: <b>"{c_data['question_meaning']}"</b></span>
 </div>""",
-            unsafe_allow_html=True
-        )
-        
-        cols_q_aud = st.columns([2.5, 7.5])
-        with cols_q_aud[0]:
-            render_play_button(c_data['question_hanzi'], "🔊 Nghe Câu hỏi", key=f"qa_class_q_play_{c_idx}")
+                unsafe_allow_html=True
+            )
+        with cols_q[1]:
+            st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
+            render_play_button(c_data['question_hanzi'], "🔊 Nghe câu hỏi", key=f"qa_class_q_play_{c_idx}", use_container_width=True)
             
-        st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;'/>", unsafe_allow_html=True)
-        st.write("👇 **Hãy thảo luận và chọn câu trả lời đúng cho đoạn hội thoại:**")
+        st.write("👉 **Chọn đáp án đúng:**")
         
         confirmed = st.session_state.qa_class_confirmed
         sel_choice = st.session_state.qa_class_selected
