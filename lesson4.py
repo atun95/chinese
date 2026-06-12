@@ -297,11 +297,10 @@ def show_lesson4_classroom_arena():
     render_lesson_intro("📚 Bài 4.1: Luyện tập", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
     
     
-    tab_game1, tab_game2, tab_game3, tab_game4 = st.tabs([
+    tab_game1, tab_game2, tab_game3 = st.tabs([
         "🎲 1. Vòng quay May mắn (Random Call)",
         "🕵️ 2. Kẻ mạo danh Chính tả (Spot the Imposter)",
-        "🧩 3. Lắp ráp Câu thần tốc (Sentence Builder)",
-        "🗣️ 4. Phản xạ Q&A (Q&A Reading Challenge)"
+        "🧩 3. Lắp ráp Câu thần tốc (Sentence Builder)"
     ])
     
     # ------------------ GAME 1: RANDOM CALL ------------------
@@ -655,9 +654,17 @@ def show_lesson4_classroom_arena():
                     unsafe_allow_html=True
                 )
 
-    # ------------------ GAME 4: Q&A READING CHALLENGE ------------------
-    with tab_game4:
-        st.markdown("### 🗣️ 4. Phản xạ Q&A (Q&A Reading Challenge)")
+def show_lesson4_qa_and_dialogues():
+    import random
+    render_lesson_intro("🗣️ Bài 4.2: Phản xạ & Giao tiếp", "Thực hành phản xạ hỏi đáp nhanh và đóng vai giao tiếp theo nhóm/cặp trên lớp học.")
+    
+    tab_qa, tab_dialogues = st.tabs([
+        "🗣️ 1. Phản xạ Q&A (Q&A Reading Challenge)",
+        "👥 2. Đóng vai Hội thoại (Role-Play Dialogues)"
+    ])
+    
+    with tab_qa:
+        st.markdown("### 🗣️ Phản xạ Q&A (Q&A Reading Challenge)")
         st.write("Hoạt động luyện đọc giao tiếp phản xạ trực tiếp trên lớp. Học viên trả lời câu hỏi và thực hành đọc to cả câu hỏi lẫn câu trả lời.")
         
         QA_CLASSROOM_CHALLENGES = [
@@ -666,7 +673,7 @@ def show_lesson4_classroom_arena():
                 "question_hanzi": "你姐姐饿吗？",
                 "question_meaning": "Chị gái bạn đói không?",
                 "choices": [
-                    "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，she/cô ấy rất mệt. -> 我姐姐不饿，她很累。)",
+                    "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，她很累。)",
                     "Wǒ yéye hē shuǐ. (我爷爷喝水。)",
                     "Tā bù xǐhuān wáwa. (他不喜欢娃娃。)"
                 ],
@@ -686,7 +693,7 @@ def show_lesson4_classroom_arena():
                 "choices": [
                     "Bàba ài chī yúròu. (爸爸爱吃鱼肉。)",
                     "Zhè gè yuè wǒ bù máng, wǒ xué Hànyǔ. (这个月我不忙，我学汉语。)",
-                    "Tā chī niúròu. (he eat beef - 他吃牛肉。)"
+                    "Tā chī niúròu. (他吃牛肉。)"
                 ],
                 "choices_meaning": [
                     "Bố thích ăn thịt cá.",
@@ -702,7 +709,7 @@ def show_lesson4_classroom_arena():
                 "question_hanzi": "这是你的娃娃吗？",
                 "question_meaning": "Đây là búp bê của bạn à?",
                 "choices": [
-                    "Wǒmen qù chī jī. (我们去 eat chicken / ăn gà - We go eat chicken.)",
+                    "Wǒmen qù chī jī. (我们去吃鸡。)",
                     "Tā chī niúròu. (他吃牛肉。)",
                     "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是我女朋友的娃娃。)"
                 ],
@@ -720,8 +727,8 @@ def show_lesson4_classroom_arena():
                 "question_hanzi": "你们去喝奶茶吗？",
                 "question_meaning": "Các bạn đi uống trà sữa không?",
                 "choices": [
-                    "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. (基本意思：我们不喝奶茶，我们喝水。)",
-                    "Tā hěn shuài. (he very handsome - 他很帅。)",
+                    "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. (我们不喝奶茶，我们喝水。)",
+                    "Tā hěn shuài. (他很帅。)",
                     "Māma ài wáwa. (妈妈爱娃娃。)"
                 ],
                 "choices_meaning": [
@@ -739,7 +746,7 @@ def show_lesson4_classroom_arena():
                 "question_meaning": "Anh trai cậu ấy đẹp trai không?",
                 "choices": [
                     "Tā hěn máng. (他很忙。)",
-                    "Tā gēge hěn shuài, tā shì shuàigē. (flag: 他哥哥很帅，他是帅哥。)",
+                    "Tā gēge hěn shuài, tā shì shuàigē. (他哥哥很帅，他是帅哥。)",
                     "Wǒ yéye hē nǎichá. (我爷爷喝奶茶。)"
                 ],
                 "choices_meaning": [
@@ -756,7 +763,7 @@ def show_lesson4_classroom_arena():
                 "question_hanzi": "爷爷的家有狗吗？",
                 "question_meaning": "Nhà của ông nội có chó không?",
                 "choices": [
-                    "Tā bù chī niúròu. (表达他不吃牛肉。)",
+                    "Tā bù chī niúròu. (他不吃牛肉。)",
                     "Wǒmen hē shuǐ. (我们喝水。)",
                     "Yéye de jiā méiyǒu gǒu, yǒu yā. (爷爷的家没有狗，有鸭。)"
                 ],
@@ -770,21 +777,6 @@ def show_lesson4_classroom_arena():
                 "pron_focus": "Vận mẫu kép: ie (yéye), ia (jiā, yā), ou (gǒu, yǒu)."
             }
         ]
-        
-        # Clean up choices display texts
-        QA_CLASSROOM_CHALLENGES[0]["choices"][0] = "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，she/cô ấy rất mệt. -> 我姐姐不饿，她很累。)"
-        QA_CLASSROOM_CHALLENGES[1]["choices"][2] = "Tā chī niúròu. (他吃牛肉。)"
-        QA_CLASSROOM_CHALLENGES[2]["choices"][0] = "Wǒmen qù chī jī. (我们去吃鸡。)"
-        QA_CLASSROOM_CHALLENGES[2]["choices"][2] = "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是 my girlfriend's doll - 不是，这是我女朋友的娃娃。)"
-        QA_CLASSROOM_CHALLENGES[3]["choices"][0] = "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. (我们不喝奶茶，我们喝水。)"
-        QA_CLASSROOM_CHALLENGES[3]["choices"][1] = "Tā hěn shuài. (他很帅。)"
-        QA_CLASSROOM_CHALLENGES[4]["choices"][1] = "Tā gēge hěn shuài, tā shì shuàigē. (他哥哥很帅，他是帅哥。)"
-        QA_CLASSROOM_CHALLENGES[5]["choices"][0] = "Tā bù chī niúròu. (表达他不吃牛肉. -> 他不吃牛肉。)"
-
-        # Set cleaner labels directly for rendering
-        QA_CLASSROOM_CHALLENGES[0]["choices"][0] = "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，她很累。)"
-        QA_CLASSROOM_CHALLENGES[2]["choices"][2] = "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是我女朋友的娃娃。)"
-        QA_CLASSROOM_CHALLENGES[5]["choices"][0] = "Tā bù chī niúròu. (他不吃牛肉。)"
 
         if "qa_class_idx" not in st.session_state:
             st.session_state.qa_class_idx = 0
@@ -796,7 +788,6 @@ def show_lesson4_classroom_arena():
         c_idx = st.session_state.qa_class_idx
         c_data = QA_CLASSROOM_CHALLENGES[c_idx]
         
-        # Display Question Card
         st.markdown(
             f"""<div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid #BFDBFE; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
 <span style="font-size: 0.9em; color: #1E40AF; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">CÂU HỎI THỰC HÀNH ({c_idx + 1}/{len(QA_CLASSROOM_CHALLENGES)}):</span>
@@ -809,7 +800,6 @@ def show_lesson4_classroom_arena():
             unsafe_allow_html=True
         )
         
-        # Audio for Question
         cols_q_aud = st.columns([2.5, 7.5])
         with cols_q_aud[0]:
             render_play_button(c_data['question_hanzi'], "🔊 Nghe Câu hỏi", key=f"qa_class_q_play_{c_idx}")
@@ -817,7 +807,6 @@ def show_lesson4_classroom_arena():
         st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;'/>", unsafe_allow_html=True)
         st.write("👇 **Hãy thảo luận và chọn câu trả lời đúng cho đoạn hội thoại:**")
         
-        # Choices selection
         confirmed = st.session_state.qa_class_confirmed
         sel_choice = st.session_state.qa_class_selected
         
@@ -844,7 +833,6 @@ def show_lesson4_classroom_arena():
                 
         st.markdown("<br/>", unsafe_allow_html=True)
         
-        # Action controls
         col_qa_acts = st.columns(4)
         with col_qa_acts[0]:
             if st.button("🚀 Xác nhận đáp án", type="primary", use_container_width=True, key=f"qa_class_confirm_{c_idx}", disabled=confirmed or (sel_choice is None)):
@@ -867,15 +855,12 @@ def show_lesson4_classroom_arena():
                 st.session_state.qa_class_confirmed = False
                 st.rerun()
                 
-        # Interactive Feedbacks & Reading Prompts
         if confirmed:
             if sel_choice == c_data["answer_idx"]:
-                # Pick a random student if list exists
                 student_list_raw = st.session_state.get("classroom_students_input", "Tiên, Vy, Trân, Thanh")
                 students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
                 target_reader = random.choice(students) if students else "Học viên"
                 
-                # Split choice into pinyin and hanzi for reading display
                 ans_text = c_data["choices"][c_data["answer_idx"]]
                 pinyin_part = ans_text.split(" (")[0]
                 hanzi_part = ans_text.split(" (")[1].replace(")", "")
@@ -906,7 +891,6 @@ def show_lesson4_classroom_arena():
                     unsafe_allow_html=True
                 )
                 
-                # Audio players for the conversation
                 st.markdown("<br/>🔊 <b>Hỗ trợ phát âm mẫu cho cặp hội thoại:</b>", unsafe_allow_html=True)
                 cols_class_aud = st.columns([1.5, 1.5, 3])
                 with cols_class_aud[0]:
@@ -930,6 +914,94 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
 </div>""",
                     unsafe_allow_html=True
                 )
+
+    with tab_dialogues:
+        st.markdown("### 👥 Hoạt động Đóng vai Hội thoại (Role-Play)")
+        st.write("Chia nhóm học viên đóng vai để thực hành các đoạn hội thoại giao tiếp bên dưới. Tập trung phát âm đúng các vận mẫu kép đã học.")
+        
+        student_list_raw = st.text_input("Nhập tên các học viên để bốc thăm cặp diễn (cách nhau bằng dấu phẩy):", "Tiên, Vy, Trân, Thanh", key="dialogue_students_input")
+        students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
+        
+        st.markdown("---")
+        
+        st.markdown("#### 💬 Hội thoại 1: Uống trà sữa hay uống nước? (2 vai)")
+        st.info("🗣️ **Học viên A & Học viên B:** Thảo luận về việc đi uống nước/trà sữa và ăn gà.")
+        
+        if st.button("🎲 Bốc thăm cặp học viên cho Hội thoại 1", key="btn_pick_dlg1"):
+            if len(students) >= 2:
+                pair = random.sample(students, 2)
+                st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
+            else:
+                st.warning("Vui lòng nhập ít nhất 2 học viên để bốc thăm.")
+                
+        dlg1_lines = [
+            ("Học viên A", "#2563eb", "Nǐmen qù hē nǎichá ma?", "你们去喝奶茶吗？", "Các bạn đi uống trà sữa không?"),
+            ("Học viên B", "#10b981", "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. Nǐ qù ma?", "我们不喝奶茶，我们喝水。你去吗？", "Chúng tôi không uống trà sữa, chúng tôi uống nước. Cậu đi không?"),
+            ("Học viên A", "#2563eb", "Wǒ qù. Wǒ hěn è, wǒ yě è.", "我去。我很饿，我也饿。", "Tớ đi. Tớ rất đói, tớ cũng đói."),
+            ("Học viên B", "#10b981", "Hǎo, wǒmen qù chī jī.", "好，我们去吃鸡。", "Được, chúng ta đi ăn gà.")
+        ]
+        for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg1_lines):
+            col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
+            with col_lbl:
+                st.markdown(f"<span style='color: {color}; font-weight: bold;'>👤 {speaker}</span>", unsafe_allow_html=True)
+            with col_content:
+                st.markdown(f"<span style='font-size: 1.1em; font-weight: bold;'>{hanzi}</span> &nbsp;&nbsp; <span style='font-family: monospace; color: #2563eb; font-size: 0.9em; background-color: #eff6ff; padding: 2px 6px; border-radius: 4px;'>{pinyin}</span><br/><span style='color: #64748b; font-style: italic; font-size: 0.9em;'>{meaning}</span>", unsafe_allow_html=True)
+            with col_audio:
+                render_play_button(hanzi, "🔊", key=f"audio_dlg1_line_{idx}")
+                
+        st.markdown("---")
+        
+        st.markdown("#### 💬 Hội thoại 2: Búp bê của chị gái và học tiếng Trung (3 vai)")
+        st.info("🗣️ **Học viên A, Học viên B & Học viên C:** Hỏi thăm về búp bê và sở thích học tập.")
+        
+        if st.button("🎲 Bốc thăm bộ ba học viên cho Hội thoại 2", key="btn_pick_dlg2"):
+            if len(students) >= 3:
+                trio = random.sample(students, 3)
+                st.success(f"👑 Chỉ định: **{trio[0]}** đóng vai **Học viên A** | **{trio[1]}** đóng vai **Học viên B** | **{trio[2]}** đóng vai **Học viên C**")
+            else:
+                st.warning("Vui lòng nhập ít nhất 3 học viên để bốc thăm.")
+                
+        dlg2_lines = [
+            ("Học viên A", "#2563eb", "Zhè shì nǐ de wáwa ma?", "这是你的娃娃吗？", "Đây là búp bê của bạn à?"),
+            ("Học viên B", "#10b981", "Bú shì, zhè shì wǒ jiějie de wáwa. Tā ài wáwa.", "不是，这是我姐姐的娃娃。她爱娃娃。", "Không phải, đây là búp bê của chị gái tớ. Chị ấy yêu búp bê."),
+            ("Học viên C", "#8b5cf6", "Tā jiějie ài zāihuā ma?", "她姐姐爱栽花吗？", "Chị gái cô ấy thích trồng hoa không?"),
+            ("Học viên B", "#10b981", "Tā bù ài zāihuā, tā ài xué Hànyǔ.", "她不爱栽花，她爱学汉语。", "Chị ấy không thích trồng hoa, chị ấy thích học tiếng Trung.")
+        ]
+        for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg2_lines):
+            col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
+            with col_lbl:
+                st.markdown(f"<span style='color: {color}; font-weight: bold;'>👤 {speaker}</span>", unsafe_allow_html=True)
+            with col_content:
+                st.markdown(f"<span style='font-size: 1.1em; font-weight: bold;'>{hanzi}</span> &nbsp;&nbsp; <span style='font-family: monospace; color: #2563eb; font-size: 0.9em; background-color: #eff6ff; padding: 2px 6px; border-radius: 4px;'>{pinyin}</span><br/><span style='color: #64748b; font-style: italic; font-size: 0.9em;'>{meaning}</span>", unsafe_allow_html=True)
+            with col_audio:
+                render_play_button(hanzi, "🔊", key=f"audio_dlg2_line_{idx}")
+                
+        st.markdown("---")
+        
+        st.markdown("#### 💬 Hội thoại 3: Anh trai đẹp trai và thói quen ăn uống (2 vai)")
+        st.info("🗣️ **Học viên A & Học viên B:** Trò chuyện về người anh trai đẹp trai, sở thích ăn thịt cá/thịt bò/trà sữa.")
+        
+        if st.button("🎲 Bốc thăm cặp học viên cho Hội thoại 3", key="btn_pick_dlg3"):
+            if len(students) >= 2:
+                pair = random.sample(students, 2)
+                st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
+            else:
+                st.warning("Vui lòng nhập ít nhất 2 học viên để bốc thăm.")
+                
+        dlg3_lines = [
+            ("Học viên A", "#2563eb", "Tā gēge shuài ma?", "他哥哥帅吗？", "Anh trai cậu ấy đẹp trai không?"),
+            ("Học viên B", "#10b981", "Tā gēge hěn shuài. Tā ài chī yúròu, yě ài chī niúròu.", "他哥哥很帅。他爱吃鱼肉，也爱吃牛肉。", "Anh trai cậu ấy rất đẹp trai. Anh ấy thích ăn thịt cá, cũng thích ăn thịt bò."),
+            ("Học viên A", "#2563eb", "Tā chī jī ma?", "他吃鸡吗？", "Anh ấy ăn gà không?"),
+            ("Học viên B", "#10b981", "Tā bù chī jī. Tā hē nǎichá, tā hē shuǐ.", "他不吃鸡。他喝奶茶，他喝水。", "Anh ấy không ăn gà. Anh ấy uống trà sữa, anh ấy uống nước.")
+        ]
+        for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg3_lines):
+            col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
+            with col_lbl:
+                st.markdown(f"<span style='color: {color}; font-weight: bold;'>👤 {speaker}</span>", unsafe_allow_html=True)
+            with col_content:
+                st.markdown(f"<span style='font-size: 1.1em; font-weight: bold;'>{hanzi}</span> &nbsp;&nbsp; <span style='font-family: monospace; color: #2563eb; font-size: 0.9em; background-color: #eff6ff; padding: 2px 6px; border-radius: 4px;'>{pinyin}</span><br/><span style='color: #64748b; font-style: italic; font-size: 0.9em;'>{meaning}</span>", unsafe_allow_html=True)
+            with col_audio:
+                render_play_button(hanzi, "🔊", key=f"audio_dlg3_line_{idx}")
 
 def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_scores_b4=None):
     st.header("🎯 Bài 4: Luyện tập Vận mẫu kép mở rộng")
