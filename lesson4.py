@@ -658,9 +658,10 @@ def show_lesson4_qa_and_dialogues():
     import random
     render_lesson_intro("🗣️ Bài 4.2: Phản xạ & Giao tiếp", "Thực hành phản xạ hỏi đáp nhanh và đóng vai giao tiếp theo nhóm/cặp trên lớp học.")
     
-    tab_qa, tab_dialogues = st.tabs([
+    tab_qa, tab_dialogues, tab_game = st.tabs([
         "🗣️ Q&A Reading Challenge",
-        "👥 Role-Play Dialogues"
+        "👥 Role-Play Dialogues",
+        "🎮 Reflex Game Arena"
     ])
     
     with tab_qa:
@@ -1038,8 +1039,10 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
             ("Học viên A", "#2563eb", "Tā gēge shuài ma?", "他哥哥帅吗？", "Anh trai cậu ấy đẹp trai không?"),
             ("Học viên B", "#10b981", "Tā hěn shuài, tā shì shuàigē. Tā ài chī jīròu, yě ài hē nǎichá.", "他很帅，他是帅哥。他爱吃鸡肉，也爱喝奶茶。", "Anh ấy rất đẹp trai, anh ấy là soái ca. Anh ấy thích ăn thịt gà, cũng thích uống trà sữa."),
             ("Học viên C", "#8b5cf6", "Tā ài chī yúròu hé niúròu ma?", "他爱吃鱼肉和牛肉吗？", "Anh ấy thích ăn thịt cá và thịt bò không?"),
-            ("Học viên D", "#f59e0b", "Tā bú ài chī yúròu, tā xǐhuān chī niúròu. Tā lèi ma?", "他不爱吃鱼肉，他喜欢吃牛肉。他累吗？", "Anh ấy không thích ăn thịt cá, anh ấy thích ăn thịt bò. Anh ấy mệt không?"),
-            ("Học viên A", "#2563eb", "Tā bú lèi, tā hěn ài xué Hànyǔ. Wèi, nǐmen è ma?", "他不累，他很爱学汉语。喂，你们饿吗？", "Anh ấy không mệt, anh ấy rất thích học tiếng Trung. Này, các cậu đói không?"),
+            ("Học viên B", "#10b981", "Tā bú ài chī yúròu, tā xǐhuān chī niúròu.", "他不爱吃鱼肉，他喜欢吃牛肉。", "Anh ấy không thích ăn thịt cá, anh ấy thích ăn thịt bò."),
+            ("Học viên D", "#f59e0b", "Tā lèi ma? Tā ài xué Hànyǔ ma?", "他累吗？他爱学汉语吗？", "Anh ấy mệt không? Anh ấy thích học tiếng Trung không?"),
+            ("Học viên B", "#10b981", "Tā bú lèi, tā hěn ài xué Hànyǔ.", "他不累，他很爱学汉语。", "Anh ấy không mệt, anh ấy rất thích học tiếng Trung."),
+            ("Học viên A", "#2563eb", "Wèi, nǐmen è ma?", "喂，你们饿吗？", "Này, các cậu đói không?"),
             ("Học viên B", "#10b981", "Wǒ hěn è, wǒ xiǎng chī jīròu. Wǒmen qù chī ba!", "我很饿，我想吃鸡肉。我们去吃吧！", "Tớ rất đói, tớ muốn ăn thịt gà. Chúng ta đi ăn đi!"),
             ("Học viên C", "#8b5cf6", "Wǒ bù è, wǒ lèi. Wǒ xǐhuān hē nǎichá.", "我不饿，我累。我喜欢喝奶茶。", "Tớ không đói, tớ mệt. Tớ thích uống trà sữa."),
             ("Học viên D", "#f59e0b", "Hǎo! Wǒmen qù hē nǎichá, chī jīròu ba!", "好！我们去喝奶茶，吃鸡肉吧！", "Được! Chúng ta đi uống trà sữa, ăn thịt gà đi!")
@@ -1053,6 +1056,192 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
             with col_audio:
                 render_play_button(hanzi, "🔊", key=f"audio_dlg3_line_{idx}")
                 
+        st.markdown("---")
+        
+    with tab_game:
+        st.markdown("### 🎮 Đấu trường Phản xạ & Tương tác")
+        st.markdown("Trò chơi phản xạ nhanh giúp học viên ôn tập từ vựng, cụm từ và phát âm của Bài 4 ngay tại lớp học.")
+        
+        # Get student list from the shared input
+        students_raw = st.session_state.get("dialogue_students_input", "Tiên, Vy, Trân, Thanh")
+        students = [s.strip() for s in students_raw.split(",") if s.strip()]
+        
+        if not students:
+            st.warning("⚠️ Vui lòng nhập danh sách học viên ở tab **Role-Play Dialogues** trước khi chơi.")
+        else:
+            # Initialize scores in session state
+            if "game_scores" not in st.session_state:
+                st.session_state.game_scores = {s: 0 for s in students}
+            
+            # Sync scores with any new students added
+            for s in students:
+                if s not in st.session_state.game_scores:
+                    st.session_state.game_scores[s] = 0
+            
+            # Leaderboard & Control Panel side-by-side
+            col_play, col_scores = st.columns([7, 3])
+            
+            with col_scores:
+                st.markdown("🏆 **BẢNG XẾP HẠNG**")
+                # Render beautiful custom scoreboard
+                sorted_scores = sorted(st.session_state.game_scores.items(), key=lambda x: x[1], reverse=True)
+                for rank, (name, score) in enumerate(sorted_scores, 1):
+                    medal = "🥇" if rank == 1 else ("🥈" if rank == 2 else ("🥉" if rank == 3 else "👤"))
+                    st.markdown(f"""
+                    <div style='background-color: #f1f5f9; border-radius: 8px; padding: 6px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;'>
+                        <span style='font-weight: bold; color: #1e293b;'>{medal} {name}</span>
+                        <span style='background-color: #3b82f6; color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.85em; font-weight: bold;'>{score}đ</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                st.markdown("<br/>", unsafe_allow_html=True)
+                if st.button("🔄 Reset điểm số", use_container_width=True, key="reset_game_scores"):
+                    st.session_state.game_scores = {s: 0 for s in students}
+                    st.toast("Đã đặt lại điểm số!", icon="🔄")
+                    st.rerun()
+            
+            with col_play:
+                game_mode = st.radio(
+                    "Chọn chế độ chơi:",
+                    ["🎯 Vòng xoay Thử thách (Reflex Spin)", "⚔️ Song đấu Phản xạ (Word Duel)"],
+                    horizontal=True,
+                    key="game_mode_select"
+                )
+                
+                # Game data bank
+                GAME_PROMPTS = [
+                    {"hanzi": "吃牛肉", "pinyin": "chī niúròu", "vietnamese": "ăn thịt bò"},
+                    {"hanzi": "喝奶茶", "pinyin": "hē nǎichá", "vietnamese": "uống trà sữa"},
+                    {"hanzi": "不累", "pinyin": "bù lèi", "vietnamese": "không mệt"},
+                    {"hanzi": "很饿", "pinyin": "hěn è", "vietnamese": "rất đói"},
+                    {"hanzi": "帅哥", "pinyin": "shuàigē", "vietnamese": "soái ca"},
+                    {"hanzi": "美女", "pinyin": "měinǚ", "vietnamese": "mỹ nữ"},
+                    {"hanzi": "爱吃鱼肉", "pinyin": "ài chī yúròu", "vietnamese": "thích ăn thịt cá"},
+                    {"hanzi": "他哥哥", "pinyin": "tā gēge", "vietnamese": "anh trai cậu ấy"},
+                    {"hanzi": "去吃鸡肉", "pinyin": "qù chī jīròu", "vietnamese": "đi ăn thịt gà"},
+                    {"hanzi": "这个月", "pinyin": "zhè gè yuè", "vietnamese": "tháng này"},
+                    {"hanzi": "漂亮", "pinyin": "piàoliang", "vietnamese": "xinh đẹp"},
+                    {"hanzi": "爷爷喝水", "pinyin": "yéye hē shuǐ", "vietnamese": "ông nội uống nước"}
+                ]
+                
+                if "Reflex Spin" in game_mode:
+                    st.markdown("#### 🎯 Vòng xoay Thử thách")
+                    st.write("Giáo viên nhấn nút **Quay số** để chỉ định ngẫu nhiên Học viên, từ vựng và hành động cần thực hiện.")
+                    
+                    if "spin_student" not in st.session_state:
+                        st.session_state.spin_student = None
+                    if "spin_prompt" not in st.session_state:
+                        st.session_state.spin_prompt = None
+                    if "spin_action" not in st.session_state:
+                        st.session_state.spin_action = None
+                    
+                    if st.button("🎲 QUAY SỐ NGẪU NHIÊN", type="primary", use_container_width=True, key="spin_btn"):
+                        st.session_state.spin_student = random.choice(students)
+                        st.session_state.spin_prompt = random.choice(GAME_PROMPTS)
+                        st.session_state.spin_action = random.choice([
+                            "🗣️ Đọc to & Phát âm (Đọc to chữ Hán & Pinyin trên màn hình)",
+                            "✍️ Đặt câu nhanh (Đặt 1 câu tiếng Trung có nghĩa chứa từ này)",
+                            "🔄 Dịch nhanh (Giáo viên che màn hình, học viên dịch nhanh từ tiếng Việt sang tiếng Trung)"
+                        ])
+                        st.rerun()
+                        
+                    if st.session_state.spin_student and st.session_state.spin_prompt:
+                        st.markdown(f"""
+                        <div style='background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; border-radius: 12px; padding: 20px; text-align: center; margin-top: 15px;'>
+                            <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>👤 LƯỢT CHƠI CỦA:</div>
+                            <div style='font-size: 2.2em; font-weight: bold; margin-bottom: 15px;'>👑 {st.session_state.spin_student} 👑</div>
+                            <hr style='border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 10px 0;'/>
+                            <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>📝 TỪ VỰNG THỬ THÁCH:</div>
+                            <div style='font-size: 2.5em; font-weight: bold; margin-top: 5px;'>{st.session_state.spin_prompt['hanzi']}</div>
+                            <div style='font-family: monospace; font-size: 1.3em; opacity: 0.9;'>{st.session_state.spin_prompt['pinyin']}</div>
+                            <div style='font-style: italic; opacity: 0.8;'>Nghĩa: {st.session_state.spin_prompt['vietnamese']}</div>
+                            <hr style='border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 15px 0;'/>
+                            <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>⚡ YÊU CẦU:</div>
+                            <div style='font-size: 1.25em; font-weight: bold; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 8px 12px; display: inline-block; margin-top: 5px;'>{st.session_state.spin_action}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        st.markdown("<br/>", unsafe_allow_html=True)
+                        col_btns = st.columns(2)
+                        with col_btns[0]:
+                            if st.button("✅ Trả lời đúng (+10đ)", type="primary", use_container_width=True, key="spin_correct"):
+                                st.session_state.game_scores[st.session_state.spin_student] += 10
+                                st.balloons()
+                                st.toast(f"Đã cộng 10 điểm cho {st.session_state.spin_student}!", icon="✅")
+                                st.session_state.spin_student = None
+                                st.session_state.spin_prompt = None
+                                st.rerun()
+                        with col_btns[1]:
+                            if st.button("❌ Bỏ qua / Trả lời sai", use_container_width=True, key="spin_incorrect"):
+                                st.toast("Lượt chơi đã qua!", icon="ℹ️")
+                                st.session_state.spin_student = None
+                                st.session_state.spin_prompt = None
+                                st.rerun()
+                                
+                else:
+                    st.markdown("#### ⚔️ Song đấu Phản xạ")
+                    st.write("Giáo viên nhấn nút để chọn cặp song đấu và từ vựng ngẫu nhiên. Ai đọc chính xác và nhanh nhất sẽ ghi điểm!")
+                    
+                    if "duel_p1" not in st.session_state:
+                        st.session_state.duel_p1 = None
+                    if "duel_p2" not in st.session_state:
+                        st.session_state.duel_p2 = None
+                    if "duel_prompt" not in st.session_state:
+                        st.session_state.duel_prompt = None
+                    
+                    if st.button("⚔️ THIẾT LẬP CẶP ĐẤU", type="primary", use_container_width=True, key="duel_btn"):
+                        if len(students) < 2:
+                            st.warning("⚠️ Cần ít nhất 2 học viên để tổ chức song đấu.")
+                        else:
+                            pair = random.sample(students, 2)
+                            st.session_state.duel_p1 = pair[0]
+                            st.session_state.duel_p2 = pair[1]
+                            st.session_state.duel_prompt = random.choice(GAME_PROMPTS)
+                            st.rerun()
+                            
+                    if st.session_state.duel_p1 and st.session_state.duel_p2 and st.session_state.duel_prompt:
+                        st.markdown(f"""
+                        <div style='background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); color: white; border-radius: 12px; padding: 20px; text-align: center; margin-top: 15px;'>
+                            <div style='font-size: 1.8em; font-weight: bold; margin-bottom: 10px;'>⚔️ SONG ĐẤU NẢY LỬA ⚔️</div>
+                            <div style='display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px;'>
+                                <div style='font-size: 1.5em; font-weight: bold; background: rgba(0,0,0,0.3); padding: 8px 16px; border-radius: 8px;'>🔵 {st.session_state.duel_p1}</div>
+                                <div style='font-size: 1.5em; font-weight: bold; font-style: italic; color: #fde047;'>VS</div>
+                                <div style='font-size: 1.5em; font-weight: bold; background: rgba(0,0,0,0.3); padding: 8px 16px; border-radius: 8px;'>🔴 {st.session_state.duel_p2}</div>
+                            </div>
+                            <hr style='border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 10px 0;'/>
+                            <div style='font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;'>Nghĩa tiếng Việt cần phản xạ nhanh:</div>
+                            <div style='font-size: 2.8em; font-weight: bold; color: #fde047; margin-top: 5px;'>"{st.session_state.duel_prompt['vietnamese']}"</div>
+                            <div style='font-size: 0.85em; opacity: 0.7; font-style: italic; margin-top: 5px;'>(Đáp án ẩn: {st.session_state.duel_prompt['hanzi']} - {st.session_state.duel_prompt['pinyin']})</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        st.markdown("<br/>", unsafe_allow_html=True)
+                        col_winners = st.columns(3)
+                        with col_winners[0]:
+                            if st.button(f"🔵 {st.session_state.duel_p1} thắng (+15đ)", type="primary", use_container_width=True, key="duel_win_p1"):
+                                st.session_state.game_scores[st.session_state.duel_p1] += 15
+                                st.balloons()
+                                st.toast(f"Chúc mừng {st.session_state.duel_p1} thắng!", icon="🏆")
+                                st.session_state.duel_p1 = None
+                                st.session_state.duel_p2 = None
+                                st.session_state.duel_prompt = None
+                                st.rerun()
+                        with col_winners[1]:
+                            if st.button(f"🔴 {st.session_state.duel_p2} thắng (+15đ)", type="primary", use_container_width=True, key="duel_win_p2"):
+                                st.session_state.game_scores[st.session_state.duel_p2] += 15
+                                st.balloons()
+                                st.toast(f"Chúc mừng {st.session_state.duel_p2} thắng!", icon="🏆")
+                                st.session_state.duel_p1 = None
+                                st.session_state.duel_p2 = None
+                                st.session_state.duel_prompt = None
+                                st.rerun()
+                        with col_winners[2]:
+                            if st.button("🤝 Hòa / Đổi lượt đấu", use_container_width=True, key="duel_tie"):
+                                st.toast("Lượt đấu hòa!", icon="🤝")
+                                st.session_state.duel_p1 = None
+                                st.session_state.duel_p2 = None
+                                st.session_state.duel_prompt = None
+                                st.rerun()
         st.markdown("---")
         
 def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_scores_b4=None):
