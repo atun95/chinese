@@ -231,8 +231,8 @@ elif mode == "🗣️ Luyện tập ghép âm":
     ])
 elif mode == "🗣️ Thực hành trên lớp":
     menu = st.sidebar.radio("Chọn hoạt động:", [
-        "Bài 3.5 - Hội thoại thực hành",
-        "Bài 4.3 - Đấu trường Luyện tập"
+        "Bài 3.1 - Hội thoại thực hành",
+        "Bài 4.1 - Đấu trường Luyện tập"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -290,7 +290,7 @@ elif menu == "Bài 4.1 - Từ vựng mở rộng":
 elif menu == "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
 
-elif menu == "Bài 3.5 - Hội thoại thực hành":
+elif menu == "Bài 3.1 - Hội thoại thực hành":
     lesson3.show_lesson3_dialogues()
 
 elif menu == "Bài tập Bài 3":
@@ -302,7 +302,7 @@ elif menu == "Bài 4.1 - Vận mẫu kép":
 elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
 
-elif menu == "Bài 4.3 - Đấu trường Luyện tập":
+elif menu == "Bài 4.1 - Đấu trường Luyện tập":
     lesson4.show_lesson4_classroom_arena()
 
 elif menu == "Bài 5 - Nét chữ Hán cơ bản":

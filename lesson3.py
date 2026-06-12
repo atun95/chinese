@@ -422,7 +422,7 @@ def render_dialogue_line(speaker, color, chinese, pinyin, meaning, idx):
         render_play_button(chinese, "🔊", key=f"audio_dlg_{idx}")
 
 def show_lesson3_dialogues():
-    render_lesson_intro("📚 Bài 3: Hội thoại thực hành", "Ứng dụng các thanh mẫu nâng cao, quy tắc viết bính âm và từ vựng đã học vào các ngữ cảnh hội thoại giao tiếp 2 người, 3 người và 4 người.")
+    render_lesson_intro("📚 Bài 3.1: Hội thoại thực hành", "Ứng dụng các thanh mẫu nâng cao, quy tắc viết bính âm và từ vựng đã học vào các ngữ cảnh hội thoại giao tiếp 2 người, 3 người và 4 người.")
     
     st.subheader("💬 Hội thoại 1: Giới thiệu & Kết bạn (2 Học viên)")
     st.info("🗣️ **Ngữ cảnh:** Thanh (Qīng - Học sinh) gặp Vy (Wēi - Luật sư). Họ chào hỏi, làm quen và giới thiệu nghề nghiệp.")

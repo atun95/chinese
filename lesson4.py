@@ -294,7 +294,7 @@ def show_lesson4_finals():
             render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="sandbox_play_btn", type="primary")
 
 def show_lesson4_classroom_arena():
-    render_lesson_intro("📚 Bài 4.3: Luyện tập", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
+    render_lesson_intro("📚 Bài 4.1: Luyện tập", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
     
     
     tab_game1, tab_game2, tab_game3, tab_game4 = st.tabs([
