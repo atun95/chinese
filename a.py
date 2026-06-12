@@ -8,11 +8,17 @@ from pathlib import Path
 from lessons_data import *
 from ui_utils import *
 
-# Import các bài học đã tách file
+# Import các bài học đã tách file và reload để tránh cache
+import importlib
 import lesson1
 import lesson2
 import lesson3
 import lesson4
+
+importlib.reload(lesson1)
+importlib.reload(lesson2)
+importlib.reload(lesson3)
+importlib.reload(lesson4)
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
