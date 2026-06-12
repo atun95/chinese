@@ -297,10 +297,11 @@ def show_lesson4_classroom_arena():
     render_lesson_intro("📚 Bài 4.3: Luyện tập", "Hoạt động thực hành nhóm và phản xạ nhanh dành cho lớp học online.")
     
     
-    tab_game1, tab_game2, tab_game3 = st.tabs([
+    tab_game1, tab_game2, tab_game3, tab_game4 = st.tabs([
         "🎲 1. Vòng quay May mắn (Random Call)",
         "🕵️ 2. Kẻ mạo danh Chính tả (Spot the Imposter)",
-        "🧩 3. Lắp ráp Câu thần tốc (Sentence Builder)"
+        "🧩 3. Lắp ráp Câu thần tốc (Sentence Builder)",
+        "🗣️ 4. Phản xạ Q&A (Q&A Reading Challenge)"
     ])
     
     # ------------------ GAME 1: RANDOM CALL ------------------
@@ -650,6 +651,282 @@ def show_lesson4_classroom_arena():
 <p style="font-size: 0.95em; margin-bottom: 0; color: #7F1D1D;">
 <b>Gợi ý cú pháp:</b> {puzzle['tip']}
 </p>
+</div>""",
+                    unsafe_allow_html=True
+                )
+
+    # ------------------ GAME 4: Q&A READING CHALLENGE ------------------
+    with tab_game4:
+        st.markdown("### 🗣️ 4. Phản xạ Q&A (Q&A Reading Challenge)")
+        st.write("Hoạt động luyện đọc giao tiếp phản xạ trực tiếp trên lớp. Học viên trả lời câu hỏi và thực hành đọc to cả câu hỏi lẫn câu trả lời.")
+        
+        QA_CLASSROOM_CHALLENGES = [
+            {
+                "question_pinyin": "Nǐ jiějie è ma?",
+                "question_hanzi": "你姐姐饿吗？",
+                "question_meaning": "Chị gái bạn đói không?",
+                "choices": [
+                    "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，she/cô ấy rất mệt. -> 我姐姐不饿，她很累。)",
+                    "Wǒ yéye hē shuǐ. (我爷爷喝水。)",
+                    "Tā bù xǐhuān wáwa. (他不喜欢娃娃。)"
+                ],
+                "choices_meaning": [
+                    "Chị gái tôi không đói, chị ấy rất mệt.",
+                    "Ông nội tôi uống nước.",
+                    "Nó không thích búp bê."
+                ],
+                "answer_idx": 0,
+                "hint": "Đáp án đúng phải liên quan đến câu hỏi về 'chị gái' (jiějie - vận mẫu ie) và tình trạng 'đói' (è - vận mẫu e). 'lèi' (mệt) chứa vận mẫu kép 'ei' đã học.",
+                "pron_focus": "Vận mẫu kép: ie (jiějie), ei (lèi) và vận mẫu đơn e (è)."
+            },
+            {
+                "question_pinyin": "Zhè gè yuè nǐ máng ma?",
+                "question_hanzi": "这个月你忙吗？",
+                "question_meaning": "Tháng này bạn bận không?",
+                "choices": [
+                    "Bàba ài chī yúròu. (爸爸爱吃鱼肉。)",
+                    "Zhè gè yuè wǒ bù máng, wǒ xué Hànyǔ. (这个月我不忙，我学汉语。)",
+                    "Tā chī niúròu. (he eat beef - 他吃牛肉。)"
+                ],
+                "choices_meaning": [
+                    "Bố thích ăn thịt cá.",
+                    "Tháng này tôi không bận, tôi học tiếng Trung.",
+                    "Cậu ấy ăn thịt bò."
+                ],
+                "answer_idx": 1,
+                "hint": "Trả lời cho câu hỏi thời gian 'Tháng này' (zhè gè yuè - vận mẫu üe trong yuè) và hành động 'học tiếng Trung' (xué Hànyǔ - vận mẫu üe trong xué).",
+                "pron_focus": "Vận mẫu kép: üe (yuè, xué) và vận mẫu kép cơ bản đã học."
+            },
+            {
+                "question_pinyin": "Zhè shì nǐ de wáwa ma?",
+                "question_hanzi": "这是你的娃娃吗？",
+                "question_meaning": "Đây là búp bê của bạn à?",
+                "choices": [
+                    "Wǒmen qù chī jī. (我们去 eat chicken / ăn gà - We go eat chicken.)",
+                    "Tā chī niúròu. (他吃牛肉。)",
+                    "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是我女朋友的娃娃。)"
+                ],
+                "choices_meaning": [
+                    "Chúng tôi đi ăn gà.",
+                    "Anh ấy ăn thịt bò.",
+                    "Không phải, đây là búp bê của bạn gái tôi."
+                ],
+                "answer_idx": 2,
+                "hint": "Câu trả lời xác nhận hoặc phủ định về vật sở hữu 'búp bê' (wáwa - vận mẫu ua) của 'bạn gái' (nǚpéngyou - vận mẫu ü trong nǚ và ou trong péngyou).",
+                "pron_focus": "Vận mẫu kép: ua (wáwa), ou (péngyou) và vận mẫu đơn ü (nǚ)."
+            },
+            {
+                "question_pinyin": "Nǐmen qù hē nǎichá ma?",
+                "question_hanzi": "你们去喝奶茶吗？",
+                "question_meaning": "Các bạn đi uống trà sữa không?",
+                "choices": [
+                    "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. (基本意思：我们不喝奶茶，我们喝水。)",
+                    "Tā hěn shuài. (he very handsome - 他很帅。)",
+                    "Māma ài wáwa. (妈妈爱娃娃。)"
+                ],
+                "choices_meaning": [
+                    "Chúng tôi không uống trà sữa, chúng tôi uống nước.",
+                    "Anh ấy rất đẹp trai.",
+                    "Mẹ yêu búp bê."
+                ],
+                "answer_idx": 0,
+                "hint": "Hỏi về 'các bạn' (nǐmen) và hành động 'uống trà sữa' (hē nǎichá). Trả lời phải dùng ngôi 'chúng tôi' (wǒmen - vận mẫu uo) và từ 'uống nước' (hē shuǐ - vận mẫu ui).",
+                "pron_focus": "Vận mẫu kép: uo (wǒmen), ui (shuǐ), ai (nǎichá)."
+            },
+            {
+                "question_pinyin": "Tā gēge shuài ma?",
+                "question_hanzi": "他哥哥帅吗？",
+                "question_meaning": "Anh trai cậu ấy đẹp trai không?",
+                "choices": [
+                    "Tā hěn máng. (他很忙。)",
+                    "Tā gēge hěn shuài, tā shì shuàigē. (flag: 他哥哥很帅，他是帅哥。)",
+                    "Wǒ yéye hē nǎichá. (我爷爷喝奶茶。)"
+                ],
+                "choices_meaning": [
+                    "Cô ấy rất bận.",
+                    "Anh trai cậu ấy rất đẹp trai, anh ấy là soái ca.",
+                    "Ông nội tôi uống trà sữa."
+                ],
+                "answer_idx": 1,
+                "hint": "Hỏi về tính chất 'đẹp trai' (shuài - vận mẫu uai). Câu trả lời lập lại thuộc tính 'shuài' và bổ sung 'shuàigē' (soái ca).",
+                "pron_focus": "Vận mẫu kép: uai (shuài, shuàigē) và vận mẫu kép cơ bản."
+            },
+            {
+                "question_pinyin": "Yéye de jiā yǒu gǒu ma?",
+                "question_hanzi": "爷爷的家有狗吗？",
+                "question_meaning": "Nhà của ông nội có chó không?",
+                "choices": [
+                    "Tā bù chī niúròu. (表达他不吃牛肉。)",
+                    "Wǒmen hē shuǐ. (我们喝水。)",
+                    "Yéye de jiā méiyǒu gǒu, yǒu yā. (爷爷的家没有狗，有鸭。)"
+                ],
+                "choices_meaning": [
+                    "Nó không ăn thịt bò.",
+                    "Chúng tôi uống nước.",
+                    "Nhà ông nội không có chó, có vịt."
+                ],
+                "answer_idx": 2,
+                "hint": "Hỏi về 'nhà ông nội' (yéye de jiā - vận mẫu ie và ia) có 'chó' không (gǒu - vận mẫu ou). Trả lời phủ định 'không có' (méiyǒu - vận mẫu iu/you) và nhắc đến 'vịt' (yā - vận mẫu ia).",
+                "pron_focus": "Vận mẫu kép: ie (yéye), ia (jiā, yā), ou (gǒu, yǒu)."
+            }
+        ]
+        
+        # Clean up choices display texts
+        QA_CLASSROOM_CHALLENGES[0]["choices"][0] = "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，she/cô ấy rất mệt. -> 我姐姐不饿，她很累。)"
+        QA_CLASSROOM_CHALLENGES[1]["choices"][2] = "Tā chī niúròu. (他吃牛肉。)"
+        QA_CLASSROOM_CHALLENGES[2]["choices"][0] = "Wǒmen qù chī jī. (我们去吃鸡。)"
+        QA_CLASSROOM_CHALLENGES[2]["choices"][2] = "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是 my girlfriend's doll - 不是，这是我女朋友的娃娃。)"
+        QA_CLASSROOM_CHALLENGES[3]["choices"][0] = "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. (我们不喝奶茶，我们喝水。)"
+        QA_CLASSROOM_CHALLENGES[3]["choices"][1] = "Tā hěn shuài. (他很帅。)"
+        QA_CLASSROOM_CHALLENGES[4]["choices"][1] = "Tā gēge hěn shuài, tā shì shuàigē. (他哥哥很帅，他是帅哥。)"
+        QA_CLASSROOM_CHALLENGES[5]["choices"][0] = "Tā bù chī niúròu. (表达他不吃牛肉. -> 他不吃牛肉。)"
+
+        # Set cleaner labels directly for rendering
+        QA_CLASSROOM_CHALLENGES[0]["choices"][0] = "Wǒ jiějie bù è, tā hěn lèi. (我姐姐不饿，她很累。)"
+        QA_CLASSROOM_CHALLENGES[2]["choices"][2] = "Bú shì, zhè shì wǒ nǚpéngyou de wáwa. (不是，这是我女朋友的娃娃。)"
+        QA_CLASSROOM_CHALLENGES[5]["choices"][0] = "Tā bù chī niúròu. (他不吃牛肉。)"
+
+        if "qa_class_idx" not in st.session_state:
+            st.session_state.qa_class_idx = 0
+        if "qa_class_selected" not in st.session_state:
+            st.session_state.qa_class_selected = None
+        if "qa_class_confirmed" not in st.session_state:
+            st.session_state.qa_class_confirmed = False
+            
+        c_idx = st.session_state.qa_class_idx
+        c_data = QA_CLASSROOM_CHALLENGES[c_idx]
+        
+        # Display Question Card
+        st.markdown(
+            f"""<div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 2px solid #BFDBFE; border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+<span style="font-size: 0.9em; color: #1E40AF; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">CÂU HỎI THỰC HÀNH ({c_idx + 1}/{len(QA_CLASSROOM_CHALLENGES)}):</span>
+<div style="font-size: 2.2em; font-weight: bold; color: #1E3A8A; margin: 10px 0; font-family: 'Courier New', monospace; line-height: 1.2;">
+{c_data['question_pinyin']}<br/>
+<span style="font-size: 0.85em; color: #2563EB; font-weight: normal; font-family: inherit;">{c_data['question_hanzi']}</span>
+</div>
+<span style="color: #475569; font-size: 1.1em;">Nghĩa tiếng Việt: <b>"{c_data['question_meaning']}"</b></span>
+</div>""",
+            unsafe_allow_html=True
+        )
+        
+        # Audio for Question
+        cols_q_aud = st.columns([2.5, 7.5])
+        with cols_q_aud[0]:
+            render_play_button(c_data['question_hanzi'], "🔊 Nghe Câu hỏi", key=f"qa_class_q_play_{c_idx}")
+            
+        st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;'/>", unsafe_allow_html=True)
+        st.write("👇 **Hãy thảo luận và chọn câu trả lời đúng cho đoạn hội thoại:**")
+        
+        # Choices selection
+        confirmed = st.session_state.qa_class_confirmed
+        sel_choice = st.session_state.qa_class_selected
+        
+        for idx, choice in enumerate(c_data["choices"]):
+            is_sel = (sel_choice == idx)
+            btn_type = "secondary"
+            btn_label = choice
+            
+            if confirmed:
+                if idx == c_data["answer_idx"]:
+                    btn_label = f"✅ {choice} (Chính xác)"
+                    btn_type = "primary"
+                elif is_sel:
+                    btn_label = f"❌ {choice} (Bạn chọn chưa đúng)"
+                    btn_type = "primary"
+            else:
+                if is_sel:
+                    btn_label = f"👉 {choice}"
+                    btn_type = "primary"
+                    
+            if st.button(btn_label, key=f"qa_class_btn_{c_idx}_{idx}", type=btn_type, use_container_width=True, disabled=confirmed):
+                st.session_state.qa_class_selected = idx
+                st.rerun()
+                
+        st.markdown("<br/>", unsafe_allow_html=True)
+        
+        # Action controls
+        col_qa_acts = st.columns(4)
+        with col_qa_acts[0]:
+            if st.button("🚀 Xác nhận đáp án", type="primary", use_container_width=True, key=f"qa_class_confirm_{c_idx}", disabled=confirmed or (sel_choice is None)):
+                st.session_state.qa_class_confirmed = True
+                if sel_choice == c_data["answer_idx"]:
+                    st.toast("🎉 Chính xác!", icon="✅")
+                else:
+                    st.toast("❌ Chưa đúng!", icon="❌")
+                st.rerun()
+        with col_qa_acts[1]:
+            if st.button("⏭️ Câu tiếp theo", use_container_width=True, key=f"qa_class_next_{c_idx}", disabled=not confirmed):
+                st.session_state.qa_class_idx = (c_idx + 1) % len(QA_CLASSROOM_CHALLENGES)
+                st.session_state.qa_class_selected = None
+                st.session_state.qa_class_confirmed = False
+                st.rerun()
+        with col_qa_acts[2]:
+            if st.button("🔄 Khởi động lại", use_container_width=True, key=f"qa_class_reset_{c_idx}"):
+                st.session_state.qa_class_idx = 0
+                st.session_state.qa_class_selected = None
+                st.session_state.qa_class_confirmed = False
+                st.rerun()
+                
+        # Interactive Feedbacks & Reading Prompts
+        if confirmed:
+            if sel_choice == c_data["answer_idx"]:
+                # Pick a random student if list exists
+                student_list_raw = st.session_state.get("classroom_students_input", "Tiên, Vy, Trân, Thanh")
+                students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
+                target_reader = random.choice(students) if students else "Học viên"
+                
+                # Split choice into pinyin and hanzi for reading display
+                ans_text = c_data["choices"][c_data["answer_idx"]]
+                pinyin_part = ans_text.split(" (")[0]
+                hanzi_part = ans_text.split(" (")[1].replace(")", "")
+                
+                st.markdown(
+                    f"""<div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #A7F3D0; border-radius: 12px; padding: 20px; margin-top: 15px;">
+<h4 style="color: #065F46; margin-top: 0; margin-bottom: 5px;">🎉 CHÍNH XÁC! LƯỢT ĐỌC TO TRÊN LỚP:</h4>
+<div style="font-size: 1.5em; font-weight: bold; color: #047857; margin-bottom: 8px;">👑 Chỉ định học viên đọc: <span style="font-size: 1.25em; color: #065F46; text-decoration: underline;">{target_reader}</span></div>
+<hr style="border: 0; border-top: 1px solid #A7F3D0; margin: 10px 0;"/>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+    <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #A7F3D0;">
+        <span style="color:#047857; font-weight:bold; font-size:0.9em; text-transform:uppercase;">🗣️ Học viên A hỏi:</span>
+        <div style="font-family: 'Courier New', monospace; font-size: 1.2em; font-weight: bold; color: #1e293b; margin-top: 5px;">{c_data['question_pinyin']}</div>
+        <div style="font-size: 1.1em; color: #047857; font-weight: bold; margin-top: 2px;">{c_data['question_hanzi']}</div>
+        <div style="color: #64748b; font-size: 0.9em; font-style: italic; margin-top: 2px;">({c_data['question_meaning']})</div>
+    </div>
+    <div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #A7F3D0;">
+        <span style="color:#047857; font-weight:bold; font-size:0.9em; text-transform:uppercase;">🗣️ Học viên B trả lời:</span>
+        <div style="font-family: 'Courier New', monospace; font-size: 1.2em; font-weight: bold; color: #1e293b; margin-top: 5px;">{pinyin_part}</div>
+        <div style="font-size: 1.1em; color: #047857; font-weight: bold; margin-top: 2px;">{hanzi_part}</div>
+        <div style="color: #64748b; font-size: 0.9em; font-style: italic; margin-top: 2px;">({c_data['choices_meaning'][c_data['answer_idx']]})</div>
+    </div>
+</div>
+<div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 10px; margin-top: 10px; border: 1px solid #A7F3D0; font-size: 0.92em; color: #065F46;">
+🔍 <b>Trọng tâm phát âm:</b> {c_data['pron_focus']}
+</div>
+</div>""",
+                    unsafe_allow_html=True
+                )
+                
+                # Audio players for the conversation
+                st.markdown("<br/>🔊 <b>Hỗ trợ phát âm mẫu cho cặp hội thoại:</b>", unsafe_allow_html=True)
+                cols_class_aud = st.columns([1.5, 1.5, 3])
+                with cols_class_aud[0]:
+                    render_play_button(c_data['question_hanzi'], "🔊 Nghe Câu hỏi", key=f"qa_class_q_play_success_{c_idx}")
+                with cols_class_aud[1]:
+                    render_play_button(hanzi_part, "🔊 Nghe Câu trả lời", key=f"qa_class_a_play_success_{c_idx}")
+                with cols_class_aud[2]:
+                    if st.button("🎉 Cộng điểm thưởng cho " + target_reader, key=f"qa_class_reward_{c_idx}"):
+                        st.balloons()
+                        st.success(f"Cộng 10 điểm thưởng cho bạn **{target_reader}**! 🏆")
+            else:
+                st.markdown(
+                    f"""<div style="background-color: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 12px; padding: 20px; margin-top: 15px; color: #991B1B;">
+<h4 style="margin-top: 0; margin-bottom: 5px; color: #991B1B;">❌ CÂU TRẢ LỜI CHƯA CHÍNH XÁC!</h4>
+<p style="font-size: 0.95em; margin-bottom: 8px; color: #7F1D1D;">
+Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm để tìm ra câu trả lời hợp lý.
+</p>
+<div style="background: white; border-radius: 8px; padding: 12px; border: 1px solid #FCA5A5; font-size: 0.92em; color: #991B1B;">
+💡 <b>Gợi ý:</b> {c_data['hint']}
+</div>
 </div>""",
                     unsafe_allow_html=True
                 )
