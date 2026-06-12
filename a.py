@@ -307,7 +307,7 @@ elif menu == "Bài 4.1 - Đấu trường Luyện tập":
     lesson4.show_lesson4_classroom_arena()
 
 elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
-    # Hot-reload trigger comment
+    # Hot-reload trigger: 2026-06-12 12:19
     lesson4.show_lesson4_qa_and_dialogues()
 
 elif menu == "Bài 5 - Nét chữ Hán cơ bản":

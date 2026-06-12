@@ -21,6 +21,50 @@ def play_audio(text):
             'ü': 'v'
         }};
         
+        let audioCtx = null;
+        function playAmplified(audioNode, fallbackFunc, volumeBoost = 3.0) {{
+            try {{
+                if (!audioCtx) {{
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }}
+                if (audioCtx.state === 'suspended') {{
+                    audioCtx.resume();
+                }}
+                if (!audioNode._amplified) {{
+                    const source = audioCtx.createMediaElementSource(audioNode);
+                    const gainNode = audioCtx.createGain();
+                    gainNode.gain.value = volumeBoost;
+                    source.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    audioNode._amplified = true;
+                }}
+                audioNode.play().catch(err => {{
+                    if (fallbackFunc) fallbackFunc();
+                }});
+            }} catch(err) {{
+                audioNode.play().catch(err => {{
+                    if (fallbackFunc) fallbackFunc();
+                }});
+            }}
+        }}
+
+        function loadAndPlay(url, fallbackFunc, volumeBoost = 3.0) {{
+            let audioNode = new Audio();
+            audioNode.crossOrigin = "anonymous";
+            audioNode.src = url;
+            audioNode.onerror = () => {{
+                if (audioNode.crossOrigin === "anonymous") {{
+                    let normalAudio = new Audio(url);
+                    normalAudio.play().catch(err => {{
+                        if (fallbackFunc) fallbackFunc();
+                    }});
+                }} else {{
+                    if (fallbackFunc) fallbackFunc();
+                }}
+            }};
+            playAmplified(audioNode, fallbackFunc, volumeBoost);
+        }}
+
         function speakSpeechSynthesis() {{
             const u = new SpeechSynthesisUtterance(text);
             u.lang = "zh-CN";
@@ -32,11 +76,7 @@ def play_audio(text):
         
         if (hasChinese) {{
             const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
-            const audio = new Audio(url);
-            audio.volume = 1.0;
-            audio.play().catch(err => {{
-                speakSpeechSynthesis();
-            }});
+            loadAndPlay(url, speakSpeechSynthesis, 3.0);
         }} else {{
             const cleanText = text.trim();
             const isSingle = !/\\s/.test(cleanText) && cleanText.length <= 7;
@@ -53,35 +93,17 @@ def play_audio(text):
                 base = base.replace(/ü/g, 'v');
                 const numbered = base + tone;
                 let url = "https://dictionary.writtenchinese.com/sounds/" + encodeURIComponent(numbered) + ".mp3";
-                let pinyinAudio = new Audio(url);
-                pinyinAudio.volume = 1.0;
-                let fallbackTriggered = false;
                 
                 const triggerFallback = () => {{
-                    if (!fallbackTriggered) {{
-                        if (tone === 5 && url.endsWith("5.mp3")) {{
-                            url = url.replace(/5\\.mp3$/, ".mp3");
-                            pinyinAudio = new Audio(url);
-                            pinyinAudio.volume = 1.0;
-                            pinyinAudio.onerror = () => {{
-                                fallbackTriggered = true;
-                                speakSpeechSynthesis();
-                            }};
-                            pinyinAudio.play().catch(err => {{
-                                fallbackTriggered = true;
-                                speakSpeechSynthesis();
-                            }});
-                        }} else {{
-                            fallbackTriggered = true;
-                            speakSpeechSynthesis();
-                        }}
+                    if (tone === 5 && url.endsWith("5.mp3")) {{
+                        url = url.replace(/5\\.mp3$/, ".mp3");
+                        loadAndPlay(url, speakSpeechSynthesis, 3.0);
+                    }} else {{
+                        speakSpeechSynthesis();
                     }}
                 }};
                 
-                pinyinAudio.onerror = triggerFallback;
-                pinyinAudio.play().catch(err => {{
-                    triggerFallback();
-                }});
+                loadAndPlay(url, triggerFallback, 3.0);
             }} else {{
                 speakSpeechSynthesis();
             }}
@@ -132,6 +154,7 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
         </style>
         <button class="play-btn" onclick="playTTS()">{label}</button>
         <script>
+        let audioCtx = null;
         let audio = null;
         const toneVowels = {{
             'ā': 'a1', 'á': 'a2', 'ǎ': 'a3', 'à': 'a4',
@@ -151,23 +174,61 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(u);
         }}
+
+        function playAmplified(audioNode, fallbackFunc, volumeBoost = 3.0) {{
+            try {{
+                if (!audioCtx) {{
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }}
+                if (audioCtx.state === 'suspended') {{
+                    audioCtx.resume();
+                }}
+                if (!audioNode._amplified) {{
+                    const source = audioCtx.createMediaElementSource(audioNode);
+                    const gainNode = audioCtx.createGain();
+                    gainNode.gain.value = volumeBoost;
+                    source.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    audioNode._amplified = true;
+                }}
+                audioNode.play().catch(err => {{
+                    if (fallbackFunc) fallbackFunc();
+                }});
+            }} catch(err) {{
+                audioNode.play().catch(err => {{
+                    if (fallbackFunc) fallbackFunc();
+                }});
+            }}
+        }}
+
+        function loadAndPlay(url, fallbackFunc, volumeBoost = 3.0) {{
+            if (audio) {{
+                audio.pause();
+            }}
+            audio = new Audio();
+            audio.crossOrigin = "anonymous";
+            audio.src = url;
+            audio.onerror = () => {{
+                if (audio.crossOrigin === "anonymous") {{
+                    let normalAudio = new Audio(url);
+                    audio = normalAudio;
+                    normalAudio.play().catch(err => {{
+                        if (fallbackFunc) fallbackFunc();
+                    }});
+                }} else {{
+                    if (fallbackFunc) fallbackFunc();
+                }}
+            }};
+            playAmplified(audio, fallbackFunc, volumeBoost);
+        }}
         
         function playTTS() {{
             const text = {safe_text};
             const hasChinese = /[\u4e00-\u9fa5]/.test(text);
             
-            if (audio) {{
-                audio.pause();
-                audio.currentTime = 0;
-            }}
-            
             if (hasChinese) {{
                 const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
-                audio = new Audio(url);
-                audio.volume = 1.0;
-                audio.play().catch(err => {{
-                    speakSpeechSynthesis(text);
-                }});
+                loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
             }} else {{
                 const cleanText = text.trim();
                 const isSingle = !/\\s/.test(cleanText) && cleanText.length <= 7;
@@ -184,35 +245,17 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                     base = base.replace(/ü/g, 'v');
                     const numbered = base + tone;
                     let url = "https://dictionary.writtenchinese.com/sounds/" + encodeURIComponent(numbered) + ".mp3";
-                    audio = new Audio(url);
-                    audio.volume = 1.0;
-                    let fallbackTriggered = false;
                     
                     const triggerFallback = () => {{
-                        if (!fallbackTriggered) {{
-                            if (tone === 5 && url.endsWith("5.mp3")) {{
-                                url = url.replace(/5\\.mp3$/, ".mp3");
-                                audio = new Audio(url);
-                                audio.volume = 1.0;
-                                audio.onerror = () => {{
-                                    fallbackTriggered = true;
-                                    speakSpeechSynthesis(text);
-                                }};
-                                audio.play().catch(err => {{
-                                    fallbackTriggered = true;
-                                    speakSpeechSynthesis(text);
-                                }});
-                            }} else {{
-                                fallbackTriggered = true;
-                                speakSpeechSynthesis(text);
-                            }}
+                        if (tone === 5 && url.endsWith("5.mp3")) {{
+                            url = url.replace(/5\\.mp3$/, ".mp3");
+                            loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
+                        }} else {{
+                            speakSpeechSynthesis(text);
                         }}
                     }};
                     
-                    audio.onerror = triggerFallback;
-                    audio.play().catch(err => {{
-                        triggerFallback();
-                    }});
+                    loadAndPlay(url, triggerFallback, 3.0);
                 }} else {{
                     speakSpeechSynthesis(text);
                 }}
