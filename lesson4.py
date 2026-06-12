@@ -1878,7 +1878,7 @@ def show_lesson4_vocab(extended_only=False):
         {"group": "uai (wai)", "emoji": "😎", "word": "帅", "pinyin": "shuài", "vietnamese": "Đẹp trai", "key_prefix": "uai_shuai", "example_han": "他很帅。", "example_py": "Tā hěn shuài.", "example_vi": "Anh ấy rất đẹp trai."},
         {"group": "ui (wei)", "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước", "key_prefix": "ui_shui", "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."},
         {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
-        {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon."},
+        {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon.", "note": "Bánh trung thu gọi là 月饼 (Nguyệt Bính) vì chữ 月 (mặt trăng) ghép với 饼 (bánh tròn, dẹt), tượng trưng cho chiếc bánh hình tròn giống vầng trăng rằm."},
         {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học Hán ngữ."},
         {"group": "Từ vựng mở rộng", "emoji": "😎", "word": "帅哥", "pinyin": "shuàigē", "vietnamese": "Soái ca, trai đẹp", "key_prefix": "ext_shuaige", "example_han": "这里有很多帅哥。", "example_py": "Zhèlǐ yǒu hěn duō shuàigē.", "example_vi": "Ở đây có rất nhiều trai đẹp."},
         {"group": "Từ vựng mở rộng", "emoji": "👸", "word": "美女", "pinyin": "měinǚ", "vietnamese": "Mỹ nữ, gái đẹp", "key_prefix": "ext_meinu", "example_han": "她是我们的美女。", "example_py": "Tā shì wǒmen de měinǚ.", "example_vi": "Cô ấy là mỹ nữ của chúng tôi."},
@@ -2063,6 +2063,14 @@ def show_lesson4_vocab(extended_only=False):
     else:
         img_tag = f'<div style="font-size: 4rem;">{w["emoji"]}</div>'
 
+    note_html = ""
+    if "note" in w:
+        note_html = f"""
+        <div style="background-color: #F0F9FF; border-left: 3px solid #0EA5E9; padding: 8px 12px; margin-top: 10px; font-size: 0.88em; color: #0369A1; border-radius: 6px; line-height: 1.45;">
+            💡 <b>Giải thích từ vựng:</b> {w['note']}
+        </div>
+        """
+
     card_html = f"""
     <div class="flashcard-container">
         <div class="flashcard-image-container">
@@ -2079,6 +2087,7 @@ def show_lesson4_vocab(extended_only=False):
                 <div class="flashcard-example-han">{w['example_han']}</div>
                 <div class="flashcard-example-py">{w['example_py']}</div>
                 <div class="flashcard-example-vi">{w['example_vi']}</div>
+                {note_html}
             </div>
         </div>
     </div>
