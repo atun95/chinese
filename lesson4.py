@@ -1135,7 +1135,7 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                         st.session_state.spin_action = random.choice([
                             "🗣️ Đọc to & Phát âm (Đọc to chữ Hán & Pinyin trên màn hình)",
                             "✍️ Đặt câu nhanh (Đặt 1 câu tiếng Trung có nghĩa chứa từ này)",
-                            "🔄 Dịch nhanh (Giáo viên che màn hình, học viên dịch nhanh từ tiếng Việt sang tiếng Trung)"
+                            "🔄 Dịch nhanh"
                         ])
                         st.session_state.reveal_spin_meaning = False
                         st.rerun()
