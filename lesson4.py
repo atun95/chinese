@@ -800,7 +800,7 @@ def show_lesson4_qa_and_dialogues():
             )
         with cols_q[1]:
             st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
-            render_play_button(c_data['question_hanzi'], "🔊 Nghe câu hỏi", key=f"qa_class_q_play_{c_idx}", use_container_width=True)
+            render_play_button(c_data['question_hanzi'], "🔊 Nghe câu hỏi", key=f"qa_class_q_play_{c_idx}")
             
         st.write("👉 **Chọn đáp án đúng:**")
         
