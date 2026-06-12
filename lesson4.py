@@ -921,19 +921,19 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
         st.markdown("#### 💬 Hội thoại 1")
         
         if st.button("🎲 Bốc thăm vai (Hội thoại 1)", key="btn_pick_dlg1"):
-            if len(students) >= 2:
-                pair = random.sample(students, 2)
-                st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
+            if len(students) >= 3:
+                trio = random.sample(students, 3)
+                st.success(f"👑 Chỉ định: **{trio[0]}** đóng vai **Học viên A** | **{trio[1]}** đóng vai **Học viên B** | **{trio[2]}** đóng vai **Học viên C**")
             else:
-                st.warning("Vui lòng nhập ít nhất 2 học viên để bốc thăm.")
+                st.warning("Vui lòng nhập ít nhất 3 học viên để bốc thăm.")
                 
         dlg1_lines = [
             ("Học viên A", "#2563eb", "Nǐmen qù hē nǎichá ma?", "你们去喝奶茶吗？", "Các bạn đi uống trà sữa không?"),
-            ("Học viên B", "#10b981", "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. Nǐ qù ma?", "我们不喝奶茶，我们喝水。你去吗？", "Chúng tôi không uống trà sữa, chúng tôi uống nước. Cậu đi không?"),
-            ("Học viên A", "#2563eb", "Wǒ hěn è. Nǐmen è ma?", "我很饿。你们饿吗？", "Tớ rất đói. Các cậu đói không?"),
-            ("Học viên B", "#10b981", "Wǒmen yě è. Wǒmen qù chī jīròu, chī yúròu.", "我们也饿。我们去吃鸡肉，吃鱼肉。", "Chúng tớ cũng đói. Chúng tớ đi ăn thịt gà, ăn thịt cá."),
-            ("Học viên A", "#2563eb", "Hǎo! Nǐmen de péngyou ài chī jīròu ma?", "好！你们的朋友爱吃鸡肉吗？", "Được! Bạn của các cậu thích ăn thịt gà không?"),
-            ("Học viên B", "#10b981", "Tā hěn ài chī jīròu, yě ài hē nǎichá.", "他很爱吃鸡肉，也爱喝奶茶。", "Cậu ấy rất thích ăn thịt gà, cũng thích uống trà sữa.")
+            ("Học viên B", "#10b981", "Wǒ bù hē nǎichá, wǒ hē shuǐ. Nǐ qù ma?", "我不喝奶茶，我喝水。你去吗？", "Tớ không uống trà sữa, tớ uống nước. Cậu đi không?"),
+            ("Học viên C", "#8b5cf6", "Wǒ qù! Wǒ hěn è. Nǐmen lèi ma?", "我去！我很饿。你们累吗？", "Tớ đi! Tớ rất đói. Các cậu mệt không?"),
+            ("Học viên B", "#10b981", "Wǒ bú lèi, wǒ yě è. Wǒmen qù chī jīròu.", "我不累，我也饿。我们去吃鸡肉。", "Tớ không mệt, tớ cũng đói. Chúng ta đi ăn thịt gà."),
+            ("Học viên A", "#2563eb", "Nǐmen de péngyou qù ma? Tā ài chī jīròu ma?", "你们的朋友去吗？他爱吃鸡肉吗？", "Bạn của các cậu đi không? Cậu ấy thích ăn thịt gà không?"),
+            ("Học viên C", "#8b5cf6", "Tā bú qù, tā hěn lèi. Tā ài chī yúròu, bú ài chī jīròu.", "他不去，他很累。他爱吃鱼肉，不爱吃鸡肉。", "Cậu ấy không đi, cậu ấy rất mệt. Cậu ấy thích ăn thịt cá, không thích ăn thịt gà.")
         ]
         for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg1_lines):
             col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
@@ -998,24 +998,51 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
             with col_audio:
                 render_play_button(hanzi, "🔊", key=f"audio_dlg2_line_{idx}")
                 
+        # Comparison note between 美 and 漂亮
+        st.markdown(
+            """<div style="background-color: #F8FAFC; border-left: 4px solid #10B981; padding: 12px 15px; border-radius: 4px; margin-top: 15px; margin-bottom: 15px;">
+<b style="color: #065F46;">💡 Phân biệt 美 (měi) & 漂亮 (piàoliang):</b>
+<table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.9em;">
+  <tr style="background-color: #ECFDF5; color: #065F46;">
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Từ</th>
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Ý nghĩa</th>
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Đặc điểm & Cách dùng</th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;"><b>美 (měi)</b></td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Đẹp (trừu tượng/nghệ thuật/vẻ đẹp bên trong)</td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Dùng cho cả vẻ đẹp bên trong (tâm hồn, đức hạnh) lẫn phong cảnh, nghệ thuật. Thường mang tính văn chương hơn.</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;"><b>漂亮 (piàoliang)</b></td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Xinh đẹp / Đẹp mắt (bên ngoài)</td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Dùng chủ yếu trong khẩu ngữ hàng ngày để tả vẻ đẹp ngoại hình trực quan của người, vật, hay quần áo. Không dùng tả vẻ đẹp tâm hồn. </td>
+  </tr>
+</table>
+</div>""",
+            unsafe_allow_html=True
+        )
+        
         st.markdown("---")
         
         st.markdown("#### 💬 Hội thoại 3")
         
         if st.button("🎲 Bốc thăm vai (Hội thoại 3)", key="btn_pick_dlg3"):
-            if len(students) >= 2:
-                pair = random.sample(students, 2)
-                st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
+            if len(students) >= 4:
+                quad = random.sample(students, 4)
+                st.success(f"👑 Chỉ định: **{quad[0]}** đóng vai **Học viên A** | **{quad[1]}** đóng vai **Học viên B** | **{quad[2]}** đóng vai **Học viên C** | **{quad[3]}** đóng vai **Học viên D**")
             else:
-                st.warning("Vui lòng nhập ít nhất 2 học viên để bốc thăm.")
+                st.warning("Vui lòng nhập ít nhất 4 học viên để bốc thăm.")
                 
         dlg3_lines = [
             ("Học viên A", "#2563eb", "Tā gēge shuài ma?", "他哥哥帅吗？", "Anh trai cậu ấy đẹp trai không?"),
-            ("Học viên B", "#10b981", "Tā gēge hěn shuài. Tā gēge shì nán xuéshēng ma?", "他哥哥很帅。他哥哥是男学生吗？", "Anh trai cậu ấy rất đẹp trai. Anh trai cậu ấy là nam sinh phải không?"),
-            ("Học viên A", "#2563eb", "Bú shì, tā gēge shì péngyou. Tā ài chī yúròu ma?", "不是，他哥哥是朋友。他爱吃鱼肉吗？", "Không phải, anh trai cậu ấy là bạn bè. Anh ấy thích ăn thịt cá không?"),
-            ("Học viên B", "#10b981", "Tā ài chī yúròu, yě hěn ài chī niúròu.", "他爱吃鱼肉，也很爱吃牛肉。", "Anh ấy thích ăn thịt cá, cũng rất thích ăn thịt bò."),
-            ("Học viên A", "#2563eb", "Tā hē nǎichá ma?", "他喝奶茶吗？", "Anh ấy uống trà sữa không?"),
-            ("Học viên B", "#10b981", "Tā bù hē nǎichá. Tā hē shuǐ, tā yě chī jīròu.", "他不喝奶茶。他喝水，他也吃鸡肉。", "Anh ấy không uống trà sữa. Anh ấy uống nước, anh ấy cũng ăn thịt gà.")
+            ("Học viên B", "#10b981", "Tā hěn shuài, tā shì shuàigē. Tā ài chī jīròu, yě ài hē nǎichá.", "他很帅，他是帅哥。他爱吃鸡肉，也爱喝奶茶。", "Anh ấy rất đẹp trai, anh ấy là soái ca. Anh ấy thích ăn thịt gà, cũng thích uống trà sữa."),
+            ("Học viên C", "#8b5cf6", "Tā ài chī yúròu hé niúròu ma?", "他爱吃鱼肉和牛肉吗？", "Anh ấy thích ăn thịt cá và thịt bò không?"),
+            ("Học viên D", "#f59e0b", "Tā bú ài chī yúròu, tā xǐhuān chī niúròu. Tā lèi ma?", "他不爱吃鱼肉，他喜欢吃牛肉。他累吗？", "Anh ấy không thích ăn thịt cá, anh ấy thích ăn thịt bò. Anh ấy mệt không?"),
+            ("Học viên A", "#2563eb", "Tā bú lèi, tā hěn ài xué Hànyǔ. Wèi, nǐmen è ma?", "他不累，他很爱学汉语。喂，你们饿吗？", "Anh ấy không mệt, anh ấy rất thích học tiếng Trung. Này, các cậu đói không?"),
+            ("Học viên B", "#10b981", "Wǒ hěn è, wǒ xiǎng chī jīròu. Wǒmen qù chī ba!", "我很饿，我想吃鸡肉。我们去吃吧！", "Tớ rất đói, tớ muốn ăn thịt gà. Chúng ta đi ăn đi!"),
+            ("Học viên C", "#8b5cf6", "Wǒ bù è, wǒ lèi. Wǒ xǐhuān hē nǎichá.", "我不饿，我累。我喜欢喝奶茶。", "Tớ không đói, tớ mệt. Tớ thích uống trà sữa."),
+            ("Học viên D", "#f59e0b", "Hǎo! Wǒmen qù hē nǎichá, chī jīròu ba!", "好！我们去喝奶茶，吃鸡肉吧！", "Được! Chúng ta đi uống trà sữa, ăn thịt gà đi!")
         ]
         for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg3_lines):
             col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
@@ -1025,7 +1052,9 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 st.markdown(f"<span style='font-size: 1.1em; font-weight: bold;'>{hanzi}</span> &nbsp;&nbsp; <span style='font-family: monospace; color: #2563eb; font-size: 0.9em; background-color: #eff6ff; padding: 2px 6px; border-radius: 4px;'>{pinyin}</span><br/><span style='color: #64748b; font-style: italic; font-size: 0.9em;'>{meaning}</span>", unsafe_allow_html=True)
             with col_audio:
                 render_play_button(hanzi, "🔊", key=f"audio_dlg3_line_{idx}")
-
+                
+        st.markdown("---")
+        
 def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_scores_b4=None):
     st.header("🎯 Bài 4: Luyện tập Vận mẫu kép mở rộng")
    
