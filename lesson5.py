@@ -91,6 +91,15 @@ NUMBERS_DATA = [
     }
 ]
 
+LARGE_NUMBERS_DATA = [
+    {"digit": "100", "hanzi": "一百", "pinyin": "yī bǎi", "meaning": "Một trăm"},
+    {"digit": "1.000", "hanzi": "一千", "pinyin": "yī qiān", "meaning": "Một nghìn"},
+    {"digit": "10.000", "hanzi": "一万", "pinyin": "yī wàn", "meaning": "Mười nghìn (1 vạn)"},
+    {"digit": "1.000.000", "hanzi": "一百万", "pinyin": "yī bǎi wàn", "meaning": "Một triệu"},
+    {"digit": "100.000.000", "hanzi": "一亿", "pinyin": "yī yì", "meaning": "Một trăm triệu"},
+    {"digit": "1.000.000.000", "hanzi": "十亿", "pinyin": "shí yì", "meaning": "Một tỷ"}
+]
+
 def show_lesson5_numbers():
     render_lesson_intro("🔢 Bài 5.1: Số đếm từ 0 đến 10", "Học phát âm, chữ Hán và cử chỉ ngón tay đếm số của người Trung Quốc.")
     
@@ -161,6 +170,26 @@ def show_lesson5_numbers():
                     </div>
                     """, unsafe_allow_html=True)
                     render_play_button(item['hanzi'], "🔊 Phát âm", key=f"play_num_{item['digit']}")
+                    
+    # --- LARGE NUMBERS EXTENSION ---
+    st.markdown("---")
+    st.subheader("📊 Mở rộng: Các đơn vị số lớn")
+    st.write("Cách đọc và đơn vị đếm các số hàng trăm, hàng nghìn, hàng triệu, hàng tỷ:")
+    
+    cols_large = st.columns(6)
+    for idx, item in enumerate(LARGE_NUMBERS_DATA):
+        with cols_large[idx]:
+            st.markdown(f"""
+            <div class="number-card" style="min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; padding: 12px; margin-bottom: 15px;">
+                <div>
+                    <div class="number-digit" style="font-size: 1.3rem; color: #0284c7;">{item['digit']}</div>
+                    <div class="number-hanzi" style="font-size: 2.0rem; margin: 5px 0;">{item['hanzi']}</div>
+                    <div class="number-pinyin" style="font-size: 1.05rem; color: #4b5563; font-weight: bold;">{item['pinyin']}</div>
+                </div>
+                <div style="font-size: 0.9rem; font-weight: bold; color: #059669; margin-top: 8px; font-style: italic;">{item['meaning']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button(item['hanzi'], "🔊 Phát âm", key=f"play_large_{idx}")
                     
     st.markdown("---")
     st.subheader("🎯 Thử thách Phản xạ Số đếm")
