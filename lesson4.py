@@ -2065,11 +2065,7 @@ def show_lesson4_vocab(extended_only=False):
 
     note_html = ""
     if "note" in w:
-        note_html = f"""
-        <div style="background-color: #F0F9FF; border-left: 3px solid #0EA5E9; padding: 8px 12px; margin-top: 10px; font-size: 0.88em; color: #0369A1; border-radius: 6px; line-height: 1.45;">
-            💡 <b>Giải thích từ vựng:</b> {w['note']}
-        </div>
-        """
+        note_html = f'<div style="background-color: #F0F9FF; border-left: 3px solid #0EA5E9; padding: 8px 12px; margin-top: 10px; font-size: 0.88em; color: #0369A1; border-radius: 6px; line-height: 1.45;">💡 <b>Giải thích từ vựng:</b> {w["note"]}</div>'
 
     card_html = f"""
     <div class="flashcard-container">
