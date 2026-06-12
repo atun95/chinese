@@ -271,7 +271,7 @@ Chữ <b>阿 (ā)</b> đặt trước tên là cách gọi <b>thân mật, gần
 <li><b>阿仙</b> (xiān) = "Tiên"</li>
 </ul>
 <div style="margin-top: 10px; font-size: 0.9em; color: #e11d48; font-weight: bold;">
-⚠️ KHÔNG dùng "阿" khi tự giới thiệu tên mình một cách trang trọng! (Ví dụ không nói "我叫青" mà nói "我叫青" hoặc "我叫林青").
+⚠️ KHÔNG dùng "阿" khi tự giới thiệu tên mình một cách trang trọng! (Ví dụ không nói "我叫阿青" mà nói "我叫青" hoặc "我叫林青").
 </div>
 </div>""", unsafe_allow_html=True)
 
