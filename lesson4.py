@@ -913,18 +913,14 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 )
 
     with tab_dialogues:
-        st.markdown("### 👥 Hoạt động Đóng vai Hội thoại (Role-Play)")
-        st.write("Chia nhóm học viên đóng vai để thực hành các đoạn hội thoại giao tiếp bên dưới. Tập trung phát âm đúng các vận mẫu kép đã học.")
-        
-        student_list_raw = st.text_input("Nhập tên các học viên để bốc thăm cặp diễn (cách nhau bằng dấu phẩy):", "Tiên, Vy, Trân, Thanh", key="dialogue_students_input")
+        student_list_raw = st.text_input("Danh sách học viên (cách nhau bằng dấu phẩy):", "Tiên, Vy, Trân, Thanh", key="dialogue_students_input")
         students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
         
         st.markdown("---")
         
-        st.markdown("#### 💬 Hội thoại 1: Uống trà sữa hay uống nước? (2 vai)")
-        st.info("🗣️ **Học viên A & Học viên B:** Thảo luận về việc đi uống nước/trà sữa và ăn gà.")
+        st.markdown("#### 💬 Hội thoại 1")
         
-        if st.button("🎲 Bốc thăm cặp học viên cho Hội thoại 1", key="btn_pick_dlg1"):
+        if st.button("🎲 Bốc thăm vai (Hội thoại 1)", key="btn_pick_dlg1"):
             if len(students) >= 2:
                 pair = random.sample(students, 2)
                 st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
@@ -948,10 +944,9 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 
         st.markdown("---")
         
-        st.markdown("#### 💬 Hội thoại 2: Búp bê của chị gái và học tiếng Trung (3 vai)")
-        st.info("🗣️ **Học viên A, Học viên B & Học viên C:** Hỏi thăm về búp bê và sở thích học tập.")
+        st.markdown("#### 💬 Hội thoại 2")
         
-        if st.button("🎲 Bốc thăm bộ ba học viên cho Hội thoại 2", key="btn_pick_dlg2"):
+        if st.button("🎲 Bốc thăm vai (Hội thoại 2)", key="btn_pick_dlg2"):
             if len(students) >= 3:
                 trio = random.sample(students, 3)
                 st.success(f"👑 Chỉ định: **{trio[0]}** đóng vai **Học viên A** | **{trio[1]}** đóng vai **Học viên B** | **{trio[2]}** đóng vai **Học viên C**")
@@ -975,10 +970,9 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 
         st.markdown("---")
         
-        st.markdown("#### 💬 Hội thoại 3: Anh trai đẹp trai và thói quen ăn uống (2 vai)")
-        st.info("🗣️ **Học viên A & Học viên B:** Trò chuyện về người anh trai đẹp trai, sở thích ăn thịt cá/thịt bò/trà sữa.")
+        st.markdown("#### 💬 Hội thoại 3")
         
-        if st.button("🎲 Bốc thăm cặp học viên cho Hội thoại 3", key="btn_pick_dlg3"):
+        if st.button("🎲 Bốc thăm vai (Hội thoại 3)", key="btn_pick_dlg3"):
             if len(students) >= 2:
                 pair = random.sample(students, 2)
                 st.success(f"👑 Chỉ định: **{pair[0]}** đóng vai **Học viên A** | **{pair[1]}** đóng vai **Học viên B**")
