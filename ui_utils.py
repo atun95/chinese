@@ -192,7 +192,7 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                     audioNode._amplified = true;
                 }}
                 audioNode.play().catch(err => {{
-                    if (fallbackFunc) fallbackFunc();
+                    // Do not trigger fallback immediately here because onerror will handle the retry
                 }});
             }} catch(err) {{
                 audioNode.play().catch(err => {{
@@ -205,6 +205,13 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
             if (audio) {{
                 audio.pause();
             }}
+            let fallbackTriggered = false;
+            const triggerFallback = () => {{
+                if (!fallbackTriggered) {{
+                    fallbackTriggered = true;
+                    fallbackFunc();
+                }}
+            }};
             audio = new Audio();
             audio.crossOrigin = "anonymous";
             audio.src = url;
@@ -213,13 +220,13 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                     let normalAudio = new Audio(url);
                     audio = normalAudio;
                     normalAudio.play().catch(err => {{
-                        if (fallbackFunc) fallbackFunc();
+                        triggerFallback();
                     }});
                 }} else {{
-                    if (fallbackFunc) fallbackFunc();
+                    triggerFallback();
                 }}
             }};
-            playAmplified(audio, fallbackFunc, volumeBoost);
+            playAmplified(audio, triggerFallback, volumeBoost);
         }}
         
         function playTTS() {{

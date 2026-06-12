@@ -14,11 +14,13 @@ import lesson1
 import lesson2
 import lesson3
 import lesson4
+import lesson5
 
 importlib.reload(lesson1)
 importlib.reload(lesson2)
 importlib.reload(lesson3)
 importlib.reload(lesson4)
+importlib.reload(lesson5)
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
@@ -220,7 +222,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 4.1 - Vận mẫu kép",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 5 - Nét chữ Hán cơ bản"
+        "Bài 5 - Nét chữ Hán cơ bản",
+        "Bài 5.1 - Số đếm từ 0 đến 10"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -318,6 +321,9 @@ elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
 
 elif menu == "Bài 5 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
+
+elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
+    lesson5.show_lesson5_numbers()
 
 elif menu == "Bài tập Bài 4":
     lesson4.show_lesson4_exercises(save_progress, save_score_row_b4, load_all_scores_b4)
