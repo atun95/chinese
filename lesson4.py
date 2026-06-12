@@ -930,8 +930,10 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
         dlg1_lines = [
             ("Học viên A", "#2563eb", "Nǐmen qù hē nǎichá ma?", "你们去喝奶茶吗？", "Các bạn đi uống trà sữa không?"),
             ("Học viên B", "#10b981", "Wǒmen bù hē nǎichá, wǒmen hē shuǐ. Nǐ qù ma?", "我们不喝奶茶，我们喝水。你去吗？", "Chúng tôi không uống trà sữa, chúng tôi uống nước. Cậu đi không?"),
-            ("Học viên A", "#2563eb", "Wǒ qù. Wǒ hěn è, wǒ yě è.", "我去。我很饿，我也饿。", "Tớ đi. Tớ rất đói, tớ cũng đói."),
-            ("Học viên B", "#10b981", "Hǎo, wǒmen qù chī jī.", "好，我们去吃鸡。", "Được, chúng ta đi ăn gà.")
+            ("Học viên A", "#2563eb", "Wǒ hěn è. Nǐmen è ma?", "我很饿。你们饿吗？", "Tớ rất đói. Các cậu đói không?"),
+            ("Học viên B", "#10b981", "Wǒmen yě è. Wǒmen qù chī jīròu, chī yúròu.", "我们也饿。我们去吃鸡肉，吃鱼肉。", "Chúng tớ cũng đói. Chúng tớ đi ăn thịt gà, ăn thịt cá."),
+            ("Học viên A", "#2563eb", "Hǎo! Nǐmen de péngyou ài chī jīròu ma?", "好！你们的朋友爱吃鸡肉吗？", "Được! Bạn của các cậu thích ăn thịt gà không?"),
+            ("Học viên B", "#10b981", "Tā hěn ài chī jīròu, yě ài hē nǎichá.", "他很爱吃鸡肉，也爱喝奶茶。", "Cậu ấy rất thích ăn thịt gà, cũng thích uống trà sữa.")
         ]
         for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg1_lines):
             col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
@@ -980,9 +982,12 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 
         dlg2_lines = [
             ("Học viên A", "#2563eb", "Zhè shì nǐ de wáwa ma?", "这是你的娃娃吗？", "Đây là búp bê của bạn à?"),
-            ("Học viên B", "#10b981", "Bú shì, zhè shì wǒ jiějie de wáwa. Tā ài wáwa.", "不是，这是我姐姐的娃娃。她爱娃娃。", "Không phải, đây là búp bê của chị gái tớ. Chị ấy yêu búp bê."),
-            ("Học viên C", "#8b5cf6", "Tā jiějie ài zāihuā ma?", "她姐姐爱栽花吗？", "Chị gái cô ấy thích trồng hoa không?"),
-            ("Học viên B", "#10b981", "Tā bù ài zāihuā, tā ài xué Hànyǔ.", "她不爱栽花，她爱学汉语。", "Chị ấy không thích trồng hoa, chị ấy thích học tiếng Trung.")
+            ("Học viên B", "#10b981", "Bú shì, zhè shì wǒ jiějie de wáwa. Tā hěn ài wáwa.", "不是，这是我姐姐的娃娃。她很爱娃娃。", "Không phải, đây là búp bê của chị gái tớ. Chị ấy rất yêu búp bê."),
+            ("Học viên C", "#8b5cf6", "Nǐ jiějie shì měinǚ ma?", "你姐姐是美女吗？", "Chị gái cậu là người đẹp phải không?"),
+            ("Học viên B", "#10b981", "Shì, tā hěn měi. Tā yě hěn ài zāihuā.", "是，她很美。她也很爱栽花。", "Đúng vậy, chị ấy rất đẹp. Chị ấy cũng rất thích trồng hoa."),
+            ("Học viên A", "#2563eb", "Tā ài xué Hànyǔ ma?", "她爱学汉语吗？", "Chị ấy thích học tiếng Trung không?"),
+            ("Học viên C", "#8b5cf6", "Tā bù ài xué Hànyǔ, tā ài wáwa.", "她不爱学汉语，她爱娃娃。", "Chị ấy không thích học tiếng Trung, chị ấy thích búp bê."),
+            ("Học viên B", "#10b981", "Bú duì, tā ài xué Hànyǔ, yě ài wáwa.", "不对，她爱学汉语，也爱娃娃。", "Không đúng, chị ấy thích học tiếng Trung, cũng thích búp bê.")
         ]
         for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg2_lines):
             col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
@@ -1006,9 +1011,11 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 
         dlg3_lines = [
             ("Học viên A", "#2563eb", "Tā gēge shuài ma?", "他哥哥帅吗？", "Anh trai cậu ấy đẹp trai không?"),
-            ("Học viên B", "#10b981", "Tā gēge hěn shuài. Tā ài chī yúròu, yě ài chī niúròu.", "他哥哥很帅。他爱吃鱼肉，也爱吃牛肉。", "Anh trai cậu ấy rất đẹp trai. Anh ấy thích ăn thịt cá, cũng thích ăn thịt bò."),
-            ("Học viên A", "#2563eb", "Tā chī jī ma?", "他吃鸡吗？", "Anh ấy ăn gà không?"),
-            ("Học viên B", "#10b981", "Tā bù chī jī. Tā hē nǎichá, tā hē shuǐ.", "他不吃鸡。他喝奶茶，他喝水。", "Anh ấy không ăn gà. Anh ấy uống trà sữa, anh ấy uống nước.")
+            ("Học viên B", "#10b981", "Tā gēge hěn shuài. Tā gēge shì nán xuéshēng ma?", "他哥哥很帅。他哥哥是男学生吗？", "Anh trai cậu ấy rất đẹp trai. Anh trai cậu ấy là nam sinh phải không?"),
+            ("Học viên A", "#2563eb", "Bú shì, tā gēge shì péngyou. Tā ài chī yúròu ma?", "不是，他哥哥是朋友。他爱吃鱼肉吗？", "Không phải, anh trai cậu ấy là bạn bè. Anh ấy thích ăn thịt cá không?"),
+            ("Học viên B", "#10b981", "Tā ài chī yúròu, yě hěn ài chī niúròu.", "他爱吃鱼肉，也很爱吃牛肉。", "Anh ấy thích ăn thịt cá, cũng rất thích ăn thịt bò."),
+            ("Học viên A", "#2563eb", "Tā hē nǎichá ma?", "他喝奶茶吗？", "Anh ấy uống trà sữa không?"),
+            ("Học viên B", "#10b981", "Tā bù hē nǎichá. Tā hē shuǐ, tā yě chī jīròu.", "他不喝奶茶。他喝水，他也吃鸡肉。", "Anh ấy không uống trà sữa. Anh ấy uống nước, anh ấy cũng ăn thịt gà.")
         ]
         for idx, (speaker, color, pinyin, hanzi, meaning) in enumerate(dlg3_lines):
             col_lbl, col_content, col_audio = st.columns([1.8, 7.2, 1])
