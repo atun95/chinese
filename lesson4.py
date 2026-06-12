@@ -944,6 +944,31 @@ Học viên hãy xem lại ngữ cảnh câu hỏi hoặc thảo luận nhóm đ
                 
         st.markdown("---")
         
+        # Comparison note between 爱 and 喜欢
+        st.markdown(
+            """<div style="background-color: #F8FAFC; border-left: 4px solid #3B82F6; padding: 12px 15px; border-radius: 4px; margin-bottom: 15px;">
+<b style="color: #1E3A8A;">💡 Phân biệt 爱 (ài) & 喜欢 (xǐhuan):</b>
+<table style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.9em;">
+  <tr style="background-color: #EFF6FF; color: #1E3A8A;">
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Từ</th>
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Ý nghĩa</th>
+    <th style="border: 1px solid #E2E8F0; padding: 6px; text-align: left;">Mức độ & Cách dùng</th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;"><b>爱 (ài)</b></td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Yêu / Rất thích / Hay (làm gì)</td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Mức độ tình cảm mạnh mẽ hơn, hoặc chỉ một thói quen/sở thích rất lớn. (Ví dụ: <i>Tā ài wáwa</i> - Cô ấy yêu/rất thích búp bê).</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;"><b>喜欢 (xǐhuan)</b></td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Thích</td>
+    <td style="border: 1px solid #E2E8F0; padding: 6px;">Thể hiện sự yêu thích thông thường, nhẹ nhàng hơn. (Ví dụ: <i>Wǒ xǐhuan hē nǎichá</i> - Tôi thích uống trà sữa).</td>
+  </tr>
+</table>
+</div>""",
+            unsafe_allow_html=True
+        )
+        
         st.markdown("#### 💬 Hội thoại 2")
         
         if st.button("🎲 Bốc thăm vai (Hội thoại 2)", key="btn_pick_dlg2"):
