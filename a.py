@@ -323,7 +323,7 @@ elif menu == "Bài 5 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
-    # Hot-reload trigger: 2026-06-12 16:33
+    # Hot-reload trigger: 2026-06-12 16:38
     lesson5.show_lesson5_numbers()
 
 elif menu == "Bài tập Bài 4":

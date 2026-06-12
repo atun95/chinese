@@ -95,7 +95,9 @@ LARGE_NUMBERS_DATA = [
     {"digit": "100", "hanzi": "一百", "pinyin": "yī bǎi", "meaning": "Một trăm"},
     {"digit": "1.000", "hanzi": "一千", "pinyin": "yī qiān", "meaning": "Một nghìn"},
     {"digit": "10.000", "hanzi": "一万", "pinyin": "yī wàn", "meaning": "Mười nghìn (1 vạn)"},
+    {"digit": "100.000", "hanzi": "十万", "pinyin": "shí wàn", "meaning": "Một trăm nghìn (10 vạn)"},
     {"digit": "1.000.000", "hanzi": "一百万", "pinyin": "yī bǎi wàn", "meaning": "Một triệu"},
+    {"digit": "10.000.000", "hanzi": "一千万", "pinyin": "yī qiān wàn", "meaning": "Mười triệu"},
     {"digit": "100.000.000", "hanzi": "一亿", "pinyin": "yī yì", "meaning": "Một trăm triệu"},
     {"digit": "1.000.000.000", "hanzi": "十亿", "pinyin": "shí yì", "meaning": "Một tỷ"}
 ]
@@ -176,20 +178,75 @@ def show_lesson5_numbers():
     st.subheader("📊 Mở rộng: Các đơn vị số lớn")
     st.write("Cách đọc và đơn vị đếm các số hàng trăm, hàng nghìn, hàng triệu, hàng tỷ:")
     
-    cols_large = st.columns(6)
-    for idx, item in enumerate(LARGE_NUMBERS_DATA):
-        with cols_large[idx]:
-            st.markdown(f"""
-            <div class="number-card" style="min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; padding: 12px; margin-bottom: 15px;">
-                <div>
-                    <div class="number-digit" style="font-size: 1.3rem; color: #0284c7;">{item['digit']}</div>
-                    <div class="number-hanzi" style="font-size: 2.0rem; margin: 5px 0;">{item['hanzi']}</div>
-                    <div class="number-pinyin" style="font-size: 1.05rem; color: #4b5563; font-weight: bold;">{item['pinyin']}</div>
-                </div>
-                <div style="font-size: 0.9rem; font-weight: bold; color: #059669; margin-top: 8px; font-style: italic;">{item['meaning']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            render_play_button(item['hanzi'], "🔊 Phát âm", key=f"play_large_{idx}")
+    for row_idx in range(2):
+        cols_large = st.columns(4)
+        for col_idx in range(4):
+            idx = row_idx * 4 + col_idx
+            if idx < len(LARGE_NUMBERS_DATA):
+                item = LARGE_NUMBERS_DATA[idx]
+                with cols_large[col_idx]:
+                    st.markdown(f"""
+                    <div class="number-card" style="min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; padding: 12px; margin-bottom: 15px;">
+                        <div>
+                            <div class="number-digit" style="font-size: 1.3rem; color: #0284c7;">{item['digit']}</div>
+                            <div class="number-hanzi" style="font-size: 2.0rem; margin: 5px 0;">{item['hanzi']}</div>
+                            <div class="number-pinyin" style="font-size: 1.05rem; color: #4b5563; font-weight: bold;">{item['pinyin']}</div>
+                        </div>
+                        <div style="font-size: 0.9rem; font-weight: bold; color: #059669; margin-top: 8px; font-style: italic;">{item['meaning']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    render_play_button(item['hanzi'], "🔊 Phát âm", key=f"play_large_{idx}")
+
+    # --- TONE SANDHI OF YI COMPARISON TABLE ---
+    st.markdown("""
+    <div style="background-color: #f8fafc; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 1.15rem; font-weight: bold;">
+            💡 Quy tắc Biến điệu của chữ "一" (yī)
+        </h4>
+        <p style="font-size: 0.95em; line-height: 1.6; color: #334155; margin-bottom: 15px;">
+            Chữ <b>一 (yī)</b> có phiên âm gốc là thanh 1 (yī) khi đứng một mình hoặc đếm số thứ tự. Tuy nhiên, khi đi kèm với các từ chỉ đơn vị (lượng từ) phía sau, âm điệu của nó sẽ thay đổi tùy thuộc vào thanh điệu của từ tiếp theo:
+        </p>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.95em; text-align: left;">
+            <thead>
+                <tr style="background-color: #eff6ff; border-bottom: 2px solid #bfdbfe;">
+                    <th style="padding: 10px; color: #1e40af; font-weight: bold;">Quy tắc biến điệu</th>
+                    <th style="padding: 10px; color: #1e40af; font-weight: bold;">Cách đọc thực tế</th>
+                    <th style="padding: 10px; color: #1e40af; font-weight: bold;">Ví dụ minh họa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px; font-weight: bold; color: #0f172a;">
+                        Giữ nguyên <span style="color: #2563eb;">yī</span> (Thanh 1)
+                    </td>
+                    <td style="padding: 10px;">Khi đứng một mình, ở cuối từ, hoặc khi đọc số thứ tự từng số.</td>
+                    <td style="padding: 10px; font-family: monospace;"><b>十一</b> (shíyī)<br><b>第一</b> (dì-yī)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px; font-weight: bold; color: #b45309;">
+                        Đổi thành <span style="color: #d97706;">yì</span> (Thanh 4)
+                    </td>
+                    <td style="padding: 10px;">Khi đứng trước âm tiết mang <b>Thanh 1, Thanh 2, Thanh 3</b>.</td>
+                    <td style="padding: 10px; font-family: monospace;">
+                        <b>一百</b> (yī + bǎi [thanh 3] &rarr; <span style="color: #d97706; font-weight:bold;">yì</span>bǎi)<br>
+                        <b>一千</b> (yī + qiān [thanh 1] &rarr; <span style="color: #d97706; font-weight:bold;">yì</span>qiān)<br>
+                        <b>一百万</b> (yī + bǎi &rarr; <span style="color: #d97706; font-weight:bold;">yì</span>bǎiwàn)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; font-weight: bold; color: #047857;">
+                        Đổi thành <span style="color: #059669;">yí</span> (Thanh 2)
+                    </td>
+                    <td style="padding: 10px;">Khi đứng trước âm tiết mang <b>Thanh 4</b>.</td>
+                    <td style="padding: 10px; font-family: monospace;">
+                        <b>一万</b> (yī + wàn [thanh 4] &rarr; <span style="color: #059669; font-weight:bold;">yí</span>wàn)<br>
+                        <b>一亿</b> (yī + yì [thanh 4] &rarr; <span style="color: #059669; font-weight:bold;">yí</span>yì)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    """, unsafe_allow_html=True)
                     
     st.markdown("---")
     st.subheader("🎯 Thử thách Phản xạ Số đếm")
