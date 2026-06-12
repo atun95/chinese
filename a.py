@@ -202,7 +202,7 @@ st.title("Học Pinyin Cơ Bản")
 
 st.sidebar.header("Danh mục giáo án")
 
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "📝 Hệ thống bài tập"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập"])
 
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
@@ -212,10 +212,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.1 - Thanh mẫu", 
         "Bài 3.2 - Quy tắc viết Pinyin",
         "Bài 3.4 - Văn hóa gọi tên & Cấu trúc câu",
-        "Bài 3.5 - Hội thoại thực hành",
         "Bài 4.1 - Vận mẫu kép",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 4.3 - Đấu trường Luyện tập",
         "Bài 5 - Nét chữ Hán cơ bản"
     ])
 elif mode == "📖 Hệ thống từ vựng":
@@ -230,6 +228,11 @@ elif mode == "🗣️ Luyện tập ghép âm":
         "Ghép âm Bài 2 - Vận mẫu kép cơ bản",
         "Ghép âm Bài 3 - Thanh mẫu nâng cao",
         "Ghép âm Bài 4 - Vận mẫu kép mở rộng"
+    ])
+elif mode == "🗣️ Thực hành trên lớp":
+    menu = st.sidebar.radio("Chọn hoạt động:", [
+        "Bài 3.5 - Hội thoại thực hành",
+        "Bài 4.3 - Đấu trường Luyện tập"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
