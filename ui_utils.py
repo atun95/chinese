@@ -212,7 +212,7 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
             const triggerFallback = () => {{
                 if (!fallbackTriggered) {{
                     fallbackTriggered = true;
-                    fallbackFunc();
+                    if (fallbackFunc) fallbackFunc();
                 }}
             }};
             audio = new Audio();
@@ -237,6 +237,10 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
         
         function playTTS() {{
             const text = {safe_text};
+            if (text.startsWith("data:audio/")) {{
+                loadAndPlay(text, null, 3.0);
+                return;
+            }}
             const hasChinese = /[\u4e00-\u9fa5]/.test(text);
             
             if (hasChinese) {{
