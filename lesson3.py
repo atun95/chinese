@@ -23,33 +23,97 @@ def show_lesson3_pinyin():
     🔑 y và w là "áo khoác" của i và u khi chúng đứng đầu âm tiết. Phát âm hoàn toàn giống nhau!
     """)
     st.markdown("---")
-    st.subheader("2. Luyện tập đọc Thanh mẫu nâng cao")
-    col_lt1, col_lt2 = st.columns(2)
-    with col_lt1:
-        st.write("**Nhóm mặt lưỡi (j, q, x):**")
-        st.write("- **jī** (鸡: con gà)")
-        st.write("- **qī** (七: số 7)")
-        st.write("- **xǐ** (洗: rửa/giặt)")
-        st.write("- **jiā** (家: nhà/gia đình)")
+    def check_b3_spelling_rule(initial, final, tone_idx):
+        valid_combos = {
+            "z": ["a", "e", "i", "u", "ai", "ao", "ou", "ei"],
+            "c": ["a", "e", "i", "u", "ai", "ao", "ou"],
+            "s": ["a", "e", "i", "u", "ai", "ao", "ou"],
+            "zh": ["a", "e", "i", "u", "ai", "ao", "ou", "ei"],
+            "ch": ["a", "e", "i", "u", "ai", "ao", "ou"],
+            "sh": ["a", "e", "i", "u", "ai", "ao", "ou", "ei"],
+            "r": ["e", "i", "u", "ao", "ou"],
+            "j": ["i", "ü"],
+            "q": ["i", "ü"],
+            "x": ["i", "ü"]
+        }
         
-        st.write("**Nhóm đầu lưỡi (z, c, s):**")
-        st.write("- **zì** (字: chữ)")
-        st.write("- **cí** (词: từ/từ vựng)")
-        st.write("- **sì** (四: số 4)")
-        st.write("- **sān** (三: số 3)")
+        if final not in valid_combos.get(initial, []):
+            return None, f"❌ Lỗi ghép âm: Thanh mẫu nâng cao <b>{initial}</b> không thể đi cùng vận mẫu <b>{final}</b> trong Bài 3!"
+            
+        spelled = ""
+        if initial in ["j", "q", "x"] and final == "ü":
+            spelled = f"{initial}u"
+        else:
+            spelled = f"{initial}{final}"
+            
+        if tone_idx == 0:
+            return spelled, None
+            
+        vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
+        res = spelled
+        for v, syms in vowels.items():
+            if v in res:
+                if (v=='u' and 'iu' in res) or (v=='i' and 'ui' in res): continue
+                res = res.replace(v, syms[tone_idx-1]); break
+                
+        return res, None
 
-    with col_lt2:
-        st.write("**Nhóm uốn lưỡi (zh, ch, sh, r):**")
-        st.write("- **zhè** (这: đây/này)")
-        st.write("- **chī** (吃: ăn)")
-        st.write("- **shì** (是: là/phải)")
-        st.write("- **rì** (日: ngày/mặt trời)")
-        st.write("- **rén** (人: người)")
+    st.subheader("2. Công cụ Ghép âm Tương tác (Thanh mẫu nâng cao)")
+    st.write("Chọn thanh mẫu nâng cao của Bài 3, vận mẫu và thanh điệu để thực hành ghép âm chuẩn:")
+    
+    cols_sel = st.columns(3)
+    with cols_sel[0]:
+        initials = ["z", "c", "s", "zh", "ch", "sh", "r", "j", "q", "x"]
+        sel_initial = st.selectbox("Chọn Thanh mẫu nâng cao:", initials, index=0, key="b3_sandbox_initial")
+    with cols_sel[1]:
+        finals = ["i", "ü", "a", "o", "e", "u", "ai", "ao", "ou", "ei"]
+        sel_final = st.selectbox("Chọn Vận mẫu:", finals, index=0, key="b3_sandbox_final")
+    with cols_sel[2]:
+        tones = ["Thanh nhẹ", "Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"]
+        sel_tone = st.selectbox("Chọn Thanh điệu:", tones, index=1, key="b3_sandbox_tone")
         
-        st.write("**Âm đệm (y, w):**")
-        st.write("- **yī** (一: số 1)")
-        st.write("- **wǔ** (五: số 5)")
-        st.write("- **yú** (鱼: con cá)")
+    tone_idx = tones.index(sel_tone)
+    spelled_res, err = check_b3_spelling_rule(sel_initial, sel_final, tone_idx)
+    
+    st.markdown("<br/>", unsafe_allow_html=True)
+    if err:
+        st.markdown(
+            f"""
+            <div style="background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; padding: 18px; text-align: center;">
+                <span style="font-size: 1.1em; color: #DC2626; font-weight: bold;">{err}</span>
+                <p style="color: #991B1B; font-size: 0.9em; margin-top: 6px; margin-bottom: 0;">
+                    Vui lòng chọn tổ hợp ghép âm phù hợp với bảng ghép âm Bài 3.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+    else:
+        alerts = []
+        if sel_initial in ["j", "q", "x"] and sel_final == "ü":
+            alerts.append("⚠️ <b>Quy tắc bỏ dấu chấm:</b> Khi j, q, x kết hợp với ü, dấu hai chấm trên đầu biến mất, viết thành 'u' nhưng vẫn đọc là 'ü' (tròn môi).")
+        if sel_initial in ["z", "c", "s", "zh", "ch", "sh", "r"] and sel_final == "i":
+            alerts.append("⚠️ <b>Quy tắc phát âm i:</b> Khi 'i' đi sau các thanh mẫu này, nó được đọc phát âm là <b>ư</b> (ví dụ: zhi đọc gần giống chư, zi đọc là tư).")
+            
+        alerts_html = ""
+        if alerts:
+            alerts_html = "<div style='margin-top: 12px; border-top: 1px solid #bfdbfe; padding-top: 8px; text-align: left;'>" + "".join([f"<p style='color: #854d0e; font-size: 0.9em; margin-bottom: 4px;'>{a}</p>" for a in alerts]) + "</div>"
+            
+        st.markdown(
+            f"""
+            <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1px solid #BFDBFE; border-radius: 12px; padding: 22px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+                <div style="font-size: 0.85em; color: #1E40AF; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">KẾT QUẢ GHÉP ÂM BÀI 3:</div>
+                <div style="font-size: 3.5em; font-weight: bold; color: #1E3A8A; font-family: 'Courier New', monospace; margin: 10px 0;">{spelled_res}</div>
+                <div style="font-size: 0.95em; color: #1E40AF; font-style: italic;">
+                    Ghép từ: <b>{sel_initial}</b> + <b>{sel_final}</b> + <b>{sel_tone}</b>
+                </div>
+                {alerts_html}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        st.markdown("<br/>", unsafe_allow_html=True)
+        render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="b3_sandbox_play_btn", type="primary")
     
     st.markdown("---")
     st.subheader("3. Biến điệu của '不' (bù)")
