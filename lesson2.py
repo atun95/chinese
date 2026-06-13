@@ -5,10 +5,167 @@ from ui_utils import *
 
 def show_lesson2_intro(add_tones):
     render_lesson_intro("📚 Bài 2.1: Vận mẫu kép", "Nắm vững 4 vận mẫu kép cơ bản và ví dụ thực tế.")
-    st.subheader("Vận mẫu kép cơ bản")
-    cols = st.columns(4)
-    for i, item in enumerate(B2_VAN_KEP_SLIDES):
-        with cols[i]: render_pronunciation_card({"chu": item["vận"], "hdsd": item["hướng_dẫn"], "vd_han": item["ví_dụ_hán"], "vd_py": item["ví_dụ_py"], "nghe": item["nghe"]}, "b2_vk")
+    
+    st.markdown(
+        """
+        <style>
+        .final-card {
+            border-radius: 12px; 
+            padding: 22px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            border: 1px solid #e2e8f0; 
+            transition: all 0.3s ease;
+        }
+        .final-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .rule-badge {
+            background-color: #fffbeb;
+            color: #451a03;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            border: 1px solid #fef3c7;
+            box-shadow: 0 2px 5px rgba(245, 158, 11, 0.05);
+        }
+        .spelling-highlight {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #fde047;
+            margin: 0 2px;
+            display: inline-block;
+        }
+        .final-letter {
+            font-size: 2.2em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            line-height: 1;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+    B2_BASIC_VAN_KEP_DATA = [
+        {
+            "chu": "ai",
+            "hdsd": "Phát âm /a/ trước rồi trượt sang /i/.",
+            "cach_doc_sau": "Bắt đầu với khẩu hình miệng mở rộng phát âm nguyên âm /a/, sau đó thu hẹp dần khoảng cách giữa hai hàm răng và trượt mượt mà sang nguyên âm /i/.",
+            "tuong_duong": "Tương đương âm <b>ai</b> trong tiếng Việt (vd: tai, vai).",
+            "luu_y": "Khi viết Pinyin, nếu không có thanh mẫu đứng trước, âm này giữ nguyên là <span class='spelling-highlight'>ai</span> (vd: ài - yêu).",
+            "vd_han": "来",
+            "vd_py": "lái",
+            "vietnamese": "đến / lại đây",
+            "more_examples": [
+                {"han": "爱", "py": "ài", "vi": "yêu"},
+                {"han": "买", "py": "mǎi", "vi": "mua"},
+                {"han": "白", "py": "bái", "vi": "màu trắng"}
+            ],
+            "color": "linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)",
+            "border_color": "#F43F5E",
+            "text_color": "#9F1239"
+        },
+        {
+            "chu": "ei",
+            "hdsd": "Phát âm /e/ trước rồi trượt sang /i/.",
+            "cach_doc_sau": "Khẩu hình miệng hơi dẹt, phát âm nguyên âm /e/ (gần giống ê) trước rồi nhanh chóng thu hẹp miệng trượt sang nguyên âm /i/.",
+            "tuong_duong": "Gần giống âm <b>ây</b> trong tiếng Việt (vd: mây, tây).",
+            "luu_y": "Khi không có thanh mẫu đi kèm, âm này giữ nguyên là <span class='spelling-highlight'>ei</span>.",
+            "vd_han": "内",
+            "vd_py": "nèi",
+            "vietnamese": "bên trong / nội",
+            "more_examples": [
+                {"han": "美", "py": "měi", "vi": "đẹp"},
+                {"han": "累", "py": "lèi", "vi": "mệt"},
+                {"han": "杯", "py": "bēi", "vi": "cái cốc/ly"}
+            ],
+            "color": "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)",
+            "border_color": "#EC4899",
+            "text_color": "#9D174D"
+        },
+        {
+            "chu": "ao",
+            "hdsd": "Phát âm /a/ trước rồi trượt sang /o/ (u).",
+            "cach_doc_sau": "Khẩu hình miệng mở rộng phát âm nguyên âm /a/ trước, sau đó nhanh chóng khép bớt môi và thu tròn môi lại chuyển sang âm /o/ hoặc /u/.",
+            "tuong_duong": "Tương đương âm <b>ao</b> trong tiếng Việt (vd: cao, sao).",
+            "luu_y": "Khi không có thanh mẫu đứng trước, âm này viết giữ nguyên là <span class='spelling-highlight'>ao</span>.",
+            "vd_han": "宝贝",
+            "vd_py": "bǎobèi",
+            "vietnamese": "bảo bối / em bé",
+            "more_examples": [
+                {"han": "好", "py": "hǎo", "vi": "tốt / khỏe"},
+                {"han": "包", "py": "bāo", "vi": "bao/túi xách"},
+                {"han": "高", "py": "gāo", "vi": "cao"}
+            ],
+            "color": "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)",
+            "border_color": "#8B5CF6",
+            "text_color": "#5B21B6"
+        },
+        {
+            "chu": "ou",
+            "hdsd": "Phát âm /o/ trước rồi trượt sang /u/.",
+            "cach_doc_sau": "Khẩu hình miệng mở tròn vừa phải phát âm âm /o/ làm âm chính, sau đó thu nhỏ tròn môi để trượt sang nguyên âm /u/.",
+            "tuong_duong": "Gần giống âm <b>âu</b> trong tiếng Việt (vd: trâu, lâu).",
+            "luu_y": "Khi đứng độc lập không có thanh mẫu đứng trước, âm này viết giữ nguyên là <span class='spelling-highlight'>ou</span>.",
+            "vd_han": "狗",
+            "vd_py": "gǒu",
+            "vietnamese": "con chó",
+            "more_examples": [
+                {"han": "口", "py": "kǒu", "vi": "miệng / nhân khẩu"},
+                {"han": "头", "py": "tóu", "vi": "đầu"},
+                {"han": "肉", "py": "ròu", "vi": "thịt"}
+            ],
+            "color": "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)",
+            "border_color": "#3B82F6",
+            "text_color": "#1E40AF"
+        }
+    ]
+    
+    st.subheader("Chi tiết 4 vận mẫu kép cơ bản")
+    for idx, item in enumerate(B2_BASIC_VAN_KEP_DATA):
+        cols = st.columns([3.5, 1.5])
+        with cols[0]:
+            card_html = f"""
+            <div class="final-card" style="background: {item['color']}; border-left: 6px solid {item['border_color']};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span class="final-letter" style="color: {item['text_color']};">{item['chu']}</span>
+                    <span style="background: white; border: 1px solid {item['border_color']}; color: {item['text_color']}; padding: 3px 10px; border-radius: 20px; font-size: 0.9em; font-weight: bold; font-family: 'Courier New', monospace;">/{item['chu']}/</span>
+                </div>
+                <div style="font-size: 1.05em; font-weight: bold; margin-bottom: 8px; color: #0f172a;">👉 Phát âm: {item['hdsd']}</div>
+                <p style="color: #334155; font-size: 0.95em; line-height: 1.5; margin-bottom: 8px;"><b>Cách đọc chi tiết:</b> {item['cach_doc_sau']}</p>
+                <div style="font-size: 0.92em; color: #475569; margin-bottom: 10px;">📣 <b>Âm tương đương:</b> {item['tuong_duong']}</div>
+                <div class="rule-badge" style="border-left: 5px solid {item['border_color']};">
+                    ⚠️ <b>Quy tắc chính tả:</b> {item['luu_y']}
+                </div>
+                <div style="background: rgba(255,255,255,0.85); border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0; margin-top: 12px;">
+                    <span style="font-size: 0.8em; color: #64748b; font-weight: bold; text-transform: uppercase;">Ví dụ từ khóa chính:</span>
+                    <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
+                        <span style="font-size: 1.6em; font-weight: bold; color: #0f172a;">{item['vd_han']}</span>
+                        <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #2563eb; font-size: 1.1em;">{item['vd_py']}</span>
+                        <span style="color: #475569; font-style: italic; font-size: 0.95em;">({item['vietnamese']})</span>
+                    </div>
+                </div>
+            </div>
+            """
+            st.markdown(card_html, unsafe_allow_html=True)
+        with cols[1]:
+            st.markdown("<br/>", unsafe_allow_html=True)
+            render_play_button(item["vd_py"], f"🔊 Phát âm từ khóa ({item['vd_py']})", key=f"btn_b2_main_{item['chu']}_{idx}")
+            
+            st.markdown("<div style='font-size:0.8em; font-weight:bold; color:#64748b; margin-top:12px; margin-bottom:4px;'>LUYỆN TẬP ÂM KHÁC:</div>", unsafe_allow_html=True)
+            for s_idx, sub in enumerate(item["more_examples"]):
+                sub_key = f"btn_b2_sub_{item['chu']}_{idx}_{s_idx}"
+                render_play_button(sub["py"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
+        st.markdown("<br/>", unsafe_allow_html=True)
 
 def show_lesson2_spelling(add_tones):
     render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
