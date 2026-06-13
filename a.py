@@ -241,7 +241,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
         "Bài 5 - Nét chữ Hán cơ bản",
         "Bài 5.1 - Số đếm từ 0 đến 10",
-        "Bài 5.2 - Vận mẫu mũi (an, ang, ong, en, eng, in, ing)"
+        "Bài 5.2 - Vận mẫu mũi"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -346,7 +346,7 @@ elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     # Hot-reload trigger: 2026-06-12 16:38
     lesson5.show_lesson5_numbers()
 
-elif menu == "Bài 5.2 - Vận mẫu mũi (an, ang, ong, en, eng, in, ing)":
+elif menu == "Bài 5.2 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_all_scores_b5)
 
 elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
