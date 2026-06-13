@@ -491,9 +491,9 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
         st.write("Hãy nghe và lặp lại theo từng cặp để nhận biết rõ sự khác biệt của âm mũi trước và sau:")
         
         pairs = [
-            {"label": "Cặp an / ang", "p1": "an", "example1": "fàn (饭 - cơm)", "p2": "ang", "example2": "máng (忙 - bận)"},
-            {"label": "Cặp en / eng", "p1": "en", "example1": "hěn (很 - rất)", "p2": "eng", "example2": "péng (朋 - bạn bè)"},
-            {"label": "Cặp in / ing", "p1": "in", "example1": "nín (您 - ngài)", "p2": "ing", "example2": "tīng (听 - nghe)"}
+            {"label": "Cặp an / ang", "p1": "ān", "example1": "fàn (饭 - cơm)", "sound1": "饭", "p2": "āng", "example2": "máng (忙 - bận)", "sound2": "忙"},
+            {"label": "Cặp en / eng", "p1": "ēn", "example1": "hěn (很 - rất)", "sound1": "很", "p2": "ēng", "example2": "péng (朋 - bạn bè)", "sound2": "朋"},
+            {"label": "Cặp in / ing", "p1": "īn", "example1": "nín (您 - ngài)", "sound1": "您", "p2": "īng", "example2": "tīng (听 - nghe)", "sound2": "听"}
         ]
         
         for idx, pair in enumerate(pairs):
@@ -501,12 +501,12 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
             col_l, col_r = st.columns(2)
             with col_l:
                 st.info(f"👉 **Âm mũi trước (-n)**: /{pair['p1']}/")
-                render_play_button(pair['p1'], f"🔊 Nghe âm /{pair['p1']}/", key=f"pair_v_{pair['p1']}")
-                render_play_button(pair['example1'].split(' (')[0], f"🔊 Từ ví dụ: {pair['example1']}", key=f"pair_ex_{pair['p1']}")
+                render_play_button(pair['p1'], f"🔊 Nghe âm /{pair['p1']}/", key=f"pair_v_l_{idx}")
+                render_play_button(pair['sound1'], f"🔊 Từ ví dụ: {pair['example1']}", key=f"pair_ex_l_{idx}")
             with col_r:
                 st.success(f"👉 **Âm mũi sau (-ng)**: /{pair['p2']}/")
-                render_play_button(pair['p2'], f"🔊 Nghe âm /{pair['p2']}/", key=f"pair_v_{pair['p2']}")
-                render_play_button(pair['example2'].split(' (')[0], f"🔊 Từ ví dụ: {pair['example2']}", key=f"pair_ex_{pair['p2']}")
+                render_play_button(pair['p2'], f"🔊 Nghe âm /{pair['p2']}/", key=f"pair_v_r_{idx}")
+                render_play_button(pair['sound2'], f"🔊 Từ ví dụ: {pair['example2']}", key=f"pair_ex_r_{idx}")
             st.markdown("<br/>", unsafe_allow_html=True)
             
     # --- TAB 3: SANDBOX ---
