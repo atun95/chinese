@@ -55,6 +55,9 @@ def play_audio(text):
             audioNode.onerror = () => {{
                 if (audioNode.crossOrigin === "anonymous") {{
                     let normalAudio = new Audio(url);
+                    normalAudio.onerror = () => {{
+                        if (fallbackFunc) fallbackFunc();
+                    }};
                     normalAudio.play().catch(err => {{
                         if (fallbackFunc) fallbackFunc();
                     }});
@@ -219,6 +222,9 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                 if (audio.crossOrigin === "anonymous") {{
                     let normalAudio = new Audio(url);
                     audio = normalAudio;
+                    normalAudio.onerror = () => {{
+                        triggerFallback();
+                    }};
                     normalAudio.play().catch(err => {{
                         triggerFallback();
                     }});
