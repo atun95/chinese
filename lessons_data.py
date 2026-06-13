@@ -609,4 +609,182 @@ B3_QUIZ_DIALOGUE = [
     {"q": "Học viên A: Nǐmen lèi ma? Qù hē nǎichá ba? (Các bạn mệt không? Đi uống trà sữa nhé?) \n Học viên B: ______", "choices": ["Wǒmen bú lèi. Qù ba! (Chúng tôi không mệt. Đi thôi!)", "Wǒ yǒu nǚpéngyou. (Tôi có bạn gái rồi.)", "Tā hěn hǎo. (Cô ấy rất tốt.)"], "answer": "Wǒmen bú lèi. Qù ba! (Chúng tôi không mệt. Đi thôi!)"}
 ]
 
+# --- DỮ LIỆU BÀI 5.2: VẬN MẪU MŨI ---
+B5_NASAL_FINALS_DATA = [
+    {
+        "nhom": "Vận mẫu mũi trước (Front Nasal Finals) - Kết thúc bằng âm /n/",
+        "items": [
+            {
+                "chu": "an",
+                "hdsd": "Miệng mở rộng rồi thu hẹp lại, đầu lưỡi chạm vào nướu răng trên. Đọc gần giống 'an' trong tiếng Việt.",
+                "cach_doc_sau": "Bắt đầu bằng nguyên âm /a/, sau đó nâng đầu lưỡi chạm lên vòm miệng trên (nướu răng) để kết thúc bằng âm /n/. Hơi thoát ra qua mũi.",
+                "tuong_duong": "Gần giống âm **an** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình giữ nguyên là <span class='spelling-highlight'>an</span>. Khi kết hợp với các thanh mẫu đầu lưỡi, chú ý kết thúc âm bằng việc đặt đầu lưỡi chạm chân răng trên.",
+                "vd_han": "饭",
+                "vd_py": "fàn",
+                "nghe": "饭",
+                "vietnamese": "cơm / ăn cơm",
+                "more_examples": [
+                    {"han": "山", "py": "shān", "vi": "núi"},
+                    {"han": "看", "py": "kàn", "vi": "nhìn / xem"},
+                    {"han": "三", "py": "sān", "vi": "số ba"}
+                ],
+                "color": "linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)",
+                "border_color": "#F43F5E",
+                "text_color": "#9F1239"
+            },
+            {
+                "chu": "en",
+                "hdsd": "Phát âm nguyên âm 'e' (ơ) rồi chuyển nhanh sang phụ âm 'n'. Đọc gần giống 'ân' trong tiếng Việt.",
+                "cach_doc_sau": "Khẩu hình hơi mở tự nhiên như âm /ơ/ (e), sau đó nhanh chóng nâng đầu lưỡi lên chạm vòm miệng cứng để khép hơi bằng âm /n/.",
+                "tuong_duong": "Gần giống âm **ân** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình giữ nguyên là <span class='spelling-highlight'>en</span> (ví dụ: 恩 ēn - ơn huệ).",
+                "vd_han": "很",
+                "vd_py": "hěn",
+                "nghe": "很",
+                "vietnamese": "rất",
+                "more_examples": [
+                    {"han": "人", "py": "rén", "vi": "người"},
+                    {"han": "门", "py": "mén", "vi": "cửa"},
+                    {"han": "本", "py": "běn", "vi": "sách / cuốn"}
+                ],
+                "color": "linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%)",
+                "border_color": "#EC4899",
+                "text_color": "#9D174D"
+            },
+            {
+                "chu": "in",
+                "hdsd": "Phát âm âm 'i' rồi nhanh chóng khép lưỡi sang phụ âm 'n'. Đọc gần giống 'in' trong tiếng Việt.",
+                "cach_doc_sau": "Bắt đầu với vị trí miệng hẹp của nguyên âm /i/, sau đó di chuyển đầu lưỡi lên trên chạm vòm họng để tạo âm mũi /n/.",
+                "tuong_duong": "Gần giống âm **in** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình (không có thanh mẫu), viết thành <span class='spelling-highlight'>yin</span> (ví dụ: 银 yín - bạc, 因 yīn - nguyên nhân).",
+                "vd_han": "您",
+                "vd_py": "nín",
+                "nghe": "您",
+                "vietnamese": "Ngài / Ông / Bà (kính trọng)",
+                "more_examples": [
+                    {"han": "拼音", "py": "pīnyīn", "vi": "Bính âm"},
+                    {"han": "林", "py": "lín", "vi": "rừng"},
+                    {"han": "琴", "py": "qín", "vi": "đàn cầm"}
+                ],
+                "color": "linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)",
+                "border_color": "#8B5CF6",
+                "text_color": "#5B21B6"
+            }
+        ]
+    },
+    {
+        "nhom": "Vận mẫu mũi sau (Back Nasal Finals) - Kết thúc bằng âm /ng/",
+        "items": [
+            {
+                "chu": "ang",
+                "hdsd": "Miệng mở rộng, cuống lưỡi rút về phía sau, hơi thoát ra qua đường mũi. Đọc gần giống 'ang' trong tiếng Việt.",
+                "cach_doc_sau": "Mở rộng miệng phát âm /a/, sau đó hạ thấp lưỡi và nâng phần gốc (cuống) lưỡi chạm nhẹ vào ngạc mềm phía sau để tạo âm /ng/.",
+                "tuong_duong": "Gần giống âm **ang** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình giữ nguyên là <span class='spelling-highlight'>ang</span> (ví dụ: 昂 áng - ngẩng cao). Chú ý gốc lưỡi phải rút về sau, không chạm vòm họng trước.",
+                "vd_han": "忙",
+                "vd_py": "máng",
+                "nghe": "忙",
+                "vietnamese": "bận rộn",
+                "more_examples": [
+                    {"han": "唱", "py": "chàng", "vi": "hát"},
+                    {"han": "胖", "py": "pàng", "vi": "béo"},
+                    {"han": "糖", "py": "táng", "vi": "đường / kẹo"}
+                ],
+                "color": "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)",
+                "border_color": "#3B82F6",
+                "text_color": "#1E40AF"
+            },
+            {
+                "chu": "eng",
+                "hdsd": "Phát âm nguyên âm 'e' (ơ) rồi chuyển hơi ra sau mũi tạo âm 'ng'. Đọc gần giống 'âng' trong tiếng Việt.",
+                "cach_doc_sau": "Khẩu hình giống như phát âm /e/ (ơ) trong tiếng Trung, sau đó rút cuống lưỡi về sau nâng lên ngạc mềm để kết thúc bằng âm /ng/.",
+                "tuong_duong": "Đọc gần giống **âng** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình giữ nguyên là <span class='spelling-highlight'>eng</span>. Sau các phụ âm môi b, p, m, f, vận mẫu này thường được đọc hơi có xu hướng chuyển thành 'ông' hoặc 'âng' tròn môi nhẹ.",
+                "vd_han": "朋",
+                "vd_py": "péng",
+                "nghe": "朋",
+                "vietnamese": "bạn bè (trong péngyou)",
+                "more_examples": [
+                    {"han": "风", "py": "fēng", "vi": "gió"},
+                    {"han": "冷", "py": "lěng", "vi": "lạnh"},
+                    {"han": "生", "py": "shēng", "vi": "học sinh / sinh"}
+                ],
+                "color": "linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)",
+                "border_color": "#10B981",
+                "text_color": "#065F46"
+            },
+            {
+                "chu": "ing",
+                "hdsd": "Phát âm âm 'i' rồi chuyển hơi ra sau mũi tạo âm 'ng'. Đọc gần giống 'inh' trong tiếng Việt.",
+                "cach_doc_sau": "Bắt đầu với âm /i/, sau đó hạ lưỡi xuống một chút và kéo gốc lưỡi về phía sau ngạc mềm để tạo âm mũi /ng/.",
+                "tuong_duong": "Gần giống âm **inh** trong tiếng Việt.",
+                "luu_y": "Khi đứng một mình viết thành <span class='spelling-highlight'>ying</span> (ví dụ: 影 yǐng - phim/ảnh, 迎 yíng - chào đón). Chú ý không đọc thành 'i-âng' mà đọc trơn tru như 'inh'.",
+                "vd_han": "听",
+                "vd_py": "tīng",
+                "nghe": "听",
+                "vietnamese": "nghe",
+                "more_examples": [
+                    {"han": "苹果", "py": "píngguǒ", "vi": "quả táo"},
+                    {"han": "明", "py": "míng", "vi": "sáng / rõ"},
+                    {"han": "星", "py": "xīng", "vi": "ngôi sao"}
+                ],
+                "color": "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
+                "border_color": "#D97706",
+                "text_color": "#92400E"
+            },
+            {
+                "chu": "ong",
+                "hdsd": "Tròn môi phát âm âm 'o' (ô) rồi chuyển hơi ra sau mũi tạo âm 'ng'. Đọc gần giống 'ung' trong tiếng Việt.",
+                "cach_doc_sau": "Bắt đầu bằng nguyên âm tròn môi /o/ (ô), sau đó rút lưỡi về phía sau để luồng khí thoát ra qua đường mũi kết thúc bằng phụ âm /ng/.",
+                "tuong_duong": "Gần giống âm **ung** trong tiếng Việt.",
+                "luu_y": "Không có âm tiết bắt đầu bằng 'ong' đứng độc lập trong tiếng Trung (khi đứng một mình, âm tương đương bắt đầu bằng u sẽ viết thành <span class='spelling-highlight'>weng</span>). Chú ý tránh đọc nhầm thành 'ong' của tiếng Việt.",
+                "vd_han": "红",
+                "vd_py": "hóng",
+                "nghe": "红",
+                "vietnamese": "màu đỏ",
+                "more_examples": [
+                    {"han": "东", "py": "dōng", "vi": "phía đông"},
+                    {"han": "龙", "py": "lóng", "vi": "con rồng"},
+                    {"han": "公", "py": "gōng", "vi": "công cộng / công"}
+                ],
+                "color": "linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%)",
+                "border_color": "#0D9488",
+                "text_color": "#0F766E"
+            }
+        ]
+    }
+]
+
+# --- DỮ LIỆU BÀI TẬP BÀI 5.2: VẬN MẪU MŨI ---
+B5_QUIZ_VOCAB = [
+    {"q": "fàn", "choices": ["cơm / ăn cơm", "núi", "rất"], "answer": "cơm / ăn cơm"},
+    {"q": "hěn", "choices": ["rất", "bạn bè", "nghe"], "answer": "rất"},
+    {"q": "máng", "choices": ["bận rộn", "lạnh", "màu đỏ"], "answer": "bận rộn"},
+    {"q": "nín", "choices": ["Ngài / Ông / Bà (kính trọng)", "bố", "mẹ"], "answer": "Ngài / Ông / Bà (kính trọng)"},
+    {"q": "péngyou", "choices": ["bạn bè", "học sinh", "thầy giáo"], "answer": "bạn bè"},
+    {"q": "tīng", "choices": ["nghe", "nói", "đọc"], "answer": "nghe"},
+    {"q": "hóng", "choices": ["màu đỏ", "màu xanh", "phía đông"], "answer": "màu đỏ"}
+]
+
+B5_QUIZ_LISTENING = [
+    {"q": "Ăn cơm (Vận mẫu an)", "hanzi": "吃饭", "choices": ["chīfàn", "chīfàng", "chīfèn"], "answer": "chīfàn"},
+    {"q": "Rất bận (Biến điệu thanh 3 & Vận mẫu mũi sau ang)", "hanzi": "很忙", "choices": ["hěnmáng", "hēnmáng", "hěnmāng"], "answer": "hěnmáng"},
+    {"q": "Học sinh (Vận mẫu eng)", "hanzi": "学生", "choices": ["xuéshēng", "xuéshēn", "xuésēn"], "answer": "xuéshēng"},
+    {"q": "Chào ông/bà (Kính trọng - Vận mẫu in)", "hanzi": "您好", "choices": ["nínhǎo", "nǐhǎo", "línhǎo"], "answer": "nínhǎo"},
+    {"q": "Quả táo (Vận mẫu ing)", "hanzi": "苹果", "choices": ["píngguǒ", "pīngguǒ", "pínggǔ"], "answer": "píngguǒ"},
+    {"q": "Phía đông (Vận mẫu ong)", "hanzi": "东", "choices": ["dōng", "dōngg", "dāng"], "answer": "dōng"}
+]
+
+B5_QUIZ_FILL_BLANKS = [
+    {"q": "f___", "ans": "àn", "meaning": "cơm/ăn cơm"},
+    {"q": "h___", "ans": "ěn", "meaning": "rất"},
+    {"q": "m___g", "ans": "án", "meaning": "bận"},
+    {"q": "p___g", "ans": "én", "meaning": "bạn bè"},
+    {"q": "n___", "ans": "ín", "meaning": "ngài/ông/bà"},
+    {"q": "t___g", "ans": "īng", "meaning": "nghe"},
+    {"q": "h___g", "ans": "óng", "meaning": "màu đỏ"}
+]
+
+
 
