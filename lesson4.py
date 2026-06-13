@@ -2080,6 +2080,27 @@ def show_lesson4_female_comparison(save_progress):
             st.rerun()
 
 def show_lesson4_vocab(extended_only=False):
+    src_xiexie = r"C:\Users\lyquo\AppData\Roaming\antigravity\brain\6f78ddc4-a5ad-4a39-adb9-2fbd652cf835\media__1781322247792.jpg"
+    if not os.path.exists(src_xiexie):
+        src_xiexie = r"C:\Users\lyquo\.gemini\antigravity\brain\6f78ddc4-a5ad-4a39-adb9-2fbd652cf835\media__1781322247792.jpg"
+    dest_xiexie = r"c:\Users\lyquo\OneDrive\Desktop\chinese\assets\lesson4\xiexie.jpg"
+    
+    src_duibuqi = r"C:\Users\lyquo\AppData\Roaming\antigravity\brain\6f78ddc4-a5ad-4a39-adb9-2fbd652cf835\media__1781322250920.jpg"
+    if not os.path.exists(src_duibuqi):
+        src_duibuqi = r"C:\Users\lyquo\.gemini\antigravity\brain\6f78ddc4-a5ad-4a39-adb9-2fbd652cf835\media__1781322250920.jpg"
+    dest_duibuqi = r"c:\Users\lyquo\OneDrive\Desktop\chinese\assets\lesson4\duibuqi.jpg"
+    
+    import shutil
+    try:
+        if os.path.exists(src_xiexie) and not os.path.exists(dest_xiexie):
+            os.makedirs(os.path.dirname(dest_xiexie), exist_ok=True)
+            shutil.copy2(src_xiexie, dest_xiexie)
+        if os.path.exists(src_duibuqi) and not os.path.exists(dest_duibuqi):
+            os.makedirs(os.path.dirname(dest_duibuqi), exist_ok=True)
+            shutil.copy2(src_duibuqi, dest_duibuqi)
+    except Exception as e:
+        pass
+
     if extended_only:
         render_lesson_intro("📚 Bài 4.1: Từ vựng mở rộng", "Học các từ vựng mở rộng dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ.")
     else:
@@ -2090,6 +2111,7 @@ def show_lesson4_vocab(extended_only=False):
         {"group": "ia (ya)", "emoji": "🦆", "word": "鸭", "pinyin": "yā", "vietnamese": "Con vịt", "key_prefix": "ia_ya", "example_han": "鸭子很可爱。", "example_py": "Yāzi hěn kě'ài.", "example_vi": "Con vịt rất đáng yêu."},
         {"group": "ie (ye)", "emoji": "👩‍🦰", "word": "姐姐", "pinyin": "jiějie", "vietnamese": "Chị gái", "key_prefix": "ie_jie", "example_han": "我的姐姐很美。", "example_py": "Wǒ de jiějie hěn měi.", "example_vi": "Chị gái tôi rất đẹp."},
         {"group": "ie (ye)", "emoji": "👴", "word": "爷爷", "pinyin": "yéye", "vietnamese": "Ông nội", "key_prefix": "ie_ye", "example_han": "爷爷爱栽花。", "example_py": "Yéye ài zāihuā.", "example_vi": "Ông nội thích trồng hoa."},
+        {"group": "ie (ye)", "emoji": "🙏", "word": "谢谢", "pinyin": "xièxie", "vietnamese": "Cảm ơn", "key_prefix": "ie_xiexie", "example_han": "谢谢你。", "example_py": "Xièxie nǐ.", "example_vi": "Cảm ơn bạn."},
         {"group": "iao (yao)", "emoji": "👶", "word": "小", "pinyin": "xiǎo", "vietnamese": "Nhỏ, bé", "key_prefix": "iao_xiao", "example_han": "他很小。", "example_py": "Tā hěn xiǎo.", "example_vi": "Cậu bé ấy rất nhỏ."},
         {"group": "iao (yao)", "emoji": "💊", "word": "药", "pinyin": "yào", "vietnamese": "Thuốc", "key_prefix": "iao_yao", "example_han": "我吃药。", "example_py": "Wǒ chī yào.", "example_vi": "Tôi uống thuốc."},
         {"group": "iu (you)", "emoji": "6️⃣", "word": "六", "pinyin": "liù", "vietnamese": "Số sáu", "key_prefix": "iu_liu", "example_han": "我有六个女朋友。", "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.", "example_vi": "Tôi có 6 người bạn gái."},
@@ -2101,7 +2123,8 @@ def show_lesson4_vocab(extended_only=False):
         {"group": "uai (wai)", "emoji": "🚪", "word": "外", "pinyin": "wài", "vietnamese": "Ngoài, bên ngoài", "key_prefix": "uai_wai", "example_han": "外面很美。", "example_py": "Wài mian hěn měi.", "example_vi": "Bên ngoài rất đẹp."},
         {"group": "uai (wai)", "emoji": "😎", "word": "帅", "pinyin": "shuài", "vietnamese": "Đẹp trai", "key_prefix": "uai_shuai", "example_han": "他很帅。", "example_py": "Tā hěn shuài.", "example_vi": "Anh ấy rất đẹp trai."},
         {"group": "ui (wei)", "emoji": "💧", "word": "水", "pinyin": "shuǐ", "vietnamese": "Nước", "key_prefix": "ui_shui", "example_han": "我喝水。", "example_py": "Wǒ hē shuǐ.", "example_vi": "Tôi uống nước."},
-        {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好吗？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
+        {"group": "ui (wei)", "emoji": "📞", "word": "喂", "pinyin": "wèi", "vietnamese": "Alo", "key_prefix": "ui_wei", "example_han": "喂，你好 ma？", "example_py": "Wèi, nǐ hǎo ma?", "example_vi": "Alo, bạn khỏe không?"},
+        {"group": "ui (wei)", "emoji": "🙇‍♂️", "word": "对不起", "pinyin": "duìbuqǐ", "vietnamese": "Xin lỗi", "key_prefix": "ui_duibuqi", "example_han": "对不起，我很忙。", "example_py": "Duìbuqǐ, wǒ hěn máng.", "example_vi": "Xin lỗi, tôi rất bận."},
         {"group": "ue (yue)", "emoji": "🌙", "word": "月", "pinyin": "yuè", "vietnamese": "Mặt trăng, tháng", "key_prefix": "ue_yue", "example_han": "月饼很好吃。", "example_py": "Yuèbǐng hěn hǎochī.", "example_vi": "Bánh trung thu rất ngon.", "note": "<b>1. Ngày hội Đoàn viên:</b> Vào đêm rằm tháng 8 âm lịch, người Trung Hoa sẽ trở về nhà sum họp gia đình, cùng thưởng thức bánh và ngắm trăng tròn trịa tượng trưng cho sự đoàn tụ trọn vẹn.<br/><b>2. Lễ hội Tạ ơn & Mừng mùa màng:</b> Tháng 8 âm lịch là thời điểm gặt hái xong vụ mùa thu. Người nông dân làm lễ cúng trăng, dâng lên các sản vật mới thu hoạch (trái cây, bánh trái) để tạ ơn đất trời đã ban cho một mùa màng bội thu, đồng thời cầu mong cho mùa sau mưa thuận gió hòa."},
         {"group": "ue (yue)", "emoji": "📚", "word": "学", "pinyin": "xué", "vietnamese": "Học", "key_prefix": "ue_xue", "example_han": "我学汉语。", "example_py": "Wǒ xué Hànyǔ.", "example_vi": "Tôi học Hán ngữ."},
         {"group": "Từ vựng mở rộng", "emoji": "😎", "word": "帅哥", "pinyin": "shuàigē", "vietnamese": "Soái ca, trai đẹp", "key_prefix": "ext_shuaige", "example_han": "这里有很多帅哥。", "example_py": "Zhèlǐ yǒu hěn duō shuàigē.", "example_vi": "Ở đây có rất nhiều trai đẹp."},
