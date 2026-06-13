@@ -167,6 +167,99 @@ def show_lesson2_intro(add_tones):
                 render_play_button(sub["py"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
         st.markdown("<br/>", unsafe_allow_html=True)
 
+    def check_b2_spelling_rule(initial, final, tone_idx):
+        valid_combos = {
+            "b": ["a", "o", "i", "u", "ai", "ei", "ao"],
+            "p": ["a", "o", "i", "u", "ai", "ei", "ao"],
+            "m": ["a", "o", "e", "i", "u", "ai", "ei", "ao", "ou"],
+            "f": ["a", "o", "u", "ei", "ou"],
+            "d": ["a", "e", "i", "u", "ai", "ei", "ao", "ou"],
+            "t": ["a", "e", "i", "u", "ai", "ao", "ou"],
+            "n": ["a", "e", "i", "u", "ü", "ai", "ei", "ao", "ou"],
+            "l": ["a", "e", "i", "u", "ü", "ai", "ei", "ao", "ou"],
+            "g": ["a", "e", "u", "ai", "ei", "ao", "ou"],
+            "k": ["a", "e", "u", "ai", "ei", "ao", "ou"],
+            "h": ["a", "e", "u", "ai", "ei", "ao", "ou"],
+            "(Không có)": ["a", "o", "e", "i", "u", "ü", "ai", "ei", "ao", "ou"]
+        }
+        
+        init_key = initial if initial != "(Không có)" else "(Không có)"
+        
+        if final not in valid_combos.get(init_key, []):
+            return None, f"❌ Lỗi ghép âm: Thanh mẫu <b>{initial}</b> không thể đi cùng vận mẫu <b>{final}</b> trong Bài 2!"
+            
+        spelled = ""
+        if initial == "(Không có)":
+            if final == "i":
+                spelled = "yi"
+            elif final == "u":
+                spelled = "wu"
+            elif final == "ü":
+                spelled = "yu"
+            else:
+                spelled = final
+        else:
+            spelled = f"{initial}{final}"
+            
+        if tone_idx == 0:
+            return spelled, None
+            
+        vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
+        res = spelled
+        for v, syms in vowels.items():
+            if v in res:
+                if (v=='u' and 'iu' in res) or (v=='i' and 'ui' in res): continue
+                res = res.replace(v, syms[tone_idx-1]); break
+                
+        return res, None
+
+    st.markdown("---")
+    st.subheader("🎮 2. Công cụ Ghép âm Tương tác (Bài 2)")
+    st.write("Chọn thanh mẫu, vận mẫu kép cơ bản và thanh điệu để ghép âm và nghe phát âm chính xác:")
+    
+    cols_sel = st.columns(3)
+    with cols_sel[0]:
+        initials = ["(Không có)", "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h"]
+        sel_initial = st.selectbox("Chọn Thanh mẫu:", initials, index=0, key="b2_sandbox_initial")
+    with cols_sel[1]:
+        finals = ["ai", "ei", "ao", "ou", "a", "o", "e", "i", "u", "ü"]
+        sel_final = st.selectbox("Chọn Vận mẫu:", finals, index=0, key="b2_sandbox_final")
+    with cols_sel[2]:
+        tones = ["Thanh nhẹ", "Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"]
+        sel_tone = st.selectbox("Chọn Thanh điệu:", tones, index=1, key="b2_sandbox_tone")
+        
+    tone_idx = tones.index(sel_tone)
+    spelled_res, err = check_b2_spelling_rule(sel_initial, sel_final, tone_idx)
+    
+    st.markdown("<br/>", unsafe_allow_html=True)
+    if err:
+        st.markdown(
+            f"""
+            <div style="background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; padding: 18px; text-align: center;">
+                <span style="font-size: 1.1em; color: #DC2626; font-weight: bold;">{err}</span>
+                <p style="color: #991B1B; font-size: 0.9em; margin-top: 6px; margin-bottom: 0;">
+                    Vui lòng chọn tổ hợp ghép âm khác phù hợp với quy tắc của Bài 2.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            f"""
+            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+                <div style="font-size: 0.85em; color: #065F46; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">KẾT QUẢ GHÉP ÂM CHUẨN XÁC:</div>
+                <div style="font-size: 3.5em; font-weight: bold; color: #047857; font-family: 'Courier New', monospace; margin: 10px 0;">{spelled_res}</div>
+                <div style="font-size: 0.95em; color: #065F46; font-style: italic;">
+                    Ghép từ: <b>{sel_initial if sel_initial != '(Không có)' else ''}</b> + <b>{sel_final}</b> + <b>{sel_tone}</b>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+        st.markdown("<br/>", unsafe_allow_html=True)
+        render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="b2_sandbox_play_btn", type="primary")
+
 def show_lesson2_spelling(add_tones):
     render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
     st.subheader("Bảng luyện tập ghép âm")
