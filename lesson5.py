@@ -1112,26 +1112,48 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
 
     # --- TAB 1: LÝ THUYẾT ---
     with tab_theory:
-        st.subheader("Bảng các Phó từ Chỉ Mức độ")
+        st.subheader("Bảng các Phó từ Chỉ Mức độ (Phân chia theo cấp độ)")
         st.info("💡 **Lưu ý quan trọng:** Trong câu khẳng định với tính từ làm vị ngữ, '很' thường BẮT BUỘC để câu hoàn chỉnh. Thiếu '很' câu sẽ mang nghĩa so sánh ngầm.")
 
-        for item in B5_3_ADVERBS_DATA:
-            st.markdown(f"""
-            <div class="adv-card">
-              <div class="adv-hanzi">{item['adv']}</div>
-              <div class="adv-pinyin">{item['pinyin']}</div>
-              <div class="adv-level">🎯 {item['level']}</div>
-              <div class="adv-formula">{item['formula']}</div>
-              <div class="adv-example">
-                <div class="adv-example-han">{item['example_han']}</div>
-                <div class="adv-example-py">{item['example_py']}</div>
-                <div class="adv-example-vi">👉 {item['meaning']}</div>
-              </div>
-              <div class="adv-desc">📌 {item['desc']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            render_play_button(item['example_han'], f"🔊 Nghe: {item['example_han']}", key=f"adv_play_{item['adv']}")
-            st.markdown("<br/>", unsafe_allow_html=True)
+        categories = [
+            {
+                "title": "🟢 1. Mức độ tương đối (Khá, tương đối)",
+                "advs": ["比较", "挺 ... 的"]
+            },
+            {
+                "title": "🟡 2. Mức độ cơ bản (Rất)",
+                "advs": ["很"]
+            },
+            {
+                "title": "🟠 3. Mức độ mạnh (Đặc biệt, vô cùng)",
+                "advs": ["特别", "非常"]
+            },
+            {
+                "title": "🔴 4. Mức độ cực hạn / Cảm thán (Quá, cực kỳ)",
+                "advs": ["太 ... 了", "极了"]
+            }
+        ]
+
+        for cat in categories:
+            st.markdown(f"### {cat['title']}")
+            cat_items = [item for item in B5_3_ADVERBS_DATA if item['adv'] in cat['advs']]
+            for item in cat_items:
+                st.markdown(f"""
+                <div class="adv-card">
+                  <div class="adv-hanzi">{item['adv']}</div>
+                  <div class="adv-pinyin">{item['pinyin']}</div>
+                  <div class="adv-level">🎯 {item['level']}</div>
+                  <div class="adv-formula">{item['formula']}</div>
+                  <div class="adv-example">
+                    <div class="adv-example-han">{item['example_han']}</div>
+                    <div class="adv-example-py">{item['example_py']}</div>
+                    <div class="adv-example-vi">👉 {item['meaning']}</div>
+                  </div>
+                  <div class="adv-desc">📌 {item['desc']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+                render_play_button(item['example_han'], f"🔊 Nghe: {item['example_han']}", key=f"adv_play_{item['adv']}")
+                st.markdown("<br/>", unsafe_allow_html=True)
 
     # --- TAB 2: SENTENCE BUILDER ---
     with tab_builder:
