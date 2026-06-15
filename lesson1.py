@@ -9,11 +9,11 @@ def show_lesson1_summary_table():
     st.markdown("""
     <style>
     .summary-section-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 800;
         color: #0f172a;
         margin-top: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
         border-left: 5px solid #2563eb;
         padding-left: 10px;
     }
@@ -21,46 +21,48 @@ def show_lesson1_summary_table():
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 16px;
-        padding: 20px;
+        padding: 16px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        margin-bottom: 25px;
+        margin-bottom: 20px;
+        overflow-x: auto;      /* KEY: horizontal scroll on mobile */
+        -webkit-overflow-scrolling: touch;
     }
     .modern-table {
         width: 100%;
+        min-width: 340px;      /* prevent collapse on tiny screens */
         border-collapse: separate;
         border-spacing: 0;
-        margin-top: 10px;
+        margin-top: 8px;
     }
     .modern-table th {
         background: #f8fafc;
         color: #475569;
         font-weight: 700;
-        padding: 12px 16px;
+        padding: 10px 12px;
         text-align: left;
         border-bottom: 2px solid #e2e8f0;
+        white-space: nowrap;
+        font-size: 0.85rem;
     }
     .modern-table td {
-        padding: 14px 16px;
+        padding: 10px 12px;
         border-bottom: 1px solid #e2e8f0;
         color: #334155;
+        vertical-align: middle;
     }
-    .modern-table tr:hover {
-        background-color: #f8fafc;
-    }
-    .modern-table tr:last-child td {
-        border-bottom: none;
-    }
+    .modern-table tr:hover { background-color: #f8fafc; }
+    .modern-table tr:last-child td { border-bottom: none; }
     .badge-initial {
         background: #eff6ff;
         color: #2563eb;
         border: 1px solid #bfdbfe;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 8px;
         font-family: 'Courier New', monospace;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1rem;
         display: inline-block;
-        margin: 3px 6px;
+        margin: 2px 4px;
         box-shadow: 0 2px 4px rgba(37,99,235,0.05);
         transition: all 0.2s;
     }
@@ -73,13 +75,13 @@ def show_lesson1_summary_table():
         background: #fffbeb;
         color: #d97706;
         border: 1px solid #fde68a;
-        padding: 4px 12px;
+        padding: 4px 10px;
         border-radius: 8px;
         font-family: 'Courier New', monospace;
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1rem;
         display: inline-block;
-        margin: 3px 6px;
+        margin: 2px 4px;
         box-shadow: 0 2px 4px rgba(217,119,6,0.05);
         transition: all 0.2s;
     }
@@ -91,7 +93,16 @@ def show_lesson1_summary_table():
     .cat-badge {
         font-weight: 700;
         color: #1e293b;
-        font-size: 1rem;
+        font-size: 0.92rem;
+        white-space: nowrap;
+    }
+    /* Mobile: tighter cells */
+    @media (max-width: 640px) {
+        .summary-section-title { font-size: 1.1rem; }
+        .modern-table th { padding: 8px 8px; font-size: 0.75rem; }
+        .modern-table td { padding: 8px 8px; }
+        .badge-initial, .badge-final { padding: 3px 7px; font-size: 0.88rem; margin: 2px 2px; }
+        .cat-badge { font-size: 0.82rem; }
     }
     </style>
     """, unsafe_allow_html=True)
