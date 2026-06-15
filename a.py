@@ -17,12 +17,35 @@ import lesson3
 import lesson4
 import lesson5
 
-importlib.reload(lessons_data)
-importlib.reload(lesson1)
-importlib.reload(lesson2)
-importlib.reload(lesson3)
-importlib.reload(lesson4)
-importlib.reload(lesson5)
+try:
+    importlib.reload(lessons_data)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson1)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson2)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson3)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson4)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson5)
+except Exception as e:
+    pass
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
