@@ -4,12 +4,7 @@ import base64
 import os
 from datetime import datetime, timezone, timedelta
 from ui_utils import render_lesson_intro, render_play_button, shuffled_options
-from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS
-try:
-    from lessons_data import B5_3_ADVERBS_DATA, B5_3_QUIZ
-except ImportError:
-    B5_3_ADVERBS_DATA = []
-    B5_3_QUIZ = []
+from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS, B5_3_ADVERBS_DATA, B5_3_QUIZ
 
 def get_image_src(img_path_or_url):
     if img_path_or_url.startswith("http"):
