@@ -64,10 +64,11 @@ SCORES_B2_FILE = USER_DATA_DIR / "scores_b2.csv"
 SCORES_B3_FILE = USER_DATA_DIR / "scores_b3.csv"
 SCORES_B4_FILE = USER_DATA_DIR / "scores_b4.csv"
 SCORES_B5_FILE = USER_DATA_DIR / "scores_b5.csv"
+SCORES_B5_3_FILE = USER_DATA_DIR / "scores_b5_3.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -205,6 +206,22 @@ def load_all_scores_b5():
     with open(SCORES_B5_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_b5_3(row_data):
+    file_exists = SCORES_B5_3_FILE.exists()
+    try:
+        with open(SCORES_B5_3_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT: Trắc nghiệm"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 5.3: {e}"); return False
+
+def load_all_scores_b5_3():
+    if not SCORES_B5_3_FILE.exists(): return []
+    with open(SCORES_B5_3_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def add_tones(base):
     vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
     tones = []
@@ -241,7 +258,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
         "Bài 5 - Nét chữ Hán cơ bản",
         "Bài 5.1 - Số đếm từ 0 đến 10",
-        "Bài 5.2 - Vận mẫu mũi"
+        "Bài 5.2 - Vận mẫu mũi",
+        "Bài 5.3 - Từ chỉ mức độ (... và các phó từ khác)"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -348,6 +366,9 @@ elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
 
 elif menu == "Bài 5.2 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_all_scores_b5)
+
+elif menu == "Bài 5.3 - Từ chỉ mức độ (... và các phó từ khác)":
+    lesson5.show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_scores_b5_3)
 
 elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_spelling(add_tones)

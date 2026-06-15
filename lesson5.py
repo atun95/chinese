@@ -4,7 +4,7 @@ import base64
 import os
 from datetime import datetime, timezone, timedelta
 from ui_utils import render_lesson_intro, render_play_button, shuffled_options
-from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS
+from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS, B5_3_ADVERBS_DATA, B5_3_QUIZ
 
 def get_image_src(img_path_or_url):
     if img_path_or_url.startswith("http"):
@@ -408,11 +408,11 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
     )
     
     tab_theory, tab_diff, tab_spelling, tab_arena, tab_exercises = st.tabs([
-        "📚 1. Chi tiết 7 Vận mẫu Mũi",
-        "⚖️ 2. Phân biệt Âm Mũi Trước / Sau",
-        "🎮 3. Công cụ Ghép âm Tương tác",
-        "🎲 4. Hoạt động lớp học (Classroom Arena)",
-        "📝 5. Luyện tập & Bài tập"
+        "📚 Lý thuyết",
+        "⚖️ Phân biệt",
+        "🎮 Ghép âm",
+        "🎲 Classroom",
+        "📝 Bài tập"
     ])
     
     # --- TAB 1: THEORY ---
@@ -559,7 +559,7 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
     # --- TAB 4: ARENA ---
     with tab_arena:
         st.subheader("4. Hoạt động Lớp học (Classroom Arena)")
-        tab_game1, tab_game2 = st.tabs(["🎲 Game 1: Vòng quay Phản xạ Âm Mũi", "🕵️ Game 2: Tìm lỗi chính tả (Spot the Imposter)"])
+        tab_game1, tab_game2 = st.tabs(["🎲 Game 1: Phản xạ Âm Mũi", "🕵️ Game 2: Tìm lỗi chính tả"])
         
         with tab_game1:
             st.markdown("### 🎲 Thử thách Phản xạ Âm tiết chứa Vận mẫu mũi")
@@ -962,3 +962,192 @@ def show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scor
             st.dataframe(all_scores, use_container_width=True)
 
 
+def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_scores_b5_3):
+    st.markdown("""
+    <style>
+    .adv-card {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 16px;
+        border-left: 5px solid #0ea5e9;
+        padding: 16px;
+        margin-bottom: 14px;
+    }
+    .adv-hanzi { font-size: 2.6em; font-weight: 900; color: #0c4a6e; line-height: 1.1; }
+    .adv-pinyin { font-size: 1em; color: #0369a1; font-weight: 600; margin-bottom: 4px; }
+    .adv-level { font-size: 0.82em; color: #475569; font-style: italic; margin-bottom: 6px; }
+    .adv-formula {
+        display: inline-block; background: #0ea5e9; color: white;
+        border-radius: 8px; padding: 3px 10px; font-size: 0.85em;
+        font-weight: 700; margin-bottom: 8px; font-family: monospace;
+    }
+    .adv-example { background: white; border-radius: 10px; padding: 10px 14px; margin-top: 6px; }
+    .adv-example-han { font-size: 1.5em; font-weight: 800; color: #1e3a8a; }
+    .adv-example-py { font-size: 0.9em; color: #2563eb; font-family: monospace; font-weight: 600; }
+    .adv-example-vi { font-size: 0.88em; color: #059669; font-style: italic; }
+    .adv-desc { font-size: 0.82em; color: #64748b; margin-top: 6px; line-height: 1.5; }
+    .sb-result-box {
+        background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+        border: 2px solid #fbbf24; border-radius: 16px;
+        padding: 20px; text-align: center; margin: 16px 0;
+    }
+    .sb-hanzi { font-size: 2.8em; font-weight: 900; color: #1e3a8a; }
+    .sb-py { font-size: 1.1em; font-family: monospace; font-weight: 700; color: #2563eb; margin: 4px 0; }
+    .sb-vi { font-size: 1em; color: #059669; font-style: italic; }
+    @media (max-width: 640px) {
+        .adv-hanzi { font-size: 2em; }
+        .sb-hanzi { font-size: 2.2em; }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        title="Bài 5.3 - Từ Chỉ Mức Độ (Degree Adverbs)",
+        objective="Làm chủ các phó từ chỉ mức độ thường dùng nhất: 很, 非常, 太...了, 特别, 挺...的, 比较, 极了"
+    )
+
+    tab_theory, tab_builder, tab_quiz = st.tabs(["📖 1. Lý thuyết", "🔨 2. Ghép câu", "📝 3. Bài tập"])
+
+    # --- TAB 1: LÝ THUYẾT ---
+    with tab_theory:
+        st.subheader("Bảng các Phó từ Chỉ Mức độ")
+        st.info("💡 **Lưu ý quan trọng:** Trong câu khẳng định với tính từ làm vị ngữ, '很' thường BẮT BUỘC để câu hoàn chỉnh. Thiếu '很' câu sẽ mang nghĩa so sánh ngầm.")
+
+        for item in B5_3_ADVERBS_DATA:
+            st.markdown(f"""
+            <div class="adv-card">
+              <div class="adv-hanzi">{item['adv']}</div>
+              <div class="adv-pinyin">{item['pinyin']}</div>
+              <div class="adv-level">🎯 {item['level']}</div>
+              <div class="adv-formula">{item['formula']}</div>
+              <div class="adv-example">
+                <div class="adv-example-han">{item['example_han']}</div>
+                <div class="adv-example-py">{item['example_py']}</div>
+                <div class="adv-example-vi">👉 {item['meaning']}</div>
+              </div>
+              <div class="adv-desc">📌 {item['desc']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button(item['example_han'], f"🔊 Nghe: {item['example_han']}", key=f"adv_play_{item['adv']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    # --- TAB 2: SENTENCE BUILDER ---
+    with tab_builder:
+        st.subheader("🔨 Ghép câu với Phó từ Chỉ Mức độ")
+        st.write("Chọn các thành phần để tạo câu hoàn chỉnh và nghe phát âm:")
+
+        SUBJECTS = {
+            "我": {"py": "Wǒ", "vi": "Tôi"},
+            "你": {"py": "Nǐ", "vi": "Bạn"},
+            "他": {"py": "Tā", "vi": "Anh ấy"},
+            "她": {"py": "Tā", "vi": "Cô ấy"},
+            "汉语": {"py": "Hànyǔ", "vi": "Tiếng Trung"},
+            "今天": {"py": "Jīntiān", "vi": "Hôm nay"},
+        }
+        ADVERBS = {
+            "(Không dùng)": {"py": "", "vi": "", "pos": "none"},
+            "很": {"py": "hěn", "vi": "rất", "pos": "pre"},
+            "非常": {"py": "fēicháng", "vi": "vô cùng", "pos": "pre"},
+            "太": {"py": "tài", "vi": "quá", "pos": "special_tai"},
+            "特别": {"py": "tèbié", "vi": "đặc biệt", "pos": "pre"},
+            "挺": {"py": "tǐng", "vi": "khá là", "pos": "special_ting"},
+            "比较": {"py": "bǐjiào", "vi": "tương đối", "pos": "pre"},
+            "极了": {"py": "jíle", "vi": "cực kỳ", "pos": "post"},
+        }
+        ADJECTIVES = {
+            "忙": {"py": "máng", "vi": "bận"},
+            "好": {"py": "hǎo", "vi": "tốt"},
+            "累": {"py": "lèi", "vi": "mệt"},
+            "热": {"py": "rè", "vi": "nóng"},
+            "难": {"py": "nán", "vi": "khó"},
+            "漂亮": {"py": "piàoliang", "vi": "xinh đẹp"},
+            "有趣": {"py": "yǒuqù", "vi": "thú vị"},
+        }
+
+        sel_s = st.selectbox("Chủ ngữ", list(SUBJECTS.keys()), key="sb53_sub")
+        sel_adv = st.selectbox("Phó từ", list(ADVERBS.keys()), index=1, key="sb53_adv")
+        sel_adj = st.selectbox("Tính từ", list(ADJECTIVES.keys()), key="sb53_adj")
+
+        s_data = SUBJECTS[sel_s]
+        adv_data = ADVERBS[sel_adv]
+        adj_data = ADJECTIVES[sel_adj]
+
+        if adv_data["pos"] == "special_tai":
+            built_han = f"{sel_s}太{sel_adj}了"
+            built_py = f"{s_data['py']} tài {adj_data['py']} le"
+            built_vi = f"{s_data['vi']} {adj_data['vi']} quá rồi"
+        elif adv_data["pos"] == "special_ting":
+            built_han = f"{sel_s}挺{sel_adj}的"
+            built_py = f"{s_data['py']} tǐng {adj_data['py']} de"
+            built_vi = f"{s_data['vi']} khá là {adj_data['vi']}"
+        elif adv_data["pos"] == "post":
+            built_han = f"{sel_s}{sel_adj}极了"
+            built_py = f"{s_data['py']} {adj_data['py']} jíle"
+            built_vi = f"{s_data['vi']} {adj_data['vi']} cực kỳ"
+        elif adv_data["pos"] == "none":
+            built_han = f"{sel_s}{sel_adj}"
+            built_py = f"{s_data['py']} {adj_data['py']}"
+            built_vi = f"{s_data['vi']} {adj_data['vi']} (⚠️ thiếu tự nhiên — thường cần phó từ)"
+        else:
+            built_han = f"{sel_s}{sel_adv}{sel_adj}"
+            built_py = f"{s_data['py']} {adv_data['py']} {adj_data['py']}"
+            built_vi = f"{s_data['vi']} {adv_data['vi']} {adj_data['vi']}"
+
+        st.markdown(f"""
+        <div class="sb-result-box">
+            <div class="sb-hanzi">{built_han}</div>
+            <div class="sb-py">{built_py}</div>
+            <div class="sb-vi">👉 {built_vi}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(built_han, "🔊 Phát âm câu vừa ghép", key="sb53_play", type="primary")
+
+    # --- TAB 3: BÀI TẬP ---
+    with tab_quiz:
+        st.subheader("📝 Bài tập Luyện tập & Đánh giá (Bài 5.3)")
+        st.write("Hoàn thành các câu trắc nghiệm dưới đây rồi bấm Chấm điểm:")
+
+        if "b5_3_current" not in st.session_state:
+            st.session_state.b5_3_current = {}
+
+        score_b5_3 = 0
+        for idx, item in enumerate(B5_3_QUIZ):
+            choices = shuffled_options(item["choices"], f"b5_3_quiz-{idx}")
+            selected = st.radio(f"**Câu {idx+1}:** {item['q']}", choices, index=None, key=f"b5_3_q_{idx}")
+            if selected == item["answer"]:
+                score_b5_3 += 1
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+        if st.button("✅ Chấm điểm Bài 5.3", key="btn_b5_3_score", use_container_width=True):
+            st.session_state.b5_3_current["score"] = (score_b5_3, len(B5_3_QUIZ))
+            save_progress()
+            st.success(f"Bạn đúng {score_b5_3}/{len(B5_3_QUIZ)} câu!")
+
+        st.markdown("---")
+        with st.expander("📊 Bảng điểm & Nộp bài Bài 5.3", expanded=True):
+            cur = st.session_state.b5_3_current
+            if "score" not in cur:
+                st.warning("Vui lòng hoàn thành và bấm chấm điểm để nộp bài.")
+            else:
+                earned, total = cur["score"]
+                score_10 = round((earned / total) * 10, 2)
+                st.success(f"📈 Điểm Bài 5.3: **{score_10} / 10**")
+                name = st.text_input("Tên học viên", key="student_name_b5_3", placeholder="Nhập tên...")
+                if st.button("📤 Nộp bài Bài 5.3", type="primary", use_container_width=True, key="btn_submit_b5_3"):
+                    if name:
+                        row = {
+                            "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                            "học viên": name,
+                            "tổng điểm": score_10,
+                            "BT: Trắc nghiệm": f"{earned}/{total}"
+                        }
+                        if save_score_row_b5_3(row):
+                            st.success("✅ Đã lưu kết quả thành công!")
+                            st.session_state.b5_3_current = {}
+                            st.rerun()
+                    else:
+                        st.error("Vui lòng nhập tên học viên!")
+
+            all_scores = load_all_scores_b5_3()
+            if all_scores:
+                st.write("### 📜 Lịch sử nộp bài:")
+                st.dataframe(all_scores, use_container_width=True)

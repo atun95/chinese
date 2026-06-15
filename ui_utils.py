@@ -39,38 +39,44 @@ def play_audio(text):
 
         function loadAndPlay(url, fallbackFunc, volumeBoost = 3.0) {{
             let audioNode = new Audio();
-            audioNode.crossOrigin = "anonymous";
             audioNode.src = url;
             audioNode.onerror = () => {{
-                if (audioNode.crossOrigin === "anonymous") {{
-                    let normalAudio = new Audio(url);
-                    normalAudio.onerror = () => {{
-                        if (fallbackFunc) fallbackFunc();
-                    }};
-                    normalAudio.play().catch(err => {{
-                        if (fallbackFunc) fallbackFunc();
-                    }});
-                }} else {{
-                    if (fallbackFunc) fallbackFunc();
-                }}
+                if (fallbackFunc) fallbackFunc();
             }};
-            playAmplified(audioNode, fallbackFunc, volumeBoost);
+            if (url.startsWith("data:")) {{
+                playAmplified(audioNode, fallbackFunc, volumeBoost);
+            }} else {{
+                audioNode.play().catch(err => {{
+                    if (fallbackFunc) fallbackFunc();
+                }});
+            }}
         }}
 
-        function speakSpeechSynthesis() {{
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = "zh-CN";
-            u.rate = 0.9;
-            u.volume = 1.0;
-            window.speechSynthesis.cancel();
-            window.speechSynthesis.speak(u);
+        function speakSpeechSynthesis(txt, onFallback) {{
+            try {{
+                if (!window.speechSynthesis) {{
+                    if (onFallback) onFallback();
+                    return;
+                }}
+                const u = new SpeechSynthesisUtterance(txt);
+                u.lang = "zh-CN";
+                u.rate = 0.9;
+                u.volume = 1.0;
+                u.onerror = (e) => {{
+                    if (onFallback) onFallback();
+                }};
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(u);
+            }} catch (err) {{
+                if (onFallback) onFallback();
+            }}
         }}
         
         if (text.startsWith("data:audio/")) {{
             loadAndPlay(text, null, 3.0);
         }} else {{
             const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
-            loadAndPlay(url, speakSpeechSynthesis, 3.0);
+            loadAndPlay(url, () => speakSpeechSynthesis(text, null), 3.0);
         }}
         </script>
         """,
@@ -121,13 +127,24 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
         let audioCtx = null;
         let audio = null;
         
-        function speakSpeechSynthesis(txt) {{
-            const u = new SpeechSynthesisUtterance(txt);
-            u.lang = "zh-CN";
-            u.rate = 0.9;
-            u.volume = 1.0;
-            window.speechSynthesis.cancel();
-            window.speechSynthesis.speak(u);
+        function speakSpeechSynthesis(txt, onFallback) {{
+            try {{
+                if (!window.speechSynthesis) {{
+                    if (onFallback) onFallback();
+                    return;
+                }}
+                const u = new SpeechSynthesisUtterance(txt);
+                u.lang = "zh-CN";
+                u.rate = 0.9;
+                u.volume = 1.0;
+                u.onerror = (e) => {{
+                    if (onFallback) onFallback();
+                }};
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(u);
+            }} catch (err) {{
+                if (onFallback) onFallback();
+            }}
         }}
 
         function playAmplified(audioNode, fallbackFunc, volumeBoost = 3.0) {{
@@ -168,23 +185,17 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                 }}
             }};
             audio = new Audio();
-            audio.crossOrigin = "anonymous";
             audio.src = url;
             audio.onerror = () => {{
-                if (audio.crossOrigin === "anonymous") {{
-                    let normalAudio = new Audio(url);
-                    audio = normalAudio;
-                    normalAudio.onerror = () => {{
-                        triggerFallback();
-                    }};
-                    normalAudio.play().catch(err => {{
-                        triggerFallback();
-                    }});
-                }} else {{
-                    triggerFallback();
-                }}
+                triggerFallback();
             }};
-            playAmplified(audio, triggerFallback, volumeBoost);
+            if (url.startsWith("data:")) {{
+                playAmplified(audio, triggerFallback, volumeBoost);
+            }} else {{
+                audio.play().catch(err => {{
+                    triggerFallback();
+                }});
+            }}
         }}
         
         function playTTS() {{
@@ -194,7 +205,7 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                 return;
             }}
             const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
-            loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
+            loadAndPlay(url, () => speakSpeechSynthesis(text, null), 3.0);
         }}
         </script>
         """,
@@ -211,25 +222,59 @@ def render_lesson_intro(title, objective=None):
     st.markdown(
         f"""
         <style>
+        /* ===== GLOBAL MOBILE FIXES ===== */
         .lesson-title {{
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: calc(1.3rem + 0.8vw);
+            white-space: normal;
+            word-break: break-word;
+            font-size: calc(1.1rem + 0.6vw);
             font-weight: 800;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: #0f172a;
             border-bottom: 2px solid #f1f5f9;
             padding-bottom: 10px;
+            line-height: 1.3;
         }}
-        @media (max-width: 768px) {{
+        /* Tabs: allow horizontal scroll on mobile instead of clipping */
+        [data-testid="stTabs"] [role="tablist"] {{
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }}
+        [data-testid="stTabs"] [role="tablist"]::-webkit-scrollbar {{ display: none; }}
+        [data-testid="stTabs"] button[role="tab"] {{
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 0.82rem;
+            padding: 8px 12px;
+        }}
+        /* Radio buttons: bigger tap targets on mobile */
+        @media (max-width: 640px) {{
             .lesson-title {{
-                font-size: 1.25rem;
+                font-size: 1.15rem;
+            }}
+            [data-testid="stRadio"] label {{
+                font-size: 0.9rem;
+                padding: 6px 0;
+            }}
+            /* Columns on mobile: stack vertically */
+            [data-testid="column"] {{
+                min-width: 100% !important;
+            }}
+            /* Buttons full width */
+            [data-testid="stButton"] > button {{
+                width: 100%;
+                font-size: 0.9rem;
+            }}
+            /* Cards: reduce padding */
+            .adv-card, .nasal-card {{
+                padding: 12px;
             }}
         }}
         </style>
         <h1 class="lesson-title">{title}</h1>
+        {f'<p style="color:#475569;font-size:0.95rem;margin-top:-8px;margin-bottom:16px;">{objective}</p>' if objective else ''}
         """,
         unsafe_allow_html=True
     )

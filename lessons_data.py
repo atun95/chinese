@@ -786,5 +786,108 @@ B5_QUIZ_FILL_BLANKS = [
     {"q": "h___g", "ans": "óng", "meaning": "màu đỏ"}
 ]
 
+# --- DỮ LIỆU BÀI 5.3: TỪ CHỈ MỨC ĐỘ ---
+B5_3_ADVERBS_DATA = [
+    {
+        "adv": "很",
+        "pinyin": "hěn",
+        "level": "Rất (Mức độ thông thường, mang tính liên kết ngữ pháp)",
+        "formula": "S + 很 + Adj",
+        "example_han": "我很忙",
+        "example_py": "Wǒ hěn máng",
+        "meaning": "Tôi rất bận",
+        "desc": "Trong câu khẳng định với tính từ làm vị ngữ, '很' là bắt buộc để câu hoàn chỉnh, nếu không câu sẽ mang nghĩa so sánh ngầm hoặc thiếu tự nhiên."
+    },
+    {
+        "adv": "非常",
+        "pinyin": "fēicháng",
+        "level": "Vô cùng, cực kỳ (Mức độ cao hơn '很')",
+        "formula": "S + 非常 + Adj",
+        "example_han": "她非常漂亮",
+        "example_py": "Tā fēicháng piàoliang",
+        "meaning": "Cô ấy vô cùng xinh đẹp",
+        "desc": "Dùng để nhấn mạnh mức độ vượt trội của tính từ."
+    },
+    {
+        "adv": "太 ... 了",
+        "pinyin": "tài ... le",
+        "level": "Quá, lắm (Mức độ cao, biểu thị cảm thán)",
+        "formula": "S + 太 + Adj + 了",
+        "example_han": "今天太热了",
+        "example_py": "Jīntiān tài rè le",
+        "meaning": "Hôm nay nóng quá rồi",
+        "desc": "Thường dùng trong câu cảm thán. Có thể dùng cho cả nghĩa tích cực (tốt quá) và tiêu cực (nóng quá)."
+    },
+    {
+        "adv": "特别",
+        "pinyin": "tèbié",
+        "level": "Đặc biệt (Nhấn mạnh sự khác biệt so với bình thường)",
+        "formula": "S + 特別 + Adj",
+        "example_han": "汉语特别有趣",
+        "example_py": "Hànyǔ tèbié yǒuqù",
+        "meaning": "Tiếng Trung đặc biệt thú vị",
+        "desc": "Diễn tả mức độ nổi bật, có nét riêng biệt."
+    },
+    {
+        "adv": "挺 ... 的",
+        "pinyin": "tǐng ... de",
+        "level": "Khá là, tương đối (Khẩu ngữ sinh động)",
+        "formula": "S + 挺 + Adj + 的",
+        "example_han": "他挺好的",
+        "example_py": "Tā tǐng hǎo de",
+        "meaning": "Anh ấy khá là tốt",
+        "desc": "Cấu trúc phổ biến trong văn nói, mang sắc thái nhẹ nhàng, thân thiện."
+    },
+    {
+        "adv": "比较",
+        "pinyin": "bǐjiào",
+        "level": "Tương đối, khá (Mang tính so sánh ngầm)",
+        "formula": "S + 比较 + Adj",
+        "example_han": "汉语比较难",
+        "example_py": "Hànyǔ bǐjiào nán",
+        "meaning": "Tiếng Trung tương đối khó",
+        "desc": "Dùng khi so sánh tương đối giữa các đối tượng."
+    },
+    {
+        "adv": "极了",
+        "pinyin": "jí le",
+        "level": "Cực kỳ (Mức độ cực độ, đứng SAU tính từ)",
+        "formula": "S + Adj + 极了",
+        "example_han": "累极了",
+        "example_py": "Lèi jíle",
+        "meaning": "Mệt cực kỳ",
+        "desc": "Khác với các phó từ khác, '极了' bắt buộc đứng sau tính từ mà nó bổ nghĩa."
+    }
+]
+
+B5_3_QUIZ = [
+    {
+        "q": "Câu nào sau đây diễn đạt đúng ngữ pháp và tự nhiên nhất cho câu 'Tôi bận'?",
+        "choices": ["我忙 (Wǒ máng)", "我很忙 (Wǒ hěn máng)", "我不很忙 (Wǒ bù hěn máng)", "我太忙 (Wǒ tài máng)"],
+        "answer": "我很忙 (Wǒ hěn máng)"
+    },
+    {
+        "q": "Điền phó từ phù hợp vào chỗ trống để tạo câu cảm thán: '今天___热了！' (Hôm nay nóng quá rồi!)",
+        "choices": ["很 (hěn)", "非常 (fēicháng)", "太 (tài)", "比较 (bǐjiào)"],
+        "answer": "太 (tài)"
+    },
+    {
+        "q": "Dịch câu 'Tôi mệt cực kỳ!' sang tiếng Trung sử dụng bổ ngữ mức độ '极了' (jíle):",
+        "choices": ["我 cực mệt 了", "我 mệt 极lự 了", "我累极了 (Wǒ lèi jíle)", "我极了累 (Wǒ jíle lèi)"],
+        "answer": "我累极了 (Wǒ lèi jíle)"
+    },
+    {
+        "q": "Chọn câu phủ định đúng của '他很好' (Anh ấy rất tốt):",
+        "choices": ["他狠不好 (Tā hěn bù hǎo)", "他不好 (Tā bù hǎo)", "他很不好 (Tā hěn bù hǎo)", "他太不好 (Tā tài bù hǎo)"],
+        "answer": "他不好 (Tā bù hǎo)"
+    },
+    {
+        "q": "Cấu trúc '挺 + Adj + 的' mang nghĩa là gì?",
+        "choices": ["Không bận lắm", "Khá là, tương đối", "Quá, lắm", "Vô cùng, cực kỳ"],
+        "answer": "Khá là, tương đối"
+    }
+]
+
+
 
 
