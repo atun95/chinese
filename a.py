@@ -10,12 +10,14 @@ from ui_utils import *
 
 # Import các bài học đã tách file và reload để tránh cache
 import importlib
+import lessons_data
 import lesson1
 import lesson2
 import lesson3
 import lesson4
 import lesson5
 
+importlib.reload(lessons_data)
 importlib.reload(lesson1)
 importlib.reload(lesson2)
 importlib.reload(lesson3)
