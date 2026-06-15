@@ -9,17 +9,6 @@ def play_audio(text):
         f"""
         <script>
         const text = {safe_txt};
-        const hasChinese = /[\u4e00-\u9fa5]/.test(text);
-        
-        const toneVowels = {{
-            'ā': 'a1', 'á': 'a2', 'ǎ': 'a3', 'à': 'a4',
-            'ē': 'e1', 'é': 'e2', 'ě': 'e3', 'è': 'e4',
-            'ī': 'i1', 'í': 'i2', 'ǐ': 'i3', 'ì': 'i4',
-            'ō': 'o1', 'ó': 'o2', 'ǒ': 'o3', 'ò': 'o4',
-            'ū': 'u1', 'ú': 'u2', 'ǔ': 'u3', 'ù': 'u4',
-            'ǖ': 'v1', 'ǘ': 'v2', 'ǚ': 'v3', 'ǜ': 'v4',
-            'ü': 'v'
-        }};
         
         let audioCtx = null;
         function playAmplified(audioNode, fallbackFunc, volumeBoost = 3.0) {{
@@ -77,39 +66,11 @@ def play_audio(text):
             window.speechSynthesis.speak(u);
         }}
         
-        if (hasChinese) {{
+        if (text.startsWith("data:audio/")) {{
+            loadAndPlay(text, null, 3.0);
+        }} else {{
             const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
             loadAndPlay(url, speakSpeechSynthesis, 3.0);
-        }} else {{
-            const cleanText = text.trim();
-            const isSingle = !/\\s/.test(cleanText) && cleanText.length <= 7;
-            if (isSingle) {{
-                let tone = 5;
-                let base = cleanText.toLowerCase();
-                for (const [marked, replacement] of Object.entries(toneVowels)) {{
-                    if (base.includes(marked)) {{
-                        base = base.replace(marked, replacement.slice(0, -1));
-                        tone = parseInt(replacement.slice(-1));
-                        break;
-                    }}
-                }}
-                base = base.replace(/ü/g, 'v');
-                const numbered = base + tone;
-                let url = "https://dictionary.writtenchinese.com/sounds/" + encodeURIComponent(numbered) + ".mp3";
-                
-                const triggerFallback = () => {{
-                    if (tone === 5 && url.endsWith("5.mp3")) {{
-                        url = url.replace(/5\\.mp3$/, ".mp3");
-                        loadAndPlay(url, speakSpeechSynthesis, 3.0);
-                    }} else {{
-                        speakSpeechSynthesis();
-                    }}
-                }};
-                
-                loadAndPlay(url, triggerFallback, 3.0);
-            }} else {{
-                speakSpeechSynthesis();
-            }}
         }}
         </script>
         """,
@@ -159,15 +120,6 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
         <script>
         let audioCtx = null;
         let audio = null;
-        const toneVowels = {{
-            'ā': 'a1', 'á': 'a2', 'ǎ': 'a3', 'à': 'a4',
-            'ē': 'e1', 'é': 'e2', 'ě': 'e3', 'è': 'e4',
-            'ī': 'i1', 'í': 'i2', 'ǐ': 'i3', 'ì': 'i4',
-            'ō': 'o1', 'ó': 'o2', 'ǒ': 'o3', 'ò': 'o4',
-            'ū': 'u1', 'ú': 'u2', 'ǔ': 'u3', 'ù': 'u4',
-            'ǖ': 'v1', 'ǘ': 'v2', 'ǚ': 'v3', 'ǜ': 'v4',
-            'ü': 'v'
-        }};
         
         function speakSpeechSynthesis(txt) {{
             const u = new SpeechSynthesisUtterance(txt);
@@ -241,42 +193,8 @@ def render_play_button(text, label, key=None, height=45, type="secondary"):
                 loadAndPlay(text, null, 3.0);
                 return;
             }}
-            const hasChinese = /[\u4e00-\u9fa5]/.test(text);
-            
-            if (hasChinese) {{
-                const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
-                loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
-            }} else {{
-                const cleanText = text.trim();
-                const isSingle = !/\\s/.test(cleanText) && cleanText.length <= 7;
-                if (isSingle) {{
-                    let tone = 5;
-                    let base = cleanText.toLowerCase();
-                    for (const [marked, replacement] of Object.entries(toneVowels)) {{
-                        if (base.includes(marked)) {{
-                            base = base.replace(marked, replacement.slice(0, -1));
-                            tone = parseInt(replacement.slice(-1));
-                            break;
-                        }}
-                    }}
-                    base = base.replace(/ü/g, 'v');
-                    const numbered = base + tone;
-                    let url = "https://dictionary.writtenchinese.com/sounds/" + encodeURIComponent(numbered) + ".mp3";
-                    
-                    const triggerFallback = () => {{
-                        if (tone === 5 && url.endsWith("5.mp3")) {{
-                            url = url.replace(/5\\.mp3$/, ".mp3");
-                            loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
-                        }} else {{
-                            speakSpeechSynthesis(text);
-                        }}
-                    }};
-                    
-                    loadAndPlay(url, triggerFallback, 3.0);
-                }} else {{
-                    speakSpeechSynthesis(text);
-                }}
-            }}
+            const url = "https://translate.google.com/translate_tts?ie=UTF-8&tl=zh-CN&client=tw-ob&q=" + encodeURIComponent(text);
+            loadAndPlay(url, () => speakSpeechSynthesis(text), 3.0);
         }}
         </script>
         """,
