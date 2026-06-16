@@ -1542,11 +1542,12 @@ def show_lesson5_vocab():
         st.markdown(f"<div style='text-align: center; font-size: 1.25em; font-weight: bold; margin-top: 10px; color:#475569;'>Từ {cur_idx + 1} / {len(B5_VOCAB)}</div>", unsafe_allow_html=True)
         st.progress((cur_idx + 1) / len(B5_VOCAB))
 
-    # --- Phần ngữ pháp 已经 ---
-    st.markdown("---")
-    st.subheader("📖 Ngữ pháp mở rộng: 已经 (yǐjīng) — Đã... rồi")
+    # --- Phần ngữ pháp 已经 (chỉ hiện khi đang xem từ 已经) ---
+    if w["key_prefix"] == "b5_yijing":
+        st.markdown("---")
+        st.subheader("📖 Ngữ pháp mở rộng: 已经 (yǐjīng) — Đã... rồi")
 
-    st.markdown("""
+        st.markdown("""
 <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 6px solid #3b82f6; border-radius: 12px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
 <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold;">
 💡 Cấu trúc: 已经 + Động từ / Tính từ + 了 (yǐjīng ... le)
@@ -1568,11 +1569,12 @@ Dùng để diễn tả một hành động đã hoàn thành, hoặc một tr�
 <i>Ví dụ:</i> <b>我还没饱。</b> (Wǒ hái méi bǎo.) — <i>Tôi vẫn chưa no.</i>
 </div>
 </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    col_ex1, col_ex2 = st.columns(2)
-    with col_ex1:
-        render_play_button("我已经饱了", "🔊 我已经饱了 (Tôi đã no rồi)", key="play_ex_yijing_1")
-    with col_ex2:
-        render_play_button("我们已经十八岁了", "🔊 我们已经十八岁了 (Đã 18 tuổi rồi)", key="play_ex_yijing_2")
+        col_ex1, col_ex2 = st.columns(2)
+        with col_ex1:
+            render_play_button("我已经饱了", "🔊 我已经饱了 (Tôi đã no rồi)", key="play_ex_yijing_1")
+        with col_ex2:
+            render_play_button("我们已经十八岁了", "🔊 我们已经十八岁了 (Đã 18 tuổi rồi)", key="play_ex_yijing_2")
+
 
