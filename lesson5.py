@@ -1367,3 +1367,230 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
             if all_scores:
                 st.write("### 📜 Lịch sử nộp bài:")
                 st.dataframe(all_scores, use_container_width=True)
+
+
+def show_lesson5_vocab():
+    render_lesson_intro("📚 Bài 5: Từ vựng mở rộng", "Học các từ vựng mới quan trọng trong Bài 5 và nắm vững cấu trúc ngữ pháp của 已经.")
+
+    st.subheader("1. Từ vựng cốt lõi Bài 5")
+
+    st.markdown("""
+    <style>
+    .vocab-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        height: 180px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vocab-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+    }
+    .vocab-hanzi {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #0f172a;
+        margin-bottom: 5px;
+        font-family: "Noto Sans SC", sans-serif;
+    }
+    .vocab-pinyin {
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        color: #2563eb;
+        background-color: #eff6ff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.95em;
+        display: inline-block;
+        margin-bottom: 10px;
+        width: fit-content;
+    }
+    .vocab-meaning {
+        font-size: 1.05rem;
+        color: #1e293b;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .vocab-note {
+        font-size: 0.88rem;
+        color: #64748b;
+        line-height: 1.5;
+    }
+    .pair-container {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    .pair-header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #0f172a;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    core_vocab = [
+        {
+            "hanzi": "早餐",
+            "pinyin": "zǎocān",
+            "meaning": "Bữa sáng / Ăn sáng",
+            "note": "Từ ghép từ <b>早</b> (sớm) và <b>餐</b> (bữa ăn)."
+        },
+        {
+            "hanzi": "大家",
+            "pinyin": "dàjiā",
+            "meaning": "Mọi người / Cả nhà",
+            "note": "Từ ghép từ <b>大</b> (lớn) và <b>家</b> (nhà, gia đình). Dùng để xưng hô nhóm người."
+        },
+        {
+            "hanzi": "您",
+            "pinyin": "nín",
+            "meaning": "Ngài / Ông / Bà (Kính trọng)",
+            "note": "Đại từ nhân xưng ngôi thứ hai số ít, viết thêm bộ <b>心 (tâm - lòng)</b> ở dưới chữ <b>你 (nǐ)</b> để thể hiện sự tôn kính."
+        },
+        {
+            "hanzi": "岁",
+            "pinyin": "suì",
+            "meaning": "Tuổi",
+            "note": "Lượng từ dùng sau số từ để chỉ số tuổi. Ví dụ: 十八岁 (18 tuổi)."
+        },
+        {
+            "hanzi": "已经",
+            "pinyin": "yǐjīng",
+            "meaning": "Đã / Đã... rồi",
+            "note": "Phó từ chỉ thời gian, thường dùng trong cấu trúc: <b>已经 + V/Adj + 了</b>."
+        }
+    ]
+
+    cols = st.columns(3)
+    for idx, item in enumerate(core_vocab):
+        with cols[idx % 3]:
+            st.markdown(f"""
+            <div class="vocab-card">
+                <div>
+                    <div class="vocab-hanzi">{item['hanzi']}</div>
+                    <div class="vocab-pinyin">{item['pinyin']}</div>
+                    <div class="vocab-meaning">{item['meaning']}</div>
+                </div>
+                <div class="vocab-note">{item['note']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button(item['hanzi'], f"🔊 Phát âm {item['hanzi']}", key=f"play_core_{idx}")
+
+    st.markdown("---")
+    st.subheader("2. Các Cặp Tính Từ Trái Nghĩa (Antonyms)")
+
+    # Cặp 1: 大 # 小
+    st.markdown("""
+    <div class="pair-container">
+        <div class="pair-header">⚖️ Cặp 1: 大 (dà) # 小 (xiǎo) — To/Lớn và Nhỏ/Bé</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_da, col_xiao = st.columns(2)
+    with col_da:
+        st.markdown("""
+        <div class="vocab-card" style="border-left: 5px solid #2563eb; height: 160px;">
+            <div>
+                <div class="vocab-hanzi">大</div>
+                <div class="vocab-pinyin">dà</div>
+                <div class="vocab-meaning">To, lớn</div>
+            </div>
+            <div class="vocab-note">Trái nghĩa với 小 (xiǎo). Ví dụ: <b>大人</b> (dàrén - người lớn), <b>大家</b> (dàjiā - mọi người).</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button("大", "🔊 Phát âm 大", key="play_da")
+
+    with col_xiao:
+        st.markdown("""
+        <div class="vocab-card" style="border-left: 5px solid #ef4444; height: 160px;">
+            <div>
+                <div class="vocab-hanzi">小</div>
+                <div class="vocab-pinyin">xiǎo</div>
+                <div class="vocab-meaning">Nhỏ, bé</div>
+            </div>
+            <div class="vocab-note">Trái nghĩa với 大 (dà). Ví dụ: <b>小孩</b> (xiǎohái - trẻ con), <b>小杯</b> (xiǎobēi - cốc nhỏ).</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button("小", "🔊 Phát âm 小", key="play_xiao")
+
+    # Cặp 2: 饱 # 饿
+    st.markdown("""
+    <div class="pair-container">
+        <div class="pair-header">🍴 Cặp 2: 饱 (bǎo) # 饿 (è) — No và Đói</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_bao, col_e = st.columns(2)
+    with col_bao:
+        st.markdown("""
+        <div class="vocab-card" style="border-left: 5px solid #10b981; height: 160px;">
+            <div>
+                <div class="vocab-hanzi">饱</div>
+                <div class="vocab-pinyin">bǎo</div>
+                <div class="vocab-meaning">No, no bụng</div>
+            </div>
+            <div class="vocab-note">Chỉ trạng thái no bụng. Ví dụ: <b>我饱了</b> (Wǒ bǎo le - Tôi no rồi).</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button("饱", "🔊 Phát âm 饱", key="play_bao")
+
+    with col_e:
+        st.markdown("""
+        <div class="vocab-card" style="border-left: 5px solid #f59e0b; height: 160px;">
+            <div>
+                <div class="vocab-hanzi">饿</div>
+                <div class="vocab-pinyin">è</div>
+                <div class="vocab-meaning">Đói, đói bụng</div>
+            </div>
+            <div class="vocab-note">Chỉ trạng thái đói bụng. Ví dụ: <b>我饿了</b> (Wǒ è le - Tôi đói rồi).</div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button("饿", "🔊 Phát âm 饿", key="play_e")
+
+    st.markdown("---")
+    st.subheader("3. Ngữ pháp mở rộng: Cấu trúc với 已经 (yǐjīng) - Đã... rồi")
+
+    st.markdown("""
+    <div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 6px solid #3b82f6; border-radius: 12px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+        <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold;">
+            💡 Cấu trúc: 已经 + Động từ / Tính từ + 了 (yǐjīng ... le)
+        </h4>
+        <p style="color: #334155; line-height: 1.6; margin-bottom: 15px; font-size: 1.02rem;">
+            Dùng để diễn tả một hành động đã hoàn thành, hoặc một trạng thái đã có sự thay đổi. Trợ từ ngữ khí <b>了 (le)</b> thường đứng cuối câu để hỗ trợ và biểu thị sự thay đổi đã xảy ra.
+        </p>
+        <div style="background-color: white; border-radius: 8px; padding: 15px; border: 1px solid #bfdbfe; color: #1e293b;">
+            <div style="font-weight: bold; color: #0f172a; margin-bottom: 10px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px;">Ví dụ áp dụng:</div>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                <li><b>我已经饱了。</b> (Wǒ yǐjīng bǎo le.) — <i>Tôi đã no rồi.</i></li>
+                <li><b>他已经来了。</b> (Tā yǐjīng lái le.) — <i>Anh ấy đã đến rồi.</i></li>
+                <li><b>我们已经十八岁了。</b> (Wǒmen yǐjīng shíbā suì le.) — <i>Chúng tôi đã 18 tuổi rồi.</i></li>
+                <li><b>爸爸 đã về nhà rồi.</b> (Bàba yǐjīng huíjiā le.) — <i>Bố đã về nhà rồi.</i></li>
+            </ul>
+        </div>
+        <div style="margin-top: 15px; font-size: 0.95em; color: #b91c1c; font-weight: bold; background-color: #fef2f2; padding: 10px 15px; border-radius: 6px; border: 1px solid #fee2e2;">
+            ⚠️ Lưu ý khi phủ định: Khi muốn nói "vẫn chưa" làm việc gì, ta KHÔNG dùng phủ định trực tiếp với <b>已经</b> (không nói <s>我不已经...</s>). Thay vào đó, hãy dùng cấu trúc <b>"还没(有) ... " (hái méi yǒu)</b>.<br/>
+            <i>Ví dụ:</i> <b>我还没饱。</b> (Wǒ hái méi bǎo.) — <i>Tôi vẫn chưa no.</i>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_ex1, col_ex2 = st.columns(2)
+    with col_ex1:
+        render_play_button("我已经饱了", "🔊 Nghe: 我已经饱了 (Tôi đã no rồi)", key="play_ex_yijing_1")
+    with col_ex2:
+        render_play_button("我们已经十八岁了", "🔊 Nghe: 我们已经十八岁了 (Chúng tôi đã 18 tuổi rồi)", key="play_ex_yijing_2")
+

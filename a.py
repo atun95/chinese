@@ -291,7 +291,8 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 1 - TỪ VỰNG CƠ BẢN", 
         "Bài 3 - TỪ VỰNG",
         "Bài 4 - TỪ VỰNG",
-        "Bài 4.1 - Từ vựng mở rộng"
+        "Bài 4.1 - Từ vựng mở rộng",
+        "Bài 5 - TỪ VỰNG"
     ])
 elif mode == "🗣️ Luyện tập ghép âm":
     menu = st.sidebar.radio("Chọn bảng ghép âm:", [
@@ -359,6 +360,9 @@ elif menu == "Bài 4 - TỪ VỰNG":
 
 elif menu == "Bài 4.1 - Từ vựng mở rộng":
     lesson4.show_lesson4_vocab(extended_only=True)
+
+elif menu == "Bài 5 - TỪ VỰNG":
+    lesson5.show_lesson5_vocab()
 
 elif menu == "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
