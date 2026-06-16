@@ -17,7 +17,7 @@ except ImportError:
             "example_han": "我很忙",
             "example_py": "Wǒ hěn máng",
             "meaning": "Tôi rất bận",
-            "desc": "Trong câu khẳng định với tính từ làm vị ngữ, 'xn/很' là bắt buộc để câu hoàn chỉnh, nếu không câu sẽ mang nghĩa so sánh ngầm hoặc thiếu tự nhiên."
+            "desc": "Trong câu khẳng định với tính từ làm vị ngữ (S + Adj), '很' đóng vai trò liên kết ngữ pháp bắt buộc. Nếu thiếu '很', câu sẽ mang nghĩa so sánh ngầm (ví dụ: 'Tôi bận, người khác rảnh') hoặc nghe không tự nhiên, lửng lơ."
         },
         {
             "adv": "非常",
@@ -1112,8 +1112,45 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
 
     # --- TAB 1: LÝ THUYẾT ---
     with tab_theory:
+        st.markdown("""
+        <div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 22px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #bbf7d0; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);">
+            <h3 style="color: #14532d; margin-top: 0; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 8px; font-size: 1.3em;">
+                💡 TRỌNG TÂM BÀI HỌC: Tại sao bắt buộc phải dùng "很" (hěn)?
+            </h3>
+            <p style="font-size: 1em; line-height: 1.7; color: #166534; margin-bottom: 15px;">
+                Đây là <b>nội dung quan trọng nhất</b> của bài học này mà mọi học viên đều phải làm chủ. Khi muốn diễn đạt một câu khẳng định đơn giản có <b>tính từ làm vị ngữ</b> (ví dụ: <i>"Tôi bận", "Cậu ấy khỏe", "Tiếng Trung khó"</i>), cấu trúc chuẩn ngữ pháp bắt buộc là:
+            </p>
+            <div style="background-color: white; border: 1.5px solid #10b981; padding: 14px; border-radius: 8px; font-size: 1.3em; font-family: 'Courier New', monospace; font-weight: bold; color: #15803d; text-align: center; margin-bottom: 18px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+                Chủ ngữ (Subject) + <span style="color: #b91c1c; font-size: 1.15em;">很 (hěn)</span> + Tính từ (Adjective)
+            </div>
+            <p style="font-size: 0.98em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-bottom: 8px;">
+                Có 3 nguyên nhân cốt lõi giải thích cho quy tắc này:
+            </p>
+            <ol style="font-size: 0.95em; line-height: 1.7; color: #374151; padding-left: 20px; margin-bottom: 18px;">
+                <li style="margin-bottom: 10px;">
+                    <b>Tránh nghĩa so sánh ngầm (Implicit Comparison):</b> 
+                    Nếu bạn chỉ nói <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"我忙" (Wǒ máng)</span>, câu sẽ bị lửng lơ và cụt. Người Trung Quốc khi nghe sẽ tự động hiểu câu này mang tính chất so sánh ngầm: <i>"Tôi bận (còn người khác thì rảnh)"</i> hoặc <i>"Tôi bận (hơn)"</i>. Do đó, việc thêm <b>"很"</b> là bắt buộc để biến nó thành một câu khẳng định độc lập, trọn vẹn: <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">"我很忙" (Wǒ hěn máng)</span>.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <b>Làm cầu nối ngữ pháp thay thế động từ "is/am/are" (to be):</b> 
+                    Trong tiếng Trung, tính từ có thể trực tiếp làm vị ngữ mà <b>tuyệt đối KHÔNG</b> đi kèm động từ liên kết <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"是" (shì)</span> (Ví dụ: ❌ <i>"我是忙"</i> là hoàn toàn sai). Từ <b>"很"</b> ở đây đóng vai trò như một chất keo liên kết chủ ngữ và tính từ, giúp cấu trúc câu trở nên cân bằng và hài hòa về mặt ngữ âm.
+                </li>
+                <li style="margin-bottom: 10px;">
+                    <b>Hiện tượng suy giảm ý nghĩa của từ "很" (Semantic Bleaching):</b> 
+                    Trong câu khẳng định thông thường, chữ <b>"很"</b> đã bị mờ nhạt nghĩa và chỉ đóng vai trò ngữ pháp. Nó <b>không</b> mang nghĩa nhấn mạnh là "rất" như trong tiếng Việt. Khi nói <i>"我很忙"</i>, ta chỉ dịch là <i>"Tôi bận"</i> chứ không nhất thiết phải dịch là <i>"Tôi rất bận"</i>.
+                </li>
+            </ol>
+            <p style="font-size: 0.98em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-bottom: 8px;">
+                💡 Quy tắc bổ sung cần ghi nhớ:
+            </p>
+            <ul style="font-size: 0.95em; line-height: 1.6; color: #4b5563; padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 6px;"><b>Khi muốn thực sự nhấn mạnh mức độ "RẤT":</b> Ta cần đọc nhấn trọng âm vào từ <b>"很"</b> khi phát âm, hoặc thay bằng các phó từ chỉ mức độ cao hơn như <i>非常 (fēicháng - vô cùng)</i>, <i>特别 (tèbié - đặc biệt)</i>.</li>
+                <li style="margin-bottom: 6px;"><b>Khi phủ định (dùng "不" - bù):</b> Do từ <b>"不"</b> đã đóng vai trò làm cầu nối ngữ pháp liên kết thay thế cho "很", ta <b>không cần dùng "很" nữa</b>. Ví dụ: <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">"我不忙" (Wǒ bù máng - Tôi không bận)</span>.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
         st.subheader("Bảng các Phó từ Chỉ Mức độ (Phân chia theo cấp độ)")
-        st.info("💡 **Lưu ý quan trọng:** Trong câu khẳng định với tính từ làm vị ngữ, '很' thường BẮT BUỘC để câu hoàn chỉnh. Thiếu '很' câu sẽ mang nghĩa so sánh ngầm.")
 
         categories = [
             {

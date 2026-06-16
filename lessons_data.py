@@ -796,7 +796,7 @@ B5_3_ADVERBS_DATA = [
         "example_han": "我很忙",
         "example_py": "Wǒ hěn máng",
         "meaning": "Tôi rất bận",
-        "desc": "Trong câu khẳng định với tính từ làm vị ngữ, '很' là bắt buộc để câu hoàn chỉnh, nếu không câu sẽ mang nghĩa so sánh ngầm hoặc thiếu tự nhiên."
+        "desc": "Trong câu khẳng định với tính từ làm vị ngữ (S + Adj), '很' đóng vai trò liên kết ngữ pháp bắt buộc. Nếu thiếu '很', câu sẽ mang nghĩa so sánh ngầm (ví dụ: 'Tôi bận, người khác rảnh') hoặc nghe không tự nhiên, lửng lơ."
     },
     {
         "adv": "非常",
