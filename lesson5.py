@@ -918,51 +918,51 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
                 st.dataframe(all_scores, use_container_width=True)
 
 def show_lesson5_nasal_spelling(add_tones):
-    st.subheader("Công cụ Ghép âm Tương tác (Nasal Finals)")
-    st.write("Chọn thanh mẫu, vận mẫu mũi và thanh điệu để ghép âm và nghe phát âm chính xác:")
+    render_lesson_intro("📚 Bài 5: Luyện tập ghép âm Vận mẫu mũi", "Luyện tập ghép âm các thanh mẫu với 7 vận mẫu mũi (an, ang, en, eng, in, ing, ong).")
     
-    cols_sel = st.columns(3)
-    with cols_sel[0]:
-        initials = ["(Không có)", "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh", "r", "z", "c", "s"]
-        sel_initial = st.selectbox("Chọn Thanh mẫu:", initials, index=0, key="nasal_sandbox_initial_standalone")
-    with cols_sel[1]:
-        finals = ["an", "ang", "en", "eng", "in", "ing", "ong"]
-        sel_final = st.selectbox("Chọn Vận mẫu mũi:", finals, index=0, key="nasal_sandbox_final_standalone")
-    with cols_sel[2]:
-        tones = ["Thanh nhẹ", "Thanh 1", "Thanh 2", "Thanh 3", "Thanh 4"]
-        sel_tone = st.selectbox("Chọn Thanh điệu:", tones, index=1, key="nasal_sandbox_tone_standalone")
-        
-    tone_idx = tones.index(sel_tone)
-    spelled_res, err = check_nasal_spelling_rule(sel_initial, sel_final, tone_idx)
+    B5_LUYEN_TAP_FINALS = ["an", "ang", "en", "eng", "in", "ing", "ong"]
+    B5_LUYEN_TAP_ROWS = {
+        "b": ["ban", "bang", "ben", "beng", "bin", "bing", ""],
+        "p": ["pan", "pang", "pen", "peng", "pin", "ping", ""],
+        "m": ["man", "mang", "men", "meng", "min", "ming", ""],
+        "f": ["fan", "fang", "fen", "feng", "", "", ""],
+        "d": ["dan", "dang", "", "deng", "", "ding", "dong"],
+        "t": ["tan", "tang", "", "teng", "", "ting", "tong"],
+        "n": ["nan", "nang", "nen", "neng", "nin", "ning", "nong"],
+        "l": ["lan", "lang", "", "leng", "lin", "ling", "long"],
+        "g": ["gan", "gang", "gen", "geng", "", "", "gong"],
+        "k": ["kan", "kang", "ken", "keng", "", "", "kong"],
+        "h": ["han", "hang", "hen", "heng", "", "", "hong"],
+        "j": ["", "", "", "", "jin", "jing", ""],
+        "q": ["", "", "", "", "qin", "qing", ""],
+        "x": ["", "", "", "", "xin", "xing", ""],
+        "zh": ["zhan", "zhang", "zhen", "zheng", "", "", "zhong"],
+        "ch": ["chan", "chang", "chen", "cheng", "", "", "chong"],
+        "sh": ["shan", "shang", "shen", "sheng", "", "", ""],
+        "r": ["ran", "rang", "ren", "reng", "", "", "rong"],
+        "z": ["zan", "zang", "zen", "zeng", "", "", "zong"],
+        "c": ["can", "cang", "cen", "ceng", "", "", "cong"],
+        "s": ["san", "sang", "sen", "seng", "", "", "song"]
+    }
     
-    st.markdown("<br/>", unsafe_allow_html=True)
-    if err:
-        st.markdown(
-            f"""
-            <div style="background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 12px; padding: 18px; text-align: center;">
-                <span style="font-size: 1.1em; color: #DC2626; font-weight: bold;">{err}</span>
-                <p style="color: #991B1B; font-size: 0.9em; margin-top: 6px; margin-bottom: 0;">
-                    Vui lòng chọn tổ hợp ghép âm khác. Nhóm thanh mẫu mặt lưỡi j, q, x chỉ có thể kết hợp với in, ing trong nhóm vận mẫu mũi này.
-                </p>
-            </div>
-            """, 
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            f"""
-            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 1px solid #A7F3D0; border-radius: 12px; padding: 22px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
-                <div style="font-size: 0.85em; color: #065F46; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">KẾT QUẢ GHÉP ÂM CHUẨN XÁC:</div>
-                <div style="font-size: 3.5em; font-weight: bold; color: #047857; font-family: 'Courier New', monospace; margin: 10px 0;">{spelled_res}</div>
-                <div style="font-size: 0.95em; color: #065F46; font-style: italic;">
-                    Ghép từ: <b>{sel_initial if sel_initial != '(Không có)' else ''}</b> + <b>{sel_final}</b> + <b>{sel_tone}</b>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown("<br/>", unsafe_allow_html=True)
-        render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="nasal_sandbox_play_btn_standalone", type="primary")
+    st.subheader("Bảng luyện tập ghép âm vận mẫu mũi (Bài 5)")
+    h_cols = st.columns([1.5] + [1] * len(B5_LUYEN_TAP_FINALS))
+    h_cols[0].markdown("**T/V**")
+    for i, f in enumerate(B5_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
+    for init in B5_LUYEN_TAP_ROWS.keys():
+        r_cols = st.columns([1.5] + [1] * len(B5_LUYEN_TAP_FINALS))
+        r_cols[0].markdown(f"**{init}**")
+        for i, combo in enumerate(B5_LUYEN_TAP_ROWS[init]):
+            if combo:
+                with r_cols[i+1]:
+                    with st.popover(combo, use_container_width=True):
+                        for t in add_tones(combo):
+                            col_t, col_btn = st.columns([2, 1])
+                            col_t.write(f"- {t}")
+                            with col_btn:
+                                render_play_button(t, "🔊", key=f"btn_p_b5_{init}_{combo}_{t}", height=45)
+            else:
+                r_cols[i+1].write("")
 
 def show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scores_b5):
     st.subheader("📝 Bài tập Luyện tập & Đánh giá (Vận mẫu mũi)")
