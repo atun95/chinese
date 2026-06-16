@@ -1114,94 +1114,94 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
     with tab_theory:
         st.markdown("""
 <div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 22px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #bbf7d0; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);">
-    <h3 style="color: #14532d; margin-top: 0; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 8px; font-size: 1.3em;">
-        💡 TRỌNG TÂM BÀI HỌC: Cách dùng phó từ "很" (hěn) & trợ từ "了" (le)
-    </h3>
-    <p style="font-size: 0.98em; line-height: 1.7; color: #166534; margin-bottom: 15px;">
-        Trong tiếng Trung, câu khẳng định đơn giản có <b>tính từ làm vị ngữ</b> (như <i>"Tôi bận", "Cậu ấy khỏe"</i>) có cấu trúc đặc thù. Hãy đối chiếu với tiếng Việt và tiếng Anh để thấy rõ sự khác biệt:
-    </p>
+<h3 style="color: #14532d; margin-top: 0; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 8px; font-size: 1.3em;">
+💡 TRỌNG TÂM BÀI HỌC: Cách dùng phó từ "很" (hěn) & trợ từ "了" (le)
+</h3>
+<p style="font-size: 0.98em; line-height: 1.7; color: #166534; margin-bottom: 15px;">
+Trong tiếng Trung, câu khẳng định đơn giản có <b>tính từ làm vị ngữ</b> (như <i>"Tôi bận", "Cậu ấy khỏe"</i>) có cấu trúc đặc thù. Hãy đối chiếu với tiếng Việt và tiếng Anh để thấy rõ sự khác biệt:
+</p>
 
-    <!-- Bảng so sánh 3 ngôn ngữ -->
-    <div style="overflow-x: auto; margin-bottom: 20px;">
-        <table style="width: 100%; border-collapse: collapse; background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9em; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-            <thead>
-                <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1; color: #334155; font-weight: 700;">
-                    <th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Ngôn ngữ</th>
-                    <th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Ví dụ câu</th>
-                    <th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Thành phần ngữ pháp</th>
-                    <th style="padding: 10px; text-align: left;">Đặc điểm nổi bật</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Việt</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #334155;">Tôi đói. / Tôi bận.</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #475569; font-style: italic;">Không cần từ đệm</td>
-                    <td style="padding: 10px; color: #475569;">Tính từ trực tiếp làm vị ngữ một cách độc lập và tự do.</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;">
-                    <td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Anh</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #334155;">I <b>am</b> hungry. / I <b>am</b> busy.</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #b91c1c; font-family: monospace; font-weight: 700;">Động từ liên kết "to be"</td>
-                    <td style="padding: 10px; color: #475569;">Tính từ không thể làm vị ngữ trực tiếp, phải có "to be" liên kết.</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Trung</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #1e40af; font-weight: 700;">我<b>很</b>饿。/ 我<b>很</b>忙。</td>
-                    <td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #15803d; font-family: monospace; font-weight: 700;">Phó từ chỉ mức độ "很"</td>
-                    <td style="padding: 10px; color: #475569;">Bắt buộc phải có "很" làm cầu nối ngữ pháp để câu được trọn vẹn.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<!-- Bảng so sánh 3 ngôn ngữ -->
+<div style="overflow-x: auto; margin-bottom: 20px;">
+<table style="width: 100%; border-collapse: collapse; background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.9em; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<thead>
+<tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1; color: #334155; font-weight: 700;">
+<th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Ngôn ngữ</th>
+<th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Ví dụ câu</th>
+<th style="padding: 10px; text-align: left; border-right: 1px solid #e2e8f0;">Thành phần ngữ pháp</th>
+<th style="padding: 10px; text-align: left;">Đặc điểm nổi bật</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #e2e8f0;">
+<td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Việt</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #334155;">Tôi đói. / Tôi bận.</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #475569; font-style: italic;">Không cần từ đệm</td>
+<td style="padding: 10px; color: #475569;">Tính từ trực tiếp làm vị ngữ một cách độc lập và tự do.</td>
+</tr>
+<tr style="border-bottom: 1px solid #e2e8f0;">
+<td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Anh</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #334155;">I <b>am</b> hungry. / I <b>am</b> busy.</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #b91c1c; font-family: monospace; font-weight: 700;">Động từ liên kết "to be"</td>
+<td style="padding: 10px; color: #475569;">Tính từ không thể làm vị ngữ trực tiếp, phải có "to be" liên kết.</td>
+</tr>
+<tr>
+<td style="padding: 10px; font-weight: bold; border-right: 1px solid #e2e8f0; color: #0f172a;">Tiếng Trung</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #1e40af; font-weight: 700;">我<b>很</b>饿。/ 我<b>很</b>忙。</td>
+<td style="padding: 10px; border-right: 1px solid #e2e8f0; color: #15803d; font-family: monospace; font-weight: 700;">Phó từ chỉ mức độ "很"</td>
+<td style="padding: 10px; color: #475569;">Bắt buộc phải có "很" làm cầu nối ngữ pháp để câu được trọn vẹn.</td>
+</tr>
+</tbody>
+</table>
+</div>
 
-    <p style="font-size: 0.98em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-bottom: 8px;">
-        📌 Tại sao câu vị ngữ tính từ tiếng Trung lại bắt buộc phải có "很" (hěn)?
-    </p>
-    <ol style="font-size: 0.95em; line-height: 1.7; color: #374151; padding-left: 20px; margin-bottom: 18px;">
-        <li style="margin-bottom: 8px;">
-            <b>Tránh nghĩa so sánh ngầm (Implicit Comparison):</b> 
-            Nếu chỉ nói <span style="font-family: monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"我忙" (Wǒ máng)</span>, câu sẽ rất cụt và lửng lơ. Người nghe sẽ tự hiểu là bạn đang so sánh ngầm: <i>"Tôi bận (còn người khác rảnh / còn bạn thì không)"</i>. Thêm <b>"很"</b> giúp câu trở thành một câu khẳng định khách quan, độc lập: <span style="font-family: monospace; font-weight: bold; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">"我很忙" (Wǒ hěn máng)</span>.
-        </li>
-        <li style="margin-bottom: 8px;">
-            <b>Làm chất keo liên kết ngữ pháp:</b> 
-            Trong tiếng Trung, tính từ làm vị ngữ trực tiếp mà <b>không đi kèm động từ "是" (shì - là)</b> (Tuyệt đối không nói ❌ <i>"我是忙"</i>). Từ <b>"很"</b> ở đây đóng vai trò như một liên từ ngữ pháp giúp kết nối và làm cân bằng cấu trúc câu.
-        </li>
-        <li style="margin-bottom: 8px;">
-            <b>Hiện tượng mờ nhạt ý nghĩa (Semantic Bleaching):</b> 
-            Trong câu khẳng định bình thường, chữ <b>"很"</b> không mang nghĩa nhấn mạnh là "rất" nữa. Khi nói <i>"我很忙"</i>, ta chỉ dịch là <i>"Tôi bận"</i>. Muốn thực sự nhấn mạnh <b>"rất"</b>, ta phải nhấn trọng âm vào chữ <b>"很"</b> khi nói hoặc dùng từ mạnh hơn như <i>非常 (fēicháng)</i>.
-        </li>
-    </ol>
+<p style="font-size: 0.98em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-bottom: 8px;">
+📌 Tại sao câu vị ngữ tính từ tiếng Trung lại bắt buộc phải có "很" (hěn)?
+</p>
+<ol style="font-size: 0.95em; line-height: 1.7; color: #374151; padding-left: 20px; margin-bottom: 18px;">
+<li style="margin-bottom: 8px;">
+<b>Tránh nghĩa so sánh ngầm (Implicit Comparison):</b> 
+Nếu chỉ nói <span style="font-family: monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"我忙" (Wǒ máng)</span>, câu sẽ rất cụt và lửng lơ. Người nghe sẽ tự hiểu là bạn đang so sánh ngầm: <i>"Tôi bận (còn người khác rảnh / còn bạn thì không)"</i>. Thêm <b>"很"</b> giúp câu trở thành một câu khẳng định khách quan, độc lập: <span style="font-family: monospace; font-weight: bold; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">"我很忙" (Wǒ hěn máng)</span>.
+</li>
+<li style="margin-bottom: 8px;">
+<b>Làm chất keo liên kết ngữ pháp:</b> 
+Trong tiếng Trung, tính từ làm vị ngữ trực tiếp mà <b>không đi kèm động từ "是" (shì - là)</b> (Tuyệt đối không nói ❌ <i>"我是忙"</i>). Từ <b>"很"</b> ở đây đóng vai trò như một liên từ ngữ pháp giúp kết nối và làm cân bằng cấu trúc câu.
+</li>
+<li style="margin-bottom: 8px;">
+<b>Hiện tượng mờ nhạt ý nghĩa (Semantic Bleaching):</b> 
+Trong câu khẳng định bình thường, chữ <b>"很"</b> không mang nghĩa nhấn mạnh là "rất" nữa. Khi nói <i>"我很忙"</i>, ta chỉ dịch là <i>"Tôi bận"</i>. Muốn thực sự nhấn mạnh <b>"rất"</b>, ta phải nhấn trọng âm vào chữ <b>"很"</b> khi nói hoặc dùng từ mạnh hơn như <i>非常 (fēicháng)</i>.
+</li>
+</ol>
 
-    <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 20px 0;"/>
+<hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 20px 0;"/>
 
-    <h4 style="color: #0c4a6e; margin-top: 0; margin-bottom: 10px; font-weight: bold;">
-        🙋 HỎI ĐÁP PHỤ TRỢ: Phân biệt cấu trúc với "很" (hěn) và "了" (le)
-    </h4>
-            <div style="background-color: white; border-radius: 8px; padding: 15px; border: 1px solid #e2e8f0; font-size: 0.95em; line-height: 1.6; color: #334155;">
-                <p style="margin-top: 0; margin-bottom: 10px;">
-                    <b>1. Từ loại của "饱" (bǎo) trong "我饱了" là gì?</b><br/>
-                    👉 Bản chất <b>饱 (bǎo)</b> vẫn là một <b>TÍNH TỪ</b> (形容词 - Adjective) chỉ trạng thái no bụng. Khi đi với trợ từ ngữ khí <b>"了" (le)</b>, nó diễn tả <b>sự chuyển biến sang một trạng thái mới</b> (từ chưa no chuyển sang đã no).
-                </p>
-                <p style="margin-bottom: 10px;">
-                    <b>2. Tại sao câu "我饱了" lại không cần dùng "hěn"?</b><br/>
-                    👉 Trợ từ ngữ khí <b>"了" (le)</b> đứng cuối câu biểu thị sự thay đổi trạng thái đã làm trọn vẹn ngữ âm và ngữ nghĩa của câu. Câu không còn cảm giác bị cụt hay lửng lơ nữa, nên ta <b>không cần</b> dùng phó từ ngữ pháp "很" để làm cầu nối.
-                </p>
-                <p style="margin-bottom: 0;">
-                    <b>3. Phân biệt sắc thái của "我饱了" vs "我很饱" vs "我很饱了":</b><br/>
-                    • <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我饱了 (Wǒ bǎo le):</span> <i>"Tôi no rồi."</i> (Thông báo sự thay đổi trạng thái khách quan).<br/>
-                    • <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我很饱 (Wǒ hěn bǎo):</span> <i>"Tôi no."</i> (Miêu tả trạng thái tĩnh, "很" chỉ làm nhiệm vụ cầu nối ngữ pháp, không mang nghĩa nhấn mạnh "rất").<br/>
-                    • <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我很饱了 (Wǒ hěn bǎo le):</span> <i>"Tôi <b>rất</b> no rồi / no căng bụng rồi."</i> (Khi "了" đã hoàn thành cấu trúc câu, "很" được giải phóng khỏi vai trò ngữ pháp và lấy lại nghĩa gốc là <b>RẤT</b> để nhấn mạnh mức độ).
-                </p>
-            </div>
+<h4 style="color: #0c4a6e; margin-top: 0; margin-bottom: 10px; font-weight: bold;">
+🙋 HỎI ĐÁP PHỤ TRỢ: Phân biệt cấu trúc với "很" (hěn) và "了" (le)
+</h4>
+<div style="background-color: white; border-radius: 8px; padding: 15px; border: 1px solid #e2e8f0; font-size: 0.95em; line-height: 1.6; color: #334155;">
+<p style="margin-top: 0; margin-bottom: 10px;">
+<b>1. Từ loại của "饱" (bǎo) trong "我饱了" là gì?</b><br/>
+👉 Bản chất <b>饱 (bǎo)</b> vẫn là một <b>TÍNH TỪ</b> (形容词 - Adjective) chỉ trạng thái no bụng. Khi đi với trợ từ ngữ khí <b>"了" (le)</b>, nó diễn tả <b>sự chuyển biến sang một trạng thái mới</b> (từ chưa no chuyển sang đã no).
+</p>
+<p style="margin-bottom: 10px;">
+<b>2. Tại sao câu "我饱了" lại không cần dùng "hěn"?</b><br/>
+👉 Trợ từ ngữ khí <b>"了" (le)</b> đứng cuối câu biểu thị sự thay đổi trạng thái đã làm trọn vẹn ngữ âm và ngữ nghĩa của câu. Câu không còn cảm giác bị cụt hay lửng lơ nữa, nên ta <b>không cần</b> dùng phó từ ngữ pháp "很" để làm cầu nối.
+</p>
+<p style="margin-bottom: 0;">
+<b>3. Phân biệt sắc thái của "我饱了" vs "我很饱" vs "我很饱了":</b><br/>
+• <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我饱了 (Wǒ bǎo le):</span> <i>"Tôi no rồi."</i> (Thông báo sự thay đổi trạng thái khách quan).<br/>
+• <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我很饱 (Wǒ hěn bǎo):</span> <i>"Tôi no."</i> (Miêu tả trạng thái tĩnh, "很" chỉ làm nhiệm vụ cầu nối ngữ pháp, không mang nghĩa nhấn mạnh "rất").<br/>
+• <span style="font-family: monospace; font-weight: bold; color: #1e40af;">我很饱了 (Wǒ hěn bǎo le):</span> <i>"Tôi <b>rất</b> no rồi / no căng bụng rồi."</i> (Khi "了" đã hoàn thành cấu trúc câu, "很" được giải phóng khỏi vai trò ngữ pháp và lấy lại nghĩa gốc là <b>RẤT</b> để nhấn mạnh mức độ).
+</p>
+</div>
 
-            <p style="font-size: 0.95em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-top: 15px; margin-bottom: 5px;">
-                ⚠️ Quy tắc khi phủ định:
-            </p>
-            <p style="font-size: 0.95em; line-height: 1.6; color: #4b5563; margin-bottom: 0;">
-                Khi phủ định bằng phó từ <b>"不" (bù - không)</b>, chính "不" đã đóng vai trò làm cầu nối ngữ pháp thay cho "很", do đó ta <b>bỏ "很" đi</b>. Ví dụ: <span style="font-family: monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"我不忙" (Wǒ bù máng)</span> - <i>"Tôi không bận"</i>.
-            </p>
-        </div>
+<p style="font-size: 0.95em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-top: 15px; margin-bottom: 5px;">
+⚠️ Quy tắc khi phủ định:
+</p>
+<p style="font-size: 0.95em; line-height: 1.6; color: #4b5563; margin-bottom: 0;">
+Khi phủ định bằng phó từ <b>"不" (bù - không)</b>, chính "不" đã đóng vai trò làm cầu nối ngữ pháp thay cho "很", do đó ta <b>bỏ "很" đi</b>. Ví dụ: <span style="font-family: monospace; font-weight: bold; color: #b91c1c; background: #fee2e2; padding: 2px 6px; border-radius: 4px;">"我不忙" (Wǒ bù máng)</span> - <i>"Tôi không bận"</i>.
+</p>
+</div>
         """, unsafe_allow_html=True)
 
         st.subheader("Bảng các Phó từ Chỉ Mức độ (Phân chia theo cấp độ)")
