@@ -285,7 +285,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 5.1 - Số đếm từ 0 đến 10",
         "Bài 5.2 - Vận mẫu mũi",
         "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
-        "Bài 5.4 - Lễ hội Đoan Ngọ (端午节)"
+        "Bài 5.4 - Tết Đoan Ngọ (端午节)"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -400,7 +400,7 @@ elif menu == "Bài 5.2 - Vận mẫu mũi":
 elif menu == "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ":
     lesson5.show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_scores_b5_3)
 
-elif menu == "Bài 5.4 - Lễ hội Đoan Ngọ (端午节)":
+elif menu == "Bài 5.4 - Tết Đoan Ngọ (端午节)":
     lesson5.show_lesson5_duanwu()
 
 elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
