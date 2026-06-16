@@ -689,7 +689,7 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
             students = [s.strip() for s in student_list_raw.split(",") if s.strip()]
             
             NASAL_REFLEX_POOL = [
-                {"pinyin": "fàn", "hanzi": "饭", "meaning": "cơm / ăn cơm"},
+                {"pinyin": "fàn", "hanzi": "饭", "meaning": "cơm"},
                 {"pinyin": "hěn", "hanzi": "很", "meaning": "rất"},
                 {"pinyin": "máng", "hanzi": "忙", "meaning": "bận"},
                 {"pinyin": "nín", "hanzi": "您", "meaning": "ngài/ông/bà (kính trọng)"},
