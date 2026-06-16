@@ -6,265 +6,257 @@ from ui_utils import *
 def show_lesson1_summary_table():
     render_lesson_intro("📊 Bài 1.1: Bảng tổng hợp Thanh mẫu & Vận mẫu", "Tổng hợp toàn bộ hệ thống phiên âm tiếng Trung (Thanh mẫu & Vận mẫu) đầy đủ, trực quan nhất.")
     
-    st.markdown("""
-    <style>
-    .summary-section-title {
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #0f172a;
-        margin-top: 15px;
-        margin-bottom: 12px;
-        border-left: 5px solid #2563eb;
-        padding-left: 10px;
-    }
-    .summary-table-container {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 16px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        margin-bottom: 20px;
-        overflow-x: auto;      /* KEY: horizontal scroll on mobile */
-        -webkit-overflow-scrolling: touch;
-    }
-    .modern-table {
-        width: 100%;
-        min-width: 340px;      /* prevent collapse on tiny screens */
-        border-collapse: separate;
-        border-spacing: 0;
-        margin-top: 8px;
-    }
-    .modern-table th {
-        background: #f8fafc;
-        color: #475569;
-        font-weight: 700;
-        padding: 10px 12px;
-        text-align: left;
-        border-bottom: 2px solid #e2e8f0;
-        white-space: nowrap;
-        font-size: 0.85rem;
-    }
-    .modern-table td {
-        padding: 10px 12px;
-        border-bottom: 1px solid #e2e8f0;
-        color: #334155;
-        vertical-align: middle;
-    }
-    .modern-table tr:hover { background-color: #f8fafc; }
-    .modern-table tr:last-child td { border-bottom: none; }
-    .badge-initial {
-        background: #eff6ff;
-        color: #2563eb;
-        border: 1px solid #bfdbfe;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-family: 'Courier New', monospace;
-        font-weight: 700;
-        font-size: 1rem;
-        display: inline-block;
-        margin: 2px 4px;
-        box-shadow: 0 2px 4px rgba(37,99,235,0.05);
-        transition: all 0.2s;
-    }
-    .badge-initial:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(37,99,235,0.1);
-        background: #dbeafe;
-    }
-    .badge-final {
-        background: #fffbeb;
-        color: #d97706;
-        border: 1px solid #fde68a;
-        padding: 4px 10px;
-        border-radius: 8px;
-        font-family: 'Courier New', monospace;
-        font-weight: 700;
-        font-size: 1rem;
-        display: inline-block;
-        margin: 2px 4px;
-        box-shadow: 0 2px 4px rgba(217,119,6,0.05);
-        transition: all 0.2s;
-    }
-    .badge-final:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(217,119,6,0.1);
-        background: #fef3c7;
-    }
-    .cat-badge {
-        font-weight: 700;
-        color: #1e293b;
-        font-size: 0.92rem;
-        white-space: nowrap;
-    }
-    /* Mobile: tighter cells */
-    @media (max-width: 640px) {
-        .summary-section-title { font-size: 1.1rem; }
-        .modern-table th { padding: 8px 8px; font-size: 0.75rem; }
-        .modern-table td { padding: 8px 8px; }
-        .badge-initial, .badge-final { padding: 3px 7px; font-size: 0.88rem; margin: 2px 2px; }
-        .cat-badge { font-size: 0.82rem; }
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    st.markdown('<div class="summary-section-title">声母 Thanh mẫu (Initials)</div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="summary-table-container">
-        <table class="modern-table">
-            <thead>
-                <tr>
-                    <th style="width: 35%;">Vị trí phát âm (Vùng cấu âm)</th>
-                    <th>Các Thanh mẫu tương ứng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="cat-badge">Âm môi (Bilabial)</span></td>
-                    <td>
-                        <span class="badge-initial">b</span>
-                        <span class="badge-initial">p</span>
-                        <span class="badge-initial">m</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm môi răng (Labiodental)</span></td>
-                    <td>
-                        <span class="badge-initial">f</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm tròn môi (Labialized)</span></td>
-                    <td>
-                        <span class="badge-initial">w</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm đầu lưỡi trước (Dental/Alveolar)</span></td>
-                    <td>
-                        <span class="badge-initial">z</span>
-                        <span class="badge-initial">c</span>
-                        <span class="badge-initial">s</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm đầu lưỡi giữa (Alveolar)</span></td>
-                    <td>
-                        <span class="badge-initial">d</span>
-                        <span class="badge-initial">t</span>
-                        <span class="badge-initial">n</span>
-                        <span class="badge-initial">l</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm đầu lưỡi sau (Retroflex)</span></td>
-                    <td>
-                        <span class="badge-initial">zh</span>
-                        <span class="badge-initial">ch</span>
-                        <span class="badge-initial">sh</span>
-                        <span class="badge-initial">r</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm mặt lưỡi (Palatal)</span></td>
-                    <td>
-                        <span class="badge-initial">j</span>
-                        <span class="badge-initial">q</span>
-                        <span class="badge-initial">x</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Âm cuống lưỡi (Velar)</span></td>
-                    <td>
-                        <span class="badge-initial">g</span>
-                        <span class="badge-initial">k</span>
-                        <span class="badge-initial">h</span>
-                        <span class="badge-initial">y</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="summary-section-title">韵母 Vận mẫu (Finals)</div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="summary-table-container">
-        <table class="modern-table">
-            <thead>
-                <tr>
-                    <th style="width: 20%;">Loại Vận mẫu</th>
-                    <th style="text-align: center;">Nguyên âm A</th>
-                    <th style="text-align: center;">Nguyên âm O</th>
-                    <th style="text-align: center;">Nguyên âm E</th>
-                    <th style="text-align: center;">Nguyên âm I</th>
-                    <th style="text-align: center;">Nguyên âm U</th>
-                    <th style="text-align: center;">Nguyên âm Ü</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="cat-badge">Vận mẫu đơn</span></td>
-                    <td style="text-align: center;"><span class="badge-final">a</span></td>
-                    <td style="text-align: center;"><span class="badge-final">o</span></td>
-                    <td style="text-align: center;"><span class="badge-final">e</span></td>
-                    <td style="text-align: center;"><span class="badge-final">i</span></td>
-                    <td style="text-align: center;"><span class="badge-final">u</span></td>
-                    <td style="text-align: center;"><span class="badge-final">ü</span></td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Vận mẫu kép</span></td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">ai</span>
-                        <span class="badge-final">ao</span>
-                    </td>
-                    <td style="text-align: center;"><span class="badge-final">ou</span></td>
-                    <td style="text-align: center;"><span class="badge-final">ei</span></td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">ia</span>
-                        <span class="badge-final">ie</span>
-                        <span class="badge-final">iao</span>
-                        <span class="badge-final">iu</span>
-                    </td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">ua</span>
-                        <span class="badge-final">uo</span>
-                        <span class="badge-final">uai</span>
-                        <span class="badge-final">ui</span>
-                    </td>
-                    <td style="text-align: center;"><span class="badge-final">üe</span></td>
-                </tr>
-                <tr>
-                    <td><span class="cat-badge">Vận mẫu mũi</span></td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">an</span>
-                        <span class="badge-final">ang</span>
-                    </td>
-                    <td style="text-align: center;"><span class="badge-final">ong</span></td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">en</span>
-                        <span class="badge-final">eng</span>
-                    </td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">ian</span>
-                        <span class="badge-final">in</span>
-                        <span class="badge-final">iang</span>
-                        <span class="badge-final">ing</span>
-                        <span class="badge-final">iong</span>
-                    </td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">uan</span>
-                        <span class="badge-final">un</span>
-                        <span class="badge-final">uang</span>
-                    </td>
-                    <td style="text-align: center;">
-                        <span class="badge-final">üan</span>
-                        <span class="badge-final">ün</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    """, unsafe_allow_html=True)
+    html_content = """<style>
+.summary-section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 15px;
+    margin-bottom: 12px;
+    border-left: 5px solid #2563eb;
+    padding-left: 10px;
+}
+.summary-table-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.modern-table {
+    width: 100%;
+    min-width: 340px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 8px;
+}
+.modern-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 700;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+.modern-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    vertical-align: middle;
+}
+.modern-table tr:hover { background-color: #f8fafc; }
+.modern-table tr:last-child td { border-bottom: none; }
+.badge-initial {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    margin: 2px 4px;
+    box-shadow: 0 2px 4px rgba(37,99,235,0.05);
+    transition: all 0.2s;
+}
+.badge-initial:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37,99,235,0.1);
+    background: #dbeafe;
+}
+.badge-final {
+    background: #fffbeb;
+    color: #d97706;
+    border: 1px solid #fde68a;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-block;
+    margin: 2px 4px;
+    box-shadow: 0 2px 4px rgba(217,119,6,0.05);
+    transition: all 0.2s;
+}
+.badge-final:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(217,119,6,0.1);
+    background: #fef3c7;
+}
+.cat-badge {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+@media (max-width: 640px) {
+    .summary-section-title { font-size: 1.1rem; }
+    .modern-table th { padding: 8px 8px; font-size: 0.75rem; }
+    .modern-table td { padding: 8px 8px; }
+    .badge-initial, .badge-final { padding: 3px 7px; font-size: 0.88rem; margin: 2px 2px; }
+    .cat-badge { font-size: 0.82rem; }
+}
+</style>
+<div class="summary-section-title">声母 Thanh mẫu (Initials)</div>
+<div class="summary-table-container">
+    <table class="modern-table">
+        <thead>
+            <tr>
+                <th style="width: 35%;">Vị trí phát âm (Vùng cấu âm)</th>
+                <th>Các Thanh mẫu tương ứng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="cat-badge">Âm môi (Bilabial)</span></td>
+                <td>
+                    <span class="badge-initial">b</span>
+                    <span class="badge-initial">p</span>
+                    <span class="badge-initial">m</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm môi răng (Labiodental)</span></td>
+                <td>
+                    <span class="badge-initial">f</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm tròn môi (Labialized)</span></td>
+                <td>
+                    <span class="badge-initial">w</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm đầu lưỡi trước (Dental/Alveolar)</span></td>
+                <td>
+                    <span class="badge-initial">z</span>
+                    <span class="badge-initial">c</span>
+                    <span class="badge-initial">s</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm đầu lưỡi giữa (Alveolar)</span></td>
+                <td>
+                    <span class="badge-initial">d</span>
+                    <span class="badge-initial">t</span>
+                    <span class="badge-initial">n</span>
+                    <span class="badge-initial">l</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm đầu lưỡi sau (Retroflex)</span></td>
+                <td>
+                    <span class="badge-initial">zh</span>
+                    <span class="badge-initial">ch</span>
+                    <span class="badge-initial">sh</span>
+                    <span class="badge-initial">r</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm mặt lưỡi (Palatal)</span></td>
+                <td>
+                    <span class="badge-initial">j</span>
+                    <span class="badge-initial">q</span>
+                    <span class="badge-initial">x</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Âm cuống lưỡi (Velar)</span></td>
+                <td>
+                    <span class="badge-initial">g</span>
+                    <span class="badge-initial">k</span>
+                    <span class="badge-initial">h</span>
+                    <span class="badge-initial">y</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="summary-section-title">韵母 Vận mẫu (Finals)</div>
+<div class="summary-table-container">
+    <table class="modern-table">
+        <thead>
+            <tr>
+                <th style="width: 20%;">Loại Vận mẫu</th>
+                <th style="text-align: center;">Nguyên âm A</th>
+                <th style="text-align: center;">Nguyên âm O</th>
+                <th style="text-align: center;">Nguyên âm E</th>
+                <th style="text-align: center;">Nguyên âm I</th>
+                <th style="text-align: center;">Nguyên âm U</th>
+                <th style="text-align: center;">Nguyên âm Ü</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="cat-badge">Vận mẫu đơn</span></td>
+                <td style="text-align: center;"><span class="badge-final">a</span></td>
+                <td style="text-align: center;"><span class="badge-final">o</span></td>
+                <td style="text-align: center;"><span class="badge-final">e</span></td>
+                <td style="text-align: center;"><span class="badge-final">i</span></td>
+                <td style="text-align: center;"><span class="badge-final">u</span></td>
+                <td style="text-align: center;"><span class="badge-final">ü</span></td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Vận mẫu kép</span></td>
+                <td style="text-align: center;">
+                    <span class="badge-final">ai</span>
+                    <span class="badge-final">ao</span>
+                </td>
+                <td style="text-align: center;"><span class="badge-final">ou</span></td>
+                <td style="text-align: center;"><span class="badge-final">ei</span></td>
+                <td style="text-align: center;">
+                    <span class="badge-final">ia</span>
+                    <span class="badge-final">ie</span>
+                    <span class="badge-final">iao</span>
+                    <span class="badge-final">iu</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="badge-final">ua</span>
+                    <span class="badge-final">uo</span>
+                    <span class="badge-final">uai</span>
+                    <span class="badge-final">ui</span>
+                </td>
+                <td style="text-align: center;"><span class="badge-final">üe</span></td>
+            </tr>
+            <tr>
+                <td><span class="cat-badge">Vận mẫu mũi</span></td>
+                <td style="text-align: center;">
+                    <span class="badge-final">an</span>
+                    <span class="badge-final">ang</span>
+                </td>
+                <td style="text-align: center;"><span class="badge-final">ong</span></td>
+                <td style="text-align: center;">
+                    <span class="badge-final">en</span>
+                    <span class="badge-final">eng</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="badge-final">ian</span>
+                    <span class="badge-final">in</span>
+                    <span class="badge-final">iang</span>
+                    <span class="badge-final">ing</span>
+                    <span class="badge-final">iong</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="badge-final">uan</span>
+                    <span class="badge-final">un</span>
+                    <span class="badge-final">uang</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="badge-final">üan</span>
+                    <span class="badge-final">ün</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>"""
+    st.markdown(html_content.replace("\n", " "), unsafe_allow_html=True)
 
 def show_lesson1_intro():
     render_lesson_intro("📚 Bài 1.2: Phiên âm cơ bản", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
