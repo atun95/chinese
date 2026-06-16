@@ -1181,7 +1181,7 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
             <div style="background-color: white; border-radius: 8px; padding: 15px; border: 1px solid #e2e8f0; font-size: 0.95em; line-height: 1.6; color: #334155;">
                 <p style="margin-top: 0; margin-bottom: 10px;">
                     <b>1. Từ loại của "饱" (bǎo) trong "我饱了" là gì?</b><br/>
-                    👉 Bản chất <b>饱 (bǎo)</b> vẫn là một <b>TÍNH TỪ</b> (形容词 - Adjective) chỉ trạng thái no bụng. Khi đi với trợ từ ngữ khí <b>"了" (le)</b>, nó diễn tả <b>sự chuyển biến sang một trạng thái mới</b> (từ chưa no chuyển sang đã no).
+                    👉 Bản chất <b>饱 (bǎo)</b> vẫn là một <b>TÍNH TỪ</b> (形容词 - Adjective) chỉ trạng thái no bụng. Khi đi với trợ từ ngữ khí <b>"定" (le)</b>, nó diễn tả <b>sự chuyển biến sang một trạng thái mới</b> (từ chưa no chuyển sang đã no).
                 </p>
                 <p style="margin-bottom: 10px;">
                     <b>2. Tại sao câu "我饱了" lại không cần dùng "hěn"?</b><br/>
