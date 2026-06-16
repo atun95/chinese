@@ -1115,7 +1115,7 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
         st.markdown("""
 <div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 22px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #bbf7d0; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);">
 <h3 style="color: #14532d; margin-top: 0; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 8px; font-size: 1.3em;">
-💡 TRỌNG TÂM BÀI HỌC: Cách dùng phó từ "很" (hěn) & trợ từ "了" (le)
+💡Cách dùng phó từ "很" (hěn) & trợ từ "了" (le)
 </h3>
 <p style="font-size: 0.98em; line-height: 1.7; color: #166534; margin-bottom: 15px;">
 Trong tiếng Trung, câu khẳng định đơn giản có <b>tính từ làm vị ngữ</b> (như <i>"Tôi bận", "Cậu ấy khỏe"</i>) có cấu trúc đặc thù. Hãy đối chiếu với tiếng Việt và tiếng Anh để thấy rõ sự khác biệt:
@@ -1176,7 +1176,7 @@ Trong câu khẳng định bình thường, chữ <b>"很"</b> không mang nghĩ
 <hr style="border: 0; border-top: 1px dashed #cbd5e1; margin: 20px 0;"/>
 
 <h4 style="color: #0c4a6e; margin-top: 0; margin-bottom: 10px; font-weight: bold;">
-🙋 HỎI ĐÁP PHỤ TRỢ: Phân biệt cấu trúc với "很" (hěn) và "了" (le)
+🙋 Phân biệt cấu trúc với "很" (hěn) và "了" (le)
 </h4>
 <div style="background-color: white; border-radius: 8px; padding: 15px; border: 1px solid #e2e8f0; font-size: 0.95em; line-height: 1.6; color: #334155;">
 <p style="margin-top: 0; margin-bottom: 10px;">
@@ -1185,7 +1185,7 @@ Trong câu khẳng định bình thường, chữ <b>"很"</b> không mang nghĩ
 </p>
 <p style="margin-bottom: 10px;">
 <b>2. Tại sao câu "我饱了" lại không cần dùng "hěn"?</b><br/>
-👉 Trợ từ ngữ khí <b>"了" (le)</b> đứng cuối câu biểu thị sự thay đổi trạng thái đã làm trọn vẹn ngữ âm và ngữ nghĩa của câu. Câu không còn cảm giác bị cụt hay lửng lơ nữa, nên ta <b>không cần</b> dùng phó từ ngữ pháp "很" để làm cầu nối.
+👉 Trợ từ ngữ khí <b>"了" (le)</b> đứng cuối câu biểu thị sự thay đổi trạng thái đã làm trọn vẹn ngữ âm và ngữ nghĩa của câu. Ta <b>không cần</b> dùng phó từ ngữ pháp "很" để làm cầu nối.
 </p>
 <p style="margin-bottom: 0;">
 <b>3. Phân biệt sắc thái của "我饱了" vs "我很饱" vs "我很饱了":</b><br/>
