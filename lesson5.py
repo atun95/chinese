@@ -1144,9 +1144,20 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
                 💡 Quy tắc bổ sung cần ghi nhớ:
             </p>
             <ul style="font-size: 0.95em; line-height: 1.6; color: #4b5563; padding-left: 20px; margin-bottom: 0;">
-                <li style="margin-bottom: 6px;"><b>Khi muốn thực sự nhấn mạnh mức độ "RẤT":</b> Ta cần đọc nhấn trọng âm vào từ <b>"很"</b> khi phát âm, hoặc thay bằng các phó từ chỉ mức độ cao hơn như <i>非常 (fēicháng - vô cùng)</i>, <i>特别 (tèbié - đặc biệt)</i>.</li>
+                <li style="margin-bottom: 6px;"><b>Khi muốn thực sự nhấn mạnh mức độ "RẤT":</b> Ta cần đọc nhấn trọng âm vào từ <b>"hẳn/很"</b> khi phát âm, hoặc thay bằng các phó từ chỉ mức độ cao hơn như <i>非常 (fēicháng - vô cùng)</i>, <i>特别 (tèbié - đặc biệt)</i>.</li>
                 <li style="margin-bottom: 6px;"><b>Khi phủ định (dùng "不" - bù):</b> Do từ <b>"不"</b> đã đóng vai trò làm cầu nối ngữ pháp liên kết thay thế cho "很", ta <b>không cần dùng "很" nữa</b>. Ví dụ: <span style="font-family: 'Courier New', monospace; font-weight: bold; color: #15803d; background: #dcfce7; padding: 2px 6px; border-radius: 4px;">"我不忙" (Wǒ bù máng - Tôi không bận)</span>.</li>
             </ul>
+            <hr style="border: 0; border-top: 1px dashed #10b981; margin: 15px 0;"/>
+            <p style="font-size: 0.98em; line-height: 1.6; color: #1f2937; font-weight: bold; margin-bottom: 8px;">
+                🙋 Góc giải đáp thắc mắc: Tại sao câu "我饱了" (Wǒ bǎo le - Tôi no rồi) không dùng "hěn" mà vẫn đúng ngữ pháp?
+            </p>
+            <p style="font-size: 0.92em; line-height: 1.6; color: #374151; margin-bottom: 0;">
+                • <b>Tác dụng của chữ "了" (le):</b> Chữ "了" ở cuối câu là trợ từ ngữ khí biểu thị <b>sự thay đổi trạng thái</b> (trước đó chưa no, bây giờ đã no rồi).<br/>
+                • <b>Cấu trúc câu tự lập:</b> Khi câu có trợ từ ngữ khí biểu thị sự thay đổi hoặc hoàn thành hành động (như "lơ/了"), nó đã có đủ tính hoàn chỉnh về mặt ngữ âm và ngữ nghĩa. Câu không còn cảm giác bị cụt hay lửng lơ nữa. Vì vậy, ta <b>không cần dùng "很"</b> để làm cầu nối nữa.<br/>
+                • <b>So sánh sự khác biệt:</b><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;- <i>"我很饱" (Wǒ hěn bǎo):</i> Miêu tả trạng thái tĩnh hiện tại ("Tôi no" - bắt buộc dùng "很" làm cầu nối).<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;- <i>"我饱了" (Wǒ bǎo le):</i> Miêu tả sự thay đổi trạng thái mới xuất hiện ("Tôi no rồi" - dùng "了" biểu thị trạng thái mới thay đổi, không cần "很").
+            </p>
         </div>
         """, unsafe_allow_html=True)
 
