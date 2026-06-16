@@ -284,7 +284,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 5 - Nét chữ Hán cơ bản",
         "Bài 5.1 - Số đếm từ 0 đến 10",
         "Bài 5.2 - Vận mẫu mũi",
-        "Bài 5.3 - Từ chỉ mức độ (... và các phó từ khác)"
+        "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -396,7 +396,7 @@ elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
 elif menu == "Bài 5.2 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_all_scores_b5)
 
-elif menu == "Bài 5.3 - Từ chỉ mức độ (... và các phó từ khác)":
+elif menu == "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ":
     lesson5.show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_scores_b5_3)
 
 elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":

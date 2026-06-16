@@ -1104,8 +1104,8 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        title="Bài 5.3 - Từ Chỉ Mức Độ (Degree Adverbs)",
-        objective="Làm chủ các phó từ chỉ mức độ thường dùng nhất: 很, 非常, 太...了, 特别, 挺...的, 比较, 极了"
+        title="Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
+        objective="Nắm vững cách dùng phó từ 很 (hěn) trong câu vị ngữ tính từ và mở rộng các phó từ chỉ mức độ: 非常, 太...了, 特别, 挺...的, 比较, 极了"
     )
 
     tab_theory, tab_builder, tab_quiz = st.tabs(["📖 1. Lý thuyết", "🔨 2. Ghép câu", "📝 3. Bài tập"])
