@@ -2482,12 +2482,12 @@ def show_lesson5_classroom_practice():
         <div style="background-color: #fdf2f8; border-left: 6px solid #db2777; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
             <h4 style="color: #9d174d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">🎵 Góc Âm Nhạc: Mười cậu bé Ấn Độ (十个印第安小朋友 - Shí gè Yìndì'ān xiǎopéngyǒu)</h4>
             <p style="color: #9d174d; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
-                Học đếm số xuôi và ngược từ 1 đến 10 cực kỳ vui nhộn với giai điệu quen thuộc. Đặc biệt giúp học viên luyện tập phản xạ phân biệt cách dùng <b>两 (liǎng)</b> thay cho <b>二 (èr)</b> trước lượng từ <b>个 (gè)</b>!
+                Học đếm số xuôi và ngược từ 1 đến 10 ,luyện tập phản xạ phân biệt cách dùng <b>两 (liǎng)</b> thay cho <b>二 (èr)</b> trước lượng từ <b>个 (gè)</b>!
             </p>
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("### 📺 Video Clip Nhạc Đồng Dao:")
+        st.markdown("### 📺 Clip Nhạc:")
         # Nhúng trực tiếp video do người dùng chỉ định
         st.video("https://www.youtube.com/watch?v=1oUXG01bP0M")
         
