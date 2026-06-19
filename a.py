@@ -290,6 +290,60 @@ if "initialized" not in st.session_state:
 # --- GIAO DIỆN CHÍNH ---
 st.title("Học Pinyin Cơ Bản")
 
+# Tích hợp nút in bài học và CSS in ấn
+st.markdown(
+    """
+    <style>
+    @media print {
+        section[data-testid="stSidebar"] {
+            display: none !important;
+        }
+        header, footer, [data-testid="stHeader"], [data-testid="stFooter"] {
+            display: none !important;
+        }
+        .print-btn-container, .stButton, button, iframe, .note-fab, #teacher-floating-note {
+            display: none !important;
+        }
+        .block-container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+    }
+    .print-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -55px;
+        margin-bottom: 25px;
+    }
+    .print-btn {
+        background-color: #10b981;
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .print-btn:hover {
+        background-color: #059669;
+        transform: translateY(-1px);
+    }
+    </style>
+    <div class="print-btn-container">
+        <button class="print-btn" onclick="window.parent.print()">🖨️ In bài học này</button>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.sidebar.header("Danh mục giáo án")
 
 mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập"])
