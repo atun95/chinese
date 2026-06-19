@@ -1853,6 +1853,57 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             st.success("**我很喜欢吃粽子。** (Wǒ hěn xǐhuān chī zòngzi.) — Tôi rất thích ăn bánh tro.")
             render_play_button("我很喜欢吃粽子。", "🔊 Nghe mẫu", key="dw_p4")
 
+            st.markdown("---")
+            st.markdown("### 🎯 Các mẫu câu ngữ pháp HSK 1 ngày Tết Đoan Ngọ:")
+            
+            # Cấu trúc 1
+            st.markdown("""
+            <div style="background-color: #fdf6f0; border-left: 4px solid #d97706; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                <b style="color: #b45309;">1. Giới thiệu ngày lễ (Ngày tháng + 是 + Tên ngày lễ):</b><br/>
+                <span style="font-size: 1.15em; font-weight: bold; color: #1e3a8a;">今天是五月五号，端午节。</span><br/>
+                <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Jīntiān shì wǔ yuè wǔ hào, Duānwǔ jié.</span><br/>
+                <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Hôm nay là ngày 5 tháng 5, Tết Đoan Ngọ.)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button("今天是五月五号，端午节。", "🔊 Phát âm mẫu 1", key="dw_grammar_p1")
+            
+            # Cấu trúc 2
+            st.markdown("""
+            <div style="background-color: #fdf6f0; border-left: 4px solid #d97706; padding: 12px; border-radius: 8px; margin-bottom: 10px; margin-top: 10px;">
+                <b style="color: #b45309;">2. Nói về hoạt động ăn uống (Ai + 吃 + Cái gì):</b><br/>
+                <span style="font-size: 1.15em; font-weight: bold; color: #1e3a8a;">中国人吃粽子。 / 越南人也吃粽子。</span><br/>
+                <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Zhōngguó rén chī zòngzi. / Yuènán rén yě chī zòngzi.</span><br/>
+                <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Người Trung Quốc ăn bánh ú. / Người Việt Nam cũng ăn bánh ú.)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            col_dw_g2a, col_dw_g2b = st.columns(2)
+            with col_dw_g2a:
+                render_play_button("中国人吃粽子。", "🔊 Trung Quốc ăn bánh ú", key="dw_grammar_p2a")
+            with col_dw_g2b:
+                render_play_button("越南人也吃粽子。", "🔊 Việt Nam cũng ăn bánh ú", key="dw_grammar_p2b")
+
+            # Cấu trúc 3
+            st.markdown("""
+            <div style="background-color: #fdf6f0; border-left: 4px solid #d97706; padding: 12px; border-radius: 8px; margin-bottom: 10px; margin-top: 10px;">
+                <b style="color: #b45309;">3. Nói về sở thích (Ai + 喜欢吃 + Trái cây):</b><br/>
+                <span style="font-size: 1.15em; font-weight: bold; color: #1e3a8a;">我喜欢吃水果。</span><br/>
+                <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Wǒ xǐhuan chī shuǐguǒ.</span><br/>
+                <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Tôi thích ăn hoa quả (vải, mận...).)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button("我喜欢吃水果。", "🔊 Phát âm mẫu 3", key="dw_grammar_p3")
+
+            # Cấu trúc 4
+            st.markdown("""
+            <div style="background-color: #fdf6f0; border-left: 4px solid #d97706; padding: 12px; border-radius: 8px; margin-bottom: 10px; margin-top: 10px;">
+                <b style="color: #b45309;">4. Thể hiện cảm xúc (太 + Tính từ + 了):</b><br/>
+                <span style="font-size: 1.15em; font-weight: bold; color: #1e3a8a;">今天我太高兴了！</span><br/>
+                <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Jīntiān wǒ tài gāoxìng le!</span><br/>
+                <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Hôm nay tôi vui quá rồi!)</span>
+            </div>
+            """, unsafe_allow_html=True)
+            render_play_button("今天我太高兴了！", "🔊 Phát âm mẫu 4", key="dw_grammar_p4")
+
     # --- TAB 5: TRẮC NGHIỆM VUI ---
     with tab_quiz:
         st.markdown("### 📝 Trắc nghiệm kiểm tra kiến thức nhanh")
