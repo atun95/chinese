@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import streamlit.components.v1 as components
 import json
 import csv
 import shutil
@@ -288,9 +289,22 @@ if "initialized" not in st.session_state:
     st.session_state.initialized = True
 
 # --- GIAO DIỆN CHÍNH ---
-st.title("Học Pinyin Cơ Bản")
+col_title, col_print = st.columns([8, 2])
+with col_title:
+    st.title("Học Pinyin Cơ Bản")
+with col_print:
+    st.write("<br>", unsafe_allow_html=True)
+    if st.button("🖨️ In bài học này", key="btn_print_lesson", use_container_width=True):
+        components.html(
+            """
+            <script>
+                window.parent.print();
+            </script>
+            """,
+            height=0
+        )
 
-# Tích hợp nút in bài học và CSS in ấn
+# Tích hợp CSS in ấn
 st.markdown(
     """
     <style>
@@ -301,7 +315,7 @@ st.markdown(
         header, footer, [data-testid="stHeader"], [data-testid="stFooter"] {
             display: none !important;
         }
-        .print-btn-container, .stButton, button, iframe, .note-fab, #teacher-floating-note {
+        [data-testid="column"]:has(button[key="btn_print_lesson"]), .stButton, button, iframe, .note-fab, #teacher-floating-note {
             display: none !important;
         }
         .block-container {
@@ -311,35 +325,7 @@ st.markdown(
             padding-right: 20px !important;
         }
     }
-    .print-btn-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: -55px;
-        margin-bottom: 25px;
-    }
-    .print-btn {
-        background-color: #10b981;
-        color: white;
-        border: none;
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.9rem;
-        transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .print-btn:hover {
-        background-color: #059669;
-        transform: translateY(-1px);
-    }
     </style>
-    <div class="print-btn-container">
-        <button class="print-btn" onclick="window.parent.print()">🖨️ In bài học này</button>
-    </div>
     """,
     unsafe_allow_html=True
 )
