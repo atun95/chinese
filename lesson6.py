@@ -428,6 +428,19 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     }
+    .standalone-card-highlighted {
+        background: #fffbeb; /* Tông màu hổ phách/kem nhạt cực kỳ êm dịu, không gắt mắt */
+        border: 1.5px solid #fde68a; /* Viền màu vàng cát mịn */
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .standalone-card-highlighted:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.08);
+    }
     .standalone-letters {
         display: flex;
         align-items: center;
@@ -500,8 +513,15 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
                     if item_idx < len(items):
                         item = items[item_idx]
                         with cols[col_idx]:
+                            card_class = "standalone-card-highlighted" if item.get("highlight") else "standalone-card"
+                            note_html = f"""
+                            <div style="margin-top: 12px; background-color: #fef3c7; color: #92400e; padding: 10px 12px; border-radius: 8px; font-size: 0.85em; border-left: 3px solid #d97706; line-height: 1.45;">
+                                {item['note_doc']}
+                            </div>
+                            """ if item.get("highlight") and item.get("note_doc") else ""
+
                             st.markdown(f"""
-                            <div class="standalone-card">
+                            <div class="{card_class}">
                                 <div class="standalone-letters">
                                     <span class="goc-letter">/{item['goc']}/</span>
                                     <span class="arrow-icon">➔</span>
@@ -514,6 +534,7 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
                                         <span style="font-family: monospace; font-size: 1.1rem; font-weight: bold; color: #2563eb;">{item['vd_py']}</span>
                                         <span style="color: #475569; font-size: 0.9em; font-style: italic;">({item['meaning']})</span>
                                     </div>
+                                    {note_html}
                                 </div>
                             </div>
                             """, unsafe_allow_html=True)
