@@ -1629,8 +1629,8 @@ def show_lesson5_duanwu():
 
     # --- TAB 1: TRUYỀN THUYẾT ---
     with tab_story:
-        st.markdown("### ❓ Câu hỏi dẫn dắt trên lớp:")
-        st.info("💡 **Gợi ý cho giáo viên:** Hỏi học viên xem họ có biết Tết Đoan Ngọ bắt nguồn từ câu chuyện của nhân vật lịch sử nào không? Tại sao ngày này người ta lại ăn bánh ú (bánh tro) và đua thuyền rồng?")
+        st.markdown("### ❓ Truyền thuyết Tết Đoan Ngọ :")
+
         
         # Checkbox để giáo viên bật mở câu chuyện
         show_story = st.checkbox("🔓 Hiển thị câu chuyện truyền thuyết (Khuất Nguyên)", value=False, key="dw_show_story")
