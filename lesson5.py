@@ -2487,9 +2487,21 @@ def show_lesson5_classroom_practice():
         </div>
         """, unsafe_allow_html=True)
 
-        # Nhúng clip Youtube bài hát 手指歌
-        st.markdown("### 📺 Video Clip Nhạc Đồng Dao:")
-        st.video("https://www.youtube.com/watch?v=R3nN42qWf4M")
+        # Giới thiệu video và cung cấp liên kết mở trực tiếp
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border: 2px solid #fbcfe8; border-radius: 16px; padding: 22px; margin-bottom: 25px; margin-top: 15px;">
+            <h4 style="color: #be185d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">📺 Trình chiếu Video Ca Nhạc:</h4>
+            <p style="color: #9d174d; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px;">
+                Để đảm bảo chất lượng hình ảnh và âm thanh tốt nhất, tránh các lỗi chặn bản quyền nhúng của trình duyệt trên lớp học, giáo viên vui lòng bấm vào nút bên dưới để mở trực tiếp video ca nhạc hoạt hình vui nhộn của bài hát <b>"手指歌"</b> hoặc <b>"找朋友"</b> trên YouTube (mở ở tab mới).
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col_vid1, col_vid2 = st.columns(2)
+        with col_vid1:
+            st.link_button("🎬 Mở bài hát 手指歌 (Đếm ngón tay)", "https://www.youtube.com/results?search_query=%E6%89%8B%E6%8C%87%E6%AD%8C+%E5%84%BF%E6%AD%8C+%E4%B8%80%E4%B8%80%E5%8F%AA%E5%B0%8F%E9%B8%A1", use_container_width=True)
+        with col_vid2:
+            st.link_button("🎵 Mở bài hát 找朋友 (Tìm bạn)", "https://www.youtube.com/results?search_query=%E6%89%BE%E6%9C%8B%E5%8F%8B+%E5%84%BF%E6%AD%8C", use_container_width=True)
 
         st.markdown("### 📝 Lời bài hát & Phát âm từng câu:")
 
