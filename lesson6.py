@@ -2,519 +2,591 @@ import streamlit as st
 import random
 from datetime import datetime, timezone, timedelta
 from ui_utils import render_lesson_intro, render_play_button
+from lessons_data import B6_1_NASAL_FINALS_DATA, B6_1_QUIZ_DATA, B6_2_STANDALONE_FINALS_DATA, B6_2_QUIZ_DATA
 
-def show_lesson6_1_duanwu(save_progress, save_score_row_b6_1, load_all_scores_b6_1):
-    # CSS Styles sang trọng cho Tết Đoan Ngọ (Màu đỏ đô kết hợp vàng cam ấm cúng và xanh lá của bánh ú)
+def check_nasal_spelling_rule_6_1(initial, final, tone_idx):
+    valid_combos = {
+        "b": ["ian"],
+        "p": ["ian"],
+        "m": ["ian"],
+        "f": [],
+        "d": ["ian", "uan", "un"],
+        "t": ["ian", "uan", "un"],
+        "n": ["ian", "iang", "uan", "un"],
+        "l": ["ian", "iang", "uan", "un"],
+        "g": ["uan", "uang", "un"],
+        "k": ["uan", "uang", "un"],
+        "h": ["uan", "uang", "un"],
+        "j": ["ian", "iang", "iong", "üan", "ün"],
+        "q": ["ian", "iang", "iong", "üan", "ün"],
+        "x": ["ian", "iang", "iong", "üan", "ün"],
+        "zh": ["uan", "uang", "un"],
+        "ch": ["uan", "uang", "un"],
+        "sh": ["uan", "uang", "un"],
+        "r": ["uan", "un"],
+        "z": ["uan", "un"],
+        "c": ["uan", "un"],
+        "s": ["uan", "un"],
+        "(Không có)": ["ian", "iang", "iong", "uan", "uang", "un", "üan", "ün"]
+    }
+    
+    init_key = initial if initial != "(Không có)" else "(Không có)"
+    
+    # n và l có đi với üan
+    if init_key in ["n", "l"] and final == "üan":
+        pass
+    elif final not in valid_combos.get(init_key, []) and not (init_key in ["n", "l"] and final == "üan"):
+        if initial == "(Không có)":
+            return None, f"❌ Vận mẫu <b>{final}</b> không đứng độc lập mà sẽ biến đổi chính tả khi viết!"
+        return None, f"❌ Lỗi ghép âm: Thanh mẫu <b>{initial}</b> không đi cùng vận mẫu <b>{final}</b> trong tiếng Trung tiêu chuẩn!"
+        
+    spelled = ""
+    explain_txt = None
+    
+    if initial == "(Không có)":
+        if final == "ian":
+            spelled = "yan"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>ian</b> khi đứng độc lập viết biến đổi thành <b>yan</b>."
+        elif final == "iang":
+            spelled = "yang"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>iang</b> khi đứng độc lập viết biến đổi thành <b>yang</b>."
+        elif final == "iong":
+            spelled = "yong"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>iong</b> khi đứng độc lập viết biến đổi thành <b>yong</b>."
+        elif final == "uan":
+            spelled = "wan"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>uan</b> khi đứng độc lập viết biến đổi thành <b>wan</b>."
+        elif final == "uang":
+            spelled = "wang"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>uang</b> khi đứng độc lập viết biến đổi thành <b>wang</b>."
+        elif final == "un":
+            spelled = "wen"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>un</b> (uen) khi đứng độc lập viết biến đổi thành <b>wen</b>."
+        elif final == "ün":
+            spelled = "yun"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>ün</b> khi đứng độc lập viết biến đổi thành <b>yun</b>."
+        elif final == "üan":
+            spelled = "yuan"
+            explain_txt = "💡 Quy tắc: Vận mẫu <b>üan</b> khi đứng độc lập viết biến đổi thành <b>yuan</b>."
+    else:
+        if initial in ["j", "q", "x"]:
+            if final == "üan":
+                spelled = f"{initial}uan"
+                explain_txt = f"💡 Quy tắc: Vận mẫu <b>üan</b> đi sau <b>{initial}</b> sẽ lược bỏ hai dấu chấm trên đầu, viết là <b>{initial}uan</b> nhưng vẫn giữ nguyên cách đọc tròn môi 'uyên'!"
+            elif final == "ün":
+                spelled = f"{initial}un"
+                explain_txt = f"💡 Quy tắc: Vận mẫu <b>ün</b> đi sau <b>{initial}</b> sẽ lược bỏ hai dấu chấm trên đầu, viết là <b>{initial}un</b> nhưng vẫn giữ nguyên cách đọc tròn môi 'uyn'!"
+            else:
+                spelled = f"{initial}{final}"
+        else:
+            spelled = f"{initial}{final}"
+            
+    if tone_idx == 0:
+        return spelled, explain_txt
+        
+    tone_vowels = {
+        'a': ['ā', 'á', 'ǎ', 'à'],
+        'e': ['ē', 'é', 'ě', 'è'],
+        'i': ['ī', 'í', 'ǐ', 'ì'],
+        'o': ['ō', 'ó', 'ǒ', 'ò'],
+        'u': ['ū', 'ú', 'ǔ', 'ù'],
+        'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+    }
+    
+    res = spelled
+    if 'a' in res:
+        res = res.replace('a', tone_vowels['a'][tone_idx - 1])
+    elif 'o' in res:
+        res = res.replace('o', tone_vowels['o'][tone_idx - 1])
+    elif 'e' in res:
+        res = res.replace('e', tone_vowels['e'][tone_idx - 1])
+    elif 'ü' in res:
+        res = res.replace('ü', tone_vowels['ü'][tone_idx - 1])
+    elif 'u' in res:
+        res = res.replace('u', tone_vowels['u'][tone_idx - 1])
+    elif 'i' in res:
+        res = res.replace('i', tone_vowels['i'][tone_idx - 1])
+        
+    return res, explain_txt
+
+def show_lesson6_1_nasal_finals(save_progress, save_score_row_b6_1, load_all_scores_b6_1):
+    # CSS Styles sang trọng cho Bài 6.1 (Tông màu Tím pastel kết hợp Xanh dương trẻ trung)
     st.markdown("""
     <style>
-    /* Card từ vựng */
-    .vocab-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 16px;
-        margin-top: 15px;
-    }
-    .vocab-card {
+    .final-card {
         background: #ffffff;
-        border: 1px solid #f3f4f6;
-        border-left: 6px solid #e11d48; /* Màu đỏ lễ hội */
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .vocab-card:hover {
+    .final-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        border-color: #fecdd3;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     }
-    .vocab-hanzi {
-        font-size: 2.2rem;
+    .final-letter {
+        font-size: 2.3em;
         font-weight: 800;
-        color: #9f1239;
-        margin-bottom: 2px;
-    }
-    .vocab-pinyin {
         font-family: 'Courier New', monospace;
-        font-size: 1.1rem;
-        color: #2563eb;
+        line-height: 1.1;
+    }
+    .spelling-highlight {
+        background-color: #fef08a;
+        color: #854d0e;
+        padding: 2px 6px;
+        border-radius: 4px;
         font-weight: bold;
-        margin-bottom: 6px;
+        font-family: 'Courier New', monospace;
+        border: 1px solid #fde047;
     }
-    .vocab-meaning {
-        font-size: 0.95rem;
-        color: #374151;
-        font-weight: 500;
-    }
-    .vocab-note {
-        font-size: 0.82rem;
-        color: #6b7280;
-        margin-top: 6px;
-        font-style: italic;
-    }
-    
-    /* Bong bóng chat hội thoại */
-    .chat-container {
-        background-color: #fcf8f2;
-        border: 1px solid #f5ebe0;
-        border-radius: 16px;
-        padding: 20px;
-        margin: 15px 0;
-        max-width: 800px;
-    }
-    .chat-bubble {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 16px;
-        max-width: 80%;
-    }
-    .chat-bubble.left {
-        align-self: flex-start;
-        margin-right: auto;
-    }
-    .chat-bubble.right {
-        align-self: flex-end;
-        margin-left: auto;
-        align-items: flex-end;
-    }
-    .chat-avatar {
-        font-size: 1.3rem;
-        margin-bottom: 4px;
-        font-weight: bold;
-        color: #4b5563;
-    }
-    .chat-content {
-        padding: 12px 16px;
-        border-radius: 16px;
-        font-size: 1.15rem;
-        line-height: 1.4;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-    .chat-bubble.left .chat-content {
-        background-color: #ffffff;
-        border: 1px solid #e5e7eb;
-        color: #1f2937;
-        border-top-left-radius: 4px;
-    }
-    .chat-bubble.right .chat-content {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: #ffffff;
-        border-top-right-radius: 4px;
-    }
-    .chat-translation {
-        font-size: 0.9rem;
-        color: #6b7280;
-        margin-top: 4px;
-        font-style: italic;
-    }
-    .chat-bubble.right .chat-translation {
-        color: #9ca3af;
-        text-align: right;
-    }
-    
-    /* Khối cấu trúc mẫu câu */
-    .pattern-card {
-        background: #fdf6f0;
-        border-left: 5px solid #d97706;
+    .rule-box {
+        background-color: #f8fafc;
+        border-left: 5px solid #6366f1;
         border-radius: 8px;
         padding: 15px;
-        margin-bottom: 12px;
+        margin: 15px 0;
     }
-    .pattern-title {
+    .rule-title {
         font-weight: bold;
-        color: #b45309;
+        color: #4f46e5;
         font-size: 1.05rem;
         margin-bottom: 6px;
-    }
-    
-    /* Interactive Word Builder */
-    .word-badge {
-        display: inline-block;
-        background-color: #f3f4f6;
-        border: 1px solid #d1d5db;
-        border-radius: 20px;
-        padding: 6px 14px;
-        margin: 5px;
-        font-size: 1.1rem;
-        font-weight: 500;
-        cursor: pointer;
-        user-select: none;
-        transition: all 0.15s ease;
-    }
-    .word-badge:hover {
-        background-color: #dbeafe;
-        border-color: #3b82f6;
-        color: #1d4ed8;
-    }
-    .word-badge:active {
-        transform: scale(0.95);
-    }
-    .builder-result-box {
-        background-color: #ffffff;
-        border: 2px dashed #93c5fd;
-        border-radius: 12px;
-        padding: 15px;
-        min-height: 56px;
-        margin: 15px 0;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-    }
-    .builder-word {
-        background-color: #eff6ff;
-        color: #1e40af;
-        border: 1px solid #bfdbfe;
-        border-radius: 15px;
-        padding: 4px 12px;
-        font-size: 1.1rem;
-        font-weight: bold;
     }
     </style>
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "🎏 Bài 6.1: Tết Đoan Ngọ cùng HSK 1",
-        "Chủ đề khóa học: 今天是端午节! (Hôm nay là Tết Đoan Ngọ!) - Học từ vựng, mẫu câu, đóng vai hội thoại và luyện tập HSK 1 thực tế."
+        "📚 Bài 6.1: Các vận mẫu mũi còn lại",
+        "Học phát âm, phân biệt và thực hành ghép âm 8 vận mẫu mũi phức hợp: ian, iang, iong, uan, uang, un, ün, üan."
     )
 
-    tab_vocab, tab_patterns, tab_dialogue, tab_practice = st.tabs([
-        "📚 生词 - Từ vựng",
-        "🎯 句子 - Mẫu câu",
-        "🗣️ 对话 - Hội thoại",
-        "📝 练习 - Luyện tập"
+    tab_theory, tab_rules, tab_spelling, tab_exercises = st.tabs([
+        "📚 Lý thuyết chi tiết",
+        "✍️ Quy tắc chính tả",
+        "🗣️ Luyện tập ghép âm",
+        "📝 Bài tập tự luyện"
     ])
 
-    # ================= TAB 1: TỪ VỰNG =================
-    with tab_vocab:
-        st.subheader("PHẦN 1: TỪ VỰNG MỚI (生词 - Shēngcí)")
-        st.write("💡 *Gợi ý cho giáo viên: Cho học viên nhìn tranh ảnh về ngày Tết Đoan Ngọ (bánh tro/bánh ú, quả vải, quả mận) và đọc to các từ sau:*")
+    # ================= TAB 1: LÝ THUYẾT CHI TIẾT =================
+    with tab_theory:
+        st.subheader("1. Chi tiết các vận mẫu mũi phức hợp")
+        st.write("Các vận mẫu mũi này bắt đầu bằng âm đệm nguyên âm hẹp (**i**, **u**, **ü**) và kết thúc bằng phụ âm mũi (**-n** hoặc **-ng**).")
 
-        vocab_data = [
-            {"hanzi": "今天", "pinyin": "jīntiān", "meaning": "Hôm nay", "note": "Từ vựng HSK 1"},
-            {"hanzi": "五月五号", "pinyin": "wǔ yuè wǔ hào", "meaning": "Ngày 5 tháng 5", "note": "Số đếm + Ngày tháng HSK 1"},
-            {"hanzi": "端午节", "pinyin": "Duānwǔ jié", "meaning": "Tết Đoan Ngọ", "note": "Từ mới theo chủ đề"},
-            {"hanzi": "吃", "pinyin": "chī", "meaning": "Ăn", "note": "Động từ HSK 1"},
-            {"hanzi": "粽子", "pinyin": "zòngzi", "meaning": "Bánh chưng Tàu / Bánh ú / Bánh tro", "note": "Từ mới theo chủ đề"},
-            {"hanzi": "水果", "pinyin": "shuǐguǒ", "meaning": "Hoa quả / Trái cây", "note": "Từ vựng HSK 1"},
-            {"hanzi": "高兴", "pinyin": "gāoxìng", "meaning": "Vui vẻ", "note": "Tính từ HSK 1"}
+        for group in B6_1_NASAL_FINALS_DATA:
+            st.markdown(f"### 📌 {group['nhom']}")
+            for idx, item in enumerate(group["items"]):
+                cols = st.columns([3.5, 1.5])
+                with cols[0]:
+                    card_html = f"""
+                    <div class="final-card" style="border-left: 6px solid {item['border_color']};">
+                        <div style="display: flex; align-items: center;">
+                            <span class="final-letter" style="color: {item['text_color']};">{item['chu']}</span>
+                        </div>
+                        <p style="margin-top: 10px; color: #1e293b; font-weight: 500;">👉 <b>Hướng dẫn phát âm:</b> {item['hdsd']}</p>
+                        <p style="color: #475569; font-size: 0.9em; line-height: 1.4;"><i>{item['cach_doc_sau']}</i></p>
+                        <div class="rule-box" style="border-left-color: {item['border_color']}; margin-top: 10px; padding: 10px;">
+                            <span style="font-size: 0.85em; font-weight: bold; color: {item['text_color']};">⚠️ LƯU Ý VIẾT PINYIN:</span><br/>
+                            <span style="font-size: 0.9em; color: #334155;">{item['luu_y']}</span>
+                        </div>
+                    </div>
+                    """
+                    st.markdown(card_html, unsafe_allow_html=True)
+                with cols[1]:
+                    st.markdown(f"<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+                    st.markdown(f"**Ví dụ tiêu biểu:**")
+                    st.markdown(f"<span style='font-size: 2.2rem; font-weight: bold; color: #1e293b;'>{item['vd_han']}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span style='font-family: monospace; font-size: 1.15rem; font-weight: bold; color: #2563eb;'>{item['vd_py']}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span style='color: #475569; font-size: 0.95rem; font-style: italic;'>({item['vietnamese']})</span>", unsafe_allow_html=True)
+                    render_play_button(item['nghe'], f"🔊 Nghe: {item['vd_py']}", key=f"play_v61_theory_{item['chu']}")
+                
+                # Hiển thị ví dụ mở rộng dạng bảng nhỏ đẹp mắt
+                with st.expander(f"🔍 Xem thêm ví dụ phát âm cho vận mẫu /{item['chu']}/"):
+                    ex_cols = st.columns(len(item['more_examples']))
+                    for ex_idx, ex in enumerate(item['more_examples']):
+                        with ex_cols[ex_idx]:
+                            st.markdown(f"""
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center;">
+                                <span style="font-size: 1.5rem; font-weight: bold; color: #0f172a;">{ex['han']}</span><br/>
+                                <span style="font-family: monospace; font-weight: bold; color: #2563eb;">{ex['py']}</span><br/>
+                                <span style="font-size: 0.85em; color: #6b7280; font-style: italic;">({ex['vi']})</span>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            render_play_button(ex['han'], f"🔊 Phát âm", key=f"play_v61_theory_ex_{item['chu']}_{ex_idx}")
+                st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+    # ================= TAB 2: QUY TẮC CHÍNH TẢ =================
+    with tab_rules:
+        st.subheader("2. Hai Quy Tắc Vàng Khi Viết Pinyin (Trọng tâm học thuật)")
+        st.write("8 vận mẫu mũi phức hợp này chứa đựng các quy tắc chính tả biến đổi phức tạp nhất trong hệ thống Pinyin. Học viên cần ghi nhớ nằm lòng:")
+        
+        st.markdown("""
+        <div style="background-color: #eff6ff; border-left: 6px solid #3b82f6; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+            <h4 style="color: #1e3a8a; margin-top: 0; font-weight: bold;">🌟 Quy tắc 1: Khi đứng độc lập một mình (Không đi kèm thanh mẫu)</h4>
+            <p style="color: #1e3a8a; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Bán nguyên âm <b>i</b> đứng đầu sẽ chuyển hóa thành phụ âm <b>y</b>.<br/>
+                Bán nguyên âm <b>u</b> đứng đầu sẽ chuyển hóa thành phụ âm <b>w</b>.<br/>
+                Bán nguyên âm <b>ü</b> đứng đầu sẽ chuyển hóa thành phụ âm <b>yu</b> (bỏ hai dấu chấm).
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        rule1_data = [
+            {"goc": "ian", "bien": "yan", "vd_han": "烟 (khói)", "vd_py": "yān"},
+            {"goc": "iang", "bien": "yang", "vd_han": "羊 (con dê)", "vd_py": "yáng"},
+            {"goc": "iong", "bien": "yong", "vd_han": "用 (sử dụng)", "vd_py": "yòng"},
+            {"goc": "uan", "bien": "wan", "vd_han": "玩 (chơi)", "vd_py": "wán"},
+            {"goc": "uang", "bien": "wang", "vd_han": "王 (vua)", "vd_py": "wáng"},
+            {"goc": "un (uen)", "bien": "wen", "vd_han": "问 (hỏi)", "vd_py": "wèn"},
+            {"goc": "ün", "bien": "yun", "vd_han": "云 (đám mây)", "vd_py": "yún"},
+            {"goc": "üan", "bien": "yuan", "vd_han": "元 (đồng tệ)", "vd_py": "yuán"},
         ]
 
-        # Hiển thị grid từ vựng
-        st.markdown('<div class="vocab-grid">', unsafe_allow_html=True)
-        cols = st.columns(3)
-        for idx, item in enumerate(vocab_data):
-            col_idx = idx % 3
-            with cols[col_idx]:
+        cols_r1 = st.columns(4)
+        for idx, r1 in enumerate(rule1_data):
+            col_idx = idx % 4
+            with cols_r1[col_idx]:
                 st.markdown(f"""
-                <div class="vocab-card">
-                    <div class="vocab-hanzi">{item['hanzi']}</div>
-                    <div class="vocab-pinyin">{item['pinyin']}</div>
-                    <div class="vocab-meaning">👉 {item['meaning']}</div>
-                    <div class="vocab-note">📌 {item['note']}</div>
+                <div style="background: white; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px; margin-bottom: 12px; text-align: center; box-shadow: 0 2px 5px rgba(59, 130, 246, 0.05);">
+                    <div style="font-family: monospace; font-size: 0.9em; color: #64748b;">Vận mẫu gốc: <b>{r1['goc']}</b></div>
+                    <div style="font-size: 1.5em; font-weight: bold; color: #2563eb; margin: 5px 0;">➔ {r1['bien']}</div>
+                    <div style="font-weight: 500; color: #0f172a;">{r1['vd_han']}</div>
+                    <div style="font-family: 'Courier New', monospace; font-weight: bold; color: #3b82f6;">{r1['vd_py']}</div>
                 </div>
                 """, unsafe_allow_html=True)
-                render_play_button(item['hanzi'], f"🔊 Phát âm: {item['hanzi']}", key=f"play_v61_{idx}")
+                render_play_button(r1['vd_han'].split(" ")[0], "🔊 Nghe phát âm", key=f"play_v61_rule1_{idx}")
                 st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
-    # ================= TAB 2: MẪU CÂU =================
-    with tab_patterns:
-        st.subheader("PHẦN 2: MẪU CÂU CƠ BẢN (句子 - Jùzi)")
-        st.write("Giáo viên giảng giải cấu trúc ngữ pháp HSK 1 thông qua các câu thực tế ngày Tết Đoan Ngọ:")
-
-        # Mẫu câu 1
         st.markdown("""
-        <div class="pattern-card">
-            <div class="pattern-title">1. Giới thiệu ngày lễ (Cấu trúc: Ngày tháng + 是 + Tên ngày lễ)</div>
-            <div style="font-size: 1.3rem; font-weight: bold; color: #1e3a8a;">今天是五月五号，端午节。</div>
-            <div style="font-family: monospace; font-size: 1rem; color: #2563eb; margin: 4px 0;">Jīntiān shì wǔ yuè wǔ hào, Duānwǔ jié.</div>
-            <div style="color: #059669; font-style: italic; font-size: 0.95rem;">Dịch nghĩa: Hôm nay là ngày 5 tháng 5, Tết Đoan Ngọ.</div>
-            <div style="font-size: 0.85rem; color: #475569; margin-top: 6px;"><b>Ngữ pháp HSK 1:</b> Cách nói ngày tháng trong tiếng Trung (Tháng trước - 月, ngày sau - 号).</div>
+        <div style="background-color: #fffbeb; border-left: 6px solid #d97706; padding: 18px; border-radius: 12px; margin-top: 10px; margin-bottom: 20px;">
+            <h4 style="color: #78350f; margin-top: 0; font-weight: bold;">🌟 Quy tắc 2: Lược bỏ hai dấu chấm của ü sau j, q, x</h4>
+            <p style="color: #78350f; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Khi các vận mẫu tròn môi <b>ün</b> và <b>üan</b> đi sau các thanh mẫu mặt lưỡi <b>j, q, x</b>, chúng ta bắt buộc phải lược bỏ hai dấu chấm trên đầu chữ ü.<br/>
+                Ví dụ: viết là <b>jun, qun, xun, juan, quan, xuan</b> nhưng miệng phát âm vẫn bắt buộc khum tròn môi là <b>jün, qün, xün, jüan, qüan, xüan</b>.
+            </p>
         </div>
         """, unsafe_allow_html=True)
-        render_play_button("今天是五月五号，端午节。", "🔊 Nghe phát âm mẫu câu 1", key="play_pattern_1")
-        st.markdown("<br>", unsafe_allow_html=True)
 
-        # Mẫu câu 2
-        st.markdown("""
-        <div class="pattern-card">
-            <div class="pattern-title">2. Nói về hoạt động ăn uống (Cấu trúc: Ai + 吃 + Cái gì)</div>
-            <div style="font-size: 1.3rem; font-weight: bold; color: #1e3a8a;">🇨🇳 中国人吃粽子。 / 🇻🇳 越南人也吃粽子。</div>
-            <div style="font-family: monospace; font-size: 1rem; color: #2563eb; margin: 4px 0;">Zhōngguó rén chī zòngzi. / Yuènán rén yě chī zòngzi.</div>
-            <div style="color: #059669; font-style: italic; font-size: 0.95rem;">Dịch nghĩa: Người Trung Quốc ăn bánh ú. / Người Việt Nam cũng ăn bánh ú.</div>
-            <div style="font-size: 0.85rem; color: #475569; margin-top: 6px;"><b>Ngữ pháp HSK 1:</b> Phó từ <b>也 (yě - cũng)</b> đứng trước động từ hành động <b>吃 (chī - ăn)</b>.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        col_p2_1, col_p2_2 = st.columns(2)
-        with col_p2_1:
-            render_play_button("中国人吃粽子。", "🔊 Trung Quốc ăn bánh ú", key="play_pattern_2_cn")
-        with col_p2_2:
-            render_play_button("越南人也吃粽子。", "🔊 Việt Nam cũng ăn bánh ú", key="play_pattern_2_vn")
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # Mẫu câu 3
-        st.markdown("""
-        <div class="pattern-card">
-            <div class="pattern-title">3. Nói về sở thích & Trái cây mùa hè (Cấu trúc: Ai + 喜欢吃 + Trái cây)</div>
-            <div style="font-size: 1.3rem; font-weight: bold; color: #1e3a8a;">我喜欢吃水果。</div>
-            <div style="font-family: monospace; font-size: 1rem; color: #2563eb; margin: 4px 0;">Wǒ xǐhuan chī shuǐguǒ.</div>
-            <div style="color: #059669; font-style: italic; font-size: 0.95rem;">Dịch nghĩa: Tôi thích ăn hoa quả (vải, mận...).</div>
-            <div style="font-size: 0.85rem; color: #475569; margin-top: 6px;"><b>Ngữ pháp HSK 1:</b> Động từ tâm lý <b>喜欢 (xǐhuan - thích)</b> kết hợp trực tiếp trước động từ hành động <b>吃 (chī - ăn)</b>.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_play_button("我喜欢吃水果。", "🔊 Nghe phát âm mẫu câu 3", key="play_pattern_3")
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # Mẫu câu 4
-        st.markdown("""
-        <div class="pattern-card">
-            <div class="pattern-title">4. Thể hiện cảm xúc (Cấu trúc: 太 + Tính từ + 了)</div>
-            <div style="font-size: 1.3rem; font-weight: bold; color: #1e3a8a;">今天我太高兴了！</div>
-            <div style="font-family: monospace; font-size: 1rem; color: #2563eb; margin: 4px 0;">Jīntiān wǒ tài gāoxìng le!</div>
-            <div style="color: #059669; font-style: italic; font-size: 0.95rem;">Dịch nghĩa: Hôm nay tôi vui quá rồi!</div>
-            <div style="font-size: 0.85rem; color: #475569; margin-top: 6px;"><b>Ngữ pháp HSK 1:</b> Cấu trúc cảm thán <b>太......了 (tài...le - quá...rồi)</b> dùng để nhấn mạnh mức độ cảm xúc.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_play_button("今天我太高兴了！", "🔊 Nghe phát âm mẫu câu 4", key="play_pattern_4")
-
-    # ================= TAB 3: HỘI THOẠI =================
-    with tab_dialogue:
-        st.subheader("PHẦN 3: ĐOẠN HỘI THOẠI NGẮN (对话 - Duìhuà)")
-        st.write("🗣️ *Giáo viên chia cặp cho học viên thực hành đóng vai nhân vật A và B:*")
-
-        st.markdown("""
-        <div class="chat-container">
-            <!-- Nhân vật A -->
-            <div class="chat-bubble left">
-                <div class="chat-avatar">🙋‍♂️ Nhân vật A</div>
-                <div class="chat-content">
-                    喂，今天是端午节，你做什么？
-                </div>
-                <div style="font-family: monospace; font-size: 0.9rem; color: #2563eb; margin-top: 4px;">
-                    Wèi, jīntiān shì Duānwǔ jié, nǐ zuò shénme?
-                </div>
-                <div class="chat-translation">
-                    Dịch: Alo, hôm nay là Tết Đoan Ngọ, bạn làm gì thế?
-                </div>
+        col_r2_1, col_r2_2 = st.columns(2)
+        with col_r2_1:
+            st.markdown("""
+            <div style="background: white; border: 1px solid #fde047; border-radius: 12px; padding: 16px; height: 100%;">
+                <h5 style="color: #a16207; font-weight: bold; margin-top: 0;">Ví dụ với ün (uyn):</h5>
+                <ul>
+                    <li>j + ün ➔ <b>jun</b> (quân đội) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">jūn</span></li>
+                    <li>q + ün ➔ <b>qun</b> (váy) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">qún</span></li>
+                    <li>x + ün ➔ <b>xun</b> (tìm kiếm) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">xún</span></li>
+                </ul>
             </div>
-        """, unsafe_allow_html=True)
-        render_play_button("喂，今天是端午节，你做什么？", "🔊 Nghe phát âm nhân vật A (Câu 1)", key="play_chat_a1")
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown("""
-            <!-- Nhân vật B -->
-            <div class="chat-bubble right">
-                <div class="chat-avatar">🙋‍♀️ Nhân vật B</div>
-                <div class="chat-content">
-                    我家吃粽子，吃水果。你呢？
-                </div>
-                <div style="font-family: monospace; font-size: 0.9rem; color: #dbeafe; margin-top: 4px; text-align: right;">
-                    Wǒ jiā chī zòngzi, chī shuǐguǒ. Nǐ ne?
-                </div>
-                <div class="chat-translation">
-                    Dịch: Nhà tôi ăn bánh ú, ăn hoa quả. Còn bạn thì sao?
-                </div>
+            """, unsafe_allow_html=True)
+        with col_r2_2:
+            st.markdown("""
+            <div style="background: white; border: 1px solid #fde047; border-radius: 12px; padding: 16px; height: 100%;">
+                <h5 style="color: #a16207; font-weight: bold; margin-top: 0;">Ví dụ với üan (uyên):</h5>
+                <ul>
+                    <li>j + üan ➔ <b>juan</b> (cuộn tròn) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">juǎn</span></li>
+                    <li>q + üan ➔ <b>quan</b> (tất cả / toàn bộ) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">quán</span></li>
+                    <li>x + üan ➔ <b>xuan</b> (chọn lựa) - <span style="font-family: monospace; color:#2563eb; font-weight:bold;">xuǎn</span></li>
+                </ul>
             </div>
-        """, unsafe_allow_html=True)
-        render_play_button("我家吃粽子，吃水果。你呢？", "🔊 Nghe phát âm nhân vật B (Câu 2)", key="play_chat_b1")
-        st.markdown("<br>", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-        st.markdown("""
-            <!-- Nhân vật A -->
-            <div class="chat-bubble left">
-                <div class="chat-avatar">🙋‍♂️ Nhân vật A</div>
-                <div class="chat-content">
-                    我去商店买东西。今天我太高兴了！
-                </div>
-                <div style="font-family: monospace; font-size: 0.9rem; color: #2563eb; margin-top: 4px;">
-                    Wǒ qù shāngdiàn mǎi dōngxi. Jīntiān wǒ tài gāoxìng le!
-                </div>
-                <div class="chat-translation">
-                    Dịch: Tôi đi cửa hàng mua đồ. Hôm nay tôi vui quá đi mất!
-                </div>
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.warning("💡 **Mẹo phân biệt:** Các thanh mẫu đầu lưỡi `n` và `l` có thể đi cùng cả `u` thường và `ü` tròn môi. Do đó, khi `n` và `l` đi với `üan`, ta **bắt buộc phải giữ nguyên dấu hai chấm** trên đầu để tránh trùng lặp. Ví dụ: `luan` (luân) khác biệt hoàn toàn với `lüan` (luyến).")
+
+    # ================= TAB 3: LUYỆN TẬP GHÉP ÂM =================
+    with tab_spelling:
+        st.subheader("3. Máy Ghép Âm Mũi Phức Hợp (Spelling Interactive)")
+        st.write("Chọn thanh mẫu, vận mẫu và thanh điệu bên dưới để máy tự động ghép chữ và chỉ ra quy tắc chính tả chuẩn xác:")
+
+        col_sp1, col_sp2, col_sp3 = st.columns(3)
+        with col_sp1:
+            sp_init = st.selectbox("1. Chọn Thanh mẫu (Initials):", [
+                "(Không có)", "b", "p", "m", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh", "r", "z", "c", "s"
+            ], key="v61_sp_initial")
+        with col_sp2:
+            sp_final = st.selectbox("2. Chọn Vận mẫu mũi (Finals):", [
+                "ian", "iang", "iong", "uan", "uang", "un", "ün", "üan"
+            ], key="v61_sp_final")
+        with col_sp3:
+            sp_tone = st.slider("3. Chọn Thanh điệu (Tones):", 0, 4, 1, format="Thanh %d" if "%d" else None, key="v61_sp_tone")
+
+        spelled_res, explain_txt = check_nasal_spelling_rule_6_1(sp_init, sp_final, sp_tone)
+
+        st.markdown("### Kết quả ghép âm:")
+        if spelled_res:
+            st.markdown(f"""
+            <div style="background: linear-gradient(135deg, #f5f3ff 0%, #edd9ff 100%); border: 2px solid #ddd6fe; border-radius: 16px; padding: 25px; text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                <span style="font-size: 0.85em; color: #6d28d9; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">BÍNH ÂM CHUẨN XÁC:</span>
+                <div style="font-size: 3.5rem; font-weight: 800; color: #4c1d95; margin: 15px 0; font-family: 'Courier New', monospace;">{spelled_res}</div>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_play_button("我去商店买东西。今天我太高兴了！", "🔊 Nghe phát âm nhân vật A (Câu 3)", key="play_chat_a2")
+            """, unsafe_allow_html=True)
+            render_play_button(spelled_res, "🔊 Phát âm chuẩn Bính âm vừa ghép", key="v61_sp_play_btn")
+            if explain_txt:
+                st.markdown(f"<div class='rule-box'><div class='rule-title'>📌 Cảnh báo chính tả:</div><p style='color: #374151; font-size: 0.95em;'>{explain_txt}</p></div>", unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+            <div style="background-color: #fef2f2; border: 2px dashed #fca5a5; border-radius: 16px; padding: 25px; text-align: center; margin-top: 10px; margin-bottom: 10px; color: #991b1b;">
+                <div style="font-size: 3rem; margin-bottom: 10px;">⚠️</div>
+                <div style="font-weight: bold; font-size: 1.15rem;">Sự kết hợp âm này không tồn tại trong tiếng Trung tiêu chuẩn!</div>
+                <p style="font-size: 0.95em; color: #b91c1c; margin-top: 5px;">{explain_txt}</p>
+            </div>
+            """, unsafe_allow_html=True)
 
-    # ================= TAB 4: LUYỆN TẬP =================
-    with tab_practice:
-        st.subheader("PHẦN 4: BÀI TẬP LUYỆN TẬP TẠI LỚP (练习 - Liànxí)")
-        st.write("Sắp xếp các từ sau thành câu hoàn chỉnh (Chuẩn form đề thi Đọc hiểu HSK 1):")
+    # ================= TAB 4: BÀI TẬP TỰ LUYỆN =================
+    with tab_exercises:
+        st.subheader("4. Bài tập thực hành luyện nghe và phản xạ Bính âm")
+        st.write("Học viên làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để lưu kết quả và tính điểm thi đua:")
 
-        # Initialize session state for practice
         if "b61_score_submitted" not in st.session_state:
             st.session_state.b61_score_submitted = False
-        
-        # Word Builder 1: "吃 / 我 / 粽子 / 喜欢 / 。"
-        st.markdown("#### 🧩 Câu 1: Sắp xếp các từ sau:")
-        st.markdown("**`吃` &nbsp;&nbsp;/&nbsp;&nbsp; `我` &nbsp;&nbsp;/&nbsp;&nbsp; `粽子` &nbsp;&nbsp;/&nbsp;&nbsp; `喜欢` &nbsp;&nbsp;/&nbsp;&nbsp; `。`**")
-        
-        if "builder_1" not in st.session_state:
-            st.session_state.builder_1 = []
-            
-        words_1 = ["我", "喜欢", "吃", "粽子", "。"]
-        # Xáo trộn các từ để học viên click
-        random_words_1 = ["吃", "粽子", "喜欢", "我", "。"]
-        
-        # Hiển thị các nút từ khóa để chọn
-        st.write("Chọn từ để ghép câu:")
-        cols_b1 = st.columns(len(random_words_1))
-        for i, word in enumerate(random_words_1):
-            with cols_b1[i]:
-                if st.button(word, key=f"btn_word1_{word}_{i}"):
-                    st.session_state.builder_1.append(word)
-                    st.rerun()
-                    
-        # Hiển thị kết quả ghép hiện tại
-        st.markdown('<div class="builder-result-box">', unsafe_allow_html=True)
-        if st.session_state.builder_1:
-            for word in st.session_state.builder_1:
-                st.markdown(f'<span class="builder-word">{word}</span>', unsafe_allow_html=True)
-        else:
-            st.markdown('<span style="color:#9ca3af; font-style:italic;">Câu trả lời của bạn sẽ hiển thị ở đây...</span>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        col_clear_1, col_back_1 = st.columns(2)
-        with col_clear_1:
-            if st.button("🔄 Làm sạch câu 1", use_container_width=True, key="clear_b1"):
-                st.session_state.builder_1 = []
-                st.rerun()
-        with col_back_1:
-            if st.button("⬅️ Xóa từ cuối", use_container_width=True, key="back_b1"):
-                if st.session_state.builder_1:
-                    st.session_state.builder_1.pop()
-                    st.rerun()
 
-        # Word Builder 2: "端午节 / 是 / 今天 / 了 / 太好 / ！"
-        st.markdown("---")
-        st.markdown("#### 🧩 Câu 2: Sắp xếp các từ sau:")
-        st.markdown("**`端午节` &nbsp;&nbsp;/&nbsp;&nbsp; `是` &nbsp;&nbsp;/&nbsp;&nbsp; `今天` &nbsp;&nbsp;/&nbsp;&nbsp; `了` &nbsp;&nbsp;/&nbsp;&nbsp; `太好` &nbsp;&nbsp;/&nbsp;&nbsp; `！`**")
-        
-        if "builder_2" not in st.session_state:
-            st.session_state.builder_2 = []
-            
-        words_2 = ["今天", "是", "端午节", "，", "太好", "了", "！"]
-        random_words_2 = ["端午节", "是", "今天", "了", "太好", "！"]
-        
-        st.write("Chọn từ để ghép câu:")
-        cols_b2 = st.columns(len(random_words_2))
-        for i, word in enumerate(random_words_2):
-            with cols_b2[i]:
-                if st.button(word, key=f"btn_word2_{word}_{i}"):
-                    # Chèn thêm dấu phẩy ngầm nếu học viên ghép để giống đáp án mẫu
-                    if word == "太好" and st.session_state.builder_2 and st.session_state.builder_2[-1] == "端午节":
-                        st.session_state.builder_2.append("，")
-                    st.session_state.builder_2.append(word)
-                    st.rerun()
-                    
-        # Hiển thị kết quả ghép hiện tại
-        st.markdown('<div class="builder-result-box">', unsafe_allow_html=True)
-        if st.session_state.builder_2:
-            for word in st.session_state.builder_2:
-                st.markdown(f'<span class="builder-word">{word}</span>', unsafe_allow_html=True)
-        else:
-            st.markdown('<span style="color:#9ca3af; font-style:italic;">Câu trả lời của bạn sẽ hiển thị ở đây...</span>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        col_clear_2, col_back_2 = st.columns(2)
-        with col_clear_2:
-            if st.button("🔄 Làm sạch câu 2", use_container_width=True, key="clear_b2"):
-                st.session_state.builder_2 = []
-                st.rerun()
-        with col_back_2:
-            if st.button("⬅️ Xóa từ cuối", use_container_width=True, key="back_b2"):
-                if st.session_state.builder_2:
-                    last = st.session_state.builder_2.pop()
-                    if last == "太好" and st.session_state.builder_2 and st.session_state.builder_2[-1] == "，":
-                        st.session_state.builder_2.pop()
-                    st.rerun()
+        score_b6_1 = 0
+        user_answers = {}
 
-        st.markdown("---")
-        
-        # Tính toán kết quả chấm điểm
-        user_ans_1 = "".join(st.session_state.builder_1)
-        user_ans_2 = "".join(st.session_state.builder_2)
-        
-        # Đáp án chuẩn hóa: không tính dấu hoặc so khớp chính xác
-        correct_ans_1 = "我喜欢吃粽子。"
-        # Đáp án 2 linh hoạt: "今天是端午节，太好了！" hoặc "今天是端午节太好了！"
-        correct_ans_2_a = "今天是端午节，太好了！"
-        correct_ans_2_b = "今天是端午节太好了！"
-        
-        score_6_1 = 0
-        ans1_is_correct = (user_ans_1 == correct_ans_1)
-        ans2_is_correct = (user_ans_2 == correct_ans_2_a or user_ans_2 == correct_ans_2_b)
-        
-        if ans1_is_correct:
-            score_6_1 += 1
-        if ans2_is_correct:
-            score_6_1 += 1
+        for idx, item in enumerate(B6_1_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            if "hanzi" in item:
+                st.markdown(f"<span style='font-size: 2rem; font-weight: bold; color: #1e293b;'>Chữ Hán: {item['hanzi']}</span>", unsafe_allow_html=True)
+                render_play_button(item['hanzi'], f"🔊 Nghe âm phát mẫu", key=f"v61_quiz_play_{idx}")
+                st.markdown("<br/>", unsafe_allow_html=True)
+            
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v61_quiz_ans_{idx}")
+            user_answers[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b6_1 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
 
         if not st.session_state.b61_score_submitted:
-            if st.button("📝 Chấm điểm bài tập Bài 6.1", type="primary", use_container_width=True):
+            if st.button("📝 Chấm điểm bài tập Bài 6.1", type="primary", use_container_width=True, key="v61_quiz_grade_btn"):
                 st.session_state.b61_score_submitted = True
-                st.session_state.scores["b61_practice"] = (score_6_1, 2)
-                save_progress()
                 st.rerun()
         else:
-            # Hiện feedback cho từng câu
-            st.markdown("### Kết quả chi tiết:")
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B6_1_QUIZ_DATA):
+                u_ans = user_answers[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!**")
+                    st.write(f"Đọc giải thích: {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}**")
+                    st.write(f"Đọc giải thích: {item['explain']}")
+
+            final_percentage_score = round((score_b6_1 / len(B6_1_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b6_1} / {len(B6_1_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
             
-            if ans1_is_correct:
-                st.success("✅ **Câu 1: Chính xác!**")
-                st.markdown(f"Đọc: **{correct_ans_1}** (Tôi thích ăn bánh ú.)")
-            else:
-                st.error("❌ **Câu 1: Chưa chính xác!**")
-                st.markdown(f"Đáp án đúng: **{correct_ans_1}**")
-                
-            if ans2_is_correct:
-                st.success("✅ **Câu 2: Chính xác!**")
-                st.markdown(f"Đọc: **{correct_ans_2_a}** (Hôm nay là Tết Đoan Ngọ, tốt quá rồi!)")
-            else:
-                st.error("❌ **Câu 2: Chưa chính xác!**")
-                st.markdown(f"Đáp án đúng: **{correct_ans_2_a}**")
-                
-            st.markdown(f"### Điểm tổng kết: **{score_6_1} / 2**")
-            
-            if score_6_1 == 2:
+            if score_b6_1 == len(B6_1_QUIZ_DATA):
                 st.balloons()
-                st.success("Chúc mừng! Bạn đã trả lời xuất sắc cả 2 câu hỏi! 🎉")
-                
+                st.success("Tuyệt vời! Bạn đã trả lời đúng tất cả các câu hỏi! 👑")
+
             st.markdown("---")
-            name = st.text_input("Tên học viên (Bài 6.1)", key="student_name_b61")
-            if st.button("Nộp bài tập Bài 6.1", type="primary", use_container_width=True):
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v61_student_name")
+            if st.button("Nộp bài tập Bài 6.1", type="primary", use_container_width=True, key="v61_submit_score_btn"):
                 if name:
                     row = {
                         "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
                         "học viên": name,
-                        "tổng điểm": round((score_6_1 / 2) * 10, 2),
-                        "BT: Ghép câu": f"{score_6_1}/2"
+                        "tổng điểm": final_percentage_score,
+                        "BT: Ghép câu": f"{score_b6_1}/{len(B6_1_QUIZ_DATA)}"
                     }
                     if save_score_row_b6_1(row):
-                        st.success("Đã lưu kết quả bài tập Bài 6.1 thành công!")
-                        st.session_state.builder_1 = []
-                        st.session_state.builder_2 = []
+                        st.success("Đã nộp bài và lưu điểm thành công!")
                         st.session_state.b61_score_submitted = False
-                        if "b61_practice" in st.session_state.scores:
-                            del st.session_state.scores["b61_practice"]
                         save_progress()
                         st.rerun()
                 else:
-                    st.error("Vui lòng nhập tên học viên để nộp bài!")
-                    
-            if st.button("🔄 Làm lại bài tập", use_container_width=True):
-                st.session_state.builder_1 = []
-                st.session_state.builder_2 = []
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v61_redo_quiz_btn"):
                 st.session_state.b61_score_submitted = False
-                if "b61_practice" in st.session_state.scores:
-                    del st.session_state.scores["b61_practice"]
                 save_progress()
                 st.rerun()
 
-        # Hiển thị lịch sử nộp bài lớp học
+        # Hiển thị bảng xếp hạng nộp bài lớp học
         all_scores = load_all_scores_b6_1()
         if all_scores:
-            st.write("### 📜 Lịch sử nộp bài lớp học:")
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
+            st.dataframe(all_scores, use_container_width=True)
+
+
+def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2):
+    # CSS Styles sang trọng cho Bài 6.2 (Tông màu HSL hiện đại, trẻ trung)
+    st.markdown("""
+    <style>
+    .standalone-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .standalone-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+    .standalone-letters {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+    .goc-letter {
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #64748b;
+        font-family: 'Courier New', monospace;
+    }
+    .arrow-icon {
+        font-size: 1.5em;
+        color: #3b82f6;
+    }
+    .bien-letter {
+        font-size: 2.3em;
+        font-weight: 800;
+        color: #1e3a8a;
+        font-family: 'Courier New', monospace;
+        background: #eff6ff;
+        padding: 2px 10px;
+        border-radius: 8px;
+        border: 1px solid #bfdbfe;
+    }
+    .standalone-desc {
+        color: #475569;
+        font-size: 0.95em;
+        line-height: 1.4;
+    }
+    .mota-box {
+        background-color: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #334155;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "📚 Bài 6.2: Quy tắc biến đổi Vận mẫu khi đứng độc lập",
+        "Tổng hợp tất cả các vận mẫu thay đổi cách viết Pinyin khi đứng một mình (không đi kèm thanh mẫu)."
+    )
+
+    tab_theory, tab_exercises = st.tabs([
+        "📚 Quy tắc biến đổi chi tiết",
+        "📝 Bài tập tự luyện"
+    ])
+
+    # ================= TAB 1: LÝ THUYẾT CHI TIẾT =================
+    with tab_theory:
+        st.write("Trong tiếng Trung, một số vận mẫu khi đứng một mình làm thành một âm tiết (không có thanh mẫu đi cùng) thì hình thức viết Pinyin của chúng bắt buộc phải thay đổi để phân tách âm tiết rõ ràng. Dưới đây là bảng tổng hợp đầy đủ theo 3 nhóm:")
+
+        for idx_group, group in enumerate(B6_2_STANDALONE_FINALS_DATA):
+            st.markdown(f"### 📌 {group['nhom']}")
+            st.markdown(f"<div class='mota-box'>{group['mota']}</div>", unsafe_allow_html=True)
+            
+            # Hiển thị các vận mẫu dưới dạng Grid layout đẹp mắt
+            items = group["items"]
+            cols_per_row = 2
+            for i in range(0, len(items), cols_per_row):
+                cols = st.columns(cols_per_row)
+                for col_idx in range(cols_per_row):
+                    item_idx = i + col_idx
+                    if item_idx < len(items):
+                        item = items[item_idx]
+                        with cols[col_idx]:
+                            st.markdown(f"""
+                            <div class="standalone-card">
+                                <div class="standalone-letters">
+                                    <span class="goc-letter">/{item['goc']}/</span>
+                                    <span class="arrow-icon">➔</span>
+                                    <span class="bien-letter">{item['bien']}</span>
+                                </div>
+                                <div style="margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 10px;">
+                                    <span style="color: #64748b; font-size: 0.85em; font-weight: bold; text-transform: uppercase;">Ví dụ cụ thể:</span>
+                                    <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 5px;">
+                                        <span style="font-size: 1.8rem; font-weight: bold; color: #0f172a;">{item['vd_han']}</span>
+                                        <span style="font-family: monospace; font-size: 1.1rem; font-weight: bold; color: #2563eb;">{item['vd_py']}</span>
+                                        <span style="color: #475569; font-size: 0.9em; font-style: italic;">({item['meaning']})</span>
+                                    </div>
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            render_play_button(item['vd_han'], f"🔊 Nghe phát âm: {item['vd_py']}", key=f"play_v62_theory_{idx_group}_{item_idx}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    # ================= TAB 2: BÀI TẬP TỰ LUYỆN =================
+    with tab_exercises:
+        st.subheader("Bài tập thực hành phản xạ Quy tắc đứng độc lập")
+        st.write("Làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để lưu kết quả thi đua:")
+
+        if "b62_score_submitted" not in st.session_state:
+            st.session_state.b62_score_submitted = False
+
+        score_b6_2 = 0
+        user_answers = {}
+
+        for idx, item in enumerate(B6_2_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v62_quiz_ans_{idx}")
+            user_answers[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b6_2 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+        if not st.session_state.b62_score_submitted:
+            if st.button("📝 Chấm điểm bài tập Bài 6.2", type="primary", use_container_width=True, key="v62_quiz_grade_btn"):
+                st.session_state.b62_score_submitted = True
+                st.rerun()
+        else:
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B6_2_QUIZ_DATA):
+                u_ans = user_answers[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!**")
+                    st.write(f"Đọc giải thích: {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}**")
+                    st.write(f"Đọc giải thích: {item['explain']}")
+
+            final_percentage_score = round((score_b6_2 / len(B6_2_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b6_2} / {len(B6_2_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
+            
+            if score_b6_2 == len(B6_2_QUIZ_DATA):
+                st.balloons()
+                st.success("Tuyệt vời! Bạn đã nắm rất chắc các quy tắc viết chính tả! 👑")
+
+            st.markdown("---")
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v62_student_name")
+            if st.button("Nộp bài tập Bài 6.2", type="primary", use_container_width=True, key="v62_submit_score_btn"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                        "học viên": name,
+                        "tổng điểm": final_percentage_score,
+                        "BT: Đứng độc lập": f"{score_b6_2}/{len(B6_2_QUIZ_DATA)}"
+                    }
+                    if save_score_row_b6_2(row):
+                        st.success("Đã nộp bài và lưu điểm thành công!")
+                        st.session_state.b62_score_submitted = False
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v62_redo_quiz_btn"):
+                st.session_state.b62_score_submitted = False
+                save_progress()
+                st.rerun()
+
+        # Hiển thị bảng xếp hạng nộp bài lớp học
+        all_scores = load_all_scores_b6_2()
+        if all_scores:
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
             st.dataframe(all_scores, use_container_width=True)
