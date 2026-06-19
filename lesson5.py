@@ -1910,7 +1910,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_a1:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("端午安康", "🔊 Nghe chúc", key="dw_p1_new", use_container_width=True)
+            render_play_button("端午安康", "🔊 Nghe chúc", key="dw_p1_new")
 
         # Câu 2
         col_c2, col_a2 = st.columns([8.2, 1.8])
@@ -1925,7 +1925,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_a2:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("端午节快乐", "🔊 Nghe chúc", key="dw_p2_new", use_container_width=True)
+            render_play_button("端午节快乐", "🔊 Nghe chúc", key="dw_p2_new")
 
         # Câu 3
         col_c3, col_a3 = st.columns([8.2, 1.8])
@@ -1940,7 +1940,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_a3:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("你吃粽子了吗？", "🔊 Nghe mẫu", key="dw_p3_new", use_container_width=True)
+            render_play_button("你吃粽子了吗？", "🔊 Nghe mẫu", key="dw_p3_new")
 
         # Câu 4
         col_c4, col_a4 = st.columns([8.2, 1.8])
@@ -1955,7 +1955,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_a4:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("我很喜欢吃粽子。", "🔊 Nghe mẫu", key="dw_p4_new", use_container_width=True)
+            render_play_button("我很喜欢吃粽子。", "🔊 Nghe mẫu", key="dw_p4_new")
 
         st.markdown("<br><hr style='border-color: #cbd5e1;'/><br>", unsafe_allow_html=True)
         st.markdown("### 🎯 Các mẫu câu ngữ pháp HSK 1 ngày Tết Đoan Ngọ")
@@ -1973,7 +1973,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_g1_btn:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("今天是五月五号，端午节。", "🔊 Nghe câu", key="dw_grammar_p1_new", use_container_width=True)
+            render_play_button("今天是五月五号，端午节。", "🔊 Nghe câu", key="dw_grammar_p1_new")
 
         # Cấu trúc 2
         col_g2_card, col_g2_btn = st.columns([8.2, 1.8])
@@ -1988,7 +1988,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_g2_btn:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("中国人吃粽子。越南人也吃粽子。", "🔊 Nghe cả hai", key="dw_grammar_p2_new", use_container_width=True)
+            render_play_button("中国人吃粽子。越南人也吃粽子。", "🔊 Nghe cả hai", key="dw_grammar_p2_new")
 
         # Cấu trúc 3
         col_g3_card, col_g3_btn = st.columns([8.2, 1.8])
@@ -2003,7 +2003,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_g3_btn:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("我喜欢吃水果。", "🔊 Nghe câu", key="dw_grammar_p3_new", use_container_width=True)
+            render_play_button("我喜欢吃水果。", "🔊 Nghe câu", key="dw_grammar_p3_new")
 
         # Cấu trúc 4
         col_g4_card, col_g4_btn = st.columns([8.2, 1.8])
@@ -2018,7 +2018,7 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             """, unsafe_allow_html=True)
         with col_g4_btn:
             st.write("<br><div style='height: 8px;'></div>", unsafe_allow_html=True)
-            render_play_button("今天我太高兴了！", "🔊 Nghe câu", key="dw_grammar_p4_new", use_container_width=True)
+            render_play_button("今天我太高兴了！", "🔊 Nghe câu", key="dw_grammar_p4_new")
 
     # --- TAB 5: TRẮC NGHIỆM VUI ---
     with tab_quiz:
