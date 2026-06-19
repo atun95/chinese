@@ -2205,9 +2205,7 @@ def show_lesson5_classroom_practice():
         st.markdown("""
         <div style="background-color: #eff6ff; border-left: 6px solid #3b82f6; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
             <h4 style="color: #1e3a8a; margin-top: 0; font-weight: bold;">🎲 Thử thách phản xạ Số đếm + Mức độ + Âm mũi</h4>
-            <p style="color: #1e3a8a; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
-                <b>Luật chơi:</b> Nhấn nút để tạo ngẫu nhiên thử thách. Học viên tương ứng với <b>Số thứ tự/Số lượng</b> được chọn phải đứng dậy đặt câu chứa <b>Phó từ mức độ</b> và <b>Tính từ/Động từ</b> yêu cầu.
-            </p>
+         
         </div>
         """, unsafe_allow_html=True)
 
