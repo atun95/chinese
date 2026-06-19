@@ -1733,7 +1733,7 @@ def show_lesson4_exercises(save_progress, save_score_row_b4=None, load_all_score
                 st.dataframe(all_s4, use_container_width=True)
 
 def show_lesson4_hanzi():
-    render_lesson_intro("📚 Bài 5: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
+    render_lesson_intro("📚 Bài 6: Nét chữ Hán cơ bản", "Rèn nét cơ bản và quy tắc thứ tự nét.")
     st.table(NET_CO_BAN)
 
 def show_lesson4_female_comparison(save_progress):

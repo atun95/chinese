@@ -16,6 +16,7 @@ import lesson2
 import lesson3
 import lesson4
 import lesson5
+import lesson6
 
 try:
     importlib.reload(lessons_data)
@@ -44,6 +45,11 @@ except Exception as e:
 
 try:
     importlib.reload(lesson5)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson6)
 except Exception as e:
     pass
 
@@ -90,10 +96,11 @@ SCORES_B3_FILE = USER_DATA_DIR / "scores_b3.csv"
 SCORES_B4_FILE = USER_DATA_DIR / "scores_b4.csv"
 SCORES_B5_FILE = USER_DATA_DIR / "scores_b5.csv"
 SCORES_B5_3_FILE = USER_DATA_DIR / "scores_b5_3.csv"
+SCORES_B6_1_FILE = USER_DATA_DIR / "scores_b6_1.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -247,6 +254,22 @@ def load_all_scores_b5_3():
     with open(SCORES_B5_3_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_b6_1(row_data):
+    file_exists = SCORES_B6_1_FILE.exists()
+    try:
+        with open(SCORES_B6_1_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT: Ghép câu"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 6.1: {e}"); return False
+
+def load_all_scores_b6_1():
+    if not SCORES_B6_1_FILE.exists(): return []
+    with open(SCORES_B6_1_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def add_tones(base):
     vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
     tones = []
@@ -281,7 +304,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 4.1 - Vận mẫu kép",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 5 - Nét chữ Hán cơ bản",
+        "Bài 6 - Nét chữ Hán cơ bản",
+        "Bài 6.1 - Tết Đoan Ngọ cùng HSK 1",
         "Bài 5.1 - Số đếm từ 0 đến 10",
         "Bài 5.2 - Vận mẫu mũi",
         "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
@@ -387,8 +411,11 @@ elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
     # Hot-reload trigger: 2026-06-12 12:19
     lesson4.show_lesson4_qa_and_dialogues()
 
-elif menu == "Bài 5 - Nét chữ Hán cơ bản":
+elif menu == "Bài 6 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
+
+elif menu == "Bài 6.1 - Tết Đoan Ngọ cùng HSK 1":
+    lesson6.show_lesson6_1_duanwu(save_progress, save_score_row_b6_1, load_all_scores_b6_1)
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     # Hot-reload trigger: 2026-06-12 16:38
