@@ -2194,10 +2194,11 @@ def show_lesson5_classroom_practice():
         objective="Tích hợp kiến thức của cả Bài 5 (Vận mẫu mũi, số đếm từ 0-10 và cách dùng phó từ 很/非常/太) vào các hoạt động thực hành khẩu ngữ tương tác trực tiếp trên lớp."
     )
 
-    tab_reflex, tab_builder, tab_roleplay = st.tabs([
+    tab_reflex, tab_builder, tab_roleplay, tab_music = st.tabs([
         "🎲 1. Phản xạ Siêu tốc",
         "✍️ 2. Máy ghép câu Tích hợp",
-        "🎭 3. Kịch bản Đóng vai"
+        "🎭 3. Kịch bản Đóng vai",
+        "🎵 4. Góc Âm Nhạc (手指歌)"
     ])
 
     # --- TAB 1: PHẢN XẠ SIÊU TỐC ---
@@ -2474,6 +2475,53 @@ def show_lesson5_classroom_practice():
         </div>
         """, unsafe_allow_html=True)
         render_play_button(f"这个{item_zh}非常红，非常好吃！今天我太高兴了！", "🔊 Phát âm A2", key="rp_play_a2")
+
+    # --- TAB 4: GÓC ÂM NHẠC (手指歌) ---
+    with tab_music:
+        st.markdown("""
+        <div style="background-color: #fdf2f8; border-left: 6px solid #db2777; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+            <h4 style="color: #9d174d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">🎵 Góc Âm Nhạc: Bài hát "Đếm ngón tay" (手指歌 - Shǒuzhǐ Gē)</h4>
+            <p style="color: #9d174d; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Học đếm số từ 1 đến 10 cực kỳ vui nhộn qua bài hát đồng dao và kết hợp làm các động tác ngón tay. Nhấn nút để nghe từng câu hát chậm hoặc xem clip nhạc sinh động ở bên dưới nhé!
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Nhúng clip Youtube bài hát 手指歌
+        st.markdown("### 📺 Video Clip Nhạc Đồng Dao:")
+        st.video("https://www.youtube.com/watch?v=R3nN42qWf4M")
+
+        st.markdown("### 📝 Lời bài hát & Phát âm từng câu:")
+
+        song_lyrics = [
+            {"num": "1", "zh": "一一只小鸡叽叽叽", "py": "Yī yī zhī xiǎojī jījījī", "vi": "Một, một chú gà con kêu chi chíp"},
+            {"num": "2", "zh": "二二只小鸭嘎嘎嘎", "py": "Èr èr zhī xiǎoyā gāgāgā", "vi": "Hai, hai chú vịt con kêu cạp cạp"},
+            {"num": "3", "zh": "三三只小鱼游游游", "py": "Sān sān zhī xiǎoyú yóu yóu yóu", "vi": "Ba, ba chú cá nhỏ bơi lội"},
+            {"num": "4", "zh": "四四只小猫喵喵喵", "py": "Sì sì zhī xiǎomāo miāo miāo miāo", "vi": "Bốn, bốn chú mèo con kêu meo meo"},
+            {"num": "5", "zh": "五五只小兔跳跳跳", "py": "Wǔ wǔ zhī xiǎotù tiào tiào tiào", "vi": "Năm, năm chú thỏ con nhảy nhảy nhảy"},
+            {"num": "6", "zh": "六六只小孔雀开屏了", "py": "Liù liù zhī xiǎokǒngquè kāipíng le", "vi": "Sáu, sáu chú công nhỏ xòe đuôi hoa"},
+            {"num": "7", "zh": "七七只小蜜蜂采蜜忙", "py": "Qī qī zhī xiǎomìfēng cǎimì máng", "vi": "Bảy, bảy chú ong nhỏ bận rộn hút mật"},
+            {"num": "8", "zh": "八八只小螃蟹爬爬爬", "py": "Bā bā zhī xiǎopángxiè pá pá pá", "vi": "Tám, tám chú cua nhỏ bò bò bò"},
+            {"num": "9", "zh": "九九只小松鼠上大树", "py": "Jiǔ jiǔ zhī xiǎosōngshǔ shàng dàshù", "vi": "Chín, chín chú sóc nhỏ leo cây lớn"},
+            {"num": "10", "zh": "十十个小朋友哈哈笑", "py": "Shí shí gè xiǎopéngyǒu hāhā xiào", "vi": "Mười, mười bạn nhỏ cười ha ha ha"}
+        ]
+
+        for idx, item in enumerate(song_lyrics):
+            col_l, col_r = st.columns([7.5, 2.5])
+            with col_l:
+                st.markdown(f"""
+                <div style="background: white; border: 1px solid #fbcfe8; border-radius: 10px; padding: 12px; margin-bottom: 8px; border-left: 5px solid #db2777;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="background: #db2777; color: white; border-radius: 50%; width: 25px; height: 25px; display: inline-flex; justify-content: center; align-items: center; font-weight: bold; font-size: 0.85em;">{item['num']}</span>
+                        <span style="font-size: 1.25rem; font-weight: bold; color: #1e293b;">{item['zh']}</span>
+                    </div>
+                    <div style="font-family: monospace; color: #db2777; margin-left: 35px; font-weight: bold; font-size: 0.95em;">{item['py']}</div>
+                    <div style="color: #4b5563; font-style: italic; margin-left: 35px; font-size: 0.9em;">({item['vi']})</div>
+                </div>
+                """, unsafe_allow_html=True)
+            with col_r:
+                st.markdown("<br/>", unsafe_allow_html=True)
+                render_play_button(item['zh'], f"🔊 Hát câu {item['num']}", key=f"sing_line_{idx}")
 
 
 
