@@ -609,9 +609,9 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
         st.write("Hãy nghe và lặp lại theo từng cặp để nhận biết rõ sự khác biệt của âm mũi trước và sau:")
         
         pairs = [
-            {"label": "Cặp an / ang", "p1": "ān", "play_p1": "安", "example1": "fàn (饭 - cơm)", "sound1": "fàn", "p2": "āng", "play_p2": "肮", "example2": "máng (忙 - bận)", "sound2": "máng"},
-            {"label": "Cặp en / eng", "p1": "ēn", "play_p1": "恩", "example1": "hěn (很 - rất)", "sound1": "hěn", "p2": "ēng", "play_p2": "鞥", "example2": "péng (朋 - bạn bè)", "sound2": "péng"},
-            {"label": "Cặp in / ing", "p1": "īn", "play_p1": "音", "example1": "nín (您 - ngài)", "sound1": "nín", "p2": "īng", "play_p2": "英", "example2": "tīng (听 - nghe)", "sound2": "tīng"}
+            {"label": "Cặp an / ang", "p1": "ān", "play_p1": "安", "example1": "fàn (饭 - cơm)", "sound1": "饭", "p2": "āng", "play_p2": "肮", "example2": "máng (忙 - bận)", "sound2": "忙"},
+            {"label": "Cặp en / eng", "p1": "ēn", "play_p1": "恩", "example1": "hěn (很 - rất)", "sound1": "很", "p2": "ēng", "play_p2": "鞥", "example2": "péng (朋 - bạn bè)", "sound2": "朋"},
+            {"label": "Cặp in / ing", "p1": "īn", "play_p1": "音", "example1": "nín (您 - ngài)", "sound1": "您", "p2": "īng", "play_p2": "英", "example2": "tīng (听 - nghe)", "sound2": "听"}
         ]
         
         for idx, pair in enumerate(pairs):
