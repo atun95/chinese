@@ -304,12 +304,12 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu",
         "Bài 4.1 - Vận mẫu kép",
         "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 6 - Nét chữ Hán cơ bản",
-        "Bài 6.1 - Tết Đoan Ngọ cùng HSK 1",
         "Bài 5.1 - Số đếm từ 0 đến 10",
         "Bài 5.2 - Vận mẫu mũi",
         "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
-        "Bài 5.4 - Tết Đoan Ngọ (端午节)"
+        "Bài 5.4 - Tết Đoan Ngọ (端午节)",
+        "Bài 6 - Nét chữ Hán cơ bản",
+        "Bài 6.1 - Tết Đoan Ngọ cùng HSK 1"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
