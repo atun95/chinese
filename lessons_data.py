@@ -1126,7 +1126,7 @@ B6_2_STANDALONE_FINALS_DATA = [
             {"goc": "ian", "bien": "yan", "vd_han": "言", "vd_py": "yán", "meaning": "ngôn ngữ / lời nói"},
             {"goc": "iang", "bien": "yang", "vd_han": "羊", "vd_py": "yáng", "meaning": "con dê"},
             {"goc": "ie", "bien": "ye", "vd_han": "爷", "vd_py": "yé", "meaning": "ông nội"},
-            {"goc": "iou", "bien": "you", "vd_han": "有", "vd_py": "yǒu", "meaning": "có", "highlight": True, "note_doc": "💡 <b>Sự khác biệt chữ viết:</b> Khi đi kèm thanh mẫu viết tắt thành <b>iu</b> (ví dụ: diū), khi đứng một mình viết đầy đủ là <b>you</b>. Phát âm giống nhau nhưng cách viết thay đổi hoàn toàn!"},
+            {"goc": "iou", "bien": "you", "vd_han": "有", "vd_py": "yǒu", "meaning": "có"},
             {"goc": "iong", "bien": "yong", "vd_han": "用", "vd_py": "yòng", "meaning": "sử dụng / dùng"},
             {"goc": "in", "bien": "yin", "vd_han": "音", "vd_py": "yīn", "meaning": "âm thanh"},
             {"goc": "ing", "bien": "ying", "vd_han": "影", "vd_py": "yǐng", "meaning": "ảnh / bóng"}
@@ -1136,14 +1136,14 @@ B6_2_STANDALONE_FINALS_DATA = [
         "nhom": "Nhóm 2: Các vận mẫu bắt đầu bằng 'u' (ua, uai, uan, uang, uo, uei, uen, ueng, u)",
         "mota": "Khi đứng độc lập (không đi kèm thanh mẫu):\n- Vận mẫu đơn <b>u</b> thêm <b>w</b> phía trước (thành <b>wu</b>).\n- Các vận mẫu khác bắt đầu bằng <b>u</b> (ua, uai, uan, uang, uo, uei, uen, ueng) sẽ <b>đổi u thành w</b> (thành wa, wai, wan, wang, wo, wei, wen, weng).",
         "items": [
-            {"goc": "u", "bien": "wu", "vd_han": "五", "vd_py": "wǔ", "meaning": "số năm", "highlight": True, "note_doc": "💡 <b>Phát âm:</b> Âm câm 'w' được thêm vào chỉ để phân tách âm tiết chính tả, cách phát âm hoàn toàn giống nguyên âm gốc /u/."},
+            {"goc": "u", "bien": "wu", "vd_han": "五", "vd_py": "wǔ", "meaning": "số năm"},
             {"goc": "ua", "bien": "wa", "vd_han": "娃", "vd_py": "wá", "meaning": "em bé / búp bê"},
             {"goc": "uai", "bien": "wai", "vd_han": "外", "vd_py": "wài", "meaning": "bên ngoài"},
             {"goc": "uan", "bien": "wan", "vd_han": "玩", "vd_py": "wán", "meaning": "chơi / đùa"},
             {"goc": "uang", "bien": "wang", "vd_han": "王", "vd_py": "wáng", "meaning": "vua / họ Vương"},
             {"goc": "uo", "bien": "wo", "vd_han": "我", "vd_py": "wǒ", "meaning": "tôi / ta"},
-            {"goc": "uei", "bien": "wei", "vd_han": "喂", "vd_py": "wèi", "meaning": "alo (khi nghe điện thoại)", "highlight": True, "note_doc": "💡 <b>Sự khác biệt chữ viết:</b> Khi đi kèm thanh mẫu viết tắt thành <b>ui</b> (ví dụ: duì), khi đứng độc lập viết đầy đủ là <b>wei</b>. Hãy nhớ phát âm rõ âm chính /e/ ở giữa!"},
-            {"goc": "uen", "bien": "wen", "vd_han": "问", "vd_py": "wèn", "meaning": "hỏi", "highlight": True, "note_doc": "💡 <b>Sự khác biệt chữ viết:</b> Khi đi kèm thanh mẫu viết tắt thành <b>un</b> (ví dụ: chūn), khi đứng độc lập viết đầy đủ là <b>wen</b>. Hãy nhớ phát âm rõ âm chính /e/ ở giữa!"},
+            {"goc": "uei", "bien": "wei", "vd_han": "喂", "vd_py": "wèi", "meaning": "alo (khi nghe điện thoại)"},
+            {"goc": "uen", "bien": "wen", "vd_han": "问", "vd_py": "wèn", "meaning": "hỏi"},
             {"goc": "ueng", "bien": "weng", "vd_han": "翁", "vd_py": "wēng", "meaning": "ông già"}
         ]
     },
@@ -1151,10 +1151,10 @@ B6_2_STANDALONE_FINALS_DATA = [
         "nhom": "Nhóm 3: Các vận mẫu bắt đầu bằng 'ü' (ü, üe, üan, ün)",
         "mota": "Khi đứng độc lập (không đi kèm thanh mẫu):\n- Tất cả các vận mẫu bắt đầu bằng <b>ü</b> (ü, üe, üan, ün) đều <b>thêm y ở phía trước và bỏ hai dấu chấm trên đầu chữ ü</b> (viết thành yu, yue, yuan, yun).",
         "items": [
-            {"goc": "ü", "bien": "yu", "vd_han": "鱼", "vd_py": "yú", "meaning": "con cá", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Do viết là 'yu' nên học viên rất dễ đọc nhầm thành âm 'u' dẹt môi. Quy tắc bắt buộc: giữ nguyên khẩu hình tròn môi /ü/!"},
-            {"goc": "üe", "bien": "yue", "vd_han": "月", "vd_py": "yuè", "meaning": "mặt trăng / tháng", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Phát âm tròn môi /ü/ trượt nhanh sang /e/ (như uyê), tuyệt đối không đọc bẹt môi giống 'de' hay 'u-e'!"},
-            {"goc": "üan", "bien": "yuan", "vd_han": "元", "vd_py": "yuán", "meaning": "đồng Nhân dân tệ / nguyên", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Vẫn giữ khẩu hình tròn môi /ü/ làm đệm rồi sang /an/ (như uyên). Tránh đọc nhầm thành 'oan' của 'wan'!"},
-            {"goc": "ün", "bien": "yun", "vd_han": "云", "vd_py": "yún", "meaning": "mây / đám mây", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Phát âm tròn môi /ü/ rồi kết hơi ở ngạc trên (như uyn), tránh đọc nhầm thành 'un' (uân) của 'wen'!"}
+            {"goc": "ü", "bien": "yu", "vd_han": "鱼", "vd_py": "yú", "meaning": "con cá", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Mặt chữ ghi là 'yu' (giống u) nhưng bắt buộc phát âm tròn môi /ü/, tuyệt đối không đọc thành 'u' thường!"},
+            {"goc": "üe", "bien": "yue", "vd_han": "月", "vd_py": "yuè", "meaning": "mặt trăng / tháng", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Mặt chữ ghi 'yue' nhưng bắt buộc phát âm tròn môi /ü/ trượt sang /e/ (như uyê), không đọc bẹt môi giống 'de' hay 'u-e'!"},
+            {"goc": "üan", "bien": "yuan", "vd_han": "元", "vd_py": "yuán", "meaning": "đồng Nhân dân tệ", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Mặt chữ ghi 'yuan' nhưng bắt buộc phát âm tròn môi /ü/ làm đệm rồi sang /an/ (như uyên), tránh đọc nhầm thành 'oan' của 'wan'!"},
+            {"goc": "ün", "bien": "yun", "vd_han": "云", "vd_py": "yún", "meaning": "mây / đám mây", "highlight": True, "note_doc": "⚠️ <b>Điểm bẫy phát âm:</b> Mặt chữ ghi 'yun' nhưng bắt buộc phát âm tròn môi /ü/ rồi kết hơi ở ngạc trên (như uyn), tránh đọc nhầm thành 'un' (uân) của 'wen'!"}
         ]
     }
 ]

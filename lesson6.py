@@ -513,15 +513,8 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
                     if item_idx < len(items):
                         item = items[item_idx]
                         with cols[col_idx]:
-                            card_class = "standalone-card-highlighted" if item.get("highlight") else "standalone-card"
-                            note_html = f"""
-                            <div style="margin-top: 12px; background-color: #fef3c7; color: #92400e; padding: 10px 12px; border-radius: 8px; font-size: 0.85em; border-left: 3px solid #d97706; line-height: 1.45;">
-                                {item['note_doc']}
-                            </div>
-                            """ if item.get("highlight") and item.get("note_doc") else ""
-
                             st.markdown(f"""
-                            <div class="{card_class}">
+                            <div class="standalone-card">
                                 <div class="standalone-letters">
                                     <span class="goc-letter">/{item['goc']}/</span>
                                     <span class="arrow-icon">➔</span>
@@ -534,7 +527,6 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
                                         <span style="font-family: monospace; font-size: 1.1rem; font-weight: bold; color: #2563eb;">{item['vd_py']}</span>
                                         <span style="color: #475569; font-size: 0.9em; font-style: italic;">({item['meaning']})</span>
                                     </div>
-                                    {note_html}
                                 </div>
                             </div>
                             """, unsafe_allow_html=True)
