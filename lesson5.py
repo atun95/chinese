@@ -2480,42 +2480,36 @@ def show_lesson5_classroom_practice():
     with tab_music:
         st.markdown("""
         <div style="background-color: #fdf2f8; border-left: 6px solid #db2777; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
-            <h4 style="color: #9d174d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">🎵 Góc Âm Nhạc: Bài hát "Đếm ngón tay" (手指歌 - Shǒuzhǐ Gē)</h4>
+            <h4 style="color: #9d174d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">🎵 Góc Âm Nhạc: Mười cậu bé Ấn Độ (十个印第安小朋友 - Shí gè Yìndì'ān xiǎopéngyǒu)</h4>
             <p style="color: #9d174d; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
-                Học đếm số từ 1 đến 10 cực kỳ vui nhộn qua bài hát đồng dao và kết hợp làm các động tác ngón tay. Nhấn nút để nghe từng câu hát chậm hoặc xem clip nhạc sinh động ở bên dưới nhé!
+                Học đếm số xuôi và ngược từ 1 đến 10 cực kỳ vui nhộn với giai điệu quen thuộc. Đặc biệt giúp học viên luyện tập phản xạ phân biệt cách dùng <b>两 (liǎng)</b> thay cho <b>二 (èr)</b> trước lượng từ <b>个 (gè)</b>!
             </p>
         </div>
         """, unsafe_allow_html=True)
 
-        # Giới thiệu video và cung cấp liên kết mở trực tiếp
+        st.markdown("### 📺 Video Clip Nhạc Đồng Dao:")
+        # Nhúng trực tiếp video do người dùng chỉ định
+        st.video("https://www.youtube.com/watch?v=1oUXG01bP0M")
+        
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border: 2px solid #fbcfe8; border-radius: 16px; padding: 22px; margin-bottom: 25px; margin-top: 15px;">
-            <h4 style="color: #be185d; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">📺 Trình chiếu Video Ca Nhạc:</h4>
-            <p style="color: #9d174d; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px;">
-                Để đảm bảo chất lượng hình ảnh và âm thanh tốt nhất, tránh các lỗi chặn bản quyền nhúng của trình duyệt trên lớp học, giáo viên vui lòng bấm vào nút bên dưới để mở trực tiếp video ca nhạc hoạt hình vui nhộn của bài hát <b>"手指歌"</b> hoặc <b>"找朋友"</b> trên YouTube (mở ở tab mới).
-            </p>
+        <div style="margin-bottom: 20px; text-align: right;">
+            <a href="https://www.youtube.com/watch?v=1oUXG01bP0M" target="_blank" style="text-decoration: none;">
+                <span style="background-color: #db2777; color: white; padding: 8px 16px; border-radius: 8px; font-size: 0.9em; font-weight: bold;">🌐 Mở xem trực tiếp trên YouTube</span>
+            </a>
         </div>
         """, unsafe_allow_html=True)
-        
-        col_vid1, col_vid2 = st.columns(2)
-        with col_vid1:
-            st.link_button("🎬 Mở bài hát 手指歌 (Đếm ngón tay)", "https://www.youtube.com/results?search_query=%E6%89%8B%E6%8C%87%E6%AD%8C+%E5%84%BF%E6%AD%8C+%E4%B8%80%E4%B8%80%E5%8F%AA%E5%B0%8F%E9%B8%A1", use_container_width=True)
-        with col_vid2:
-            st.link_button("🎵 Mở bài hát 找朋友 (Tìm bạn)", "https://www.youtube.com/results?search_query=%E6%89%BE%E6%9C%8B%E5%8F%8B+%E5%84%BF%E6%AD%8C", use_container_width=True)
 
         st.markdown("### 📝 Lời bài hát & Phát âm từng câu:")
 
         song_lyrics = [
-            {"num": "1", "zh": "一一只小鸡叽叽叽", "py": "Yī yī zhī xiǎojī jījījī", "vi": "Một, một chú gà con kêu chi chíp"},
-            {"num": "2", "zh": "二二只小鸭嘎嘎嘎", "py": "Èr èr zhī xiǎoyā gāgāgā", "vi": "Hai, hai chú vịt con kêu cạp cạp"},
-            {"num": "3", "zh": "三三只小鱼游游游", "py": "Sān sān zhī xiǎoyú yóu yóu yóu", "vi": "Ba, ba chú cá nhỏ bơi lội"},
-            {"num": "4", "zh": "四四只小猫喵喵喵", "py": "Sì sì zhī xiǎomāo miāo miāo miāo", "vi": "Bốn, bốn chú mèo con kêu meo meo"},
-            {"num": "5", "zh": "五五只小兔跳跳跳", "py": "Wǔ wǔ zhī xiǎotù tiào tiào tiào", "vi": "Năm, năm chú thỏ con nhảy nhảy nhảy"},
-            {"num": "6", "zh": "六六只小孔雀开屏了", "py": "Liù liù zhī xiǎokǒngquè kāipíng le", "vi": "Sáu, sáu chú công nhỏ xòe đuôi hoa"},
-            {"num": "7", "zh": "七七只小蜜蜂采蜜忙", "py": "Qī qī zhī xiǎomìfēng cǎimì máng", "vi": "Bảy, bảy chú ong nhỏ bận rộn hút mật"},
-            {"num": "8", "zh": "八八只小螃蟹爬爬爬", "py": "Bā bā zhī xiǎopángxiè pá pá pá", "vi": "Tám, tám chú cua nhỏ bò bò bò"},
-            {"num": "9", "zh": "九九只小松鼠上大树", "py": "Jiǔ jiǔ zhī xiǎosōngshǔ shàng dàshù", "vi": "Chín, chín chú sóc nhỏ leo cây lớn"},
-            {"num": "10", "zh": "十十个小朋友哈哈笑", "py": "Shí shí gè xiǎopéngyǒu hāhā xiào", "vi": "Mười, mười bạn nhỏ cười ha ha ha"}
+            {"num": "1", "zh": "一个两个三个印第安人", "py": "Yī gè, liǎng gè, sān gè Yìndì'ānrén", "vi": "Một người, hai người, ba người Ấn Độ"},
+            {"num": "2", "zh": "四个五个六个印第安人", "py": "Sì gè, wǔ gè, liù gè Yìndì'ānrén", "vi": "Bốn người, năm người, sáu người Ấn Độ"},
+            {"num": "3", "zh": "七个八个九个印第安人", "py": "Qī gè, bā gè, jiǔ gè Yìndì'ānrén", "vi": "Bảy người, tám người, chín người Ấn Độ"},
+            {"num": "4", "zh": "十个印第安小朋友", "py": "Shí gè Yìndì'ān xiǎopéngyǒu", "vi": "Mười bạn nhỏ Ấn Độ"},
+            {"num": "5", "zh": "十个九个八个印第安人", "py": "Shí gè, jiǔ gè, bā gè Yìndì'ānrén", "vi": "Mười người, chín người, tám người Ấn Độ"},
+            {"num": "6", "zh": "七个六个五个印第安人", "py": "Qī gè, liù gè, wǔ gè Yìndì'ānrén", "vi": "Bảy người, sáu người, năm người Ấn Độ"},
+            {"num": "7", "zh": "四个三个两个印第安人", "py": "Sì gè, sān gè, liǎng gè Yìndì'ānrén", "vi": "Bốn người, ba người, hai người Ấn Độ"},
+            {"num": "8", "zh": "一个印第安小朋友", "py": "Yī gè Yìndì'ān xiǎopéngyǒu", "vi": "Một bạn nhỏ Ấn Độ"}
         ]
 
         for idx, item in enumerate(song_lyrics):
