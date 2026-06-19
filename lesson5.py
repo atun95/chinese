@@ -368,6 +368,61 @@ def show_lesson5_numbers():
     </div>
     """, unsafe_allow_html=True)
                     
+    # --- PHÂN BIỆT 二 (èr) VÀ 两 (liǎng) ---
+    st.markdown("""
+    <div style="background-color: #f0fdf4; border-left: 5px solid #10b981; padding: 20px; border-radius: 8px; margin-top: 25px; margin-bottom: 25px; border: 1px solid #d1fae5;">
+        <h4 style="color: #065f46; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 1.15rem; font-weight: bold;">
+            ⚖️ Phân biệt cách dùng số 2: 二 (èr) và 两 (liǎng)
+        </h4>
+        <p style="font-size: 0.95em; line-height: 1.6; color: #047857; margin-bottom: 15px;">
+            Trong tiếng Trung, số <b>2</b> có hai cách biểu đạt là <b>二 (èr)</b> và <b>两 (liǎng)</b>. Việc lựa chọn từ nào phụ thuộc vào ngữ cảnh sử dụng:
+        </p>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.95em; text-align: left;">
+            <thead>
+                <tr style="background-color: #e6fbf1; border-bottom: 2px solid #a7f3d0;">
+                    <th style="padding: 10px; color: #065f46; font-weight: bold; width: 25%;">Từ vựng</th>
+                    <th style="padding: 10px; color: #065f46; font-weight: bold; width: 45%;">Quy tắc áp dụng</th>
+                    <th style="padding: 10px; color: #065f46; font-weight: bold; width: 30%;">Ví dụ minh họa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 10px; font-weight: bold; color: #047857; font-size: 1.1em;">
+                        二 (èr)
+                    </td>
+                    <td style="padding: 10px; color: #1e293b;">
+                        • Đọc số đếm thuần túy (1, 2, 3...).<br>
+                        • Số thứ tự, số phòng, số xe, số điện thoại.<br>
+                        • Đứng ở hàng chục, hàng đơn vị.
+                    </td>
+                    <td style="padding: 10px; font-family: monospace; color: #047857;">
+                        <b>一，二，三</b> (yī, èr, sān)<br>
+                        <b>第二</b> (dì-èr: thứ hai)<br>
+                        <b>十二</b> (shí'èr: 12)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; font-weight: bold; color: #b45309; font-size: 1.1em;">
+                        两 (liǎng)
+                    </td>
+                    <td style="padding: 10px; color: #1e293b;">
+                        • Đứng trước <b>lượng từ</b> để chỉ số lượng người/vật.<br>
+                        • Đứng trước các đơn vị số lớn từ hàng trăm trở lên (trăm, nghìn, vạn, tỷ...).
+                    </td>
+                    <td style="padding: 10px; font-family: monospace; color: #b45309;">
+                        <b>两个人</b> (liǎng gè rén: 2 người)<br>
+                        <b>两个粽子</b> (liǎng gè zòngzi: 2 bánh ú)<br>
+                        <b>两百</b> (liǎngbǎi: 200)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="background-color: #fffbeb; border: 1px solid #fef3c7; color: #92400e; padding: 10px; border-radius: 6px; margin-top: 15px; font-size: 0.9em; font-weight: 500;">
+            ⚠️ <b>Cực kỳ quan trọng:</b> Tuyệt đối không nói <del>二个人 (èr gè rén)</del> mà bắt buộc phải dùng <b>两个人 (liǎng gè rén)</b>!
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("---")
     st.subheader("🎯 Thử thách Phản xạ Số đếm")
     st.write("Giáo viên nhấn nút **Tạo số ngẫu nhiên** để yêu cầu học viên phản xạ nhanh cách phát âm, chữ Hán hoặc làm ký hiệu tay tương ứng.")
@@ -574,6 +629,18 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
                         sub_key = f"btn_sub_nasal_{item['chu']}_{idx}_{s_idx}"
                         render_play_button(sub["py"], f"🔊 {sub['han']} ({sub['py']}): {sub['vi']}", key=sub_key)
                 st.markdown("<br/>", unsafe_allow_html=True)
+
+        # Quy tắc đặc biệt cho vận mẫu ong khi đứng một mình
+        st.markdown("""
+        <div style="background-color: #fffbeb; border-left: 6px solid #f59e0b; padding: 18px; border-radius: 12px; margin-top: 10px; margin-bottom: 25px;">
+            <h4 style="color: #7c2d12; margin-top: 0; font-weight: bold; display: flex; align-items: center; gap: 8px;">💡 Quy tắc đặc biệt: Khi vận mẫu "ong" đứng một mình</h4>
+            <p style="color: #7c2d12; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Trong hệ thống Bính âm (Pinyin) tiêu chuẩn, vận mẫu <b>ong</b> không bao giờ đứng độc lập làm một âm tiết riêng biệt. 
+                Khi một chữ Hán có phát âm này mà không có thanh mẫu đi kèm phía trước, nó sẽ được viết biến đổi thành <b>weng</b> (ví dụ: chữ <b>翁</b> - wēng - nghĩa là 'ông lão'). 
+                <br/><i>*Lưu ý cho học viên: Khi viết độc lập, hãy nhớ đổi cách viết từ <b>ong</b> thành <b>weng</b> nhé!</i>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
                 
     # --- TAB 2: DIFFERENCE ---
     with tab_diff:
@@ -1562,8 +1629,15 @@ def show_lesson5_duanwu():
 
     # --- TAB 1: TRUYỀN THUYẾT ---
     with tab_story:
-        st.markdown("""
-<div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+        st.markdown("### ❓ Câu hỏi dẫn dắt trên lớp:")
+        st.info("💡 **Gợi ý cho giáo viên:** Hỏi học viên xem họ có biết Tết Đoan Ngọ bắt nguồn từ câu chuyện của nhân vật lịch sử nào không? Tại sao ngày này người ta lại ăn bánh ú (bánh tro) và đua thuyền rồng?")
+        
+        # Checkbox để giáo viên bật mở câu chuyện
+        show_story = st.checkbox("🔓 Hiển thị câu chuyện truyền thuyết (Khuất Nguyên)", value=False, key="dw_show_story")
+        
+        if show_story:
+            st.markdown("""
+<div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 20px; border-radius: 12px; margin-bottom: 20px; margin-top: 15px;">
 <h3 style="color: #14532d; margin-top: 0; font-weight: 800;">🐉 Truyền thuyết Khuất Nguyên (屈原)</h3>
 <p style="line-height: 1.6; color: #166534; font-size: 1.05em;">
 <b>Khuất Nguyên</b> (khoảng 340–278 TCN) là vị trung thần tài hoa và nhà thơ yêu nước vĩ đại của nước Sở thời Chiến Quốc. Khi đất nước bị quân Tần xâm chiếm, ông vô cùng đau xót, đã ôm đá gieo mình xuống sông <b>Mịch La (汨罗江)</b> tự vẫn vào ngày <b>mùng 5 tháng 5 Âm lịch</b> để thể hiện khí tiết.
@@ -1572,13 +1646,13 @@ def show_lesson5_duanwu():
 Thương tiếc ông, người dân hối hả chèo thuyền ra cứu (nguồn gốc của <b>đua thuyền rồng</b>), đồng thời ném cơm nếp bọc lá tre xuống sông để cá không ăn thân xác ông (nguồn gốc của <b>bánh tro - bánh ú</b>). Từ đó, ngày 5/5 âm lịch trở thành ngày Tết Đoan Ngọ để tưởng nhớ ông.
 </p>
 </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
-        col_audio1, col_audio2 = st.columns(2)
-        with col_audio1:
-            render_play_button("屈原", "🔊 Nghe phát âm: 屈原 (Khuất Nguyên)", key="dw_play_quyuan_name")
-        with col_audio2:
-            render_play_button("端午节", "🔊 Nghe phát âm: 端午节 (Tết Đoan Ngọ)", key="dw_play_duanwujie_name")
+            col_audio1, col_audio2 = st.columns(2)
+            with col_audio1:
+                render_play_button("屈原", "🔊 Nghe phát âm: 屈原 (Khuất Nguyên)", key="dw_play_quyuan_name")
+            with col_audio2:
+                render_play_button("端午节", "🔊 Nghe phát âm: 端午节 (Tết Đoan Ngọ)", key="dw_play_duanwujie_name")
 
     # --- TAB 2: TỪ VỰNG FLASHCARD ---
     with tab_vocab:
