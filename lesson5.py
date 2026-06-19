@@ -2113,6 +2113,297 @@ Nhiều người quan niệm ngày này gắn liền với cái chết thương 
             render_quiz_feedback(6, is_q6_correct, q6, correct_answers["q6"])
 
 
+def show_lesson5_classroom_practice():
+    import random
+    render_lesson_intro(
+        title="🗣️ Bài 5.1 - Thực hành Giao tiếp & Phản xạ trên lớp",
+        objective="Tích hợp kiến thức của cả Bài 5 (Vận mẫu mũi, số đếm từ 0-10 và cách dùng phó từ 很/非常/太) vào các hoạt động thực hành khẩu ngữ tương tác trực tiếp trên lớp."
+    )
+
+    tab_reflex, tab_builder, tab_roleplay = st.tabs([
+        "🎲 1. Phản xạ Siêu tốc",
+        "✍️ 2. Máy ghép câu Tích hợp",
+        "🎭 3. Kịch bản Đóng vai"
+    ])
+
+    # --- TAB 1: PHẢN XẠ SIÊU TỐC ---
+    with tab_reflex:
+        st.markdown("""
+        <div style="background-color: #eff6ff; border-left: 6px solid #3b82f6; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+            <h4 style="color: #1e3a8a; margin-top: 0; font-weight: bold;">🎲 Thử thách phản xạ Số đếm + Mức độ + Âm mũi</h4>
+            <p style="color: #1e3a8a; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                <b>Luật chơi:</b> Nhấn nút để tạo ngẫu nhiên thử thách. Học viên tương ứng với <b>Số thứ tự/Số lượng</b> được chọn phải đứng dậy đặt câu chứa <b>Phó từ mức độ</b> và <b>Tính từ/Động từ</b> yêu cầu.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Trạng thái session_state cho game phản xạ
+        if "reflex_num" not in st.session_state:
+            st.session_state.reflex_num = "五 (5)"
+            st.session_state.reflex_adv = "非常 (vô cùng)"
+            st.session_state.reflex_adj = "忙 (bận - chứa âm mũi /ang/)"
+            st.session_state.reflex_target = "Ví dụ: 五个人非常忙。 (5 người vô cùng bận.)"
+            st.session_state.reflex_audio = "五个人非常忙。"
+
+        numbers_pool = [
+            {"zh": "一 (1)", "val": "一"},
+            {"zh": "二 (2)", "val": "二"},
+            {"zh": "三 (3)", "val": "三"},
+            {"zh": "四 (4)", "val": "四"},
+            {"zh": "五 (5)", "val": "五"},
+            {"zh": "六 (6)", "val": "六"},
+            {"zh": "七 (7)", "val": "七"},
+            {"zh": "八 (8)", "val": "八"},
+            {"zh": "九 (9)", "val": "九"},
+            {"zh": "十 (10)", "val": "十"}
+        ]
+        adv_pool = [
+            {"zh": "很 (rất)", "val": "很"},
+            {"zh": "非常 (vô cùng)", "val": "非常"},
+            {"zh": "太...l (quá... rồi)", "val": "太"}
+        ]
+        adj_pool = [
+            {"zh": "忙 (bận - âm mũi /ang/)", "val": "忙", "eg": "个人hěn忙 / người rất bận"},
+            {"zh": "累 (mệt)", "val": "累", "eg": "个人非常累 / người vô cùng mệt"},
+            {"zh": "高兴 (vui vẻ - âm mũi /ing/)", "val": "高兴", "eg": "个人太高兴了 / người vui quá rồi"},
+            {"zh": "红 (đỏ - âm mũi /ong/)", "val": "红", "eg": "个苹果很hóng / quả táo rất đỏ"},
+            {"zh": "吃粽子 (ăn bánh ú - âm mũi /ing/)", "val": "吃粽子", "eg": "个人喜欢吃粽子 / người thích ăn bánh ú"}
+        ]
+
+        if st.button("🎰 Tạo thử thách ngẫu nhiên!", use_container_width=True, key="btn_rand_reflex"):
+            r_num = random.choice(numbers_pool)
+            r_adv = random.choice(adv_pool)
+            r_adj = random.choice(adj_pool)
+            
+            st.session_state.reflex_num = r_num["zh"]
+            st.session_state.reflex_adv = r_adv["zh"]
+            st.session_state.reflex_adj = r_adj["zh"]
+            
+            # Xây dựng câu ví dụ
+            num_val = r_num["val"]
+            adv_val = r_adv["val"]
+            adj_val = r_adj["val"]
+            
+            if adj_val == "红":
+                if adv_val == "太":
+                    st.session_state.reflex_target = f"Ví dụ: {num_val}个苹果太红了！ ({num_val} quả táo đỏ quá rồi!)"
+                    st.session_state.reflex_audio = f"{num_val}个苹果太红了"
+                else:
+                    st.session_state.reflex_target = f"Ví dụ: {num_val}个苹果{adv_val}红。 ({num_val} quả táo {adv_val.replace('很', 'rất').replace('非常', 'vô cùng')} đỏ.)"
+                    st.session_state.reflex_audio = f"{num_val}个苹果{adv_val}红"
+            elif adj_val == "吃粽子":
+                st.session_state.reflex_target = f"Ví dụ: {num_val}个人{adv_val.replace('太', '很')}喜欢吃粽子。 ({num_val} người {adv_val.replace('太', 'rất').replace('很', 'rất').replace('非常', 'vô cùng')} thích ăn bánh ú.)"
+                st.session_state.reflex_audio = f"{num_val}个人很喜欢吃粽子"
+            else:
+                if adv_val == "太":
+                    st.session_state.reflex_target = f"Ví dụ: {num_val}个人太{adj_val}了！ ({num_val} người {adj_val.replace('忙', 'bận').replace('累', 'mệt').replace('高兴', 'vui')} quá rồi!)"
+                    st.session_state.reflex_audio = f"{num_val}个人太{adj_val}了"
+                else:
+                    st.session_state.reflex_target = f"Ví dụ: {num_val}个人{adv_val}{adj_val}。 ({num_val} người {adv_val.replace('很', 'rất').replace('非常', 'vô cùng')} {adj_val.replace('忙', 'bận').replace('累', 'mệt').replace('高兴', 'vui')}.)"
+                    st.session_state.reflex_audio = f"{num_val}个人{adv_val}{adj_val}"
+            st.rerun()
+
+        # Hiển thị thử thách dạng thẻ lớn
+        st.markdown(f"""
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 10px; margin-bottom: 20px;">
+            <div style="background: #fffbeb; border: 2px solid #fde68a; border-radius: 12px; padding: 20px; text-align: center;">
+                <span style="font-size: 0.85em; color: #b45309; font-weight: bold; text-transform: uppercase;">🔢 Số lượng:</span>
+                <div style="font-size: 1.8rem; font-weight: 800; color: #d97706; margin-top: 8px;">{st.session_state.reflex_num}</div>
+            </div>
+            <div style="background: #fdf2f8; border: 2px solid #fbcfe8; border-radius: 12px; padding: 20px; text-align: center;">
+                <span style="font-size: 0.85em; color: #be185d; font-weight: bold; text-transform: uppercase;">⚡ Mức độ:</span>
+                <div style="font-size: 1.8rem; font-weight: 800; color: #db2777; margin-top: 8px;">{st.session_state.reflex_adv}</div>
+            </div>
+            <div style="background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 12px; padding: 20px; text-align: center;">
+                <span style="font-size: 0.85em; color: #15803d; font-weight: bold; text-transform: uppercase;">👄 Từ khóa (Âm mũi):</span>
+                <div style="font-size: 1.6rem; font-weight: 800; color: #16a34a; margin-top: 8px;">{st.session_state.reflex_adj}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.info(f"💡 {st.session_state.reflex_target}")
+        render_play_button(st.session_state.reflex_audio, "🔊 Nghe phát âm gợi ý", key="reflex_audio_btn")
+
+    # --- TAB 2: MÁY GHÉP CÂU TÍCH HỢP ---
+    with tab_builder:
+        st.markdown("""
+        <div style="background-color: #fdf6f0; border-left: 6px solid #d97706; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+            <h4 style="color: #b45309; margin-top: 0; font-weight: bold;">✍️ Luyện viết và ghép câu tích hợp</h4>
+            <p style="color: #b45309; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Học viên tự chọn các thành phần ngữ pháp trong bảng để ghép thành câu. Máy sẽ tự động dịch nghĩa, hiển thị bính âm và phát âm chuẩn để luyện đọc.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_sub, col_num, col_deg, col_act = st.columns(4)
+        
+        with col_sub:
+            sub_opt = st.selectbox("1. Chủ ngữ (Âm mũi):", [
+                "我 (tôi)", "您 (ngài)", "朋友 (bạn)", "中国人 (người Trung Quốc)", "越南人 (người Việt Nam)"
+            ], key="b51_sub")
+        with col_num:
+            num_opt = st.selectbox("2. Số lượng (Số đếm):", [
+                "(Không chọn)", "一个 (1 người/cái)", "三个 (3 người/cái)", "五个 (5 người/cái)", "八个 (8 người/cái)", "十个 (10 người/cái)"
+            ], key="b51_num")
+        with col_deg:
+            deg_opt = st.selectbox("3. Phó từ mức độ:", [
+                "很 (rất)", "非常 (vô cùng)", "太 (quá... rồi)", "(Không chọn)"
+            ], key="b51_deg")
+        with col_act:
+            act_opt = st.selectbox("4. Tính từ / Hoạt động:", [
+                "忙 (bận)", "累 (mệt)", "高兴 (vui vẻ)", "吃粽子 (ăn bánh tro)"
+            ], key="b51_act")
+
+        # Xử lý ghép câu
+        sub_zh = sub_opt.split(" ")[0]
+        act_zh = act_opt.split(" ")[0]
+        
+        num_zh = "" if "Không" in num_opt else num_opt.split(" ")[0]
+        deg_zh = "" if "Không" in deg_opt else deg_opt.split(" ")[0]
+
+        # Xây dựng câu hoàn chỉnh
+        full_zh = ""
+        translation = ""
+        pinyin_text = ""
+
+        # Dịch các thành phần để hiển thị nghĩa tiếng Việt
+        sub_vi = "Tôi" if sub_zh == "我" else "Ngài" if sub_zh == "您" else "Bạn bè" if sub_zh == "朋友" else "Người Trung Quốc" if sub_zh == "中国人" else "Người Việt Nam"
+        num_vi = "" if not num_zh else "1 người/cái" if "一" in num_zh else "3 người/cái" if "三" in num_zh else "5 người/cái" if "五" in num_zh else "8 người/cái" if "八" in num_zh else "10 người/cái"
+        deg_vi = "rất" if deg_zh == "很" else "vô cùng" if deg_zh == "非常" else "quá" if deg_zh == "太" else ""
+        act_vi = "bận" if act_zh == "忙" else "mệt" if act_zh == "累" else "vui vẻ" if act_zh == "高兴" else "ăn bánh tro"
+
+        # Cấu trúc câu
+        if num_zh:
+            classifier = "个"
+            num_clean = num_zh.replace("个", "")
+            
+            if act_zh == "吃粽子":
+                full_zh = f"{num_clean}个人"
+                pinyin_text = f"{num_clean.replace('一','yī').replace('三','sān').replace('五','wǔ').replace('八','bā').replace('十','shí')} gè rén "
+                
+                if deg_zh == "太":
+                    full_zh += "太喜欢吃粽子了"
+                    pinyin_text += "tài xǐhuān chī zòngzi le"
+                    translation = f"{num_vi.replace('người/cái', 'người')} thích ăn bánh tro quá rồi"
+                else:
+                    d_z = "很" if not deg_zh else deg_zh
+                    full_zh += f"{d_z}喜欢吃粽子"
+                    pinyin_text += f"{'hěn' if d_z=='很' else 'fēicháng'} xǐhuān chī zòngzi"
+                    translation = f"{num_vi.replace('người/cái', 'người')} {deg_vi or 'rất'} thích ăn bánh tro"
+            else:
+                if deg_zh == "太":
+                    full_zh = f"{num_clean}个人太{act_zh}了"
+                    pinyin_text = f"{num_clean.replace('一','yī').replace('三','sān').replace('五','wǔ').replace('八','bā').replace('十','shí')} gè rén tài { 'máng' if act_zh=='忙' else 'lèi' if act_zh=='累' else 'gāoxìng' } le"
+                    translation = f"{num_vi.replace('người/cái', 'người')} {act_vi} quá rồi"
+                else:
+                    d_z = "很" if not deg_zh else deg_zh
+                    full_zh = f"{num_clean}个人{d_z}{act_zh}"
+                    pinyin_text = f"{num_clean.replace('一','yī').replace('三','sān').replace('五','wǔ').replace('八','bā').replace('十','shí')} gè rén {'hěn' if d_z=='很' else 'fēicháng'} {'máng' if act_zh=='忙' else 'lèi' if act_zh=='累' else 'gāoxìng'}"
+                    translation = f"{num_vi.replace('người/cái', 'người')} {deg_vi or 'rất'} {act_vi}"
+        else:
+            if act_zh == "吃粽子":
+                if deg_zh == "太":
+                    full_zh = f"{sub_zh}太喜欢吃粽子了"
+                    pinyin_text = f"{'wǒ' if sub_zh=='我' else 'nín' if sub_zh=='您' else 'péngyou' if sub_zh=='朋友' else 'Zhōngguórén' if sub_zh=='中国人' else 'Yuènánrén'} tài xǐhuān chī zòngzi le"
+                    translation = f"{sub_vi} thích ăn bánh tro quá rồi"
+                else:
+                    d_z = "很" if not deg_zh else deg_zh
+                    full_zh = f"{sub_zh}{d_z}喜欢吃粽子"
+                    pinyin_text = f"{'wǒ' if sub_zh=='我' else 'nín' if sub_zh=='您' else 'péngyou' if sub_zh=='朋友' else 'Zhōngguórén' if sub_zh=='中国人' else 'Yuènánrén'} {'hěn' if d_z=='很' else 'fēicháng'} xǐhuān chī zòngzi"
+                    translation = f"{sub_vi} {deg_vi or 'rất'} thích ăn bánh tro"
+            else:
+                if deg_zh == "太":
+                    full_zh = f"{sub_zh}太{act_zh}了"
+                    pinyin_text = f"{'wǒ' if sub_zh=='我' else 'nín' if sub_zh=='您' else 'péngyou' if sub_zh=='朋友' else 'Zhōngguórén' if sub_zh=='中国人' else 'Yuènánrén'} tài {'máng' if act_zh=='忙' else 'lèi' if act_zh=='累' else 'gāoxìng'} le"
+                    translation = f"{sub_vi} {act_vi} quá rồi"
+                else:
+                    d_z = "很" if not deg_zh else deg_zh
+                    full_zh = f"{sub_zh}{d_z}{act_zh}"
+                    pinyin_text = f"{'wǒ' if sub_zh=='wǒ' or sub_zh=='我' else 'nín' if sub_zh=='您' else 'péngyou' if sub_zh=='朋友' else 'Zhōngguórén' if sub_zh=='中国人' else 'Yuènánrén'} {'hěn' if d_z=='很' else 'fēicháng'} {'máng' if act_zh=='忙' else 'lèi' if act_zh=='累' else 'gāoxìng'}"
+                    translation = f"{sub_vi} {deg_vi or 'rất'} {act_vi}"
+
+        # Sửa pinyin chuẩn
+        pinyin_text = pinyin_text.strip().capitalize()
+        pinyin_text = pinyin_text.replace("wǒ", "Wǒ").replace("nín", "Nín").replace("péngyou", "Péngyou")
+
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #fdf6f0 0%, #ffedd5 100%); border: 2px solid #fed7aa; border-radius: 16px; padding: 25px; margin-top: 15px; margin-bottom: 15px; text-align: center;">
+            <span style="font-size: 0.85em; color: #ea580c; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">CÂU HOÀN CHỈNH VỪA GHÉP:</span>
+            <div style="font-size: 2.2rem; font-weight: 800; color: #7c2d12; margin: 10px 0;">{full_zh}</div>
+            <div style="font-family: 'Courier New', monospace; font-size: 1.25rem; font-weight: bold; color: #2563eb; margin-bottom: 8px;">{pinyin_text}</div>
+            <div style="font-size: 1.1rem; color: #475569; font-style: italic;">Nghĩa: {translation}.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        render_play_button(full_zh, "🔊 Phát âm câu vừa ghép", key="builder_play_integrated_btn")
+
+    # --- TAB 3: KỊCH BẢN ĐỒNG VAI ---
+    with tab_roleplay:
+        st.markdown("""
+        <div style="background-color: #f0fdf4; border-left: 6px solid #10b981; padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+            <h4 style="color: #14532d; margin-top: 0; font-weight: bold;">🎭 Kịch bản Đóng vai: Giao dịch ngày Tết Đoan Ngọ</h4>
+            <p style="color: #14532d; font-size: 0.95em; line-height: 1.5; margin-bottom: 0;">
+                Tình huống: Học viên đóng vai Khách mua (A) và Chủ quán (B) để thực hiện giao dịch mua bán bánh ú/hoa quả ngày Tết Đoan Ngọ, sử dụng số đếm và từ chỉ mức độ.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_rp1, col_rp2 = st.columns(2)
+        with col_rp1:
+            item_type = st.selectbox("Chọn loại hàng mua:", [
+                "粽子 (Bánh ú / Bánh tro - âm mũi /ing/)",
+                "水果 (Hoa quả / Trái cây - HSK 1)"
+            ], key="rp_item")
+        with col_rp2:
+            qty_val = st.slider("Số lượng mua (Số đếm):", 1, 10, 5, key="rp_qty")
+
+        # Chuẩn bị dữ liệu cho kịch bản
+        item_zh = "粽子" if "粽子" in item_type else "水果"
+        item_vi = "bánh ú" if item_zh == "粽子" else "hoa quả"
+        
+        qty_zh = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"][qty_val]
+        qty_py = ["líng", "yī", "èr", "sān", "sì", "wǔ", "liù", "qī", "bā", "jiǔ", "shí"][qty_val]
+
+        st.markdown("### 🗣️ Kịch bản Giao tiếp A vs B:")
+
+        # Cặp thoại 1: Khách hỏi mua
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px;">
+            <b style="color: #2563eb;">👤 Nhân vật A (Khách mua):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">你好！我要买{qty_zh}个{item_zh}。</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Nǐ hǎo! Wǒ yào mǎi {qty_py} gè {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'}.</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Xin chào! Tôi muốn mua {qty_val} cái/quả {item_vi}.)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"你好！我要买{qty_zh}个{item_zh}。", "🔊 Phát âm A1", key="rp_play_a1")
+
+        # Cặp thoại 2: Chủ quán báo giá
+        price_num = qty_val * 2
+        price_zh = ["零", "二", "四", "六", "八", "十", "十二", "十四", "十六", "十八", "二十"][qty_val]
+        price_py = ["líng", "èr", "sì", "liù", "bā", "shí", "shí'èr", "shísì", "shíliù", "shíbā", "èrshí"][qty_val]
+        
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
+            <b style="color: #16a34a;">👤 Nhân vật B (Chủ quán):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">好的。{qty_zh}个{item_zh}，一共{price_zh}块钱。</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Hǎo de. {qty_py} gè {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'}, yīgòng {price_py} kuài qián.</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Dạ được. {qty_val} {item_vi}, tổng cộng là {price_num} đồng.)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"好的。{qty_zh}个{item_zh}，一共{price_zh}块钱。", "🔊 Phát âm B1", key="rp_play_b1")
+
+        # Cặp thoại 3: Khách nhận xét và cảm xúc
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
+            <b style="color: #2563eb;">👤 Nhân vật A (Khách mua):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">这个{item_zh}非常红，非常好吃！今天我太高兴了！</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Zhège {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'} fēicháng hóng, fēicháng hǎochī! Jīntiān wǒ tài gāoxìng le!</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">({item_zh == '粽子' and 'Bánh ú' or 'Hoa quả'} này vô cùng đỏ, vô cùng ngon! Hôm nay tôi vui quá rồi!)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"这个{item_zh}非常红，非常好吃！今天我太高兴了！", "🔊 Phát âm A2", key="rp_play_a2")
+
+
 
 
 

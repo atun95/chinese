@@ -368,7 +368,8 @@ elif mode == "🗣️ Thực hành trên lớp":
     menu = st.sidebar.radio("Chọn hoạt động:", [
         "Bài 3.1 - Hội thoại thực hành",
         "Bài 4.1 - Đấu trường Luyện tập",
-        "Bài 4.2 - Phản xạ & Giao tiếp"
+        "Bài 4.2 - Phản xạ & Giao tiếp",
+        "Bài 5.1 - Thực hành Giao tiếp & Phản xạ"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -448,6 +449,9 @@ elif menu == "Bài 4.1 - Đấu trường Luyện tập":
 elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
     # Hot-reload trigger: 2026-06-12 12:19
     lesson4.show_lesson4_qa_and_dialogues()
+
+elif menu == "Bài 5.1 - Thực hành Giao tiếp & Phản xạ":
+    lesson5.show_lesson5_classroom_practice()
 
 elif menu == "Bài 6 - Nét chữ Hán cơ bản":
     lesson4.show_lesson4_hanzi()
