@@ -525,10 +525,9 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
         unsafe_allow_html=True
     )
     
-    tab_theory, tab_diff, tab_spelling, tab_arena, tab_exercises = st.tabs([
+    tab_theory, tab_diff, tab_arena, tab_exercises = st.tabs([
         "📚 Lý thuyết",
         "⚖️ Phân biệt",
-        "🎮 Ghép âm",
         "🎲 Classroom",
         "📝 Bài tập"
     ])
@@ -626,55 +625,7 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
                 render_play_button(pair['play_p2'], f"🔊 Nghe âm /{pair['p2']}/", key=f"pair_v_r_{idx}")
                 render_play_button(pair['sound2'], f"🔊 Từ ví dụ: {pair['example2']}", key=f"pair_ex_r_{idx}")
             st.markdown("<br/>", unsafe_allow_html=True)
-    # --- TAB 3: SPELING GRID ---
-    with tab_spelling:
-        st.subheader("3. Bảng ghép âm Vận mẫu mũi (Nasal Finals)")
-        st.write("Nhấp vào từng ô để chọn thanh điệu và nghe phát âm tương ứng:")
 
-        B5_TAB3_FINALS = ["an", "ang", "en", "eng", "in", "ing", "ong"]
-        B5_TAB3_ROWS = {
-            "(Không có)": ["an", "ang", "en", "eng", "yin", "ying", "weng"],
-            "b": ["ban", "bang", "ben", "beng", "bin", "bing", ""],
-            "p": ["pan", "pang", "pen", "peng", "pin", "ping", ""],
-            "m": ["man", "mang", "men", "meng", "min", "ming", ""],
-            "f": ["fan", "fang", "fen", "feng", "", "", ""],
-            "d": ["dan", "dang", "", "deng", "", "ding", "dong"],
-            "t": ["tan", "tang", "", "teng", "", "ting", "tong"],
-            "n": ["nan", "nang", "nen", "neng", "nin", "ning", "nong"],
-            "l": ["lan", "lang", "", "leng", "lin", "ling", "long"],
-            "g": ["gan", "gang", "gen", "geng", "", "", "gong"],
-            "k": ["kan", "kang", "ken", "keng", "", "", "kong"],
-            "h": ["han", "hang", "hen", "heng", "", "", "hong"],
-            "j": ["", "", "", "", "jin", "jing", ""],
-            "q": ["", "", "", "", "qin", "qing", ""],
-            "x": ["", "", "", "", "xin", "xing", ""],
-            "zh": ["zhan", "zhang", "zhen", "zheng", "", "", "zhong"],
-            "ch": ["chan", "chang", "chen", "cheng", "", "", "chong"],
-            "sh": ["shan", "shang", "shen", "sheng", "", "", ""],
-            "r": ["ran", "rang", "ren", "reng", "", "", "rong"],
-            "z": ["zan", "zang", "zen", "zeng", "", "", "zong"],
-            "c": ["can", "cang", "cen", "ceng", "", "", "cong"],
-            "s": ["san", "sang", "sen", "seng", "", "", "song"]
-        }
-
-        h_cols = st.columns([1.5] + [1] * len(B5_TAB3_FINALS))
-        h_cols[0].markdown("**T/V**")
-        for i, f in enumerate(B5_TAB3_FINALS): 
-            h_cols[i+1].markdown(f"**{f}**")
-        for init in B5_TAB3_ROWS.keys():
-            r_cols = st.columns([1.5] + [1] * len(B5_TAB3_FINALS))
-            r_cols[0].markdown(f"**{init}**")
-            for i, combo in enumerate(B5_TAB3_ROWS[init]):
-                if combo:
-                    with r_cols[i+1]:
-                        with st.popover(combo, use_container_width=True):
-                            for t in add_tones(combo):
-                                col_t, col_btn = st.columns([2, 1])
-                                col_t.write(f"- {t}")
-                                with col_btn:
-                                    render_play_button(get_nasal_audio(t), "🔊", key=f"btn_p_b5_tab3_{init}_{combo}_{t}", height=45)
-                else:
-                    r_cols[i+1].write("")
 
     # --- TAB 4: ARENA ---
     with tab_arena:
