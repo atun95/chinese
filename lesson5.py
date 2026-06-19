@@ -2433,48 +2433,91 @@ def show_lesson5_classroom_practice():
         # Chuẩn bị dữ liệu cho kịch bản
         item_zh = "粽子" if "粽子" in item_type else "水果"
         item_vi = "bánh ú" if item_zh == "粽子" else "hoa quả"
+        item_py = "zòngzi" if item_zh == "粽子" else "shuǐguǒ"
         
         qty_zh = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"][qty_val]
         qty_py = ["líng", "yī", "èr", "sān", "sì", "wǔ", "liù", "qī", "bā", "jiǔ", "shí"][qty_val]
+
+        # Đổi er thành liang khi đứng trước lượng từ ge!
+        qty_display_zh = "两" if qty_val == 2 else qty_zh
+        qty_display_py = "liǎng" if qty_val == 2 else qty_py
+        
+        # Báo giá: 2 đồng một cái
+        price_num = qty_val * 2
+        price_zh = ["零", "二", "四", "六", "八", "十", "十二", "十四", "十六", "十八", "二十"][qty_val]
+        price_py = ["líng", "èr", "sì", "liù", "bā", "shí", "shí'èr", "shísì", "shíliù", "shíbā", "èrshí"][qty_val]
+        
+        # Đổi giá trị cho số 2 đồng thành 两块钱
+        price_display_zh = "两" if price_num == 2 else price_zh
+        price_display_py = "liǎng" if price_num == 2 else price_py
 
         st.markdown("### 🗣️ Kịch bản Giao tiếp A vs B:")
 
         # Cặp thoại 1: Khách hỏi mua
         st.markdown(f"""
         <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px;">
-            <b style="color: #2563eb;">👤 Nhân vật A (Khách mua):</b><br/>
-            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">你好！我要买{qty_zh}个{item_zh}。</span><br/>
-            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Nǐ hǎo! Wǒ yào mǎi {qty_py} gè {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'}.</span><br/>
-            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Xin chào! Tôi muốn mua {qty_val} cái/quả {item_vi}.)</span>
+            <b style="color: #2563eb;">👤 A1. Khách mua (A):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">老板，你好！我想买{item_zh}。这个{item_zh}怎么卖？</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Lǎobǎn, nǐ hǎo! Wǒ xiǎng mǎi {item_py}. Zhège {item_py} zěnme mài?</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Ông chủ chào anh! Tôi muốn mua {item_vi}. {item_vi} này bán thế nào?)</span>
         </div>
         """, unsafe_allow_html=True)
-        render_play_button(f"你好！我要买{qty_zh}个{item_zh}。", "🔊 Phát âm A1", key="rp_play_a1")
+        render_play_button(f"老板，你好！我想买{item_zh}。这个{item_zh}怎么卖？", "🔊 Phát âm A1", key="rp_play_a1")
 
-        # Cặp thoại 2: Chủ quán báo giá
-        price_num = qty_val * 2
-        price_zh = ["零", "二", "四", "六", "八", "十", "十二", "十四", "十六", "十八", "二十"][qty_val]
-        price_py = ["líng", "èr", "sì", "liù", "bā", "shí", "shí'èr", "shísì", "shíliù", "shíbā", "èrshí"][qty_val]
-        
+        # Cặp thoại 2: Chủ quán báo giá 1 đơn vị
         st.markdown(f"""
         <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
-            <b style="color: #16a34a;">👤 Nhân vật B (Chủ quán):</b><br/>
-            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">好的。{qty_zh}个{item_zh}，一共{price_zh}块钱。</span><br/>
-            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Hǎo de. {qty_py} gè {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'}, yīgòng {price_py} kuài qián.</span><br/>
-            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Dạ được. {qty_val} {item_vi}, tổng cộng là {price_num} đồng.)</span>
+            <b style="color: #16a34a;">👤 B1. Chủ quán (B):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">你好！这个{item_zh}很大，非常好吃。一个两块钱。</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Nǐ hǎo! Zhège {item_py} hěn dà, fēicháng hǎochī. Yī gè liǎng kuài qián.</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Chào bạn! {item_vi} này rất to, vô cùng ngon. Một cái giá 2 đồng.)</span>
         </div>
         """, unsafe_allow_html=True)
-        render_play_button(f"好的。{qty_zh}个{item_zh}，一共{price_zh}块钱。", "🔊 Phát âm B1", key="rp_play_b1")
+        render_play_button(f"你好！这个{item_zh}很大，非常好吃。一个两块钱。", "🔊 Phát âm B1", key="rp_play_b1")
 
-        # Cặp thoại 3: Khách nhận xét và cảm xúc
+        # Cặp thoại 3: Khách đặt số lượng mua
         st.markdown(f"""
         <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
-            <b style="color: #2563eb;">👤 Nhân vật A (Khách mua):</b><br/>
-            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">这个{item_zh}非常红，非常好吃！今天我太高兴了！</span><br/>
-            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Zhège {item_zh == '粽子' and 'zòngzi' or 'shuǐguǒ'} fēicháng hóng, fēicháng hǎochī! Jīntiān wǒ tài gāoxìng le!</span><br/>
-            <span style="color: #475569; font-style: italic; font-size: 0.9em;">({item_zh == '粽子' and 'Bánh ú' or 'Hoa quả'} này vô cùng đỏ, vô cùng ngon! Hôm nay tôi vui quá rồi!)</span>
+            <b style="color: #2563eb;">👤 A2. Khách mua (A):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">那我要买{qty_display_zh}个。这个{item_zh}红不红？</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Nà wǒ yào mǎi {qty_display_py} gè. Zhège {item_py} hóng bù hóng?</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Vậy tôi muốn mua {qty_val} cái. {item_vi} này có đỏ không?)</span>
         </div>
         """, unsafe_allow_html=True)
-        render_play_button(f"这个{item_zh}非常红，非常好吃！今天我太高兴了！", "🔊 Phát âm A2", key="rp_play_a2")
+        render_play_button(f"那我要买{qty_display_zh}个。这个{item_zh}红不红？", "🔊 Phát âm A2", key="rp_play_a2")
+
+        # Cặp thoại 4: Chủ quán khẳng định chất lượng & báo tổng tiền
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
+            <b style="color: #16a34a;">👤 B2. Chủ quán (B):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">非常红！非常甜！{qty_display_zh}个一共{price_display_zh}块钱。</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Fēicháng hóng! Fēicháng tián! {qty_display_py} gè yīgòng {price_display_py} kuài qián.</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Vô cùng đỏ! Vô cùng ngọt! {qty_val} cái tổng cộng là {price_num} đồng.)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"非常红！非常甜！{qty_display_zh}个一共{price_display_zh}块钱。", "🔊 Phát âm B2", key="rp_play_b2")
+
+        # Cặp thoại 5: Khách đưa tiền & khen ngợi
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
+            <b style="color: #2563eb;">👤 A3. Khách mua (A):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">给你钱。今天我太高兴了，谢谢老板！</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Gěi nǐ qián. Jīntiān wǒ tài gāoxìng le, xièxie lǎobǎn!</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Gửi tiền ông chủ. Hôm nay tôi vui quá rồi, cảm ơn ông chủ!)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"给你钱。今天我太高兴了，谢谢老板！", "🔊 Phát âm A3", key="rp_play_a3")
+
+        # Cặp thoại 6: Chủ quán chúc mừng & tạm biệt
+        st.markdown(f"""
+        <div style="background:#f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 8px; margin-top: 15px;">
+            <b style="color: #16a34a;">👤 B3. Chủ quán (B):</b><br/>
+            <span style="font-size: 1.15em; font-weight: 700; color: #0f172a;">收你钱，谢谢！祝你端午安康！再见！</span><br/>
+            <span style="font-family: monospace; color: #2563eb; font-size: 0.9em;">Shōu nǐ qián, xièxie! Zhù nǐ Duānwǔ ānkāng! Zàijiàn!</span><br/>
+            <span style="color: #475569; font-style: italic; font-size: 0.9em;">(Nhận tiền của bạn, cảm ơn! Chúc bạn Đoan Ngọ an khang! Tạm biệt!)</span>
+        </div>
+        """, unsafe_allow_html=True)
+        render_play_button(f"收你钱，谢谢！祝你端午安康！再见！", "🔊 Phát âm B3", key="rp_play_b3")
 
     # --- TAB 4: GÓC ÂM NHẠC (手指歌) ---
     with tab_music:
