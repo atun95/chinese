@@ -1,13 +1,91 @@
-# -*- coding: utf-8 -*-
-import os
-import re
-
-# 1. DANH SÁCH BÀI HỌC (Bạn có thể dễ dàng thêm Bài 7, Bài 8... vào đây)
-LESSONS = [
-    {
-        "title": "Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu",
-        "toc_desc": "Thanh mẫu b-h, Vận mẫu đơn, 4 Thanh điệu, Biến điệu thanh 3",
-        "content_html": """
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giáo Trình Tiếng Trung Cơ Bản (Tổng Hợp)</title>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
+        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        th { background-color: #f1f5f9; color: var(--primary-color); }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
+        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
+        @media print { .no-print { display: none !important; } }
+    
+        .cover-page { height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px double var(--primary-color); padding: 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); margin-top: 2vh; page-break-after: always; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print print-btn-container">
+            <button class="print-btn" onclick="window.print()">🖨️ In toàn bộ giáo trình</button>
+        </div>
+        
+        <!-- COVER PAGE -->
+        <div class="cover-page">
+            <div class="cover-badge">TÀI LIỆU HỌC VIÊN</div>
+            <h1 class="cover-title">Giáo Trình Phát Âm & Giao Tiếp Tiếng Trung Cơ Bản</h1>
+            <div class="cover-subtitle">Phần Lý Thuyết & Bài Tập Thực Hành</div>
+        </div>
+        
+        <!-- TABLE OF CONTENTS -->
+        <div style="page-break-before: always; padding-top: 20px; page-break-after: always;">
+            <h1 class="lesson-title" style="border-bottom: 2px solid #000; margin-top: 0;">Mục Lục Giáo Trình</h1>
+            <table style="border: none; width: 100%;">
+                <thead>
+                    <tr style="background-color: transparent; border-bottom: 2px solid #000;">
+                        <th style="background: transparent; color: #000; padding: 12px 0; font-size: 16px; border: none;">Bài học</th>
+                        <th style="background: transparent; color: #000; padding: 12px 0; text-align: right; font-size: 16px; border: none;">Nội dung chính</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_1.html" style="color: var(--primary-color); text-decoration: none;">Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Thanh mẫu b-h, Vận mẫu đơn, 4 Thanh điệu, Biến điệu thanh 3</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_2.html" style="color: var(--primary-color); text-decoration: none;">Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Vận mẫu kép (ai, ei, ao, ou), Bảng ghép âm tổng hợp</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_3.html" style="color: var(--primary-color); text-decoration: none;">Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">j-x, zh-r, z-s, Biến điệu "Bù", Động từ "Shì" & "Yǒu", Cách gọi tên</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_4.html" style="color: var(--primary-color); text-decoration: none;">Bài 4: Vận mẫu kép Mở rộng & Từ vựng chỉ Nữ giới</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">9 Vận mẫu kép mới, Viết gọn iu/ui, Chuyên đề 7 từ vựng chỉ Nữ giới</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_5.html" style="color: var(--primary-color); text-decoration: none;">Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Số đếm 0-10, Biến điệu "Yī", Phân biệt èr/liǎng, Âm mũi, Tết Đoan Ngọ</td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./bai_6.html" style="color: var(--primary-color); text-decoration: none;">Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả</a></td>
+            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">8 Vận mẫu mũi mới, Quy tắc viết đứng độc lập y/w, Lược dấu chấm ü</td>
+        </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- LESSONS -->
+        
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</h1>
+        
         <h2 class="section-title">1. Khái quát về hệ thống chữ viết Pinyin</h2>
         <p>Hệ thống phiên âm tiếng Trung tiêu chuẩn (Bính âm - Pinyin) cấu tạo bởi 3 thành phần chính:</p>
         <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 2px;">
@@ -270,78 +348,12 @@ LESSONS = [
                 <li>Thầy giáo rất bận: <span class="write-line" style="width:300px;"></span></li>
             </ol>
         </div>
-        """,
-        "content_md": """
-### 1. Khái quát về hệ thống chữ viết Pinyin
-Hệ thống phiên âm tiếng Trung tiêu chuẩn (Bính âm - Pinyin) cấu tạo bởi 3 thành phần chính:
-$$\\text{Thanh mẫu (Phụ âm đầu)} + \\text{Vận mẫu (Nguyên âm)} + \\text{Thanh điệu (Dấu)}$$
-
-### 2. Thanh mẫu cơ bản (11 Phụ âm đầu)
-*   **b**: Âm hai môi, không bật hơi. Đọc gần giống chữ "p" nhẹ trong tiếng Việt. Mím hai môi rồi mở ra nhẹ nhàng. (Ví dụ: 爸爸 **bàba** - bố)
-*   **p**: Âm hai môi, bật hơi mạnh. Mím môi chặt rồi đẩy một luồng hơi mạnh từ khoang miệng ra ngoài. Giống âm "ph" bật môi. (Ví dụ: 跑步 **pǎobù** - chạy bộ)
-*   **m**: Âm hai môi, âm mũi. Phát âm giống hệt chữ "m" trong tiếng Việt. (Ví dụ: 妈妈 **māma** - mẹ)
-*   **f**: Âm răng môi. Răng trên chạm nhẹ vào môi dưới, đẩy hơi ra ngoài. Phát âm giống chữ "ph" trong tiếng Việt. (Ví dụ: 饭 **fàn** - cơm)
-*   **d**: Âm đầu lưỡi, không bật hơi. Đọc gần giống chữ "t" trong tiếng Việt. (Ví dụ: 弟弟 **dìdi** - em trai)
-*   **t**: Âm đầu lưỡi, bật hơi mạnh. Đọc gần giống chữ "th" trong tiếng Việt nhưng hơi đẩy ra dứt khoát và mạnh hơn. (Ví dụ: 他 **tā** - anh ấy)
-*   **n**: Âm đầu lưỡi, âm mũi. Phát âm giống hệt chữ "n" trong tiếng Việt. (Ví dụ: 你 **nǐ** - bạn)
-*   **l**: Âm bên đầu lưỡi. Phát âm giống hệt chữ "l" trong tiếng Việt. (Ví dụ: 老师 **lǎoshī** - giáo viên)
-*   **g**: Âm cuống lưỡi, không bật hơi. Đọc gần giống chữ "c" hoặc "k" trong tiếng Việt. (Ví dụ: 哥哥 **gēge** - anh trai)
-*   **k**: Âm cuống lưỡi, bật hơi mạnh. Đọc gần giống chữ "kh" tiếng Việt nhưng cần đẩy luồng hơi mạnh từ cuống họng ra ngoài. (Ví dụ: 渴 **kě** - khát)
-*   **h**: Âm cuống lưỡi, âm xát. Phát âm hơi nhẹ hơn chữ "h" tiếng Việt một chút, giống như tiếng thở phào nhẹ nhõm. (Ví dụ: 好 **hǎo** - tốt)
-
-### 3. Vận mẫu đơn cơ bản (6 Nguyên âm đơn)
-*   **a**: Miệng mở rộng tối đa, lưỡi hạ thấp. Đọc giống chữ "a" trong tiếng Việt. (Ví dụ: 爸 **bà** - bố)
-*   **o**: Môi tròn, miệng hơi khép lại, lưỡi rút về sau. Đọc giống chữ "ô" tiếng Việt. (Ví dụ: 我 **wǒ** - tôi)
-*   **e**: Miệng mở vừa, dẹt sang hai bên. Đọc giống chữ "ơ" hoặc "ưa" trong tiếng Việt. (Ví dụ: 鹅 **é** - con ngỗng)
-*   **i**: Hai môi dẹt, răng khép hờ, lưỡi nâng cao. Đọc giống chữ "i" tiếng Việt. (Ví dụ: 一 **yī** - số một)
-*   **u**: Môi tròn và nhô ra phía trước tối đa. Đọc giống chữ "u" tiếng Việt. (Ví dụ: 五 **wǔ** - số năm)
-*   **ü**: Môi tròn (giống u), lưỡi nâng cao (giống i). Đọc giống âm "uy" nhưng giữ nguyên hình dáng môi tròn suốt quá trình phát âm. (Ví dụ: 绿 **lǜ** - màu xanh lá)
-
-### 4. Hệ thống Thanh điệu
-Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
-*   **Thanh 1 (Thanh ngang - $\\bar{a}$):** Giọng cao, giữ thăng bằng từ đầu đến cuối. Đọc kéo dài hơi.
-*   **Thanh 2 (Thanh sắc - $\\acute{a}$):** Giọng đi từ mức trung bình lên mức cao nhất. Đọc giống dấu sắc tiếng Việt nhưng nhẹ hơn.
-*   **Thanh 3 (Thanh hỏi - $\\check{a}$):** Giọng đi từ thấp xuống cực thấp rồi đi lên trung bình. Đọc giống dấu hỏi kéo dài.
-*   **Thanh 4 (Thanh huyền - $\\grave{a}$):** Giọng đi từ mức cao nhất rơi thẳng xuống mức thấp nhất. Đọc dứt khoát, mạnh mẽ.
-*   **Thanh nhẹ (Neutral Tone):** Không có ký hiệu dấu. Đọc cực kỳ nhẹ và ngắn. Thường xuất hiện ở âm tiết thứ hai của từ láy (Ví dụ: **bàba**, **māma**).
-
-> [!NOTE]
-> **Quy tắc Biến điệu của Thanh 3:**
-> Khi hai âm tiết mang thanh 3 đi liền nhau, thanh 3 thứ nhất sẽ biến âm đọc thành thanh 2 (thanh sắc), nhưng cách viết chữ Pinyin vẫn giữ nguyên dấu thanh 3.
-> *Ví dụ:* 你好 **nǐ hǎo** đọc thực tế là **ní hǎo**.
-
-### 5. Từ vựng cốt lõi Bài 1
-*   **爸爸 (bàba):** bố / ba (Danh từ)
-*   **妈妈 (māma):** mẹ / má (Danh từ)
-*   **哥哥 (gēge):** anh trai (Danh từ)
-*   **姐姐 (jiějie):** chị gái (Danh từ)
-*   **弟弟 (dìdi):** em trai (Danh từ)
-*   **妹妹 (mèimei):** em gái (Danh từ)
-*   **我 (wǒ):** tôi / tớ / mình (Đại từ)
-*   **你 (nǐ):** bạn / cậu / mày (Đại từ)
-*   **他 (tā):** anh ấy / ông ấy (Đại từ)
-*   **她 (tā):** cô ấy / chị ấy (Đại từ)
-*   **老师 (lǎoshī):** thầy giáo / cô giáo (Danh từ)
-*   **学生 (xuéshēng):** học sinh / sinh viên (Danh từ)
-*   **很 (hěn):** rất (Phó từ)
-*   **忙 (máng):** bận rộn (Tính từ)
-*   **不 (bù):** không (Phó từ)
-
-### 6. Bài tập thực hành Bài 1
-1.  **Đánh dấu thanh điệu thích hợp cho các từ sau:**
-    *   Mẹ (mama): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Bố (baba): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Tôi rất bận (wo hen mang): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Giáo viên (laoshi): \\_\\_\\_\\_\\_\\_\\_\\_
-2.  **Dịch các câu sau sang tiếng Trung (Pinyin và Chữ Hán):**
-    *   Tôi không bận: \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
-    *   Thầy giáo rất bận: \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
-        """
-    },
-    {
-        "title": "Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản",
-        "toc_desc": "Vận mẫu kép (ai, ei, ao, ou), Bảng ghép âm tổng hợp",
-        "content_html": """
+        
+    </div>
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản</h1>
+        
         <h2 class="section-title">1. Vận mẫu kép cơ bản (ai, ei, ao, ou)</h2>
         <p>Vận mẫu kép là sự kết hợp của nhiều nguyên âm đơn. Khi phát âm, khẩu hình trượt mượt mà từ âm thứ nhất sang âm thứ hai:</p>
         <table>
@@ -558,44 +570,12 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             <p><strong>Dạng 3: Tập viết tay các âm sau (nhớ viết đúng vị trí dấu thanh điệu):</strong></p>
             <p>1. <span class="pinyin">lǎoshī</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">bǎobèi</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. <span class="pinyin">gēge</span>: <span class="write-line"></span></p>
         </div>
-        """,
-        "content_md": """
-### 1. Vận mẫu kép cơ bản (ai, ei, ao, ou)
-*   **ai**: Miệng mở rộng phát âm nguyên âm /a/, sau đó chuyển nhanh khẩu hình sang dẹt và khép nhẹ ở /i/. Phát âm giống chữ "ai" tiếng Việt. (Ví dụ: 来 **lái** - đến)
-*   **ei**: Miệng mở hé phát âm nguyên âm /e/, sau đó trượt nhanh sang âm /i/. Đọc gần giống chữ "ây" trong tiếng Việt. (Ví dụ: 内 **nèi** - ở trong)
-*   **ao**: Miệng mở rộng bắt đầu từ /a/, trượt mượt mà thu tròn môi lại kết thúc ở âm /o/. Đọc giống chữ "ao" tiếng Việt. (Ví dụ: 宝贝 **bǎobèi** - bảo bối)
-*   **ou**: Môi tròn vừa phát âm /o/, nhanh chóng thu tròn môi nhỏ lại kết thúc ở âm /u/. Đọc giống chữ "âu" trong tiếng Việt. (Ví dụ: 狗 **gǒu** - con chó)
-
-### 2. Bảng Ghép âm cơ bản (Thanh mẫu + Vận mẫu đơn & kép)
-
-| Pinyin | a | o | e | i | u | ü | ai | ei | ao | ou |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **b** | ba | bo | - | bi | bu | - | bai | bei | bao | - |
-| **p** | pa | po | - | pi | pu | - | pai | pei | pao | pou |
-| **m** | ma | mo | me | mi | mu | - | mai | mei | mao | mou |
-| **f** | fa | fo | - | - | fu | - | - | fei | - | fou |
-| **d** | da | - | de | di | du | - | dai | dei | dao | dou |
-| **t** | ta | - | te | ti | tu | - | tai | - | tao | tou |
-| **n** | na | - | ne | ni | nu | nü | nai | nei | nao | nou |
-| **l** | la | - | le | li | lu | lü | lai | lei | lao | lou |
-| **g** | ga | - | ge | - | gu | - | gai | gei | gao | gou |
-| **k** | ka | - | ke | - | ku | - | kai | kei | kao | kou |
-| **h** | ha | - | he | - | hu | - | hai | hei | hao | hou |
-
-### 3. Bài tập thực hành Bài 2
-1.  **Điền vận mẫu kép thích hợp (ai, ei, ao, ou) vào chỗ trống:**
-    *   Đến, lại: l\\_\\_\\_ (lái)
-    *   Con chó: g\\_\\_\\_ (gǒu)
-    *   Bên trong: n\\_\\_\\_ (nèi)
-    *   Tốt, khỏe: h\\_\\_\\_ (hǎo)
-2.  **Chọn âm tiết viết SAI quy tắc ghép âm:**
-    *   A. bei &nbsp;&nbsp;&nbsp;&nbsp; B. bo &nbsp;&nbsp;&nbsp;&nbsp; C. gei &nbsp;&nbsp;&nbsp;&nbsp; D. fi &nbsp;&nbsp;&nbsp;&nbsp; E. kii
-        """
-    },
-    {
-        "title": "Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi",
-        "toc_desc": "j-x, zh-r, z-s, Biến điệu \"Bù\", Động từ \"Shì\" & \"Yǒu\", Cách gọi tên",
-        "content_html": """
+        
+    </div>
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi</h1>
+        
         <h2 class="section-title">1. Hệ thống Thanh mẫu Nâng cao (10 Phụ âm &amp; 2 Âm đệm)</h2>
         <table>
             <thead>
@@ -774,49 +754,12 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             <p>2. Anh ấy có bạn gái không? (Dùng câu nghi vấn với 吗):</p>
             <div class="write-box"></div>
         </div>
-        """,
-        "content_md": """
-### 1. Hệ thống Thanh mẫu Nâng cao
-*   **Nhóm mặt lưỡi (j, q, x):** Không bật hơi ở **j** (đọc giống "ch" dẹt môi); bật hơi cực mạnh ở **q**; âm xát nhẹ ở **x** (giống "x" tiếng Việt).
-*   **Nhóm uốn lưỡi (zh, ch, sh, r):** Uốn đầu lưỡi chạm ngạc cứng. Không bật hơi ở **zh** (đọc "tr" uốn lưỡi nặng); bật hơi cực mạnh ở **ch**; âm xát uốn lưỡi ở **sh** (giống "s" uốn lưỡi); âm rung uốn lưỡi ở **r** (giống "r" tiếng Việt).
-*   **Nhóm đầu lưỡi - răng (z, c, s):** Lưỡi thẳng chạm mặt sau răng trên. Không bật hơi ở **z** (đọc giống "ch" lưỡi thẳng); bật hơi cực mạnh ở **c** (đẩy hơi mạnh qua khe răng); âm xát đầu lưỡi ở **s** (xì nhẹ thẳng lưỡi).
-
-> [!WARNING]
-> **Quy tắc Phát âm Vận mẫu "i" đặc biệt:**
-> *   Khi nguyên âm **i** đi sau các thanh mẫu **zh, ch, sh, r, z, c, s**, nó bắt buộc phải phát âm biến thành âm **"ư"** (Ví dụ: 是 **shì** đọc là "sư", 四 **sì** đọc là "sư").
-> *   Khi **i** đi sau các thanh mẫu khác, nó vẫn phát âm là âm **"i"** (Ví dụ: 你 **nǐ** đọc là "ni").
-
-### 2. Quy tắc chính tả đứng độc lập và lược dấu chấm ü
-*   **Đứng độc lập:** i → **yi**, ia → **ya**, ie → **ye**, iu → **you**, u → **wu**, ua → **wa**, uo → **wo**, ui → **wei**, ü → **yu**, üe → **yue**, üan → **yuan**, ün → **yun**.
-*   **Lược dấu hai chấm của ü:** Khi **ü** đi sau **j, q, x, y**, ta bỏ hai dấu chấm trên đầu, viết là **ju, qu, xu, yu** nhưng vẫn đọc tròn môi là **jü, qü, xü, yü**. Đi sau **n, l** phải giữ nguyên dấu chấm để phân biệt (nü, lü).
-
-### 3. Quy tắc Biến điệu của phó từ "不" (bù)
-*   **Giữ nguyên thanh 4 (bù):** Khi đi trước từ mang Thanh 1, Thanh 2, Thanh 3. (Ví dụ: 不忙 **bù máng**)
-*   **Đổi thành thanh 2 (bú):** Khi đi trước từ mang Thanh 4. (Ví dụ: 不是 **bú shì**)
-
-### 4. Động từ "是" (shì - Là) và "有" (yǒu - Có)
-*   **Câu với 是:**
-    *   Khẳng định: S + 是 + O (Ví dụ: 我是老师 - Tôi là giáo viên)
-    *   Phủ định: S + 不是 + O (Ví dụ: 他不是学生 - Anh ấy không phải học sinh)
-*   **Câu với 有:**
-    *   Khẳng định: S + 有 + O (Ví dụ: 我有朋友 - Tôi có bạn bè)
-    *   Phủ định: S + **没有** + O (Ví dụ: 他没有女朋友 - Anh ấy không có bạn gái. *Tuyệt đối không nói ❌ bù hữu*)
-
-### 5. Từ vựng cốt lõi Bài 3
-*   **律师 (lǜshī):** luật sư (Danh từ)
-*   **朋友 (péngyou):** bạn bè (Danh từ)
-*   **男朋友 (nánpéngyou):** bạn trai (Danh từ)
-*   **女朋友 (nǚpéngyou):** bạn gái (Danh từ)
-*   **名字 (míngzi):** tên (Danh từ)
-*   **高兴 (gāoxìng):** vui mừng, vui vẻ (Tính từ)
-*   **认识 (rènshi):** quen biết (Động từ)
-*   **叫 (jiào):** gọi là (Động từ)
-        """
-    },
-    {
-        "title": "Bài 4: Vận mẫu kép Mở rộng & Từ vựng chỉ Nữ giới",
-        "toc_desc": "9 Vận mẫu kép mới, Viết gọn iu/ui, Chuyên đề 7 từ vựng chỉ Nữ giới",
-        "content_html": """
+        
+    </div>
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 4: Vận mẫu kép Mở rộng & Từ vựng chỉ Nữ giới</h1>
+        
         <h2 class="section-title">1. Vận mẫu kép mở rộng (9 Nguyên âm phức)</h2>
         <p>Chi tiết cách phát âm và quy tắc biến đổi chính tả của 9 vận mẫu kép phức hợp:</p>
         <table>
@@ -971,33 +914,12 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
                 <li>Các bạn nữ học sinh, sinh viên trong trường học thường gọi nhau là: <span class="write-line"></span></li>
             </ol>
         </div>
-        """,
-        "content_md": """
-### 1. Vận mẫu kép mở rộng (9 Nguyên âm phức)
-*   **ia (ya)**: Đọc i đệm rồi mở miệng sang a. (Ví dụ: 家 **jiā** - nhà)
-*   **ie (ye)**: Đọc i đệm rồi trượt sang ê. (Ví dụ: 姐姐 **jiějie** - chị)
-*   **iao (yao)**: Đọc i-a-o liền mạch. (Ví dụ: 小 **xiǎo** - nhỏ)
-*   **iu (you)**: Viết gọn của *iou*. Đọc i sang ou. (Ví dụ: 六 **liù** - số sáu)
-*   **ua (wa)**: Tròn môi u đệm mở sang a. (Ví dụ: 花 **huā** - hoa)
-*   **uo (wo)**: Tròn môi u đệm mở sang o. (Ví dụ: 我 **wǒ** - tôi)
-*   **uai (wai)**: Tròn môi u đệm trượt sang ai. (Ví dụ: 外 **wài** - bên ngoài)
-*   **ui (wei)**: Viết gọn của *uei*. Đọc u đệm sang ei. (Ví dụ: 水 **shuǐ** - nước)
-*   **üe (yue)**: Tròn môi ü đệm trượt sang ê. (Ví dụ: 月 **yuè** - tháng)
-
-### 2. Chuyên đề phân biệt 7 từ vựng chỉ Nữ giới
-1.  **女人 (nǚrén - Phụ nữ/Đàn bà):** Chỉ phụ nữ trưởng thành chung chung trong khẩu ngữ đời sống. (Trái nghĩa: 男人)
-2.  **女孩 (nǚhái - Cô bé/Thiếu nữ):** Bé gái hoặc cô gái trẻ chưa chồng, mang sắc thái đáng yêu, trẻ trung. (Trái nghĩa: 男孩)
-3.  **女儿 (nǚ'ér - Con gái ruột):** Dùng duy nhất biểu thị quan hệ huyết thống gia đình với bố mẹ. (Trái nghĩa: 儿子)
-4.  **女生 (nǚshēng - Bạn nữ/Cô gái trẻ):** Học sinh/sinh viên nữ hoặc dùng gọi lịch sự các cô gái trẻ tuổi. (Trái nghĩa: 男生)
-5.  **女性 (nǚxìng - Nữ giới/Phái nữ):** Từ trang trọng chỉ giới tính trong nghiên cứu, y khoa, báo chí. (Trái nghĩa: 男性)
-6.  **女子 (nǚzǐ - Nữ/Nữ tử):** Mang sắc thái trang trọng, văn viết, phổ biến trong các hạng mục thể thao.
-7.  **妇女 (fùnǚ - Phụ nữ trung niên):** Phụ nữ đã kết hôn hoặc trung niên (25-30 tuổi trở lên), dùng trong văn bản pháp luật, chính trị.
-        """
-    },
-    {
-        "title": "Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ",
-        "toc_desc": "Số đếm 0-10, Biến điệu \"Yī\", Phân biệt èr/liǎng, Âm mũi, Tết Đoan Ngọ",
-        "content_html": """
+        
+    </div>
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ</h1>
+        
         <h2 class="section-title">1. Số đếm tiếng Trung cơ bản &amp; Ký hiệu số lớn</h2>
         <p>Học đếm số từ 0 đến 10 kèm các đơn vị số lớn:</p>
         <table>
@@ -1193,52 +1115,12 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             <p>2. Hôm nay mệt quá rồi! (Cảm thán):</p>
             <div class="write-box"></div>
         </div>
-        """,
-        "content_md": """
-### 1. Số đếm và Biến điệu của "一" (yī)
-*   **Số đếm 0 - 10:** 0 **零 líng**, 1 **一 yī**, 2 **二 èr / 两 liǎng**, 3 **三 sān**, 4 **四 sì**, 5 **五 wǔ**, 6 **六 liù**, 7 **七 qī**, 8 **八 bā**, 9 **九 jiǔ**, 10 **十 shí**.
-*   **Đơn vị số lớn:** 100 **一百 yī bǎi**, 1000 **一千 yī qiān**, 10.000 **一万 yī wàn**, 100.000.000 **一亿 yī yì**.
-*   **Biến điệu của "一" (yī):**
-    *   Giữ nguyên thanh 1 (yī): Khi đứng lẻ, đọc số thứ tự.
-    *   Đổi thành thanh 4 (yì): Khi đi trước từ mang Thanh 1, 2, 3 (Ví dụ: **yì bǎi**, **yì qiān**).
-    *   Đổi thành thanh 2 (yí): Khi đi trước từ mang Thanh 4 (Ví dụ: **yí wàn**, **yí yì**).
-
-> [!IMPORTANT]
-> **Phân biệt 二 (èr) và 两 (liǎng):**
-> *   Dùng **二 (èr)** khi đếm số, số thứ tự, số nhà, số phòng.
-> *   Dùng **两 (liǎng)** khi đứng trước lượng từ chỉ số lượng người/vật (Ví dụ: 两个人 - hai người) hoặc đơn vị số lớn (两百).
-
-### 2. Vận mẫu mũi trước (-n) và mũi sau (-ng)
-*   **Mũi trước (-n): an, en, in.** Đầu lưỡi chạm ngạc trên khép âm lại. (Ví dụ: **fàn** - cơm, **hěn** - rất)
-*   **Mũi sau (-ng): ang, eng, ing, ong.** Gốc lưỡi hạ thấp chặn hơi ở sau, hơi đi ra mũi. (Ví dụ: **máng** - bận, **péng** - bạn bè)
-
-### 3. Ngữ pháp: Phó từ chỉ mức độ
-Trong câu khẳng định vị ngữ tính từ (S + Adj), bắt buộc phải có phó từ mức độ **很 (hěn)** đi kèm làm liên kết ngữ pháp.
-*   **Các phó từ mức độ theo cấp độ:**
-    *   Tương đối, khá: 比较 **bǐjiào**, 挺...de **tǐng...de**
-    *   Rất: 很 **hěn**
-    *   Đặc biệt: 特別 **tèbié**
-    *   Vô cùng: 非常 **fēicháng**
-    *   Quá, lắm: 太...了 **tài...le**
-    *   Cực kỳ: 极了 **jí le**
-
-### 4. Chuyên đề Văn hóa: Tết Đoan Ngọ (端午节 - Duānwǔ Jié)
-Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung Quốc, ngày lễ này mang tính tưởng niệm sâu sắc đối với nhà thơ yêu nước vĩ đại Khuất Nguyên (屈原) nước Sở thời Chiến Quốc. Khi nước Sở mất nước, ông ôm đá tự vẫn dưới sông Mịch La. Người dân đi thuyền ra cứu và ném bánh tro (bánh ú - 粽子) xuống sông để cá không ăn xác ông. Đây cũng là nguồn gốc phong tục Đua thuyền rồng (赛龙舟).
-
-### 5. Bài tập thực hành
-1.  **Điền từ thích hợp "二" (èr) hoặc "两" (liǎng) vào chỗ trống:**
-    *   Số đếm: 一 (yī)，________ (èr)，三 (sān)。
-    *   Hai người học sinh: ________ 个人 (liǎng gè rén)。
-    *   Hai trăm tệ: ________ 百元 (liǎng bǎi yuán)。
-2.  **Dịch các câu sau sang tiếng Trung (chữ Hán và Pinyin):**
-    *   Tiếng Trung đặc biệt thú vị.
-    *   Hôm nay mệt quá rồi!
-"""
-    },
-    {
-        "title": "Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả",
-        "toc_desc": "8 Vận mẫu mũi mới, Quy tắc viết đứng độc lập y/w, Lược dấu chấm ü",
-        "content_html": """
+        
+    </div>
+    <!-- PAGE BREAK FOR NEW LESSON -->
+    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+        <h1 class="lesson-title">Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả</h1>
+        
         <h2 class="section-title">1. Vận mẫu mũi phức hợp (8 Nguyên âm mũi phức)</h2>
         <p>Các vận mẫu mũi phức hợp bắt đầu bằng âm đệm nguyên âm hẹp (i, u, ü) kết thúc bằng phụ âm mũi (-n hoặc -ng):</p>
         <table>
@@ -1332,207 +1214,8 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
                 <li>Mây (yún): <span class="pinyin">yǘn</span> → Sửa lại: <span class="write-line"></span></li>
             </ol>
         </div>
-        """,
-        "content_md": """
-### 1. Vận mẫu mũi phức hợp (8 Nguyên âm mũi phức)
-*   **ian (yan)**: Đọc i đệm trượt sang an (đọc giống "yên").
-*   **iang (yang)**: Đọc i đệm trượt sang ang (đọc giống "yang").
-*   **iong (yong)**: Đọc i đệm trượt sang ong.
-*   **uan (wan)**: Tròn môi u đệm trượt sang an.
-*   **uang (wang)**: Tròn môi u đệm trượt sang ang.
-*   **un (wen)**: Viết gọn của *uen*. Đọc u đệm sang ên (đọc giống "uân").
-*   **ün (yun)**: Tròn môi ü đệm kết thúc ở n (đọc giống "uyn").
-*   **üan (yuan)**: Tròn môi ü đệm trượt sang an (đọc giống "uyên").
-
-### 2. Tổng hợp 2 Quy tắc chính tả Pinyin cuối khóa
-*   **Quy tắc 1: Khi nguyên âm đứng một mình tạo thành âm tiết độc lập**
-    *   Bán nguyên âm **i** biến đổi thành **y** (ian → **yan**, iang → **yang**, iong → **yong**).
-    *   Bán nguyên âm **u** biến đổi thành **w** (uan → **wan**, uang → **wang**, uen → **wen**).
-    *   Bán nguyên âm **ü** biến đổi thêm **y** và lược dấu chấm (üan → **yuan**, ün → **yun**, üe → **yue**).
-*   **Quy tắc 2: Lược bỏ hai dấu chấm trên đầu chữ ü sau j, q, x**
-    *   Khi **ün** và **üan** đi sau **j, q, x**, ta viết lược bỏ hai dấu chấm trên đầu ü thành **jun, qun, xun, juan, quan, xuan** nhưng vẫn giữ nguyên cách phát âm tròn môi.
-
-### 3. Bài tập ôn tập tổng hợp cuối khóa
-1.  **Viết lại các từ sau về dạng Bính âm đúng chính tả:**
-    *   j + üan (thanh 3) = ________
-    *   q + ün (thanh 2) = ________
-    *   x + üan (thanh 4) = ________
-2.  **Sửa lỗi chính tả cho các từ sau:**
-    *   Đám mây (yún): `yǘn` → Sửa: ________
-    *   Váy (qún): `qǘn` → Sửa: ________
-        """
-    }
-]
-
-def make_filename(title):
-    match = re.search(r"Bài\s+(\d+)", title, re.IGNORECASE)
-    if match:
-        return f"bai_{match.group(1)}.html"
-    return "bai_hoc.html"
-
-def build_individual_lessons():
-    output_dir = "giao_trinh_in_an"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
         
-    css_content = """
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
-        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
-        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
-        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
-        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
-        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
-        th { background-color: #f1f5f9; color: var(--primary-color); }
-        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
-        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
-        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
-        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
-        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
-        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
-        @media print { .no-print { display: none !important; } }
-    """
-    
-    # 1. Tạo trang bìa và mục lục
-    toc_rows = ""
-    for idx, lesson in enumerate(LESSONS, 1):
-        filename = make_filename(lesson['title'])
-        toc_rows += f"""
-        <tr>
-            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./{filename}" style="color: var(--primary-color); text-decoration: none;">{lesson['title']}</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">{lesson['toc_desc']}</td>
-        </tr>"""
-        
-    cover_html = f"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Bìa & Mục Lục - Giáo Trình Tiếng Trung</title>
-    <style>{css_content}</style>
-</head>
-<body>
-    <div class="container">
-        <div class="no-print print-btn-container">
-            <button class="print-btn" onclick="window.print()">🖨️ In trang bìa & mục lục</button>
-        </div>
-        
-        <!-- COVER PAGE -->
-        <div class="cover-page">
-            <div class="cover-badge">TÀI LIỆU HỌC VIÊN</div>
-            <h1 class="cover-title">Giáo Trình Phát Âm & Giao Tiếp Tiếng Trung Cơ Bản</h1>
-            <div class="cover-subtitle">Phần Lý Thuyết & Bài Tập Thực Hành</div>
-        </div>
-        
-        <!-- TABLE OF CONTENTS -->
-        <div style="page-break-before: always; padding-top: 20px;">
-            <h1 class="lesson-title" style="border-bottom: 2px solid #000; margin-top: 0;">Mục Lục Giáo Trình</h1>
-            <table style="border: none; width: 100%;">
-                <thead>
-                    <tr style="background-color: transparent; border-bottom: 2px solid #000;">
-                        <th style="background: transparent; color: #000; padding: 12px 0; font-size: 16px; border: none;">Bài học</th>
-                        <th style="background: transparent; color: #000; padding: 12px 0; text-align: right; font-size: 16px; border: none;">Nội dung chính</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {toc_rows}
-                </tbody>
-            </table>
-        </div>
+    </div>
     </div>
 </body>
-</html>"""
-
-    with open(os.path.join(output_dir, "trang_bia_va_muc_luc.html"), "w", encoding="utf-8") as f:
-        f.write(cover_html)
-        
-    # 2. Tạo từng bài học riêng biệt
-    for idx, lesson in enumerate(LESSONS, 1):
-        filename = make_filename(lesson['title'])
-        lesson_html = f"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{lesson['title']}</title>
-    <style>{css_content}</style>
-</head>
-<body>
-    <div class="container">
-        <div class="no-print print-btn-container">
-            <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
-        </div>
-        <h1 class="lesson-title">{lesson['title']}</h1>
-        {lesson['content_html']}
-    </div>
-</body>
-</html>"""
-        with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
-            f.write(lesson_html)
-            
-    # 3. Tạo file tổng hợp giao_trinh_in_an.html ở thư mục gốc
-    lessons_content = ""
-    for lesson in LESSONS:
-        lessons_content += f"""
-    <!-- PAGE BREAK FOR NEW LESSON -->
-    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
-        <h1 class="lesson-title">{lesson['title']}</h1>
-        {lesson['content_html']}
-    </div>"""
-
-    combined_html = f"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giáo Trình Tiếng Trung Cơ Bản (Tổng Hợp)</title>
-    <style>
-        {css_content}
-        .cover-page {{ height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 4px double var(--primary-color); padding: 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); margin-top: 2vh; page-break-after: always; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="no-print print-btn-container">
-            <button class="print-btn" onclick="window.print()">🖨️ In toàn bộ giáo trình</button>
-        </div>
-        
-        <!-- COVER PAGE -->
-        <div class="cover-page">
-            <div class="cover-badge">TÀI LIỆU HỌC VIÊN</div>
-            <h1 class="cover-title">Giáo Trình Phát Âm & Giao Tiếp Tiếng Trung Cơ Bản</h1>
-            <div class="cover-subtitle">Phần Lý Thuyết & Bài Tập Thực Hành</div>
-        </div>
-        
-        <!-- TABLE OF CONTENTS -->
-        <div style="page-break-before: always; padding-top: 20px; page-break-after: always;">
-            <h1 class="lesson-title" style="border-bottom: 2px solid #000; margin-top: 0;">Mục Lục Giáo Trình</h1>
-            <table style="border: none; width: 100%;">
-                <thead>
-                    <tr style="background-color: transparent; border-bottom: 2px solid #000;">
-                        <th style="background: transparent; color: #000; padding: 12px 0; font-size: 16px; border: none;">Bài học</th>
-                        <th style="background: transparent; color: #000; padding: 12px 0; text-align: right; font-size: 16px; border: none;">Nội dung chính</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {toc_rows}
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- LESSONS -->
-        {lessons_content}
-    </div>
-</body>
-</html>"""
-
-    with open("giao_trinh_in_an.html", "w", encoding="utf-8") as f:
-        f.write(combined_html)
-            
-    print(f"Successfully generated {len(LESSONS)} individual lessons in folder '{output_dir}/' and combined file 'giao_trinh_in_an.html'.")
-
-if __name__ == "__main__":
-    build_individual_lessons()
-    print("=== SYNC SUCCESSFUL ===")
+</html>

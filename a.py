@@ -408,6 +408,28 @@ if mode == "🖨️ In ấn & Đồng bộ":
     if os.path.exists(output_dir):
         files = sorted(os.listdir(output_dir))
         if files:
+            # Combined file option
+            combined_path = "giao_trinh_in_an.html"
+            if os.path.exists(combined_path):
+                try:
+                    with open(combined_path, "r", encoding="utf-8") as f_data:
+                        combined_bytes = f_data.read()
+                except Exception as e:
+                    combined_bytes = f"Error reading combined file: {e}"
+                
+                col_file, col_dl = st.columns([7, 3])
+                with col_file:
+                    st.markdown("**🎴 In toàn bộ giáo trình (File gộp)** (`giao_trinh_in_an.html`)")
+                with col_dl:
+                    st.download_button(
+                        label="📥 Tải file gộp",
+                        data=combined_bytes,
+                        file_name="giao_trinh_in_an.html",
+                        mime="text/html",
+                        key="dl_combined_giao_trinh"
+                    )
+                st.markdown("---")
+            
             for f_name in files:
                 filepath = os.path.join(output_dir, f_name)
                 try:
