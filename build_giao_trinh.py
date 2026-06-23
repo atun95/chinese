@@ -636,7 +636,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
                 <em>Ví dụ:</em> 不忙 <span class="pinyin">bù máng</span> (không bận), 不好 <span class="pinyin">bù hǎo</span> (không tốt), 不吃 <span class="pinyin">bù chī</span> (không ăn).
             </li>
             <li><strong>Biến âm đọc thành thanh 2 (bú):</strong> Khi đứng trước các từ mang <strong>Thanh 4</strong>.<br>
-                <em>Ví dụ:</em> 不是 <span class="pinyin">bù ①</span> → đọc là <span class="pinyin">bú shì</span> (không phải); 不累 <span class="pinyin">bù lèi</span> → đọc là <span class="pinyin">bú lèi</span> (không mệt).
+                <em>Ví dụ:</em> 不是 <span class="pinyin">bù shì</span> → đọc là <span class="pinyin">bú shì</span> (không phải); 不累 <span class="pinyin">bù lèi</span> → đọc là <span class="pinyin">bú lèi</span> (không mệt).
             </li>
         </ol>
 
@@ -736,7 +736,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
 
 | Động từ "是" (shì - Là) | Động từ "有" (yǒu - Có) |
 | :--- | :--- |
-| **Ý nghĩa:** Định danh, biểu thị quan hệ tương đương.<br>**Khẳng định:** S + 是 + O<br>*Ví dụ:* 我是老师 (Tôi là giáo viên).<br>**Phủ định:** S + 不是 + O<br>*Ví dụ:* 他ไม่ใช่学生 (Anh ấy không phải học sinh).<br>**Nghi vấn:** S + 是 + O + 吗？<br>*Ví dụ:* 你是学生吗？ (Bạn là học sinh phải không?) | **Ý nghĩa:** Biểu thị sự sở hữu hoặc mối quan hệ.<br>**Khẳng định:** S + 有 + O<br>*Ví dụ:* 我有朋友 (Tôi có bạn bè).<br>**Phủ định:** S + 没有 + O<br>*Ví dụ:* 他没有女朋友 (Anh ấy không có bạn gái).<br>**Nghi vấn:** S + 有 + O + 吗？<br>*Ví dụ:* 你有男朋友吗？ (Bạn có bạn trai không?) |
+| **Ý nghĩa:** Định danh, biểu thị quan hệ tương đương.<br>**Khẳng định:** S + 是 + O<br>*Ví dụ:* 我是老师 (Tôi là giáo viên).<br>**Phủ định:** S + 不是 + O<br>*Ví dụ:* 他tên不是学生 (Anh ấy không phải học sinh).<br>**Nghi vấn:** S + 是 + O + 吗？<br>*Ví dụ:* 你sẽ学生吗？ (Bạn là học sinh phải không?) | **Ý nghĩa:** Biểu thị sự sở hữu hoặc mối quan hệ.<br>**Khẳng định:** S + 有 + O<br>*Ví dụ:* 我有朋友 (Tôi có bạn bè).<br>**Phủ định:** S + 没有 + O<br>*Ví dụ:* 他没有女朋友 (Anh ấy không có bạn gái).<br>**Nghi vấn:** S + 有 + O + 吗？<br>*Ví dụ:* 你有男朋友吗？ (Bạn có bạn trai không?) |
 
 ### 5. Từ vựng cốt lõi Bài 3
 *   **律师 (lǜshī):** luật sư (Danh từ)
@@ -1061,7 +1061,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
                 </tr>
                 <tr>
                     <td>Khá là (Văn nói)</td>
-                    <td>挺... của <span class="pinyin">tǐng...de</span></td>
+                    <td>挺...的 <span class="pinyin">tǐng...de</span></td>
                     <td>S + 挺 + Adj + 的</td>
                     <td>他挺好的 (Anh ấy khá là tốt)</td>
                 </tr>
@@ -1085,7 +1085,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
                 </tr>
                 <tr>
                     <td>Quá / Lắm (Cảm thán)</td>
-                    <td>太... lự <span class="pinyin">tài...le</span></td>
+                    <td>太...了 <span class="pinyin">tài...le</span></td>
                     <td>S + 太 + Adj + 了</td>
                     <td>今天太热了 (Hôm nay nóng quá rồi!)</td>
                 </tr>
@@ -1272,8 +1272,30 @@ def build_individual_lessons():
         .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
         .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
         .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
-        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
-        @media print { .no-print { display: none !important; } }
+        .print-btn-container { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .print-btn { background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; }
+        .print-btn:hover { background-color: var(--secondary-color); }
+        @media print {
+            .no-print { display: none !important; }
+            table, tr, td, th { page-break-inside: avoid; break-inside: avoid; }
+            .info-box, .warn-box { page-break-inside: avoid; break-inside: avoid; }
+            h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+            @page {
+                size: A4 portrait;
+                margin: 20mm 15mm 20mm 15mm;
+            }
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: #ffffff;
+            }
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
     """
     
     # 1. Tạo trang bìa và mục lục
