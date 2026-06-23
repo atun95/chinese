@@ -349,8 +349,9 @@ st.markdown(
 
 st.sidebar.header("Danh mục giáo án")
 
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "🖨️ In ấn & Đồng bộ"])
 
+menu = None
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
         "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
@@ -401,7 +402,76 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 6.2"
     ])
 
-if menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
+if mode == "🖨️ In ấn & Đồng bộ":
+    st.header("🖨️ Đồng bộ & In ấn Giáo Trình")
+    st.write("Dữ liệu giáo trình được tổng hợp tự động từ nội dung các bài học để tạo ra các bản HTML riêng biệt được tối ưu hóa cho in ấn khổ giấy A4 dọc.")
+    
+    st.markdown("""
+    <div style="background-color: #f0fdf4; border-left: 6px solid #16a34a; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <h4 style="color: #14532d; margin-top: 0;">💡 Hướng dẫn in ấn chuẩn đẹp:</h4>
+        <ol>
+            <li>Nhấp vào nút <b>"🔄 Đồng bộ & Cập nhật giáo trình"</b> ở dưới để làm mới tất cả các file.</li>
+            <li>Sau đó, nhấp vào nút <b>"📥 Tải file để in"</b> bên cạnh mỗi bài học bạn muốn in.</li>
+            <li>Mở file đã tải xuống trong trình duyệt (Chrome, Edge, Firefox).</li>
+            <li>Nhấn <b>Ctrl + P</b> (hoặc Command + P trên Mac) để mở hộp thoại in.</li>
+            <li><b>LƯU Ý QUAN TRỌNG:</b> Trong phần cài đặt in (More Settings), hãy <b>bỏ tích chọn "Headers and Footers"</b> (Đầu trang và chân trang) để xóa bỏ các dòng chữ địa chỉ tệp <code>file:///...</code> ở đầu trang và chân trang giấy.</li>
+            <li>Chọn khổ giấy <b>A4</b>, hướng trang <b>Portrait (Dọc)</b>, và thiết lập Margin là <b>Default</b>.</li>
+        </ol>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    if st.button("🔄 Đồng bộ & Cập nhật giáo trình", type="primary", use_container_width=True):
+        try:
+            import build_giao_trinh
+            importlib.reload(build_giao_trinh)
+            build_giao_trinh.build_individual_lessons()
+            st.success("Đồng bộ thành công! Các bài học đã được lưu vào thư mục `giao_trinh_in_an/` trên máy tính của bạn.")
+        except Exception as e:
+            st.error(f"Có lỗi xảy ra khi đồng bộ: {e}")
+            
+    st.subheader("📁 Danh sách tài liệu học tập:")
+    
+    import os
+    import re
+    output_dir = "giao_trinh_in_an"
+    if os.path.exists(output_dir):
+        files = sorted(os.listdir(output_dir))
+        if files:
+            st.info(f"Các tệp HTML in ấn được lưu trên máy của bạn tại: `{os.path.abspath(output_dir)}`")
+            for f_name in files:
+                filepath = os.path.join(output_dir, f_name)
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f_data:
+                        html_bytes = f_data.read()
+                except Exception as e:
+                    html_bytes = f"Error reading file: {e}"
+                
+                if "trang_bia" in f_name:
+                    display_name = "🎴 Trang bìa và Mục lục"
+                else:
+                    num_match = re.search(r"bai_(\d+)", f_name)
+                    if num_match:
+                        display_name = f"📖 Giáo án Bài {num_match.group(1)}"
+                    else:
+                        display_name = f"📄 {f_name.replace('.html', '')}"
+                
+                col_file, col_dl = st.columns([7, 3])
+                with col_file:
+                    st.markdown(f"**{display_name}** (`{f_name}`)")
+                with col_dl:
+                    st.download_button(
+                        label="📥 Tải file để in",
+                        data=html_bytes,
+                        file_name=f_name,
+                        mime="text/html",
+                        key=f"dl_{f_name}"
+                    )
+        else:
+            st.info("Chưa có file nào được tạo. Nhấp vào nút đồng bộ ở trên để tạo file.")
+    else:
+        st.info("Thư mục in ấn chưa tồn tại. Nhấp vào nút đồng bộ ở trên để tạo.")
+
+elif menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
     lesson1.show_lesson1_summary_table()
 
 elif menu == "Bài 1.2 - Thanh mẫu và vận mẫu đơn":

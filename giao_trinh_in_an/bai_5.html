@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
+        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        th { background-color: #f1f5f9; color: var(--primary-color); }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
+        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print print-btn-container">
+            <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
+        </div>
+        <h1 class="lesson-title">Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ</h1>
+        
+        <h2 class="section-title">1. Số đếm tiếng Trung cơ bản &amp; Ký hiệu số lớn</h2>
+        <p>Học đếm số từ 0 đến 10 kèm các đơn vị số lớn:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Số</th>
+                    <th style="width: 15%;">Chữ Hán</th>
+                    <th style="width: 15%;">Pinyin</th>
+                    <th style="width: 20%;">Số lớn</th>
+                    <th style="width: 15%;">Chữ Hán</th>
+                    <th style="width: 25%;">Nghĩa Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td class="hanzi">零</td>
+                    <td class="pinyin">líng</td>
+                    <td>100</td>
+                    <td class="hanzi">一百</td>
+                    <td class="pinyin">yī bǎi (Một trăm)</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td class="hanzi">一</td>
+                    <td class="pinyin">yī</td>
+                    <td>1.000</td>
+                    <td class="hanzi">一千</td>
+                    <td class="pinyin">yī qiān (Một nghìn)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="hanzi">二 / 两</td>
+                    <td class="pinyin">èr / liǎng</td>
+                    <td>10.000</td>
+                    <td class="hanzi">一万</td>
+                    <td class="pinyin">yī wàn (Mười nghìn/1 vạn)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="hanzi">三</td>
+                    <td class="pinyin">sān</td>
+                    <td>100.000</td>
+                    <td class="hanzi">十万</td>
+                    <td class="pinyin">shí wàn (Một trăm nghìn)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="hanzi">四</td>
+                    <td class="pinyin">sì</td>
+                    <td>1.000.000</td>
+                    <td class="hanzi">一百万</td>
+                    <td class="pinyin">yī bǎi wàn (Một triệu)</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td class="hanzi">五</td>
+                    <td class="pinyin">wǔ</td>
+                    <td>10.000.000</td>
+                    <td class="hanzi">一千万</td>
+                    <td class="pinyin">yī qiān wàn (Mười triệu)</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td class="hanzi">六</td>
+                    <td class="pinyin">liù</td>
+                    <td>100.000.000</td>
+                    <td class="hanzi">一亿</td>
+                    <td class="pinyin">yī yì (Một trăm triệu)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td class="hanzi">七</td>
+                    <td class="pinyin">qī</td>
+                    <td>1.000.000.000</td>
+                    <td class="hanzi">十亿</td>
+                    <td class="pinyin">shí yì (Một tỷ)</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td class="hanzi">八</td>
+                    <td class="pinyin">bā</td>
+                    <td colspan="3" rowspan="3" style="background-color:#f1f5f9; text-align:center; font-weight:bold; font-size:12px;">
+                        💡 Biến điệu của "一" (yī):<br>
+                        • Đọc <span class="pinyin">yī</span> khi đứng lẻ, đọc số thứ tự.<br>
+                        • Đọc <span class="pinyin">yì</span> trước thanh 1, 2, 3 (yì bǎi, yì qiān).<br>
+                        • Đọc <span class="pinyin">yí</span> trước thanh 4 (yí wàn, yí yì).
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="hanzi">九</td>
+                    <td class="pinyin">jiǔ</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="hanzi">十</td>
+                    <td class="pinyin">shí</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-box">
+            <strong>⚖️ Phân biệt cách dùng số 2: 二 (èr) và 两 (liǎng):</strong><br>
+            • Dùng <strong>二 (èr)</strong> khi: đếm số thuần túy (yī, èr, sān...), đọc số thứ tự (第二), số phòng, số điện thoại, số đứng ở hàng chục và hàng đơn vị (十二).<br>
+            • Dùng <strong>两 (liǎng)</strong> khi: đứng trực tiếp trước <strong>lượng từ</strong> để chỉ số lượng người/vật (2 người, 2 bánh ú). Hoặc đứng trước các đơn vị số lớn từ hàng trăm trở lên (两百 - 200, 两千 - 2000).
+        </div>
+
+        <h2 class="section-title">2. Vận mẫu mũi trước (-n) và mũi sau (-ng)</h2>
+        <p>Vận mẫu mũi được chia làm 2 nhóm chính dựa vào vị trí kết thúc luồng hơi:</p>
+        <ul>
+            <li><strong>Nhóm mũi trước (-n): an, en, in.</strong> Khi kết thúc âm, đầu lưỡi bắt buộc nâng lên chạm nhẹ vào nướu răng cửa hàm trên (khép âm lại bằng âm /n/).</li>
+            <li><strong>Nhóm mũi sau (-ng): ang, eng, ing, ong.</strong> Khi kết thúc âm, gốc lưỡi hạ thấp tự do, cuống lưỡi thụt về sau chạm ngạc mềm chặn hơi. Âm vang lên ở hốc mũi.</li>
+        </ul>
+
+        <h2 class="section-title">3. Ngữ pháp: Phó từ chỉ mức độ trong câu vị ngữ tính từ</h2>
+        <p>Trong tiếng Trung, câu khẳng định có tính từ làm vị ngữ có cấu trúc đặc trưng:</p>
+        <div style="text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0;">
+            Chủ ngữ (S) + Phó từ mức độ + Tính từ (Adj)
+        </div>
+
+        <p><strong>Bảng phân cấp các phó từ chỉ mức độ thường gặp:</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Cấp độ mức độ</th>
+                    <th style="width: 20%;">Phó từ / Cấu trúc</th>
+                    <th style="width: 25%;">Công thức câu</th>
+                    <th style="width: 30%;">Ví dụ cụ thể</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tương đối / Khá</td>
+                    <td>比较 <span class="pinyin">bǐjiào</span></td>
+                    <td>S + 比较 + Adj</td>
+                    <td>汉语比较难 (Tiếng Trung tương đối khó)</td>
+                </tr>
+                <tr>
+                    <td>Khá là (Văn nói)</td>
+                    <td>挺... của <span class="pinyin">tǐng...de</span></td>
+                    <td>S + 挺 + Adj + 的</td>
+                    <td>他挺好的 (Anh ấy khá là tốt)</td>
+                </tr>
+                <tr>
+                    <td>Bình thường / Rất</td>
+                    <td>很 <span class="pinyin">hěn</span></td>
+                    <td>S + 很 + Adj</td>
+                    <td>我很忙 (Tôi bận / Tôi rất bận)</td>
+                </tr>
+                <tr>
+                    <td>Đặc biệt</td>
+                    <td>特别 <span class="pinyin">tèbié</span></td>
+                    <td>S + 特别 + Adj</td>
+                    <td>汉语特别有趣 (Tiếng Trung đặc biệt thú vị)</td>
+                </tr>
+                <tr>
+                    <td>Vô cùng / Cực kỳ</td>
+                    <td>非常 <span class="pinyin">fēicháng</span></td>
+                    <td>S + 非常 + Adj</td>
+                    <td>她非常漂亮 (Cô ấy vô cùng xinh đẹp)</td>
+                </tr>
+                <tr>
+                    <td>Quá / Lắm (Cảm thán)</td>
+                    <td>太... lự <span class="pinyin">tài...le</span></td>
+                    <td>S + 太 + Adj + 了</td>
+                    <td>今天太热了 (Hôm nay nóng quá rồi!)</td>
+                </tr>
+                <tr>
+                    <td>Cực kỳ (Đứng sau)</td>
+                    <td>极了 <span class="pinyin">jí le</span></td>
+                    <td>S + Adj + 极了</td>
+                    <td>累极了 (Mệt cực kỳ)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">4. Chuyên đề Văn hóa: Tết Đoan Ngọ (端午节 - Duānwǔ Jié)</h2>
+        <p>Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung Quốc, ngày lễ này mang tính tưởng niệm sâu sắc đối với nhà thơ yêu nước vĩ đại <strong>Khuất Nguyên (屈原)</strong> nước Sở thời Chiến Quốc.</p>
+
+        <div class="exercise-section">
+            <div class="exercise-title">📝 Bài tập thực hành Bài 5</div>
+            <p><strong>Dạng 1: Điền từ thích hợp "二" (èr) hoặc "两" (liǎng) vào chỗ trống:</strong></p>
+            <ol>
+                <li>Số đếm: 一 (yī)，<span class="write-line"></span> (___)，三 (sān)。</li>
+                <li>Hai người học sinh: <span class="write-line"></span> 个人 (___ gè rén)。</li>
+                <li>Hai trăm tệ: <span class="write-line"></span> 百元 (___ bǎi yuán)。</li>
+            </ol>
+            <br>
+            <p><strong>Dạng 2: Dịch các câu sau sang tiếng Trung (chú ý trật tự từ phó từ mức độ):</strong></p>
+            <p>1. Tiếng Trung đặc biệt thú vị:</p>
+            <div class="write-box"></div>
+            <p>2. Hôm nay mệt quá rồi! (Cảm thán):</p>
+            <div class="write-box"></div>
+        </div>
+        
+    </div>
+</body>
+</html>

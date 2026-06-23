@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
+        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        th { background-color: #f1f5f9; color: var(--primary-color); }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
+        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print print-btn-container">
+            <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
+        </div>
+        <h1 class="lesson-title">Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi</h1>
+        
+        <h2 class="section-title">1. Hệ thống Thanh mẫu Nâng cao (10 Phụ âm &amp; 2 Âm đệm)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Nhóm thanh mẫu</th>
+                    <th style="width: 15%;">Ký hiệu</th>
+                    <th style="width: 60%;">Đặc điểm cấu âm &amp; Hướng dẫn phát âm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3"><strong>Nhóm mặt lưỡi</strong><br>(Không đi với u, o)</td>
+                    <td><strong>j</strong></td>
+                    <td>Không bật hơi. Mặt lưỡi áp sát ngạc cứng, đẩy hơi nhẹ ra ngoài. Đọc giống chữ "ch" tiếng Việt nhưng dẹt môi sang hai bên.</td>
+                </tr>
+                <tr>
+                    <td><strong>q</strong></td>
+                    <td>Bật hơi mạnh. Vị trí đặt lưỡi giống hệt "j" nhưng cần nén hơi lại và đẩy ra một luồng hơi cực mạnh làm rung giấy.</td>
+                </tr>
+                <tr>
+                    <td><strong>x</strong></td>
+                    <td>Âm xát. Mặt lưỡi gần sát ngạc cứng, để hơi thoát ra ngoài tự nhiên qua khe lưỡi. Phát âm nhẹ giống chữ "x" tiếng Việt.</td>
+                </tr>
+                <tr>
+                    <td rowspan="4"><strong>Nhóm uốn lưỡi</strong><br>(Uốn đầu lưỡi ngược lên ngạc cứng)</td>
+                    <td><strong>zh</strong></td>
+                    <td>Không bật hơi. Đầu lưỡi uốn ngược chạm ngạc cứng, chặn hơi rồi thả nhẹ cho hơi thoát ra. Đọc giống chữ "tr" uốn lưỡi nặng.</td>
+                </tr>
+                <tr>
+                    <td><strong>ch</strong></td>
+                    <td>Bật hơi mạnh. Vị trí giống "zh" nhưng bật hơi mạnh từ cuống họng.</td>
+                </tr>
+                <tr>
+                    <td><strong>sh</strong></td>
+                    <td>Âm xát uốn lưỡi. Uốn lưỡi lên sát ngạc trên (không chạm hẳn), để hơi xát đi ra ngoài. Đọc giống chữ "s" uốn lưỡi rất nặng.</td>
+                </tr>
+                <tr>
+                    <td><strong>r</strong></td>
+                    <td>Âm uốn lưỡi có rung dây thanh. Khẩu hình giống "sh" nhưng có độ rung của cổ họng. Phát âm gần giống chữ "r" tiếng Việt.</td>
+                </tr>
+                <tr>
+                    <td rowspan="3"><strong>Nhóm đầu lưỡi - răng</strong><br>(Lưỡi thẳng chạm mặt sau răng trên)</td>
+                    <td><strong>z</strong></td>
+                    <td>Không bật hơi. Đầu lưỡi thẳng chạm mặt sau răng trên, chặn hơi rồi hé nhẹ ra. Đọc gần giống chữ "ch" tiếng Việt nhưng lưỡi thẳng.</td>
+                </tr>
+                <tr>
+                    <td><strong>c</strong></td>
+                    <td>Bật hơi mạnh. Khẩu hình và vị trí lưỡi giống "z" nhưng đẩy hơi bật thật mạnh ra ngoài qua khe răng khép hờ.</td>
+                </tr>
+                <tr>
+                    <td><strong>s</strong></td>
+                    <td>Âm xát đầu lưỡi. Lưỡi thẳng để hở khe nhỏ với răng trên, đẩy hơi xát nhẹ ra ngoài. Đọc giống chữ "s" thẳng lưỡi (xì nhẹ).</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><strong>Ký hiệu bán nguyên âm</strong></td>
+                    <td><strong>y</strong></td>
+                    <td>Biểu diễn cho nguyên âm đệm <strong>i</strong> khi âm tiết không có phụ âm đầu đi kèm.</td>
+                </tr>
+                <tr>
+                    <td><strong>w</strong></td>
+                    <td>Biểu diễn cho nguyên âm đệm <strong>u</strong> khi âm tiết không có phụ âm đầu đi kèm.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warn-box">
+            <strong>⚠️ Quy tắc Phát âm Vận mẫu "i" đặc biệt:</strong><br>
+            • Khi nguyên âm <strong>i</strong> đi sau các thanh mẫu uốn lưỡi và đầu lưỡi răng (<strong>zh, ch, sh, r, z, c, s</strong>), nó bắt buộc phải đọc biến thành âm <strong>"ư"</strong> của tiếng Việt. Ví dụ: 是 <span class="pinyin">shì</span> (đọc là "sư"), 四 <span class="pinyin">sì</span> (đọc là "sư"), 吃 <span class="pinyin">chī</span> (đọc là "chư").<br>
+            • Khi <strong>i</strong> đi sau các thanh mẫu khác (như <strong>b, p, m, d, t, n, l, j, q, x</strong>), nó vẫn đọc là âm <strong>"i"</strong> như tiếng Việt. Ví dụ: 你 <span class="pinyin">nǐ</span> (ni), 七 <span class="pinyin">qī</span> (chi).
+        </div>
+
+        <h2 class="section-title">2. Quy tắc chính tả đối với i, u, ü khi đứng độc lập</h2>
+        <p>Khi các vận mẫu đứng một mình tạo thành âm tiết độc lập, dạng viết Bính âm của chúng phải thay đổi như sau:</p>
+        <ul>
+            <li><strong>Nhóm i:</strong> i → <span class="spelling-highlight">yi</span>, ia → <span class="spelling-highlight">ya</span>, ie → <span class="spelling-highlight">ye</span>, iu → <span class="spelling-highlight">you</span>.</li>
+            <li><strong>Nhóm u:</strong> u → <span class="spelling-highlight">wu</span>, ua → <span class="spelling-highlight">wa</span>, uo → <span class="spelling-highlight">wo</span>, ui → <span class="spelling-highlight">wei</span>.</li>
+            <li><strong>Nhóm ü:</strong> ü → <span class="spelling-highlight">yu</span>, üe → <span class="spelling-highlight">yue</span>, üan → <span class="spelling-highlight">yuan</span>, ün → <span class="spelling-highlight">yun</span> (Lược bỏ hai dấu chấm trên đầu chữ ü).</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>💡 Quy tắc Lược bỏ Dấu hai chấm trên đầu chữ "ü":</strong><br>
+            • Khi <strong>ü</strong> đi sau các thanh mẫu mặt lưỡi <strong>j, q, x</strong> và bán nguyên âm <strong>y</strong>, ta bỏ hai dấu chấm trên đầu, viết là <strong>ju, qu, xu, yu</strong> nhưng vẫn giữ nguyên cách đọc tròn môi là <strong>jü, qü, xü, yü</strong>.<br>
+            • Khi <strong>ü</strong> đi sau hai thanh mẫu đầu lưỡi <strong>n, l</strong>, ta <strong>bắt buộc phải giữ nguyên hai dấu chấm</strong> (viết là <strong>nü, lü</strong>) để phân biệt rõ với âm đi với u thường (<strong>nu, lu</strong>).
+        </div>
+
+        <h2 class="section-title">3. Quy tắc Biến điệu của phó từ phủ định "不" (bù)</h2>
+        <p>Phó từ phủ định <strong>不 (bù)</strong> mang thanh 4 gốc. Tuy nhiên cách đọc thay đổi tùy theo thanh điệu của từ tiếp sau nó:</p>
+        <ol>
+            <li><strong>Giữ nguyên thanh 4 (bù):</strong> Khi đứng trước các từ mang <strong>Thanh 1, Thanh 2, Thanh 3</strong>.<br>
+                <em>Ví dụ:</em> 不忙 <span class="pinyin">bù máng</span> (không bận), 不好 <span class="pinyin">bù hǎo</span> (không tốt), 不吃 <span class="pinyin">bù chī</span> (không ăn).
+            </li>
+            <li><strong>Biến âm đọc thành thanh 2 (bú):</strong> Khi đứng trước các từ mang <strong>Thanh 4</strong>.<br>
+                <em>Ví dụ:</em> 不是 <span class="pinyin">bù ①</span> → đọc là <span class="pinyin">bú shì</span> (không phải); 不累 <span class="pinyin">bù lèi</span> → đọc là <span class="pinyin">bú lèi</span> (không mệt).
+            </li>
+        </ol>
+
+        <h2 class="section-title">4. Cấu trúc Ngữ pháp Cốt lõi: Động từ "是" (shì) &amp; "有" (yǒu)</h2>
+        <div class="grid-cards">
+            <div class="card">
+                <div class="card-title"><span>Động từ "是" (shì - Là)</span></div>
+                <p>Dùng để biểu thị quan hệ tương đương giữa chủ ngữ và vị ngữ danh từ.</p>
+                <ul>
+                    <li><strong>Khẳng định:</strong> S + 是 + O<br><em>Ví dụ:</em> 我是老师 (Tôi là giáo viên).</li>
+                    <li><strong>Phủ định:</strong> S + 不是 + O<br><em>Ví dụ:</em> 他不是学生 (Anh ấy không phải học sinh).</li>
+                    <li><strong>Nghi vấn:</strong> S + 是 + O + 吗?<br><em>Ví dụ:</em> 你 là học sinh 吗? (Bạn là học sinh phải không?)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-title"><span>Động từ "有" (yǒu - Có)</span></div>
+                <p>Biểu thị sự sở hữu vật chất hoặc mối quan hệ xã hội.</p>
+                <ul>
+                    <li><strong>Khẳng định:</strong> S + 有 + O<br><em>Ví dụ:</em> 我 có bạn (Tôi có bạn bè).</li>
+                    <li><strong>Phủ định:</strong> S + <strong>Chi hữu</strong> + O<br><em>Ví dụ:</em> 他没有女朋友 (Anh ấy không có bạn gái).</li>
+                    <li><strong>Nghi vấn:</strong> S + 有 + O + 吗?<br><em>Ví dụ:</em> 你 có bạn trai 吗? (Bạn có bạn trai không?)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">5. Từ vựng cốt lõi Bài 3 &amp; Văn hóa gọi tên</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Chữ Hán / Phiên âm</th>
+                    <th style="width: 30%;">Nghĩa tiếng Việt</th>
+                    <th style="width: 20%;">Chữ Hán / Phiên âm</th>
+                    <th style="width: 25%;">Nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="hanzi">律师 <span class="pinyin">lǜshī</span></td>
+                    <td>luật sư</td>
+                    <td class="hanzi">名字 <span class="pinyin">míngzi</span></td>
+                    <td>tên</td>
+                </tr>
+                <tr>
+                    <td class="hanzi">朋友 <span class="pinyin">péngyou</span></td>
+                    <td>bạn bè</td>
+                    <td class="hanzi">高兴 <span class="pinyin">gāoxìng</span></td>
+                    <td>vui mừng / vui vẻ</td>
+                </tr>
+                <tr>
+                    <td class="hanzi">男朋友 <span class="pinyin">nánpéngyou</span></td>
+                    <td>bạn trai</td>
+                    <td class="hanzi">认识 <span class="pinyin">rènshi</span></td>
+                    <td>quen biết / nhận biết</td>
+                </tr>
+                <tr>
+                    <td class="hanzi">女朋友 <span class="pinyin">nǚpéngyou</span></td>
+                    <td>bạn gái</td>
+                    <td class="hanzi">叫 <span class="pinyin">jiào</span></td>
+                    <td>gọi / gọi là</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="margin-top: 10px;"><strong>💡 Văn hóa gọi tên trong giao tiếp đời thường:</strong><br>
+        Người Trung Quốc thường gọi nhau bằng các cách thân mật: ghép tiền tố <strong>阿 (ā)</strong> hoặc <strong>小 (xiǎo)</strong> trước tên (Ví dụ: 小薇 Xiǎo Wēi - Tiểu Vy, ...). Khi gọi người lớn tuổi hoặc cấp trên thân mật, ghép tiền tố <strong>老 (lǎo)</strong> trước họ (Ví dụ: 老张 Lǎo Zhāng - Lão Trương).</p>
+
+        <div class="exercise-section">
+            <div class="exercise-title">📝 Bài tập thực hành Bài 3</div>
+            <p><strong>Dạng 1: Đánh dấu thanh điệu chuẩn cho phó từ "不" (bù / bú) trong các trường hợp sau:</strong></p>
+            <p>1. <span class="pinyin">bu shi</span> (không phải) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">bu mang</span> (không bận) → <span class="write-line"></span></p>
+            <p>3. <span class="pinyin">bu lei</span> (không mệt) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. <span class="pinyin">bu hao</span> (không tốt) → <span class="write-line"></span></p>
+            <br>
+            <p><strong>Dạng 2: Sửa lỗi sai chính tả trong các câu viết Pinyin sau:</strong></p>
+            <ol>
+                <li>Tôi tên là A Trân: <span class="pinyin">wǒ jiao Ā Jēn</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
+                <li>Cô ấy là bạn gái tôi: <span class="pinyin">tā shì wǒ de nǚ pengyou</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
+                <li>Tôi không có xe: <span class="pinyin">wǒ bù yǒu chē</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
+            </ol>
+            <br>
+            <p><strong>Dạng 3: Dịch các câu sau sang tiếng Trung (Ghi rõ Chữ Hán và Pinyin):</strong></p>
+            <p>1. Tôi rất vui khi quen biết bạn:</p>
+            <div class="write-box"></div>
+            <p>2. Anh ấy có bạn gái không? (Dùng câu nghi vấn với 吗):</p>
+            <div class="write-box"></div>
+        </div>
+        
+    </div>
+</body>
+</html>

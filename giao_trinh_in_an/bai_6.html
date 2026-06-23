@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
+        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        th { background-color: #f1f5f9; color: var(--primary-color); }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
+        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print print-btn-container">
+            <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
+        </div>
+        <h1 class="lesson-title">Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả</h1>
+        
+        <h2 class="section-title">1. Vận mẫu mũi phức hợp (8 Nguyên âm mũi phức)</h2>
+        <p>Các vận mẫu mũi phức hợp bắt đầu bằng âm đệm nguyên âm hẹp (i, u, ü) kết thúc bằng phụ âm mũi (-n hoặc -ng):</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Vận mẫu</th>
+                    <th style="width: 45%;">Hướng dẫn khẩu hình &amp; Cách đọc</th>
+                    <th style="width: 20%;">Viết độc lập</th>
+                    <th style="width: 20%;">Ví dụ cụ thể</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ian</strong></td>
+                    <td>Đọc âm /i/ rồi trượt nhanh sang âm /an/. Đọc giống âm "yên" tiếng Việt.</td>
+                    <td><strong>yan</strong></td>
+                    <td>烟 <span class="pinyin">yān</span> (khói)</td>
+                </tr>
+                <tr>
+                    <td><strong>iang</strong></td>
+                    <td>Đọc âm /i/ rồi trượt nhanh sang âm /ang/. Đọc giống âm "yang" tiếng Việt.</td>
+                    <td><strong>yang</strong></td>
+                    <td>羊 <span class="pinyin">yáng</span> (con dê)</td>
+                </tr>
+                <tr>
+                    <td><strong>iong</strong></td>
+                    <td>Đọc âm /i/ rồi trượt nhanh sang âm /ong/. Đọc giống âm "y-ông" tiếng Việt.</td>
+                    <td><strong>yong</strong></td>
+                    <td>用 <span class="pinyin">yòng</span> (dùng)</td>
+                </tr>
+                <tr>
+                    <td><strong>uan</strong></td>
+                    <td>Tròn môi phát âm /u/ làm đệm, chuyển nhanh sang /an/. Đọc giống âm "oan" tiếng Việt.</td>
+                    <td><strong>wan</strong></td>
+                    <td>玩 <span class="pinyin">wán</span> (chơi)</td>
+                </tr>
+                <tr>
+                    <td><strong>uang</strong></td>
+                    <td>Tròn môi phát âm /u/ làm đệm, chuyển nhanh sang /ang/. Đọc giống âm "oang" tiếng Việt.</td>
+                    <td><strong>wang</strong></td>
+                    <td>王 <span class="pinyin">wáng</span> (vua)</td>
+                </tr>
+                <tr>
+                    <td><strong>un</strong></td>
+                    <td>Cách viết rút gọn của <strong>uen</strong>. Đọc âm /u/ trượt sang /ên/. Đọc giống âm "uân" tiếng Việt.</td>
+                    <td><strong>wen</strong></td>
+                    <td>问 <span class="pinyin">wèn</span> (hỏi)</td>
+                </tr>
+                <tr>
+                    <td><strong>ün</strong></td>
+                    <td>Tròn môi phát âm /ü/, kết thúc ở âm /n/ (lưỡi chạm răng trên). Đọc giống âm "uyn".</td>
+                    <td><strong>yun</strong></td>
+                    <td>云 <span class="pinyin">yún</span> (mây)</td>
+                </tr>
+                <tr>
+                    <td><strong>üan</strong></td>
+                    <td>Tròn môi phát âm /ü/, kết thúc ở âm /an/. Đọc giống âm "uyên" tiếng Việt.</td>
+                    <td><strong>yuan</strong></td>
+                    <td>元 <span class="pinyin">yuán</span> (đồng tệ)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Quy tắc chính tả Pinyin tối quan trọng (Tổng ôn toàn khóa)</h2>
+        <div class="warn-box">
+            <strong>🌟 Quy tắc 1: Khi nguyên âm đứng một mình làm thành âm tiết (Không đi với thanh mẫu)</strong><br>
+            • Các vận mẫu bắt đầu bằng <strong>i</strong> sẽ chuyển chữ <strong>i</strong> thành <strong>y</strong> (ia → ya, ian → yan, iang → yang, iong → yong).<br>
+            • Các vận mẫu bắt đầu bằng <strong>u</strong> sẽ chuyển chữ <strong>u</strong> thành <strong>w</strong> (uan → wa, uan → wan, uang → wang, uen → wen).<br>
+            • Các vận mẫu bắt đầu bằng <strong>ü</strong> sẽ thêm chữ <strong>y</strong> đứng trước và lược bỏ hai dấu chấm trên đầu chữ ü (üan → yuan, ün → yun, üe → yue).
+        </div>
+
+        <div class="info-box">
+            <strong>🌟 Quy tắc 2: Lược bỏ hai dấu chấm của nguyên âm "ü" sau j, q, x</strong><br>
+            Khi các vận mẫu tròn môi như <strong>ün</strong> và <strong>üan</strong> kết hợp với thanh mẫu mặt lưỡi <strong>j, q, x</strong>, chúng ta bắt buộc lược bỏ hai dấu chấm trên đầu chữ ü.<br>
+            • j + ün → <strong>jun</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • q + ün → <strong>qun</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • x + ün → <strong>xun</strong><br>
+            • j + üan → <strong>juan</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • q + üan → <strong>quan</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • x + üan → <strong>xuan</strong>
+        </div>
+
+        <div class="exercise-section">
+            <div class="exercise-title">📝 Bài tập ôn tập tổng hợp (Bài 6 &amp; Cuối khóa)</div>
+            <p><strong>Dạng 1: Ghép các thanh mẫu j, q, x với vận mẫu üan, viết kết quả pinyin chuẩn xác:</strong></p>
+            <ol>
+                <li>j + üan (thanh 3) = <span class="write-line"></span></li>
+                <li>q + üan (thanh 2) = <span class="write-line"></span></li>
+                <li>x + üan (thanh 4) = <span class="write-line"></span></li>
+            </ol>
+            <br>
+            <p><strong>Dạng 2: Đọc hiểu và sửa lỗi sai trong các từ Pinyin viết sai chính tả dưới đây:</strong></p>
+            <ol>
+                <li>Váy (qún): <span class="pinyin">qǘn</span> → Sửa lại: <span class="write-line"></span></li>
+                <li>Mây (yún): <span class="pinyin">yǘn</span> → Sửa lại: <span class="write-line"></span></li>
+            </ol>
+        </div>
+        
+    </div>
+</body>
+</html>

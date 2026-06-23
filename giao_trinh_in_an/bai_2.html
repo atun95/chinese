@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px; }
+        h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        th { background-color: #f1f5f9; color: var(--primary-color); }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
+        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .write-box { border: 1px solid #cbd5e1; height: 30px; width: 100%; margin-top: 5px; }
+        @media print { .no-print { display: none !important; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print print-btn-container">
+            <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
+        </div>
+        <h1 class="lesson-title">Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản</h1>
+        
+        <h2 class="section-title">1. Vận mẫu kép cơ bản (ai, ei, ao, ou)</h2>
+        <p>Vận mẫu kép là sự kết hợp của nhiều nguyên âm đơn. Khi phát âm, khẩu hình trượt mượt mà từ âm thứ nhất sang âm thứ hai:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Vận mẫu</th>
+                    <th style="width: 50%;">Hướng dẫn khẩu hình &amp; Cách đọc</th>
+                    <th style="width: 35%;">Ví dụ cụ thể</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ai</strong></td>
+                    <td>Miệng mở rộng phát âm nguyên âm /a/, sau đó chuyển nhanh khẩu hình sang dẹt và khép nhẹ ở /i/. Phát âm giống chữ "ai" tiếng Việt.</td>
+                    <td>来 <span class="pinyin">lái</span> (đến/lại)</td>
+                </tr>
+                <tr>
+                    <td><strong>ei</strong></td>
+                    <td>Miệng mở hé phát âm nguyên âm /e/, sau đó trượt nhanh sang âm /i/. Đọc gần giống chữ "ây" trong tiếng Việt.</td>
+                    <td>内 <span class="pinyin">nèi</span> (ở trong)</td>
+                </tr>
+                <tr>
+                    <td><strong>ao</strong></td>
+                    <td>Miệng mở rộng bắt đầu từ /a/, trượt mượt mà thu tròn môi lại kết thúc ở âm /o/. Đọc giống chữ "ao" tiếng Việt.</td>
+                    <td>宝贝 <span class="pinyin">bǎobèi</span> (bảo bối)</td>
+                </tr>
+                <tr>
+                    <td><strong>ou</strong></td>
+                    <td>Môi tròn vừa phát âm /o/, nhanh chóng thu tròn môi nhỏ lại kết thúc ở âm /u/. Đọc giống chữ "âu" trong tiếng Việt.</td>
+                    <td>狗 <span class="pinyin">gǒu</span> (con chó)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Bảng Ghép âm cơ bản (Thanh mẫu + Vận mẫu đơn &amp; kép)</h2>
+        <p>Học viên hãy dùng bút luyện tập đánh vần từng ô giao nhau của thanh mẫu và vận mẫu bên dưới. Những ô trống biểu thị sự kết hợp âm không tồn tại trong tiếng Trung tiêu chuẩn.</p>
+        <table style="text-align: center;">
+            <thead>
+                <tr style="background-color: #f1f5f9;">
+                    <th style="text-align: center;">Pinyin</th>
+                    <th style="text-align: center;">a</th>
+                    <th style="text-align: center;">o</th>
+                    <th style="text-align: center;">e</th>
+                    <th style="text-align: center;">i</th>
+                    <th style="text-align: center;">u</th>
+                    <th style="text-align: center;">ü</th>
+                    <th style="text-align: center;">ai</th>
+                    <th style="text-align: center;">ei</th>
+                    <th style="text-align: center;">ao</th>
+                    <th style="text-align: center;">ou</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>b</strong></td>
+                    <td>ba</td>
+                    <td>bo</td>
+                    <td>-</td>
+                    <td>bi</td>
+                    <td>bu</td>
+                    <td>-</td>
+                    <td>bai</td>
+                    <td>bei</td>
+                    <td>bao</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td><strong>p</strong></td>
+                    <td>pa</td>
+                    <td>po</td>
+                    <td>-</td>
+                    <td>pi</td>
+                    <td>pu</td>
+                    <td>-</td>
+                    <td>pai</td>
+                    <td>pei</td>
+                    <td>pao</td>
+                    <td>pou</td>
+                </tr>
+                <tr>
+                    <td><strong>m</strong></td>
+                    <td>ma</td>
+                    <td>mo</td>
+                    <td>me</td>
+                    <td>mi</td>
+                    <td>mu</td>
+                    <td>-</td>
+                    <td>mai</td>
+                    <td>mei</td>
+                    <td>mao</td>
+                    <td>mou</td>
+                </tr>
+                <tr>
+                    <td><strong>f</strong></td>
+                    <td>fa</td>
+                    <td>fo</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>fu</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>fei</td>
+                    <td>-</td>
+                    <td>fou</td>
+                </tr>
+                <tr>
+                    <td><strong>d</strong></td>
+                    <td>da</td>
+                    <td>-</td>
+                    <td>de</td>
+                    <td>di</td>
+                    <td>du</td>
+                    <td>-</td>
+                    <td>dai</td>
+                    <td>dei</td>
+                    <td>dao</td>
+                    <td>dou</td>
+                </tr>
+                <tr>
+                    <td><strong>t</strong></td>
+                    <td>ta</td>
+                    <td>-</td>
+                    <td>te</td>
+                    <td>ti</td>
+                    <td>tu</td>
+                    <td>-</td>
+                    <td>tai</td>
+                    <td>-</td>
+                    <td>tao</td>
+                    <td>tou</td>
+                </tr>
+                <tr>
+                    <td><strong>n</strong></td>
+                    <td>na</td>
+                    <td>-</td>
+                    <td>ne</td>
+                    <td>ni</td>
+                    <td>nu</td>
+                    <td>nü</td>
+                    <td>nai</td>
+                    <td>nei</td>
+                    <td>nao</td>
+                    <td>nou</td>
+                </tr>
+                <tr>
+                    <td><strong>l</strong></td>
+                    <td>la</td>
+                    <td>-</td>
+                    <td>le</td>
+                    <td>li</td>
+                    <td>lu</td>
+                    <td>lü</td>
+                    <td>lai</td>
+                    <td>lei</td>
+                    <td>lao</td>
+                    <td>lou</td>
+                </tr>
+                <tr>
+                    <td><strong>g</strong></td>
+                    <td>ga</td>
+                    <td>-</td>
+                    <td>ge</td>
+                    <td>-</td>
+                    <td>gu</td>
+                    <td>-</td>
+                    <td>gai</td>
+                    <td>gei</td>
+                    <td>gao</td>
+                    <td>gou</td>
+                </tr>
+                <tr>
+                    <td><strong>k</strong></td>
+                    <td>ka</td>
+                    <td>-</td>
+                    <td>ke</td>
+                    <td>-</td>
+                    <td>ku</td>
+                    <td>-</td>
+                    <td>kai</td>
+                    <td>kei</td>
+                    <td>kao</td>
+                    <td>kou</td>
+                </tr>
+                <tr>
+                    <td><strong>h</strong></td>
+                    <td>ha</td>
+                    <td>-</td>
+                    <td>he</td>
+                    <td>-</td>
+                    <td>hu</td>
+                    <td>-</td>
+                    <td>hai</td>
+                    <td>hei</td>
+                    <td>hao</td>
+                    <td>hou</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exercise-section">
+            <div class="exercise-title">📝 Bài tập thực hành Bài 2</div>
+            <p><strong>Dạng 1: Điền vận mẫu kép thích hợp (ai, ei, ao, ou) vào chỗ trống dựa vào nghĩa tiếng Việt:</strong></p>
+            <ol>
+                <li>Đến, lại: l___ (lái)</li>
+                <li>Con chó: g___ (gǒu)</li>
+                <li>Bảo bối: bǎob___ (bǎobèi)</li>
+                <li>Ở trong: n___ (nèi)</li>
+                <li>Tốt, khỏe, ngon: h___ (hǎo)</li>
+            </ol>
+            <br>
+            <p><strong>Dạng 2: Phát hiện âm tiết SAI quy tắc ghép âm (khoanh tròn đáp án):</strong></p>
+            <p>A. bei &nbsp;&nbsp;&nbsp;&nbsp; B. bo &nbsp;&nbsp;&nbsp;&nbsp; C. gei &nbsp;&nbsp;&nbsp;&nbsp; D. fi &nbsp;&nbsp;&nbsp;&nbsp; E. tou &nbsp;&nbsp;&nbsp;&nbsp; F. kii</p>
+            <br>
+            <p><strong>Dạng 3: Tập viết tay các âm sau (nhớ viết đúng vị trí dấu thanh điệu):</strong></p>
+            <p>1. <span class="pinyin">lǎoshī</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">bǎobèi</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. <span class="pinyin">gēge</span>: <span class="write-line"></span></p>
+        </div>
+        
+    </div>
+</body>
+</html>
