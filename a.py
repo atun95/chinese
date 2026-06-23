@@ -403,22 +403,6 @@ elif mode == "📝 Hệ thống bài tập":
     ])
 
 if mode == "🖨️ In ấn & Đồng bộ":
-    st.header("🖨️ Đồng bộ & In ấn Giáo Trình")
-    st.write("Dữ liệu giáo trình được tổng hợp tự động từ nội dung các bài học để tạo ra các bản HTML riêng biệt được tối ưu hóa cho in ấn khổ giấy A4 dọc.")
-    
-    st.markdown("""
-    <div style="background-color: #f0fdf4; border-left: 6px solid #16a34a; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <h4 style="color: #14532d; margin-top: 0;">💡 Hướng dẫn in ấn chuẩn đẹp:</h4>
-        <ol>
-            <li>Nhấp vào nút <b>"🔄 Đồng bộ & Cập nhật giáo trình"</b> ở dưới để làm mới tất cả các file.</li>
-            <li>Sau đó, nhấp vào nút <b>"📥 Tải file để in"</b> bên cạnh mỗi bài học bạn muốn in.</li>
-            <li>Mở file đã tải xuống trong trình duyệt (Chrome, Edge, Firefox).</li>
-            <li>Nhấn <b>Ctrl + P</b> (hoặc Command + P trên Mac) để mở hộp thoại in.</li>
-            <li><b>LƯU Ý QUAN TRỌNG:</b> Trong phần cài đặt in (More Settings), hãy <b>bỏ tích chọn "Headers and Footers"</b> (Đầu trang và chân trang) để xóa bỏ các dòng chữ địa chỉ tệp <code>file:///...</code> ở đầu trang và chân trang giấy.</li>
-            <li>Chọn khổ giấy <b>A4</b>, hướng trang <b>Portrait (Dọc)</b>, và thiết lập Margin là <b>Default</b>.</li>
-        </ol>
-    </div>
-    """, unsafe_allow_html=True)
     
     if st.button("🔄 Đồng bộ & Cập nhật giáo trình", type="primary", use_container_width=True):
         try:
