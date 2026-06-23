@@ -1330,7 +1330,7 @@ def build_individual_lessons():
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
         :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; font-weight: 700; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
         .container { max-width: 900px; margin: 0 auto; padding: 30px; }
         h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
         h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
@@ -1382,7 +1382,7 @@ def build_individual_lessons():
 
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 13px !important; line-height: 1.4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
+            body { font-size: 13px !important; line-height: 1.4 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
             .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 auto !important; }
             
             /* Cover Page - Precise A4 Print size to prevent trailing blank space */
@@ -1448,7 +1448,7 @@ def build_individual_lessons():
         filename = make_filename(lesson['title'])
         toc_rows += f"""
         <tr>
-            <td style="font-weight: 600; padding: 12px 0; border: none;"><a href="./{filename}" style="color: var(--primary-color); text-decoration: none;">{lesson['title']}</a></td>
+            <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./{filename}" style="color: var(--primary-color); text-decoration: none;">{lesson['title']}</a></td>
             <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">{lesson['toc_desc']}</td>
         </tr>"""
         
