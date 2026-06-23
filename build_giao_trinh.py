@@ -248,28 +248,7 @@ LESSONS = [
             </tbody>
         </table>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập thực hành Bài 1</div>
-            <p><strong>Dạng 1: Viết phiên âm Pinyin đúng và đánh dấu thanh điệu cho các từ sau:</strong></p>
-            <ol>
-                <li>Bố (baba): <span class="write-line"></span></li>
-                <li>Mẹ (mama): <span class="write-line"></span></li>
-                <li>Tôi rất bận (wo hen mang): <span class="write-line"></span></li>
-                <li>Giáo viên (laoshi): <span class="write-line"></span></li>
-            </ol>
-            <br>
-            <p><strong>Dạng 2: Chọn đáp án đúng nhất (Trắc nghiệm ngữ âm):</strong></p>
-            <p>1. Cặp từ nào sau đây chứa thanh mẫu bật hơi?</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;A. bàba - dìdi &nbsp;&nbsp;&nbsp;&nbsp;B. tā - pǎobù &nbsp;&nbsp;&nbsp;&nbsp;C. māma - lǎoshī</p>
-            <p>2. Khi đọc câu "Nǐ hǎo" (chào bạn), ta phát âm thực tế như thế nào?</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;A. nǐ hǎo &nbsp;&nbsp;&nbsp;&nbsp;B. nǐ háo &nbsp;&nbsp;&nbsp;&nbsp;C. ní hǎo</p>
-            <br>
-            <p><strong>Dạng 3: Dịch các câu sau sang chữ Hán hoặc Pinyin:</strong></p>
-            <ol>
-                <li>Tôi không bận: <span class="write-line" style="width:300px;"></span></li>
-                <li>Thầy giáo rất bận: <span class="write-line" style="width:300px;"></span></li>
-            </ol>
-        </div>
+
         """,
         "content_md": """
 ### 1. Khái quát về hệ thống chữ viết Pinyin
@@ -327,15 +306,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
 *   **忙 (máng):** bận rộn (Tính từ)
 *   **不 (bù):** không (Phó từ)
 
-### 6. Bài tập thực hành Bài 1
-1.  **Đánh dấu thanh điệu thích hợp cho các từ sau:**
-    *   Mẹ (mama): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Bố (baba): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Tôi rất bận (wo hen mang): \\_\\_\\_\\_\\_\\_\\_\\_
-    *   Giáo viên (laoshi): \\_\\_\\_\\_\\_\\_\\_\\_
-2.  **Dịch các câu sau sang tiếng Trung (Pinyin và Chữ Hán):**
-    *   Tôi không bận: \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
-    *   Thầy giáo rất bận: \\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_
+
         """
     },
     {
@@ -541,23 +512,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             </tbody>
         </table>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập thực hành Bài 2</div>
-            <p><strong>Dạng 1: Điền vận mẫu kép thích hợp (ai, ei, ao, ou) vào chỗ trống dựa vào nghĩa tiếng Việt:</strong></p>
-            <ol>
-                <li>Đến, lại: l___ (lái)</li>
-                <li>Con chó: g___ (gǒu)</li>
-                <li>Bảo bối: bǎob___ (bǎobèi)</li>
-                <li>Ở trong: n___ (nèi)</li>
-                <li>Tốt, khỏe, ngon: h___ (hǎo)</li>
-            </ol>
-            <br>
-            <p><strong>Dạng 2: Phát hiện âm tiết SAI quy tắc ghép âm (khoanh tròn đáp án):</strong></p>
-            <p>A. bei &nbsp;&nbsp;&nbsp;&nbsp; B. bo &nbsp;&nbsp;&nbsp;&nbsp; C. gei &nbsp;&nbsp;&nbsp;&nbsp; D. fi &nbsp;&nbsp;&nbsp;&nbsp; E. tou &nbsp;&nbsp;&nbsp;&nbsp; F. kii</p>
-            <br>
-            <p><strong>Dạng 3: Tập viết tay các âm sau (nhớ viết đúng vị trí dấu thanh điệu):</strong></p>
-            <p>1. <span class="pinyin">lǎoshī</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">bǎobèi</span>: <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. <span class="pinyin">gēge</span>: <span class="write-line"></span></p>
-        </div>
+
         """,
         "content_md": """
 ### 1. Vận mẫu kép cơ bản (ai, ei, ao, ou)
@@ -582,14 +537,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
 | **k** | ka | - | ke | - | ku | - | kai | kei | kao | kou |
 | **h** | ha | - | he | - | hu | - | hai | hei | hao | hou |
 
-### 3. Bài tập thực hành Bài 2
-1.  **Điền vận mẫu kép thích hợp (ai, ei, ao, ou) vào chỗ trống:**
-    *   Đến, lại: l\\_\\_\\_ (lái)
-    *   Con chó: g\\_\\_\\_ (gǒu)
-    *   Bên trong: n\\_\\_\\_ (nèi)
-    *   Tốt, khỏe: h\\_\\_\\_ (hǎo)
-2.  **Chọn âm tiết viết SAI quy tắc ghép âm:**
-    *   A. bei &nbsp;&nbsp;&nbsp;&nbsp; B. bo &nbsp;&nbsp;&nbsp;&nbsp; C. gei &nbsp;&nbsp;&nbsp;&nbsp; D. fi &nbsp;&nbsp;&nbsp;&nbsp; E. kii
+
         """
     },
     {
@@ -692,27 +640,35 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             </li>
         </ol>
 
-        <h2 class="section-title">4. Cấu trúc Ngữ pháp Cốt lõi: Động từ "是" (shì) &amp; "有" (yǒu)</h2>
-        <div class="grid-cards">
-            <div class="card">
-                <div class="card-title"><span>Động từ "是" (shì - Là)</span></div>
-                <p>Dùng để biểu thị quan hệ tương đương giữa chủ ngữ và vị ngữ danh từ.</p>
-                <ul>
-                    <li><strong>Khẳng định:</strong> S + 是 + O<br><em>Ví dụ:</em> 我是老师 (Tôi là giáo viên).</li>
-                    <li><strong>Phủ định:</strong> S + 不是 + O<br><em>Ví dụ:</em> 他不是学生 (Anh ấy không phải học sinh).</li>
-                    <li><strong>Nghi vấn:</strong> S + 是 + O + 吗?<br><em>Ví dụ:</em> 你 là học sinh 吗? (Bạn là học sinh phải không?)</li>
-                </ul>
-            </div>
-            <div class="card">
-                <div class="card-title"><span>Động từ "有" (yǒu - Có)</span></div>
-                <p>Biểu thị sự sở hữu vật chất hoặc mối quan hệ xã hội.</p>
-                <ul>
-                    <li><strong>Khẳng định:</strong> S + 有 + O<br><em>Ví dụ:</em> 我 có bạn (Tôi có bạn bè).</li>
-                    <li><strong>Phủ định:</strong> S + <strong>Chi hữu</strong> + O<br><em>Ví dụ:</em> 他没有女朋友 (Anh ấy không có bạn gái).</li>
-                    <li><strong>Nghi vấn:</strong> S + 有 + O + 吗?<br><em>Ví dụ:</em> 你 có bạn trai 吗? (Bạn có bạn trai không?)</li>
-                </ul>
-            </div>
-        </div>
+        <h2 class="section-title">4. Cấu trúc Ngữ pháp Cốt lõi: So sánh Động từ "是" (shì) &amp; "有" (yǒu)</h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f1f5f9;">
+                    <th style="width: 50%; font-size: 15px; text-align: center; padding: 12px; font-weight: bold; color: var(--primary-color);">Động từ "是" (shì - Là)</th>
+                    <th style="width: 50%; font-size: 15px; text-align: center; padding: 12px; font-weight: bold; color: var(--primary-color);">Động từ "有" (yǒu - Có)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top; padding: 15px;">
+                        <p style="margin-bottom: 8px;"><strong>Ý nghĩa:</strong> Biểu thị quan hệ tương đương giữa chủ ngữ và vị ngữ danh từ (định danh, giới thiệu).</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Khẳng định:</strong> <code style="color: #1e3a8a; font-weight: bold;">S + 是 + O</code><br><em>Ví dụ:</em> 我是老师。<span class="pinyin">(Wǒ shì lǎoshī.)</span> - Tôi là giáo viên.</li>
+                            <li><strong>Phủ định:</strong> <code style="color: #b91c1c; font-weight: bold;">S + 不是 + O</code><br><em>Ví dụ:</em> 他不是学生。<span class="pinyin">(Tā bú shì xuéshēng.)</span> - Anh ấy không phải học sinh.</li>
+                            <li><strong>Nghi vấn:</strong> <code style="color: #0f766e; font-weight: bold;">S + 是 + O + 吗？</code><br><em>Ví dụ:</em> 你是学生吗？<span class="pinyin">(Nǐ shì xuéshēng ma?)</span> - Bạn là học sinh phải không?</li>
+                        </ul>
+                    </td>
+                    <td style="vertical-align: top; padding: 15px;">
+                        <p style="margin-bottom: 8px;"><strong>Ý nghĩa:</strong> Biểu thị sự sở hữu vật chất, mối quan hệ xã hội hoặc sự tồn tại.</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Khẳng định:</strong> <code style="color: #1e3a8a; font-weight: bold;">S + 有 + O</code><br><em>Ví dụ:</em> 我有朋友。<span class="pinyin">(Wǒ yǒu péngyou.)</span> - Tôi có bạn bè.</li>
+                            <li><strong>Phủ định:</strong> <code style="color: #b91c1c; font-weight: bold;">S + 没有 + O</code><br><em>Ví dụ:</em> 他没有女朋友。<span class="pinyin">(Tā méiyǒu nǚpéngyou.)</span> - Anh ấy không có bạn gái.</li>
+                            <li><strong>Nghi vấn:</strong> <code style="color: #0f766e; font-weight: bold;">S + 有 + O + 吗？</code><br><em>Ví dụ:</em> 你有男朋友吗？<span class="pinyin">(Nǐ yǒu nánpéngyou ma?)</span> - Bạn có bạn trai không?</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2 class="section-title">5. Từ vựng cốt lõi Bài 3 &amp; Văn hóa gọi tên</h2>
         <table>
@@ -755,25 +711,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
         <p style="margin-top: 10px;"><strong>💡 Văn hóa gọi tên trong giao tiếp đời thường:</strong><br>
         Người Trung Quốc thường gọi nhau bằng các cách thân mật: ghép tiền tố <strong>阿 (ā)</strong> hoặc <strong>小 (xiǎo)</strong> trước tên (Ví dụ: 小薇 Xiǎo Wēi - Tiểu Vy, ...). Khi gọi người lớn tuổi hoặc cấp trên thân mật, ghép tiền tố <strong>老 (lǎo)</strong> trước họ (Ví dụ: 老张 Lǎo Zhāng - Lão Trương).</p>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập thực hành Bài 3</div>
-            <p><strong>Dạng 1: Đánh dấu thanh điệu chuẩn cho phó từ "不" (bù / bú) trong các trường hợp sau:</strong></p>
-            <p>1. <span class="pinyin">bu shi</span> (không phải) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">bu mang</span> (không bận) → <span class="write-line"></span></p>
-            <p>3. <span class="pinyin">bu lei</span> (không mệt) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. <span class="pinyin">bu hao</span> (không tốt) → <span class="write-line"></span></p>
-            <br>
-            <p><strong>Dạng 2: Sửa lỗi sai chính tả trong các câu viết Pinyin sau:</strong></p>
-            <ol>
-                <li>Tôi tên là A Trân: <span class="pinyin">wǒ jiao Ā Jēn</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
-                <li>Cô ấy là bạn gái tôi: <span class="pinyin">tā shì wǒ de nǚ pengyou</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
-                <li>Tôi không có xe: <span class="pinyin">wǒ bù yǒu chē</span> → Sửa: <span class="write-line" style="width: 250px;"></span></li>
-            </ol>
-            <br>
-            <p><strong>Dạng 3: Dịch các câu sau sang tiếng Trung (Ghi rõ Chữ Hán và Pinyin):</strong></p>
-            <p>1. Tôi rất vui khi quen biết bạn:</p>
-            <div class="write-box"></div>
-            <p>2. Anh ấy có bạn gái không? (Dùng câu nghi vấn với 吗):</p>
-            <div class="write-box"></div>
-        </div>
+
         """,
         "content_md": """
 ### 1. Hệ thống Thanh mẫu Nâng cao
@@ -794,13 +732,11 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
 *   **Giữ nguyên thanh 4 (bù):** Khi đi trước từ mang Thanh 1, Thanh 2, Thanh 3. (Ví dụ: 不忙 **bù máng**)
 *   **Đổi thành thanh 2 (bú):** Khi đi trước từ mang Thanh 4. (Ví dụ: 不是 **bú shì**)
 
-### 4. Động từ "是" (shì - Là) và "有" (yǒu - Có)
-*   **Câu với 是:**
-    *   Khẳng định: S + 是 + O (Ví dụ: 我是老师 - Tôi là giáo viên)
-    *   Phủ định: S + 不是 + O (Ví dụ: 他不是学生 - Anh ấy không phải học sinh)
-*   **Câu với 有:**
-    *   Khẳng định: S + 有 + O (Ví dụ: 我有朋友 - Tôi có bạn bè)
-    *   Phủ định: S + **没有** + O (Ví dụ: 他没有女朋友 - Anh ấy không có bạn gái. *Tuyệt đối không nói ❌ bù hữu*)
+### 4. So sánh Động từ "是" (shì - Là) & "有" (yǒu - Có)
+
+| Động từ "是" (shì - Là) | Động từ "有" (yǒu - Có) |
+| :--- | :--- |
+| **Ý nghĩa:** Định danh, biểu thị quan hệ tương đương.<br>**Khẳng định:** S + 是 + O<br>*Ví dụ:* 我是老师 (Tôi là giáo viên).<br>**Phủ định:** S + 不是 + O<br>*Ví dụ:* 他ไม่ใช่学生 (Anh ấy không phải học sinh).<br>**Nghi vấn:** S + 是 + O + 吗？<br>*Ví dụ:* 你是学生吗？ (Bạn là học sinh phải không?) | **Ý nghĩa:** Biểu thị sự sở hữu hoặc mối quan hệ.<br>**Khẳng định:** S + 有 + O<br>*Ví dụ:* 我有朋友 (Tôi có bạn bè).<br>**Phủ định:** S + 没有 + O<br>*Ví dụ:* 他没有女朋友 (Anh ấy không có bạn gái).<br>**Nghi vấn:** S + 有 + O + 吗？<br>*Ví dụ:* 你有男朋友吗？ (Bạn có bạn trai không?) |
 
 ### 5. Từ vựng cốt lõi Bài 3
 *   **律师 (lǜshī):** luật sư (Danh từ)
@@ -957,20 +893,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             </tbody>
         </table>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập thực hành Bài 4</div>
-            <p><strong>Dạng 1: Viết lại các từ phiên âm Pinyin sau về dạng đúng chính tả đứng độc lập:</strong></p>
-            <p>1. <span class="pinyin">iou</span> (hữu/có) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <span class="pinyin">uei</span> (alo/vị) → <span class="write-line"></span></p>
-            <p>3. <span class="pinyin">üan</span> (đồng tệ) → <span class="write-line"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. <span class="pinyin">üe</span> (trăng) → <span class="write-line"></span></p>
-            <br>
-            <p><strong>Dạng 2: Chọn từ thích hợp trong 7 từ chỉ nữ giới điền vào chỗ trống (Chữ Hán hoặc Pinyin):</strong></p>
-            <ol>
-                <li>Để ghi giới tính trong hộ chiếu, người ta dùng từ: <span class="write-line"></span></li>
-                <li>Người mẹ gọi đứa con gái yêu của mình là: <span class="write-line"></span></li>
-                <li>Hạng mục thi đấu bóng đá nữ ở Olympic gọi là: <span class="write-line"></span></li>
-                <li>Các bạn nữ học sinh, sinh viên trong trường học thường gọi nhau là: <span class="write-line"></span></li>
-            </ol>
-        </div>
+
         """,
         "content_md": """
 ### 1. Vận mẫu kép mở rộng (9 Nguyên âm phức)
@@ -1178,21 +1101,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
         <h2 class="section-title">4. Chuyên đề Văn hóa: Tết Đoan Ngọ (端午节 - Duānwǔ Jié)</h2>
         <p>Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung Quốc, ngày lễ này mang tính tưởng niệm sâu sắc đối với nhà thơ yêu nước vĩ đại <strong>Khuất Nguyên (屈原)</strong> nước Sở thời Chiến Quốc.</p>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập thực hành Bài 5</div>
-            <p><strong>Dạng 1: Điền từ thích hợp "二" (èr) hoặc "两" (liǎng) vào chỗ trống:</strong></p>
-            <ol>
-                <li>Số đếm: 一 (yī)，<span class="write-line"></span> (___)，三 (sān)。</li>
-                <li>Hai người học sinh: <span class="write-line"></span> 个人 (___ gè rén)。</li>
-                <li>Hai trăm tệ: <span class="write-line"></span> 百元 (___ bǎi yuán)。</li>
-            </ol>
-            <br>
-            <p><strong>Dạng 2: Dịch các câu sau sang tiếng Trung (chú ý trật tự từ phó từ mức độ):</strong></p>
-            <p>1. Tiếng Trung đặc biệt thú vị:</p>
-            <div class="write-box"></div>
-            <p>2. Hôm nay mệt quá rồi! (Cảm thán):</p>
-            <div class="write-box"></div>
-        </div>
+
         """,
         "content_md": """
 ### 1. Số đếm và Biến điệu của "一" (yī)
@@ -1225,14 +1134,7 @@ Trong câu khẳng định vị ngữ tính từ (S + Adj), bắt buộc phải 
 ### 4. Chuyên đề Văn hóa: Tết Đoan Ngọ (端午节 - Duānwǔ Jié)
 Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung Quốc, ngày lễ này mang tính tưởng niệm sâu sắc đối với nhà thơ yêu nước vĩ đại Khuất Nguyên (屈原) nước Sở thời Chiến Quốc. Khi nước Sở mất nước, ông ôm đá tự vẫn dưới sông Mịch La. Người dân đi thuyền ra cứu và ném bánh tro (bánh ú - 粽子) xuống sông để cá không ăn xác ông. Đây cũng là nguồn gốc phong tục Đua thuyền rồng (赛龙舟).
 
-### 5. Bài tập thực hành
-1.  **Điền từ thích hợp "二" (èr) hoặc "两" (liǎng) vào chỗ trống:**
-    *   Số đếm: 一 (yī)，________ (èr)，三 (sān)。
-    *   Hai người học sinh: ________ 个人 (liǎng gè rén)。
-    *   Hai trăm tệ: ________ 百元 (liǎng bǎi yuán)。
-2.  **Dịch các câu sau sang tiếng Trung (chữ Hán và Pinyin):**
-    *   Tiếng Trung đặc biệt thú vị.
-    *   Hôm nay mệt quá rồi!
+
 """
     },
     {
@@ -1317,21 +1219,7 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
             • j + üan → <strong>juan</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • q + üan → <strong>quan</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • x + üan → <strong>xuan</strong>
         </div>
 
-        <div class="exercise-section">
-            <div class="exercise-title">📝 Bài tập ôn tập tổng hợp (Bài 6 &amp; Cuối khóa)</div>
-            <p><strong>Dạng 1: Ghép các thanh mẫu j, q, x với vận mẫu üan, viết kết quả pinyin chuẩn xác:</strong></p>
-            <ol>
-                <li>j + üan (thanh 3) = <span class="write-line"></span></li>
-                <li>q + üan (thanh 2) = <span class="write-line"></span></li>
-                <li>x + üan (thanh 4) = <span class="write-line"></span></li>
-            </ol>
-            <br>
-            <p><strong>Dạng 2: Đọc hiểu và sửa lỗi sai trong các từ Pinyin viết sai chính tả dưới đây:</strong></p>
-            <ol>
-                <li>Váy (qún): <span class="pinyin">qǘn</span> → Sửa lại: <span class="write-line"></span></li>
-                <li>Mây (yún): <span class="pinyin">yǘn</span> → Sửa lại: <span class="write-line"></span></li>
-            </ol>
-        </div>
+
         """,
         "content_md": """
 ### 1. Vận mẫu mũi phức hợp (8 Nguyên âm mũi phức)
@@ -1352,14 +1240,7 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 *   **Quy tắc 2: Lược bỏ hai dấu chấm trên đầu chữ ü sau j, q, x**
     *   Khi **ün** và **üan** đi sau **j, q, x**, ta viết lược bỏ hai dấu chấm trên đầu ü thành **jun, qun, xun, juan, quan, xuan** nhưng vẫn giữ nguyên cách phát âm tròn môi.
 
-### 3. Bài tập ôn tập tổng hợp cuối khóa
-1.  **Viết lại các từ sau về dạng Bính âm đúng chính tả:**
-    *   j + üan (thanh 3) = ________
-    *   q + ün (thanh 2) = ________
-    *   x + üan (thanh 4) = ________
-2.  **Sửa lỗi chính tả cho các từ sau:**
-    *   Đám mây (yún): `yǘn` → Sửa: ________
-    *   Váy (qún): `qǘn` → Sửa: ________
+
         """
     }
 ]
