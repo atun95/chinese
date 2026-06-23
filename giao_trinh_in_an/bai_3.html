@@ -60,14 +60,14 @@
 
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 12px !important; line-height: 1.25 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
+            body { font-size: 10.5px !important; line-height: 1.15 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
             .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 auto !important; }
             
             /* Cover Page - Precise A4 Print size to prevent trailing blank space */
             .cover-page {
-                height: 265mm !important;
+                height: 275mm !important;
                 margin: 0 auto !important;
-                padding: 30px !important;
+                padding: 20px !important;
                 border: 4px double var(--primary-color) !important;
                 box-sizing: border-box !important;
                 display: flex !important;
@@ -80,36 +80,36 @@
                 break-inside: avoid !important;
             }
             .cover-title {
-                font-size: 26px !important;
+                font-size: 24px !important;
             }
 
             /* Compact spacing for paragraphs, lists, and headings */
-            p { margin-top: 2px !important; margin-bottom: 2px !important; line-height: 1.25 !important; }
-            ul, ol { margin-top: 2px !important; margin-bottom: 2px !important; padding-left: 16px !important; }
-            li { margin-bottom: 1px !important; }
+            p { margin-top: 1px !important; margin-bottom: 1px !important; line-height: 1.15 !important; }
+            ul, ol { margin-top: 1px !important; margin-bottom: 1px !important; padding-left: 14px !important; }
+            li { margin-bottom: 0.5px !important; }
 
             /* Tables & rows */
-            table { page-break-inside: auto; margin: 5px 0 !important; line-height: 1.2 !important; }
-            tr { page-break-inside: avoid; break-inside: avoid; }
-            th, td { padding: 4px 5px !important; font-size: 11px !important; }
+            table { page-break-inside: avoid !important; margin: 4px 0 !important; line-height: 1.1 !important; }
+            tr { page-break-inside: avoid !important; break-inside: avoid !important; }
+            th, td { padding: 2px 4px !important; font-size: 9.5px !important; }
             
-            /* Allow blocks to break across pages to prevent huge white gaps */
+            /* Allow blocks to break across pages if needed, but try to avoid */
             .info-box, .warn-box {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
-                padding: 5px 8px !important;
-                margin: 5px 0 !important;
-                font-size: 11px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                padding: 4px 6px !important;
+                margin: 4px 0 !important;
+                font-size: 9.5px !important;
             }
             .exercise-section {
-                margin: 6px 0 !important;
-                padding: 6px !important;
-                page-break-inside: auto !important;
-                break-inside: auto !important;
+                margin: 4px 0 !important;
+                padding: 4px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
 
-            h1.lesson-title { font-size: 16px !important; margin-top: 0 !important; margin-bottom: 5px !important; padding-bottom: 3px !important; }
-            h2.section-title { font-size: 13px !important; margin-top: 6px !important; margin-bottom: 3px !important; padding-left: 5px !important; }
+            h1.lesson-title { font-size: 14px !important; margin-top: 0 !important; margin-bottom: 3px !important; padding-bottom: 2px !important; }
+            h2.section-title { font-size: 11px !important; margin-top: 4px !important; margin-bottom: 2px !important; padding-left: 4px !important; }
             
             /* Keep headings with their subsequent paragraph / table */
             h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
@@ -120,7 +120,7 @@
             }
             @page {
                 size: A4 portrait;
-                margin: 6mm 8mm 6mm 8mm;
+                margin: 4mm 6mm 4mm 6mm;
             }
         }
     </style>
@@ -217,7 +217,7 @@
             • Khi <strong>ü</strong> đi sau hai thanh mẫu đầu lưỡi <strong>n, l</strong>, ta <strong>bắt buộc phải giữ nguyên hai dấu chấm</strong> (viết là <strong>nü, lü</strong>) để phân biệt rõ với âm đi với u thường (<strong>nu, lu</strong>).
         </div>
 
-        <h2 class="section-title" style="page-break-before: always;">3. Quy tắc Biến điệu của phó từ phủ định "不" (bù)</h2>
+        <h2 class="section-title">3. Quy tắc Biến điệu của phó từ phủ định "不" (bù)</h2>
         <p>Phó từ phủ định <strong>不 (bù)</strong> mang thanh 4 gốc. Tuy nhiên cách đọc thay đổi tùy theo thanh điệu của từ tiếp sau nó:</p>
         <ol>
             <li><strong>Giữ nguyên thanh 4 (bù):</strong> Khi đứng trước các từ mang <strong>Thanh 1, Thanh 2, Thanh 3</strong>.<br>

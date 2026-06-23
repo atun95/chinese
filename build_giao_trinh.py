@@ -137,7 +137,7 @@ LESSONS = [
             <li><strong>Thanh nhẹ (Neutral Tone):</strong> Không có ký hiệu dấu trên đầu nguyên âm. Đọc cực kỳ nhẹ và ngắn. Ví dụ: <span class="pinyin">māma</span>, <span class="pinyin">bàba</span>.</li>
         </ul>
 
-        <div class="info-box" style="page-break-before: always;">
+        <div class="info-box">
             <strong>💡 Quy tắc Biến điệu của Thanh 3 (Sandhi Rule):</strong><br>
             • Khi <strong>hai âm tiết mang thanh 3</strong> đi liền nhau, thanh 3 thứ nhất sẽ biến âm đọc thành thanh 2 (thanh sắc), nhưng cách viết chữ Pinyin vẫn giữ nguyên dấu thanh 3.<br>
             <em>Ví dụ:</em> 你好 <span class="pinyin">nǐ hǎo</span> đọc thực tế là <span class="pinyin">ní hǎo</span>.<br>
@@ -629,7 +629,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             • Khi <strong>ü</strong> đi sau hai thanh mẫu đầu lưỡi <strong>n, l</strong>, ta <strong>bắt buộc phải giữ nguyên hai dấu chấm</strong> (viết là <strong>nü, lü</strong>) để phân biệt rõ với âm đi với u thường (<strong>nu, lu</strong>).
         </div>
 
-        <h2 class="section-title" style="page-break-before: always;">3. Quy tắc Biến điệu của phó từ phủ định "不" (bù)</h2>
+        <h2 class="section-title">3. Quy tắc Biến điệu của phó từ phủ định "不" (bù)</h2>
         <p>Phó từ phủ định <strong>不 (bù)</strong> mang thanh 4 gốc. Tuy nhiên cách đọc thay đổi tùy theo thanh điệu của từ tiếp sau nó:</p>
         <ol>
             <li><strong>Giữ nguyên thanh 4 (bù):</strong> Khi đứng trước các từ mang <strong>Thanh 1, Thanh 2, Thanh 3</strong>.<br>
@@ -1029,7 +1029,7 @@ Tiếng Trung có 4 thanh điệu chính và 1 thanh nhẹ:
             • Dùng <strong>两 (liǎng)</strong> khi: đứng trực tiếp trước <strong>lượng từ</strong> để chỉ số lượng người/vật (2 người, 2 bánh ú). Hoặc đứng trước các đơn vị số lớn từ hàng trăm trở lên (两百 - 200, 两千 - 2000).
         </div>
 
-        <h2 class="section-title" style="page-break-before: always;">2. Vận mẫu mũi trước (-n) và mũi sau (-ng)</h2>
+        <h2 class="section-title">2. Vận mẫu mũi trước (-n) và mũi sau (-ng)</h2>
         <p>Vận mẫu mũi được chia làm 2 nhóm chính dựa vào vị trí kết thúc luồng hơi:</p>
         <ul>
             <li><strong>Nhóm mũi trước (-n): an, en, in.</strong> Khi kết thúc âm, đầu lưỡi bắt buộc nâng lên chạm nhẹ vào nướu răng cửa hàm trên (khép âm lại bằng âm /n/).</li>
@@ -1236,7 +1236,7 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
             </tbody>
         </table>
 
-        <h3 style="margin-top: 15px; font-size: 14.5px; color: var(--primary-color); page-break-before: always;">📌 Nhóm 2: Các vận mẫu bắt đầu bằng 'u'</h3>
+        <h3 style="margin-top: 15px; font-size: 14.5px; color: var(--primary-color);">📌 Nhóm 2: Các vận mẫu bắt đầu bằng 'u'</h3>
         <table>
             <thead>
                 <tr>
@@ -1382,14 +1382,14 @@ def build_individual_lessons():
 
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 12px !important; line-height: 1.25 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
+            body { font-size: 10.5px !important; line-height: 1.15 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
             .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 auto !important; }
             
             /* Cover Page - Precise A4 Print size to prevent trailing blank space */
             .cover-page {
-                height: 265mm !important;
+                height: 275mm !important;
                 margin: 0 auto !important;
-                padding: 30px !important;
+                padding: 20px !important;
                 border: 4px double var(--primary-color) !important;
                 box-sizing: border-box !important;
                 display: flex !important;
@@ -1402,36 +1402,36 @@ def build_individual_lessons():
                 break-inside: avoid !important;
             }
             .cover-title {
-                font-size: 26px !important;
+                font-size: 24px !important;
             }
 
             /* Compact spacing for paragraphs, lists, and headings */
-            p { margin-top: 2px !important; margin-bottom: 2px !important; line-height: 1.25 !important; }
-            ul, ol { margin-top: 2px !important; margin-bottom: 2px !important; padding-left: 16px !important; }
-            li { margin-bottom: 1px !important; }
+            p { margin-top: 1px !important; margin-bottom: 1px !important; line-height: 1.15 !important; }
+            ul, ol { margin-top: 1px !important; margin-bottom: 1px !important; padding-left: 14px !important; }
+            li { margin-bottom: 0.5px !important; }
 
             /* Tables & rows */
-            table { page-break-inside: auto; margin: 5px 0 !important; line-height: 1.2 !important; }
-            tr { page-break-inside: avoid; break-inside: avoid; }
-            th, td { padding: 4px 5px !important; font-size: 11px !important; }
+            table { page-break-inside: avoid !important; margin: 4px 0 !important; line-height: 1.1 !important; }
+            tr { page-break-inside: avoid !important; break-inside: avoid !important; }
+            th, td { padding: 2px 4px !important; font-size: 9.5px !important; }
             
-            /* Allow blocks to break across pages to prevent huge white gaps */
+            /* Allow blocks to break across pages if needed, but try to avoid */
             .info-box, .warn-box {
-                page-break-inside: auto !important;
-                break-inside: auto !important;
-                padding: 5px 8px !important;
-                margin: 5px 0 !important;
-                font-size: 11px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                padding: 4px 6px !important;
+                margin: 4px 0 !important;
+                font-size: 9.5px !important;
             }
             .exercise-section {
-                margin: 6px 0 !important;
-                padding: 6px !important;
-                page-break-inside: auto !important;
-                break-inside: auto !important;
+                margin: 4px 0 !important;
+                padding: 4px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
 
-            h1.lesson-title { font-size: 16px !important; margin-top: 0 !important; margin-bottom: 5px !important; padding-bottom: 3px !important; }
-            h2.section-title { font-size: 13px !important; margin-top: 6px !important; margin-bottom: 3px !important; padding-left: 5px !important; }
+            h1.lesson-title { font-size: 14px !important; margin-top: 0 !important; margin-bottom: 3px !important; padding-bottom: 2px !important; }
+            h2.section-title { font-size: 11px !important; margin-top: 4px !important; margin-bottom: 2px !important; padding-left: 4px !important; }
             
             /* Keep headings with their subsequent paragraph / table */
             h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
@@ -1442,7 +1442,7 @@ def build_individual_lessons():
             }
             @page {
                 size: A4 portrait;
-                margin: 6mm 8mm 6mm 8mm;
+                margin: 4mm 6mm 4mm 6mm;
             }
         }
     """
