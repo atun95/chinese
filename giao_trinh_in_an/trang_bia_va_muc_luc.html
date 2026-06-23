@@ -6,20 +6,20 @@
     <title>Trang Bìa & Mục Lục - Giáo Trình Tiếng Trung</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
-        :root { --primary-color: #1e3a8a; --secondary-color: #0f766e; --dark-color: #1e293b; --light-bg: #f8fafc; --border-color: #cbd5e1; --highlight-bg: #fefbeb; --highlight-border: #fde047; }
+        :root { --primary-color: #000000; --secondary-color: #000000; --dark-color: #000000; --light-bg: #f1f5f9; --border-color: #000000; --highlight-bg: #ffffff; --highlight-border: #000000; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', 'Noto Sans SC', sans-serif; font-weight: 700; color: var(--dark-color); line-height: 1.6; background-color: #ffffff; font-size: 14px; }
         .container { max-width: 900px; margin: 0 auto; padding: 30px; }
         h1.lesson-title { font-size: 24px; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
         h2.section-title { font-size: 18px; color: var(--secondary-color); border-left: 5px solid var(--secondary-color); padding-left: 10px; margin-top: 25px; margin-bottom: 15px; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
-        table, th, td { border: 1px solid var(--border-color); padding: 10px; }
+        table, th, td { border: 1.5px solid var(--border-color); padding: 10px; }
         th { background-color: #f1f5f9; color: var(--primary-color); }
-        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1px solid #cbd5e1; }
-        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid #d97706; padding: 15px; margin: 15px 0; border: 1px solid var(--highlight-border); }
-        .exercise-section { border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin: 30px 0; }
-        .pinyin { font-family: monospace; font-weight: bold; color: #2563eb; }
-        .write-line { display: inline-block; width: 150px; border-bottom: 1px solid #94a3b8; }
+        .info-box { background-color: var(--light-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1.5px solid var(--border-color); }
+        .warn-box { background-color: var(--highlight-bg); border-left: 5px solid var(--primary-color); padding: 15px; margin: 15px 0; border: 1.5px solid var(--border-color); }
+        .exercise-section { border: 2px dashed var(--border-color); border-radius: 12px; padding: 20px; margin: 30px 0; }
+        .pinyin { font-family: monospace; font-weight: bold; color: var(--primary-color); }
+        .write-line { display: inline-block; width: 150px; border-bottom: 1.5px solid var(--border-color); }
         .print-btn-container { display: flex; justify-content: flex-end; margin-bottom: 20px; }
         .print-btn { background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; }
         .print-btn:hover { background-color: var(--secondary-color); }
@@ -146,27 +146,27 @@
                     
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_1.html" style="color: var(--primary-color); text-decoration: none;">Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Thanh mẫu b-h, Vận mẫu đơn, 4 Thanh điệu, Biến điệu thanh 3</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">Thanh mẫu b-h, Vận mẫu đơn, 4 Thanh điệu, Biến điệu thanh 3</td>
         </tr>
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_2.html" style="color: var(--primary-color); text-decoration: none;">Bài 2: Vận mẫu kép & Bảng Ghép âm cơ bản</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Vận mẫu kép (ai, ei, ao, ou), Bảng ghép âm tổng hợp</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">Vận mẫu kép (ai, ei, ao, ou), Bảng ghép âm tổng hợp</td>
         </tr>
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_3.html" style="color: var(--primary-color); text-decoration: none;">Bài 3: Thanh mẫu Nâng cao & Cấu trúc Ngữ pháp Cốt lõi</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">j-x, zh-r, z-s, Biến điệu "Bù", Động từ "Shì" & "Yǒu", Cách gọi tên</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">j-x, zh-r, z-s, Biến điệu "Bù", Động từ "Shì" & "Yǒu", Cách gọi tên</td>
         </tr>
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_4.html" style="color: var(--primary-color); text-decoration: none;">Bài 4: Vận mẫu kép Mở rộng & Từ vựng chỉ Nữ giới</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">9 Vận mẫu kép mới, Viết gọn iu/ui, Chuyên đề 7 từ vựng chỉ Nữ giới</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">9 Vận mẫu kép mới, Viết gọn iu/ui, Chuyên đề 7 từ vựng chỉ Nữ giới</td>
         </tr>
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_5.html" style="color: var(--primary-color); text-decoration: none;">Bài 5: Số đếm, Vận mẫu mũi trước/sau & Ngữ pháp Mức độ</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">Số đếm 0-10, Biến điệu "Yī", Phân biệt èr/liǎng, Âm mũi, Tết Đoan Ngọ</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">Số đếm 0-10, Biến điệu "Yī", Phân biệt èr/liǎng, Âm mũi, Tết Đoan Ngọ</td>
         </tr>
         <tr>
             <td style="font-weight: 700; padding: 12px 0; border: none;"><a href="./bai_6.html" style="color: var(--primary-color); text-decoration: none;">Bài 6: Vận mẫu mũi phức hợp & Bảng quy tắc biến đổi chính tả</a></td>
-            <td style="color: #475569; padding: 12px 0; text-align: right; border: none;">8 Vận mẫu mũi mới, Quy tắc viết đứng độc lập y/w, Lược dấu chấm ü</td>
+            <td style="color: var(--dark-color); padding: 12px 0; text-align: right; border: none;">8 Vận mẫu mũi mới, Quy tắc viết đứng độc lập y/w, Lược dấu chấm ü</td>
         </tr>
                 </tbody>
             </table>
