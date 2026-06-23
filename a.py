@@ -306,20 +306,7 @@ if "initialized" not in st.session_state:
     st.session_state.initialized = True
 
 # --- GIAO DIỆN CHÍNH ---
-col_title, col_print = st.columns([8, 2])
-with col_title:
-    st.title("Học Pinyin Cơ Bản")
-with col_print:
-    st.write("<br>", unsafe_allow_html=True)
-    if st.button("🖨️ In bài học này", key="btn_print_lesson", use_container_width=True):
-        components.html(
-            """
-            <script>
-                window.parent.print();
-            </script>
-            """,
-            height=0
-        )
+st.title("Học Pinyin Cơ Bản")
 
 # Tích hợp CSS in ấn
 st.markdown(
@@ -421,7 +408,6 @@ if mode == "🖨️ In ấn & Đồng bộ":
     if os.path.exists(output_dir):
         files = sorted(os.listdir(output_dir))
         if files:
-            st.info(f"Các tệp HTML in ấn được lưu trên máy của bạn tại: `{os.path.abspath(output_dir)}`")
             for f_name in files:
                 filepath = os.path.join(output_dir, f_name)
                 try:
