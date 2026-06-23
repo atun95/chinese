@@ -4,10 +4,16 @@ import streamlit.components.v1 as components
 import json
 import csv
 import shutil
+import sys
 from datetime import datetime
 from pathlib import Path
+
+# Thêm thư mục lessons vào sys.path để import các bài học
+sys.path.append(str(Path(__file__).parent / "lessons"))
+
 from lessons_data import *
 from ui_utils import *
+
 
 # Import các bài học đã tách file và reload để tránh cache
 import importlib
