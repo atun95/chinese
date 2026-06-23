@@ -1382,14 +1382,14 @@ def build_individual_lessons():
 
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 13px !important; line-height: 1.4 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
+            body { font-size: 12px !important; line-height: 1.3 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
             .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 auto !important; }
             
             /* Cover Page - Precise A4 Print size to prevent trailing blank space */
             .cover-page {
-                height: 250mm !important;
+                height: 260mm !important;
                 margin: 0 auto !important;
-                padding: 40px !important;
+                padding: 30px !important;
                 border: 4px double var(--primary-color) !important;
                 box-sizing: border-box !important;
                 display: flex !important;
@@ -1402,31 +1402,36 @@ def build_individual_lessons():
                 break-inside: avoid !important;
             }
             .cover-title {
-                font-size: 28px !important;
+                font-size: 26px !important;
             }
 
+            /* Compact spacing for paragraphs, lists, and headings */
+            p { margin-top: 3px !important; margin-bottom: 3px !important; }
+            ul, ol { margin-top: 3px !important; margin-bottom: 3px !important; padding-left: 18px !important; }
+            li { margin-bottom: 1.5px !important; }
+
             /* Tables & rows */
-            table { page-break-inside: auto; margin: 10px 0 !important; }
+            table { page-break-inside: auto; margin: 6px 0 !important; }
             tr { page-break-inside: avoid; break-inside: avoid; }
-            th, td { padding: 6px 8px !important; font-size: 12.5px !important; }
+            th, td { padding: 4px 6px !important; font-size: 11.5px !important; }
             
             /* Allow blocks to break across pages to prevent huge white gaps */
             .info-box, .warn-box {
                 page-break-inside: auto !important;
                 break-inside: auto !important;
-                padding: 10px 12px !important;
-                margin: 10px 0 !important;
-                font-size: 12.5px !important;
+                padding: 6px 10px !important;
+                margin: 6px 0 !important;
+                font-size: 11.5px !important;
             }
             .exercise-section {
-                margin: 15px 0 !important;
-                padding: 12px !important;
+                margin: 8px 0 !important;
+                padding: 8px !important;
                 page-break-inside: auto !important;
                 break-inside: auto !important;
             }
 
-            h1.lesson-title { font-size: 20px !important; margin-bottom: 12px !important; padding-bottom: 6px !important; }
-            h2.section-title { font-size: 15px !important; margin-top: 15px !important; margin-bottom: 8px !important; padding-left: 8px !important; }
+            h1.lesson-title { font-size: 17px !important; margin-top: 5px !important; margin-bottom: 6px !important; padding-bottom: 4px !important; }
+            h2.section-title { font-size: 13px !important; margin-top: 8px !important; margin-bottom: 4px !important; padding-left: 6px !important; }
             
             /* Keep headings with their subsequent paragraph / table */
             h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
@@ -1437,7 +1442,7 @@ def build_individual_lessons():
             }
             @page {
                 size: A4 portrait;
-                margin: 12mm 15mm 12mm 15mm;
+                margin: 8mm 10mm 8mm 10mm;
             }
         }
     """
@@ -1520,10 +1525,11 @@ def build_individual_lessons():
             
     # 3. Tạo file tổng hợp giao_trinh_in_an.html ở thư mục gốc
     lessons_content = ""
-    for lesson in LESSONS:
+    for idx, lesson in enumerate(LESSONS):
+        divider_style = "page-break-before: auto; border-top: 1.5px solid var(--border-color); margin-top: 25px; padding-top: 15px;" if idx > 0 else "page-break-before: auto;"
         lessons_content += f"""
-    <!-- PAGE BREAK FOR NEW LESSON -->
-    <div class="page-break" style="page-break-before: always; padding-top: 20px;">
+    <!-- CONTINUOUS LESSON BLOCK -->
+    <div class="lesson-block" style="{divider_style}">
         <h1 class="lesson-title">{lesson['title']}</h1>
         {lesson['content_html']}
     </div>"""
