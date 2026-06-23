@@ -60,14 +60,14 @@
 
         @media print {
             .no-print { display: none !important; }
-            body { font-size: 10.5px !important; line-height: 1.15 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
+            body { font-size: 11.5px !important; line-height: 1.25 !important; font-weight: 700 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #ffffff; }
             .container { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 auto !important; }
             
             /* Cover Page - Precise A4 Print size to prevent trailing blank space */
             .cover-page {
-                height: 275mm !important;
+                height: 270mm !important;
                 margin: 0 auto !important;
-                padding: 20px !important;
+                padding: 25px !important;
                 border: 4px double var(--primary-color) !important;
                 box-sizing: border-box !important;
                 display: flex !important;
@@ -80,36 +80,36 @@
                 break-inside: avoid !important;
             }
             .cover-title {
-                font-size: 24px !important;
+                font-size: 25px !important;
             }
 
             /* Compact spacing for paragraphs, lists, and headings */
-            p { margin-top: 1px !important; margin-bottom: 1px !important; line-height: 1.15 !important; }
-            ul, ol { margin-top: 1px !important; margin-bottom: 1px !important; padding-left: 14px !important; }
-            li { margin-bottom: 0.5px !important; }
+            p { margin-top: 2px !important; margin-bottom: 2px !important; line-height: 1.25 !important; }
+            ul, ol { margin-top: 2px !important; margin-bottom: 2px !important; padding-left: 15px !important; }
+            li { margin-bottom: 0.8px !important; }
 
             /* Tables & rows */
-            table { page-break-inside: avoid !important; margin: 4px 0 !important; line-height: 1.1 !important; }
+            table { page-break-inside: avoid !important; margin: 5px 0 !important; line-height: 1.2 !important; }
             tr { page-break-inside: avoid !important; break-inside: avoid !important; }
-            th, td { padding: 2px 4px !important; font-size: 9.5px !important; }
+            th, td { padding: 3.5px 5px !important; font-size: 10.5px !important; }
             
             /* Allow blocks to break across pages if needed, but try to avoid */
             .info-box, .warn-box {
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
-                padding: 4px 6px !important;
-                margin: 4px 0 !important;
-                font-size: 9.5px !important;
+                padding: 5px 8px !important;
+                margin: 5px 0 !important;
+                font-size: 10.5px !important;
             }
             .exercise-section {
-                margin: 4px 0 !important;
-                padding: 4px !important;
+                margin: 5px 0 !important;
+                padding: 5px !important;
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
 
-            h1.lesson-title { font-size: 14px !important; margin-top: 0 !important; margin-bottom: 3px !important; padding-bottom: 2px !important; }
-            h2.section-title { font-size: 11px !important; margin-top: 4px !important; margin-bottom: 2px !important; padding-left: 4px !important; }
+            h1.lesson-title { font-size: 15px !important; margin-top: 0 !important; margin-bottom: 4px !important; padding-bottom: 2px !important; }
+            h2.section-title { font-size: 12px !important; margin-top: 5px !important; margin-bottom: 2.5px !important; padding-left: 4px !important; }
             
             /* Keep headings with their subsequent paragraph / table */
             h1, h2, h3, h4, h5, h6 { page-break-after: avoid; break-after: avoid; }
@@ -118,15 +118,120 @@
                 orphans: 2;
                 widows: 2;
             }
+
+            /* Lesson-specific fine tuning to fill page beautifully without overflow */
+            /* Lesson 1 (Longest): squeeze slightly to fit on 1 page */
+            .lesson-1 {
+                font-size: 10.2px !important;
+                line-height: 1.2 !important;
+            }
+            .lesson-1 p {
+                margin-top: 1.5px !important;
+                margin-bottom: 1.5px !important;
+            }
+            .lesson-1 table {
+                margin: 4px 0 !important;
+            }
+            .lesson-1 th, .lesson-1 td {
+                padding: 2.2px 4px !important;
+                font-size: 9.2px !important;
+            }
+            .lesson-1 .info-box, .lesson-1 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4px 0 !important;
+                font-size: 9.2px !important;
+            }
+
+            /* Lesson 2 (Short): expand to fill page */
+            .lesson-2 {
+                font-size: 13.5px !important;
+                line-height: 1.35 !important;
+            }
+            .lesson-2 p {
+                margin-top: 5px !important;
+                margin-bottom: 5px !important;
+            }
+            .lesson-2 table {
+                margin: 10px 0 !important;
+            }
+            .lesson-2 th, .lesson-2 td {
+                padding: 6px 8px !important;
+                font-size: 12.5px !important;
+            }
+
+            /* Lesson 3 (Medium-long): squeeze slightly to fit on 1 page */
+            .lesson-3 {
+                font-size: 10.3px !important;
+                line-height: 1.2 !important;
+            }
+            .lesson-3 th, .lesson-3 td {
+                padding: 2.5px 4px !important;
+                font-size: 9.3px !important;
+            }
+            .lesson-3 .info-box, .lesson-3 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4px 0 !important;
+                font-size: 9.3px !important;
+            }
+
+            /* Lesson 4 (Short): expand but keep safe from overflow */
+            .lesson-4 {
+                font-size: 12px !important;
+                line-height: 1.25 !important;
+            }
+            .lesson-4 p {
+                margin-top: 4px !important;
+                margin-bottom: 4px !important;
+            }
+            .lesson-4 table {
+                margin: 8px 0 !important;
+            }
+            .lesson-4 th, .lesson-4 td {
+                padding: 4px 6px !important;
+                font-size: 11px !important;
+            }
+
+            /* Lesson 5 (Medium-long): scale slightly */
+            .lesson-5 {
+                font-size: 11.2px !important;
+                line-height: 1.22 !important;
+            }
+            .lesson-5 th, .lesson-5 td {
+                padding: 3px 5px !important;
+                font-size: 10.2px !important;
+            }
+
+            /* Lesson 6 (Long): squeeze slightly to fit on 1 page */
+            .lesson-6 {
+                font-size: 10px !important;
+                line-height: 1.18 !important;
+            }
+            .lesson-6 p {
+                margin-top: 1.5px !important;
+                margin-bottom: 1.5px !important;
+            }
+            .lesson-6 table {
+                margin: 4px 0 !important;
+            }
+            .lesson-6 th, .lesson-6 td {
+                padding: 2.2px 4px !important;
+                font-size: 9px !important;
+            }
+            .lesson-6 .info-box, .lesson-6 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4px 0 !important;
+                font-size: 9px !important;
+            }
+
             @page {
                 size: A4 portrait;
-                margin: 4mm 6mm 4mm 6mm;
+                margin: 6mm 8mm 6mm 8mm;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container lesson-1">
         <div class="no-print print-btn-container">
             <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
         </div>
