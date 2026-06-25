@@ -102,40 +102,40 @@ def show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_s
                     cautrucs_html = ""
                     for ct_idx, ct_item in enumerate(item.get("cautrucs", [])):
                         cautrucs_html += f"""
-                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px; margin-bottom:10px;">
-                            <div style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:4px; padding:4px 8px; font-size:0.9rem; font-family:'Courier New',monospace; color:#1d4ed8; font-weight:bold; margin-bottom:6px;">
-                                📐 Cấu trúc {ct_idx+1}: {ct_item['ct']}
-                            </div>
-                            <div style="padding-left: 8px;">
-                                <span style="font-size: 1.25rem; font-weight: 700; color: #0f172a; display: block;">{ct_item['vd_han']}</span>
-                                <span style="font-family: monospace; font-size: 1.05rem; font-weight: bold; color: #2563eb; display: block; margin-top:2px;">{ct_item['vd_py']}</span>
-                                <span style="font-size: 0.92rem; color: #475569; display: block; font-style: italic; margin-top:2px;">➔ Dịch: {ct_item['vd_vi']}</span>
-                            </div>
-                        </div>
-                        """
+<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:4px; padding:4px 8px; font-size:0.9rem; font-family:'Courier New',monospace; color:#1d4ed8; font-weight:bold; margin-bottom:6px;">
+📐 Cấu trúc {ct_idx+1}: {ct_item['ct']}
+</div>
+<div style="padding-left: 8px;">
+<span style="font-size: 1.25rem; font-weight: 700; color: #0f172a; display: block;">{ct_item['vd_han']}</span>
+<span style="font-family: monospace; font-size: 1.05rem; font-weight: bold; color: #2563eb; display: block; margin-top:2px;">{ct_item['vd_py']}</span>
+<span style="font-size: 0.92rem; color: #475569; display: block; font-style: italic; margin-top:2px;">➔ Dịch: {ct_item['vd_vi']}</span>
+</div>
+</div>
+""".replace("\n", " ")
                     
                     if not cautrucs_html:
                         cautrucs_html = f"""
-                        <p style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:6px; padding:6px 10px; font-size:0.92rem; margin-bottom:8px; font-family:'Courier New',monospace; color:#1d4ed8;"><b>📐 Cấu trúc:</b> {item.get('cautruc','')}</p>
-                        <div class="rule-box">
-                            <span style="font-size: 0.85em; font-weight: bold; color: #1e293b;">VÍ DỤ TIÊU BIỂU:</span><br/>
-                            <span style="font-size: 1.3rem; font-weight: 700; color: #0f172a; display: block; margin-top: 5px;">{item['vd_han']}</span>
-                            <span style="font-family: monospace; font-size: 1.05rem; font-weight: bold; color: #2563eb; display: block;">{item['vd_py']}</span>
-                            <span style="font-size: 0.95rem; color: #475569; display: block; font-style: italic; margin-top: 2px;">➔ Dịch: {item['vd_vi']}</span>
-                        </div>
-                        """
+<p style="background:#eff6ff; border-left:4px solid #3b82f6; border-radius:6px; padding:6px 10px; font-size:0.92rem; margin-bottom:8px; font-family:'Courier New',monospace; color:#1d4ed8;"><b>📐 Cấu trúc:</b> {item.get('cautruc','')}</p>
+<div class="rule-box">
+<span style="font-size: 0.85em; font-weight: bold; color: #1e293b;">VÍ DỤ TIÊU BIỂU:</span><br/>
+<span style="font-size: 1.3rem; font-weight: 700; color: #0f172a; display: block; margin-top: 5px;">{item['vd_han']}</span>
+<span style="font-family: monospace; font-size: 1.05rem; font-weight: bold; color: #2563eb; display: block;">{item['vd_py']}</span>
+<span style="font-size: 0.95rem; color: #475569; display: block; font-style: italic; margin-top: 2px;">➔ Dịch: {item['vd_vi']}</span>
+</div>
+""".replace("\n", " ")
 
                     card_html = f"""
-                    <div class="word-card">
-                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
-                            <span class="word-title">{item['tu']}</span>
-                            <span class="pinyin-badge">{item['pinyin']}</span>
-                            <span class="meaning-badge">{item['nghianhanh']}</span>
-                        </div>
-                        <p style="color: #475569; font-size: 0.95rem; margin-bottom: 8px;"><b>Cách dùng:</b> {item['cachdung']}</p>
-                        {cautrucs_html}
-                    </div>
-                    """
+<div class="word-card">
+<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+<span class="word-title">{item['tu']}</span>
+<span class="pinyin-badge">{item['pinyin']}</span>
+<span class="meaning-badge">{item['nghianhanh']}</span>
+</div>
+<p style="color: #475569; font-size: 0.95rem; margin-bottom: 8px;"><b>Cách dùng:</b> {item['cachdung']}</p>
+{cautrucs_html}
+</div>
+""".replace("\n", " ")
                     st.markdown(card_html, unsafe_allow_html=True)
                 with cols[1]:
                     st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
