@@ -696,18 +696,83 @@ def show_lesson6_vocab():
         "Học các từ vựng theo nhóm từ cơ bản đến nâng cao về thời gian, thứ ngày tháng năm, giờ giấc và các mùa."
     )
 
-    # --- Nhóm 1: Thời gian cơ bản ---
-    st.markdown("<h3 class='vocab-section-title-b6'>📅 1. Thời gian cơ bản (Hôm qua, Hôm nay, Ngày mai)</h3>", unsafe_allow_html=True)
-    group1 = [
-        {"word": "昨天", "pinyin": "zuótiān", "vietnamese": "Hôm qua", "example_han": "昨天我去学校了。", "example_py": "Zuótiān wǒ qù xuéxiào le.", "example_vi": "Hôm qua tôi đi học rồi."},
-        {"word": "今天", "pinyin": "jīntiān", "vietnamese": "Hôm nay", "example_han": "今天天气很好。", "example_py": "Jīntiān tiānqì hěn hǎo.", "example_vi": "Hôm nay thời tiết rất tốt."},
-        {"word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "example_han": "明天`nǐ`忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"}
+    groups = [
+        {
+            "name": "📅 Nhóm 1: Thời gian cơ bản",
+            "items": [
+                {"word": "昨天", "pinyin": "zuótiān", "vietnamese": "Hôm qua", "example_han": "昨天我去学校了。", "example_py": "Zuótiān wǒ qù xuéxiào le.", "example_vi": "Hôm qua tôi đi học rồi."},
+                {"word": "今天", "pinyin": "jīntiān", "vietnamese": "Hôm nay", "example_han": "今天天气很好。", "example_py": "Jīntiān tiānqì hěn hǎo.", "example_vi": "Hôm nay thời tiết rất tốt."},
+                {"word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "example_han": "明天`nǐ`忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"}
+            ],
+            "guide": None
+        },
+        {
+            "name": "🗓️ Nhóm 2: Thứ, Ngày, Tháng, Năm",
+            "items": [
+                {"word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"},
+                {"word": "号", "pinyin": "hào", "vietnamese": "Ngày (văn nói)", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"},
+                {"word": "日", "pinyin": "rì", "vietnamese": "Ngày (văn viết)", "example_han": "十月一日是国庆节。", "example_py": "Shíyuè yī rì  shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
+                {"word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "example_han": "现在 là 六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
+                {"word": "年", "pinyin": "nián", "vietnamese": "Năm", "example_han": "今年 là 二零二六年。", "example_py": "Jīnnián  shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."}
+            ],
+            "guide": "date"
+        },
+        {
+            "name": "⏰ Nhóm 3: Giờ giấc & Cách đọc giờ",
+            "items": [
+                {"word": "点", "pinyin": "diǎn", "vietnamese": "Giờ", "example_han": "现在八点。", "example_py": "Xiànzài bā diǎn.", "example_vi": "Bây giờ là 8 giờ."},
+                {"word": "分", "pinyin": "fēn", "vietnamese": "Phút", "example_han": "现在八点十分。", "example_py": "Xiànzài  bā diǎn shí fēn.", "example_vi": "Bây giờ là 8 giờ 10 phút."},
+                {"word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "example_han": "现在八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
+                {"word": "刻", "pinyin": "kè", "vietnamese": "Khắc (15 phút)", "example_han": "现在八点一刻。", "example_py": "Xiànzài  bā diǎn yí kè.", "example_vi": "Bây giờ là 8 giờ 15 phút."},
+                {"word": "差", "pinyin": "chà", "vietnamese": "Kém", "example_han": "差五分九点。", "example_py": "Chà wǔ fēn jiǔ diǎn.", "example_vi": "9 giờ kém 5 phút."}
+            ],
+            "guide": "time"
+        },
+        {
+            "name": "🌸 Nhóm 4: Bốn mùa",
+            "items": [
+                {"word": "春天", "pinyin": "chūntiān", "vietnamese": "Mùa xuân", "example_han": "春天很暖和。", "example_py": "Chūntiān hěn nuǎnhuo.", "example_vi": "Mùa xuân rất ấm áp."},
+                {"word": "夏天", "pinyin": "xiàtiān", "vietnamese": "Mùa hạ / hè", "example_han": "夏天很热。", "example_py": "Xiàtiān hěn rè.", "example_vi": "Mùa hè rất nóng."},
+                {"word": "秋天", "pinyin": "qiūtiān", "vietnamese": "Mùa thu", "example_han": "秋天很凉快。", "example_py": "Qiūtiān hěn liángkuai.", "example_vi": "Mùa thu rất mát mẻ."},
+                {"word": "冬天", "pinyin": "dōngtiān", "vietnamese": "Mùa đông", "example_han": "冬天很冷。", "example_py": "Dōngtiān hěn lěng.", "example_vi": "Mùa đông rất lạnh."}
+            ],
+            "guide": None
+        }
     ]
-    group1[2]["example_han"] = "明天你忙吗？"
-    
-    cols1 = st.columns(3)
-    for idx, item in enumerate(group1):
-        with cols1[idx]:
+
+    groups[0]["items"][2]["example_han"] = "明天你忙吗？"
+    groups[1]["items"][3]["example_han"] = "Now six month... -> 现在是六月。"
+    groups[1]["items"][3]["example_han"] = "现在是六月。"
+    groups[1]["items"][4]["example_han"] = "今年是二零二六年。"
+
+    group_key = "b6_vocab_group_idx"
+    if group_key not in st.session_state:
+        st.session_state[group_key] = 0
+
+    cur_group_idx = st.session_state[group_key]
+    cur_group = groups[cur_group_idx]
+
+    # --- Navigation controller (like flashcards) ---
+    col_prev, col_title, col_next = st.columns([1.5, 4, 1.5])
+    with col_prev:
+        if st.button("⬅️ Nhóm trước", use_container_width=True, key="b6_g_prev"):
+            st.session_state[group_key] = (cur_group_idx - 1) % len(groups)
+            st.rerun()
+    with col_title:
+        st.markdown(f"<div style='text-align: center; font-size: 1.25rem; font-weight: bold; color: #1e3a8a; padding: 6px; background: #eff6ff; border-radius: 8px; border: 1px solid #bfdbfe;'>{cur_group['name']}</div>", unsafe_allow_html=True)
+    with col_next:
+        if st.button("Nhóm sau ➡️", use_container_width=True, key="b6_g_next"):
+            st.session_state[group_key] = (cur_group_idx + 1) % len(groups)
+            st.rerun()
+
+    st.markdown(f"<div style='text-align: center; font-size: 1rem; font-weight: bold; margin-top: 5px; color:#475569;'>Nhóm {cur_group_idx + 1} / {len(groups)}</div>", unsafe_allow_html=True)
+    st.progress((cur_group_idx + 1) / len(groups))
+
+    # --- Render active group cards ---
+    items = cur_group["items"]
+    cols = st.columns(len(items))
+    for idx, item in enumerate(items):
+        with cols[idx]:
             card_html = f"""<div class="vocab-card-b6">
 <div>
 <div class="vocab-word-b6">{item['word']}</div>
@@ -722,135 +787,45 @@ def show_lesson6_vocab():
 </div>
 </div>""".replace("\n", " ")
             st.markdown(card_html, unsafe_allow_html=True)
-            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g1_w_{idx}")
-            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g1_ex_{idx}")
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g{cur_group_idx}_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g{cur_group_idx}_ex_{idx}")
 
-    # --- Nhóm 2: Thứ, Ngày, Tháng, Năm ---
-    st.markdown("<h3 class='vocab-section-title-b6'>🗓️ 2. Thứ, Ngày, Tháng, Năm</h3>", unsafe_allow_html=True)
-    group2 = [
-        {"word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"},
-        {"word": "号", "pinyin": "hào", "vietnamese": "Ngày (văn nói)", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"},
-        {"word": "日", "pinyin": "rì", "vietnamese": "Ngày (văn viết)", "example_han": "十月一日是国庆节。", "example_py": "Shíyuè yī rì  shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
-        {"word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "example_han": "现在 là 六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
-        {"word": "年", "pinyin": "nián", "vietnamese": "Năm", "example_han": "今年 là 二零二六年。", "example_py": "Jīnnián shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."}
-    ]
-    group2[3]["example_han"] = "现在是六月。"
-    group2[4]["example_han"] = "今年是二零二六年。"
-    
-    cols2 = st.columns(5)
-    for idx, item in enumerate(group2):
-        with cols2[idx]:
-            card_html = f"""<div class="vocab-card-b6">
-<div>
-<div class="vocab-word-b6">{item['word']}</div>
-<div class="vocab-pinyin-b6">{item['pinyin']}</div>
-<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
-<div class="vocab-ex-box-b6">
-<div class="vocab-ex-title-b6">Ví dụ:</div>
-<div class="vocab-ex-han-b6">{item['example_han']}</div>
-<div class="vocab-ex-py-b6">{item['example_py']}</div>
-<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
-</div>
-</div>
-</div>""".replace("\n", " ")
-            st.markdown(card_html, unsafe_allow_html=True)
-            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g2_w_{idx}")
-            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g2_ex_{idx}")
-
-    # Cách đọc thứ ngày tháng năm trực tiếp theo nhóm 2
-    st.markdown("""
-    <div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 15px; margin-bottom: 10px; border: 1px solid #dbeafe;">
-        <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
-            💡 Cách đọc thứ ngày tháng năm trong tiếng Trung
-        </h4>
-        <p style="font-size: 0.95em; line-height: 1.6; color: #1e3a8a; margin-bottom: 12px;">
-            <b>Quy tắc cốt lõi:</b> Đi từ đơn vị lớn đến đơn vị nhỏ: <b>Năm (年) ➔ Tháng (月) ➔ Ngày (日/号) ➔ Thứ (星期)</b>.
-        </p>
-        <ul style="font-size: 0.95em; line-height: 1.7; color: #1e3a8a; padding-left: 20px; margin-bottom: 0;">
-            <li><b>Cách đọc Năm:</b> Đọc từng chữ số riêng lẻ kèm từ "年" (nián). Ví dụ: 2026年 ➔ 二零二六年 (èr líng èr liù nián).</li>
-            <li><b>Cách đọc Tháng:</b> Số thứ tự tháng (1-12) + "月" (yuè). Ví dụ: Tháng 6 ➔ 六月 (liù yuè).</li>
-            <li><b>Cách đọc Ngày:</b> Số ngày (1-31) + "号" (hào - văn nói) hoặc "日" (rì - văn viết). Ví dụ: Ngày 25 ➔ 二十五号 (èrshíwǔ hào).</li>
-            <li><b>Cách đọc Thứ:</b> "星期" (xīngqī) + Số tương ứng. Đặc biệt: Thứ Hai đến Thứ Bảy là 1-6 (Ví dụ: Thứ Hai ➔ 星期一 xīngqīyī; Thứ Bảy ➔ 星期六 xīngqīliù). Chủ Nhật dùng <b>星期天 (xīngqītiān)</b> hoặc <b>星期日 (xīngqīrì)</b>.</li>
-        </ul>
-        <div style="margin-top: 15px; background: white; padding: 12px; border-radius: 6px; border: 1px dashed #bfdbfe; font-size: 0.95rem; font-weight: bold; color: #1e3a8a;">
-            👉 Ví dụ hoàn chỉnh: Thứ Năm, ngày 25 tháng 6 năm 2026<br/>
-            ➔ 2026年6月25日 星期四 (Èr líng èr liù nián liù yuè èrshíwǔ rì xīngqīsì)
+    # --- Render guides under active group ---
+    if cur_group["guide"] == "date":
+        st.markdown("""
+        <div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 10px; border: 1px solid #dbeafe;">
+            <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
+                💡 Cách đọc thứ ngày tháng năm trong tiếng Trung
+            </h4>
+            <p style="font-size: 0.95em; line-height: 1.6; color: #1e3a8a; margin-bottom: 12px;">
+                <b>Quy tắc cốt lõi:</b> Đi từ đơn vị lớn đến đơn vị nhỏ: <b>Năm (年) ➔ Tháng (月) ➔ Ngày (日/号) ➔ Thứ (星期)</b>.
+            </p>
+            <ul style="font-size: 0.95em; line-height: 1.7; color: #1e3a8a; padding-left: 20px; margin-bottom: 0;">
+                <li><b>Cách đọc Năm:</b> Đọc từng chữ số riêng lẻ kèm từ "年" (nián). Ví dụ: 2026年 ➔ 二零二六年 (èr líng èr liù nián).</li>
+                <li><b>Cách đọc Tháng:</b> Số thứ tự tháng (1-12) + "月" (yuè). Ví dụ: Tháng 6 ➔ 六月 (liù yuè).</li>
+                <li><b>Cách đọc Ngày:</b> Số ngày (1-31) + "号" (hào - văn nói) hoặc "日" (rì - văn viết). Ví dụ: Ngày 25 ➔ 二十五号 (èrshíwǔ hào).</li>
+                <li><b>Cách đọc Thứ:</b> "星期" (xīngqī) + Số tương ứng. Đặc biệt: Thứ Hai đến Thứ Bảy là 1-6 (Ví dụ: Thứ Hai ➔ 星期一 xīngqīyī; Thứ Bảy ➔ 星期六 xīngqīliù). Chủ Nhật dùng <b>星期天 (xīngqītiān)</b> hoặc <b>星期日 (xīngqīrì)</b>.</li>
+            </ul>
+            <div style="margin-top: 15px; background: white; padding: 12px; border-radius: 6px; border: 1px dashed #bfdbfe; font-size: 0.95rem; font-weight: bold; color: #1e3a8a;">
+                👉 Ví dụ hoàn chỉnh: Thứ Năm, ngày 25 tháng 6 năm 2026<br/>
+                ➔ 2026年6月25日 星期四 (Èr líng èr liù nián liù yuè èrshíwǔ rì xīngqīsì)
+            </div>
         </div>
-    </div>
-    """.replace("\n", " "), unsafe_allow_html=True)
-    render_play_button("二零二六年六月二十五号星期四", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex_v6")
-
-    # --- Nhóm 3: Giờ giấc ---
-    st.markdown("<h3 class='vocab-section-title-b6'>⏰ 3. Giờ và cách đọc giờ</h3>", unsafe_allow_html=True)
-    group3 = [
-        {"word": "点", "pinyin": "diǎn", "vietnamese": "Giờ", "example_han": "现在八点。", "example_py": "Xiànzài bā diǎn.", "example_vi": "Bây giờ là 8 giờ."},
-        {"word": "分", "pinyin": "fēn", "vietnamese": "Phút", "example_han": "现在八点十分。", "example_py": "Xiànzài  bā diǎn shí fēn.", "example_vi": "Bây giờ là 8 giờ 10 phút."},
-        {"word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "example_han": "现在八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
-        {"word": "刻", "pinyin": "kè", "vietnamese": "Khắc (15 phút)", "example_han": "现在八点一刻。", "example_py": "Xiànzài  bā diǎn yí kè.", "example_vi": "Bây giờ là 8 giờ 15 phút."},
-        {"word": "差", "pinyin": "chà", "vietnamese": "Kém", "example_han": "差五分九点。", "example_py": "Chà wǔ fēn jiǔ diǎn.", "example_vi": "9 giờ kém 5 phút."}
-    ]
-    
-    cols3 = st.columns(5)
-    for idx, item in enumerate(group3):
-        with cols3[idx]:
-            card_html = f"""<div class="vocab-card-b6">
-<div>
-<div class="vocab-word-b6">{item['word']}</div>
-<div class="vocab-pinyin-b6">{item['pinyin']}</div>
-<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
-<div class="vocab-ex-box-b6">
-<div class="vocab-ex-title-b6">Ví dụ:</div>
-<div class="vocab-ex-han-b6">{item['example_han']}</div>
-<div class="vocab-ex-py-b6">{item['example_py']}</div>
-<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
-</div>
-</div>
-</div>""".replace("\n", " ")
-            st.markdown(card_html, unsafe_allow_html=True)
-            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g3_w_{idx}")
-            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g3_ex_{idx}")
-
-    # Cách đọc giờ trực tiếp theo nhóm 3
-    st.markdown("""
-    <div style="background-color: #fef3c7; border-left: 5px solid #d97706; padding: 20px; border-radius: 8px; margin-top: 15px; margin-bottom: 25px; border: 1px solid #fde68a;">
-        <h4 style="color: #92400e; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
-            💡 Các mẫu câu đọc giờ trong tiếng Trung
-        </h4>
-        <ul style="font-size: 0.95em; line-height: 1.7; color: #92400e; padding-left: 20px; margin-bottom: 0;">
-            <li><b>Giờ chẵn:</b> Số giờ + 点 (diǎn). Ví dụ: 10 giờ ➔ 十点 (shí diǎn).</li>
-            <li><b>Giờ lẻ phút:</b> Số giờ + 点 + Số phút + 分 (fēn). Ví dụ: 10 giờ 10 phút ➔ 十点十分 (shí diǎn shí fēn).</li>
-            <li><b>Giờ rưỡi (30 phút):</b> Số giờ + 点 + 半 (bàn). Ví dụ: 10 giờ rưỡi ➔ 十点半 (shí diǎn bàn).</li>
-            <li><b>Giờ khắc (15 hoặc 45 phút):</b> Số giờ + 点 + 一刻 (yí kè - 15 phút) hoặc 三刻 (sān kè - 45 phút). Ví dụ: 10 giờ 15 phút ➔ 十点一刻 (shí diǎn yí kè).</li>
-            <li><b>Giờ kém:</b> 差 (chà) + Số phút kém + 分 + Số giờ tiếp theo + 点. Ví dụ: 10 giờ kém 10 phút ➔ 差十分十点 (chà shí fēn shí diǎn).</li>
-        </ul>
-    </div>
-    """.replace("\n", " "), unsafe_allow_html=True)
-
-    # --- Nhóm 4: Bốn mùa ---
-    st.markdown("<h3 class='vocab-section-title-b6'>🌸 4. Bốn mùa (Xuân, Hạ, Thu, Đông)</h3>", unsafe_allow_html=True)
-    group4 = [
-        {"word": "春天", "pinyin": "chūntiān", "vietnamese": "Mùa xuân", "example_han": "春天很暖和。", "example_py": "Chūntiān hěn nuǎnhuo.", "example_vi": "Mùa xuân rất ấm áp."},
-        {"word": "夏天", "pinyin": "xiàtiān", "vietnamese": "Mùa hạ / hè", "example_han": "夏天很热。", "example_py": "Xiàtiān hěn rè.", "example_vi": "Mùa hè rất nóng."},
-        {"word": "秋天", "pinyin": "qiūtiān", "vietnamese": "Mùa thu", "example_han": "秋天很凉快。", "example_py": "Qiūtiān hěn liángkuai.", "example_vi": "Mùa thu rất mát mẻ."},
-        {"word": "冬天", "pinyin": "dōngtiān", "vietnamese": "Mùa đông", "example_han": "冬天很冷。", "example_py": "Dōngtiān hěn lěng.", "example_vi": "Mùa đông rất lạnh."}
-    ]
-    
-    cols4 = st.columns(4)
-    for idx, item in enumerate(group4):
-        with cols4[idx]:
-            card_html = f"""<div class="vocab-card-b6">
-<div>
-<div class="vocab-word-b6">{item['word']}</div>
-<div class="vocab-pinyin-b6">{item['pinyin']}</div>
-<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
-<div class="vocab-ex-box-b6">
-<div class="vocab-ex-title-b6">Ví dụ:</div>
-<div class="vocab-ex-han-b6">{item['example_han']}</div>
-<div class="vocab-ex-py-b6">{item['example_py']}</div>
-<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
-</div>
-</div>
-</div>""".replace("\n", " ")
-            st.markdown(card_html, unsafe_allow_html=True)
-            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g4_w_{idx}")
-            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g4_ex_{idx}")
+        """.replace("\n", " "), unsafe_allow_html=True)
+        render_play_button("二零二六年六月二十五号星期四", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex_v6")
+        
+    elif cur_group["guide"] == "time":
+        st.markdown("""
+        <div style="background-color: #fef3c7; border-left: 5px solid #d97706; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; border: 1px solid #fde68a;">
+            <h4 style="color: #92400e; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
+                💡 Các mẫu câu đọc giờ trong tiếng Trung
+            </h4>
+            <ul style="font-size: 0.95em; line-height: 1.7; color: #92400e; padding-left: 20px; margin-bottom: 0;">
+                <li><b>Giờ chẵn:</b> Số giờ + 点 (diǎn). Ví dụ: 10 giờ ➔ 十点 (shí diǎn).</li>
+                <li><b>Giờ lẻ phút:</b> Số giờ + 点 + Số phút + 分 (fēn). Ví dụ: 10 giờ 10 phút ➔ 十点十分 (shí diǎn shí fēn).</li>
+                <li><b>Giờ rưỡi (30 phút):</b> Số giờ + 点 + 半 (bàn). Ví dụ: 10 giờ rưỡi ➔ 十点半 (shí diǎn bàn).</li>
+                <li><b>Giờ khắc (15 hoặc 45 phút):</b> Số giờ + 点 + 一刻 (yí kè - 15 phút) hoặc 三刻 (sān kè - 45 phút). Ví dụ: 10 giờ 15 phút ➔ 十点一刻 (shí diǎn yí kè).</li>
+                <li><b>Giờ kém:</b> 差 (chà) + Số phút kém + 分 + Số giờ tiếp theo + 点. Ví dụ: 10 giờ kém 10 phút ➔ 差十分十点 (chà shí fēn shí diǎn).</li>
+            </ul>
+        </div>
+        """.replace("\n", " "), unsafe_allow_html=True)
