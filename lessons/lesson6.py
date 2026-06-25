@@ -429,8 +429,8 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     }
     .standalone-card-highlighted {
-        background: #fffbeb; /* Tông màu hổ phách/kem nhạt cực kỳ êm dịu, không gắt mắt */
-        border: 1.5px solid #fde68a; /* Viền màu vàng cát mịn */
+        background: #fffbeb;
+        border: 1.5px solid #fde68a;
         border-radius: 14px;
         padding: 20px;
         margin-bottom: 18px;
@@ -608,206 +608,158 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
 def show_lesson6_vocab():
     st.markdown("""
     <style>
-    .flashcard-container-b6 {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-        display: flex;
-        gap: 30px;
-        align-items: center;
-    }
-    .flashcard-image-b6 {
-        flex-shrink: 0;
-        width: 180px;
-        height: 180px;
-        border-radius: 16px;
-        overflow: hidden;
-        border: 3px solid #f1f5f9;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .fc-category-b6 {
-        font-size: 0.85rem;
-        color: #ef4444;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 4px;
-    }
-    .fc-word-b6 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        color: #0f172a;
-        line-height: 1.1;
-        margin-bottom: 5px;
-    }
-    .fc-pinyin-b6 {
-        font-family: 'Courier New', monospace;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #2563eb;
-        background: #eff6ff;
-        padding: 4px 16px;
-        border-radius: 30px;
-        border: 1px solid #dbeafe;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    .fc-viet-b6 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #334155;
+    .vocab-section-title-b6 {
+        color: #1e3a8a;
+        border-left: 5px solid #2563eb;
+        padding-left: 12px;
+        margin-top: 30px;
         margin-bottom: 15px;
+        font-weight: 700;
+        font-size: 1.4rem;
     }
-    .fc-ex-box-b6 {
+    .vocab-card-b6 {
         background: white;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: 15px;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 280px;
     }
-    .fc-ex-title-b6 {
-        font-size: 0.8rem;
-        color: #64748b;
+    .vocab-card-b6:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+        border-color: #cbd5e1;
+    }
+    .vocab-word-b6 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 2px;
+        line-height: 1.2;
+    }
+    .vocab-pinyin-b6 {
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 6px;
+    }
+    .vocab-viet-b6 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 10px;
+    }
+    .vocab-ex-box-b6 {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid #f1f5f9;
+    }
+    .vocab-ex-title-b6 {
+        font-size: 0.7rem;
+        color: #94a3b8;
         font-weight: 700;
         text-transform: uppercase;
-        margin-bottom: 6px;
-        letter-spacing: 0.05em;
+        margin-bottom: 2px;
     }
-    .fc-ex-han-b6 { font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; }
-    .fc-ex-py-b6 { font-family: 'Courier New', monospace; font-weight: 700; color: #059669; font-size: 1.05rem; margin-bottom: 4px; }
-    .fc-ex-vi-b6 { color: #475569; font-style: italic; font-size: 0.95rem; border-left: 2px solid #cbd5e1; padding-left: 8px; }
-    @media (max-width: 768px) {
-        .flashcard-container-b6 { flex-direction: column; padding: 20px; text-align: center; gap: 20px; }
-        .flashcard-image-b6 { width: 160px; height: 160px; }
+    .vocab-ex-han-b6 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #1e293b;
+        display: block;
+        margin-bottom: 1px;
+    }
+    .vocab-ex-py-b6 {
+        font-family: 'Courier New', monospace;
+        color: #059669;
+        display: block;
+        margin-bottom: 2px;
+        font-size: 0.8rem;
+    }
+    .vocab-ex-vi-b6 {
+        color: #475569;
+        font-style: italic;
+        display: block;
+        font-size: 0.78rem;
     }
     </style>
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 6: Hệ thống từ vựng (Flashcards)",
-        "Học các từ vựng mới trong Bài 6 dưới dạng thẻ từ tương tác (Flashcards) có phát âm bản xứ."
+        "📚 Bài 6: Hệ thống từ vựng",
+        "Học các từ vựng theo nhóm từ cơ bản đến nâng cao về thời gian, thứ ngày tháng năm, giờ giấc và các mùa."
     )
 
-    B6_VOCAB = [
-        # Nhóm 1: Thời gian cơ bản
-        {"emoji": "📅", "category": "Thời gian cơ bản", "word": "昨天", "pinyin": "zuótiān", "vietnamese": "Hôm qua", "key_prefix": "b6_zuotian", "example_han": "昨天我去学校了。", "example_py": "Zuótiān wǒ qù xuéxiào le.", "example_vi": "Hôm qua tôi đi học rồi."},
-        {"emoji": "📅", "category": "Thời gian cơ bản", "word": "今天", "pinyin": "jīntiān", "vietnamese": "Hôm nay", "key_prefix": "b6_jintian", "example_han": "今天天气很好。", "example_py": "Jīntiān tiānqì hěn hǎo.", "example_vi": "Hôm nay thời tiết rất tốt."},
-        {"emoji": "📅", "category": "Thời gian cơ bản", "word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "key_prefix": "b6_mingtian", "example_han": "明天你忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"},
-        
-        # Nhóm 2: Thứ, Ngày, Tháng, Năm
-        {"emoji": "🗓️", "category": "Thứ, Ngày, Tháng, Năm", "word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "key_prefix": "b6_xingqi", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"},
-        {"emoji": "🗓️", "category": "Thứ, Ngày, Tháng, Năm", "word": "号", "pinyin": "hào", "vietnamese": "Ngày (văn nói)", "key_prefix": "b6_hao", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"},
-        {"emoji": "🗓️", "category": "Thứ, Ngày, Tháng, Năm", "word": "日", "pinyin": "rì", "vietnamese": "Ngày (văn viết)", "key_prefix": "b6_ri", "example_han": "十月一日是国庆节。", "example_py": "Shíyuè yī rì shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
-        {"emoji": "🗓️", "category": "Thứ, Ngày, Tháng, Năm", "word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "key_prefix": "b6_yue", "example_han": "现在是六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
-        {"emoji": "🗓️", "category": "Thứ, Ngày, Tháng, Năm", "word": "年", "pinyin": "nián", "vietnamese": "Năm", "key_prefix": "b6_nian", "example_han": "今年是二零二六年。", "example_py": "Jīnnián shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."},
-
-        # Nhóm 3: Giờ giấc
-        {"emoji": "⏰", "category": "Giờ giấc", "word": "点", "pinyin": "diǎn", "vietnamese": "Giờ", "key_prefix": "b6_dian", "example_han": "现在八点。", "example_py": "Xiànzài bā diǎn.", "example_vi": "Bây giờ là 8 giờ."},
-        {"emoji": "⏰", "category": "Giờ giấc", "word": "分", "pinyin": "fēn", "vietnamese": "Phút", "key_prefix": "b6_fen", "example_han": "现在八点十分。", "example_py": "Xiànzài bā diǎn shí fēn.", "example_vi": "Bây giờ là 8 giờ 10 phút."},
-        {"emoji": "⏰", "category": "Giờ giấc", "word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "key_prefix": "b6_ban", "example_han": "现在八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
-        {"emoji": "⏰", "category": "Giờ giấc", "word": "刻", "pinyin": "kè", "vietnamese": "Khắc (15 phút)", "key_prefix": "b6_ke", "example_han": "现在八点一刻。", "example_py": "Xiànzài bā diǎn yí kè.", "example_vi": "Bây giờ là 8 giờ 15 phút."},
-        {"emoji": "⏰", "category": "Giờ giấc", "word": "差", "pinyin": "chà", "vietnamese": "Kém", "key_prefix": "b6_cha", "example_han": "差五分九点。", "example_py": "Chà wǔ fēn jiǔ diǎn.", "example_vi": "9 giờ kém 5 phút."},
-
-        # Nhóm 4: Bốn mùa
-        {"emoji": "🌸", "category": "Bốn mùa", "word": "春天", "pinyin": "chūntiān", "vietnamese": "Mùa xuân", "key_prefix": "b6_chuntian", "example_han": "春天很暖和。", "example_py": "Chūntiān hěn nuǎnhuo.", "example_vi": "Mùa xuân rất ấm áp."},
-        {"emoji": "☀️", "category": "Bốn mùa", "word": "夏天", "pinyin": "xiàtiān", "vietnamese": "Mùa hạ / hè", "key_prefix": "b6_xiatian", "example_han": "夏天很热。", "example_py": "Xiàtiān hěn rè.", "example_vi": "Mùa hè rất nóng."},
-        {"emoji": "🍂", "category": "Bốn mùa", "word": "秋天", "pinyin": "qiūtiān", "vietnamese": "Mùa thu", "key_prefix": "b6_qiutian", "example_han": "秋天很凉快。", "example_py": "Qiūtiān hěn liángkuai.", "example_vi": "Mùa thu rất mát mẻ."},
-        {"emoji": "❄️", "category": "Bốn mùa", "word": "冬天", "pinyin": "dōngtiān", "vietnamese": "Mùa đông", "key_prefix": "b6_dongtian", "example_han": "冬天很冷。", "example_py": "Dōngtiān hěn lěng.", "example_vi": "Mùa đông rất lạnh."}
+    # --- Nhóm 1: Thời gian cơ bản ---
+    st.markdown("<h3 class='vocab-section-title-b6'>📅 1. Thời gian cơ bản (Hôm qua, Hôm nay, Ngày mai)</h3>", unsafe_allow_html=True)
+    group1 = [
+        {"word": "昨天", "pinyin": "zuótiān", "vietnamese": "Hôm qua", "example_han": "昨天我去学校了。", "example_py": "Zuótiān wǒ qù xuéxiào le.", "example_vi": "Hôm qua tôi đi học rồi."},
+        {"word": "今天", "pinyin": "jīntiān", "vietnamese": "Hôm nay", "example_han": "今天天气很好。", "example_py": "Jīntiān tiānqì hěn hǎo.", "example_vi": "Hôm nay thời tiết rất tốt."},
+        {"word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "example_han": "明天`nǐ`忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"}
     ]
-
-    # Clean up inline artifact text in examples
-    B6_VOCAB[9]["example_han"] = "现在八点十分。"
-
-    slide_key = "b6_vocab_slide_idx"
-    if slide_key not in st.session_state:
-        st.session_state[slide_key] = 0
-
-    cur_idx = st.session_state[slide_key]
-    if cur_idx >= len(B6_VOCAB):
-        cur_idx = 0
-        st.session_state[slide_key] = 0
-
-    w = B6_VOCAB[cur_idx]
-
-    # --- Image lookup ---
-    img_name = w["key_prefix"].replace("b6_", "")
-    img_base64 = ""
-    for ext in [".png", ".jpg", ".jpeg", ".gif", ".webp"]:
-        import base64
-        import os
-        p = os.path.join("assets", "lesson6", img_name + ext)
-        if os.path.exists(p):
-            try:
-                with open(p, "rb") as f:
-                    data = f.read()
-                    mime = "image/png"
-                    if data.startswith(b'\xff\xd8'): mime = "image/jpeg"
-                    elif data.startswith(b'GIF8'): mime = "image/gif"
-                    elif data.startswith(b'RIFF') and b'WEBP' in data: mime = "image/webp"
-                    img_base64 = f"data:{mime};base64,{base64.b64encode(data).decode('utf-8')}"
-                break
-            except Exception:
-                pass
-
-    if img_base64:
-        img_tag = f'<img src="{img_base64}" />'
-    else:
-        img_tag = f'<div style="font-size: 5rem;">{w["emoji"]}</div>'
-
-    card_html = f"""<div class="flashcard-container-b6">
-<div class="flashcard-image-b6">{img_tag}</div>
-<div style="flex-grow: 1;">
-<div class="fc-category-b6">📌 Nhóm: {w['category']}</div>
-<div class="fc-word-b6">{w['word']}</div>
-<div><span class="fc-pinyin-b6">{w['pinyin']}</span></div>
-<div class="fc-viet-b6">Nghĩa: {w['vietnamese']}</div>
-<div class="fc-ex-box-b6">
-<div class="fc-ex-title-b6">Ví dụ mẫu:</div>
-<div class="fc-ex-han-b6">{w['example_han']}</div>
-<div class="fc-ex-py-b6">{w['example_py']}</div>
-<div class="fc-ex-vi-b6">{w['example_vi']}</div>
+    group1[2]["example_han"] = "明天你忙吗？"
+    
+    cols1 = st.columns(3)
+    for idx, item in enumerate(group1):
+        with cols1[idx]:
+            card_html = f"""<div class="vocab-card-b6">
+<div>
+<div class="vocab-word-b6">{item['word']}</div>
+<div class="vocab-pinyin-b6">{item['pinyin']}</div>
+<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
+<div class="vocab-ex-box-b6">
+<div class="vocab-ex-title-b6">Ví dụ:</div>
+<div class="vocab-ex-han-b6">{item['example_han']}</div>
+<div class="vocab-ex-py-b6">{item['example_py']}</div>
+<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
 </div>
 </div>
 </div>""".replace("\n", " ")
+            st.markdown(card_html, unsafe_allow_html=True)
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g1_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g1_ex_{idx}")
 
-    col_card, col_ctrl = st.columns([4.2, 1.8])
-    with col_card:
-        st.markdown(card_html, unsafe_allow_html=True)
-    with col_ctrl:
-        st.markdown("<h4 style='color:#1e293b; margin-top:0;'>🔊 Phát âm</h4>", unsafe_allow_html=True)
-        render_play_button(w['word'], "🔊 Phát âm từ", key=f"slide_{w['key_prefix']}_word")
-        st.write("")
-        render_play_button(w['example_han'], "🔊 Nghe cả câu", key=f"slide_{w['key_prefix']}_ex")
-
-        st.markdown("<hr style='margin:15px 0;'/>", unsafe_allow_html=True)
-        st.markdown("<h4 style='color:#1e293b;'>🎮 Điều khiển</h4>", unsafe_allow_html=True)
-
-        col_prev, col_next = st.columns(2)
-        with col_prev:
-            if st.button("⬅️ Từ trước", use_container_width=True, key="b6v_prev"):
-                st.session_state[slide_key] = (cur_idx - 1) % len(B6_VOCAB)
-                st.rerun()
-        with col_next:
-            if st.button("Từ sau ➡️", use_container_width=True, key="b6v_next"):
-                st.session_state[slide_key] = (cur_idx + 1) % len(B6_VOCAB)
-                st.rerun()
-
-        st.markdown(f"<div style='text-align: center; font-size: 1.25em; font-weight: bold; margin-top: 10px; color:#475569;'>Từ {cur_idx + 1} / {len(B6_VOCAB)}</div>", unsafe_allow_html=True)
-        st.progress((cur_idx + 1) / len(B6_VOCAB))
-
-    # --- Hướng dẫn bổ sung dưới flashcards ---
-    st.markdown("---")
+    # --- Nhóm 2: Thứ, Ngày, Tháng, Năm ---
+    st.markdown("<h3 class='vocab-section-title-b6'>🗓️ 2. Thứ, Ngày, Tháng, Năm</h3>", unsafe_allow_html=True)
+    group2 = [
+        {"word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"},
+        {"word": "号", "pinyin": "hào", "vietnamese": "Ngày (văn nói)", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"},
+        {"word": "日", "pinyin": "rì", "vietnamese": "Ngày (văn viết)", "example_han": "十月一日是国庆节。", "example_py": "Shíyuè yī rì  shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
+        {"word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "example_han": "现在 là 六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
+        {"word": "年", "pinyin": "nián", "vietnamese": "Năm", "example_han": "今年 là 二零二六年。", "example_py": "Jīnnián shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."}
+    ]
+    group2[3]["example_han"] = "现在是六月。"
+    group2[4]["example_han"] = "今年是二零二六年。"
     
-    # Cách đọc thứ ngày tháng năm
+    cols2 = st.columns(5)
+    for idx, item in enumerate(group2):
+        with cols2[idx]:
+            card_html = f"""<div class="vocab-card-b6">
+<div>
+<div class="vocab-word-b6">{item['word']}</div>
+<div class="vocab-pinyin-b6">{item['pinyin']}</div>
+<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
+<div class="vocab-ex-box-b6">
+<div class="vocab-ex-title-b6">Ví dụ:</div>
+<div class="vocab-ex-han-b6">{item['example_han']}</div>
+<div class="vocab-ex-py-b6">{item['example_py']}</div>
+<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
+</div>
+</div>
+</div>""".replace("\n", " ")
+            st.markdown(card_html, unsafe_allow_html=True)
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g2_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g2_ex_{idx}")
+
+    # Cách đọc thứ ngày tháng năm trực tiếp theo nhóm 2
     st.markdown("""
-    <div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; border: 1px solid #dbeafe;">
+    <div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 15px; margin-bottom: 10px; border: 1px solid #dbeafe;">
         <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
             💡 Cách đọc thứ ngày tháng năm trong tiếng Trung
         </h4>
@@ -826,11 +778,41 @@ def show_lesson6_vocab():
         </div>
     </div>
     """.replace("\n", " "), unsafe_allow_html=True)
-    render_play_button("二零二六年六月二十五号星期四", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex")
+    render_play_button("二零二六年六月二十五号星期四", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex_v6")
 
-    # Cách đọc giờ
+    # --- Nhóm 3: Giờ giấc ---
+    st.markdown("<h3 class='vocab-section-title-b6'>⏰ 3. Giờ và cách đọc giờ</h3>", unsafe_allow_html=True)
+    group3 = [
+        {"word": "点", "pinyin": "diǎn", "vietnamese": "Giờ", "example_han": "现在八点。", "example_py": "Xiànzài bā diǎn.", "example_vi": "Bây giờ là 8 giờ."},
+        {"word": "分", "pinyin": "fēn", "vietnamese": "Phút", "example_han": "现在八点十分。", "example_py": "Xiànzài  bā diǎn shí fēn.", "example_vi": "Bây giờ là 8 giờ 10 phút."},
+        {"word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "example_han": "现在八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
+        {"word": "刻", "pinyin": "kè", "vietnamese": "Khắc (15 phút)", "example_han": "现在八点一刻。", "example_py": "Xiànzài  bā diǎn yí kè.", "example_vi": "Bây giờ là 8 giờ 15 phút."},
+        {"word": "差", "pinyin": "chà", "vietnamese": "Kém", "example_han": "差五分九点。", "example_py": "Chà wǔ fēn jiǔ diǎn.", "example_vi": "9 giờ kém 5 phút."}
+    ]
+    
+    cols3 = st.columns(5)
+    for idx, item in enumerate(group3):
+        with cols3[idx]:
+            card_html = f"""<div class="vocab-card-b6">
+<div>
+<div class="vocab-word-b6">{item['word']}</div>
+<div class="vocab-pinyin-b6">{item['pinyin']}</div>
+<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
+<div class="vocab-ex-box-b6">
+<div class="vocab-ex-title-b6">Ví dụ:</div>
+<div class="vocab-ex-han-b6">{item['example_han']}</div>
+<div class="vocab-ex-py-b6">{item['example_py']}</div>
+<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
+</div>
+</div>
+</div>""".replace("\n", " ")
+            st.markdown(card_html, unsafe_allow_html=True)
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g3_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g3_ex_{idx}")
+
+    # Cách đọc giờ trực tiếp theo nhóm 3
     st.markdown("""
-    <div style="background-color: #fef3c7; border-left: 5px solid #d97706; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; border: 1px solid #fde68a;">
+    <div style="background-color: #fef3c7; border-left: 5px solid #d97706; padding: 20px; border-radius: 8px; margin-top: 15px; margin-bottom: 25px; border: 1px solid #fde68a;">
         <h4 style="color: #92400e; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
             💡 Các mẫu câu đọc giờ trong tiếng Trung
         </h4>
@@ -843,3 +825,32 @@ def show_lesson6_vocab():
         </ul>
     </div>
     """.replace("\n", " "), unsafe_allow_html=True)
+
+    # --- Nhóm 4: Bốn mùa ---
+    st.markdown("<h3 class='vocab-section-title-b6'>🌸 4. Bốn mùa (Xuân, Hạ, Thu, Đông)</h3>", unsafe_allow_html=True)
+    group4 = [
+        {"word": "春天", "pinyin": "chūntiān", "vietnamese": "Mùa xuân", "example_han": "春天很暖和。", "example_py": "Chūntiān hěn nuǎnhuo.", "example_vi": "Mùa xuân rất ấm áp."},
+        {"word": "夏天", "pinyin": "xiàtiān", "vietnamese": "Mùa hạ / hè", "example_han": "夏天很热。", "example_py": "Xiàtiān hěn rè.", "example_vi": "Mùa hè rất nóng."},
+        {"word": "秋天", "pinyin": "qiūtiān", "vietnamese": "Mùa thu", "example_han": "秋天很凉快。", "example_py": "Qiūtiān hěn liángkuai.", "example_vi": "Mùa thu rất mát mẻ."},
+        {"word": "冬天", "pinyin": "dōngtiān", "vietnamese": "Mùa đông", "example_han": "冬天很冷。", "example_py": "Dōngtiān hěn lěng.", "example_vi": "Mùa đông rất lạnh."}
+    ]
+    
+    cols4 = st.columns(4)
+    for idx, item in enumerate(group4):
+        with cols4[idx]:
+            card_html = f"""<div class="vocab-card-b6">
+<div>
+<div class="vocab-word-b6">{item['word']}</div>
+<div class="vocab-pinyin-b6">{item['pinyin']}</div>
+<div class="vocab-viet-b6">Nghĩa: {item['vietnamese']}</div>
+<div class="vocab-ex-box-b6">
+<div class="vocab-ex-title-b6">Ví dụ:</div>
+<div class="vocab-ex-han-b6">{item['example_han']}</div>
+<div class="vocab-ex-py-b6">{item['example_py']}</div>
+<div class="vocab-ex-vi-b6">{item['example_vi']}</div>
+</div>
+</div>
+</div>""".replace("\n", " ")
+            st.markdown(card_html, unsafe_allow_html=True)
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v6_g4_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g4_ex_{idx}")
