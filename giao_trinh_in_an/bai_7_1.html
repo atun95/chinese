@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</title>
+    <title>Bài 7.1: Các từ để hỏi</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
         :root { --primary-color: #000000; --secondary-color: #000000; --dark-color: #000000; --light-bg: #f1f5f9; --border-color: #000000; --highlight-bg: #ffffff; --highlight-border: #000000; }
@@ -275,253 +275,118 @@
     </style>
 </head>
 <body>
-    <div class="container lesson-1">
+    <div class="container lesson-7">
         <div class="no-print print-btn-container">
             <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
         </div>
-        <h1 class="lesson-title">Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</h1>
+        <h1 class="lesson-title">Bài 7.1: Các từ để hỏi</h1>
         
-        <h2 class="section-title">1. Khái quát về hệ thống chữ viết Pinyin</h2>
-        <p>Hệ thống phiên âm tiếng Trung tiêu chuẩn (Bính âm - Pinyin) cấu tạo bởi 3 thành phần chính:</p>
-        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 2px;">
-            Thanh mẫu (Phụ âm đầu) + Vận mẫu (Nguyên âm) + Thanh điệu (Dấu)
-        </div>
-        
-        <h2 class="section-title">2. Thanh mẫu cơ bản (11 Phụ âm đầu)</h2>
-        <p>Học phát âm chuẩn xác các thanh mẫu nhóm môi, đầu lưỡi và cuống lưỡi:</p>
+        <h2 class="section-title">1. Hệ thống đại từ nghi vấn (Từ để hỏi) cốt lõi</h2>
+        <p>Bảng tổng hợp các đại từ nghi vấn quan trọng nhất trong cấp độ HSK 1:</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 15%;">Thanh mẫu</th>
-                    <th style="width: 45%;">Hướng dẫn khẩu hình &amp; Cách phát âm</th>
-                    <th style="width: 40%;">Ví dụ từ khóa (Chữ Hán - Pinyin - Việt)</th>
+                    <th style="width: 15%;">Từ để hỏi</th>
+                    <th style="width: 25%;">Phiên âm / Nghĩa</th>
+                    <th style="width: 30%;">Cách sử dụng chính</th>
+                    <th style="width: 30%;">Ví dụ cụ thể (Chữ Hán - Pinyin - Việt)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>b</strong></td>
-                    <td>Âm hai môi, không bật hơi. Đọc gần giống chữ "p" nhẹ trong tiếng Việt. Mím hai môi rồi mở ra nhẹ nhàng.</td>
-                    <td>爸爸 <span class="pinyin">bàba</span> (bố)</td>
+                    <td><strong>谁</strong></td>
+                    <td><span class="pinyin">shéi / shuí</span><br>Ai (Who)</td>
+                    <td>Hỏi danh tính người. Thay thế trực tiếp vào vị trí của người trong câu.</td>
+                    <td>他是谁？ <span class="pinyin">Tā shì shéi?</span> (Anh ấy là ai?)</td>
                 </tr>
                 <tr>
-                    <td><strong>p</strong></td>
-                    <td>Âm hai môi, bật hơi mạnh. Mím môi chặt rồi đẩy một luồng hơi mạnh từ khoang miệng ra ngoài. Giống âm "ph" bật môi.</td>
-                    <td>跑步 <span class="pinyin">pǎobù</span> (chạy bộ)</td>
+                    <td><strong>什么</strong></td>
+                    <td><span class="pinyin">shénme</span><br>Cái gì / Gì (What)</td>
+                    <td>Hỏi đồ vật, tên gọi, nghề nghiệp... Có thể đi kèm danh từ ở sau (什么 + N).</td>
+                    <td>你叫什么名字？ <span class="pinyin">Nǐ jiào shénme míngzi?</span> (Bạn tên là gì?)</td>
                 </tr>
                 <tr>
-                    <td><strong>m</strong></td>
-                    <td>Âm hai môi, âm mũi. Phát âm giống hệt chữ "m" trong tiếng Việt.</td>
-                    <td>妈妈 <span class="pinyin">māma</span> (mẹ)</td>
+                    <td><strong>哪</strong></td>
+                    <td><span class="pinyin">nǎ</span><br>Nào (Which)</td>
+                    <td>Hỏi về sự lựa chọn. Thường đi kèm lượng từ và danh từ phía sau.</td>
+                    <td>你是哪国人？ <span class="pinyin">Nǐ shì nǎ guó rén?</span> (Bạn là người nước nào?)</td>
                 </tr>
                 <tr>
-                    <td><strong>f</strong></td>
-                    <td>Âm răng môi. Răng trên chạm nhẹ vào môi dưới, đẩy hơi ra ngoài. Phát âm giống chữ "ph" trong tiếng Việt.</td>
-                    <td>饭 <span class="pinyin">fàn</span> (cơm)</td>
+                    <td><strong>哪儿 / 哪里</strong></td>
+                    <td><span class="pinyin">nǎr / nǎlǐ</span><br>Ở đâu / Đâu (Where)</td>
+                    <td>Hỏi về vị trí địa điểm. Thường đi sau động từ 在 (ở) hoặc 去 (đi).</td>
+                    <td>我的书在哪儿？ <span class="pinyin">Wǒ de shū zài nǎr?</span> (Sách của tôi ở đâu?)</td>
                 </tr>
                 <tr>
-                    <td><strong>d</strong></td>
-                    <td>Âm đầu lưỡi, không bật hơi. Đọc gần giống chữ "t" trong tiếng Việt (đầu lưỡi chạm răng trên rồi hạ xuống).</td>
-                    <td>弟弟 <span class="pinyin">dìdi</span> (em trai)</td>
+                    <td><strong>几</strong></td>
+                    <td><span class="pinyin">jǐ</span><br>Mấy (How many)</td>
+                    <td>Hỏi số lượng nhỏ (&lt; 10). Bắt buộc đi kèm lượng từ (几 + Lượng từ + N).</td>
+                    <td>你家有几口人？ <span class="pinyin">Nǐ jiā yǒu jǐ kǒu rén?</span> (Nhà bạn có mấy người?)</td>
                 </tr>
                 <tr>
-                    <td><strong>t</strong></td>
-                    <td>Âm đầu lưỡi, bật hơi mạnh. Đọc gần giống chữ "th" trong tiếng Việt nhưng hơi đẩy ra dứt khoát và mạnh hơn.</td>
-                    <td>他 <span class="pinyin">tā</span> (anh ấy)</td>
+                    <td><strong>多少</strong></td>
+                    <td><span class="pinyin">duōshao</span><br>Bao nhiêu (How many/much)</td>
+                    <td>Hỏi số lượng lớn hoặc không giới hạn. Lượng từ đi kèm không bắt buộc.</td>
+                    <td>这个杯子多少钱？ <span class="pinyin">Zhège bēizi duōshao qián?</span> (Cái cốc này bao nhiêu tiền?)</td>
                 </tr>
                 <tr>
-                    <td><strong>n</strong></td>
-                    <td>Âm đầu lưỡi, âm mũi. Phát âm giống hệt chữ "n" trong tiếng Việt.</td>
-                    <td>你 <span class="pinyin">nǐ</span> (bạn)</td>
+                    <td><strong>怎么</strong></td>
+                    <td><span class="pinyin">zěnme</span><br>Thế nào / Sao (How/Why)</td>
+                    <td>Hỏi cách thức thực hiện hành động (怎么 + V), hoặc hỏi lý do đầy ngạc nhiên.</td>
+                    <td>这个字怎么写？ <span class="pinyin">Zhège zì zěnme xiě?</span> (Chữ này viết thế nào?)</td>
                 </tr>
                 <tr>
-                    <td><strong>l</strong></td>
-                    <td>Âm bên đầu lưỡi. Phát âm giống hệt chữ "l" trong tiếng Việt.</td>
-                    <td>老师 <span class="pinyin">lǎoshī</span> (giáo viên)</td>
-                </tr>
-                <tr>
-                    <td><strong>g</strong></td>
-                    <td>Âm cuống lưỡi, không bật hơi. Đọc gần giống chữ "c" hoặc "k" trong tiếng Việt. Luồng hơi bị chặn lại ở cuống họng.</td>
-                    <td>哥哥 <span class="pinyin">gēge</span> (anh trai)</td>
-                </tr>
-                <tr>
-                    <td><strong>k</strong></td>
-                    <td>Âm cuống lưỡi, bật hơi mạnh. Đọc gần giống chữ "kh" tiếng Việt nhưng cần đẩy luồng hơi mạnh từ cuống họng ra ngoài.</td>
-                    <td>渴 <span class="pinyin">kě</span> (khát)</td>
-                </tr>
-                <tr>
-                    <td><strong>h</strong></td>
-                    <td>Âm cuống lưỡi, âm xát. Phát âm hơi nhẹ hơn chữ "h" tiếng Việt một chút, giống như tiếng thở phào nhẹ nhõm.</td>
-                    <td>好 <span class="pinyin">hǎo</span> (tốt)</td>
+                    <td><strong>怎么样</strong></td>
+                    <td><span class="pinyin">zěnmeyàng</span><br>Thế nào / Ra sao (How about)</td>
+                    <td>Hỏi tình trạng tính chất (đứng cuối câu) hoặc thăm hỏi ý kiến đề xuất.</td>
+                    <td>今天天气怎么样？ <span class="pinyin">Jīntiān tiānqì zěnmeyàng?</span> (Thời tiết hôm nay thế nào?)</td>
                 </tr>
             </tbody>
         </table>
 
-        <h2 class="section-title">3. Vận mẫu đơn cơ bản (6 Nguyên âm đơn)</h2>
-        <p>Cách đặt khẩu hình miệng quyết định độ chuẩn xác của nguyên âm:</p>
+        <h2 class="section-title">2. Trợ từ nghi vấn đặc biệt ở cuối câu</h2>
+        <p>Các trợ từ không dùng để thay thế từ ngữ mà đứng cuối câu để biến câu trần thuật thành câu hỏi:</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 15%;">Vận mẫu</th>
-                    <th style="width: 50%;">Hướng dẫn khẩu hình &amp; Cách đọc</th>
-                    <th style="width: 35%;">Ví dụ cụ thể</th>
+                    <th style="width: 20%;">Trợ từ nghi vấn</th>
+                    <th style="width: 20%;">Phiên âm / Nghĩa</th>
+                    <th style="width: 30%;">Vị trí &amp; Tác dụng</th>
+                    <th style="width: 30%;">Ví dụ cụ thể</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>a</strong></td>
-                    <td>Miệng mở rộng tối đa, lưỡi hạ thấp. Đọc giống chữ "a" trong tiếng Việt.</td>
-                    <td>爸 <span class="pinyin">bà</span> (bố)</td>
+                    <td><strong>吗</strong></td>
+                    <td><span class="pinyin">ma</span><br>...không? / ...phải không?</td>
+                    <td>Đứng cuối câu trần thuật để tạo câu hỏi nghi vấn Đúng/Sai (Yes/No).</td>
+                    <td>你是学生吗？ <span class="pinyin">Nǐ shì xuésheng ma?</span> (Bạn là học sinh phải không?)</td>
                 </tr>
                 <tr>
-                    <td><strong>o</strong></td>
-                    <td>Môi tròn, miệng hơi khép lại, lưỡi rút về sau. Đọc giống chữ "ô" tiếng Việt.</td>
-                    <td>我 <span class="pinyin">wǒ</span> (tôi)</td>
-                </tr>
-                <tr>
-                    <td><strong>e</strong></td>
-                    <td>Miệng mở vừa, dẹt sang hai bên. Đọc giống chữ "ơ" hoặc "ưa" trong tiếng Việt.</td>
-                    <td>鹅 <span class="pinyin">é</span> (con ngỗng)</td>
-                </tr>
-                <tr>
-                    <td><strong>i</strong></td>
-                    <td>Hai môi dẹt, răng khép hờ, lưỡi nâng cao. Đọc giống chữ "i" tiếng Việt.</td>
-                    <td>一 <span class="pinyin">yī</span> (số một)</td>
-                </tr>
-                <tr>
-                    <td><strong>u</strong></td>
-                    <td>Môi tròn và nhô ra phía trước tối đa. Đọc giống chữ "u" tiếng Việt.</td>
-                    <td>五 <span class="pinyin">wǔ</span> (số năm)</td>
-                </tr>
-                <tr>
-                    <td><strong>ü</strong></td>
-                    <td>Môi tròn (giống u), lưỡi nâng cao (giống i). Đọc giống âm "uy" nhưng giữ nguyên hình dáng môi tròn suốt quá trình phát âm.</td>
-                    <td>绿 <span class="pinyin">lǜ</span> (màu xanh lá)</td>
+                    <td><strong>呢</strong></td>
+                    <td><span class="pinyin">ne</span><br>...thì sao? / ...đâu?</td>
+                    <td>Đứng sau danh từ/đại từ để hỏi tỉnh lược ("còn bạn thì sao?") hoặc hỏi vị trí nhanh.</td>
+                    <td>我的杯子呢？ <span class="pinyin">Wǒ de bēizi ne?</span> (Cái cốc của tôi đâu rồi?)</td>
                 </tr>
             </tbody>
         </table>
 
-        <h2 class="section-title">4. Hệ thống Thanh điệu (4 Thanh chính &amp; Thanh nhẹ)</h2>
-        <p>Tiếng Trung là ngôn ngữ có thanh điệu. Một âm tiết mang thanh điệu khác nhau sẽ biểu thị ý nghĩa hoàn toàn khác nhau:</p>
-        <ul>
-            <li><strong>Thanh 1 (Thanh ngang):</strong> Giọng cao, giữ thăng bằng từ đầu đến cuối (ký hiệu: <span class="pinyin">ā</span>). Đọc kéo dài hơi.</li>
-            <li><strong>Thanh 2 (Thanh sắc):</strong> Giọng đi từ mức trung bình lên mức cao nhất (ký hiệu: <span class="pinyin">á</span>). Đọc giống dấu sắc tiếng Việt nhưng nhẹ hơn.</li>
-            <li><strong>Thanh 3 (Thanh hỏi):</strong> Giọng đi từ thấp xuống cực thấp rồi đi lên trung bình (ký hiệu: <span class="pinyin">ǎ</span>). Đọc giống dấu hỏi kéo dài hơi hoặc đi xuống sâu.</li>
-            <li><strong>Thanh 4 (Thanh huyền):</strong> Giọng đi từ mức cao nhất rơi thẳng xuống mức thấp nhất (ký hiệu: <span class="pinyin">à</span>). Đọc dứt khoát, mạnh mẽ, không kéo dài.</li>
-            <li><strong>Thanh nhẹ (Neutral Tone):</strong> Không có ký hiệu dấu trên đầu nguyên âm. Đọc cực kỳ nhẹ và ngắn. Ví dụ: <span class="pinyin">māma</span>, <span class="pinyin">bàba</span>.</li>
-        </ul>
-
+        <h2 class="section-title">3. So sánh mở rộng và lưu ý sử dụng</h2>
         <div class="info-box">
-            <strong>💡 Quy tắc Biến điệu của Thanh 3 (Sandhi Rule):</strong><br>
-            • Khi <strong>hai âm tiết mang thanh 3</strong> đi liền nhau, thanh 3 thứ nhất sẽ biến âm đọc thành thanh 2 (thanh sắc), nhưng cách viết chữ Pinyin vẫn giữ nguyên dấu thanh 3.<br>
-            <em>Ví dụ:</em> 你好 <span class="pinyin">nǐ hǎo</span> đọc thực tế là <span class="pinyin">ní hǎo</span>.<br>
-            • Khi <strong>ba âm tiết mang thanh 3</strong> đi liền nhau, tùy cấu trúc ngữ nghĩa để biến điệu: biến âm tiết thứ 2 (3-3-3 → 3-2-3) hoặc biến cả hai âm tiết đầu (3-3-3 → 2-2-3).
+            <strong>💡 Phân biệt 几 (jǐ) và 多少 (duōshao):</strong><br>
+            • <strong>几 (jǐ):</strong> Thường dùng khi ước lượng số lượng nhỏ (&lt; 10) và <strong>bắt buộc phải có lượng từ</strong> đi kèm phía sau (Ví dụ: 几本书, 几个人). Thường dùng hỏi giờ, ngày tháng, thứ, gia đình.<br>
+            • <strong>多少 (duōshao):</strong> Dùng khi ước lượng số lượng lớn hoặc không giới hạn số lượng, <strong>lượng từ phía sau có thể có hoặc không</strong> (Ví dụ: 多少(个)人, 多少钱).
         </div>
-
-        <h2 class="section-title">5. Từ vựng cốt lõi Bài 1</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%;">Chữ Hán</th>
-                    <th style="width: 25%;">Phiên âm Pinyin</th>
-                    <th style="width: 30%;">Nghĩa tiếng Việt</th>
-                    <th style="width: 20%;">Loại từ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="hanzi">爸爸</td>
-                    <td class="pinyin">bàba</td>
-                    <td>bố / ba</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">妈妈</td>
-                    <td class="pinyin">māma</td>
-                    <td>mẹ / má</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">哥哥</td>
-                    <td class="pinyin">gēge</td>
-                    <td>anh trai</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">姐姐</td>
-                    <td class="pinyin">jiějie</td>
-                    <td>chị gái</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">弟弟</td>
-                    <td class="pinyin">dìdi</td>
-                    <td>em trai</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">妹妹</td>
-                    <td class="pinyin">mèimei</td>
-                    <td>em gái</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">我</td>
-                    <td class="pinyin">wǒ</td>
-                    <td>tôi / tớ / mình</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">你</td>
-                    <td class="pinyin">nǐ</td>
-                    <td>bạn / cậu / mày</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">他</td>
-                    <td class="pinyin">tā</td>
-                    <td>anh ấy / ông ấy</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">她</td>
-                    <td class="pinyin">tā</td>
-                    <td>cô ấy / chị ấy</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">老师</td>
-                    <td class="pinyin">lǎoshī</td>
-                    <td>thầy giáo / cô giáo</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">学生</td>
-                    <td class="pinyin">xuéshēng</td>
-                    <td>học sinh / sinh viên</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">很</td>
-                    <td class="pinyin">hěn</td>
-                    <td>rất</td>
-                    <td>Phó từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">忙</td>
-                    <td class="pinyin">máng</td>
-                    <td>bạn rộn</td>
-                    <td>Tính từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">不</td>
-                    <td class="pinyin">bù</td>
-                    <td>không</td>
-                    <td>Phó từ</td>
-                </tr>
-            </tbody>
-        </table>
-
-
+        <div class="info-box">
+            <strong>💡 Phân biệt 怎么 (zěnme) và 怎么样 (zěnmeyàng):</strong><br>
+            • <strong>怎么 (zěnme):</strong> Luôn đứng trước động từ để hỏi về cách thức thực hiện hành động (怎么写 - viết thế nào, 怎么去 - đi thế nào).<br>
+            • <strong>怎么样 (zěnmeyàng):</strong> Đứng ở cuối câu để hỏi về tính chất, trạng thái (天气怎么样 - thời tiết thế nào) hoặc đề xuất lấy ý kiến (Chúng ta đi ăn cơm nhé, thấy thế nào?).
+        </div>
+        <div class="info-box">
+            <strong>💡 Bản sắc địa phương: 哪儿 (nǎr) và 哪里 (nǎlǐ):</strong><br>
+            • Cả hai đều dùng hỏi địa điểm "ở đâu". <strong>哪儿</strong> phổ biến ở miền Bắc với âm cuốn lưỡi, còn <strong>哪里</strong> phổ biến hơn ở miền Nam, Đài Loan.<br>
+            • Ngoài ra, <strong>哪里，哪里！</strong> (Nǎlǐ, nǎlǐ!) còn là câu phản hồi khiêm tốn khi nhận lời khen (Đâu có, đâu có!). Không dùng "哪儿，哪儿" cho mục đích này.
+        </div>
         
     </div>
 </body>

@@ -1309,16 +1309,231 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
         *   ü ➔ **yu**, üe ➔ **yue**, üan ➔ **yuan**, ün ➔ **yun**
 *   **Quy tắc 2: Lược bỏ hai dấu chấm trên đầu chữ ü sau j, q, x**
     *   Khi **ün** và **üan** đi sau **j, q, x**, ta viết lược bỏ hai dấu chấm trên đầu ü thành **jun, qun, xun, juan, quan, xuan** nhưng vẫn giữ nguyên cách phát âm tròn môi.
+        """
+    },
+    {
+        "title": "Bài 7.1: Các từ để hỏi",
+        "toc_desc": "Hỏi về người, vật, địa điểm, số lượng, cách thức và trợ từ nghi vấn",
+        "content_html": """
+        <h2 class="section-title">1. Hệ thống đại từ nghi vấn (Từ để hỏi) cốt lõi</h2>
+        <p>Bảng tổng hợp các đại từ nghi vấn quan trọng nhất trong cấp độ HSK 1:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Từ để hỏi</th>
+                    <th style="width: 25%;">Phiên âm / Nghĩa</th>
+                    <th style="width: 30%;">Cách sử dụng chính</th>
+                    <th style="width: 30%;">Ví dụ cụ thể (Chữ Hán - Pinyin - Việt)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>谁</strong></td>
+                    <td><span class="pinyin">shéi / shuí</span><br>Ai (Who)</td>
+                    <td>Hỏi danh tính người. Thay thế trực tiếp vào vị trí của người trong câu.</td>
+                    <td>他是谁？ <span class="pinyin">Tā shì shéi?</span> (Anh ấy là ai?)</td>
+                </tr>
+                <tr>
+                    <td><strong>什么</strong></td>
+                    <td><span class="pinyin">shénme</span><br>Cái gì / Gì (What)</td>
+                    <td>Hỏi đồ vật, tên gọi, nghề nghiệp... Có thể đi kèm danh từ ở sau (什么 + N).</td>
+                    <td>你叫什么名字？ <span class="pinyin">Nǐ jiào shénme míngzi?</span> (Bạn tên là gì?)</td>
+                </tr>
+                <tr>
+                    <td><strong>哪</strong></td>
+                    <td><span class="pinyin">nǎ</span><br>Nào (Which)</td>
+                    <td>Hỏi về sự lựa chọn. Thường đi kèm lượng từ và danh từ phía sau.</td>
+                    <td>你是哪国人？ <span class="pinyin">Nǐ shì nǎ guó rén?</span> (Bạn là người nước nào?)</td>
+                </tr>
+                <tr>
+                    <td><strong>哪儿 / 哪里</strong></td>
+                    <td><span class="pinyin">nǎr / nǎlǐ</span><br>Ở đâu / Đâu (Where)</td>
+                    <td>Hỏi về vị trí địa điểm. Thường đi sau động từ 在 (ở) hoặc 去 (đi).</td>
+                    <td>我的书在哪儿？ <span class="pinyin">Wǒ de shū zài nǎr?</span> (Sách của tôi ở đâu?)</td>
+                </tr>
+                <tr>
+                    <td><strong>几</strong></td>
+                    <td><span class="pinyin">jǐ</span><br>Mấy (How many)</td>
+                    <td>Hỏi số lượng nhỏ (&lt; 10). Bắt buộc đi kèm lượng từ (几 + Lượng từ + N).</td>
+                    <td>你家有几口人？ <span class="pinyin">Nǐ jiā yǒu jǐ kǒu rén?</span> (Nhà bạn có mấy người?)</td>
+                </tr>
+                <tr>
+                    <td><strong>多少</strong></td>
+                    <td><span class="pinyin">duōshao</span><br>Bao nhiêu (How many/much)</td>
+                    <td>Hỏi số lượng lớn hoặc không giới hạn. Lượng từ đi kèm không bắt buộc.</td>
+                    <td>这个杯子多少钱？ <span class="pinyin">Zhège bēizi duōshao qián?</span> (Cái cốc này bao nhiêu tiền?)</td>
+                </tr>
+                <tr>
+                    <td><strong>怎么</strong></td>
+                    <td><span class="pinyin">zěnme</span><br>Thế nào / Sao (How/Why)</td>
+                    <td>Hỏi cách thức thực hiện hành động (怎么 + V), hoặc hỏi lý do đầy ngạc nhiên.</td>
+                    <td>这个字怎么写？ <span class="pinyin">Zhège zì zěnme xiě?</span> (Chữ này viết thế nào?)</td>
+                </tr>
+                <tr>
+                    <td><strong>怎么样</strong></td>
+                    <td><span class="pinyin">zěnmeyàng</span><br>Thế nào / Ra sao (How about)</td>
+                    <td>Hỏi tình trạng tính chất (đứng cuối câu) hoặc thăm hỏi ý kiến đề xuất.</td>
+                    <td>今天天气怎么样？ <span class="pinyin">Jīntiān tiānqì zěnmeyàng?</span> (Thời tiết hôm nay thế nào?)</td>
+                </tr>
+            </tbody>
+        </table>
 
+        <h2 class="section-title">2. Trợ từ nghi vấn đặc biệt ở cuối câu</h2>
+        <p>Các trợ từ không dùng để thay thế từ ngữ mà đứng cuối câu để biến câu trần thuật thành câu hỏi:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Trợ từ nghi vấn</th>
+                    <th style="width: 20%;">Phiên âm / Nghĩa</th>
+                    <th style="width: 30%;">Vị trí &amp; Tác dụng</th>
+                    <th style="width: 30%;">Ví dụ cụ thể</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>吗</strong></td>
+                    <td><span class="pinyin">ma</span><br>...không? / ...phải không?</td>
+                    <td>Đứng cuối câu trần thuật để tạo câu hỏi nghi vấn Đúng/Sai (Yes/No).</td>
+                    <td>你是学生吗？ <span class="pinyin">Nǐ shì xuésheng ma?</span> (Bạn là học sinh phải không?)</td>
+                </tr>
+                <tr>
+                    <td><strong>呢</strong></td>
+                    <td><span class="pinyin">ne</span><br>...thì sao? / ...đâu?</td>
+                    <td>Đứng sau danh từ/đại từ để hỏi tỉnh lược ("còn bạn thì sao?") hoặc hỏi vị trí nhanh.</td>
+                    <td>我的杯子呢？ <span class="pinyin">Wǒ de bēizi ne?</span> (Cái cốc của tôi đâu rồi?)</td>
+                </tr>
+            </tbody>
+        </table>
 
+        <h2 class="section-title">3. So sánh mở rộng và lưu ý sử dụng</h2>
+        <div class="info-box">
+            <strong>💡 Phân biệt 几 (jǐ) và 多少 (duōshao):</strong><br>
+            • <strong>几 (jǐ):</strong> Thường dùng khi ước lượng số lượng nhỏ (&lt; 10) và <strong>bắt buộc phải có lượng từ</strong> đi kèm phía sau (Ví dụ: 几本书, 几个人). Thường dùng hỏi giờ, ngày tháng, thứ, gia đình.<br>
+            • <strong>多少 (duōshao):</strong> Dùng khi ước lượng số lượng lớn hoặc không giới hạn số lượng, <strong>lượng từ phía sau có thể có hoặc không</strong> (Ví dụ: 多少(个)人, 多少钱).
+        </div>
+        <div class="info-box">
+            <strong>💡 Phân biệt 怎么 (zěnme) và 怎么样 (zěnmeyàng):</strong><br>
+            • <strong>怎么 (zěnme):</strong> Luôn đứng trước động từ để hỏi về cách thức thực hiện hành động (怎么写 - viết thế nào, 怎么去 - đi thế nào).<br>
+            • <strong>怎么样 (zěnmeyàng):</strong> Đứng ở cuối câu để hỏi về tính chất, trạng thái (天气怎么样 - thời tiết thế nào) hoặc đề xuất lấy ý kiến (Chúng ta đi ăn cơm nhé, thấy thế nào?).
+        </div>
+        <div class="info-box">
+            <strong>💡 Bản sắc địa phương: 哪儿 (nǎr) và 哪里 (nǎlǐ):</strong><br>
+            • Cả hai đều dùng hỏi địa điểm "ở đâu". <strong>哪儿</strong> phổ biến ở miền Bắc với âm cuốn lưỡi, còn <strong>哪里</strong> phổ biến hơn ở miền Nam, Đài Loan.<br>
+            • Ngoài ra, <strong>哪里，哪里！</strong> (Nǎlǐ, nǎlǐ!) còn là câu phản hồi khiêm tốn khi nhận lời khen (Đâu có, đâu có!). Không dùng "哪儿，哪儿" cho mục đích này.
+        </div>
+        """,
+        "content_md": """
+### 1. Hệ thống đại từ nghi vấn (Từ để hỏi) HSK 1
+*   **谁 (shéi / shuí) - Ai:** Hỏi về danh tính (Ví dụ: 他是谁？ - Anh ấy là ai?).
+*   **什么 (shénme) - Cái gì / Gì:** Hỏi đồ vật, tên gọi (Ví dụ: 这是什么？ - Đây là cái gì?).
+*   **哪 (nǎ) - Nào:** Hỏi lựa chọn (Ví dụ: 你sách nǎ guó rén? - Bạn là người nước nào?).
+*   **哪儿 / 哪里 (nǎr / nǎlǐ) - Ở đâu:** Hỏi vị trí (Ví dụ: 我的书在哪儿？ - Sách của tôi ở đâu?).
+*   **几 (jǐ) - Mấy:** Hỏi số lượng nhỏ < 10, yêu cầu lượng từ (Ví dụ: 你家有几口人？ - Nhà bạn có mấy người?).
+*   **多少 (duōshao) - Bao nhiêu:** Hỏi số lượng không giới hạn, lượng từ không bắt buộc (Ví dụ: 这个杯子多少钱？ - Cái cốc này bao nhiêu tiền?).
+*   **怎么 (zěnme) - Thế nào / Sao:** Hỏi cách thức (怎么写 - viết thế nào) hoặc lý do ngạc nhiên.
+*   **怎么样 (zěnmeyàng) - Ra sao / Thế nào:** Hỏi trạng thái hoặc lấy ý kiến (Ví dụ: 今天天气怎么样？ - Thời tiết hôm nay thế nào?).
+
+### 2. Trợ từ nghi vấn cuối câu
+*   **吗 (ma) - ...không?:** Biến câu trần thuật thành câu hỏi Yes/No (Ví dụ: 你是老师吗？ - Bạn là giáo viên phải không?).
+*   **呢 (ne) - ...thì sao?:** Dùng trong câu hỏi tỉnh lược (Ví dụ: 我很好，你呢？ - Tôi rất tốt, còn bạn?) hoặc hỏi vị trí nhanh (我的杯子呢？ - Cái cốc của tôi đâu?).
+
+### 3. Điểm ngữ pháp cốt lõi
+1.  **Cấu trúc 几 (jǐ) và 多少 (duōshao):** 几 bắt buộc đi với lượng từ, 多少 không bắt buộc.
+2.  **Cấu trúc 怎么 (zěnme) và 怎么样 (zěnmeyàng):** 怎么 + Động từ; 怎么样 đứng ở cuối câu.
+3.  **Hỏi vị trí:** Dùng 哪儿 hoặc 哪里 đứng sau động từ 在 (ở) hoặc 去 (đi).
+        """
+    },
+    {
+        "title": "Bài 7.2: Cách dùng chữ 的",
+        "toc_desc": "Sở hữu, tính chất đặc điểm, cấu trúc chữ 的 và quy tắc lược bỏ",
+        "content_html": """
+        <h2 class="section-title">1. Ba cấu trúc ngữ pháp cơ bản của chữ 的</h2>
+        <p>Quy tắc cốt lõi: Cái chính yếu, quan trọng đứng sau; cái phụ trợ, bổ nghĩa đứng trước.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Cấu trúc sử dụng</th>
+                    <th style="width: 35%;">Giải thích chi tiết</th>
+                    <th style="width: 40%;">Ví dụ cụ thể (Chữ Hán - Pinyin - Việt)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sở hữu (Của...)</strong></td>
+                    <td>Đảo ngược so với tiếng Việt.<br>Cấu trúc: <strong>Người sở hữu + 的 + Vật sở hữu</strong></td>
+                    <td>我的书 <span class="pinyin">wǒ de shū</span> (Sách của tôi)<br>老师的电脑 <span class="pinyin">lǎoshī de diànnǎo</span> (Máy tính của thầy giáo)</td>
+                </tr>
+                <tr>
+                    <td><strong>Đặc điểm, tính chất</strong></td>
+                    <td>Nối tính từ với danh từ để miêu tả đặc điểm.<br>Cấu trúc: <strong>Tính từ + 的 + Danh từ</strong></td>
+                    <td>很好的朋友 <span class="pinyin">hěn hǎo de péngyou</span> (Người bạn rất tốt)<br>很大的苹果 <span class="pinyin">hěn dà de píngguǒ</span> (Quả táo rất to)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cấu trúc chữ "de" lược bỏ</strong></td>
+                    <td>Lược bỏ danh từ phía sau chữ 的 khi ngữ cảnh đã rõ ràng để tránh lặp từ.</td>
+                    <td>我要大的。 <span class="pinyin">Wǒ yào dà de.</span> (Tôi muốn cái to.)<br>这本书是我的。 <span class="pinyin">Zhè běn shū shì wǒ de.</span> (Cuốn sách này là của tôi.)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Quy tắc lược bỏ chữ 的 khi biểu thị sở hữu</h2>
+        <p>Bạn có thể lược bỏ chữ <strong>的</strong> khi giữa người sở hữu và đối tượng sở hữu có mối quan hệ gắn bó khăng khít:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Trường hợp</th>
+                    <th style="width: 35%;">Cách dùng đúng (Nên dùng)</th>
+                    <th style="width: 35%;">Giải thích ngữ cảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Người thân gia đình</strong></td>
+                    <td>我爸爸 <span class="pinyin">wǒ bàba</span> (Bố tôi)<br>我妈妈 <span class="pinyin">wǒ māma</span> (Mẹ tôi)</td>
+                    <td>Mối quan hệ huyết thống ruột thịt gần gũi.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mối quan hệ xã hội quen thuộc</strong></td>
+                    <td>我朋友 <span class="pinyin">wǒ péngyou</span> (Bạn tôi)<br>Chúng tôi 老师 / 我们老师 <span class="pinyin">wǒmen lǎoshī</span> (Thầy giáo của chúng tôi)</td>
+                    <td>Giao tế xã hội, bạn bè học tập thân cận.</td>
+                </tr>
+                <tr>
+                    <td><strong>Nơi chốn, cơ quan gắn liền</strong></td>
+                    <td>我家 <span class="pinyin">wǒ jiā</span> (Nhà tôi)<br>我学校 <span class="pinyin">wǒ xuéxiào</span> (Trường tôi)</td>
+                    <td>Nơi thuộc về hoặc sinh sống hàng ngày.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warn-box">
+            <strong>⚠️ LƯU Ý BẮT BUỘC GIỮ LẠI "Đ":</strong><br>
+            Đối với <strong>đồ vật cá nhân, tài sản độc lập</strong> (quần áo, sách vở, tiền bạc, máy tính...), mối quan hệ này không phải là "tự nhiên gắn liền" mà là sở hữu tài sản. Bạn bắt buộc phải giữ chữ 的:<br>
+            • Đúng: <strong>我的书</strong> (Sách của tôi) &nbsp;&nbsp; ❌ Sai: <i>我书</i><br>
+            • Đúng: <strong>他的电脑</strong> (Máy tính của anh ấy) &nbsp;&nbsp; ❌ Sai: <i>他电脑</i><br>
+            • Đúng: <strong>我的衣服</strong> (Quần áo của tôi) &nbsp;&nbsp; ❌ Sai: <i>我衣服</i>
+        </div>
+        """,
+        "content_md": """
+### 1. Ba cấu trúc cơ bản
+1.  **Biểu thị sở hữu:** Người sở hữu + 的 + Đồ vật (Ví dụ: 我的书 - Sách của tôi).
+2.  **Biểu thị đặc điểm:** Tính từ + 的 + Danh từ (Ví dụ: 很好的朋友 - Người bạn rất tốt).
+3.  **Cấu trúc chữ 的 rút gọn:** Bỏ danh từ phía sau (Ví dụ: 我要大的 - Tôi lấy cái to; 这本书是我的 - Sách này là của tôi).
+
+### 2. Quy tắc lược bỏ "de" (Sở hữu thân thiết)
+*   **Có thể lược bỏ:**
+    *   Người thân (...爸爸, 我妈妈)
+    *   Quan hệ xã hội thân cận (我朋友, 我们老师)
+    *   Nơi chốn/Cơ quan thuộc về (我家, 我学校)
+*   **Bắt buộc giữ 的:** Tài sản cá nhân, đồ vật (我的书, 他的电脑).
         """
     }
 ]
 
 def make_filename(title):
-    match = re.search(r"Bài\s+(\d+)", title, re.IGNORECASE)
+    match = re.search(r"Bài\s+([\d\.]+)", title, re.IGNORECASE)
     if match:
-        return f"bai_{match.group(1)}.html"
+        val = match.group(1).replace(".", "_")
+        return f"bai_{val}.html"
     return "bai_hoc.html"
 
 def build_individual_lessons():
@@ -1543,6 +1758,50 @@ def build_individual_lessons():
                 padding: 4px 6px !important;
                 margin: 4px 0 !important;
                 font-size: 9px !important;
+            }
+
+            /* Lesson 7.1 (Medium-long): squeeze slightly to fit on 1 page */
+            .lesson-7 {
+                font-size: 11px !important;
+                line-height: 1.22 !important;
+            }
+            .lesson-7 p {
+                margin-top: 2px !important;
+                margin-bottom: 2px !important;
+            }
+            .lesson-7 table {
+                margin: 6px 0 !important;
+            }
+            .lesson-7 th, .lesson-7 td {
+                padding: 3px 5px !important;
+                font-size: 9.8px !important;
+            }
+            .lesson-7 .info-box, .lesson-7 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4.5px 0 !important;
+                font-size: 9.8px !important;
+            }
+
+            /* Lesson 7.2 (Medium-long): squeeze slightly to fit on 1 page */
+            .lesson-8 {
+                font-size: 11.2px !important;
+                line-height: 1.22 !important;
+            }
+            .lesson-8 p {
+                margin-top: 2px !important;
+                margin-bottom: 2px !important;
+            }
+            .lesson-8 table {
+                margin: 6px 0 !important;
+            }
+            .lesson-8 th, .lesson-8 td {
+                padding: 3.5px 5px !important;
+                font-size: 10px !important;
+            }
+            .lesson-8 .info-box, .lesson-8 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4.5px 0 !important;
+                font-size: 10px !important;
             }
 
             @page {

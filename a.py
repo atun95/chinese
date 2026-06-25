@@ -24,6 +24,7 @@ import lesson3
 import lesson4
 import lesson5
 import lesson6
+import lesson7
 
 try:
     importlib.reload(lessons_data)
@@ -57,6 +58,11 @@ except Exception as e:
 
 try:
     importlib.reload(lesson6)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(lesson7)
 except Exception as e:
     pass
 
@@ -105,10 +111,12 @@ SCORES_B5_FILE = USER_DATA_DIR / "scores_b5.csv"
 SCORES_B5_3_FILE = USER_DATA_DIR / "scores_b5_3.csv"
 SCORES_B6_1_FILE = USER_DATA_DIR / "scores_b6_1.csv"
 SCORES_B6_2_FILE = USER_DATA_DIR / "scores_b6_2.csv"
+SCORES_B7_1_FILE = USER_DATA_DIR / "scores_b7_1.csv"
+SCORES_B7_2_FILE = USER_DATA_DIR / "scores_b7_2.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "scores_b7_1.csv", "scores_b7_2.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -119,7 +127,7 @@ for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv"
 
 def save_progress():
     try:
-        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "b3_", "b4_", "b5_", "student_name"))]
+        quiz_keys = [k for k in st.session_state.keys() if k.startswith(("bai", "vanmau_", "docviet_", "tone_", "cau_ngan_", "q2_", "b2_", "b3_", "b4_", "b5_", "b6", "b7", "v6", "v7", "radio_pr_", "student_name"))]
         data = {"scores": st.session_state.scores, "values": {k: st.session_state[k] for k in quiz_keys}}
         with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -294,6 +302,38 @@ def load_all_scores_b6_2():
     with open(SCORES_B6_2_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_b7_1(row_data):
+    file_exists = SCORES_B7_1_FILE.exists()
+    try:
+        with open(SCORES_B7_1_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT: Từ để hỏi"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 7.1: {e}"); return False
+
+def load_all_scores_b7_1():
+    if not SCORES_B7_1_FILE.exists(): return []
+    with open(SCORES_B7_1_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+def save_score_row_b7_2(row_data):
+    file_exists = SCORES_B7_2_FILE.exists()
+    try:
+        with open(SCORES_B7_2_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT: Chữ 的"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 7.2: {e}"); return False
+
+def load_all_scores_b7_2():
+    if not SCORES_B7_2_FILE.exists(): return []
+    with open(SCORES_B7_2_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def add_tones(base):
     vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
     tones = []
@@ -360,7 +400,9 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
         "Bài 5.4 - Tết Đoan Ngọ (端午节)",
         "Bài 6.1 - Các vận mẫu mũi còn lại",
-        "Bài 6.2 - Vận mẫu đứng một mình"
+        "Bài 6.2 - Vận mẫu đứng một mình",
+        "Bài 7.1 - Các từ để hỏi",
+        "Bài 7.2 - Cách dùng chữ 的 (de)"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -392,7 +434,9 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 4",
         "Bài tập Bài 5",
         "Bài tập Bài 6.1",
-        "Bài tập Bài 6.2"
+        "Bài tập Bài 6.2",
+        "Bài tập Bài 7.1",
+        "Bài tập Bài 7.2"
     ])
 
 if mode == "🖨️ In ấn & Đồng bộ":
@@ -547,6 +591,12 @@ elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập
 
 elif menu == "Bài 6.1 - Các vận mẫu mũi còn lại" or menu == "Bài tập Bài 6.1":
     lesson6.show_lesson6_1_nasal_finals(save_progress, save_score_row_b6_1, load_all_scores_b6_1)
+
+elif menu == "Bài 7.1 - Các từ để hỏi" or menu == "Bài tập Bài 7.1":
+    lesson7.show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_scores_b7_1)
+
+elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài 7.2":
+    lesson7.show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b7_2)
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     # Hot-reload trigger: 2026-06-12 16:38
