@@ -1203,7 +1203,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "shéi / shuí",
                 "nghianhanh": "Ai",
                 "cachdung": "Hỏi về danh tính của người. Đặt ở vị trí của người trong câu.",
-                "cautruc": "S + 是 + 谁？ | 谁 + V + O？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 是 + 谁？ (Ai đó là ai?)",
+                        "vd_han": "他是谁？",
+                        "vd_py": "Tā shì shéi?",
+                        "vd_vi": "Anh ấy là ai?"
+                    },
+                    {
+                        "ct": "谁 + V + O？ (Ai làm hành động gì?)",
+                        "vd_han": "谁想吃粽子？",
+                        "vd_py": "Shéi xiǎng chī zòngzi?",
+                        "vd_vi": "Ai muốn ăn bánh ú?"
+                    }
+                ],
                 "vd_han": "他是谁？",
                 "vd_py": "Tā shì shéi?",
                 "vd_vi": "Anh ấy là ai?",
@@ -1213,8 +1226,21 @@ B7_1_QUESTION_WORDS_DATA = [
                 "tu": "什么",
                 "pinyin": "shénme",
                 "nghianhanh": "Cái gì / Gì",
-                "cachdung": "Hỏi về đồ vật, tên gọi, nghề nghiệp... Có thể dùng: 什么 + N.",
-                "cautruc": "S + 是 + 什么？ | S + 什么 + N + V？",
+                "cachdung": "Hỏi về đồ vật, tên gọi, nghề nghiệp... Có thể đi sau động từ hoặc đứng trước danh từ.",
+                "cautrucs": [
+                    {
+                        "ct": "S + 是 + 什么？ (Hỏi cái gì / là cái gì?)",
+                        "vd_han": "这是什么？",
+                        "vd_py": "Zhè shì shénme?",
+                        "vd_vi": "Đây là cái gì?"
+                    },
+                    {
+                        "ct": "S + V + 什么 + N？ (Hỏi cụ thể loại đồ vật/tên gọi nào?)",
+                        "vd_han": "你叫什么名字？",
+                        "vd_py": "Nǐ jiào shénme míngzi?",
+                        "vd_vi": "Bạn tên là gì?"
+                    }
+                ],
                 "vd_han": "你叫什么名字？",
                 "vd_py": "Nǐ jiào shénme míngzi?",
                 "vd_vi": "Bạn tên là gì?",
@@ -1231,7 +1257,14 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "nǎ",
                 "nghianhanh": "Nào",
                 "cachdung": "Hỏi về sự lựa chọn. Thường đi kèm lượng từ và danh từ phía sau.",
-                "cautruc": "S + 是 + 哪 + Lượng từ + N？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 是 + 哪 + Lượng từ + N？ (Ai/Cái nào là...?)",
+                        "vd_han": "你是哪国人？",
+                        "vd_py": "Nǐ shì nǎ guó rén?",
+                        "vd_vi": "Bạn là người nước nào?"
+                    }
+                ],
                 "vd_han": "你是哪国人？",
                 "vd_py": "Nǐ shì nǎ guó rén?",
                 "vd_vi": "Bạn là người nước nào?",
@@ -1242,7 +1275,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "nǎr",
                 "nghianhanh": "Ở đâu / Đâu",
                 "cachdung": "Hỏi về vị trí địa điểm. Thường đi sau động từ 在 (ở) hoặc 去 (đi).",
-                "cautruc": "S + 在 + 哪儿？ | S + 去 + 哪儿？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 在 + 哪儿？ (Hỏi vị trí, nơi chốn ở hiện tại)",
+                        "vd_han": "我的书在哪儿？",
+                        "vd_py": "Wǒ de shū zài nǎr?",
+                        "vd_vi": "Sách của tôi ở đâu?"
+                    },
+                    {
+                        "ct": "S + 去 + 哪儿？ (Hỏi điểm đến, hướng đi)",
+                        "vd_han": "你去哪儿？",
+                        "vd_py": "Nǐ qù nǎr?",
+                        "vd_vi": "Bạn đi đâu?"
+                    }
+                ],
                 "vd_han": "我的书在哪儿？",
                 "vd_py": "Wǒ de shū zài nǎr?",
                 "vd_vi": "Sách của tôi ở đâu?",
@@ -1259,8 +1305,15 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "jǐ",
                 "nghianhanh": "Mấy",
                 "cachdung": "Hỏi số lượng nhỏ (< 10). Bắt buộc đi kèm lượng từ phía sau.",
-                "cautruc": "S + 有 + 几 + Lượng từ + N？",
-                "vd_han": "你家有几口人？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 有 + 几 + Lượng từ + N？ (Hỏi số lượng có bao nhiêu?)",
+                        "vd_han": "你家有几口人？",
+                        "vd_py": "Nǐ jiā yǒu jǐ kǒu rén?",
+                        "vd_vi": "Nhà bạn có mấy người?"
+                    }
+                ],
+                "vd_han": "Nhà bạn có mấy người？",
                 "vd_py": "Nǐ jiā yǒu jǐ kǒu rén?",
                 "vd_vi": "Nhà bạn có mấy người?",
                 "sound_txt": "你家有几口人？"
@@ -1270,7 +1323,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "duōshao",
                 "nghianhanh": "Bao nhiêu",
                 "cachdung": "Hỏi số lượng lớn hoặc không giới hạn. Lượng từ đi kèm không bắt buộc.",
-                "cautruc": "N + 多少 + 钱？ | S + 有 + 多少 + (Lượng từ) + N？",
+                "cautrucs": [
+                    {
+                        "ct": "N/S + 多少 + 钱？ (Cấu trúc hỏi giá tiền)",
+                        "vd_han": "这个杯子多少钱？",
+                        "vd_py": "Zhège bēizi duōshao qián?",
+                        "vd_vi": "Cái cốc này bao nhiêu tiền?"
+                    },
+                    {
+                        "ct": "S + 有 + 多少 + N？ (Hỏi số lượng đồ vật/người)",
+                        "vd_han": "你们学校有多少 student? -> 你们学校有多少学生？",
+                        "vd_py": "Nǐmen xuéxiào yǒu duōshao xuésheng?",
+                        "vd_vi": "Trường các bạn có bao nhiêu học sinh?"
+                    }
+                ],
                 "vd_han": "这个杯子多少钱？",
                 "vd_py": "Zhège bēizi duōshao qián?",
                 "vd_vi": "Cái cốc này bao nhiêu tiền?",
@@ -1287,7 +1353,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "zěnme",
                 "nghianhanh": "Thế nào / Sao",
                 "cachdung": "Hỏi cách thức thực hiện hành động (怎么 + V), hoặc hỏi lý do ngạc nhiên.",
-                "cautruc": "S + 怎么 + V + O？ | 怎么 + V？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 怎么 + V + O？ (Hỏi cách làm việc gì?)",
+                        "vd_han": "这个字怎么写？",
+                        "vd_py": "Zhège zì zěnme xiě?",
+                        "vd_vi": "Chữ này viết thế nào?"
+                    },
+                    {
+                        "ct": "S + 怎么 + V？ (Hỏi cách di chuyển/phương tiện hoặc cách đi)",
+                        "vd_han": "我们怎么 đi? -> Chúng ta làm thế nào để đi? -> 我们怎么去？",
+                        "vd_py": "Wǒmen zěnme qù?",
+                        "vd_vi": "Chúng ta đi bằng cách nào?"
+                    }
+                ],
                 "vd_han": "这个字怎么写？",
                 "vd_py": "Zhège zì zěnme xiě?",
                 "vd_vi": "Chữ này viết thế nào?",
@@ -1298,7 +1377,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "zěnmeyàng",
                 "nghianhanh": "Thế nào / Ra sao",
                 "cachdung": "Hỏi tình trạng, tính chất (đứng cuối câu) hoặc lấy ý kiến đề xuất.",
-                "cautruc": "S + 怎么样？ | ..., 怎么样？",
+                "cautrucs": [
+                    {
+                        "ct": "S + 怎么样？ (Hỏi về tình trạng, tính chất vật/người)",
+                        "vd_han": "今天天气怎么样？",
+                        "vd_py": "Jīntiān tiānqì zěnmeyàng?",
+                        "vd_vi": "Thời tiết hôm nay thế nào?"
+                    },
+                    {
+                        "ct": "..., 怎么样？ (Đưa ra đề xuất và hỏi ý kiến đối phương)",
+                        "vd_han": "我们去吃中国菜，怎么样？",
+                        "vd_py": "Wǒmen qù chī Zhōngguó cài, zěnmeyàng?",
+                        "vd_vi": "Chúng ta đi ăn món ăn Trung Quốc, thế nào?"
+                    }
+                ],
                 "vd_han": "今天天气怎么样？",
                 "vd_py": "Jīntiān tiānqì zěnmeyàng?",
                 "vd_vi": "Thời tiết hôm nay thế nào?",
@@ -1315,7 +1407,14 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "ma",
                 "nghianhanh": "...không? / ...phải không?",
                 "cachdung": "Dùng cuối câu trần thuật tạo câu hỏi có/không (Yes/No).",
-                "cautruc": "Câu trần thuật + 吗？",
+                "cautrucs": [
+                    {
+                        "ct": "Câu trần thuật + 吗？ (Xác nhận thông tin)",
+                        "vd_han": "你是学生吗？",
+                        "vd_py": "Nǐ shì xuésheng ma?",
+                        "vd_vi": "Bạn là học sinh phải không?"
+                    }
+                ],
                 "vd_han": "你是学生吗？",
                 "vd_py": "Nǐ shì xuésheng ma?",
                 "vd_vi": "Bạn là học sinh phải không?",
@@ -1326,7 +1425,20 @@ B7_1_QUESTION_WORDS_DATA = [
                 "pinyin": "ne",
                 "nghianhanh": "...thì sao? / ...đâu?",
                 "cachdung": "Đặt sau danh từ/đại từ để hỏi tỉnh lược (còn bạn thì sao?) hoặc hỏi vị trí nhanh.",
-                "cautruc": "Chủ đề + 呢？ | N + 呢？",
+                "cautrucs": [
+                    {
+                        "ct": "Chủ đề + 呢？ (Hỏi lược giản, hỏi lại ý tương tự)",
+                        "vd_han": "我很好，你呢？",
+                        "vd_py": "Wǒ hěn hǎo, nǐ ne?",
+                        "vd_vi": "Tôi rất tốt, còn bạn?"
+                    },
+                    {
+                        "ct": "N + 呢？ (Hỏi nhanh vị trí của người/vật đang ở đâu)",
+                        "vd_han": "我的杯子呢？",
+                        "vd_py": "Wǒ de bēizi ne?",
+                        "vd_vi": "Cái cốc của tôi đâu rồi?"
+                    }
+                ],
                 "vd_han": "我的杯子呢？",
                 "vd_py": "Wǒ de bēizi ne?",
                 "vd_vi": "Cái cốc của tôi đâu rồi?",
