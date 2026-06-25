@@ -11,6 +11,7 @@ from pathlib import Path
 # Thêm thư mục lessons vào sys.path để import các bài học
 sys.path.append(str(Path(__file__).parent / "lessons"))
 
+# pyrefly: ignore [missing-import]
 from lessons_data import *
 from ui_utils import *
 
@@ -18,6 +19,11 @@ from ui_utils import *
 # Import các bài học đã tách file và reload để tránh cache
 import importlib
 import lessons_data
+try:
+    importlib.reload(lessons_data)
+except Exception as e:
+    pass
+
 import lesson1
 import lesson2
 import lesson3
@@ -26,10 +32,6 @@ import lesson5
 import lesson6
 import lesson7
 
-try:
-    importlib.reload(lessons_data)
-except Exception as e:
-    pass
 
 try:
     importlib.reload(lesson1)
