@@ -95,6 +95,15 @@ def show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_s
         for group_idx, group in enumerate(B7_1_QUESTION_WORDS_DATA):
             st.markdown(f"### 📌 {group['nhom']}")
             st.write(group['mota'])
+            
+            if "3. Hỏi về Số lượng" in group['nhom']:
+                st.markdown("""
+<div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px; border-radius: 8px; margin-top: 8px; margin-bottom: 15px; font-size: 0.92rem; color: #14532d;">
+    💡 <b>Phân biệt lượng từ khi hỏi về gia đình:</b><br/>
+    • <b>你家有几口人？</b> (Dùng <b>口 - kǒu</b>): Hỏi về thành viên gia đình ruột thịt cùng sống chung (nghĩa gốc là "miệng ăn"). Nghe ấm áp, đậm chất truyền thống.<br/>
+    • <b>你家有几个人？</b> (Dùng <b>个 - gè</b>): Cách hỏi hiện đại, dùng lượng từ phổ thông "个". Rất tự nhiên và thông dụng trong khẩu ngữ hàng ngày.
+</div>
+""".replace("\n", " "), unsafe_allow_html=True)
 
             for idx, item in enumerate(group["items"]):
                 cols = st.columns([7, 3])

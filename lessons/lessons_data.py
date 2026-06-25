@@ -1313,7 +1313,7 @@ B7_1_QUESTION_WORDS_DATA = [
                         "vd_vi": "Nhà bạn có mấy người?"
                     }
                 ],
-                "vd_han": "Nhà bạn có mấy người？",
+                "vd_han": "你家有几口人？",
                 "vd_py": "Nǐ jiā yǒu jǐ kǒu rén?",
                 "vd_vi": "Nhà bạn có mấy người?",
                 "sound_txt": "你家有几口人？"
@@ -1332,7 +1332,7 @@ B7_1_QUESTION_WORDS_DATA = [
                     },
                     {
                         "ct": "S + 有 + 多少 + N？ (Hỏi số lượng đồ vật/người)",
-                        "vd_han": "你们学校有多少 student? -> 你们学校有多少学生？",
+                        "vd_han": "你们学校有多少学生？",
                         "vd_py": "Nǐmen xuéxiào yǒu duōshao xuésheng?",
                         "vd_vi": "Trường các bạn có bao nhiêu học sinh?"
                     }
@@ -1362,7 +1362,7 @@ B7_1_QUESTION_WORDS_DATA = [
                     },
                     {
                         "ct": "S + 怎么 + V？ (Hỏi cách di chuyển/phương tiện hoặc cách đi)",
-                        "vd_han": "我们怎么 đi? -> Chúng ta làm thế nào để đi? -> 我们怎么去？",
+                        "vd_han": "我们怎么去？",
                         "vd_py": "Wǒmen zěnme qù?",
                         "vd_vi": "Chúng ta đi bằng cách nào?"
                     }
