@@ -702,34 +702,40 @@ def show_lesson6_vocab():
             "items": [
                 {"word": "昨天", "pinyin": "zuótiān", "vietnamese": "Hôm qua", "example_han": "昨天我去学校了。", "example_py": "Zuótiān wǒ qù xuéxiào le.", "example_vi": "Hôm qua tôi đi học rồi."},
                 {"word": "今天", "pinyin": "jīntiān", "vietnamese": "Hôm nay", "example_han": "今天天气很好。", "example_py": "Jīntiān tiānqì hěn hǎo.", "example_vi": "Hôm nay thời tiết rất tốt."},
-                {"word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "example_han": "明天`nǐ`忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"}
+                {"word": "明天", "pinyin": "míngtiān", "vietnamese": "Ngày mai", "example_han": "明天你忙吗？", "example_py": "Míngtiān nǐ máng ma?", "example_vi": "Ngày mai bạn bận không?"}
             ],
             "guide": None
         },
         {
-            "name": "🗓️ Nhóm 2: Thứ, Ngày, Tháng, Năm",
+            "name": "🗓️ Nhóm 2: Thứ trong tuần (星期)",
             "items": [
-                {"word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"},
+                {"word": "星期", "pinyin": "xīngqī", "vietnamese": "Thứ (trong tuần)", "example_han": "今天星期几？", "example_py": "Jīntiān xīngqī jǐ?", "example_vi": "Hôm nay thứ mấy?"}
+            ],
+            "guide": "week"
+        },
+        {
+            "name": "🗓️ Nhóm 3: Ngày, Tháng, Năm",
+            "items": [
                 {"word": "号", "pinyin": "hào", "vietnamese": "Ngày (văn nói)", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"},
                 {"word": "日", "pinyin": "rì", "vietnamese": "Ngày (văn viết)", "example_han": "十月一日是国庆节。", "example_py": "Shíyuè yī rì  shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
-                {"word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "example_han": "现在 là 六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
-                {"word": "年", "pinyin": "nián", "vietnamese": "Năm", "example_han": "今年 là 二零二六年。", "example_py": "Jīnnián  shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."}
+                {"word": "月", "pinyin": "yuè", "vietnamese": "Tháng", "example_han": "现在是六月。", "example_py": "Xiànzài shì liùyuè.", "example_vi": "Bây giờ là tháng 6."},
+                {"word": "年", "pinyin": "nián", "vietnamese": "Năm", "example_han": "今年是二零二六年。", "example_py": "Jīnnián  shì èr líng èr liù nián.", "example_vi": "Năm nay là năm 2026."}
             ],
             "guide": "date"
         },
         {
-            "name": "⏰ Nhóm 3: Giờ giấc & Cách đọc giờ",
+            "name": "⏰ Nhóm 4: Giờ và cách đọc giờ",
             "items": [
                 {"word": "点", "pinyin": "diǎn", "vietnamese": "Giờ", "example_han": "现在八点。", "example_py": "Xiànzài bā diǎn.", "example_vi": "Bây giờ là 8 giờ."},
                 {"word": "分", "pinyin": "fēn", "vietnamese": "Phút", "example_han": "现在八点十分。", "example_py": "Xiànzài  bā diǎn shí fēn.", "example_vi": "Bây giờ là 8 giờ 10 phút."},
-                {"word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "example_han": "现在八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
+                {"word": "半", "pinyin": "bàn", "vietnamese": "Rưỡi / Nửa", "example_han": "Boss八点半。", "example_py": "Xiànzài bā diǎn bàn.", "example_vi": "Bây giờ là 8 giờ rưỡi."},
                 {"word": "刻", "pinyin": "kè", "vietnamese": "Khắc (15 phút)", "example_han": "现在八点一刻。", "example_py": "Xiànzài  bā diǎn yí kè.", "example_vi": "Bây giờ là 8 giờ 15 phút."},
                 {"word": "差", "pinyin": "chà", "vietnamese": "Kém", "example_han": "差五分九点。", "example_py": "Chà wǔ fēn jiǔ diǎn.", "example_vi": "9 giờ kém 5 phút."}
             ],
             "guide": "time"
         },
         {
-            "name": "🌸 Nhóm 4: Bốn mùa",
+            "name": "🌸 Nhóm 5: Bốn mùa",
             "items": [
                 {"word": "春天", "pinyin": "chūntiān", "vietnamese": "Mùa xuân", "example_han": "春天很暖和。", "example_py": "Chūntiān hěn nuǎnhuo.", "example_vi": "Mùa xuân rất ấm áp."},
                 {"word": "夏天", "pinyin": "xiàtiān", "vietnamese": "Mùa hạ / hè", "example_han": "夏天很热。", "example_py": "Xiàtiān hěn rè.", "example_vi": "Mùa hè rất nóng."},
@@ -740,28 +746,30 @@ def show_lesson6_vocab():
         }
     ]
 
-    groups[0]["items"][2]["example_han"] = "明天你忙吗？"
-    groups[1]["items"][3]["example_han"] = "Now six month... -> 现在是六月。"
-    groups[1]["items"][3]["example_han"] = "现在是六月。"
-    groups[1]["items"][4]["example_han"] = "今年是二零二六年。"
+    groups[3]["items"][2]["example_han"] = "Now 8:30 -> 现在八点半。"
+    groups[3]["items"][2]["example_han"] = "现在八点半。"
 
     group_key = "b6_vocab_group_idx"
     if group_key not in st.session_state:
         st.session_state[group_key] = 0
 
     cur_group_idx = st.session_state[group_key]
+    if cur_group_idx >= len(groups):
+        cur_group_idx = 0
+        st.session_state[group_key] = 0
+
     cur_group = groups[cur_group_idx]
 
     # --- Navigation controller (like flashcards) ---
     col_prev, col_title, col_next = st.columns([1.5, 4, 1.5])
     with col_prev:
-        if st.button("⬅️ Nhóm trước", use_container_width=True, key="b6_g_prev"):
+        if st.button("⬅️ Nhóm trước", use_container_width=True, key="b6_g_prev_2"):
             st.session_state[group_key] = (cur_group_idx - 1) % len(groups)
             st.rerun()
     with col_title:
         st.markdown(f"<div style='text-align: center; font-size: 1.25rem; font-weight: bold; color: #1e3a8a; padding: 6px; background: #eff6ff; border-radius: 8px; border: 1px solid #bfdbfe;'>{cur_group['name']}</div>", unsafe_allow_html=True)
     with col_next:
-        if st.button("Nhóm sau ➡️", use_container_width=True, key="b6_g_next"):
+        if st.button("Nhóm sau ➡️", use_container_width=True, key="b6_g_next_2"):
             st.session_state[group_key] = (cur_group_idx + 1) % len(groups)
             st.rerun()
 
@@ -791,28 +799,52 @@ def show_lesson6_vocab():
             render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v6_g{cur_group_idx}_ex_{idx}")
 
     # --- Render guides under active group ---
-    if cur_group["guide"] == "date":
+    if cur_group["guide"] == "week":
+        st.markdown("<h4 style='color: #1e3a8a; margin-top: 25px; font-weight: bold;'>📅 Bảng tra cứu phát âm các Thứ trong tuần:</h4>", unsafe_allow_html=True)
+        week_days = [
+            {"day": "星期一", "py": "xīngqīyī", "vi": "Thứ Hai"},
+            {"day": "星期二", "py": "xīngqīèr", "vi": "Thứ Ba"},
+            {"day": "星期三", "py": "xīngqīsān", "vi": "Thứ Tư"},
+            {"day": "星期四", "py": "xīngqīsì", "vi": "Thứ Năm"},
+            {"day": "星期五", "py": "xīngqīwǔ", "vi": "Thứ Sáu"},
+            {"day": "星期六", "py": "xīngqīliù", "vi": "Thứ Bảy"},
+            {"day": "星期天", "py": "xīngqītiān", "vi": "Chủ Nhật (văn nói)"},
+            {"day": "星期日", "py": "xīngqīrì", "vi": "Chủ Nhật (văn viết)"}
+        ]
+        cols_w = st.columns(4)
+        for idx_w, w_day in enumerate(week_days):
+            col_w_idx = idx_w % 4
+            with cols_w[col_w_idx]:
+                st.markdown(f"""
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                    <span style="font-size: 1.3rem; font-weight: bold; color: #1e3a8a;">{w_day['day']}</span><br/>
+                    <span style="font-family: monospace; font-size: 0.95rem; font-weight: bold; color: #2563eb;">{w_day['py']}</span><br/>
+                    <span style="font-size: 0.85em; color: #475569; font-weight: bold;">{w_day['vi']}</span>
+                </div>
+                """, unsafe_allow_html=True)
+                render_play_button(w_day['day'], "🔊 Phát âm", key=f"play_week_day_{idx_w}")
+
+    elif cur_group["guide"] == "date":
         st.markdown("""
         <div style="background-color: #eff6ff; border-left: 5px solid #2563eb; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 10px; border: 1px solid #dbeafe;">
             <h4 style="color: #1e3a8a; margin-top: 0; margin-bottom: 12px; font-weight: bold; font-size: 1.1rem;">
-                💡 Cách đọc thứ ngày tháng năm trong tiếng Trung
+                💡 Cách đọc ngày tháng năm trong tiếng Trung
             </h4>
             <p style="font-size: 0.95em; line-height: 1.6; color: #1e3a8a; margin-bottom: 12px;">
-                <b>Quy tắc cốt lõi:</b> Đi từ đơn vị lớn đến đơn vị nhỏ: <b>Năm (年) ➔ Tháng (月) ➔ Ngày (日/号) ➔ Thứ (星期)</b>.
+                <b>Quy tắc cốt lõi:</b> Đi từ đơn vị lớn đến đơn vị nhỏ: <b>Năm (年) ➔ Tháng (月) ➔ Ngày (日/号)</b>.
             </p>
             <ul style="font-size: 0.95em; line-height: 1.7; color: #1e3a8a; padding-left: 20px; margin-bottom: 0;">
                 <li><b>Cách đọc Năm:</b> Đọc từng chữ số riêng lẻ kèm từ "年" (nián). Ví dụ: 2026年 ➔ 二零二六年 (èr líng èr liù nián).</li>
                 <li><b>Cách đọc Tháng:</b> Số thứ tự tháng (1-12) + "月" (yuè). Ví dụ: Tháng 6 ➔ 六月 (liù yuè).</li>
                 <li><b>Cách đọc Ngày:</b> Số ngày (1-31) + "号" (hào - văn nói) hoặc "日" (rì - văn viết). Ví dụ: Ngày 25 ➔ 二十五号 (èrshíwǔ hào).</li>
-                <li><b>Cách đọc Thứ:</b> "星期" (xīngqī) + Số tương ứng. Đặc biệt: Thứ Hai đến Thứ Bảy là 1-6 (Ví dụ: Thứ Hai ➔ 星期一 xīngqīyī; Thứ Bảy ➔ 星期六 xīngqīliù). Chủ Nhật dùng <b>星期天 (xīngqītiān)</b> hoặc <b>星期日 (xīngqīrì)</b>.</li>
             </ul>
             <div style="margin-top: 15px; background: white; padding: 12px; border-radius: 6px; border: 1px dashed #bfdbfe; font-size: 0.95rem; font-weight: bold; color: #1e3a8a;">
-                👉 Ví dụ hoàn chỉnh: Thứ Năm, ngày 25 tháng 6 năm 2026<br/>
-                ➔ 2026年6月25日 星期四 (Èr líng èr liù nián liù yuè èrshíwǔ rì xīngqīsì)
+                👉 Ví dụ hoàn chỉnh: Ngày 25 tháng 6 năm 2026<br/>
+                ➔ 2026年6月25日 (Èr líng èr liù nián liù yuè èrshíwǔ rì)
             </div>
         </div>
         """.replace("\n", " "), unsafe_allow_html=True)
-        render_play_button("二零二六年六月二十五号星期四", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex_v6")
+        render_play_button("二零二六年六月二十五号", "🔊 Nghe phát âm câu ví dụ hoàn chỉnh", key="play_date_full_ex_v6_new")
         
     elif cur_group["guide"] == "time":
         st.markdown("""
