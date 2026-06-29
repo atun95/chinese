@@ -11,7 +11,6 @@ from pathlib import Path
 # Thêm thư mục lessons vào sys.path để import các bài học
 sys.path.append(str(Path(__file__).parent / "lessons"))
 
-# pyrefly: ignore [missing-import]
 from lessons_data import *
 from ui_utils import *
 
@@ -19,11 +18,6 @@ from ui_utils import *
 # Import các bài học đã tách file và reload để tránh cache
 import importlib
 import lessons_data
-try:
-    importlib.reload(lessons_data)
-except Exception as e:
-    pass
-
 import lesson1
 import lesson2
 import lesson3
@@ -32,6 +26,10 @@ import lesson5
 import lesson6
 import lesson7
 
+try:
+    importlib.reload(lessons_data)
+except Exception as e:
+    pass
 
 try:
     importlib.reload(lesson1)
@@ -412,8 +410,7 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 3 - TỪ VỰNG",
         "Bài 4 - TỪ VỰNG",
         "Bài 4.1 - Từ vựng mở rộng",
-        "Bài 5 - TỪ VỰNG",
-        "Bài 6 - TỪ VỰNG"
+        "Bài 5 - TỪ VỰNG"
     ])
 elif mode == "🗣️ Luyện tập ghép âm":
     menu = st.sidebar.radio("Chọn bảng ghép âm:", [
@@ -563,9 +560,6 @@ elif menu == "Bài 4.1 - Từ vựng mở rộng":
 
 elif menu == "Bài 5 - TỪ VỰNG":
     lesson5.show_lesson5_vocab()
-
-elif menu == "Bài 6 - TỪ VỰNG":
-    lesson6.show_lesson6_vocab()
 
 elif menu == "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
