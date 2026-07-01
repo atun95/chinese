@@ -554,54 +554,352 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
             }
         ]
 
-        # Fix spelling for correct checks
-        practice_items_de[0]["choices"][0] = "这是 tôi 爸爸的电脑。 (Zhè shì wǒ bàba de diànnǎo.) - Đây là máy tính của bố tôi."
-        practice_items_de[0]["choices"][0] = "这是我爸爸的电脑。 (Zhè shì wǒ bàba de diànnǎo.) - Đây là máy tính của bố tôi."
-        practice_items_de[0]["correct"] = "这是 my 爸爸的电脑。 (Zhè...)"
-        practice_items_de[0]["correct"] = "这是 tôi 爸爸的电脑。 (Zhè shì wǒ bàba de diànnǎo.) - Đây là máy tính của bố tôi."
-        practice_items_de[0]["correct"] = "这是 me 爸爸的电脑..."
-        practice_items_de[0]["correct"] = "这是我爸爸的电脑。 (Zhè shì wǒ bàba de diànnǎo.) - Đây là máy tính của bố tôi."
+def show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3):
+    st.markdown("""
+    <style>
+    .word-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+    .word-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #1e3a8a;
+        margin-right: 15px;
+    }
+    .pinyin-badge {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border: 1px solid #bfdbfe;
+    }
+    .meaning-badge {
+        background-color: #f0fdf4;
+        color: #15803d;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #bbf7d0;
+    }
+    .rule-box {
+        background-color: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0 0 0;
+    }
+    .comparison-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-left: 6px solid #8b5cf6;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+    .comparison-title {
+        font-weight: 700;
+        color: #7c3aed;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-        for p in practice_items_de:
-            st.markdown(f"#### 💬 Câu hỏi: <span style='font-size:1.4rem; font-weight:bold;'>{p['q_han']}</span> ({p['q_py']})", unsafe_allow_html=True)
-            col_btn, col_blank = st.columns([4, 6])
-            with col_btn:
-                render_play_button(p['q_han'], "🔊 Nghe câu hỏi", key=f"btn_listen_pr_{p['id']}")
-            
-            ans = st.radio(f"Chọn câu phản hồi phù hợp cho câu hỏi trên:", p['choices'], key=f"radio_pr_{p['id']}")
-            if ans:
-                if ans == p['correct']:
-                    st.success("✅ Đúng rồi! Mối quan hệ sở hữu ngữ pháp chính xác.")
-                else:
-                    st.info("💡 Xem lại cách dùng cấu trúc chữ 的 hoặc quy tắc sở hữu.")
+    render_lesson_intro(
+        "📚 Bài 7.3: Cặp từ 这 và 那",
+        "Làm chủ cách sử dụng đại từ chỉ định 这 (Đây/Này), 那 (Kia/Đó), cách kết hợp lượng từ (这个, 那个), câu hỏi lựa chọn 哪个, và từ đệm giao tiếp."
+    )
+
+    B7_3_ZHENA_DATA = [
+        {
+            "nhom": "1. Từ chỉ định cơ bản: 这 (zhè) và 那 (nà)",
+            "mota": "Dùng để chỉ định vị trí gần (这) hoặc xa (那) so với người nói.",
+            "items": [
+                {
+                    "tu": "这",
+                    "pinyin": "zhè / zhèi",
+                    "nghianhanh": "Đây / Này (cự ly gần)",
+                    "cachdung": "Dùng để chỉ người hoặc vật ở cự ly gần người nói. Trong khẩu ngữ, khi đi trực tiếp với lượng từ, thường đọc chệch thành 'zhèi'.",
+                    "vd_han": "这是我的书。",
+                    "vd_py": "Zhè shì wǒ de shū.",
+                    "vd_vi": "Đây là sách của tôi.",
+                    "sound_txt": "这是我的书。"
+                },
+                {
+                    "tu": "那",
+                    "pinyin": "nà / nèi",
+                    "nghianhanh": "Kia / Đó (cự ly xa)",
+                    "cachdung": "Dùng để chỉ người hoặc vật ở cự ly xa người nói. Trong khẩu ngữ, khi đi trực tiếp với lượng từ, thường đọc chệch thành 'nèi'.",
+                    "vd_han": "那是老师的电脑。",
+                    "vd_py": "Nà shì lǎoshī de diànnǎo.",
+                    "vd_vi": "Kia là máy tính của thầy giáo.",
+                    "sound_txt": "那是老师的电脑。"
+                }
+            ]
+        },
+        {
+            "nhom": "2. Đại từ chỉ định kết hợp lượng từ: 这个 (zhège) và 那个 (nàge)",
+            "mota": "Công thức chung: 这/那 + Lượng từ (个) + Danh từ (chỉ cụ thể 'cái này', 'cái kia').",
+            "items": [
+                {
+                    "tu": "这个",
+                    "pinyin": "zhège / zhèige",
+                    "nghianhanh": "Cái này / Người này",
+                    "cachdung": "Đi kèm lượng từ trước danh từ để chỉ vật/người cụ thể ở gần.",
+                    "vd_han": "这个杯子是我的。",
+                    "vd_py": "Zhège bēizi shì wǒ de.",
+                    "vd_vi": "Cái cốc này là của tôi.",
+                    "sound_txt": "这个杯子是我的。"
+                },
+                {
+                    "tu": "那个",
+                    "pinyin": "nàge / nèige",
+                    "nghianhanh": "Cái kia / Người kia",
+                    "cachdung": "Đi kèm lượng từ trước danh từ để chỉ vật/người cụ thể ở xa.",
+                    "vd_han": "那个学生是我的朋友。",
+                    "vd_py": "Nàge xuésheng shì wǒ de péngyou.",
+                    "vd_vi": "Học sinh kia là bạn của tôi.",
+                    "sound_txt": "那个学生是我的朋友。"
+                }
+            ]
+        },
+        {
+            "nhom": "3. Hỏi lựa chọn và từ đệm khẩu ngữ: 哪个 (nǎge) và từ đệm",
+            "mota": "Ứng dụng mở rộng của cặp từ chỉ định trong giao tiếp hàng ngày.",
+            "items": [
+                {
+                    "tu": "哪个",
+                    "pinyin": "nǎge / nèige",
+                    "nghianhanh": "Cái nào / Người nào",
+                    "cachdung": "Dùng để hỏi lựa chọn giữa nhiều đối tượng cụ thể.",
+                    "vd_han": "你要哪个苹果？",
+                    "vd_py": "Nǐ yào nǎge píngguǒ?",
+                    "vd_vi": "Bạn muốn quả táo nào?",
+                    "sound_txt": "你要哪个苹果？"
+                },
+                {
+                    "tu": "Từ đệm khẩu ngữ",
+                    "pinyin": "nàge / nèige / zhège / zhèige",
+                    "nghianhanh": "Ơ... / À thì... / Cái đó...",
+                    "cachdung": "Làm từ đệm ngập ngừng trong giao tiếp hàng ngày khi người nói đang suy nghĩ.",
+                    "vd_han": "那个……我不知道。",
+                    "vd_py": "Nèi ge... wǒ bù zhīdào.",
+                    "vd_vi": "À thì... tôi không biết nữa.",
+                    "sound_txt": "那个……我不知道。"
+                }
+            ]
+        }
+    ]
+
+    B7_3_QUIZ_DATA = [
+        {
+            "q": "Chọn câu dịch đúng nhất cho câu: 'Đây là bạn của tôi.'",
+            "choices": ["这是我的朋友。 (Zhè shì wǒ de péngyou.)", "那是我的朋友。 (Nà shì wǒ de péngyou.)", "这是我的老师。 (Zhè shì wǒ de lǎoshī.)"],
+            "answer": "这是我的朋友。 (Zhè shì wǒ de péngyou.)",
+            "explain": "'Đây' dùng 这 (zhè), 'bạn' dùng 朋友 (péngyou)."
+        },
+        {
+            "q": "Chọn câu dịch đúng nhất cho câu: 'Kia là con chó của tôi.'",
+            "choices": ["那是我的狗。 (Nà shì wǒ de gǒu.)", "这是我的狗。 (Zhè shì wǒ de gǒu.)", "那是我的猫。 (Nà shì wǒ de māo.)"],
+            "answer": "那是我的狗。 (Nà shì wǒ de gǒu.)",
+            "explain": "'Kia' dùng 那 (nà), 'chó' dùng 狗 (gǒu)."
+        },
+        {
+            "q": "Khi nói nhanh hoặc trong khẩu ngữ tự nhiên, '这个' (zhège) và '那个' (nàge) thường phát âm thành gì?",
+            "choices": ["zhèige và nèige", "zhège và nàge (giữ nguyên)", "zège và nàge"],
+            "answer": "zhèige và nèige",
+            "explain": "Trong giao tiếp thực tế, âm 'zhè' và 'nà' kết hợp với âm 'yī' của số một tạo thành dạng đọc chệch 'zhèige' và 'nèige' vô cùng phổ biến."
+        },
+        {
+            "q": "Điền từ thích hợp vào chỗ trống: '______ 苹果很大。 (Quả táo này rất to.)'",
+            "choices": ["这个 (zhège)", "那个 (nàge)", "哪个 (nǎge)"],
+            "answer": "这个 (zhège)",
+            "explain": "Để chỉ vật ở gần ('này'), ta dùng '这个'."
+        },
+        {
+            "q": "Điền từ thích hợp vào chỗ trống: '______ 老师是我的妈妈。 (Thầy/cô giáo kia là mẹ của tôi.)'",
+            "choices": ["这个 (zhège)", "那个 (nàge)", "哪个 (nǎge)"],
+            "answer": "那个 (nàge)",
+            "explain": "Để chỉ người ở xa ('kia'), ta dùng '那个老师'."
+        },
+        {
+            "q": "Trong giao tiếp đời sống, từ nào hay được lặp lại làm từ đệm ngập ngừng (giống như 'ơ, à, thì')?",
+            "choices": ["那个/这个 (nàge/zhège)", "什么 (shénme)", "谁 (shéi)"],
+            "answer": "那个/这个 (nàge/zhège)",
+            "explain": "'那个' và '这个' là các từ đệm cực kỳ thông dụng khi đang suy nghĩ."
+        },
+        {
+            "q": "Chọn câu dịch đúng: 'Bạn muốn cốc nào?'",
+            "choices": ["你要哪个杯子？ (Nǐ yào nǎge bēizi?)", "你要这个杯子吗？ (Nǐ yào zhège bēizi ma?)", "你要那个杯子？ (Nǐ yào nàge bēizi?)"],
+            "answer": "你要哪个杯子？ (Nǐ yào nǎge bēizi?)",
+            "explain": "'Nào' dùng 哪个 (nǎge) để hỏi sự lựa chọn."
+        },
+        {
+            "q": "Chọn câu đúng ngữ pháp nhất để nói: 'Người này là giáo viên của tôi.'",
+            "choices": ["这人是我的老师。 (Zhè rén shì wǒ de lǎoshī.)", "这个人是我的老师。 (Zhège rén shì wǒ de lǎoshī.)", "这一个是我的老师。 (Zhè yí gè shì wǒ de lǎoshī.)"],
+            "answer": "这个人是我的老师。 (Zhège rén shì wǒ de lǎoshī.)",
+            "explain": "Cấu trúc chỉ định cụ thể: 这 + lượng từ + danh từ. Ở đây '人' dùng lượng từ '个'."
+        },
+        {
+            "q": "Chọn câu SAI ngữ pháp trong các câu sau:",
+            "choices": ["那是谁？ (Nà shì shéi?) - Kia là ai?", "这个是什么？ (Zhège shì shénme?) - Đây là cái gì?", "这个是哪儿？ (Zhège shì nǎr?) - Đây là ở đâu?"],
+            "answer": "这个是哪儿？ (Zhège shì nǎr?) - Đây là ở đâu?",
+            "explain": "Để hỏi/chỉ vị trí, địa điểm ta phải dùng các từ chỉ nơi chốn như '这儿/这里' hoặc '那儿/ni/nǎr'. '这个' chỉ dùng cho người hoặc đồ vật cụ thể."
+        },
+        {
+            "q": "Điền từ: 'A: Nǐ xǐhuan nǎge bēizi? - B: Wǒ xǐhuan ______ (tôi thích cái này).'",
+            "choices": ["这个 (zhège)", "那个 (nàge)", "哪个 (nǎge)"],
+            "answer": "这个 (zhège)",
+            "explain": "Trả lời chọn 'cái này' (gần) dùng '这个 (zhège)'."
+        }
+    ]
+
+    tab_vocab, tab_rules, tab_practice, tab_quiz = st.tabs([
+        "📚 Bảng lý thuyết chỉ định",
+        "💡 Quy tắc & Phân tích",
+        "🗣️ Thực hành khẩu ngữ",
+        "📝 Bài tập phản xạ"
+    ])
+
+    with tab_vocab:
+        st.subheader("Bảng từ vựng chỉ định cơ bản")
+        for group_idx, group in enumerate(B7_3_ZHENA_DATA):
+            st.markdown(f"### 📌 {group['nhom']}")
+            st.write(group['mota'])
+            for idx, item in enumerate(group["items"]):
+                cols = st.columns([7, 3])
+                with cols[0]:
+                    card_html = f"""
+                    <div class="word-card">
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                    <span class="word-title">{item['tu']}</span>
+                    <span class="pinyin-badge">{item['pinyin']}</span>
+                    <span class="meaning-badge">{item['nghianhanh']}</span>
+                    </div>
+                    <p style="color: #475569; font-size: 0.95rem; margin-bottom: 8px;"><b>Cách dùng:</b> {item['cachdung']}</p>
+                    <div class="rule-box">
+                    <span style="font-size: 0.85em; font-weight: bold; color: #1e293b;">VÍ DỤ TIÊU BIỂU:</span><br/>
+                    <span style="font-size: 1.3rem; font-weight: 700; color: #0f172a; display: block; margin-top: 5px;">{item['vd_han']}</span>
+                    <span style="font-family: monospace; font-size: 1.05rem; font-weight: bold; color: #2563eb; display: block;">{item['vd_py']}</span>
+                    <span style="font-size: 0.95rem; color: #475569; display: block; font-style: italic; margin-top: 2px;">➔ Dịch: {item['vd_vi']}</span>
+                    </div>
+                    </div>
+                    """.replace("\n", " ")
+                    st.markdown(card_html, unsafe_allow_html=True)
+                with cols[1]:
+                    st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+                    render_play_button(item['sound_txt'], f"🔊 Phát âm", key=f"play_v73_{group_idx}_{idx}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    with tab_rules:
+        st.subheader("💡 Cách sử dụng và quy tắc đặc biệt")
+        st.markdown("""
+            <div class="comparison-card">
+                <div class="comparison-title">1. Quy tắc phát âm: Đọc chệch (zhè ➔ zhèi, nà ➔ nèi)</div>
+                <ul style="line-height: 1.6; margin-left: 20px; color: #334155;">
+                    <li>Trong tiếng Trung tiêu chuẩn, âm gốc là <b>这 (zhè)</b> và <b>那 (nà)</b>.</li>
+                    <li>Tuy nhiên, khi nói nhanh hoặc đi kèm trực tiếp với lượng từ phía sau, người bản xứ thường phát âm thành <b>zhèi</b> và <b>nèi</b>.</li>
+                </ul>
+            </div>
+            <div class="comparison-card" style="border-left-color: #0ea5e9;">
+                <div class="comparison-title" style="color: #0284c7;">2. Vai trò của Lượng từ (Classifier)</div>
+                <ul style="line-height: 1.6; margin-left: 20px; color: #334155;">
+                    <li>Cấu trúc: <b>这 / 那 + Lượng từ + Danh từ</b>. <i>Ví dụ:</i> <b>这个杯子</b>.</li>
+                </ul>
+            </div>
+            <div class="comparison-card" style="border-left-color: #10b981;">
+                <div class="comparison-title" style="color: #059669;">3. Dùng làm từ đệm ngập ngừng (Filler Words)</div>
+                <ul style="line-height: 1.6; margin-left: 20px; color: #334155;">
+                    <li>Bạn có thể nói <b>那个……</b> hoặc <b>这个……</b> để có thêm thời gian suy nghĩ.</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with tab_practice:
+        st.subheader("🗣️ Thực hành Giao tiếp và Phản xạ")
+        practice_items = [
+            {
+                "id": "pr73_1",
+                "q_han": "你要哪个杯子？",
+                "q_py": "Nǐ yào nǎge bēizi?",
+                "q_vi": "Bạn muốn cái cốc nào?",
+                "choices": ["我要这个红色的杯子。 (Wǒ yào zhège hóngsè de bēizi.) - Tôi muốn cái cốc màu đỏ này.", "他是我的老师。 (Tā shì wǒ de lǎoshī.) - Anh ấy là thầy giáo của tôi.", "这是我的书。 (Zhè shì wǒ de shū.) - Đây là sách của tôi."],
+                "correct": "我要这个红色的杯子。 (Wǒ yào zhège hóngsè de bēizi.) - Tôi muốn cái cốc màu đỏ này."
+            },
+            {
+                "id": "pr73_2",
+                "q_han": "那个学生是谁？",
+                "q_py": "Nàge xuésheng shì shéi?",
+                "q_vi": "Học sinh kia là ai thế?",
+                "choices": ["这个苹果很好吃。 (Zhège píngguǒ hěn hǎochī.) - Quả táo này rất ngon.", "那个学生是我的弟弟。 (Nàge xuésheng shì wǒ de dìdi.) - Học sinh kia là em trai tôi.", "他在学校。 (Tā zài xuéxiào.) - Cậu ấy ở trường."],
+                "correct": "那个学生是我的弟弟。 (Nàge xuésheng shì wǒ de dìdi.) - Học sinh kia là em trai tôi."
+            },
+            {
+                "id": "pr73_3",
+                "q_han": "这是你的电脑吗？",
+                "q_py": "Zhè shì nǐ de diànnǎo ma?",
+                "q_vi": "Đây là máy tính của bạn phải không?",
+                "choices": ["不，这是我爸爸的。 (Bù, zhè shì wǒ bàba de.) - Không, đây là của bố tôi.", "那是我的狗。 (Nà shì wǒ de gǒu.) - Kia là con chó của tôi.", "我要买电脑。 (Wǒ yào mǎi diànnǎo.) - Tôi muốn mua máy tính."],
+                "correct": "不，这是我爸爸的。 (Bù, zhè shì wǒ bàba de.) - Không, đây là của bố tôi."
+            }
+        ]
+        for item in practice_items:
+            st.markdown(f"##### 🎧 Nghe câu hỏi:")
+            cols = st.columns([8, 2])
+            with cols[0]:
+                st.markdown(f"<div style='background:#f1f5f9; padding: 10px; border-radius: 8px; font-weight: bold;'>{item['q_han']} ({item['q_py']}) <span style='font-weight: normal; font-style: italic; color: #475569;'>- {item['q_vi']}</span></div>", unsafe_allow_html=True)
+            with cols[1]:
+                render_play_button(item['q_han'], "🔊 Nghe", key=f"play_q_pr73_{item['id']}")
+
+            user_ans = st.radio("Chọn câu phản hồi đúng nhất:", item['choices'], key=f"pr73_ans_select_{item['id']}")
+            if user_ans == item['correct']:
+                st.success("✅ Đúng ngữ cảnh rồi! Câu trả lời rất logic.")
+            else:
+                st.info("💡 Hãy nghe lại câu hỏi kỹ và lựa chọn phản hồi phù hợp hơn.")
             st.markdown("---")
 
     # ================= TAB 4: BÀI TẬP PHẢN XẠ =================
     with tab_quiz:
-        st.subheader("Bài tập phản xạ chữ 的 trong HSK 1")
+        st.subheader("Bài tập phản xạ các từ chỉ định HSK 1")
         st.write("Làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để ghi nhận kết quả:")
 
-        if "b72_score_submitted" not in st.session_state:
-            st.session_state.b72_score_submitted = False
+        if "b73_score_submitted" not in st.session_state:
+            st.session_state.b73_score_submitted = False
 
-        score_b7_2 = 0
+        score_b7_3 = 0
         user_answers = {}
 
-        for idx, item in enumerate(B7_2_QUIZ_DATA):
+        for idx, item in enumerate(B7_3_QUIZ_DATA):
             st.markdown(f"#### Câu {idx+1}: {item['q']}")
-            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v72_quiz_ans_{idx}")
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v73_quiz_ans_{idx}")
             user_answers[idx] = user_ans
             if user_ans == item['answer']:
-                score_b7_2 += 1
+                score_b7_3 += 1
             st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
 
-        if not st.session_state.b72_score_submitted:
-            if st.button("📝 Chấm điểm bài tập Bài 7.2", type="primary", use_container_width=True, key="v72_quiz_grade_btn"):
-                st.session_state.b72_score_submitted = True
+        if not st.session_state.b73_score_submitted:
+            if st.button("📝 Chấm điểm bài tập Bài 7.3", type="primary", use_container_width=True, key="v73_quiz_grade_btn"):
+                st.session_state.b73_score_submitted = True
                 st.rerun()
         else:
             st.markdown("### Kết quả chấm điểm chi tiết:")
-            for idx, item in enumerate(B7_2_QUIZ_DATA):
+            for idx, item in enumerate(B7_3_QUIZ_DATA):
                 u_ans = user_answers[idx]
                 if u_ans == item['answer']:
                     st.success(f"✅ **Câu {idx+1}: Chính xác!**")
@@ -611,38 +909,39 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
                     st.write(f"👉 Đáp án đúng: **{item['answer']}**")
                     st.write(f"Giải thích: {item['explain']}")
 
-            final_percentage_score = round((score_b7_2 / len(B7_2_QUIZ_DATA)) * 10, 2)
-            st.markdown(f"### Điểm tổng kết: **{score_b7_2} / {len(B7_2_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
+            final_percentage_score = round((score_b7_3 / len(B7_3_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b7_3} / {len(B7_3_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
             
-            if score_b7_2 == len(B7_2_QUIZ_DATA):
+            if score_b7_3 == len(B7_3_QUIZ_DATA):
                 st.balloons()
-                st.success("Xuất sắc! Bạn đã nắm vững 100% cách dùng chữ 的 HSK 1! 👑")
+                st.success("Xuất sắc! Bạn đã nắm vững 100% cách dùng các từ chỉ định và lượng từ! 👑")
 
             st.markdown("---")
-            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v72_student_name")
-            if st.button("Nộp bài tập Bài 7.2", type="primary", use_container_width=True, key="v72_submit_score_btn"):
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v73_student_name")
+            if st.button("Nộp bài tập Bài 7.3", type="primary", use_container_width=True, key="v73_submit_score_btn"):
                 if name:
                     row = {
                         "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
                         "học viên": name,
                         "tổng điểm": final_percentage_score,
-                        "BT: Chữ 的": f"{score_b7_2}/{len(B7_2_QUIZ_DATA)}"
+                        "BT: Cặp từ 这/那": f"{score_b7_3}/{len(B7_3_QUIZ_DATA)}"
                     }
-                    if save_score_row_b7_2(row):
+                    if save_score_row_b7_3(row):
                         st.success("Đã nộp bài và lưu điểm thành công!")
-                        st.session_state.b72_score_submitted = False
+                        st.session_state.b73_score_submitted = False
                         save_progress()
                         st.rerun()
                 else:
                     st.error("Vui lòng nhập tên để nộp bài!")
 
-            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v72_redo_quiz_btn"):
-                st.session_state.b72_score_submitted = False
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v73_redo_quiz_btn"):
+                st.session_state.b73_score_submitted = False
                 save_progress()
                 st.rerun()
 
         # Hiển thị bảng xếp hạng nộp bài lớp học
-        all_scores = load_all_scores_b7_2()
+        all_scores = load_all_scores_b7_3()
         if all_scores:
             st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
             st.dataframe(all_scores, use_container_width=True)
+
