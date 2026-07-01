@@ -919,7 +919,7 @@ def show_lesson6_1_classroom_practice():
     )
 
     st.markdown("### 📺 Clip thực hành trên lớp:")
-    col_left, col_mid, col_right = st.columns([1.2, 1.0, 1.2])
+    col_left, col_mid, col_right = st.columns([1.0, 1.3, 1.0])
     with col_mid:
         st.video("assets/gioi thieu tieng trung.mp4")
         st.markdown("""
