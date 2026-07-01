@@ -911,3 +911,21 @@ def show_lesson6_spelling(add_tones):
             else:
                 r_cols[i+1].write("")
 
+
+def show_lesson6_1_classroom_practice():
+    render_lesson_intro(
+        title="🗣️ Bài 6.1 - Thực hành Giao tiếp & Phản xạ trên lớp",
+        objective="Xem clip giới thiệu thực hành phát âm và luyện phản xạ trên lớp."
+    )
+
+    st.markdown("### 📺 Clip thực hành trên lớp:")
+    col_video, _ = st.columns([5, 3])
+    with col_video:
+        st.video("assets/gioi thieu tieng trung.mp4")
+        st.markdown("""
+        <div style="margin-top: 10px; font-size: 0.85em; color: #64748b;">
+            📁 <i>Đang phát clip: assets/gioi thieu tieng trung.mp4</i>
+        </div>
+        """, unsafe_allow_html=True)
+
+

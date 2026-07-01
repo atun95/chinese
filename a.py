@@ -444,7 +444,8 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 3.1 - Hội thoại thực hành",
         "Bài 4.1 - Đấu trường Luyện tập",
         "Bài 4.2 - Phản xạ & Giao tiếp",
-        "Bài 5.1 - Thực hành Giao tiếp & Phản xạ"
+        "Bài 5.1 - Thực hành Giao tiếp & Phản xạ",
+        "Bài 6.1 - Thực hành Giao tiếp & Phản xạ"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -609,6 +610,9 @@ elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
 
 elif menu == "Bài 5.1 - Thực hành Giao tiếp & Phản xạ":
     lesson5.show_lesson5_classroom_practice()
+
+elif menu == "Bài 6.1 - Thực hành Giao tiếp & Phản xạ":
+    lesson6.show_lesson6_1_classroom_practice()
 
 elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)
