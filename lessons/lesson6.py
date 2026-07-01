@@ -919,17 +919,8 @@ def show_lesson6_1_classroom_practice():
     )
 
     st.markdown("### 📺 Clip thực hành trên lớp:")
-    col_left, col_mid, col_right = st.columns([0.5, 2.0, 0.5])
+    col_left, col_mid, col_right = st.columns([1.2, 1.0, 1.2])
     with col_mid:
-        st.markdown("""
-        <style>
-        div[data-testid="stVideo"] video {
-            max-height: 480px !important;
-            background-color: #000000 !important;
-            object-fit: contain !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
         st.video("assets/gioi thieu tieng trung.mp4")
         st.markdown("""
         <div style="margin-top: 10px; font-size: 0.85em; color: #64748b; text-align: center;">
