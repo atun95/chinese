@@ -861,3 +861,53 @@ def show_lesson6_vocab():
             </ul>
         </div>
         """.replace("\n", " "), unsafe_allow_html=True)
+
+
+def show_lesson6_spelling(add_tones):
+    render_lesson_intro("📚 Bài 6: Luyện tập ghép âm Vận mẫu mũi phức hợp", "Luyện tập ghép âm các thanh mẫu với 8 vận mẫu mũi phức hợp (ian, iang, iong, uan, uang, un, ün, üan).")
+    
+    B6_LUYEN_TAP_FINALS = ["ian", "iang", "iong", "uan", "uang", "un", "ün", "üan"]
+    B6_LUYEN_TAP_ROWS = {
+        "(Không có)": ["yan", "yang", "yong", "wan", "wang", "wen", "yun", "yuan"],
+        "b": ["bian", "", "", "", "", "", "", ""],
+        "p": ["pian", "", "", "", "", "", "", ""],
+        "m": ["mian", "", "", "", "", "", "", ""],
+        "f": ["", "", "", "", "", "", "", ""],
+        "d": ["dian", "", "", "duan", "", "dun", "", ""],
+        "t": ["tian", "", "", "tuan", "", "tun", "", ""],
+        "n": ["nian", "niang", "", "nuan", "", "nun", "", "nüan"],
+        "l": ["lian", "liang", "", "luan", "", "lun", "", "lüan"],
+        "g": ["", "", "", "guan", "guang", "gun", "", ""],
+        "k": ["", "", "", "kuan", "kuang", "kun", "", ""],
+        "h": ["", "", "", "huan", "huang", "hun", "", ""],
+        "j": ["jian", "jiang", "jiong", "", "", "", "jun", "juan"],
+        "q": ["qian", "qiang", "qiong", "", "", "", "qun", "quan"],
+        "x": ["xian", "xiang", "xiong", "", "", "", "xun", "xuan"],
+        "zh": ["", "", "", "zhuan", "zhuang", "zhun", "", ""],
+        "ch": ["", "", "", "chuan", "chuang", "chun", "", ""],
+        "sh": ["", "", "", "shuan", "shuang", "shun", "", ""],
+        "r": ["", "", "", "ruan", "", "run", "", ""],
+        "z": ["", "", "", "zuan", "", "zun", "", ""],
+        "c": ["", "", "", "cuan", "", "cun", "", ""],
+        "s": ["", "", "", "suan", "", "sun", "", ""]
+    }
+    
+    st.subheader("Bảng luyện tập ghép âm vận mẫu mũi phức hợp (Bài 6)")
+    h_cols = st.columns([1.5] + [1] * len(B6_LUYEN_TAP_FINALS))
+    h_cols[0].markdown("**T/V**")
+    for i, f in enumerate(B6_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
+    for init in B6_LUYEN_TAP_ROWS.keys():
+        r_cols = st.columns([1.5] + [1] * len(B6_LUYEN_TAP_FINALS))
+        r_cols[0].markdown(f"**{init}**")
+        for i, combo in enumerate(B6_LUYEN_TAP_ROWS[init]):
+            if combo:
+                with r_cols[i+1]:
+                    with st.popover(combo, use_container_width=True):
+                        for t in add_tones(combo):
+                            col_t, col_btn = st.columns([2, 1])
+                            col_t.write(f"- {t}")
+                            with col_btn:
+                                render_play_button(t, "🔊", key=f"btn_p_b6_{init}_{combo}_{t}", height=45)
+            else:
+                r_cols[i+1].write("")
+

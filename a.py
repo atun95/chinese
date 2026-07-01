@@ -417,7 +417,8 @@ elif mode == "🗣️ Luyện tập ghép âm":
         "Ghép âm Bài 2 - Vận mẫu kép cơ bản",
         "Ghép âm Bài 3 - Thanh mẫu nâng cao",
         "Ghép âm Bài 4 - Vận mẫu kép mở rộng",
-        "Ghép âm Bài 5 - Vận mẫu mũi"
+        "Ghép âm Bài 5 - Vận mẫu mũi",
+        "Ghép âm Bài 6 - Vận mẫu mũi phức hợp"
     ])
 elif mode == "🗣️ Thực hành trên lớp":
     menu = st.sidebar.radio("Chọn hoạt động:", [
@@ -613,6 +614,9 @@ elif menu == "Bài 5.4 - Tết Đoan Ngọ (端午节)":
 
 elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_spelling(add_tones)
+
+elif menu == "Ghép âm Bài 6 - Vận mẫu mũi phức hợp":
+    lesson6.show_lesson6_spelling(add_tones)
 
 elif menu == "Bài tập Bài 5":
     lesson5.show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scores_b5)
