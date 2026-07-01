@@ -919,12 +919,12 @@ def show_lesson6_1_classroom_practice():
     )
 
     st.markdown("### 📺 Clip thực hành trên lớp:")
-    col_video, _ = st.columns([5, 3])
-    with col_video:
+    col_left, col_mid, col_right = st.columns([1.2, 1.0, 1.2])
+    with col_mid:
         st.video("assets/gioi thieu tieng trung.mp4")
         st.markdown("""
-        <div style="margin-top: 10px; font-size: 0.85em; color: #64748b;">
-            📁 <i>Đang phát clip: assets/gioi thieu tieng trung.mp4</i>
+        <div style="margin-top: 10px; font-size: 0.85em; color: #64748b; text-align: center;">
+            📁 <i>Đang phát: assets/gioi thieu tieng trung.mp4</i>
         </div>
         """, unsafe_allow_html=True)
 
