@@ -140,6 +140,34 @@ B7_1_QUESTION_WORDS_DATA = [
                 "sound_txt": "我的杯子呢？"
             }
         ]
+    },
+    {
+        "nhom": "6. Hỏi về Thời gian và Nguyên nhân",
+        "mota": "Các từ dùng để hỏi về thời điểm diễn ra sự việc hoặc nguyên nhân, lý do.",
+        "items": [
+            {
+                "tu": "什么时候",
+                "pinyin": "shénme shíhou",
+                "nghianhanh": "Khi nào / Lúc nào / Bao giờ",
+                "cachdung": "Hỏi về thời điểm, thời gian xảy ra hành động. Có thể đứng trước hoặc sau chủ ngữ (trước động từ).",
+                "cautruc": "S + 什么时候 + V + O？ | 什么时候 + S + V + O？",
+                "vd_han": "你什么时候去中国？",
+                "vd_py": "Nǐ shénme shíhou qù Zhōngguó?",
+                "vd_vi": "Khi nào bạn đi Trung Quốc?",
+                "sound_txt": "你什么时候去中国？"
+            },
+            {
+                "tu": "为什么",
+                "pinyin": "wèishénme",
+                "nghianhanh": "Tại sao / Vì sao",
+                "cachdung": "Hỏi lý do, nguyên nhân của hành động, sự việc. Có thể đứng trước động từ hoặc đầu câu.",
+                "cautruc": "S + 为什么 + V + O？ | 为什么 + S + V + O？",
+                "vd_han": "你为什么不喝茶？",
+                "vd_py": "Nǐ wèishénme bù hē chá?",
+                "vd_vi": "Tại sao bạn không uống trà?",
+                "sound_txt": "你为什么不喝茶？"
+            }
+        ]
     }
 ]
 
@@ -197,6 +225,18 @@ B7_1_QUIZ_DATA = [
         "choices": ["你怎么没吃粽子？ (Nǐ zěnme méi chī zòngzi?)", "你怎么样没吃粽子？ (Nǐ zěnmeyàng méi chī zòngzi?)", "你没吃粽子吗？ (Nǐ méi chī zòngzi ma?)"],
         "answer": "你怎么没吃粽子？ (Nǐ zěnme méi chī zòngzi?)",
         "explain": "怎么 + không + V để hỏi lý do với sắc thái ngạc nhiên."
+    },
+    {
+        "q": "Chọn câu dịch đúng nhất cho câu: 'Khi nào bạn đi Trung Quốc?'",
+        "choices": ["你什么时候去中国？ (Nǐ shénme shíhou qù Zhōngguó?)", "你为什么去中国？ (Nǐ wèishénme qù Zhōngguó?)", "你去哪儿？ (Nǐ qù nǎr?)"],
+        "answer": "你什么时候去中国？ (Nǐ shénme shíhou qù Zhōngguó?)",
+        "explain": "什么时候 (shénme shíhou) dùng để hỏi về thời điểm 'khi nào'."
+    },
+    {
+        "q": "Chọn câu dịch đúng nhất cho câu: 'Tại sao bạn không uống trà?'",
+        "choices": ["你为什么不喝茶？ (Nǐ wèishénme bù hē chá?)", "你什么时候喝茶？ (Nǐ shénme shíhou hē chá?)", "你喝茶吗？ (Nǐ hē chá ma?)"],
+        "answer": "你为什么不喝茶？ (Nǐ wèishénme bù hē chá?)",
+        "explain": "为什么 (wèishénme) dùng để hỏi lý do 'tại sao'."
     }
 ]
 

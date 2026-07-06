@@ -1375,6 +1375,18 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
                     <td>Hỏi tình trạng tính chất (đứng cuối câu) hoặc thăm hỏi ý kiến đề xuất.</td>
                     <td>今天天气怎么样？ <span class="pinyin">Jīntiān tiānqì zěnmeyàng?</span> (Thời tiết hôm nay thế nào?)</td>
                 </tr>
+                <tr>
+                    <td><strong>什么时候</strong></td>
+                    <td><span class="pinyin">shénme shíhou</span><br>Khi nào / Lúc nào / Bao giờ (When)</td>
+                    <td>Hỏi thời điểm xảy ra hành động. Đứng trước hoặc sau chủ ngữ (trước động từ).</td>
+                    <td>你什么时候去中国？ <span class="pinyin">Nǐ shénme shíhou qù Zhōngguó?</span> (Khi nào bạn đi Trung Quốc?)</td>
+                </tr>
+                <tr>
+                    <td><strong>为什么</strong></td>
+                    <td><span class="pinyin">wèishénme</span><br>Tại sao / Vì sao (Why)</td>
+                    <td>Hỏi lý do, nguyên nhân thực hiện hành động, sự việc.</td>
+                    <td>你为什么不喝茶？ <span class="pinyin">Nǐ wèishénme bù hē chá?</span> (Tại sao bạn không uống trà?)</td>
+                </tr>
             </tbody>
         </table>
 
@@ -1426,12 +1438,14 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 ### 1. Hệ thống đại từ nghi vấn (Từ để hỏi) HSK 1
 *   **谁 (shéi / shuí) - Ai:** Hỏi về danh tính (Ví dụ: 他是谁？ - Anh ấy là ai?).
 *   **什么 (shénme) - Cái gì / Gì:** Hỏi đồ vật, tên gọi (Ví dụ: 这是什么？ - Đây là cái gì?).
-*   **哪 (nǎ) - Nào:** Hỏi lựa chọn (Ví dụ: 你sách nǎ guó rén? - Bạn là người nước nào?).
+*   **哪 (nǎ) - Nào:** Hỏi lựa chọn (Ví dụ: 你是 nǎ guó rén? - Bạn là người nước nào?).
 *   **哪儿 / 哪里 (nǎr / nǎlǐ) - Ở đâu:** Hỏi vị trí (Ví dụ: 我的书在哪儿？ - Sách của tôi ở đâu?).
 *   **几 (jǐ) - Mấy:** Hỏi số lượng nhỏ < 10, yêu cầu lượng từ (Ví dụ: 你家有几口人？ - Nhà bạn có mấy người?).
 *   **多少 (duōshao) - Bao nhiêu:** Hỏi số lượng không giới hạn, lượng từ không bắt buộc (Ví dụ: 这个杯子多少钱？ - Cái cốc này bao nhiêu tiền?).
 *   **怎么 (zěnme) - Thế nào / Sao:** Hỏi cách thức (怎么写 - viết thế nào) hoặc lý do ngạc nhiên.
 *   **怎么样 (zěnmeyàng) - Ra sao / Thế nào:** Hỏi trạng thái hoặc lấy ý kiến (Ví dụ: 今天天气怎么样？ - Thời tiết hôm nay thế nào?).
+*   **什么时候 (shénme shíhou) - Khi nào / Lúc nào:** Hỏi về thời gian, thời điểm (Ví dụ: 你什么时候去中国？ - Khi nào bạn đi Trung Quốc?).
+*   **为什么 (wèishénme) - Tại sao:** Hỏi về nguyên nhân, lý do (Ví dụ: 你为什么不喝茶？ - Tại sao bạn không uống trà?).
 
 ### 2. Trợ từ nghi vấn cuối câu
 *   **吗 (ma) - ...không?:** Biến câu trần thuật thành câu hỏi Yes/No (Ví dụ: 你是老师吗？ - Bạn là giáo viên phải không?).
@@ -1441,6 +1455,7 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 1.  **Cấu trúc 几 (jǐ) và 多少 (duōshao):** 几 bắt buộc đi với lượng từ, 多少 không bắt buộc.
 2.  **Cấu trúc 怎么 (zěnme) và 怎么样 (zěnmeyàng):** 怎么 + Động từ; 怎么样 đứng ở cuối câu.
 3.  **Hỏi vị trí:** Dùng 哪儿 hoặc 哪里 đứng sau động từ 在 (ở) hoặc 去 (đi).
+4.  **Cấu trúc 什么时候 (shénme shíhou) và 为什么 (wèishénme):** Thường đứng trước động từ (sau chủ ngữ) để hỏi về thời điểm và nguyên nhân thực hiện hành động.
         """
     },
     {
