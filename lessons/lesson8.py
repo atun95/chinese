@@ -188,6 +188,9 @@ def show_lesson8_1_overview():
     st.subheader("1. Bản chất chữ Hán")
     st.write("Chữ Hán là chữ **biểu ý** (chỉ ý nghĩa), khác với chữ tiếng Việt/tiếng Anh là chữ **biểu âm** (ghép vần phát âm).")
     
+    st.write("💡 **Sự tiến hóa của chữ Hán qua hình vẽ (Ví dụ chữ Mã - Con ngựa):**")
+    st.image("assets/horse_evolution.png", caption="Sự tiến hóa chữ Mã (Ngựa): Giáp cốt văn ➔ Kim văn ➔ Tiểu triện ➔ Lệ thư ➔ Khải thư (Phồn thể) ➔ Giản thể", use_column_width=True)
+
     st.write("💡 **So sánh Phồn thể (nhiều nét) vs Giản thể (ít nét, dễ viết hơn):**")
     col1, col2 = st.columns(2)
     with col1:

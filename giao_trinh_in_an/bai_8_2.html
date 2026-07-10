@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</title>
+    <title>Bài 8.2: Hệ thống Nét viết</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
         :root { --primary-color: #000000; --secondary-color: #000000; --dark-color: #000000; --light-bg: #f1f5f9; --border-color: #000000; --highlight-bg: #ffffff; --highlight-border: #000000; }
@@ -297,253 +297,86 @@
     </style>
 </head>
 <body>
-    <div class="container lesson-1">
+    <div class="container lesson-10">
         <div class="no-print print-btn-container">
             <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
         </div>
-        <h1 class="lesson-title">Bài 1: Nhập môn Bính âm (Pinyin) & Hệ thống Thanh điệu</h1>
+        <h1 class="lesson-title">Bài 8.2: Hệ thống Nét viết</h1>
         
-        <h2 class="section-title">1. Khái quát về hệ thống chữ viết Pinyin</h2>
-        <p>Hệ thống phiên âm tiếng Trung tiêu chuẩn (Bính âm - Pinyin) cấu tạo bởi 3 thành phần chính:</p>
-        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 2px;">
-            Thanh mẫu (Phụ âm đầu) + Vận mẫu (Nguyên âm) + Thanh điệu (Dấu)
-        </div>
-        
-        <h2 class="section-title">2. Thanh mẫu cơ bản (11 Phụ âm đầu)</h2>
-        <p>Học phát âm chuẩn xác các thanh mẫu nhóm môi, đầu lưỡi và cuống lưỡi:</p>
+        <h2 class="section-title">1. 8 Nét viết cơ bản (Vĩnh tự bát pháp)</h2>
+        <p>Hệ thống nét viết trong chữ Hán bắt đầu bằng 8 nét cốt lõi:</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 15%;">Thanh mẫu</th>
-                    <th style="width: 45%;">Hướng dẫn khẩu hình &amp; Cách phát âm</th>
-                    <th style="width: 40%;">Ví dụ từ khóa (Chữ Hán - Pinyin - Việt)</th>
+                    <th style="width: 25%;">Tên nét tiếng Việt</th>
+                    <th style="width: 25%;">Ký hiệu minh họa</th>
+                    <th style="width: 50%;">Mô tả cách viết</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>b</strong></td>
-                    <td>Âm hai môi, không bật hơi. Đọc gần giống chữ "p" nhẹ trong tiếng Việt. Mím hai môi rồi mở ra nhẹ nhàng.</td>
-                    <td>爸爸 <span class="pinyin">bàba</span> (bố)</td>
+                    <td><strong>Chấm (点)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丶</td>
+                    <td>Dấu chấm từ trên xuống, hơi chếch sang phải.</td>
                 </tr>
                 <tr>
-                    <td><strong>p</strong></td>
-                    <td>Âm hai môi, bật hơi mạnh. Mím môi chặt rồi đẩy một luồng hơi mạnh từ khoang miệng ra ngoài. Giống âm "ph" bật môi.</td>
-                    <td>跑步 <span class="pinyin">pǎobù</span> (chạy bộ)</td>
+                    <td><strong>Ngang (横)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">一</td>
+                    <td>Thẳng ngang từ trái sang phải.</td>
                 </tr>
                 <tr>
-                    <td><strong>m</strong></td>
-                    <td>Âm hai môi, âm mũi. Phát âm giống hệt chữ "m" trong tiếng Việt.</td>
-                    <td>妈妈 <span class="pinyin">māma</span> (mẹ)</td>
+                    <td><strong>Sổ (竖)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丨</td>
+                    <td>Thẳng đứng dọc từ trên xuống dưới.</td>
                 </tr>
                 <tr>
-                    <td><strong>f</strong></td>
-                    <td>Âm răng môi. Răng trên chạm nhẹ vào môi dưới, đẩy hơi ra ngoài. Phát âm giống chữ "ph" trong tiếng Việt.</td>
-                    <td>饭 <span class="pinyin">fàn</span> (cơm)</td>
+                    <td><strong>Phẩy (撇)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丿</td>
+                    <td>Nét cong từ trên xuống, vắt chéo sang trái.</td>
                 </tr>
                 <tr>
-                    <td><strong>d</strong></td>
-                    <td>Âm đầu lưỡi, không bật hơi. Đọc gần giống chữ "t" trong tiếng Việt (đầu lưỡi chạm răng trên rồi hạ xuống).</td>
-                    <td>弟弟 <span class="pinyin">dìdi</span> (em trai)</td>
+                    <td><strong>Mác (捺)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">乀</td>
+                    <td>Nét thẳng xiên từ trên xuống, kéo sang phải.</td>
                 </tr>
                 <tr>
-                    <td><strong>t</strong></td>
-                    <td>Âm đầu lưỡi, bật hơi mạnh. Đọc gần giống chữ "th" trong tiếng Việt nhưng hơi đẩy ra dứt khoát và mạnh hơn.</td>
-                    <td>他 <span class="pinyin">tā</span> (anh ấy)</td>
+                    <td><strong>Hất (提)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">㇀</td>
+                    <td>Nét thẳng đi chéo từ dưới lên trên, sang phải.</td>
                 </tr>
                 <tr>
-                    <td><strong>n</strong></td>
-                    <td>Âm đầu lưỡi, âm mũi. Phát âm giống hệt chữ "n" trong tiếng Việt.</td>
-                    <td>你 <span class="pinyin">nǐ</span> (bạn)</td>
+                    <td><strong>Gập (折)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">𠃍</td>
+                    <td>Gập khúc chuyển hướng đột ngột của đầu bút.</td>
                 </tr>
                 <tr>
-                    <td><strong>l</strong></td>
-                    <td>Âm bên đầu lưỡi. Phát âm giống hệt chữ "l" trong tiếng Việt.</td>
-                    <td>老师 <span class="pinyin">lǎoshī</span> (giáo viên)</td>
-                </tr>
-                <tr>
-                    <td><strong>g</strong></td>
-                    <td>Âm cuống lưỡi, không bật hơi. Đọc gần giống chữ "c" hoặc "k" trong tiếng Việt. Luồng hơi bị chặn lại ở cuống họng.</td>
-                    <td>哥哥 <span class="pinyin">gēge</span> (anh trai)</td>
-                </tr>
-                <tr>
-                    <td><strong>k</strong></td>
-                    <td>Âm cuống lưỡi, bật hơi mạnh. Đọc gần giống chữ "kh" tiếng Việt nhưng cần đẩy luồng hơi mạnh từ cuống họng ra ngoài.</td>
-                    <td>渴 <span class="pinyin">kě</span> (khát)</td>
-                </tr>
-                <tr>
-                    <td><strong>h</strong></td>
-                    <td>Âm cuống lưỡi, âm xát. Phát âm hơi nhẹ hơn chữ "h" tiếng Việt một chút, giống như tiếng thở phào nhẹ nhõm.</td>
-                    <td>好 <span class="pinyin">hǎo</span> (tốt)</td>
+                    <td><strong>Móc (钩)</strong></td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">亅</td>
+                    <td>Nét móc nhỏ ngược lên ở cuối nét sổ hoặc nét nghiêng.</td>
                 </tr>
             </tbody>
         </table>
 
-        <h2 class="section-title">3. Vận mẫu đơn cơ bản (6 Nguyên âm đơn)</h2>
-        <p>Cách đặt khẩu hình miệng quyết định độ chuẩn xác của nguyên âm:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 15%;">Vận mẫu</th>
-                    <th style="width: 50%;">Hướng dẫn khẩu hình &amp; Cách đọc</th>
-                    <th style="width: 35%;">Ví dụ cụ thể</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>a</strong></td>
-                    <td>Miệng mở rộng tối đa, lưỡi hạ thấp. Đọc giống chữ "a" trong tiếng Việt.</td>
-                    <td>爸 <span class="pinyin">bà</span> (bố)</td>
-                </tr>
-                <tr>
-                    <td><strong>o</strong></td>
-                    <td>Môi tròn, miệng hơi khép lại, lưỡi rút về sau. Đọc giống chữ "ô" tiếng Việt.</td>
-                    <td>我 <span class="pinyin">wǒ</span> (tôi)</td>
-                </tr>
-                <tr>
-                    <td><strong>e</strong></td>
-                    <td>Miệng mở vừa, dẹt sang hai bên. Đọc giống chữ "ơ" hoặc "ưa" trong tiếng Việt.</td>
-                    <td>鹅 <span class="pinyin">é</span> (con ngỗng)</td>
-                </tr>
-                <tr>
-                    <td><strong>i</strong></td>
-                    <td>Hai môi dẹt, răng khép hờ, lưỡi nâng cao. Đọc giống chữ "i" tiếng Việt.</td>
-                    <td>一 <span class="pinyin">yī</span> (số một)</td>
-                </tr>
-                <tr>
-                    <td><strong>u</strong></td>
-                    <td>Môi tròn và nhô ra phía trước tối đa. Đọc giống chữ "u" tiếng Việt.</td>
-                    <td>五 <span class="pinyin">wǔ</span> (số năm)</td>
-                </tr>
-                <tr>
-                    <td><strong>ü</strong></td>
-                    <td>Môi tròn (giống u), lưỡi nâng cao (giống i). Đọc giống âm "uy" nhưng giữ nguyên hình dáng môi tròn suốt quá trình phát âm.</td>
-                    <td>绿 <span class="pinyin">lǜ</span> (màu xanh lá)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="section-title">4. Hệ thống Thanh điệu (4 Thanh chính &amp; Thanh nhẹ)</h2>
-        <p>Tiếng Trung là ngôn ngữ có thanh điệu. Một âm tiết mang thanh điệu khác nhau sẽ biểu thị ý nghĩa hoàn toàn khác nhau:</p>
-        <ul>
-            <li><strong>Thanh 1 (Thanh ngang):</strong> Giọng cao, giữ thăng bằng từ đầu đến cuối (ký hiệu: <span class="pinyin">ā</span>). Đọc kéo dài hơi.</li>
-            <li><strong>Thanh 2 (Thanh sắc):</strong> Giọng đi từ mức trung bình lên mức cao nhất (ký hiệu: <span class="pinyin">á</span>). Đọc giống dấu sắc tiếng Việt nhưng nhẹ hơn.</li>
-            <li><strong>Thanh 3 (Thanh hỏi):</strong> Giọng đi từ thấp xuống cực thấp rồi đi lên trung bình (ký hiệu: <span class="pinyin">ǎ</span>). Đọc giống dấu hỏi kéo dài hơi hoặc đi xuống sâu.</li>
-            <li><strong>Thanh 4 (Thanh huyền):</strong> Giọng đi từ mức cao nhất rơi thẳng xuống mức thấp nhất (ký hiệu: <span class="pinyin">à</span>). Đọc dứt khoát, mạnh mẽ, không kéo dài.</li>
-            <li><strong>Thanh nhẹ (Neutral Tone):</strong> Không có ký hiệu dấu trên đầu nguyên âm. Đọc cực kỳ nhẹ và ngắn. Ví dụ: <span class="pinyin">māma</span>, <span class="pinyin">bàba</span>.</li>
-        </ul>
-
+        <h2 class="section-title">2. Ý nghĩa chữ 永 (Vĩnh) trong thư pháp</h2>
         <div class="info-box">
-            <strong>💡 Quy tắc Biến điệu của Thanh 3 (Sandhi Rule):</strong><br>
-            • Khi <strong>hai âm tiết mang thanh 3</strong> đi liền nhau, thanh 3 thứ nhất sẽ biến âm đọc thành thanh 2 (thanh sắc), nhưng cách viết chữ Pinyin vẫn giữ nguyên dấu thanh 3.<br>
-            <em>Ví dụ:</em> 你好 <span class="pinyin">nǐ hǎo</span> đọc thực tế là <span class="pinyin">ní hǎo</span>.<br>
-            • Khi <strong>ba âm tiết mang thanh 3</strong> đi liền nhau, tùy cấu trúc ngữ nghĩa để biến điệu: biến âm tiết thứ 2 (3-3-3 → 3-2-3) hoặc biến cả hai âm tiết đầu (3-3-3 → 2-2-3).
+            Chữ <strong>永</strong> (yǒng - vĩnh viễn/mãi mãi) là chữ kinh điển chứa đầy đủ cả 8 nét viết cơ bản trên:<br>
+            • Nét Chấm (点): Đỉnh trên cùng.<br>
+            • Nét Ngang (横): Giữa thân trái.<br>
+            • Nét Sổ (竖): Dọc trục chính đứng.<br>
+            • Nét Móc (钩): Móc đáy sổ dọc.<br>
+            • Nét Hất (提): Chéo xiên bên trái lên.<br>
+            • Nét Phẩy (撇): Cong bên trái.<br>
+            • Nét Gập (折): Khung gập bên phải.<br>
+            • Nét Mác (捺): Kéo xiên dài bên phải.
         </div>
 
-        <h2 class="section-title">5. Từ vựng cốt lõi Bài 1</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%;">Chữ Hán</th>
-                    <th style="width: 25%;">Phiên âm Pinyin</th>
-                    <th style="width: 30%;">Nghĩa tiếng Việt</th>
-                    <th style="width: 20%;">Loại từ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="hanzi">爸爸</td>
-                    <td class="pinyin">bàba</td>
-                    <td>bố / ba</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">妈妈</td>
-                    <td class="pinyin">māma</td>
-                    <td>mẹ / má</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">哥哥</td>
-                    <td class="pinyin">gēge</td>
-                    <td>anh trai</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">姐姐</td>
-                    <td class="pinyin">jiějie</td>
-                    <td>chị gái</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">弟弟</td>
-                    <td class="pinyin">dìdi</td>
-                    <td>em trai</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">妹妹</td>
-                    <td class="pinyin">mèimei</td>
-                    <td>em gái</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">我</td>
-                    <td class="pinyin">wǒ</td>
-                    <td>tôi / tớ / mình</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">你</td>
-                    <td class="pinyin">nǐ</td>
-                    <td>bạn / cậu / mày</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">他</td>
-                    <td class="pinyin">tā</td>
-                    <td>anh ấy / ông ấy</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">她</td>
-                    <td class="pinyin">tā</td>
-                    <td>cô ấy / chị ấy</td>
-                    <td>Đại từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">老师</td>
-                    <td class="pinyin">lǎoshī</td>
-                    <td>thầy giáo / cô giáo</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">学生</td>
-                    <td class="pinyin">xuéshēng</td>
-                    <td>học sinh / sinh viên</td>
-                    <td>Danh từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">很</td>
-                    <td class="pinyin">hěn</td>
-                    <td>rất</td>
-                    <td>Phó từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">忙</td>
-                    <td class="pinyin">máng</td>
-                    <td>bạn rộn</td>
-                    <td>Tính từ</td>
-                </tr>
-                <tr>
-                    <td class="hanzi">不</td>
-                    <td class="pinyin">bù</td>
-                    <td>không</td>
-                    <td>Phó từ</td>
-                </tr>
-            </tbody>
-        </table>
-
-
+        <h2 class="section-title">3. Các nét biến thể ghép</h2>
+        <ul>
+            <li><strong>横折 (héngzhé - Ngang gập):</strong> Ngang rồi gập vuông góc đi xuống (Ví dụ: 口, 日).</li>
+            <li><strong>竖折 (shùzhé - Sổ gập):</strong> Sổ rồi gập vuông góc sang phải (Ví dụ: 山).</li>
+            <li><strong>竖钩 (shùgōu - Sổ móc):</strong> Sổ thẳng rồi móc nhọn lên bên trái (Ví dụ: 小, 水).</li>
+            <li><strong>斜钩 (xiégōu - Nghiêng móc):</strong> Nghiêng cong kéo từ trên xuống rồi móc chéo lên (Ví dụ: 我).</li>
+        </ul>
         
     </div>
 </body>

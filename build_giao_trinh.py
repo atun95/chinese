@@ -1552,6 +1552,10 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
             • <strong>Chữ Phồn thể (繁体字):</strong> Kiểu chữ truyền thống nhiều nét, mang tính tạo hình cao. Ví dụ: <strong>馬</strong> (mã - con ngựa) gồm 10 nét.<br>
             • <strong>Chữ Giản thể (简体字):</strong> Bản rút gọn lược bớt nét để viết nhanh, dễ nhớ hơn. Ví dụ: <strong>马</strong> gồm 3 nét.
         </div>
+        <div style="text-align: center; margin: 15px 0;">
+            <img src="{ASSETS_PATH}/horse_evolution.png" alt="Sự tiến hóa chữ Mã" style="max-width: 100%; height: auto; border: 1.5px solid var(--border-color); border-radius: 8px; padding: 5px;">
+            <p style="font-size: 11px; color: #475569; margin-top: 5px;">Sự tiến hóa của chữ Mã (Ngựa) qua các thời kỳ</p>
+        </div>
         
         <h2 class="section-title">2. Cấu tạo Chữ Hán theo Lục thư (4 cách cơ bản)</h2>
         <table>
@@ -2280,7 +2284,7 @@ def build_individual_lessons():
             <button class="print-btn" onclick="window.print()">🖨️ In bài học này</button>
         </div>
         <h1 class="lesson-title">{lesson['title']}</h1>
-        {lesson['content_html']}
+        {lesson['content_html'].replace("{ASSETS_PATH}", "../assets")}
     </div>
 </body>
 </html>"""
@@ -2294,7 +2298,7 @@ def build_individual_lessons():
     <!-- PAGE BREAK FOR NEW LESSON -->
     <div class="page-break lesson-{idx}" style="page-break-before: always; padding-top: 20px;">
         <h1 class="lesson-title">{lesson['title']}</h1>
-        {lesson['content_html']}
+        {lesson['content_html'].replace("{ASSETS_PATH}", "assets")}
     </div>"""
 
     combined_html = f"""<!DOCTYPE html>
