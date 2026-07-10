@@ -53,10 +53,8 @@ def render_hanzi_anim(char, width=120, height=120, key=None):
           showOutline: true,
           strokeColor: '#e11d48',
           outlineColor: '#f8fafc',
-          strokeAnimationSpeed: 1.5,
-          delayBetweenLoops: 2000
+          strokeAnimationSpeed: 1.5
         }});
-        writer.loopCharacterAnimation();
         document.getElementById('container').addEventListener('click', function() {{
           writer.animateCharacter();
         }});
@@ -70,6 +68,7 @@ def render_stroke_anim(d_path, width=120, height=120, key=None):
     import uuid
     if key is None:
         key = str(uuid.uuid4())[:8]
+    path_id = f"stroke_path_{key}"
     html_code = f"""
     <!DOCTYPE html>
     <html>
@@ -93,18 +92,23 @@ def render_stroke_anim(d_path, width=120, height=120, key=None):
           display: flex;
           justify-content: center;
           align-items: center;
+          cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }}
+        #container:hover {{
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }}
         .animated-path {{
           stroke-dasharray: 300;
-          stroke-dashoffset: 300;
-          animation: draw 2.5s infinite ease-in-out;
+          stroke-dashoffset: 0;
+        }}
+        .animated-path.draw-active {{
+          animation: draw 1.5s ease-in-out forwards;
         }}
         @keyframes draw {{
           0% {{
             stroke-dashoffset: 300;
-          }}
-          50% {{
-            stroke-dashoffset: 0;
           }}
           100% {{
             stroke-dashoffset: 0;
@@ -113,16 +117,26 @@ def render_stroke_anim(d_path, width=120, height=120, key=None):
       </style>
     </head>
     <body>
-      <div id="container">
+      <div id="container" onclick="startAnim()">
         <svg width="{width - 16}" height="{height - 16}" viewBox="0 0 100 100">
           <line x1="0" y1="50" x2="100" y2="50" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1" />
           <line x1="50" y1="0" x2="50" y2="100" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1" />
           <line x1="0" y1="0" x2="100" y2="100" stroke="#f1f5f9" stroke-dasharray="4 4" stroke-width="1" />
           <line x1="100" y1="0" x2="0" y2="100" stroke="#f1f5f9" stroke-dasharray="4 4" stroke-width="1" />
           <rect x="1" y="1" width="98" height="98" fill="none" stroke="#e2e8f0" stroke-width="2" rx="10" />
-          <path d="{d_path}" stroke="#e11d48" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" class="animated-path" />
+          <path d="{d_path}" stroke="#f1f5f9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <path d="{d_path}" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" style="opacity: 0.4;" />
+          <path id="{path_id}" d="{d_path}" stroke="#e11d48" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" class="animated-path" />
         </svg>
       </div>
+      <script>
+        function startAnim() {{
+          var path = document.getElementById('{path_id}');
+          path.classList.remove('draw-active');
+          void path.offsetWidth;
+          path.classList.add('draw-active');
+        }}
+      </script>
     </body>
     </html>
     """
