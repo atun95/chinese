@@ -429,7 +429,11 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 7.1 - Các từ để hỏi",
         "Bài 7.2 - Cách dùng chữ 的 (de)",
         "Bài 7.3 - Cặp từ 这 và 那",
-        "Bài 8.1 - Chữ Hán: Nét viết, Bút thuận & Cấu tạo chữ"
+        "Bài 8.1 - Tổng quan Chữ Hán",
+        "Bài 8.2 - Hệ thống Nét viết",
+        "Bài 8.3 - Quy tắc Bút thuận",
+        "Bài 8.4 - Hệ thống Bộ thủ",
+        "Bài 8.5 - Đơn thể & Hợp thể"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -638,8 +642,20 @@ elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài
 elif menu == "Bài 7.3 - Cặp từ 这 và 那" or menu == "Bài tập Bài 7.3":
     lesson7.show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3)
 
-elif menu == "Bài 8.1 - Chữ Hán: Nét viết, Bút thuận & Cấu tạo chữ":
-    lesson8.show_lesson8_1_hanzi_strokes()
+elif menu == "Bài 8.1 - Tổng quan Chữ Hán":
+    lesson8.show_lesson8_1_overview()
+
+elif menu == "Bài 8.2 - Hệ thống Nét viết":
+    lesson8.show_lesson8_2_strokes()
+
+elif menu == "Bài 8.3 - Quy tắc Bút thuận":
+    lesson8.show_lesson8_3_rules()
+
+elif menu == "Bài 8.4 - Hệ thống Bộ thủ":
+    lesson8.show_lesson8_4_radicals()
+
+elif menu == "Bài 8.5 - Đơn thể & Hợp thể":
+    lesson8.show_lesson8_5_structures()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     # Hot-reload trigger: 2026-06-12 16:38
