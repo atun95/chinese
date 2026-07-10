@@ -25,6 +25,8 @@ import lesson4
 import lesson5
 import lesson6
 import lesson7
+import lesson8
+
 
 try:
     importlib.reload(lessons_data)
@@ -65,6 +67,12 @@ try:
     importlib.reload(lesson7)
 except Exception as e:
     pass
+
+try:
+    importlib.reload(lesson8)
+except Exception as e:
+    pass
+
 
 # Cấu hình trang
 st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layout="wide")
@@ -420,7 +428,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 6.2 - Vận mẫu đứng một mình",
         "Bài 7.1 - Các từ để hỏi",
         "Bài 7.2 - Cách dùng chữ 的 (de)",
-        "Bài 7.3 - Cặp từ 这 và 那"
+        "Bài 7.3 - Cặp từ 这 và 那",
+        "Bài 8.1 - Chữ Hán: Nét viết, Bút thuận & Cấu tạo chữ"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -628,6 +637,9 @@ elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài
 
 elif menu == "Bài 7.3 - Cặp từ 这 và 那" or menu == "Bài tập Bài 7.3":
     lesson7.show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3)
+
+elif menu == "Bài 8.1 - Chữ Hán: Nét viết, Bút thuận & Cấu tạo chữ":
+    lesson8.show_lesson8_1_hanzi_strokes()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     # Hot-reload trigger: 2026-06-12 16:38
