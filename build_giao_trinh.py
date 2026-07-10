@@ -1738,12 +1738,20 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
         </ul>
         """,
         "content_md": """
-### 1. Nguồn gốc & Cấu tạo Chữ Hán
-Chữ Hán là chữ biểu ý, cấu tạo theo phương thức **Lục thư** (6 cách tạo chữ):
-*   **Chữ Tượng hình (象形):** Vẽ lại hình dáng thực tế của vật (Ví dụ: 日 - nhật, 月 - nguyệt, 木 - mộc, 山 - sơn, 人 - nhân).
-*   **Chữ Chỉ sự (指事):** Ký hiệu biểu thị khái niệm trừu tượng (Ví dụ: 上 - thượng, 下 - hạ, 本 - gốc cây).
-*   **Chữ Hội ý (会意):** Ghép nghĩa các chữ đơn lẻ thành nghĩa mới (Ví dụ: 休 - nghỉ ngơi = người 人 tựa gốc cây 木; 明 - sáng = nhật 日 + nguyệt 月; 好 - tốt = nữ 女 + tử 子).
-*   **Chữ Hình thanh (形声):** Ghép phần chỉ nghĩa (bộ thủ) và phần chỉ cách đọc (Ví dụ: 妈 - mẹ, 爸 - bố, 谁 - ai).
+### 1. Nguồn gốc & Bản chất Chữ Hán
+Chữ Hán là chữ biểu ý, phát triển qua các thời kỳ chính sau:
+*   **Giáp cốt văn (甲骨文):** Khắc trên mai rùa, xương thú. *Ví dụ:* Chữ **日** hình tròn có chấm giữa; chữ **马** vẽ rõ hình con ngựa đứng.
+*   **Kim văn (金文):** Khắc trên đồ đồng. *Ví dụ:* Chữ **日** tròn hơn; chữ **马** thon gọn hơn, vẽ rõ bờm ngựa.
+*   **Tiểu triện (小篆):** Thống nhất thời Tần, nét cong thanh mảnh. *Ví dụ:* Chữ **日** hình chữ nhật bo tròn; chữ **马** nét cong dài dọc đối xứng.
+*   **Lệ thư (隶书):** Chuyển nét cong thành thẳng, gập vuông vức. *Ví dụ:* Chữ **日** vuông vắn hẳn; chữ **马** nét gập, 4 chân thành 4 dấu chấm (**馬**).
+*   **Khải thư (楷书):** Chuẩn mực vuông vức sắc nét. *Ví dụ:* Chữ **日** và chữ **馬** cân đối tối đa.
+*   **Phồn thể & Giản thể:** Phồn thể giữ Khải thư truyền thống (Ví dụ: **馬** - 10 nét). Giản thể lược bớt nét để viết nhanh (Ví dụ: **马** - 3 nét).
+
+**Cấu tạo theo Lục thư (6 cách tạo chữ):**
+*   **Chữ Tượng hình (象形):** Vẽ lại hình dáng thực tế của vật (Ví dụ: 日, 月, 木, 山, 人).
+*   **Chữ Chỉ sự (指事):** Ký hiệu biểu thị khái niệm trừu tượng (Ví dụ: 上, 下, 本).
+*   **Chữ Hội ý (会意):** Ghép nghĩa các chữ đơn lẻ thành nghĩa mới (Ví dụ: 休 = người 人 tựa gốc cây 木; 明 = nhật 日 + nguyệt 月; 好 = nữ 女 + tử 子).
+*   **Chữ Hình thanh (形声):** Ghép phần chỉ nghĩa (bộ thủ) và phần chỉ cách đọc (Ví dụ: 妈 - mẹ, 爸 - bố).
 
 ### 2. 8 Nét viết cơ bản (永字八法)
 *   **Chấm (点 - diǎn):** Dấu chấm từ trên xuống (Ví dụ: 主, 六).
