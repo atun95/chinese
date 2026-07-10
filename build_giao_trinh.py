@@ -1542,249 +1542,367 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 *   **Bắt buộc giữ 的:** Tài sản cá nhân, đồ vật (我的书, 他的电脑).
         """
     },
-    {
-        "title": "Bài 8.1: Chữ Hán, Nét viết, Bút thuận & Cấu tạo chữ",
-        "toc_desc": "Nguồn gốc chữ Hán, Lục thư, 8 nét cơ bản, Quy tắc bút thuận, Bộ thủ, Chữ đơn thể & hợp thể",
+        {
+        "title": "Bài 8.1: Tổng quan Chữ Hán",
+        "toc_desc": "Bản chất chữ Hán, so sánh Phồn thể & Giản thể, 4 cách cấu tạo chữ Hán theo Lục thư",
         "content_html": """
-        <h2 class="section-title">1. Nguồn gốc & Bản chất Chữ Hán (Các thời kỳ phát triển)</h2>
-        <p>Chữ Hán (汉字) là hệ chữ biểu ý, trải qua các giai đoạn phát triển chính sau:</p>
-        <div class="info-box" style="margin-bottom: 15px;">
-            • <strong>Giáp cốt văn (甲骨文):</strong> Chữ khắc trên mai rùa, xương thú thời nhà Thương (khoảng 3000 năm trước), mang tính tượng hình rất đậm nét. <i>Ví dụ:</i> Chữ <strong>日</strong> (mặt trời) thuở sơ khai được khắc là một hình tròn có một dấu chấm ở giữa biểu thị tâm mặt trời; chữ <strong>马</strong> (ngựa) vẽ rõ nét con ngựa đứng có đầu, bờm và bốn chân.<br>
-            • <strong>Kim văn (金文):</strong> Chữ khắc trên chuông, đỉnh và đồ dùng bằng đồng thời nhà Chu. Nét chữ dày dặn hơn. <i>Ví dụ:</i> Chữ <strong>日</strong> được viết tròn hơn, dấu chấm ở giữa to rõ; chữ <strong>马</strong> được làm thon gọn lại, chú trọng nét vẽ bờm và đầu ngựa.<br>
-            • <strong>Tiểu triện (小篆):</strong> Kiểu chữ thống nhất thời Tần Thủy Hoàng. Nét vẽ uốn lượn tròn trịa, thanh mảnh. <i>Ví dụ:</i> Chữ <strong>日</strong> kéo dài thành hình chữ nhật đứng bo tròn góc với nét ngang ở giữa; chữ <strong>马</strong> được chuẩn hóa thành các nét cong xếp dọc đối xứng.<br>
-            • <strong>Lệ thư (隶书):</strong> Bước ngoặt lớn nhất, biến nét cong uốn lượn thành nét thẳng, gập vuông vức để viết bằng bút lông nhanh hơn. <i>Ví dụ:</i> Chữ <strong>日</strong> vuông vắn hẳn; chữ <strong>马</strong> biến đổi thành nét ngang dọc, bốn chân ngựa biến thành bốn dấu chấm ở đáy (<strong>馬</strong>).<br>
-            • <strong>Khải thư (楷书):</strong> Kiểu chữ chuẩn mực, vuông vức, cân đối nhất từ thời Đông Hán đến nay. <i>Ví dụ:</i> Chữ <strong>日</strong> và chữ <strong>馬</strong> đạt độ cân đối thẩm mỹ tối đa.<br>
-            • <strong>Giản thể (简体字) & Phồn thể (繁体字):</strong> Chữ Phồn thể giữ nguyên nét của Khải thư (Ví dụ: <strong>馬</strong> - 10 nét). Chữ Giản thể lược bớt nét để viết nhanh hơn (Ví dụ: <strong>马</strong> - 3 nét, bốn chấm biến thành nét ngang dài).
+        <h2 class="section-title">1. Bản chất Chữ Hán</h2>
+        <p>Chữ Hán (汉字) là hệ chữ <strong>biểu ý</strong> (ghi lại ý nghĩa), khác với chữ Quốc ngữ hay tiếng Anh là hệ chữ <strong>biểu âm</strong> (ghép chữ cái phát âm).</p>
+        <div class="info-box">
+            • <strong>Chữ Phồn thể (繁体字):</strong> Kiểu chữ truyền thống nhiều nét, mang tính tạo hình cao. Ví dụ: <strong>馬</strong> (mã - con ngựa) gồm 10 nét.<br>
+            • <strong>Chữ Giản thể (简体字):</strong> Bản rút gọn lược bớt nét để viết nhanh, dễ nhớ hơn. Ví dụ: <strong>马</strong> gồm 3 nét.
         </div>
-        <p><strong>Cấu tạo Chữ Hán theo Lục thư:</strong> Trong 6 cách tạo chữ truyền thống, có 4 cách cơ bản nhất:</p>
+        
+        <h2 class="section-title">2. Cấu tạo Chữ Hán theo Lục thư (4 cách cơ bản)</h2>
         <table>
             <thead>
                 <tr>
                     <th style="width: 25%;">Phương thức tạo chữ</th>
                     <th style="width: 35%;">Định nghĩa &amp; Đặc điểm</th>
-                    <th style="width: 40%;">Ví dụ tiêu biểu</th>
+                    <th style="width: 40%;">Ví dụ biểu diễn</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Chữ Tượng hình</strong><br>(象形 - xiàngxíng)</td>
+                    <td><strong>Chữ Tượng hình</strong><br>(象形)</td>
                     <td>Phác họa lại hình dáng thực tế của sự vật ngoài đời.</td>
-                    <td><strong>日</strong> (rì - mặt trời), <strong>月</strong> (yuè - mặt trăng), <strong>木</strong> (mù - cây), <strong>山</strong> (shān - núi), <strong>人</strong> (rén - người).</td>
+                    <td><strong>日</strong> (Mặt trời), <strong>月</strong> (Mặt trăng), <strong>木</strong> (Cây), <strong>山</strong> (Núi), <strong>人</strong> (Người).</td>
                 </tr>
                 <tr>
-                    <td><strong>Chữ Chỉ sự</strong><br>(指事 - zhǐshì)</td>
+                    <td><strong>Chữ Chỉ sự</strong><br>(指 sự)</td>
                     <td>Dùng ký hiệu ước lệ để chỉ các khái niệm trừu tượng hoặc chỉ vị trí.</td>
-                    <td><strong>上</strong> (shàng - trên), <strong>下</strong> (xià - dưới), <strong>本</strong> (běn - gốc rễ, thêm nét ngang dưới chữ 木).</td>
+                    <td><strong>上</strong> (Trên), <strong>下</strong> (Dưới), <strong>本</strong> (Gốc rễ - thêm nét ngang dưới chữ 木).</td>
                 </tr>
                 <tr>
-                    <td><strong>Chữ Hội ý</strong><br>(会意 - huìyì)</td>
+                    <td><strong>Chữ Hội ý</strong><br>(会意)</td>
                     <td>Ghép hai hoặc nhiều chữ đơn lẻ để biểu thị ý nghĩa mới kết hợp.</td>
-                    <td><strong>休</strong> (xiū - nghỉ ngơi: người 人 tựa vào cây 木), <strong>明</strong> (míng - sáng: nhật 日 + nguyệt 月), <strong>好</strong> (hǎo - tốt: nữ 女 + tử 子).</td>
+                    <td><strong>休</strong> (Nghỉ ngơi = Người 人 tựa cây 木), <strong>明</strong> (Sáng = Nhật 日 + Nguyệt 月), <strong>好</strong> (Tốt = Nữ 女 + Tử 子).</td>
                 </tr>
                 <tr>
-                    <td><strong>Chữ Hình thanh</strong><br>(形声 - xíngshēng)</td>
+                    <td><strong>Chữ Hình thanh</strong><br>(形声)</td>
                     <td>Ghép phần chỉ ý nghĩa (bộ thủ) và phần chỉ cách đọc (biểu âm). Chiếm hơn 80% chữ Hán.</td>
-                    <td><strong>妈</strong> (mā - mẹ: nữ 女 chỉ nghĩa + mã 马 chỉ âm), <strong>爸</strong> (bà - bố: phụ 父 chỉ nghĩa + ba 巴 chỉ âm).</td>
+                    <td><strong>妈</strong> (Mẹ = Nữ 女 chỉ nghĩa + Mã 马 chỉ âm 'mā'), <strong>爸</strong> (Bố = Phụ 父 chỉ nghĩa + Ba Ba chỉ âm 'bà').</td>
                 </tr>
             </tbody>
         </table>
+        """,
+        "content_md": """
+### 1. Bản chất Chữ Hán
+* Chữ Hán là chữ biểu ý.
+* Gồm 2 dạng viết: Phồn thể (馬 - 10 nét) và Giản thể (马 - 3 nét).
 
-        <h2 class="section-title">2. 8 Nét viết cơ bản (永字八法) &amp; Nét biến thể</h2>
-        <p>Hệ thống nét viết trong chữ Hán bắt đầu bằng 8 nét cốt lõi (Vĩnh tự bát pháp):</p>
+### 2. Cấu tạo Chữ Hán theo Lục thư
+* **Tượng hình (象形):** Vẽ hình sự vật (Ví dụ: 日, 月, 木, 山, 人).
+* **Chỉ sự (指事):** Biểu diễn khái niệm trừu tượng (Ví dụ: 上, 下, 本).
+* **Hội ý (会意):** Ghép nghĩa các chữ đơn (Ví dụ: 休 = 人 + 木; 明 = 日 + 月; 好 = 女 + Tử).
+* **Hình thanh (形声):** Ghép phần chỉ nghĩa + phần chỉ âm (Ví dụ: 妈, 爸).
+        """
+    },
+    {
+        "title": "Bài 8.2: Hệ thống Nét viết",
+        "toc_desc": "8 nét viết cơ bản (Vĩnh tự bát pháp), Giải nghĩa cấu tạo chữ 永 và 4 nét biến thể ghép",
+        "content_html": """
+        <h2 class="section-title">1. 8 Nét viết cơ bản (Vĩnh tự bát pháp)</h2>
+        <p>Hệ thống nét viết trong chữ Hán bắt đầu bằng 8 nét cốt lõi:</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 15%;">Tên nét</th>
-                    <th style="width: 20%;">Ký hiệu minh họa</th>
-                    <th style="width: 40%;">Mô tả cách viết</th>
-                    <th style="width: 25%;">Ví dụ chữ</th>
+                    <th style="width: 25%;">Tên nét tiếng Việt</th>
+                    <th style="width: 25%;">Ký hiệu minh họa</th>
+                    <th style="width: 50%;">Mô tả cách viết</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><strong>Chấm (点)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">丶</td>
-                    <td>Dấu chấm từ trên xuống, hơi chếch sang phải</td>
-                    <td>主, 六, 门</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丶</td>
+                    <td>Dấu chấm từ trên xuống, hơi chếch sang phải.</td>
                 </tr>
                 <tr>
                     <td><strong>Ngang (横)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">一</td>
-                    <td>Thẳng ngang từ trái sang phải</td>
-                    <td>一, 二, 三, 十</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">一</td>
+                    <td>Thẳng ngang từ trái sang phải.</td>
                 </tr>
                 <tr>
                     <td><strong>Sổ (竖)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">丨</td>
-                    <td>Thẳng đứng từ trên xuống dưới</td>
-                    <td>十, 中, 工</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丨</td>
+                    <td>Thẳng đứng dọc từ trên xuống dưới.</td>
                 </tr>
                 <tr>
                     <td><strong>Phẩy (撇)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">丿</td>
-                    <td>Nét cong từ trên xuống, vắt chéo sang trái</td>
-                    <td>人, 八, 千</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">丿</td>
+                    <td>Nét cong từ trên xuống, vắt chéo sang trái.</td>
                 </tr>
                 <tr>
                     <td><strong>Mác (捺)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">乀</td>
-                    <td>Nét thẳng xiên từ trên xuống, kéo sang phải</td>
-                    <td>人, 八, 木, 大</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">乀</td>
+                    <td>Nét thẳng xiên từ trên xuống, kéo sang phải.</td>
                 </tr>
                 <tr>
                     <td><strong>Hất (提)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">㇀</td>
-                    <td>Nét thẳng đi chéo từ dưới lên trên, sang phải</td>
-                    <td>我, 打, 习</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">㇀</td>
+                    <td>Nét thẳng đi chéo từ dưới lên trên, sang phải.</td>
                 </tr>
                 <tr>
                     <td><strong>Gập (折)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">𠃍</td>
-                    <td>Gập khúc đột ngột sang hướng khác</td>
-                    <td>口, 日, 四</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">𠃍</td>
+                    <td>Gập khúc chuyển hướng đột ngột của đầu bút.</td>
                 </tr>
                 <tr>
                     <td><strong>Móc (钩)</strong></td>
-                    <td style="font-size: 20px; text-align: center;">亅</td>
-                    <td>Nét móc nhỏ ngược lên ở cuối nét khác</td>
-                    <td>小, 水, 手, 我</td>
+                    <td style="font-size: 20px; text-align: center; font-weight: bold;">亅</td>
+                    <td>Nét móc nhỏ ngược lên ở cuối nét sổ hoặc nét nghiêng.</td>
                 </tr>
             </tbody>
         </table>
 
+        <h2 class="section-title">2. Ý nghĩa chữ 永 (Vĩnh) trong thư pháp</h2>
         <div class="info-box">
-            <strong>📌 Các nét gập/móc phức hợp:</strong><br>
-            • <strong>横折 (héngzhé):</strong> Ngang gập (chữ 口)<br>
-            • <strong>竖折 (shùzhé):</strong> Sổ gập (chữ 山)<br>
-            • <strong>竖钩 (shùgōu):</strong> Sổ móc (chữ 小)<br>
-            • <strong>斜钩 (xiégōu):</strong> Nghiêng móc (chữ 我)
+            Chữ <strong>永</strong> (yǒng - vĩnh viễn/mãi mãi) là chữ kinh điển chứa đầy đủ cả 8 nét viết cơ bản trên:<br>
+            • Nét Chấm (点): Đỉnh trên cùng.<br>
+            • Nét Ngang (横): Giữa thân trái.<br>
+            • Nét Sổ (竖): Dọc trục chính đứng.<br>
+            • Nét Móc (钩): Móc đáy sổ dọc.<br>
+            • Nét Hất (提): Chéo xiên bên trái lên.<br>
+            • Nét Phẩy (撇): Cong bên trái.<br>
+            • Nét Gập (折): Khung gập bên phải.<br>
+            • Nét Mác (捺): Kéo xiên dài bên phải.
         </div>
 
-        <h2 class="section-title">3. 7 Quy tắc bút thuận cơ bản</h2>
-        <p>Quy định thứ tự viết các nét để chữ viết nhanh, cân đối và đẹp mắt:</p>
-        <ol style="margin-left: 20px; line-height: 1.8;">
-            <li><strong>Ngang trước sổ sau:</strong> Viết nét ngang trước giao với nét sổ sau (Ví dụ: 十).</li>
-            <li><strong>Phẩy trước mác sau:</strong> Viết nét phẩy bên trái trước, nét mác bên phải sau (Ví dụ: 人, 八).</li>
-            <li><strong>Trên trước dưới sau:</strong> Viết các nét/bộ phận ở trên trước, ở dưới sau (Ví dụ: 三).</li>
-            <li><strong>Trái trước phải sau:</strong> Viết bộ phận bên trái trước, bên phải sau (Ví dụ: 你, 川).</li>
-            <li><strong>Ngoài trước trong sau:</strong> Khung ngoài viết trước, nội dung bên trong viết sau (Ví dụ: 月, 同).</li>
-            <li><strong>Vào trước đóng sau:</strong> Viết khung ngoài (không khép đáy) ➔ viết ruột bên trong ➔ đóng nét ngang đáy (Ví dụ: 国, 回).</li>
-            <li><strong>Giữa trước hai bên sau:</strong> Viết nét đứng ở giữa trước, sau đó viết hai nét đối xứng hai bên (Ví dụ: 小, 水).</li>
-        </ol>
+        <h2 class="section-title">3. Các nét biến thể ghép</h2>
+        <ul>
+            <li><strong>横折 (héngzhé - Ngang gập):</strong> Ngang rồi gập vuông góc đi xuống (Ví dụ: 口, 日).</li>
+            <li><strong>竖折 (shùzhé - Sổ gập):</strong> Sổ rồi gập vuông góc sang phải (Ví dụ: 山).</li>
+            <li><strong>竖钩 (shùgōu - Sổ móc):</strong> Sổ thẳng rồi móc nhọn lên bên trái (Ví dụ: 小, 水).</li>
+            <li><strong>斜钩 (xiégōu - Nghiêng móc):</strong> Nghiêng cong kéo từ trên xuống rồi móc chéo lên (Ví dụ: 我).</li>
+        </ul>
+        """,
+        "content_md": """
+### 1. 8 Nét Cơ Bản
+* Chấm (点): 丶
+* Ngang (横): 一
+* Sổ (竖): 丨
+* Phẩy (撇): 丿
+* Mác (捺): 乀
+* Hất (提): ㇀
+* Gập (折): 𠃍
+* Móc (钩): 亅
 
-        <h2 class="section-title">4. Bộ thủ cốt lõi (部首) trong HSK 1</h2>
-        <p>Bộ thủ biểu thị nghĩa khái quát của chữ. Nắm vững 8 bộ thủ cơ bản:</p>
+### 2. Ý nghĩa chữ 永
+Chữ 永 chứa đủ 8 nét viết cơ bản của chữ Hán.
+
+### 3. Nét biến thể ghép
+* Ngang gập (横折) - chữ 口
+* Sổ gập (竖折) - chữ 山
+* Sổ móc (竖钩) - chữ 小
+* Nghiêng móc (斜钩) - chữ 我
+        """
+    },
+    {
+        "title": "Bài 8.3: Quy tắc Bút thuận",
+        "toc_desc": "7 quy tắc viết bút thuận chữ Hán từ trước ra sau, từ trên xuống dưới",
+        "content_html": """
+        <h2 class="section-title">7 Quy tắc Bút thuận cơ bản</h2>
+        <p>Bút thuận là quy định thứ tự viết trước - sau của các nét để chữ Hán viết nhanh, cân đối và đẹp mắt:</p>
         <table>
             <thead>
                 <tr>
-                    <th style="width: 15%;">Bộ thủ</th>
-                    <th style="width: 25%;">Ý nghĩa bộ thủ</th>
-                    <th style="width: 60%;">Ví dụ chữ Hán &amp; Cách dùng</th>
+                    <th style="width: 10%;">STT</th>
+                    <th style="width: 30%;">Quy tắc bút thuận</th>
+                    <th style="width: 45%;">Hướng dẫn chi tiết</th>
+                    <th style="width: 15%;">Ví dụ chữ</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">亻(人)</td>
-                    <td>Nhân (Con người)</td>
-                    <td><strong>你</strong> (bạn), <strong>他</strong> (anh ấy), <strong>men</strong> (chúng tôi)</td>
+                    <td>1</td>
+                    <td><strong>Ngang trước sổ sau</strong></td>
+                    <td>Nét ngang viết trước, nét sổ cắt qua viết sau.</td>
+                    <td><strong>十</strong> (Mười)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">女</td>
-                    <td>Nữ (Phụ nữ)</td>
-                    <td><strong>她</strong> (cô ấy), <strong>妈</strong> (mẹ), <strong>好</strong> (tốt, đẹp)</td>
+                    <td>2</td>
+                    <td><strong>Phẩy trước mác sau</strong></td>
+                    <td>Nét phẩy bên trái viết trước, nét mác bên phải viết sau.</td>
+                    <td><strong>人</strong> (Người)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">口</td>
-                    <td>Khẩu (Cái miệng)</td>
-                    <td><strong>吃</strong> (ăn), <strong>喝</strong> (uống), <strong>叫</strong> (gọi), <strong>吗</strong> (không?)</td>
+                    <td>3</td>
+                    <td><strong>Trên trước dưới sau</strong></td>
+                    <td>Viết các nét ở phía trên trước, nét ở dưới viết sau.</td>
+                    <td><strong>三</strong> (Ba)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">氵(水)</td>
-                    <td>Thủy (Nước, chất lỏng)</td>
-                    <td><strong>水</strong> (nước), <strong>汉</strong> (sông Hán, chữ Hán), <strong>没</strong> (không có)</td>
+                    <td>4</td>
+                    <td><strong>Trái trước phải sau</strong></td>
+                    <td>Phần bên trái chữ viết trước, phần bên phải viết sau.</td>
+                    <td><strong>你</strong> (Bạn)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">木</td>
-                    <td>Mộc (Cây cối, gỗ)</td>
-                    <td><strong>林</strong> (rừng), <strong>桌</strong> (bàn), <strong>杯</strong> (cốc)</td>
+                    <td>5</td>
+                    <td><strong>Ngoài trước trong sau</strong></td>
+                    <td>Khung bao vây ngoài viết trước, bộ phận trong viết sau.</td>
+                    <td><strong>月</strong> (Mặt trăng)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">火 (灬)</td>
-                    <td>Hỏa (Lửa, nhiệt độ)</td>
-                    <td><strong>热</strong> (nóng), <strong>点</strong> (giờ / dấu chấm)</td>
+                    <td>6</td>
+                    <td><strong>Vào trước đóng sau</strong></td>
+                    <td>Viết khung ngoài (hở đáy) ➔ viết ruột ➔ đóng cửa đáy.</td>
+                    <td><strong>国</strong> (Quốc gia)</td>
                 </tr>
                 <tr>
-                    <td class="hanzi" style="font-size:18px;">讠(言)</td>
-                    <td>Ngôn (Lời nói, ngôn ngữ)</td>
-                    <td><strong>说</strong> (nói), <strong>语</strong> (ngôn ngữ), <strong>谁</strong> (ai)</td>
-                </tr>
-                <tr>
-                    <td class="hanzi" style="font-size:18px;">忄(心)</td>
-                    <td>Tâm (Tâm lý, cảm xúc)</td>
-                    <td><strong>忙</strong> (bận), <strong>想</strong> (muốn, nhớ), <strong>怕</strong> (sợ)</td>
+                    <td>7</td>
+                    <td><strong>Giữa trước hai bên sau</strong></td>
+                    <td>Nét thẳng đứng ở giữa viết trước, hai bên viết sau.</td>
+                    <td><strong>小</strong> (Nhỏ)</td>
                 </tr>
             </tbody>
         </table>
-
-        <h2 class="section-title">5. Chữ đơn thể và Chữ hợp thể</h2>
-        <p>Phân loại chữ Hán theo cấu trúc kết hợp nét:</p>
-        <ul>
-            <li><strong>Chữ đơn thể (独体字):</strong> Chữ độc lập tạo từ các nét cơ bản, không tách rời thành bộ phận nhỏ hơn có nghĩa được. Ví dụ: 人, 木, 日, 月, 山, 水, 口, 女.</li>
-            <li><strong>Chữ hợp thể (合体字):</strong> Chữ ghép từ 2 bộ phận trở lên (bộ thủ + chữ đơn thể khác). Có các kiểu kết cấu chính:
-                <br>• Trái - Phải: 好 (女+子), 你 (亻+尔), 忙 (忄+亡)
-                <br>• Trên - Dưới: 爸 (父+巴), 字 (宀+子)
-                <br>• Bao vây: 国 (囗+玉), 回 (囗+口)
-            </li>
-        </ul>
         """,
         "content_md": """
-### 1. Nguồn gốc & Bản chất Chữ Hán
-Chữ Hán là chữ biểu ý, phát triển qua các thời kỳ chính sau:
-*   **Giáp cốt văn (甲骨文):** Khắc trên mai rùa, xương thú. *Ví dụ:* Chữ **日** hình tròn có chấm giữa; chữ **马** vẽ rõ hình con ngựa đứng.
-*   **Kim văn (金文):** Khắc trên đồ đồng. *Ví dụ:* Chữ **日** tròn hơn; chữ **马** thon gọn hơn, vẽ rõ bờm ngựa.
-*   **Tiểu triện (小篆):** Thống nhất thời Tần, nét cong thanh mảnh. *Ví dụ:* Chữ **日** hình chữ nhật bo tròn; chữ **马** nét cong dài dọc đối xứng.
-*   **Lệ thư (隶书):** Chuyển nét cong thành thẳng, gập vuông vức. *Ví dụ:* Chữ **日** vuông vắn hẳn; chữ **马** nét gập, 4 chân thành 4 dấu chấm (**馬**).
-*   **Khải thư (楷书):** Chuẩn mực vuông vức sắc nét. *Ví dụ:* Chữ **日** và chữ **馬** cân đối tối đa.
-*   **Phồn thể & Giản thể:** Phồn thể giữ Khải thư truyền thống (Ví dụ: **馬** - 10 nét). Giản thể lược bớt nét để viết nhanh (Ví dụ: **马** - 3 nét).
+### 7 Quy tắc viết bút thuận
+1. Ngang trước sổ sau: 十
+2. Phẩy trước mác sau: 人
+3. Trên trước dưới sau: 三
+4. Trái trước phải sau: 你
+5. Ngoài trước trong sau: 月
+6. Vào trước đóng sau: 国
+7. Giữa trước hai bên sau: 小
+        """
+    },
+    {
+        "title": "Bài 8.4: Hệ thống Bộ thủ",
+        "toc_desc": "Vai trò bộ thủ biểu nghĩa và 8 bộ thủ cốt lõi của trình độ HSK 1",
+        "content_html": """
+        <h2 class="section-title">1. Khái niệm Bộ thủ (部首)</h2>
+        <p>Bộ thủ là bộ phận biểu ý chính của chữ Hán, giúp chúng ta nhận diện ý nghĩa khái quát của từ mặc dù chưa biết cách đọc.</p>
+        
+        <h2 class="section-title">2. 8 Bộ thủ cốt lõi trình độ HSK 1</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Bộ thủ</th>
+                    <th style="width: 25%;">Ý nghĩa gốc</th>
+                    <th style="width: 40%;">Mô tả ngữ nghĩa liên quan</th>
+                    <th style="width: 20%;">Ví dụ chữ Hán</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>亻(人)</strong></td>
+                    <td>Nhân (Con người)</td>
+                    <td>Liên quan đến con người, danh xưng, hoạt động của người.</td>
+                    <td><strong>他</strong> (anh ấy), <strong>ni</strong> (bạn)</td>
+                </tr>
+                <tr>
+                    <td><strong>女</strong></td>
+                    <td>Nữ (Phụ nữ)</td>
+                    <td>Liên quan đến phái đẹp, người nữ, gia đình.</td>
+                    <td><strong>她</strong> (cô ấy), <strong>妈</strong> (mẹ)</td>
+                </tr>
+                <tr>
+                    <td><strong>口</strong></td>
+                    <td>Khẩu (Miệng)</td>
+                    <td>Liên quan đến ăn uống, kêu gọi, bộ phận ở miệng.</td>
+                    <td><strong>吃</strong> (ăn), <strong>喝</strong> (uống)</td>
+                </tr>
+                <tr>
+                    <td><strong>氵(水)</strong></td>
+                    <td>Thủy (Nước)</td>
+                    <td>Liên quan đến chất lỏng, sông ngòi, nước nói chung.</td>
+                    <td><strong>没</strong> (không có), <strong>汉</strong> (Hán)</td>
+                </tr>
+                <tr>
+                    <td><strong>木</strong></td>
+                    <td>Mộc (Cây, Gỗ)</td>
+                    <td>Liên quan đến cây cối, rừng rậm hoặc đồ dùng bằng gỗ.</td>
+                    <td><strong>杯</strong> (cốc), <strong>桌</strong> (bàn)</td>
+                </tr>
+                <tr>
+                    <td><strong>火 (灬)</strong></td>
+                    <td>Hỏa (Lửa)</td>
+                    <td>Liên quan đến nhiệt độ, sức nóng, nấu nướng.</td>
+                    <td><strong>热</strong> (nóng), <strong>点</strong> (giờ)</td>
+                </tr>
+                <tr>
+                    <td><strong>讠(言)</strong></td>
+                    <td>Ngôn (Lời nói)</td>
+                    <td>Liên quan đến giao tiếp, đối thoại, phát ngôn.</td>
+                    <td><strong>说</strong> (nói), <strong>语</strong> (ngôn ngữ)</td>
+                </tr>
+                <tr>
+                    <td><strong>忄(心)</strong></td>
+                    <td>Tâm (Cảm xúc)</td>
+                    <td>Liên quan đến suy nghĩ, tâm trạng, tình cảm tâm lý.</td>
+                    <td><strong>忙</strong> (bận), <strong>想</strong> (muốn/nhớ)</td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        "content_md": """
+### 1. Khái niệm Bộ thủ
+Bộ thủ là thành phần quy định nghĩa của chữ.
 
-**Cấu tạo theo Lục thư (6 cách tạo chữ):**
-*   **Chữ Tượng hình (象形):** Vẽ lại hình dáng thực tế của vật (Ví dụ: 日, 月, 木, 山, 人).
-*   **Chữ Chỉ sự (指事):** Ký hiệu biểu thị khái niệm trừu tượng (Ví dụ: 上, 下, 本).
-*   **Chữ Hội ý (会意):** Ghép nghĩa các chữ đơn lẻ thành nghĩa mới (Ví dụ: 休 = người 人 tựa gốc cây 木; 明 = nhật 日 + nguyệt 月; 好 = nữ 女 + tử 子).
-*   **Chữ Hình thanh (形声):** Ghép phần chỉ nghĩa (bộ thủ) và phần chỉ cách đọc (Ví dụ: 妈 - mẹ, 爸 - bố).
+### 2. 8 Bộ thủ cơ bản HSK 1
+* **亻(人) - Nhân:** 他, 你
+* **女 - Nữ:** 她, 妈
+* **口 - Khẩu:** 吃, 喝
+* **氵(水) - Thủy:** 没, 汉
+* **木 - Mộc:** 杯, 桌
+* **火 (灬) - Hỏa:** 热, 点
+* **讠(言) - Ngôn:** 说, 语
+* **忄(心) - Tâm:** 忙, 想
+        """
+    },
+    {
+        "title": "Bài 8.5: Đơn thể & Hợp thể",
+        "toc_desc": "Phân loại chữ Đơn thể độc lập và Chữ Hợp thể ghép theo cấu trúc",
+        "content_html": """
+        <h2 class="section-title">1. Chữ Đơn thể (独体字)</h2>
+        <p>Là kiểu chữ độc lập cấu thành trực tiếp từ các nét vẽ gốc, không thể bóc tách nhỏ hơn thành các bộ phận có nghĩa lẻ. Đóng vai trò làm bộ thủ hoặc khối gốc xây dựng các chữ khác.</p>
+        <div class="info-box">
+            <strong>Ví dụ tiêu biểu:</strong> <strong>人</strong> (Người), <strong>木</strong> (Cây), <strong>日</strong> (Mặt trời), <strong>月</strong> (Mặt trăng), <strong>山</strong> (Núi), <strong>水</strong> (Nước), <strong>口</strong> (Miệng), <strong>女</strong> (Phụ nữ).
+        </div>
 
-### 2. 8 Nét viết cơ bản (永字八法)
-*   **Chấm (点 - diǎn):** Dấu chấm từ trên xuống (Ví dụ: 主, 六).
-*   **Ngang (横 - héng):** Ngang từ trái sang phải (Ví dụ: 一, 二, 三).
-*   **Sổ (竖 - shù):** Thẳng đứng từ trên xuống (Ví dụ: 十, 中).
-*   **Phẩy (撇 - piě):** Cong từ trên xuống sang trái (Ví dụ: 人, 八).
-*   **Mác (捺 - nà):** Thẳng xiên từ trên xuống sang phải (Ví dụ: 人, 八, 木).
-*   **Hất (提 - tí):** Chéo thẳng từ dưới lên sang phải (Ví dụ: 我, 打).
-*   **Gập (折 - zhé):** Gập khúc vuông góc (Ví dụ: 口, 日).
-*   **Móc (钩 - gōu):** Móc nhỏ ở cuối nét (Ví dụ: 小, 水, 手).
+        <h2 class="section-title">2. Chữ Hợp thể (合体字)</h2>
+        <p>Là kiểu chữ phức hợp ghép từ hai hay nhiều bộ phận nhỏ hơn (các bộ thủ kết hợp với chữ đơn thể). Có 3 kiểu cấu trúc ghép phổ biến nhất:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Cấu trúc ghép</th>
+                    <th style="width: 40%;">Hướng dẫn nhận diện</th>
+                    <th style="width: 30%;">Ví dụ chữ Hán</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Kết cấu Trái - Phải</strong></td>
+                    <td>Hai bộ phận xếp song hành từ trái qua phải.</td>
+                    <td><strong>好</strong> (Nữ 女 + Tử 子)<br><strong>你</strong> (Nhân 亻 + Nhĩ 尔)</td>
+                </tr>
+                <tr>
+                    <td><strong>Kết cấu Trên - Dưới</strong></td>
+                    <td>Hai bộ phận xếp chồng lên nhau từ trên xuống dưới.</td>
+                    <td><strong>爸</strong> (Phụ 父 + Ba Ba)<br><strong>字</strong> (Miên 宀 + Tử 子)</td>
+                </tr>
+                <tr>
+                    <td><strong>Kết cấu Bao vây</strong></td>
+                    <td>Khung ngoài ôm bao bọc bộ phận nhỏ hơn ở trong.</td>
+                    <td><strong>国</strong> (Vi 囗 + Ngọc 玉)<br><strong>回</strong> (Vi 囗 + Khẩu 口)</td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        "content_md": """
+### 1. Chữ Đơn thể
+* Chữ độc lập tạo từ nét vẽ gốc.
+* Ví dụ: 人, 木, 日, 月, 山, 水, 口, 女.
 
-### 3. 7 Quy tắc bút thuận cơ bản
-1.  **Ngang trước sổ sau:** 十
-2.  **Phẩy trước mác sau:** 人, 八
-3.  **Trên trước dưới sau:** 三
-4.  **Trái trước phải sau:** 你, 川
-5.  **Ngoài trước trong sau:** 月, 同
-6.  **Vào trước đóng sau:** 国, 回
-7.  **Giữa trước hai bên sau:** 小, 水
-
-### 4. 8 Bộ thủ cốt lõi HSK 1
-*   **亻(人) - Bộ Nhân (Người):** 你, 他, 们
-*   **女 - Bộ Nữ (Phụ nữ):** 她, 妈, 好
-*   **口 - Bộ Khẩu (Miệng):** 吃, 喝, 叫, 吗
-*   **氵(水) - Bộ Thủy (Nước):** 水, 汉, 没
-*   **木 - Bộ Mộc (Cây/Gỗ):** 林, 桌, 杯
-*   **火 (灬) - Bộ Hỏa (Lửa):** 热, 点
-*   **讠(言) - Bộ Ngôn (Lời nói):** 说, 语, 谁
-*   **忄(心) - Bộ Tâm (Cảm xúc):** 忙, 想, 怕
-
-### 5. Chữ đơn thể và Chữ hợp thể
-*   **Chữ đơn thể (独体字):** Chữ độc lập, cấu tạo trực tiếp từ nét bút, không tách nhỏ được (Ví dụ: 人, 木, 日, 月, 山, 水, 口, 女).
-*   **Chữ hợp thể (合体字):** Chữ ghép từ các chữ đơn thể hoặc bộ thủ (Ví dụ: 好 = 女 + 子; 爸 = 父 + Ba; 国 = 囗 + 玉). Các kiểu cấu trúc phổ biến: Trái-Phải, Trên-Dưới, Bao vây.
+### 2. Chữ Hợp thể
+* Chữ ghép từ các thành phần chữ đơn thể khác.
+* **Trái - Phải:** 好 (女+子), 你 (亻+尔).
+* **Trên - Dưới:** 爸 (父+巴), 字 (宀+子).
+* **Bao vây:** 国 (囗+玉), 回 (囗+口).
         """
     }
 ]

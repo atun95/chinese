@@ -273,20 +273,20 @@ def show_lesson8_2_strokes():
         render_hanzi_anim("永", width=160, height=160, key="yong_explain")
 
     st.subheader("3. Các nét biến thể ghép")
+    st.write("Nhấp vào các ô bên dưới để xem cách viết các nét biến thể ghép:")
     compound_strokes = [
-        {"stroke": "横折 (héng zhé)", "desc": "Ngang gập (ví dụ trong chữ <b>口</b>, <b>日</b>)"},
-        {"stroke": "竖折 (shù zhé)", "desc": "Sổ gập (ví dụ trong chữ <b>山</b>)"},
-        {"stroke": "竖钩 (shù gōu)", "desc": "Sổ móc (ví dụ trong chữ <b>小</b>, <b>水</b>)"},
-        {"stroke": "斜钩 (xié gōu)", "desc": "Nghiêng móc (ví dụ trong chữ <b>我</b>)"}
+        {"stroke": "横折 (héng zhé)", "name": "Ngang Gập", "path": "M 25 40 L 75 40 L 75 75", "desc": "Ngang rồi gập dọc (Ví dụ: 口, 日)"},
+        {"stroke": "竖折 (shù zhé)", "name": "Sổ Gập", "path": "M 35 30 L 35 70 L 75 70", "desc": "Sổ rồi gập ngang (Ví dụ: 山)"},
+        {"stroke": "竖钩 (shù gōu)", "name": "Sổ Móc", "path": "M 50 20 L 50 75 L 35 60", "desc": "Sổ rồi móc lên trái (Ví dụ: 小, 水)"},
+        {"stroke": "斜钩 (xié gōu)", "name": "Nghiêng Móc", "path": "M 35 25 Q 55 60 65 75 L 53 65", "desc": "Cong nghiêng rồi móc lên (Ví dụ: 我)"}
     ]
-    cols = st.columns(2)
-    for i, cs in enumerate(compound_strokes):
-        with cols[i % 2]:
-            st.markdown(f"""
-            <div style="background-color:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:8px 12px; margin-bottom:8px;">
-                <span style="font-weight:bold; color:#e11d48;">{cs['stroke']}</span>: {cs['desc']}
-            </div>
-            """, unsafe_allow_html=True)
+    cols = st.columns(4)
+    for idx, cs in enumerate(compound_strokes):
+        with cols[idx]:
+            st.write(f"✍️ **{cs['name']}**")
+            st.write(f"<small>{cs['stroke']}: {cs['desc']}</small>", unsafe_allow_html=True)
+            render_stroke_anim(cs['path'], key=f"compound_char_{idx}")
+            st.markdown("<br/>", unsafe_allow_html=True)
 
 def show_lesson8_3_rules():
     inject_lesson8_css()
@@ -328,34 +328,72 @@ def show_lesson8_4_radicals():
     inject_lesson8_css()
     render_lesson_intro(
         "🧩 Bài 8.4 - Hệ thống Bộ thủ",
-        "Nhận diện 8 bộ thủ cơ bản đại diện cho nhóm ý nghĩa trong chữ Hán."
+        "Học 8 bộ thủ cơ bản HSK 1 qua thẻ ghi nhớ (Flashcards) tương tác."
     )
-    st.subheader("1. Khái niệm Bộ thủ")
-    st.write("Bộ thủ biểu thị nhóm ý nghĩa khái quát của chữ Hán. HSK 1 cần nhớ 8 bộ thủ sau:")
 
     radicals_data = [
-        {"bo": "亻(人)", "name": "Bộ Nhân (Người)", "char": "他", "desc": "Chỉ người, hành động của người"},
-        {"bo": "女", "name": "Bộ Nữ (Phụ nữ)", "char": " she", "char": "彼女", "char": "彼女", "char": "她", "desc": "Chỉ phụ nữ, quan hệ gia đình"},
-        {"bo": "口", "name": "Bộ Khẩu (Miệng)", "char": "吃", "desc": "Liên quan đến ăn uống, lời nói"},
-        {"bo": "氵(水)", "name": "Bộ Thủy (Nước)", "char": "没", "desc": "Liên quan đến nước, chất lỏng"},
-        {"bo": "木", "name": "Bộ Mộc (Cây/Gỗ)", "char": "杯", "desc": "Liên quan đến thực vật, bàn ghế, cốc gỗ"},
-        {"bo": "火 (灬)", "name": "Bộ Hỏa (Lửa)", "char": "热", "desc": "Liên quan đến lửa, nhiệt độ"},
-        {"bo": "讠(言)", "name": "Bộ Ngôn (Lời nói)", "char": "说", "desc": "Liên quan đến giao tiếp, ngôn ngữ"},
-        {"bo": "忄(心)", "name": "Bộ Tâm (Cảm xúc)", "char": "忙", "desc": "Liên quan đến tâm lý, tâm trạng"}
+        {"bo": "亻 (人)", "name": "Bộ Nhân", "meaning": "Người", "char": "..."},
+        {"bo": "亻 (人)", "name": "Bộ Nhân", "meaning": "Người", "char": "他", "desc": "Liên quan đến con người, danh xưng, hoạt động của người."},
+        {"bo": "女", "name": "Bộ Nữ", "meaning": "Phụ nữ", "char": "她", "desc": "Liên quan đến phái đẹp, người nữ, quan hệ gia đình."},
+        {"bo": "口", "name": "Bộ Khẩu", "meaning": "Miệng", "char": "吃", "desc": "Liên quan đến ăn uống, kêu gọi, bộ phận ở miệng."},
+        {"bo": "氵 (水)", "name": "Bộ Thủy", "meaning": "Nước", "char": "没", "desc": "Liên quan đến chất lỏng, sông ngòi, nước nói chung."},
+        {"bo": "木", "name": "Bộ Mộc", "meaning": "Cây/Gỗ", "char": "杯", "desc": "Liên quan đến cây cối, rừng rậm hoặc đồ dùng bằng gỗ."},
+        {"bo": "火 (灬)", "name": "Bộ Hỏa", "meaning": "Lửa", "char": "热", "desc": "Liên quan đến nhiệt độ, sức nóng, nấu nướng."},
+        {"bo": "讠 (言)", "name": "Bộ Ngôn", "meaning": "Lời nói", "char": "说", "desc": "Liên quan đến giao tiếp, đối thoại, phát ngôn."},
+        {"bo": "忄 (心)", "name": "Bộ Tâm", "meaning": "Cảm xúc", "char": "忙", "desc": "Liên quan đến suy nghĩ, tâm trạng, tình cảm tâm lý."}
     ]
+    # Remove dummy item
+    radicals_data = radicals_data[1:]
 
-    cols = st.columns(4)
-    for idx, r in enumerate(radicals_data):
-        with cols[idx % 4]:
-            st.markdown(f"""
-            <div style="background-color:#fff1f2; border:1px solid #fecdd3; border-radius:8px; padding:10px; text-align:center; margin-bottom:5px;">
-                <span style="font-size:1.5rem; font-weight:bold; color:#e11d48;">{r['bo']}</span><br/>
-                <b>{r['name']}</b><br/>
-                <small style="color:#475569;">{r['desc']}</small>
+    if "radical_idx" not in st.session_state:
+        st.session_state.radical_idx = 0
+
+    col_prev, col_info, col_next = st.columns([2, 6, 2])
+    
+    with col_prev:
+        st.write("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+        if st.button("◀ Thẻ trước", key="btn_prev_rad", use_container_width=True):
+            st.session_state.radical_idx = (st.session_state.radical_idx - 1) % len(radicals_data)
+            st.rerun()
+
+    with col_next:
+        st.write("<div style='height: 100px;'></div>", unsafe_allow_html=True)
+        if st.button("Thẻ sau ▶", key="btn_next_rad", use_container_width=True):
+            st.session_state.radical_idx = (st.session_state.radical_idx + 1) % len(radicals_data)
+            st.rerun()
+
+    current_idx = st.session_state.radical_idx
+    r = radicals_data[current_idx]
+
+    with col_info:
+        st.markdown(f"""
+        <div style="background: linear-gradient(145deg, #ffffff 0%, #fff1f2 100%); 
+                    border: 2px solid #fecdd3; 
+                    border-radius: 20px; 
+                    padding: 25px; 
+                    box-shadow: 0 10px 25px rgba(225, 29, 72, 0.08); 
+                    text-align: center; 
+                    margin-top: 10px;">
+            <span style="background-color: #ffe4e6; color: #e11d48; padding: 4px 14px; border-radius: 12px; font-weight: bold; font-size: 0.9rem;">
+                BỘ THỦ {current_idx + 1} / {len(radicals_data)}
+            </span>
+            <div style="font-size: 5rem; font-weight: bold; color: #e11d48; margin: 15px 0 5px 0; line-height: 1;">
+                {r['bo']}
             </div>
-            """, unsafe_allow_html=True)
-            render_hanzi_anim(r['char'], width=100, height=100, key=f"rad_anim_{idx}")
-            st.markdown("<br/>", unsafe_allow_html=True)
+            <h3 style="color: #1e293b; margin: 0 0 10px 0; font-size: 1.5rem;">{r['name']} ({r['meaning']})</h3>
+            <p style="color: #475569; font-size: 1rem; line-height: 1.6; max-width: 500px; margin: 0 auto 20px auto;">
+                {r['desc']}
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<div style='text-align: center; font-weight: bold; margin-top: 20px; color: #1e3a8a;'>Ví dụ chữ Hán chứa bộ thủ:</div>", unsafe_allow_html=True)
+        col_char, col_btn = st.columns([1, 1])
+        with col_char:
+            render_hanzi_anim(r['char'], width=120, height=120, key=f"flash_rad_char_{current_idx}")
+        with col_btn:
+            st.write("<div style='height: 35px;'></div>", unsafe_allow_html=True)
+            render_play_button(r['char'], f"🔊 Phát âm chữ: {r['char']}", key=f"play_flash_{current_idx}")
 
 def show_lesson8_5_structures():
     inject_lesson8_css()
