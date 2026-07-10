@@ -194,11 +194,18 @@ def show_lesson8_1_hanzi_strokes():
         <div class="info-box-premium">
             <strong>💡 Quá trình phát triển của chữ Hán qua các thời kỳ:</strong><br/>
             • <b>Giáp cốt văn (甲骨文):</b> Chữ khắc trên mai rùa, xương thú thời nhà Thương (khoảng 3000 năm trước), mang tính tượng hình rất đậm nét.<br/>
-            • <b>Kim văn (金文):</b> Chữ khắc trên đồ đồng thời nhà Chu.<br/>
-            • <b>Tiểu triện (小篆):</b> Kiểu chữ thống nhất thời Tần Thủy Hoàng, nét vẽ uốn lượn nghệ thuật.<br/>
-            • <b>Lệ thư (隶书):</b> Bước ngoặt giản lược các đường cong thành các nét thẳng, vuông vắn hơn.<br/>
-            • <b>Khải thư (楷书):</b> Kiểu chữ chuẩn mực, vuông vức, rõ nét dùng từ thời Đông Hán đến nay.<br/>
-            • <b>Chữ Giản thể (简体字) & Phồn thể (繁体字):</b> Chữ Phồn thể (nhiều nét, giữ truyền thống) hiện dùng tại Đài Loan, Hồng Kông. Chữ Giản thể (lược bớt nét) được dùng phổ biến tại Trung Quốc đại lục và Singapore từ giữa thế kỷ 20.
+            &nbsp;&nbsp; <i>Ví dụ:</i> Chữ <b>日</b> (mặt trời) thuở sơ khai được khắc là một hình tròn có một dấu chấm tròn ở giữa biểu thị tâm mặt trời; chữ <b>马</b> (ngựa) vẽ rõ nét con ngựa đứng có đầu, bờm và bốn chân.<br/>
+            • <b>Kim văn (金文):</b> Chữ khắc trên chuông, đỉnh và đồ dùng bằng đồng thời nhà Chu. Nét chữ dày dặn hơn, bớt đi các góc nhọn sắc của nét khắc xương.<br/>
+            &nbsp;&nbsp; <i>Ví dụ:</i> Chữ <b>日</b> trong Kim văn được viết tròn hơn, dấu chấm ở giữa to rõ; chữ <b>马</b> được làm thon gọn lại, chú trọng nét vẽ bờm và đầu ngựa.<br/>
+            • <b>Tiểu triện (小篆):</b> Kiểu chữ thống nhất thời Tần Thủy Hoàng. Nét vẽ uốn lượn tròn trịa, dài và thanh mảnh, mang tính thẩm mỹ cao.<br/>
+            &nbsp;&nbsp; <i>Ví dụ:</i> Chữ <b>日</b> kéo dài thành hình chữ nhật đứng bo tròn góc với nét ngang ở giữa; chữ <b>马</b> được chuẩn hóa thành các nét cong dài xếp dọc đối xứng.<br/>
+            • <b>Lệ thư (隶书):</b> Bước ngoặt lớn nhất, biến các nét cong uốn lượn của Tiểu triện thành các nét thẳng, gập vuông vắn để thuận tiện viết nhanh bằng bút lông.<br/>
+            &nbsp;&nbsp; <i>Ví dụ:</i> Chữ <b>日</b> trở nên vuông vắn hoàn toàn; chữ <b>马</b> biến đổi các nét vẽ bờm thành các nét ngang dọc thẳng đứng, 4 chân ngựa biến thành 4 dấu chấm ở đáy (<b>馬</b>).<br/>
+            • <b>Khải thư (楷书):</b> Kiểu chữ chuẩn mực, vuông vức, cân đối và sắc nét nhất, kế thừa Lệ thư và ổn định cấu trúc chữ từ thời Đông Hán cho đến nay.<br/>
+            &nbsp;&nbsp; <i>Ví dụ:</i> Chữ <b>日</b> và chữ <b>馬</b> đạt độ cân đối thẩm mỹ tối đa, là kiểu chữ in sách chuẩn ngày nay.<br/>
+            • <b>Chữ Giản thể (简体字) & Phồn thể (繁体字):</b><br/>
+            &nbsp;&nbsp; - <b>Phồn thể:</b> Giữ nguyên các nét của Khải thư truyền thống (dùng ở Đài Loan, Hồng Kông). <i>Ví dụ:</i> Chữ <b>馬</b> (ngựa) có 10 nét.<br/>
+            &nbsp;&nbsp; - <b>Giản thể:</b> Phiên bản rút gọn nét của chữ Phồn thể để giúp người dân học và viết nhanh hơn (dùng ở Trung Quốc đại lục, Singapore). <i>Ví dụ:</i> Chữ <b>馬</b> được giản lược thành <b>马</b> (chỉ còn 3 nét, 4 dấu chấm chân ngựa bên dưới biến thành 1 nét ngang dài).
         </div>
         """, unsafe_allow_html=True)
 

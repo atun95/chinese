@@ -1546,8 +1546,17 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
         "title": "Bài 8.1: Chữ Hán, Nét viết, Bút thuận & Cấu tạo chữ",
         "toc_desc": "Nguồn gốc chữ Hán, Lục thư, 8 nét cơ bản, Quy tắc bút thuận, Bộ thủ, Chữ đơn thể & hợp thể",
         "content_html": """
-        <h2 class="section-title">1. Nguồn gốc & Cấu tạo Chữ Hán (Lục thư)</h2>
-        <p>Chữ Hán (汉字) là hệ chữ biểu ý có lịch sử lâu đời. Trong Lục thư (6 cách tạo chữ), có 4 cách quan trọng nhất:</p>
+        <h2 class="section-title">1. Nguồn gốc & Bản chất Chữ Hán (Các thời kỳ phát triển)</h2>
+        <p>Chữ Hán (汉字) là hệ chữ biểu ý, trải qua các giai đoạn phát triển chính sau:</p>
+        <div class="info-box" style="margin-bottom: 15px;">
+            • <strong>Giáp cốt văn (甲骨文):</strong> Chữ khắc trên mai rùa, xương thú thời nhà Thương (khoảng 3000 năm trước), mang tính tượng hình rất đậm nét. <i>Ví dụ:</i> Chữ <strong>日</strong> (mặt trời) thuở sơ khai được khắc là một hình tròn có một dấu chấm ở giữa biểu thị tâm mặt trời; chữ <strong>马</strong> (ngựa) vẽ rõ nét con ngựa đứng có đầu, bờm và bốn chân.<br>
+            • <strong>Kim văn (金文):</strong> Chữ khắc trên chuông, đỉnh và đồ dùng bằng đồng thời nhà Chu. Nét chữ dày dặn hơn. <i>Ví dụ:</i> Chữ <strong>日</strong> được viết tròn hơn, dấu chấm ở giữa to rõ; chữ <strong>马</strong> được làm thon gọn lại, chú trọng nét vẽ bờm và đầu ngựa.<br>
+            • <strong>Tiểu triện (小篆):</strong> Kiểu chữ thống nhất thời Tần Thủy Hoàng. Nét vẽ uốn lượn tròn trịa, thanh mảnh. <i>Ví dụ:</i> Chữ <strong>日</strong> kéo dài thành hình chữ nhật đứng bo tròn góc với nét ngang ở giữa; chữ <strong>马</strong> được chuẩn hóa thành các nét cong xếp dọc đối xứng.<br>
+            • <strong>Lệ thư (隶书):</strong> Bước ngoặt lớn nhất, biến nét cong uốn lượn thành nét thẳng, gập vuông vức để viết bằng bút lông nhanh hơn. <i>Ví dụ:</i> Chữ <strong>日</strong> vuông vắn hẳn; chữ <strong>马</strong> biến đổi thành nét ngang dọc, bốn chân ngựa biến thành bốn dấu chấm ở đáy (<strong>馬</strong>).<br>
+            • <strong>Khải thư (楷书):</strong> Kiểu chữ chuẩn mực, vuông vức, cân đối nhất từ thời Đông Hán đến nay. <i>Ví dụ:</i> Chữ <strong>日</strong> và chữ <strong>馬</strong> đạt độ cân đối thẩm mỹ tối đa.<br>
+            • <strong>Giản thể (简体字) & Phồn thể (繁体字):</strong> Chữ Phồn thể giữ nguyên nét của Khải thư (Ví dụ: <strong>馬</strong> - 10 nét). Chữ Giản thể lược bớt nét để viết nhanh hơn (Ví dụ: <strong>马</strong> - 3 nét, bốn chấm biến thành nét ngang dài).
+        </div>
+        <p><strong>Cấu tạo Chữ Hán theo Lục thư:</strong> Trong 6 cách tạo chữ truyền thống, có 4 cách cơ bản nhất:</p>
         <table>
             <thead>
                 <tr>
