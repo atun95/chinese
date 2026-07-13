@@ -945,3 +945,177 @@ def show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7
             st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
             st.dataframe(all_scores, use_container_width=True)
 
+
+def show_lesson7_vocab():
+    st.markdown("""
+    <style>
+    .vocab-section-title-b7 {
+        color: #1e3a8a;
+        border-left: 5px solid #e11d48;
+        padding-left: 12px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-weight: 700;
+        font-size: 1.4rem;
+    }
+    .vocab-card-b7 {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 280px;
+    }
+    .vocab-card-b7:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+        border-color: #cbd5e1;
+    }
+    .vocab-word-b7 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #e11d48;
+        margin-bottom: 2px;
+        line-height: 1.2;
+    }
+    .vocab-pinyin-b7 {
+        font-family: 'Courier New', monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #2563eb;
+        margin-bottom: 6px;
+    }
+    .vocab-viet-b7 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 10px;
+    }
+    .vocab-ex-box-b7 {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid #f1f5f9;
+    }
+    .vocab-ex-title-b7 {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+    .vocab-ex-han-b7 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #1e293b;
+        display: block;
+        margin-bottom: 1px;
+    }
+    .vocab-ex-py-b7 {
+        font-family: 'Courier New', monospace;
+        color: #059669;
+        display: block;
+        margin-bottom: 2px;
+        font-size: 0.8rem;
+    }
+    .vocab-ex-vi-b7 {
+        color: #475569;
+        font-style: italic;
+        display: block;
+        font-size: 0.78rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "📚 Bài 7: Hệ thống từ vựng",
+        "Học các từ vựng theo nhóm về hoạt động thường ngày, thời gian, từ để hỏi và giao tiếp lịch sự."
+    )
+
+    groups = [
+        {
+            "name": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+            "items": [
+                {"word": "吃饭", "pinyin": "chī fàn", "vietnamese": "ăn cơm", "example_han": "我们去吃饭吧。", "example_py": "Wǒmen qù chī fàn ba.", "example_vi": "Chúng ta đi ăn cơm đi."},
+                {"word": "做", "pinyin": "zuò", "vietnamese": "làm", "example_han": "你在做什么？", "example_py": "Nǐ zài zuò shénme?", "example_vi": "Bạn đang làm gì?"},
+                {"word": "工作", "pinyin": "gōngzuò", "vietnamese": "công việc / làm việc", "example_han": "我很喜欢我的工作。", "example_py": "Wǒ hěn xǐhuān wǒ de gōngzuò.", "example_vi": "Tôi rất thích công việc của tôi."},
+                {"word": "你在做什么？", "pinyin": "nǐ zài zuò shénme?", "vietnamese": "bạn đang làm gì?", "example_han": "你在做什么？我在工作。", "example_py": "Nǐ zài zuò shénme? Wǒ zài gōngzuò.", "example_vi": "Bạn đang làm gì? Tôi đang làm việc."},
+                {"word": "坐飞机", "pinyin": "zuò fēi jī", "vietnamese": "ngồi máy bay / đi máy bay", "example_han": "我坐飞机去北京。", "example_py": "Wǒ zoù fēi jī qù Běijīng.", "example_vi": "Tôi đi máy bay đến Bắc Kinh."}
+            ]
+        },
+        {
+            "name": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+            "items": [
+                {"word": "还没", "pinyin": "hái méi", "vietnamese": "chưa (not yet)", "example_han": "他还没来。", "example_py": "Tā hái méi lái.", "example_vi": "Anh ấy chưa đến."},
+                {"word": "哪个人", "pinyin": "nǎ ge rén", "vietnamese": "người nào", "example_han": "哪个人是你的老师？", "example_py": "Nǎ ge rén  shì nǐ de lǎoshī?", "example_vi": "Người nào là giáo viên của bạn?"},
+                {"word": "日", "pinyin": "rì", "vietnamese": "ngày (văn viết)", "example_han": "十月一日是国庆节。", "example_py": "Shí yuè yī rì  shì guóqìng jié.", "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."},
+                {"word": "天", "pinyin": "tiān", "vietnamese": "ngày (bao nhiêu ngày)", "example_han": "我去北京三天。", "example_py": "Wǒ qù Běijīng sān tiān.", "example_vi": "Tôi đi Bắc Kinh ba ngày."},
+                {"word": "号", "pinyin": "hào", "vietnamese": "ngày (trong câu hỏi hỏi ngày mấy / văn nói)", "example_han": "今天几号？", "example_py": "Jīntiān jǐ hào?", "example_vi": "Hôm nay ngày mấy?"}
+            ]
+        },
+        {
+            "name": "🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际)",
+            "items": [
+                {"word": "因为", "pinyin": "yīn wèi", "vietnamese": "tại vì / bởi vì", "example_han": "因为今天很忙，我不去。", "example_py": "Yīnwèi jīntiān hěn máng, wǒ bú qù.", "example_vi": "Vì hôm nay rất bận nên tôi không đi."},
+                {"word": "没关系", "pinyin": "méi guān xi", "vietnamese": "không sao / không có gì", "example_han": "对不起！没关系。", "example_py": "Duìbuqǐ! Méi guān xi.", "example_vi": "Xin lỗi! Không sao đâu."},
+                {"word": "不客气", "pinyin": "bù kè qì", "vietnamese": "đừng khách sáo / không có gì", "example_han": "谢谢`你！不客气。", "example_py": "Xièxie nǐ! Bú kèqi.", "example_vi": "Cảm ơn bạn! Đừng khách sáo."},
+                {"word": "哪里！", "pinyin": "nǎlǐ!", "vietnamese": "nhận được lời khen, tỏ ra khiêm tốn (đâu có!)", "example_han": "你汉语很好！哪里，哪里！", "example_py": "Nǐ Hànyǔ hěn hǎo! Nǎlǐ, nǎlǐ!", "example_vi": "Tiếng Trung của bạn rất tốt! Đâu có, đâu có!"}
+            ]
+        }
+    ]
+
+    group_key = "b7_vocab_group_idx"
+    if group_key not in st.session_state:
+        st.session_state[group_key] = 0
+
+    cur_group_idx = st.session_state[group_key]
+    if cur_group_idx >= len(groups):
+        cur_group_idx = 0
+        st.session_state[group_key] = 0
+
+    cur_group = groups[cur_group_idx]
+
+    # Navigation controller
+    col_prev, col_title, col_next = st.columns([1.5, 4, 1.5])
+    with col_prev:
+        if st.button("⬅️ Nhóm trước", use_container_width=True, key="b7_g_prev"):
+            st.session_state[group_key] = (cur_group_idx - 1) % len(groups)
+            st.rerun()
+    with col_title:
+        st.markdown(f"<div style='text-align: center; font-size: 1.25rem; font-weight: bold; color: #e11d48; padding: 6px; background: #fff1f2; border-radius: 8px; border: 1px solid #fecdd3;'>{cur_group['name']}</div>", unsafe_allow_html=True)
+    with col_next:
+        if st.button("Nhóm sau ➡️", use_container_width=True, key="b7_g_next"):
+            st.session_state[group_key] = (cur_group_idx + 1) % len(groups)
+            st.rerun()
+
+    st.markdown(f"<div style='text-align: center; font-size: 1rem; font-weight: bold; margin-top: 5px; color:#475569;'>Nhóm {cur_group_idx + 1} / {len(groups)}</div>", unsafe_allow_html=True)
+    st.progress((cur_group_idx + 1) / len(groups))
+
+    # Render active group cards
+    items = cur_group["items"]
+    cols = st.columns(len(items))
+    for idx, item in enumerate(items):
+        with cols[idx]:
+            card_html = f"""<div class="vocab-card-b7">
+<div>
+<div class="vocab-word-b7">{item['word']}</div>
+<div class="vocab-pinyin-b7">{item['pinyin']}</div>
+<div class="vocab-viet-b7">Nghĩa: {item['vietnamese']}</div>
+<div class="vocab-ex-box-b7">
+<div class="vocab-ex-title-b7">Ví dụ:</div>
+<div class="vocab-ex-han-b7">{item['example_han']}</div>
+<div class="vocab-ex-py-b7">{item['example_py']}</div>
+<div class="vocab-ex-vi-b7">{item['example_vi']}</div>
+</div>
+</div>
+</div>""".replace("\n", " ")
+            st.markdown(card_html, unsafe_allow_html=True)
+            render_play_button(item['word'], "🔊 Đọc từ", key=f"v7_g{cur_group_idx}_w_{idx}")
+            render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v7_g{cur_group_idx}_ex_{idx}")
+
+
