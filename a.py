@@ -725,7 +725,7 @@ st.markdown(
 
 st.sidebar.header("Danh mục giáo án")
 
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "🖨️ In ấn & Đồng bộ"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG", "🖨️ In ấn & Đồng bộ"])
 
 menu = None
 if mode == "📚 Lý thuyết & Bài học":
@@ -761,8 +761,7 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 4.1 - Từ vựng mở rộng",
         "Bài 5 - TỪ VỰNG",
         "Bài 6 - TỪ VỰNG",
-        "Bài 7 - TỪ VỰNG",
-        "🎴 Thẻ từ ghi nhớ (Flashcards) tổng hợp"
+        "Bài 7 - TỪ VỰNG"
     ])
 elif mode == "🗣️ Luyện tập ghép âm":
     menu = st.sidebar.radio("Chọn bảng ghép âm:", [
@@ -794,7 +793,10 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 7.3"
     ])
 
-if mode == "🖨️ In ấn & Đồng bộ":
+if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
+    show_consolidated_flashcards()
+
+elif mode == "🖨️ In ấn & Đồng bộ":
     
     if st.button("🔄 Đồng bộ & Cập nhật giáo trình", type="primary", use_container_width=True):
         try:
@@ -957,8 +959,7 @@ elif menu == "Bài 6 - TỪ VỰNG":
 elif menu == "Bài 7 - TỪ VỰNG":
     lesson7.show_lesson7_vocab()
 
-elif menu == "🎴 Thẻ từ ghi nhớ (Flashcards) tổng hợp":
-    show_consolidated_flashcards()
+
 
 elif menu == "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()

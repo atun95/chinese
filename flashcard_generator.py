@@ -704,6 +704,60 @@ def generate_offline_app(vocab_list, filepath):
             color: var(--text-muted);
         }}
 
+        /* Learn Card styling (No Flip) */
+        .learn-card {{
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }}
+
+        .learn-card-body {{
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }}
+
+        .learn-word-section {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }}
+
+        .learn-details-section {{
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }}
+
+        .detail-item {{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }}
+
+        .detail-label {{
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }}
+
         /* Audio buttons */
         .btn-audio {{
             border: 1px solid var(--border-color);
@@ -896,6 +950,16 @@ def generate_offline_app(vocab_list, filepath):
             .word-translation {{
                 font-size: 1.3rem;
             }}
+            .learn-card-body {{
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }}
+            .learn-details-section {{
+                width: 100%;
+                align-items: center;
+                text-align: center;
+            }}
         }}
     </style>
 </head>
@@ -904,7 +968,6 @@ def generate_offline_app(vocab_list, filepath):
         <div class="header-title">
             <span>🇨🇳</span> HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG
         </div>
-        <div class="header-subtitle">Bộ công cụ ôn tập từ vựng offline</div>
     </header>
 
     <div class="main-container">
@@ -912,7 +975,8 @@ def generate_offline_app(vocab_list, filepath):
             <div class="form-group">
                 <label>Chế độ hiển thị</label>
                 <div class="mode-selector">
-                    <button class="mode-btn active" onclick="switchView('card')">🎴 Thẻ từ</button>
+                    <button class="mode-btn active" onclick="switchView('learn')">📖 Học tập</button>
+                    <button class="mode-btn" onclick="switchView('card')">🎴 Luyện tập</button>
                     <button class="mode-btn" onclick="switchView('table')">📋 Danh sách</button>
                 </div>
             </div>
@@ -924,26 +988,65 @@ def generate_offline_app(vocab_list, filepath):
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="sel-cat">Chọn Nhóm từ</label>
-                <select id="sel-cat" class="form-control" onchange="applyFilters()">
-                    <option value="Tất cả">Tất cả nhóm</option>
-                </select>
-            </div>
+
 
             <div class="form-group">
                 <label for="search-input">Tìm kiếm</label>
                 <input type="text" id="search-input" class="form-control" placeholder="Tìm Hán tự, Pinyin, nghĩa..." oninput="applyFilters()">
             </div>
 
-            <button class="btn btn-secondary" onclick="shuffleVocabulary()" style="width: 100%; margin-top: 10px;">
-                🔀 Trộn ngẫu nhiên
-            </button>
+
         </div>
 
         <div class="content-area">
+            <!-- Learn View Mode (No Flip) -->
+            <div id="learn-view-mode" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <div class="learn-card">
+                    <div class="learn-card-body">
+                        <div class="learn-word-section">
+                            <div id="learn-word" class="word-chinese"></div>
+                            <button id="learn-speak-btn" class="btn-audio" style="margin-top: 15px;" onclick="speakCurrentWord()">🔊 Phát âm</button>
+                        </div>
+                        <div class="learn-details-section">
+                            <div class="detail-item">
+                                <span class="detail-label">Pinyin:</span>
+                                <span id="learn-pinyin" class="word-pinyin"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nghĩa tiếng Việt:</span>
+                                <span id="learn-viet" class="word-translation" style="text-align: left; margin-bottom: 0;"></span>
+                            </div>
+                            
+                            <!-- Example sentences -->
+                            <div id="learn-example" class="card-example" style="margin-top: 10px; display: none;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stroke animation for characters -->
+                    <div class="stroke-section" style="margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; width: 100%; text-align: center;">
+                        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 0.05em;">Hướng dẫn viết nét chữ Hán (Bấm vào chữ để vẽ nét):</h4>
+                        <div id="learn-stroke-area" class="stroke-container"></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="prevCard()">⬅️ Từ trước</button>
+                    <button class="btn btn-secondary" onclick="nextCard()">Từ sau ➡️</button>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span id="learn-progress-info">Từ 0 / 0</span>
+                        <span id="learn-percent-info">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="learn-progress-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Card View Mode -->
-            <div id="card-view-mode" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div id="card-view-mode" style="width: 100%; display: none; flex-direction: column; align-items: center;">
                 <div class="card-scene" onclick="flipCard()">
                     <div id="flashcard" class="flashcard">
                         <!-- Front Face -->
@@ -1016,6 +1119,7 @@ def generate_offline_app(vocab_list, filepath):
         let currentIndex = 0;
         let activeWritersFront = [];
         let activeWritersBack = [];
+        let activeWritersLearn = [];
 
         window.addEventListener('DOMContentLoaded', () => {{
             populateFilters();
@@ -1037,29 +1141,19 @@ def generate_offline_app(vocab_list, filepath):
                 opt.textContent = les;
                 selLesson.appendChild(opt);
             }});
-
-            const selCat = document.getElementById('sel-cat');
-            Array.from(categories).sort().forEach(cat => {{
-                const opt = document.createElement('option');
-                opt.value = cat;
-                opt.textContent = cat;
-                selCat.appendChild(opt);
-            }});
         }}
 
         function applyFilters() {{
             const selectedLesson = document.getElementById('sel-lesson').value;
-            const selectedCat = document.getElementById('sel-cat').value;
             const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
 
             activeVocab = VOCABULARY.filter(item => {{
                 const matchesLesson = selectedLesson === 'Tất cả' || item.lesson === selectedLesson;
-                const matchesCat = selectedCat === 'Tất cả' || item.category === selectedCat;
                 const matchesSearch = !searchQuery || 
                     item.word.toLowerCase().includes(searchQuery) ||
                     item.pinyin.toLowerCase().includes(searchQuery) ||
                     item.vietnamese.toLowerCase().includes(searchQuery);
-                return matchesLesson && matchesCat && matchesSearch;
+                return matchesLesson && matchesSearch;
             }});
 
             currentIndex = 0;
@@ -1078,21 +1172,30 @@ def generate_offline_app(vocab_list, filepath):
         }}
 
         function switchView(view) {{
+            const learnMode = document.getElementById('learn-view-mode');
             const cardMode = document.getElementById('card-view-mode');
             const tableMode = document.getElementById('table-view-mode');
             const buttons = document.querySelectorAll('.mode-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            if (view === 'card') {{
-                cardMode.style.display = 'flex';
+            if (view === 'learn') {{
+                learnMode.style.display = 'flex';
+                cardMode.style.display = 'none';
                 tableMode.style.display = 'none';
                 buttons[0].classList.add('active');
                 updateUI();
+            }} else if (view === 'card') {{
+                learnMode.style.display = 'none';
+                cardMode.style.display = 'flex';
+                tableMode.style.display = 'none';
+                buttons[1].classList.add('active');
+                updateUI();
             }} else {{
+                learnMode.style.display = 'none';
                 cardMode.style.display = 'none';
                 tableMode.style.display = 'block';
-                buttons[1].classList.add('active');
+                buttons[2].classList.add('active');
                 updateTable();
             }}
         }}
@@ -1112,6 +1215,12 @@ def generate_offline_app(vocab_list, filepath):
             const card = document.getElementById('flashcard');
             card.classList.remove('flipped');
 
+            // Learn mode elements
+            const learnWord = document.getElementById('learn-word');
+            const learnPinyin = document.getElementById('learn-pinyin');
+            const learnViet = document.getElementById('learn-viet');
+            const learnExBox = document.getElementById('learn-example');
+
             if (activeVocab.length === 0) {{
                 document.getElementById('front-word').textContent = '⚠️ Trống';
                 document.getElementById('back-word').textContent = '⚠️ Trống';
@@ -1121,6 +1230,16 @@ def generate_offline_app(vocab_list, filepath):
                 document.getElementById('progress-info').textContent = 'Từ 0 / 0';
                 document.getElementById('percent-info').textContent = '0%';
                 document.getElementById('progress-fill').style.width = '0%';
+
+                if (learnWord) {{
+                    learnWord.textContent = '⚠️ Trống';
+                    learnPinyin.textContent = '';
+                    learnViet.textContent = 'Vui lòng chọn bộ lọc khác';
+                    learnExBox.style.display = 'none';
+                    document.getElementById('learn-progress-info').textContent = 'Từ 0 / 0';
+                    document.getElementById('learn-percent-info').textContent = '0%';
+                    document.getElementById('learn-progress-fill').style.width = '0%';
+                }}
                 return;
             }}
 
@@ -1152,7 +1271,32 @@ def generate_offline_app(vocab_list, filepath):
             document.getElementById('percent-info').textContent = `${{percent}}%`;
             document.getElementById('progress-fill').style.width = `${{percent}}%`;
 
+            // Update learn view UI
+            if (learnWord) {{
+                learnWord.textContent = item.word;
+                learnPinyin.textContent = item.pinyin;
+                learnViet.textContent = item.vietnamese;
+
+                if (item.example_han) {{
+                    learnExBox.style.display = 'block';
+                    learnExBox.innerHTML = `
+                        <div class="example-title">Ví dụ minh họa:</div>
+                        <div class="example-han">${{item.example_han}}</div>
+                        <div class="example-py">${{item.example_py}}</div>
+                        <div class="example-vi">${{item.example_vi}}</div>
+                        <button class="btn-audio" onclick="speak('${{item.example_han}}')">🔊 Nghe câu ví dụ</button>
+                    `;
+                }} else {{
+                    learnExBox.style.display = 'none';
+                }}
+
+                document.getElementById('learn-progress-info').textContent = `Từ ${{currentNum}} / ${{total}}`;
+                document.getElementById('learn-percent-info').textContent = `${{percent}}%`;
+                document.getElementById('learn-progress-fill').style.width = `${{percent}}%`;
+            }}
+
             initStrokeWritersFront();
+            initStrokeWritersLearn();
             speak(item.word);
         }}
 
@@ -1191,6 +1335,50 @@ def generate_offline_app(vocab_list, filepath):
                     charBox.textContent = char;
                 }}
             }});
+        }}
+
+        function initStrokeWritersLearn() {{
+            const item = activeVocab[currentIndex];
+            const container = document.getElementById('learn-stroke-area');
+            container.innerHTML = '';
+            activeWritersLearn = [];
+
+            if (!item) return;
+            const chars = item.word.split('').filter(c => /[\\u4e00-\\u9fa5]/.test(c));
+
+            chars.forEach((char, idx) => {{
+                const charBox = document.createElement('div');
+                charBox.className = 'hanzi-char-box';
+                charBox.id = `learn-char-box-${{idx}}`;
+                container.appendChild(charBox);
+
+                try {{
+                    const writer = HanziWriter.create(charBox.id, char, {{
+                        width: 80,
+                        height: 80,
+                        padding: 5,
+                        showOutline: true,
+                        strokeColor: '#e11d48',
+                        outlineColor: '#f8fafc',
+                        strokeAnimationSpeed: 1.5
+                    }});
+                    activeWritersLearn.push(writer);
+                    charBox.addEventListener('click', (e) => {{
+                        e.stopPropagation();
+                        writer.animateCharacter();
+                    }});
+                    setTimeout(() => writer.animateCharacter(), idx * 400);
+                }} catch (e) {{
+                    charBox.textContent = char;
+                }}
+            }});
+        }}
+
+        function speakCurrentWord() {{
+            const item = activeVocab[currentIndex];
+            if (item) {{
+                speak(item.word);
+            }}
         }}
 
         function initStrokeWritersBack() {{

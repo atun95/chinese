@@ -1,0 +1,143 @@
+word,pinyin,vietnamese,lesson,category,example_han,example_py,example_vi
+爸爸,bàba,ba/bố,Bài 1,Từ xưng hô (Láy),,,
+妈妈,māma,mẹ/má,Bài 1,Từ xưng hô (Láy),,,
+哥哥,gēge,anh trai,Bài 1,Từ xưng hô (Láy),,,
+姐姐,jiějie,chị gái,Bài 1,Từ xưng hô (Láy),,,
+弟弟,dìdi,em trai,Bài 1,Từ xưng hô (Láy),,,
+妹妹,mèimei,em gái,Bài 1,Từ xưng hô (Láy),,,
+爷爷,yéye,ông nội,Bài 1,Từ xưng hô (Láy),,,
+奶奶,nǎinai,bà nội,Bài 1,Từ xưng hô (Láy),,,
+我,wǒ,tôi/mình,Bài 1,Đại từ xưng hô,,,
+你,nǐ,bạn/cậu,Bài 1,Đại từ xưng hô,,,
+他,tā,anh ấy/ông ấy,Bài 1,Đại từ xưng hô,,,
+她,tā,cô ấy/chị ấy,Bài 1,Đại từ xưng hô,,,
+它,tā,nó,Bài 1,Đại từ xưng hô,,,
+我们,wǒmen,chúng tôi/chúng ta,Bài 1,Đại từ xưng hô,,,
+你们,nǐmen,các bạn,Bài 1,Đại từ xưng hô,,,
+他们,tāmen,họ,Bài 1,Đại từ xưng hô,,,
+老师,lǎoshī,thầy/cô giáo,Bài 1,Từ vựng bổ sung,,,
+学生,xuéshēng,học sinh,Bài 1,Từ vựng bổ sung,,,
+很,hěn,rất,Bài 1,Từ vựng bổ sung,,,
+忙,máng,bận,Bài 1,Từ vựng bổ sung,,,
+不,bù,không,Bài 1,Từ vựng bổ sung,,,
+家,jiā,Nhà / Gia đình,Bài 2,Vận mẫu ia,,,
+牙,yá,răng,Bài 2,Ví dụ vận mẫu ia,,,
+鸭,yā,con vịt,Bài 2,Ví dụ vận mẫu ia,,,
+虾,xiā,con tôm,Bài 2,Ví dụ vận mẫu ia,,,
+姐,jiě,Chị gái,Bài 2,Vận mẫu ie,,,
+爷,yé,ông nội,Bài 2,Ví dụ vận mẫu ie,,,
+写,xiě,viết,Bài 2,Ví dụ vận mẫu ie,,,
+鞋,xié,đôi giày,Bài 2,Ví dụ vận mẫu ie,,,
+小,xiǎo,Nhỏ / Bé,Bài 2,Vận mẫu iao,,,
+药,yào,thuốc,Bài 2,Ví dụ vận mẫu iao,,,
+鸟,niǎo,con chim,Bài 2,Ví dụ vận mẫu iao,,,
+叫,jiào,gọi/tên là,Bài 2,Ví dụ vận mẫu iao,,,
+六,liù,Số sáu,Bài 2,Vận mẫu iu,,,
+九,jiǔ,số chín,Bài 2,Ví dụ vận mẫu iu,,,
+牛,niú,con bò,Bài 2,Ví dụ vận mẫu iu,,,
+秋,qiū,mùa thu,Bài 2,Ví dụ vận mẫu iu,,,
+花,huā,Bông hoa,Bài 2,Vận mẫu ua,,,
+袜,wà,đôi tất/vớ,Bài 2,Ví dụ vận mẫu ua,,,
+画,huà,vẽ / bức tranh,Bài 2,Ví dụ vận mẫu ua,,,
+挂,guà,treo lên,Bài 2,Ví dụ vận mẫu ua,,,
+我,wǒ,Tôi / Tớ,Bài 2,Vận mẫu uo,,,
+火,huǒ,lửa,Bài 2,Ví dụ vận mẫu uo,,,
+国,guó,đất nước,Bài 2,Ví dụ vận mẫu uo,,,
+多,duō,nhiều,Bài 2,Ví dụ vận mẫu uo,,,
+快,kuài,Nhanh / Nhanh chóng,Bài 2,Vận mẫu uai,,,
+外,wài,bên ngoài,Bài 2,Ví dụ vận mẫu uai,,,
+怪,guài,quái vật / kỳ lạ,Bài 2,Ví dụ vận mẫu uai,,,
+帅,shuài,đẹp trai,Bài 2,Ví dụ vận mẫu uai,,,
+水,shuǐ,Nước,Bài 2,Vận mẫu ui,,,
+回,huí,trở về,Bài 2,Ví dụ vận mẫu ui,,,
+喂,wèi,alo / cho ăn,Bài 2,Ví dụ vận mẫu ui,,,
+贵,guì,đắt / quý,Bài 2,Ví dụ vận mẫu ui,,,
+月,yuè,Mặt trăng / Tháng,Bài 2,Vận mẫu üe,,,
+雪,xuě,tuyết,Bài 2,Ví dụ vận mẫu üe,,,
+学,xué,học,Bài 2,Ví dụ vận mẫu üe,,,
+缺,quē,thiếu thốn,Bài 2,Ví dụ vận mẫu üe,,,
+律师,lǜshī,luật sư,Bài 3,Từ vựng,,,
+朋友,péngyou,"bạn, bạn bè",Bài 3,Từ vựng,,,
+男,nán,nam,Bài 3,Từ vựng,,,
+女,nǚ,nữ,Bài 3,Từ vựng,,,
+男朋友,nánpéngyou,bạn trai,Bài 3,Từ vựng,,,
+女朋友,nǚpéngyou,bạn gái,Bài 3,Từ vựng,,,
+叫,jiào,"gọi, tên là",Bài 3,Từ vựng,,,
+名字,míngzi,tên,Bài 3,Từ vựng,,,
+高兴,gāoxìng,vui vẻ,Bài 3,Từ vựng,,,
+认识,rènshi,quen biết,Bài 3,Từ vựng,,,
+你叫什么名字,Nǐ jiào shénme míngzi?,Bạn tên là gì?,Bài 3,Từ vựng,,,
+青,Qīng,tên Thanh,Bài 3,Tên riêng,,,
+薇,Wēi,tên Vy,Bài 3,Tên riêng,,,
+珍,Zhēn,tên Trân,Bài 3,Tên riêng,,,
+仙,Xiān,tên Tiên,Bài 3,Tên riêng,,,
+家,jiā,Nhà,Bài 4,ia (ya),这是我的家。,Zhè shì wǒ de jiā.,Đây là nhà của tôi.
+鸭,yā,Con vịt,Bài 4,ia (ya),鸭子很可爱。,Yāzi hěn kě'ài.,Con vịt rất đáng yêu.
+姐姐,jiějie,Chị gái,Bài 4,ie (ye),我的姐姐很美。,Wǒ de jiějie hěn měi.,Chị gái tôi rất đẹp.
+爷爷,yéye,Ông nội,Bài 4,ie (ye),爷爷爱栽花。,Yéye ài zāihuā.,Ông nội thích trồng hoa.
+谢谢,xièxie,Cảm ơn,Bài 4,ie (ye),谢谢你。,Xièxie nǐ.,Cảm ơn bạn.
+小,xiǎo,"Nhỏ, bé",Bài 4,iao (yao),他很小。,Tā hěn xiǎo.,Cậu bé ấy rất nhỏ.
+药,yào,Thuốc,Bài 4,iao (yao),我吃药。,Wǒ chī yào.,Tôi uống thuốc.
+六,liù,Số sáu,Bài 4,iu (you),我有六个女朋友。,Wǒ yǒu liù ge nǚ péngyǒu.,Tôi có 6 người bạn gái.
+有,yǒu,Có,Bài 4,iu (you),我有一个姐姐。,Wǒ yǒu yī ge jiějie.,Tôi có một người chị gái.
+花,huā,"Bông hoa, hoa",Bài 4,ua (wa),花很美。,Huā hěn měi.,Hoa rất đẹp.
+娃娃,wáwa,"Búp bê, em bé",Bài 4,ua (wa),我喜欢娃娃。,Wǒ xǐhuān wáwa.,Tôi thích búp bê.
+我,wǒ,"Tôi, tớ, mình",Bài 4,uo (wo),我是学生。,Wǒ shì xuéshēng.,Tôi là học sinh.
+国家,guójiā,"Quốc gia, đất nước",Bài 4,uo (wo),我的国家很美。,Wǒ de guójiā hěn měi.,Đất nước của tôi rất đẹp.
+外,wài,"Ngoài, bên ngoài",Bài 4,uai (wai),外面很美。,Wài mian hěn měi.,Bên ngoài rất đẹp.
+帅,shuài,Đẹp trai,Bài 4,uai (wai),他很帅。,Tā hěn shuài.,Anh ấy rất đẹp trai.
+水,shuǐ,Nước,Bài 4,ui (wei),我喝水。,Wǒ hē shuǐ.,Tôi uống nước.
+喂,wèi,Alo,Bài 4,ui (wei),喂，你好 ma？,"Wèi, nǐ hǎo ma?","Alo, bạn khỏe không?"
+对不起,duìbuqǐ,Xin lỗi,Bài 4,ui (wei),对不起，我很忙。,"Duìbuqǐ, wǒ hěn máng.","Xin lỗi, tôi rất bận."
+月,yuè,"Mặt trăng, tháng",Bài 4,ue (yue),月饼很好吃。,Yuèbǐng hěn hǎochī.,Bánh trung thu rất ngon.
+学,xué,Học,Bài 4,ue (yue),我学汉语。,Wǒ xué Hànyǔ.,Tôi học Hán ngữ.
+帅哥,shuàigē,"Soái ca, trai đẹp",Bài 4,Từ vựng mở rộng,这里有很多帅哥。,Zhèlǐ yǒu hěn duō shuàigē.,Ở đây có rất nhiều trai đẹp.
+美女,měinǚ,"Mỹ nữ, gái đẹp",Bài 4,Từ vựng mở rộng,她是我们的美女。,Tā shì wǒmen de měinǚ.,Cô ấy là mỹ nữ của chúng tôi.
+喝,hē,Uống,Bài 4,Từ vựng mở rộng,我想喝奶茶。,Wǒ xiǎng hē nǎichá.,Tôi muốn uống trà sữa.
+吃,chī,Ăn,Bài 4,Từ vựng mở rộng,你吃什么肉？,Nǐ chī shénme ròu?,Bạn ăn thịt gì?
+奶茶,nǎichá,Trà sữa,Bài 4,Từ vựng mở rộng,我爱喝奶茶。,Wǒ ài hē nǎichá.,Tôi yêu thích uống trà sữa.
+饿,è,Đói,Bài 4,Từ vựng mở rộng,我很饿。,Wǒ hěn è.,Tôi rất đói.
+累,lèi,Mệt,Bài 4,Từ vựng mở rộng,你累吗？,Nǐ lèi ma?,Bạn mệt không?
+鸡肉,jīròu,Thịt gà,Bài 4,Từ vựng mở rộng,我喜欢吃鸡肉。,Wǒ xǐhuān chī jīròu.,Tôi thích ăn thịt gà.
+鱼肉,yúròu,Thịt cá,Bài 4,Từ vựng mở rộng,鱼肉很好吃。,Yúròu hěn hǎochī.,Thịt cá rất ngon.
+牛肉,niúròu,Thịt bò,Bài 4,Từ vựng mở rộng,牛肉很贵。,Niúròu hěn guì.,Thịt bò rất đắt.
+早餐,zǎocān,Bữa sáng,Bài 5,Từ vựng,你吃早餐了吗？,Nǐ chī zǎocān le ma?,Bạn ăn sáng chưa?
+大家,dàjiā,"Mọi người, cả nhà",Bài 5,Từ vựng,大家好！,Dàjiā hǎo!,Chào mọi người!
+大,dà,"To, lớn",Bài 5,Từ vựng,他的家很大。,Tā de jiā hěn dà.,Nhà của anh ấy rất lớn.
+小,xiǎo,"Nhỏ, bé",Bài 5,Từ vựng,这个杯子很小。,Zhège bēizi hěn xiǎo.,Cái cốc này rất nhỏ.
+饱,bǎo,"No, no bụng",Bài 5,Từ vựng,我饱了。,Wǒ bǎo le.,Tôi no rồi.
+饿,è,"Đói, đói bụng",Bài 5,Từ vựng,你饿吗？,Nǐ è ma?,Bạn đói không?
+您,nín,Ngài / Ông / Bà (kính trọng),Bài 5,Từ vựng,您好！您贵姓？,Nín hǎo! Nín guìxìng?,Chào Ngài! Ngài quý danh?
+岁,suì,Tuổi,Bài 5,Từ vựng,你今年几岁？,Nǐ jīnnián jǐ suì?,Năm nay bạn bao nhiêu tuổi?
+已经,yǐjīng,Đã / Đã... rồi,Bài 5,Từ vựng,我已经饱了。,Wǒ yǐjīng bǎo le.,Tôi đã no rồi.
+昨天,zuótiān,Hôm qua,Bài 6,📅 Nhóm 1: Thời gian cơ bản,昨天我去学校了。,Zuótiān wǒ qù xuéxiào le.,Hôm qua tôi đi học rồi.
+今天,jīntiān,Hôm nay,Bài 6,📅 Nhóm 1: Thời gian cơ bản,今天天气很好。,Jīntiān tiānqì hěn hǎo.,Hôm nay thời tiết rất tốt.
+明天,míngtiān,Ngày mai,Bài 6,📅 Nhóm 1: Thời gian cơ bản,明天你忙吗？,Míngtiān nǐ máng ma?,Ngày mai bạn bận không?
+星期,xīngqī,Thứ (trong tuần),Bài 6,🗓️ Nhóm 2: Thứ trong tuần (星期),今天星期几？,Jīntiān xīngqī jǐ?,Hôm nay thứ mấy?
+号,hào,Ngày (văn nói),Bài 6,"🗓️ Nhóm 3: Ngày, Tháng, Năm",今天几号？,Jīntiān jǐ hào?,Hôm nay ngày mấy?
+日,rì,Ngày (văn viết),Bài 6,"🗓️ Nhóm 3: Ngày, Tháng, Năm",十月一日是国庆节。,Shíyuè yī rì  shì guóqìng jié.,Ngày 1 tháng 10 là ngày Quốc khánh.
+月,yuè,Tháng,Bài 6,"🗓️ Nhóm 3: Ngày, Tháng, Năm",现在是六月。,Xiànzài shì liùyuè.,Bây giờ là tháng 6.
+年,nián,Năm,Bài 6,"🗓️ Nhóm 3: Ngày, Tháng, Năm",今年是二零二六年。,Jīnnián  shì èr líng èr liù nián.,Năm nay là năm 2026.
+点,diǎn,Giờ,Bài 6,⏰ Nhóm 4: Giờ và cách đọc giờ,现在八点。,Xiànzài bā diǎn.,Bây giờ là 8 giờ.
+分,fēn,Phút,Bài 6,⏰ Nhóm 4: Giờ và cách đọc giờ,现在八点十分。,Xiànzài  bā diǎn shí fēn.,Bây giờ là 8 giờ 10 phút.
+半,bàn,Rưỡi / Nửa,Bài 6,⏰ Nhóm 4: Giờ và cách đọc giờ,Boss八点半。,Xiànzài bā diǎn bàn.,Bây giờ là 8 giờ rưỡi.
+刻,kè,Khắc (15 phút),Bài 6,⏰ Nhóm 4: Giờ và cách đọc giờ,现在八点一刻。,Xiànzài  bā diǎn yí kè.,Bây giờ là 8 giờ 15 phút.
+差,chà,Kém,Bài 6,⏰ Nhóm 4: Giờ và cách đọc giờ,差五分九点。,Chà wǔ fēn jiǔ diǎn.,9 giờ kém 5 phút.
+春天,chūntiān,Mùa xuân,Bài 6,🌸 Nhóm 5: Bốn mùa,春天很暖和。,Chūntiān hěn nuǎnhuo.,Mùa xuân rất ấm áp.
+夏天,xiàtiān,Mùa hạ / hè,Bài 6,🌸 Nhóm 5: Bốn mùa,夏天很热。,Xiàtiān hěn rè.,Mùa hè rất nóng.
+秋天,qiūtiān,Mùa thu,Bài 6,🌸 Nhóm 5: Bốn mùa,秋天很凉快。,Qiūtiān hěn liángkuai.,Mùa thu rất mát mẻ.
+冬天,dōngtiān,Mùa đông,Bài 6,🌸 Nhóm 5: Bốn mùa,冬天很冷。,Dōngtiān hěn lěng.,Mùa đông rất lạnh.
+吃饭,chī fàn,ăn cơm,Bài 7,📅 Nhóm 1: Hoạt động thường ngày (日常活动),我们去吃饭吧。,Wǒmen qù chī fàn ba.,Chúng ta đi ăn cơm đi.
+做,zuò,làm,Bài 7,📅 Nhóm 1: Hoạt động thường ngày (日常活动),你在做什么？,Nǐ zài zuò shénme?,Bạn đang làm gì?
+工作,gōngzuò,công việc / làm việc,Bài 7,📅 Nhóm 1: Hoạt động thường ngày (日常活动),我很喜欢我的工作。,Wǒ hěn xǐhuān wǒ de gōngzuò.,Tôi rất thích công việc của tôi.
+你在做什么？,nǐ zài zuò shénme?,bạn đang làm gì?,Bài 7,📅 Nhóm 1: Hoạt động thường ngày (日常活动),你在做什么？我在工作。,Nǐ zài zuò shénme? Wǒ zài gōngzuò.,Bạn đang làm gì? Tôi đang làm việc.
+坐飞机,zuò fēi jī,ngồi máy bay / đi máy bay,Bài 7,📅 Nhóm 1: Hoạt động thường ngày (日常活动),我坐飞机去北京。,Wǒ zoù fēi jī qù Běijīng.,Tôi đi máy bay đến Bắc Kinh.
+还没,hái méi,chưa (not yet),Bài 7,⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间),他还没来。,Tā hái méi lái.,Anh ấy chưa đến.
+哪个人,nǎ ge rén,người nào,Bài 7,⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间),哪个人是你的老师？,Nǎ ge rén  shì nǐ de lǎoshī?,Người nào là giáo viên của bạn?
+日,rì,ngày (văn viết),Bài 7,⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间),十月一日是国庆节。,Shí yuè yī rì  shì guóqìng jié.,Ngày 1 tháng 10 là ngày Quốc khánh.
+天,tiān,ngày (bao nhiêu ngày),Bài 7,⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间),我去北京三天。,Wǒ qù Běijīng sān tiān.,Tôi đi Bắc Kinh ba ngày.
+号,hào,ngày (trong câu hỏi hỏi ngày mấy / văn nói),Bài 7,⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间),今天几号？,Jīntiān jǐ hào?,Hôm nay ngày mấy?
+因为,yīn wèi,tại vì / bởi vì,Bài 7,🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际),因为今天很忙，我不去。,"Yīnwèi jīntiān hěn máng, wǒ bú qù.",Vì hôm nay rất bận nên tôi không đi.
+没关系,méi guān xi,không sao / không có gì,Bài 7,🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际),对不起！没关系。,Duìbuqǐ! Méi guān xi.,Xin lỗi! Không sao đâu.
+不客气,bù kè qì,đừng khách sáo / không có gì,Bài 7,🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际),谢谢`你！不客气。,Xièxie nǐ! Bú kèqi.,Cảm ơn bạn! Đừng khách sáo.
+哪里！,nǎlǐ!,"nhận được lời khen, tỏ ra khiêm tốn (đâu có!)",Bài 7,🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际),你汉语很好！哪里，哪里！,"Nǐ Hànyǔ hěn hǎo! Nǎlǐ, nǎlǐ!","Tiếng Trung của bạn rất tốt! Đâu có, đâu có!"

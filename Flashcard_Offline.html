@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thẻ từ Ôn tập Từ vựng HSK 1 (Offline)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2/dist/hanzi-writer.min.js"></script>
+    <style>
+        :root {
+            --primary: #e11d48;
+            --primary-hover: #be123c;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .header-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px;
+            gap: 24px;
+        }
+
+        .sidebar {
+            width: 320px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-self: flex-start;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+        }
+
+        /* 3D Card Container */
+        .card-scene {
+            width: 100%;
+            max-width: 650px;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08);
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-card);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #ffffff 0%, #fcfdfd 100%);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+        }
+
+        .word-chinese {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .word-pinyin {
+            font-family: monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2563eb;
+            background-color: #eff6ff;
+            padding: 4px 18px;
+            border-radius: 30px;
+            border: 1px solid #dbeafe;
+            margin-bottom: 12px;
+        }
+
+        .word-translation {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Stroke anim container */
+        .stroke-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .hanzi-char-box {
+            width: 90px;
+            height: 90px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .hanzi-char-box:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+        }
+
+        .card-example {
+            width: 100%;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: auto;
+            text-align: left;
+        }
+
+        .example-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .example-han {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .example-py {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #059669;
+            margin-bottom: 4px;
+        }
+
+        .example-vi {
+            font-size: 0.82rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* Learn Card styling (No Flip) */
+        .learn-card {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .learn-card-body {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .learn-word-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+
+        .learn-details-section {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Audio buttons */
+        .btn-audio {
+            border: 1px solid var(--border-color);
+            background-color: #fff;
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            margin-top: 6px;
+            font-size: 0.85rem;
+        }
+
+        .btn-audio:hover {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            max-width: 650px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Progress */
+        .progress-container {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 20px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Mode Selector */
+        .mode-selector {
+            display: flex;
+            background-color: #e2e8f0;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            color: var(--primary);
+        }
+
+        /* Table view */
+        .table-view {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 16px;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .card-scene {
+                height: 340px;
+            }
+            .word-chinese {
+                font-size: 3rem;
+            }
+            .word-pinyin {
+                font-size: 1.4rem;
+            }
+            .word-translation {
+                font-size: 1.3rem;
+            }
+            .learn-card-body {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .learn-details-section {
+                width: 100%;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <span>🇨🇳</span> HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="form-group">
+                <label>Chế độ hiển thị</label>
+                <div class="mode-selector">
+                    <button class="mode-btn active" onclick="switchView('learn')">📖 Học tập</button>
+                    <button class="mode-btn" onclick="switchView('card')">🎴 Luyện tập</button>
+                    <button class="mode-btn" onclick="switchView('table')">📋 Danh sách</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sel-lesson">Chọn Bài học</label>
+                <select id="sel-lesson" class="form-control" onchange="applyFilters()">
+                    <option value="Tất cả">Tất cả bài học</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="search-input">Tìm kiếm</label>
+                <input type="text" id="search-input" class="form-control" placeholder="Tìm Hán tự, Pinyin, nghĩa..." oninput="applyFilters()">
+            </div>
+
+
+        </div>
+
+        <div class="content-area">
+            <!-- Learn View Mode (No Flip) -->
+            <div id="learn-view-mode" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <div class="learn-card">
+                    <div class="learn-card-body">
+                        <div class="learn-word-section">
+                            <div id="learn-word" class="word-chinese"></div>
+                            <button id="learn-speak-btn" class="btn-audio" style="margin-top: 15px;" onclick="speakCurrentWord()">🔊 Phát âm</button>
+                        </div>
+                        <div class="learn-details-section">
+                            <div class="detail-item">
+                                <span class="detail-label">Pinyin:</span>
+                                <span id="learn-pinyin" class="word-pinyin"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nghĩa tiếng Việt:</span>
+                                <span id="learn-viet" class="word-translation" style="text-align: left; margin-bottom: 0;"></span>
+                            </div>
+                            
+                            <!-- Example sentences -->
+                            <div id="learn-example" class="card-example" style="margin-top: 10px; display: none;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stroke animation for characters -->
+                    <div class="stroke-section" style="margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 20px; width: 100%; text-align: center;">
+                        <h4 style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 0.05em;">Hướng dẫn viết nét chữ Hán (Bấm vào chữ để vẽ nét):</h4>
+                        <div id="learn-stroke-area" class="stroke-container"></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="prevCard()">⬅️ Từ trước</button>
+                    <button class="btn btn-secondary" onclick="nextCard()">Từ sau ➡️</button>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span id="learn-progress-info">Từ 0 / 0</span>
+                        <span id="learn-percent-info">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="learn-progress-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card View Mode -->
+            <div id="card-view-mode" style="width: 100%; display: none; flex-direction: column; align-items: center;">
+                <div class="card-scene" onclick="flipCard()">
+                    <div id="flashcard" class="flashcard">
+                        <!-- Front Face -->
+                        <div class="card-face card-front">
+                            <div id="front-word" class="word-chinese"></div>
+                            <div id="front-stroke-area" class="stroke-container" onclick="event.stopPropagation()"></div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-top: 10px;">
+                                (Bấm vào chữ để xem viết nét, nhấp vào nền để lật thẻ)
+                            </div>
+                        </div>
+                        
+                        <!-- Back Face -->
+                        <div class="card-face card-back">
+                            <div id="back-word" class="word-chinese" style="font-size: 2.2rem; margin-bottom: 4px;"></div>
+                            <div id="back-pinyin" class="word-pinyin"></div>
+                            <div id="back-viet" class="word-translation"></div>
+                            
+                            <!-- Stroke animation for characters -->
+                            <div id="stroke-area" class="stroke-container" onclick="event.stopPropagation()"></div>
+                            
+                            <!-- Example sentences -->
+                            <div id="back-example" class="card-example"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" onclick="prevCard()">⬅️ Từ trước</button>
+                    <button class="btn btn-primary" onclick="flipCard()">👁️ Lật thẻ</button>
+                    <button class="btn btn-secondary" onclick="nextCard()">Từ sau ➡️</button>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span id="progress-info">Từ 0 / 0</span>
+                        <span id="percent-info">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table View Mode -->
+            <div id="table-view-mode" class="table-view">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Bài</th>
+                            <th>Hán tự</th>
+                            <th>Pinyin</th>
+                            <th>Nghĩa tiếng Việt</th>
+                            <th>Nhóm từ</th>
+                            <th>Phát âm</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const VOCABULARY = [
+    {
+        "word": "爸爸",
+        "pinyin": "bàba",
+        "vietnamese": "ba/bố",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "妈妈",
+        "pinyin": "māma",
+        "vietnamese": "mẹ/má",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "哥哥",
+        "pinyin": "gēge",
+        "vietnamese": "anh trai",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "姐姐",
+        "pinyin": "jiějie",
+        "vietnamese": "chị gái",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "弟弟",
+        "pinyin": "dìdi",
+        "vietnamese": "em trai",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "妹妹",
+        "pinyin": "mèimei",
+        "vietnamese": "em gái",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "爷爷",
+        "pinyin": "yéye",
+        "vietnamese": "ông nội",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "奶奶",
+        "pinyin": "nǎinai",
+        "vietnamese": "bà nội",
+        "lesson": "Bài 1",
+        "category": "Từ xưng hô (Láy)",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "我",
+        "pinyin": "wǒ",
+        "vietnamese": "tôi/mình",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "你",
+        "pinyin": "nǐ",
+        "vietnamese": "bạn/cậu",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "他",
+        "pinyin": "tā",
+        "vietnamese": "anh ấy/ông ấy",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "她",
+        "pinyin": "tā",
+        "vietnamese": "cô ấy/chị ấy",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "它",
+        "pinyin": "tā",
+        "vietnamese": "nó",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "我们",
+        "pinyin": "wǒmen",
+        "vietnamese": "chúng tôi/chúng ta",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "你们",
+        "pinyin": "nǐmen",
+        "vietnamese": "các bạn",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "他们",
+        "pinyin": "tāmen",
+        "vietnamese": "họ",
+        "lesson": "Bài 1",
+        "category": "Đại từ xưng hô",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "老师",
+        "pinyin": "lǎoshī",
+        "vietnamese": "thầy/cô giáo",
+        "lesson": "Bài 1",
+        "category": "Từ vựng bổ sung",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "学生",
+        "pinyin": "xuéshēng",
+        "vietnamese": "học sinh",
+        "lesson": "Bài 1",
+        "category": "Từ vựng bổ sung",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "很",
+        "pinyin": "hěn",
+        "vietnamese": "rất",
+        "lesson": "Bài 1",
+        "category": "Từ vựng bổ sung",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "忙",
+        "pinyin": "máng",
+        "vietnamese": "bận",
+        "lesson": "Bài 1",
+        "category": "Từ vựng bổ sung",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "不",
+        "pinyin": "bù",
+        "vietnamese": "không",
+        "lesson": "Bài 1",
+        "category": "Từ vựng bổ sung",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "家",
+        "pinyin": "jiā",
+        "vietnamese": "Nhà / Gia đình",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu ia",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "牙",
+        "pinyin": "yá",
+        "vietnamese": "răng",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ia",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "鸭",
+        "pinyin": "yā",
+        "vietnamese": "con vịt",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ia",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "虾",
+        "pinyin": "xiā",
+        "vietnamese": "con tôm",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ia",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "姐",
+        "pinyin": "jiě",
+        "vietnamese": "Chị gái",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu ie",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "爷",
+        "pinyin": "yé",
+        "vietnamese": "ông nội",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ie",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "写",
+        "pinyin": "xiě",
+        "vietnamese": "viết",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ie",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "鞋",
+        "pinyin": "xié",
+        "vietnamese": "đôi giày",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ie",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "小",
+        "pinyin": "xiǎo",
+        "vietnamese": "Nhỏ / Bé",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu iao",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "药",
+        "pinyin": "yào",
+        "vietnamese": "thuốc",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iao",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "鸟",
+        "pinyin": "niǎo",
+        "vietnamese": "con chim",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iao",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "叫",
+        "pinyin": "jiào",
+        "vietnamese": "gọi/tên là",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iao",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "六",
+        "pinyin": "liù",
+        "vietnamese": "Số sáu",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu iu",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "九",
+        "pinyin": "jiǔ",
+        "vietnamese": "số chín",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iu",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "牛",
+        "pinyin": "niú",
+        "vietnamese": "con bò",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iu",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "秋",
+        "pinyin": "qiū",
+        "vietnamese": "mùa thu",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu iu",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "花",
+        "pinyin": "huā",
+        "vietnamese": "Bông hoa",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu ua",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "袜",
+        "pinyin": "wà",
+        "vietnamese": "đôi tất/vớ",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ua",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "画",
+        "pinyin": "huà",
+        "vietnamese": "vẽ / bức tranh",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ua",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "挂",
+        "pinyin": "guà",
+        "vietnamese": "treo lên",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ua",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "我",
+        "pinyin": "wǒ",
+        "vietnamese": "Tôi / Tớ",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu uo",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "火",
+        "pinyin": "huǒ",
+        "vietnamese": "lửa",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uo",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "国",
+        "pinyin": "guó",
+        "vietnamese": "đất nước",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uo",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "多",
+        "pinyin": "duō",
+        "vietnamese": "nhiều",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uo",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "快",
+        "pinyin": "kuài",
+        "vietnamese": "Nhanh / Nhanh chóng",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu uai",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "外",
+        "pinyin": "wài",
+        "vietnamese": "bên ngoài",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uai",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "怪",
+        "pinyin": "guài",
+        "vietnamese": "quái vật / kỳ lạ",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uai",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "帅",
+        "pinyin": "shuài",
+        "vietnamese": "đẹp trai",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu uai",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "水",
+        "pinyin": "shuǐ",
+        "vietnamese": "Nước",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu ui",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "回",
+        "pinyin": "huí",
+        "vietnamese": "trở về",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ui",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "喂",
+        "pinyin": "wèi",
+        "vietnamese": "alo / cho ăn",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ui",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "贵",
+        "pinyin": "guì",
+        "vietnamese": "đắt / quý",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu ui",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "月",
+        "pinyin": "yuè",
+        "vietnamese": "Mặt trăng / Tháng",
+        "lesson": "Bài 2",
+        "category": "Vận mẫu üe",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "雪",
+        "pinyin": "xuě",
+        "vietnamese": "tuyết",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu üe",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "学",
+        "pinyin": "xué",
+        "vietnamese": "học",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu üe",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "缺",
+        "pinyin": "quē",
+        "vietnamese": "thiếu thốn",
+        "lesson": "Bài 2",
+        "category": "Ví dụ vận mẫu üe",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "律师",
+        "pinyin": "lǜshī",
+        "vietnamese": "luật sư",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "朋友",
+        "pinyin": "péngyou",
+        "vietnamese": "bạn, bạn bè",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "男",
+        "pinyin": "nán",
+        "vietnamese": "nam",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "女",
+        "pinyin": "nǚ",
+        "vietnamese": "nữ",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "男朋友",
+        "pinyin": "nánpéngyou",
+        "vietnamese": "bạn trai",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "女朋友",
+        "pinyin": "nǚpéngyou",
+        "vietnamese": "bạn gái",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "叫",
+        "pinyin": "jiào",
+        "vietnamese": "gọi, tên là",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "名字",
+        "pinyin": "míngzi",
+        "vietnamese": "tên",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "高兴",
+        "pinyin": "gāoxìng",
+        "vietnamese": "vui vẻ",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "认识",
+        "pinyin": "rènshi",
+        "vietnamese": "quen biết",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "你叫什么名字",
+        "pinyin": "Nǐ jiào shénme míngzi?",
+        "vietnamese": "Bạn tên là gì?",
+        "lesson": "Bài 3",
+        "category": "Từ vựng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "青",
+        "pinyin": "Qīng",
+        "vietnamese": "tên Thanh",
+        "lesson": "Bài 3",
+        "category": "Tên riêng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "薇",
+        "pinyin": "Wēi",
+        "vietnamese": "tên Vy",
+        "lesson": "Bài 3",
+        "category": "Tên riêng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "珍",
+        "pinyin": "Zhēn",
+        "vietnamese": "tên Trân",
+        "lesson": "Bài 3",
+        "category": "Tên riêng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "仙",
+        "pinyin": "Xiān",
+        "vietnamese": "tên Tiên",
+        "lesson": "Bài 3",
+        "category": "Tên riêng",
+        "example_han": "",
+        "example_py": "",
+        "example_vi": ""
+    },
+    {
+        "word": "家",
+        "pinyin": "jiā",
+        "vietnamese": "Nhà",
+        "lesson": "Bài 4",
+        "category": "ia (ya)",
+        "example_han": "这是我的家。",
+        "example_py": "Zhè shì wǒ de jiā.",
+        "example_vi": "Đây là nhà của tôi."
+    },
+    {
+        "word": "鸭",
+        "pinyin": "yā",
+        "vietnamese": "Con vịt",
+        "lesson": "Bài 4",
+        "category": "ia (ya)",
+        "example_han": "鸭子很可爱。",
+        "example_py": "Yāzi hěn kě'ài.",
+        "example_vi": "Con vịt rất đáng yêu."
+    },
+    {
+        "word": "姐姐",
+        "pinyin": "jiějie",
+        "vietnamese": "Chị gái",
+        "lesson": "Bài 4",
+        "category": "ie (ye)",
+        "example_han": "我的姐姐很美。",
+        "example_py": "Wǒ de jiějie hěn měi.",
+        "example_vi": "Chị gái tôi rất đẹp."
+    },
+    {
+        "word": "爷爷",
+        "pinyin": "yéye",
+        "vietnamese": "Ông nội",
+        "lesson": "Bài 4",
+        "category": "ie (ye)",
+        "example_han": "爷爷爱栽花。",
+        "example_py": "Yéye ài zāihuā.",
+        "example_vi": "Ông nội thích trồng hoa."
+    },
+    {
+        "word": "谢谢",
+        "pinyin": "xièxie",
+        "vietnamese": "Cảm ơn",
+        "lesson": "Bài 4",
+        "category": "ie (ye)",
+        "example_han": "谢谢你。",
+        "example_py": "Xièxie nǐ.",
+        "example_vi": "Cảm ơn bạn."
+    },
+    {
+        "word": "小",
+        "pinyin": "xiǎo",
+        "vietnamese": "Nhỏ, bé",
+        "lesson": "Bài 4",
+        "category": "iao (yao)",
+        "example_han": "他很小。",
+        "example_py": "Tā hěn xiǎo.",
+        "example_vi": "Cậu bé ấy rất nhỏ."
+    },
+    {
+        "word": "药",
+        "pinyin": "yào",
+        "vietnamese": "Thuốc",
+        "lesson": "Bài 4",
+        "category": "iao (yao)",
+        "example_han": "我吃药。",
+        "example_py": "Wǒ chī yào.",
+        "example_vi": "Tôi uống thuốc."
+    },
+    {
+        "word": "六",
+        "pinyin": "liù",
+        "vietnamese": "Số sáu",
+        "lesson": "Bài 4",
+        "category": "iu (you)",
+        "example_han": "我有六个女朋友。",
+        "example_py": "Wǒ yǒu liù ge nǚ péngyǒu.",
+        "example_vi": "Tôi có 6 người bạn gái."
+    },
+    {
+        "word": "有",
+        "pinyin": "yǒu",
+        "vietnamese": "Có",
+        "lesson": "Bài 4",
+        "category": "iu (you)",
+        "example_han": "我有一个姐姐。",
+        "example_py": "Wǒ yǒu yī ge jiějie.",
+        "example_vi": "Tôi có một người chị gái."
+    },
+    {
+        "word": "花",
+        "pinyin": "huā",
+        "vietnamese": "Bông hoa, hoa",
+        "lesson": "Bài 4",
+        "category": "ua (wa)",
+        "example_han": "花很美。",
+        "example_py": "Huā hěn měi.",
+        "example_vi": "Hoa rất đẹp."
+    },
+    {
+        "word": "娃娃",
+        "pinyin": "wáwa",
+        "vietnamese": "Búp bê, em bé",
+        "lesson": "Bài 4",
+        "category": "ua (wa)",
+        "example_han": "我喜欢娃娃。",
+        "example_py": "Wǒ xǐhuān wáwa.",
+        "example_vi": "Tôi thích búp bê."
+    },
+    {
+        "word": "我",
+        "pinyin": "wǒ",
+        "vietnamese": "Tôi, tớ, mình",
+        "lesson": "Bài 4",
+        "category": "uo (wo)",
+        "example_han": "我是学生。",
+        "example_py": "Wǒ shì xuéshēng.",
+        "example_vi": "Tôi là học sinh."
+    },
+    {
+        "word": "国家",
+        "pinyin": "guójiā",
+        "vietnamese": "Quốc gia, đất nước",
+        "lesson": "Bài 4",
+        "category": "uo (wo)",
+        "example_han": "我的国家很美。",
+        "example_py": "Wǒ de guójiā hěn měi.",
+        "example_vi": "Đất nước của tôi rất đẹp."
+    },
+    {
+        "word": "外",
+        "pinyin": "wài",
+        "vietnamese": "Ngoài, bên ngoài",
+        "lesson": "Bài 4",
+        "category": "uai (wai)",
+        "example_han": "外面很美。",
+        "example_py": "Wài mian hěn měi.",
+        "example_vi": "Bên ngoài rất đẹp."
+    },
+    {
+        "word": "帅",
+        "pinyin": "shuài",
+        "vietnamese": "Đẹp trai",
+        "lesson": "Bài 4",
+        "category": "uai (wai)",
+        "example_han": "他很帅。",
+        "example_py": "Tā hěn shuài.",
+        "example_vi": "Anh ấy rất đẹp trai."
+    },
+    {
+        "word": "水",
+        "pinyin": "shuǐ",
+        "vietnamese": "Nước",
+        "lesson": "Bài 4",
+        "category": "ui (wei)",
+        "example_han": "我喝水。",
+        "example_py": "Wǒ hē shuǐ.",
+        "example_vi": "Tôi uống nước."
+    },
+    {
+        "word": "喂",
+        "pinyin": "wèi",
+        "vietnamese": "Alo",
+        "lesson": "Bài 4",
+        "category": "ui (wei)",
+        "example_han": "喂，你好 ma？",
+        "example_py": "Wèi, nǐ hǎo ma?",
+        "example_vi": "Alo, bạn khỏe không?"
+    },
+    {
+        "word": "对不起",
+        "pinyin": "duìbuqǐ",
+        "vietnamese": "Xin lỗi",
+        "lesson": "Bài 4",
+        "category": "ui (wei)",
+        "example_han": "对不起，我很忙。",
+        "example_py": "Duìbuqǐ, wǒ hěn máng.",
+        "example_vi": "Xin lỗi, tôi rất bận."
+    },
+    {
+        "word": "月",
+        "pinyin": "yuè",
+        "vietnamese": "Mặt trăng, tháng",
+        "lesson": "Bài 4",
+        "category": "ue (yue)",
+        "example_han": "月饼很好吃。",
+        "example_py": "Yuèbǐng hěn hǎochī.",
+        "example_vi": "Bánh trung thu rất ngon."
+    },
+    {
+        "word": "学",
+        "pinyin": "xué",
+        "vietnamese": "Học",
+        "lesson": "Bài 4",
+        "category": "ue (yue)",
+        "example_han": "我学汉语。",
+        "example_py": "Wǒ xué Hànyǔ.",
+        "example_vi": "Tôi học Hán ngữ."
+    },
+    {
+        "word": "帅哥",
+        "pinyin": "shuàigē",
+        "vietnamese": "Soái ca, trai đẹp",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "这里有很多帅哥。",
+        "example_py": "Zhèlǐ yǒu hěn duō shuàigē.",
+        "example_vi": "Ở đây có rất nhiều trai đẹp."
+    },
+    {
+        "word": "美女",
+        "pinyin": "měinǚ",
+        "vietnamese": "Mỹ nữ, gái đẹp",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "她是我们的美女。",
+        "example_py": "Tā shì wǒmen de měinǚ.",
+        "example_vi": "Cô ấy là mỹ nữ của chúng tôi."
+    },
+    {
+        "word": "喝",
+        "pinyin": "hē",
+        "vietnamese": "Uống",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "我想喝奶茶。",
+        "example_py": "Wǒ xiǎng hē nǎichá.",
+        "example_vi": "Tôi muốn uống trà sữa."
+    },
+    {
+        "word": "吃",
+        "pinyin": "chī",
+        "vietnamese": "Ăn",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "你吃什么肉？",
+        "example_py": "Nǐ chī shénme ròu?",
+        "example_vi": "Bạn ăn thịt gì?"
+    },
+    {
+        "word": "奶茶",
+        "pinyin": "nǎichá",
+        "vietnamese": "Trà sữa",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "我爱喝奶茶。",
+        "example_py": "Wǒ ài hē nǎichá.",
+        "example_vi": "Tôi yêu thích uống trà sữa."
+    },
+    {
+        "word": "饿",
+        "pinyin": "è",
+        "vietnamese": "Đói",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "我很饿。",
+        "example_py": "Wǒ hěn è.",
+        "example_vi": "Tôi rất đói."
+    },
+    {
+        "word": "累",
+        "pinyin": "lèi",
+        "vietnamese": "Mệt",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "你累吗？",
+        "example_py": "Nǐ lèi ma?",
+        "example_vi": "Bạn mệt không?"
+    },
+    {
+        "word": "鸡肉",
+        "pinyin": "jīròu",
+        "vietnamese": "Thịt gà",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "我喜欢吃鸡肉。",
+        "example_py": "Wǒ xǐhuān chī jīròu.",
+        "example_vi": "Tôi thích ăn thịt gà."
+    },
+    {
+        "word": "鱼肉",
+        "pinyin": "yúròu",
+        "vietnamese": "Thịt cá",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "鱼肉很好吃。",
+        "example_py": "Yúròu hěn hǎochī.",
+        "example_vi": "Thịt cá rất ngon."
+    },
+    {
+        "word": "牛肉",
+        "pinyin": "niúròu",
+        "vietnamese": "Thịt bò",
+        "lesson": "Bài 4",
+        "category": "Từ vựng mở rộng",
+        "example_han": "牛肉很贵。",
+        "example_py": "Niúròu hěn guì.",
+        "example_vi": "Thịt bò rất đắt."
+    },
+    {
+        "word": "早餐",
+        "pinyin": "zǎocān",
+        "vietnamese": "Bữa sáng",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "你吃早餐了吗？",
+        "example_py": "Nǐ chī zǎocān le ma?",
+        "example_vi": "Bạn ăn sáng chưa?"
+    },
+    {
+        "word": "大家",
+        "pinyin": "dàjiā",
+        "vietnamese": "Mọi người, cả nhà",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "大家好！",
+        "example_py": "Dàjiā hǎo!",
+        "example_vi": "Chào mọi người!"
+    },
+    {
+        "word": "大",
+        "pinyin": "dà",
+        "vietnamese": "To, lớn",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "他的家很大。",
+        "example_py": "Tā de jiā hěn dà.",
+        "example_vi": "Nhà của anh ấy rất lớn."
+    },
+    {
+        "word": "小",
+        "pinyin": "xiǎo",
+        "vietnamese": "Nhỏ, bé",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "这个杯子很小。",
+        "example_py": "Zhège bēizi hěn xiǎo.",
+        "example_vi": "Cái cốc này rất nhỏ."
+    },
+    {
+        "word": "饱",
+        "pinyin": "bǎo",
+        "vietnamese": "No, no bụng",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "我饱了。",
+        "example_py": "Wǒ bǎo le.",
+        "example_vi": "Tôi no rồi."
+    },
+    {
+        "word": "饿",
+        "pinyin": "è",
+        "vietnamese": "Đói, đói bụng",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "你饿吗？",
+        "example_py": "Nǐ è ma?",
+        "example_vi": "Bạn đói không?"
+    },
+    {
+        "word": "您",
+        "pinyin": "nín",
+        "vietnamese": "Ngài / Ông / Bà (kính trọng)",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "您好！您贵姓？",
+        "example_py": "Nín hǎo! Nín guìxìng?",
+        "example_vi": "Chào Ngài! Ngài quý danh?"
+    },
+    {
+        "word": "岁",
+        "pinyin": "suì",
+        "vietnamese": "Tuổi",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "你今年几岁？",
+        "example_py": "Nǐ jīnnián jǐ suì?",
+        "example_vi": "Năm nay bạn bao nhiêu tuổi?"
+    },
+    {
+        "word": "已经",
+        "pinyin": "yǐjīng",
+        "vietnamese": "Đã / Đã... rồi",
+        "lesson": "Bài 5",
+        "category": "Từ vựng",
+        "example_han": "我已经饱了。",
+        "example_py": "Wǒ yǐjīng bǎo le.",
+        "example_vi": "Tôi đã no rồi."
+    },
+    {
+        "word": "昨天",
+        "pinyin": "zuótiān",
+        "vietnamese": "Hôm qua",
+        "lesson": "Bài 6",
+        "category": "📅 Nhóm 1: Thời gian cơ bản",
+        "example_han": "昨天我去学校了。",
+        "example_py": "Zuótiān wǒ qù xuéxiào le.",
+        "example_vi": "Hôm qua tôi đi học rồi."
+    },
+    {
+        "word": "今天",
+        "pinyin": "jīntiān",
+        "vietnamese": "Hôm nay",
+        "lesson": "Bài 6",
+        "category": "📅 Nhóm 1: Thời gian cơ bản",
+        "example_han": "今天天气很好。",
+        "example_py": "Jīntiān tiānqì hěn hǎo.",
+        "example_vi": "Hôm nay thời tiết rất tốt."
+    },
+    {
+        "word": "明天",
+        "pinyin": "míngtiān",
+        "vietnamese": "Ngày mai",
+        "lesson": "Bài 6",
+        "category": "📅 Nhóm 1: Thời gian cơ bản",
+        "example_han": "明天你忙吗？",
+        "example_py": "Míngtiān nǐ máng ma?",
+        "example_vi": "Ngày mai bạn bận không?"
+    },
+    {
+        "word": "星期",
+        "pinyin": "xīngqī",
+        "vietnamese": "Thứ (trong tuần)",
+        "lesson": "Bài 6",
+        "category": "🗓️ Nhóm 2: Thứ trong tuần (星期)",
+        "example_han": "今天星期几？",
+        "example_py": "Jīntiān xīngqī jǐ?",
+        "example_vi": "Hôm nay thứ mấy?"
+    },
+    {
+        "word": "号",
+        "pinyin": "hào",
+        "vietnamese": "Ngày (văn nói)",
+        "lesson": "Bài 6",
+        "category": "🗓️ Nhóm 3: Ngày, Tháng, Năm",
+        "example_han": "今天几号？",
+        "example_py": "Jīntiān jǐ hào?",
+        "example_vi": "Hôm nay ngày mấy?"
+    },
+    {
+        "word": "日",
+        "pinyin": "rì",
+        "vietnamese": "Ngày (văn viết)",
+        "lesson": "Bài 6",
+        "category": "🗓️ Nhóm 3: Ngày, Tháng, Năm",
+        "example_han": "十月一日是国庆节。",
+        "example_py": "Shíyuè yī rì  shì guóqìng jié.",
+        "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."
+    },
+    {
+        "word": "月",
+        "pinyin": "yuè",
+        "vietnamese": "Tháng",
+        "lesson": "Bài 6",
+        "category": "🗓️ Nhóm 3: Ngày, Tháng, Năm",
+        "example_han": "现在是六月。",
+        "example_py": "Xiànzài shì liùyuè.",
+        "example_vi": "Bây giờ là tháng 6."
+    },
+    {
+        "word": "年",
+        "pinyin": "nián",
+        "vietnamese": "Năm",
+        "lesson": "Bài 6",
+        "category": "🗓️ Nhóm 3: Ngày, Tháng, Năm",
+        "example_han": "今年是二零二六年。",
+        "example_py": "Jīnnián  shì èr líng èr liù nián.",
+        "example_vi": "Năm nay là năm 2026."
+    },
+    {
+        "word": "点",
+        "pinyin": "diǎn",
+        "vietnamese": "Giờ",
+        "lesson": "Bài 6",
+        "category": "⏰ Nhóm 4: Giờ và cách đọc giờ",
+        "example_han": "现在八点。",
+        "example_py": "Xiànzài bā diǎn.",
+        "example_vi": "Bây giờ là 8 giờ."
+    },
+    {
+        "word": "分",
+        "pinyin": "fēn",
+        "vietnamese": "Phút",
+        "lesson": "Bài 6",
+        "category": "⏰ Nhóm 4: Giờ và cách đọc giờ",
+        "example_han": "现在八点十分。",
+        "example_py": "Xiànzài  bā diǎn shí fēn.",
+        "example_vi": "Bây giờ là 8 giờ 10 phút."
+    },
+    {
+        "word": "半",
+        "pinyin": "bàn",
+        "vietnamese": "Rưỡi / Nửa",
+        "lesson": "Bài 6",
+        "category": "⏰ Nhóm 4: Giờ và cách đọc giờ",
+        "example_han": "Boss八点半。",
+        "example_py": "Xiànzài bā diǎn bàn.",
+        "example_vi": "Bây giờ là 8 giờ rưỡi."
+    },
+    {
+        "word": "刻",
+        "pinyin": "kè",
+        "vietnamese": "Khắc (15 phút)",
+        "lesson": "Bài 6",
+        "category": "⏰ Nhóm 4: Giờ và cách đọc giờ",
+        "example_han": "现在八点一刻。",
+        "example_py": "Xiànzài  bā diǎn yí kè.",
+        "example_vi": "Bây giờ là 8 giờ 15 phút."
+    },
+    {
+        "word": "差",
+        "pinyin": "chà",
+        "vietnamese": "Kém",
+        "lesson": "Bài 6",
+        "category": "⏰ Nhóm 4: Giờ và cách đọc giờ",
+        "example_han": "差五分九点。",
+        "example_py": "Chà wǔ fēn jiǔ diǎn.",
+        "example_vi": "9 giờ kém 5 phút."
+    },
+    {
+        "word": "春天",
+        "pinyin": "chūntiān",
+        "vietnamese": "Mùa xuân",
+        "lesson": "Bài 6",
+        "category": "🌸 Nhóm 5: Bốn mùa",
+        "example_han": "春天很暖和。",
+        "example_py": "Chūntiān hěn nuǎnhuo.",
+        "example_vi": "Mùa xuân rất ấm áp."
+    },
+    {
+        "word": "夏天",
+        "pinyin": "xiàtiān",
+        "vietnamese": "Mùa hạ / hè",
+        "lesson": "Bài 6",
+        "category": "🌸 Nhóm 5: Bốn mùa",
+        "example_han": "夏天很热。",
+        "example_py": "Xiàtiān hěn rè.",
+        "example_vi": "Mùa hè rất nóng."
+    },
+    {
+        "word": "秋天",
+        "pinyin": "qiūtiān",
+        "vietnamese": "Mùa thu",
+        "lesson": "Bài 6",
+        "category": "🌸 Nhóm 5: Bốn mùa",
+        "example_han": "秋天很凉快。",
+        "example_py": "Qiūtiān hěn liángkuai.",
+        "example_vi": "Mùa thu rất mát mẻ."
+    },
+    {
+        "word": "冬天",
+        "pinyin": "dōngtiān",
+        "vietnamese": "Mùa đông",
+        "lesson": "Bài 6",
+        "category": "🌸 Nhóm 5: Bốn mùa",
+        "example_han": "冬天很冷。",
+        "example_py": "Dōngtiān hěn lěng.",
+        "example_vi": "Mùa đông rất lạnh."
+    },
+    {
+        "word": "吃饭",
+        "pinyin": "chī fàn",
+        "vietnamese": "ăn cơm",
+        "lesson": "Bài 7",
+        "category": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+        "example_han": "我们去吃饭吧。",
+        "example_py": "Wǒmen qù chī fàn ba.",
+        "example_vi": "Chúng ta đi ăn cơm đi."
+    },
+    {
+        "word": "做",
+        "pinyin": "zuò",
+        "vietnamese": "làm",
+        "lesson": "Bài 7",
+        "category": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+        "example_han": "你在做什么？",
+        "example_py": "Nǐ zài zuò shénme?",
+        "example_vi": "Bạn đang làm gì?"
+    },
+    {
+        "word": "工作",
+        "pinyin": "gōngzuò",
+        "vietnamese": "công việc / làm việc",
+        "lesson": "Bài 7",
+        "category": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+        "example_han": "我很喜欢我的工作。",
+        "example_py": "Wǒ hěn xǐhuān wǒ de gōngzuò.",
+        "example_vi": "Tôi rất thích công việc của tôi."
+    },
+    {
+        "word": "你在做什么？",
+        "pinyin": "nǐ zài zuò shénme?",
+        "vietnamese": "bạn đang làm gì?",
+        "lesson": "Bài 7",
+        "category": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+        "example_han": "你在做什么？我在工作。",
+        "example_py": "Nǐ zài zuò shénme? Wǒ zài gōngzuò.",
+        "example_vi": "Bạn đang làm gì? Tôi đang làm việc."
+    },
+    {
+        "word": "坐飞机",
+        "pinyin": "zuò fēi jī",
+        "vietnamese": "ngồi máy bay / đi máy bay",
+        "lesson": "Bài 7",
+        "category": "📅 Nhóm 1: Hoạt động thường ngày (日常活动)",
+        "example_han": "我坐飞机去北京。",
+        "example_py": "Wǒ zoù fēi jī qù Běijīng.",
+        "example_vi": "Tôi đi máy bay đến Bắc Kinh."
+    },
+    {
+        "word": "还没",
+        "pinyin": "hái méi",
+        "vietnamese": "chưa (not yet)",
+        "lesson": "Bài 7",
+        "category": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+        "example_han": "他还没来。",
+        "example_py": "Tā hái méi lái.",
+        "example_vi": "Anh ấy chưa đến."
+    },
+    {
+        "word": "哪个人",
+        "pinyin": "nǎ ge rén",
+        "vietnamese": "người nào",
+        "lesson": "Bài 7",
+        "category": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+        "example_han": "哪个人是你的老师？",
+        "example_py": "Nǎ ge rén  shì nǐ de lǎoshī?",
+        "example_vi": "Người nào là giáo viên của bạn?"
+    },
+    {
+        "word": "日",
+        "pinyin": "rì",
+        "vietnamese": "ngày (văn viết)",
+        "lesson": "Bài 7",
+        "category": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+        "example_han": "十月一日是国庆节。",
+        "example_py": "Shí yuè yī rì  shì guóqìng jié.",
+        "example_vi": "Ngày 1 tháng 10 là ngày Quốc khánh."
+    },
+    {
+        "word": "天",
+        "pinyin": "tiān",
+        "vietnamese": "ngày (bao nhiêu ngày)",
+        "lesson": "Bài 7",
+        "category": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+        "example_han": "我去北京三天。",
+        "example_py": "Wǒ qù Běijīng sān tiān.",
+        "example_vi": "Tôi đi Bắc Kinh ba ngày."
+    },
+    {
+        "word": "号",
+        "pinyin": "hào",
+        "vietnamese": "ngày (trong câu hỏi hỏi ngày mấy / văn nói)",
+        "lesson": "Bài 7",
+        "category": "⏰ Nhóm 2: Từ hỏi và Thời gian (疑问词 & 时间)",
+        "example_han": "今天几号？",
+        "example_py": "Jīntiān jǐ hào?",
+        "example_vi": "Hôm nay ngày mấy?"
+    },
+    {
+        "word": "因为",
+        "pinyin": "yīn wèi",
+        "vietnamese": "tại vì / bởi vì",
+        "lesson": "Bài 7",
+        "category": "🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际)",
+        "example_han": "因为今天很忙，我不去。",
+        "example_py": "Yīnwèi jīntiān hěn máng, wǒ bú qù.",
+        "example_vi": "Vì hôm nay rất bận nên tôi không đi."
+    },
+    {
+        "word": "没关系",
+        "pinyin": "méi guān xi",
+        "vietnamese": "không sao / không có gì",
+        "lesson": "Bài 7",
+        "category": "🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际)",
+        "example_han": "对不起！没关系。",
+        "example_py": "Duìbuqǐ! Méi guān xi.",
+        "example_vi": "Xin lỗi! Không sao đâu."
+    },
+    {
+        "word": "不客气",
+        "pinyin": "bù kè qì",
+        "vietnamese": "đừng khách sáo / không có gì",
+        "lesson": "Bài 7",
+        "category": "🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际)",
+        "example_han": "谢谢`你！不客气。",
+        "example_py": "Xièxie nǐ! Bú kèqi.",
+        "example_vi": "Cảm ơn bạn! Đừng khách sáo."
+    },
+    {
+        "word": "哪里！",
+        "pinyin": "nǎlǐ!",
+        "vietnamese": "nhận được lời khen, tỏ ra khiêm tốn (đâu có!)",
+        "lesson": "Bài 7",
+        "category": "🗣️ Nhóm 3: Giao tiếp & Lịch sự (日常交际)",
+        "example_han": "你汉语很好！哪里，哪里！",
+        "example_py": "Nǐ Hànyǔ hěn hǎo! Nǎlǐ, nǎlǐ!",
+        "example_vi": "Tiếng Trung của bạn rất tốt! Đâu có, đâu có!"
+    }
+];
+        
+        let activeVocab = [...VOCABULARY];
+        let currentIndex = 0;
+        let activeWritersFront = [];
+        let activeWritersBack = [];
+        let activeWritersLearn = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            populateFilters();
+            applyFilters();
+        });
+
+        function populateFilters() {
+            const lessons = new Set();
+            const categories = new Set();
+            VOCABULARY.forEach(item => {
+                if (item.lesson) lessons.add(item.lesson);
+                if (item.category) categories.add(item.category);
+            });
+
+            const selLesson = document.getElementById('sel-lesson');
+            Array.from(lessons).sort().forEach(les => {
+                const opt = document.createElement('option');
+                opt.value = les;
+                opt.textContent = les;
+                selLesson.appendChild(opt);
+            });
+        }
+
+        function applyFilters() {
+            const selectedLesson = document.getElementById('sel-lesson').value;
+            const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+
+            activeVocab = VOCABULARY.filter(item => {
+                const matchesLesson = selectedLesson === 'Tất cả' || item.lesson === selectedLesson;
+                const matchesSearch = !searchQuery || 
+                    item.word.toLowerCase().includes(searchQuery) ||
+                    item.pinyin.toLowerCase().includes(searchQuery) ||
+                    item.vietnamese.toLowerCase().includes(searchQuery);
+                return matchesLesson && matchesSearch;
+            });
+
+            currentIndex = 0;
+            updateUI();
+            updateTable();
+        }
+
+        function shuffleVocabulary() {
+            for (let i = activeVocab.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [activeVocab[i], activeVocab[j]] = [activeVocab[j], activeVocab[i]];
+            }
+            currentIndex = 0;
+            updateUI();
+            updateTable();
+        }
+
+        function switchView(view) {
+            const learnMode = document.getElementById('learn-view-mode');
+            const cardMode = document.getElementById('card-view-mode');
+            const tableMode = document.getElementById('table-view-mode');
+            const buttons = document.querySelectorAll('.mode-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (view === 'learn') {
+                learnMode.style.display = 'flex';
+                cardMode.style.display = 'none';
+                tableMode.style.display = 'none';
+                buttons[0].classList.add('active');
+                updateUI();
+            } else if (view === 'card') {
+                learnMode.style.display = 'none';
+                cardMode.style.display = 'flex';
+                tableMode.style.display = 'none';
+                buttons[1].classList.add('active');
+                updateUI();
+            } else {
+                learnMode.style.display = 'none';
+                cardMode.style.display = 'none';
+                tableMode.style.display = 'block';
+                buttons[2].classList.add('active');
+                updateTable();
+            }
+        }
+
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            
+            if (card.classList.contains('flipped')) {
+                initStrokeWritersBack();
+            } else {
+                initStrokeWritersFront();
+            }
+        }
+
+        function updateUI() {
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+
+            // Learn mode elements
+            const learnWord = document.getElementById('learn-word');
+            const learnPinyin = document.getElementById('learn-pinyin');
+            const learnViet = document.getElementById('learn-viet');
+            const learnExBox = document.getElementById('learn-example');
+
+            if (activeVocab.length === 0) {
+                document.getElementById('front-word').textContent = '⚠️ Trống';
+                document.getElementById('back-word').textContent = '⚠️ Trống';
+                document.getElementById('back-pinyin').textContent = '';
+                document.getElementById('back-viet').textContent = 'Vui lòng chọn bộ lọc khác';
+                document.getElementById('back-example').style.display = 'none';
+                document.getElementById('progress-info').textContent = 'Từ 0 / 0';
+                document.getElementById('percent-info').textContent = '0%';
+                document.getElementById('progress-fill').style.width = '0%';
+
+                if (learnWord) {
+                    learnWord.textContent = '⚠️ Trống';
+                    learnPinyin.textContent = '';
+                    learnViet.textContent = 'Vui lòng chọn bộ lọc khác';
+                    learnExBox.style.display = 'none';
+                    document.getElementById('learn-progress-info').textContent = 'Từ 0 / 0';
+                    document.getElementById('learn-percent-info').textContent = '0%';
+                    document.getElementById('learn-progress-fill').style.width = '0%';
+                }
+                return;
+            }
+
+            const item = activeVocab[currentIndex];
+            document.getElementById('front-word').textContent = item.word;
+            document.getElementById('back-word').textContent = item.word;
+            document.getElementById('back-pinyin').textContent = item.pinyin;
+            document.getElementById('back-viet').textContent = item.vietnamese;
+
+            const exBox = document.getElementById('back-example');
+            if (item.example_han) {
+                exBox.style.display = 'block';
+                exBox.innerHTML = `
+                    <div class="example-title">Ví dụ minh họa:</div>
+                    <div class="example-han">${item.example_han}</div>
+                    <div class="example-py">${item.example_py}</div>
+                    <div class="example-vi">${item.example_vi}</div>
+                    <button class="btn-audio" onclick="speak('${item.example_han}')">🔊 Nghe câu ví dụ</button>
+                `;
+            } else {
+                exBox.style.display = 'none';
+            }
+
+            const total = activeVocab.length;
+            const currentNum = currentIndex + 1;
+            const percent = Math.round((currentNum / total) * 100);
+            
+            document.getElementById('progress-info').textContent = `Từ ${currentNum} / ${total}`;
+            document.getElementById('percent-info').textContent = `${percent}%`;
+            document.getElementById('progress-fill').style.width = `${percent}%`;
+
+            // Update learn view UI
+            if (learnWord) {
+                learnWord.textContent = item.word;
+                learnPinyin.textContent = item.pinyin;
+                learnViet.textContent = item.vietnamese;
+
+                if (item.example_han) {
+                    learnExBox.style.display = 'block';
+                    learnExBox.innerHTML = `
+                        <div class="example-title">Ví dụ minh họa:</div>
+                        <div class="example-han">${item.example_han}</div>
+                        <div class="example-py">${item.example_py}</div>
+                        <div class="example-vi">${item.example_vi}</div>
+                        <button class="btn-audio" onclick="speak('${item.example_han}')">🔊 Nghe câu ví dụ</button>
+                    `;
+                } else {
+                    learnExBox.style.display = 'none';
+                }
+
+                document.getElementById('learn-progress-info').textContent = `Từ ${currentNum} / ${total}`;
+                document.getElementById('learn-percent-info').textContent = `${percent}%`;
+                document.getElementById('learn-progress-fill').style.width = `${percent}%`;
+            }
+
+            initStrokeWritersFront();
+            initStrokeWritersLearn();
+            speak(item.word);
+        }
+
+        function initStrokeWritersFront() {
+            const item = activeVocab[currentIndex];
+            const container = document.getElementById('front-stroke-area');
+            container.innerHTML = '';
+            activeWritersFront = [];
+
+            if (!item) return;
+            const chars = item.word.split('').filter(c => /[\u4e00-\u9fa5]/.test(c));
+
+            chars.forEach((char, idx) => {
+                const charBox = document.createElement('div');
+                charBox.className = 'hanzi-char-box';
+                charBox.id = `front-char-box-${idx}`;
+                container.appendChild(charBox);
+
+                try {
+                    const writer = HanziWriter.create(charBox.id, char, {
+                        width: 80,
+                        height: 80,
+                        padding: 5,
+                        showOutline: true,
+                        strokeColor: '#e11d48',
+                        outlineColor: '#f8fafc',
+                        strokeAnimationSpeed: 1.5
+                    });
+                    activeWritersFront.push(writer);
+                    charBox.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        writer.animateCharacter();
+                    });
+                    setTimeout(() => writer.animateCharacter(), idx * 400);
+                } catch (e) {
+                    charBox.textContent = char;
+                }
+            });
+        }
+
+        function initStrokeWritersLearn() {
+            const item = activeVocab[currentIndex];
+            const container = document.getElementById('learn-stroke-area');
+            container.innerHTML = '';
+            activeWritersLearn = [];
+
+            if (!item) return;
+            const chars = item.word.split('').filter(c => /[\u4e00-\u9fa5]/.test(c));
+
+            chars.forEach((char, idx) => {
+                const charBox = document.createElement('div');
+                charBox.className = 'hanzi-char-box';
+                charBox.id = `learn-char-box-${idx}`;
+                container.appendChild(charBox);
+
+                try {
+                    const writer = HanziWriter.create(charBox.id, char, {
+                        width: 80,
+                        height: 80,
+                        padding: 5,
+                        showOutline: true,
+                        strokeColor: '#e11d48',
+                        outlineColor: '#f8fafc',
+                        strokeAnimationSpeed: 1.5
+                    });
+                    activeWritersLearn.push(writer);
+                    charBox.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        writer.animateCharacter();
+                    });
+                    setTimeout(() => writer.animateCharacter(), idx * 400);
+                } catch (e) {
+                    charBox.textContent = char;
+                }
+            });
+        }
+
+        function speakCurrentWord() {
+            const item = activeVocab[currentIndex];
+            if (item) {
+                speak(item.word);
+            }
+        }
+
+        function initStrokeWritersBack() {
+            const item = activeVocab[currentIndex];
+            const container = document.getElementById('stroke-area');
+            container.innerHTML = '';
+            activeWritersBack = [];
+
+            if (!item) return;
+            const chars = item.word.split('').filter(c => /[\u4e00-\u9fa5]/.test(c));
+
+            chars.forEach((char, idx) => {
+                const charBox = document.createElement('div');
+                charBox.className = 'hanzi-char-box';
+                charBox.id = `back-char-box-${idx}`;
+                container.appendChild(charBox);
+
+                try {
+                    const writer = HanziWriter.create(charBox.id, char, {
+                        width: 70,
+                        height: 70,
+                        padding: 5,
+                        showOutline: true,
+                        strokeColor: '#2563eb',
+                        outlineColor: '#f8fafc',
+                        strokeAnimationSpeed: 1.5
+                    });
+                    activeWritersBack.push(writer);
+                    charBox.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        writer.animateCharacter();
+                    });
+                    setTimeout(() => writer.animateCharacter(), idx * 400);
+                } catch (e) {
+                    charBox.textContent = char;
+                }
+            });
+        }
+
+        function prevCard() {
+            if (activeVocab.length === 0) return;
+            currentIndex = (currentIndex - 1 + activeVocab.length) % activeVocab.length;
+            updateUI();
+        }
+
+        function nextCard() {
+            if (activeVocab.length === 0) return;
+            currentIndex = (currentIndex + 1) % activeVocab.length;
+            updateUI();
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+
+            activeVocab.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td><span class="badge">${item.lesson}</span></td>
+                    <td style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">${item.word}</td>
+                    <td style="font-family: monospace; font-size: 1.1rem; color: #2563eb;">${item.pinyin}</td>
+                    <td style="font-weight: 600;">${item.vietnamese}</td>
+                    <td><span class="badge" style="background-color:#eff6ff; color:#1e40af;">${item.category}</span></td>
+                    <td>
+                        <button class="btn-audio" style="margin-top:0;" onclick="speak('${item.word}')">🔊 Phát âm</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
