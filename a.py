@@ -91,42 +91,8 @@ def show_consolidated_flashcards():
                 st.error(f"Lỗi khi khởi tạo thẻ từ: {e}")
                 return
 
-    # Render Header
-    render_lesson_intro(
-        "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG",
-        "Học tập và thực hành luyện tập từ vựng HSK 1 trực quan với hiệu ứng viết chữ Hán, phát âm chuẩn và lật thẻ ghi nhớ."
-    )
-
-    # Sync and Download Area
-    col_sync, col_dl = st.columns([1, 1])
-    with col_sync:
-        if st.button("🔄 Đồng bộ & Làm mới", use_container_width=True, key="btn_sync_app_fc"):
-            with st.spinner("Đang đồng bộ..."):
-                try:
-                    import flashcard_generator
-                    importlib.reload(flashcard_generator)
-                    flashcard_generator.generate_vocabulary()
-                    st.success("Đồng bộ thành công!")
-                    st.rerun()
-                except Exception as e:
-                    st.error(f"Lỗi khi đồng bộ: {e}")
-                    
-    with col_dl:
-        try:
-            with open(app_path, "r", encoding="utf-8") as f:
-                app_bytes = f.read()
-            st.download_button(
-                label="📥 Tải App Offline về máy",
-                data=app_bytes,
-                file_name="Flashcard_Offline.html",
-                mime="text/html",
-                use_container_width=True,
-                key="btn_dl_app_fc_from_tab"
-            )
-        except Exception as e:
-            st.error(f"Lỗi khi đọc file để tải xuống: {e}")
-
-    st.markdown("---")
+    # Render Header without description
+    render_lesson_intro("🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG")
 
     # Embed Flashcard_Offline.html using Streamlit components
     try:
