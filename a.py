@@ -173,6 +173,24 @@ def show_consolidated_flashcards():
         
         # Download buttons
         st.write("### 📥 Tải xuống / Xuất file:")
+        
+        # Offline App (Interactive App)
+        app_path = "Flashcard_Offline.html"
+        if os.path.exists(app_path):
+            with open(app_path, "r", encoding="utf-8") as f:
+                app_bytes = f.read()
+            st.download_button(
+                label="🚀 TẢI APP FLASHCARD OFFLINE (Tương tác lật thẻ + Phát âm + Xem nét chữ động)",
+                data=app_bytes,
+                file_name="Flashcard_Offline.html",
+                mime="text/html",
+                use_container_width=True,
+                type="primary",
+                key="fc_dl_offline_app"
+            )
+            st.info("💡 Hướng dẫn gửi học viên: Tải file `Flashcard_Offline.html` này gửi qua Zalo/Email. Học viên chỉ cần mở file bằng trình duyệt (Chrome, Safari, Edge...) trên Điện thoại hoặc Máy tính là học được ngay offline, không cần cài đặt gì thêm!")
+            st.markdown("---")
+            
         col_dl_json, col_dl_csv, col_dl_html = st.columns(3)
         
         # JSON
