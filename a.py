@@ -76,320 +76,66 @@ except Exception as e:
 
 def show_consolidated_flashcards():
     import os
-    import json
+    import streamlit.components.v1 as components
     
-    # Path to vocabulary JSON
-    json_path = os.path.join("assets", "vocabulary.json")
+    # Path to the standalone HTML app
+    app_path = "Flashcard_Offline.html"
     
-    # If the JSON doesn't exist, generate it dynamically
-    if not os.path.exists(json_path) or os.path.getsize(json_path) == 0:
-        with st.spinner("Đang khởi tạo dữ liệu từ vựng..."):
+    # If the app doesn't exist, generate it dynamically first
+    if not os.path.exists(app_path) or os.path.getsize(app_path) == 0:
+        with st.spinner("Đang tạo ứng dụng thẻ từ ôn tập..."):
             try:
                 import flashcard_generator
                 flashcard_generator.generate_vocabulary()
             except Exception as e:
-                st.error(f"Lỗi khi tạo dữ liệu từ vựng: {e}")
+                st.error(f"Lỗi khi khởi tạo thẻ từ: {e}")
                 return
-
-    try:
-        with open(json_path, "r", encoding="utf-8") as f:
-            vocab_data = json.load(f)
-    except Exception as e:
-        st.error(f"Lỗi khi đọc tệp từ vựng: {e}")
-        return
 
     # Render Header
     render_lesson_intro(
-        "🎴 Thẻ từ ghi nhớ (Flashcards) Tổng Hợp",
-        "Hệ thống ôn tập từ vựng thông minh tích hợp từ Bài 1 đến Bài 7. Sử dụng flashcards tương tác kèm phát âm giọng bản xứ."
+        "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG",
+        "Học tập và thực hành luyện tập từ vựng HSK 1 trực quan với hiệu ứng viết chữ Hán, phát âm chuẩn và lật thẻ ghi nhớ."
     )
-    
-    # Sync vocabulary database button
-    col_sync, col_status = st.columns([3, 7])
+
+    # Sync and Download Area
+    col_sync, col_dl = st.columns([1, 1])
     with col_sync:
-        if st.button("🔄 Đồng bộ & Cập nhật từ vựng", use_container_width=True, key="btn_sync_db"):
+        if st.button("🔄 Đồng bộ & Làm mới", use_container_width=True, key="btn_sync_app_fc"):
             with st.spinner("Đang đồng bộ..."):
                 try:
                     import flashcard_generator
                     importlib.reload(flashcard_generator)
-                    vocab_data = flashcard_generator.generate_vocabulary()
+                    flashcard_generator.generate_vocabulary()
                     st.success("Đồng bộ thành công!")
                     st.rerun()
                 except Exception as e:
                     st.error(f"Lỗi khi đồng bộ: {e}")
                     
-    # Filter settings UI
-    st.markdown("### 🛠️ Bộ lọc từ vựng")
-    col_les, col_cat, col_search = st.columns([2, 2, 3])
-    
-    # Lesson selection
-    lessons_list = ["Tất cả"] + sorted(list(set(item["lesson"] for item in vocab_data)), key=lambda x: int(x.split(" ")[1]) if len(x.split(" ")) > 1 and x.split(" ")[1].isdigit() else 99)
-    with col_les:
-        sel_lesson = st.selectbox("Chọn bài học:", lessons_list, key="fc_sel_lesson")
-        
-    # Category selection
-    cats_for_lesson = [item["category"] for item in vocab_data if sel_lesson == "Tất cả" or item["lesson"] == sel_lesson]
-    categories_list = ["Tất cả"] + sorted(list(set(cats_for_lesson)))
-    with col_cat:
-        sel_cat = st.selectbox("Chọn nhóm từ:", categories_list, key="fc_sel_cat")
-        
-    # Search input
-    with col_search:
-        search_query = st.text_input("🔍 Tìm kiếm từ vựng (Hán tự, Pinyin, Tiếng Việt):", "", key="fc_search")
-        
-    # Filtering the vocab list
-    filtered_vocab = [
-        item for item in vocab_data
-        if (sel_lesson == "Tất cả" or item["lesson"] == sel_lesson) and
-           (sel_cat == "Tất cả" or item["category"] == sel_cat) and
-           (not search_query or 
-            search_query.lower() in item["word"].lower() or 
-            search_query.lower() in item["pinyin"].lower() or 
-            search_query.lower() in item["vietnamese"].lower())
-    ]
-    
-    if not filtered_vocab:
-        st.warning("Không tìm thấy từ vựng nào khớp với bộ lọc hiện tại!")
-        return
-
-    # View Mode Selector
-    view_mode = st.radio("Chế độ hiển thị:", ["🎴 Thẻ từ (Flashcard)", "📋 Bảng tổng hợp chi tiết"], horizontal=True, key="fc_view_mode")
-    
-    if view_mode == "📋 Bảng tổng hợp chi tiết":
-        st.markdown(f"**Danh sách gồm {len(filtered_vocab)} từ vựng:**")
-        # Format table data
-        table_data = []
-        for idx, item in enumerate(filtered_vocab, 1):
-            table_data.append({
-                "STT": idx,
-                "Bài": item["lesson"],
-                "Nhóm": item["category"],
-                "Chữ Hán": item["word"],
-                "Pinyin": item["pinyin"],
-                "Nghĩa tiếng Việt": item["vietnamese"],
-                "Ví dụ": item["example_han"] if item["example_han"] else "-"
-            })
-        st.dataframe(table_data, use_container_width=True)
-        
-        # Download buttons
-        st.write("### 📥 Tải xuống / Xuất file:")
-        
-        # Offline App (Interactive App)
-        app_path = "Flashcard_Offline.html"
-        if os.path.exists(app_path):
+    with col_dl:
+        try:
             with open(app_path, "r", encoding="utf-8") as f:
                 app_bytes = f.read()
             st.download_button(
-                label="🚀 TẢI APP FLASHCARD OFFLINE (Tương tác lật thẻ + Phát âm + Xem nét chữ động)",
+                label="📥 Tải App Offline về máy",
                 data=app_bytes,
                 file_name="Flashcard_Offline.html",
                 mime="text/html",
                 use_container_width=True,
-                type="primary",
-                key="fc_dl_offline_app"
+                key="btn_dl_app_fc_from_tab"
             )
-            st.info("💡 Hướng dẫn gửi học viên: Tải file `Flashcard_Offline.html` này gửi qua Zalo/Email. Học viên chỉ cần mở file bằng trình duyệt (Chrome, Safari, Edge...) trên Điện thoại hoặc Máy tính là học được ngay offline, không cần cài đặt gì thêm!")
-            st.markdown("---")
-            
-        col_dl_json, col_dl_csv, col_dl_html = st.columns(3)
+        except Exception as e:
+            st.error(f"Lỗi khi đọc file để tải xuống: {e}")
+
+    st.markdown("---")
+
+    # Embed Flashcard_Offline.html using Streamlit components
+    try:
+        with open(app_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
         
-        # JSON
-        with open(json_path, "r", encoding="utf-8") as f:
-            json_bytes = f.read()
-        with col_dl_json:
-            st.download_button("📥 Tải file JSON", json_bytes, file_name="vocabulary.json", mime="application/json", key="fc_dl_json")
-            
-        # CSV
-        csv_path = os.path.join("assets", "vocabulary.csv")
-        if os.path.exists(csv_path):
-            with open(csv_path, "r", encoding="utf-8") as f:
-                csv_bytes = f.read()
-            with col_dl_csv:
-                st.download_button("📥 Tải file CSV (Excel)", csv_bytes, file_name="vocabulary.csv", mime="text/csv", key="fc_dl_csv")
-                
-        # HTML Print Format
-        html_path = os.path.join("assets", "vocabulary_print.html")
-        if os.path.exists(html_path):
-            with open(html_path, "r", encoding="utf-8") as f:
-                html_bytes = f.read()
-            with col_dl_html:
-                st.download_button("📥 Tải trang HTML In Ấn", html_bytes, file_name="vocabulary_print.html", mime="text/html", key="fc_dl_html")
-        return
-
-    # Shuffle button
-    col_ord, col_shuf = st.columns([5, 2])
-    with col_ord:
-        st.markdown(f"**Đang hiển thị {len(filtered_vocab)} từ vựng.**")
-    with col_shuf:
-        if st.button("🔀 Trộn ngẫu nhiên", use_container_width=True, key="fc_shuffle"):
-            random.shuffle(filtered_vocab)
-            st.session_state["fc_shuffled_list"] = filtered_vocab
-            st.session_state["fc_index"] = 0
-            st.rerun()
-
-    # Get the source list (use shuffled if available)
-    vocab_source = st.session_state.get("fc_shuffled_list", filtered_vocab)
-    
-    # Sync with filtered list size change
-    if len(vocab_source) != len(filtered_vocab):
-        vocab_source = filtered_vocab
-        if "fc_shuffled_list" in st.session_state:
-            del st.session_state["fc_shuffled_list"]
-
-    # Current index in session state
-    if "fc_index" not in st.session_state:
-        st.session_state["fc_index"] = 0
-        
-    if st.session_state["fc_index"] >= len(vocab_source):
-        st.session_state["fc_index"] = 0
-        
-    cur_idx = st.session_state["fc_index"]
-    item = vocab_source[cur_idx]
-    
-    # Progress indicator
-    st.progress((cur_idx + 1) / len(vocab_source))
-    st.markdown(f"<div style='text-align: center; color: #64748b; font-weight: bold; margin-bottom: 20px;'>Từ {cur_idx + 1} / {len(vocab_source)} ({item['lesson']} - {item['category']})</div>", unsafe_allow_html=True)
-    
-    # Card Flipped State
-    if "fc_flipped" not in st.session_state:
-        st.session_state["fc_flipped"] = False
-
-    # Custom styling for premium card
-    st.markdown("""
-    <style>
-    .fc-box {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        border: 2px solid #e11d48;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-        text-align: center;
-        min-height: 280px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 25px;
-    }
-    .fc-word {
-        font-size: 3.8rem;
-        font-weight: 800;
-        color: #e11d48;
-        margin-bottom: 10px;
-    }
-    .fc-pinyin {
-        font-family: 'Courier New', monospace;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #2563eb;
-        background: #eff6ff;
-        padding: 4px 20px;
-        border-radius: 30px;
-        border: 1px solid #dbeafe;
-        display: inline-block;
-        margin-bottom: 15px;
-    }
-    .fc-viet {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #1e293b;
-        margin-bottom: 20px;
-    }
-    .fc-ex-box {
-        background: #f8fafc;
-        border-radius: 12px;
-        padding: 15px;
-        border: 1px solid #e2e8f0;
-        width: 100%;
-        max-width: 600px;
-        text-align: left;
-        margin-top: 10px;
-    }
-    .fc-ex-title {
-        font-size: 0.8rem;
-        color: #94a3b8;
-        font-weight: 700;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-    }
-    .fc-ex-han {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #1e293b;
-        margin-bottom: 2px;
-    }
-    .fc-ex-py {
-        font-family: 'Courier New', monospace;
-        color: #059669;
-        font-size: 0.95rem;
-        margin-bottom: 4px;
-    }
-    .fc-ex-vi {
-        color: #475569;
-        font-style: italic;
-        font-size: 0.9rem;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    if not st.session_state["fc_flipped"]:
-        # Front Side (Chinese only)
-        st.markdown(f"""
-        <div class="fc-box">
-            <div class="fc-word">{item['word']}</div>
-            <div style="color: #94a3b8; font-style: italic; font-size: 0.9rem; margin-top: 15px;">(Click "Lật thẻ" bên dưới để xem phiên âm & nghĩa)</div>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        # Back Side (Detailed View)
-        ex_html = ""
-        if item["example_han"]:
-            ex_html = f"""
-            <div class="fc-ex-box">
-                <div class="fc-ex-title">Ví dụ minh họa:</div>
-                <div class="fc-ex-han">{item['example_han']}</div>
-                <div class="fc-ex-py">{item['example_py']}</div>
-                <div class="fc-ex-vi">{item['example_vi']}</div>
-            </div>
-            """
-            
-        st.markdown(f"""
-        <div class="fc-box">
-            <div class="fc-word" style="font-size: 3rem;">{item['word']}</div>
-            <div><span class="fc-pinyin">{item['pinyin']}</span></div>
-            <div class="fc-viet">{item['vietnamese']}</div>
-            {ex_html}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Audio Player columns
-        col_a1, col_a2 = st.columns(2)
-        with col_a1:
-            render_play_button(item['word'], "🔊 Phát âm từ", key=f"fc_aud_w_{cur_idx}")
-        with col_a2:
-            if item["example_han"]:
-                render_play_button(item['example_han'], "🔊 Nghe câu ví dụ", key=f"fc_aud_ex_{cur_idx}")
-
-    # Navigation buttons
-    col_prev, col_flip, col_next = st.columns([2, 3, 2])
-    
-    with col_prev:
-        if st.button("⬅️ Từ trước", use_container_width=True, key="btn_fc_prev"):
-            st.session_state["fc_index"] = (cur_idx - 1) % len(vocab_source)
-            st.session_state["fc_flipped"] = False
-            st.rerun()
-            
-    with col_flip:
-        btn_label = "👁️ Lật thẻ (Xem nghĩa)" if not st.session_state["fc_flipped"] else "🙈 Lật thẻ (Ẩn nghĩa)"
-        if st.button(btn_label, use_container_width=True, type="primary", key="btn_fc_flip"):
-            st.session_state["fc_flipped"] = not st.session_state["fc_flipped"]
-            st.rerun()
-            
-    with col_next:
-        if st.button("Từ sau ➡️", use_container_width=True, key="btn_fc_next"):
-            st.session_state["fc_index"] = (cur_idx + 1) % len(vocab_source)
-            st.session_state["fc_flipped"] = False
-            st.rerun()
+        components.html(html_content, height=850, scrolling=True)
+    except Exception as e:
+        st.error(f"Lỗi khi hiển thị ứng dụng: {e}")
 
 
 # Cấu hình trang
