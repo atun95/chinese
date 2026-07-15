@@ -394,7 +394,7 @@ def save_score_row_hsk1_consolidated(row_data):
     file_exists = SCORES_HSK1_CONSOLIDATED_FILE.exists()
     try:
         with open(SCORES_HSK1_CONSOLIDATED_FILE, "a", newline="", encoding="utf-8-sig") as f:
-            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "Kết quả"])
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "Đề kiểm tra", "tổng điểm", "Kết quả"])
             if not file_exists: writer.writeheader()
             writer.writerow(row_data)
         return True
