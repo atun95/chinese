@@ -570,6 +570,595 @@ QUIZZES_DATA = {
                 "sound_txt": "明天我去商店买东西。"
             }
         ]
+    },
+    "quiz_5": {
+        "title": "📝 Đề 5: Luyện tập Ngữ âm & Từ vựng Giao tiếp (Bài 1 - Bài 3)",
+        "description": "Luyện tập thanh mẫu, vận mẫu đơn/kép cơ bản (Bài 1 - Bài 3), biến điệu thanh 3, quy tắc viết Pinyin của 'ü', các từ xưng hô gia đình và giao tiếp cơ bản.",
+        "questions": [
+            {
+                "question": "Chọn cách phát âm đúng của vận mẫu 'ü' trong từ '鱼' (yú - con cá):",
+                "pinyin": "Phát âm 'ü' trong 'yú':",
+                "choices": [
+                    "A. Đọc giống 'u' trong tiếng Việt",
+                    "B. Đọc giống 'ư' trong tiếng Việt",
+                    "C. Đọc giống âm 'uy' (như uy trong tiếng Việt nhưng giữ tròn môi)",
+                    "D. Đọc giống âm 'o'"
+                ],
+                "answer": "C. Đọc giống âm 'uy' (như uy trong tiếng Việt nhưng giữ tròn môi)",
+                "explain": "Nguyên âm tròn môi 'ü' phát âm bằng cách để vị trí lưỡi và khoang miệng giống âm 'i' nhưng môi khép tròn nhô ra phía trước, tương đương âm 'uy' trong tiếng Việt nhưng giữ nguyên môi tròn đến hết âm.",
+                "sound_txt": "鱼"
+            },
+            {
+                "question": "Khi hai âm tiết mang thanh 3 đi liền nhau (ví dụ: 你好 nǐ hǎo), âm tiết thứ nhất sẽ biến điệu phát âm thành thanh mấy?",
+                "pinyin": "Biến điệu thanh 3:",
+                "choices": ["A. Thanh 1", "B. Thanh 2 (ní)", "C. Thanh 4", "D. Giữ nguyên thanh 3"],
+                "answer": "B. Thanh 2 (ní)",
+                "explain": "Quy tắc biến điệu thanh 3: Khi hai âm mang thanh 3 (thanh hỏi) đi liền nhau, âm thứ nhất bắt buộc phải đọc thành thanh 2 (thanh sắc), viết vẫn giữ nguyên thanh 3.",
+                "sound_txt": "你好"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “他是我的_____， we cùng nhau học tập。” (Anh ấy là bạn học của tôi, chúng tôi học cùng nhau.)",
+                "pinyin": "Tā shì wǒ de _____.",
+                "choices": ["A. 老师 (lǎoshī)", "B. 医生 (yīshēng)", "C. 同学 (tóngxué)", "D. 爸爸 (bàba)"],
+                "answer": "C. 同学 (tóngxué)",
+                "explain": "'同学' (tóngxué) nghĩa là bạn học cùng trường/lớp. Phù hợp nhất với ngữ cảnh học tập chung.",
+                "sound_txt": "同学"
+            },
+            {
+                "question": "Chọn cách viết Pinyin đúng luật chính tả cho âm tiết 'ia' khi đứng độc lập không có thanh mẫu đi trước:",
+                "pinyin": "Quy tắc viết Bính âm của 'ia':",
+                "choices": ["A. ia", "B. yia", "C. ya", "D. wa"],
+                "answer": "C. ya",
+                "explain": "Khi vận mẫu bắt đầu bằng 'i' đứng độc lập tạo thành một âm tiết không có phụ âm đi trước, ta phải đổi 'i' thành 'y'. Do đó 'ia' viết thành 'ya'.",
+                "sound_txt": "鸭"
+            },
+            {
+                "question": "Khi nguyên âm 'ü' kết hợp với thanh mẫu 'n', ta viết thế nào trên Bính âm chính thức?",
+                "pinyin": "ü kết hợp với n:",
+                "choices": ["A. nu", "B. nyu", "C. nü", "D. nou"],
+                "answer": "C. nü",
+                "explain": "Vì thanh mẫu 'n' có thể đi với cả 'u' (nu - giận dữ) và 'ü' (nü - nữ), nên khi viết ta bắt buộc phải giữ nguyên hai dấu chấm trên đầu 'ü' thành 'nü' để phân biệt.",
+                "sound_txt": "女"
+            },
+            {
+                "question": "Chọn câu chào xã giao phù hợp dành cho nhiều người cùng lúc (các bạn chào thầy cô, hoặc thầy cô chào cả lớp):",
+                "pinyin": "Chào số nhiều:",
+                "choices": ["A. 你好 (nǐhǎo)", "B. 您好 (nínhǎo)", "C. 你们好 (nǐmenhǎo)", "D. 老师好 (lǎoshīhǎo)"],
+                "answer": "C. 你们好 (nǐmenhǎo)",
+                "explain": "'你们好' (nǐmenhǎo - chào các bạn/chào mọi người) dùng để chào một nhóm từ 2 người trở lên.",
+                "sound_txt": "你们好"
+            },
+            {
+                "question": "Dịch câu sau sang tiếng Trung: 'Gia đình bạn có 5 người phải không?'",
+                "pinyin": "Dịch câu hỏi số người:",
+                "choices": [
+                    "A. 你家有五口人吗？ (Nǐ jiā yǒu wǔ kǒu rén ma?)",
+                    "B. 我家有五口人。 (Wǒ jiā yǒu wǔ kǒu rén.)",
+                    "C. 他家有五个人吗？ (Tā jiā yǒu wǔ gè rén ma?)",
+                    "D. 你家有几口人？ (Nǐ jiā yǒu jǐ kǒu rén?)"
+                ],
+                "answer": "A. 你家有五口人吗？ (Nǐ jiā yǒu wǔ kǒu rén ma?)",
+                "explain": "'Gia đình bạn' là 你家, 'có' là 有, '5 người' dùng lượng từ gia đình là 五口人, 'phải không' dùng trợ từ nghi vấn 吗. Do đó câu đúng là: 你家有五口人吗？",
+                "sound_txt": "你家有五口人吗？"
+            },
+            {
+                "question": "Thanh mẫu nào sau đây thuộc nhóm âm đầu lưỡi-răng (z, c, s) khi phát âm cần để đầu lưỡi chạm vào răng cửa trên rồi đẩy hơi ra?",
+                "pinyin": "Phân loại thanh mẫu:",
+                "choices": ["A. z", "B. zh", "C. j", "D. g"],
+                "answer": "A. z",
+                "explain": "'z' thuộc nhóm âm đầu lưỡi-răng (z, c, s), phát âm không bật hơi. Khác với 'zh' là âm uốn lưỡi, 'j' là âm mặt lưỡi.",
+                "sound_txt": "z"
+            },
+            {
+                "question": "Chọn cách viết Bính âm đúng của từ 'tạm biệt' (zàijiàn):",
+                "pinyin": "Viết Pinyin của zàijiàn:",
+                "choices": ["A. zàijiàn", "B. zàijian", "C. zāijiàn", "D. zāijian"],
+                "answer": "A. zàijiàn",
+                "explain": "Từ '再' mang thanh 4 (zài), từ '见' mang thanh 4 (jiàn). Do đó viết Bính âm đúng là 'zàijiàn'.",
+                "sound_txt": "再见"
+            },
+            {
+                "question": "Từ xưng hô nào mang nghĩa là 'học sinh, sinh viên'?",
+                "pinyin": "Từ vựng nghề nghiệp:",
+                "choices": ["A. 老师 (lǎoshī)", "B. 学生 (xuéshēng)", "C. 医生 (yīshēng)", "D. 同学 (tóngxué)"],
+                "answer": "B. 学生 (xuéshēng)",
+                "explain": "'学生' (xuéshēng) có nghĩa là học sinh hoặc sinh viên nói chung. '老师' là giáo viên, '医生' là bác sĩ.",
+                "sound_txt": "学生"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “我不是老师，我_____是学生。” (Tôi không phải giáo viên, tôi _____ là học sinh.)",
+                "pinyin": "Wǒ bú  shì lǎoshī, wǒ _____  shì xuéshēng.",
+                "choices": ["A. 没 (méi)", "B. 是 (shì)", "C. 有 (yǒu)", "D. 不 (bù)"],
+                "answer": "B. 是 (shì)",
+                "explain": "Vế trước phủ định '我不是老师' (Tôi không phải giáo viên), vế sau khẳng định '我是学生' (Tôi là học sinh), điền '是' (shì) làm động từ liên kết.",
+                "sound_txt": "我是学生"
+            },
+            {
+                "question": "Thanh mẫu 'h' trong tiếng Trung phát âm thế nào?",
+                "pinyin": "Cách phát âm thanh mẫu 'h':",
+                "choices": [
+                    "A. Phát âm nhẹ nhàng giống 'h' tiếng Việt",
+                    "B. Phát âm mạnh, xát từ cuống họng gần giống 'kh' tiếng Việt",
+                    "C. Phát âm câm không đọc",
+                    "D. Phát âm giống 'g' tiếng Việt"
+                ],
+                "answer": "B. Phát âm mạnh, xát từ cuống họng gần giống 'kh' tiếng Việt",
+                "explain": "Thanh mẫu 'h' là phụ âm cuống họng, xát, trong khẩu ngữ thực tế thường đọc mạnh và sát hơn chữ 'h' tiếng Việt, hơi thiên về âm 'kh' nhẹ.",
+                "sound_txt": "h"
+            },
+            {
+                "question": "Quy tắc viết Bính âm của nguyên âm kép 'ua' khi đứng độc lập không đi kèm phụ âm:",
+                "pinyin": "Quy tắc viết Bính âm cho 'ua':",
+                "choices": ["A. ua", "B. wa", "C. ya", "D. yua"],
+                "answer": "B. wa",
+                "explain": "Theo quy tắc chính tả Bính âm, khi nguyên âm kép bắt đầu bằng 'u' đứng độc lập, ta phải đổi 'u' thành 'w'. Do đó 'ua' viết thành 'wa'.",
+                "sound_txt": "蛙"
+            },
+            {
+                "question": "Dịch đại từ nhân xưng số nhiều 'họ/chúng nó' (chỉ nam giới hoặc cả nhóm có cả nam lẫn nữ):",
+                "pinyin": "Họ / Chúng nó (nam/chung)",
+                "choices": ["A. 我们 (wǒmen)", "B. 你们 (nǐmen)", "C. 他们 (tāmen)", "D. 她们 (tāmen)"],
+                "answer": "C. 他们 (tāmen)",
+                "explain": "'他们' (tāmen) dùng cho nhóm nam giới hoặc nhóm hỗn hợp nam nữ. '她们' chỉ dùng cho nhóm toàn nữ giới.",
+                "sound_txt": "他们"
+            },
+            {
+                "question": "Trong câu hỏi “你好吗？” (Bạn khỏe không?), từ “吗” (ma) đóng vai trò gì?",
+                "pinyin": "Vai trò của '吗':",
+                "choices": [
+                    "A. Trợ từ ngữ khí đứng cuối câu để tạo câu hỏi nghi vấn Có/Không",
+                    "B. Đại từ nhân xưng chỉ ngôi thứ hai",
+                    "C. Tính từ biểu đạt trạng thái sức khỏe tốt",
+                    "D. Động từ liên kết"
+                ],
+                "answer": "A. Trợ từ ngữ khí đứng cuối câu để tạo câu hỏi nghi vấn Có/Không",
+                "explain": "Trợ từ ngữ khí '吗' (ma) đặt ở cuối câu trần thuật để biến câu đó thành câu hỏi Có/Không (Yes/No question).",
+                "sound_txt": "你好吗？"
+            }
+        ]
+    },
+    "quiz_6": {
+        "title": "📝 Đề 6: Số đếm, Ngày tháng & Từ vựng Nữ giới (Bài 4 - Bài 5)",
+        "description": "Luyện tập số đếm 0 - 10, phân biệt cách dùng các từ chỉ Nữ giới (nǚrén, nǚ'ér, nǚhái, nǚshēng...), phó từ chỉ mức độ, vận mẫu mũi trước và vận mẫu mũi sau.",
+        "questions": [
+            {
+                "question": "Số đếm '8' trong tiếng Trung viết bằng chữ Hán là chữ nào?",
+                "pinyin": "Chữ Hán của số 8:",
+                "choices": ["A. 八 (bā)", "B. 七 (qī)", "C. 九 (jiǔ)", "D. 六 (liù)"],
+                "answer": "A. 八 (bā)",
+                "explain": "Số 8 viết là '八' (bā). '七' là 7, '九' là 9, '六' là 6.",
+                "sound_txt": "八"
+            },
+            {
+                "question": "Chọn từ vựng chỉ giới tính nữ mang sắc thái thân mật, thường dùng cho các bạn gái nhỏ hoặc thiếu nữ trẻ:",
+                "pinyin": "Cô bé / Bạn gái trẻ:",
+                "choices": ["A. 女人 (nǚrén)", "B. 女孩 (nǚhái)", "C. 女性 (nǚxìng)", "D. 妇女 (fùnǚ)"],
+                "answer": "B. 女孩 (nǚhái)",
+                "explain": "'女孩' (nǚhái) nghĩa là cô bé, bạn gái nhỏ tuổi, mang sắc thái trẻ trung thân mật.",
+                "sound_txt": "女孩"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “我买两个_____。” (Tôi mua hai cái cốc.)",
+                "pinyin": "Wǒ mǎi liǎng gè _____.",
+                "choices": ["A. 衣服 (yīfu)", "B. 书 (shū)", "C. 杯子 (bēizi)", "D. 苹果 (píngguǒ)"],
+                "answer": "C. 杯子 (bēizi)",
+                "explain": "'杯子' (bēizi) nghĩa là cái cốc, đi với lượng từ '个' (gè).",
+                "sound_txt": "杯子"
+            },
+            {
+                "question": "Khi đứng trước một lượng từ (như '个', '口'), số đếm '2' (hai) biến đổi thành từ nào?",
+                "pinyin": "Quy tắc dùng số 2 trước lượng từ:",
+                "choices": ["A. 二 (èr)", "B. 两 (liǎng)", "C. 双 (shuāng)", "D. 俩 (liǎ)"],
+                "answer": "B. 两 (liǎng)",
+                "explain": "Khi biểu thị số lượng của sự vật đứng trước một lượng từ, ta không dùng '二' (èr) mà bắt buộc phải đổi sang dùng '两' (liǎng). Ví dụ: 两个苹果.",
+                "sound_txt": "两个"
+            },
+            {
+                "question": "Vận mẫu kép nào dưới đây bắt đầu bằng nguyên âm 'u' và kết thúc bằng phụ âm mũi trước 'n'?",
+                "pinyin": "Vận mẫu mũi bắt đầu bằng u:",
+                "choices": ["A. uan", "B. un (uen)", "C. uang", "D. ueng"],
+                "answer": "B. un (uen)",
+                "explain": "Vận mẫu 'un' thực chất là viết tắt của 'uen' khi kết hợp với thanh mẫu phía trước. Đây là vận mẫu mũi trước kết thúc bằng âm 'n'.",
+                "sound_txt": "un"
+            },
+            {
+                "question": "Phó từ chỉ mức độ nào mang ý nghĩa là 'cực kỳ / vô cùng'?",
+                "pinyin": "Phó từ mức độ mạnh:",
+                "choices": ["A. 很 (hěn)", "B. 非常 (fēicháng)", "C. 太 (tài)", "D. 最 (zuì)"],
+                "answer": "B. 非常 (fēicháng)",
+                "explain": "'非常' (fēicháng - phi thường, cực kỳ) biểu thị mức độ cao hơn '很' (rất) nhưng chưa đạt mức cực hạn tuyệt đối như '最' (nhất).",
+                "sound_txt": "非常"
+            },
+            {
+                "question": "Chọn câu dịch tiếng Trung đúng nhất cho câu: “Hôm nay tôi rất bận.”",
+                "pinyin": "Dịch câu 'Hôm nay tôi rất bận':",
+                "choices": [
+                    "A. 昨天我很忙。 (Zuótiān wǒ hěn máng.)",
+                    "B. 今天我很忙。 (Jīntiān wǒ hěn máng.)",
+                    "C. 明天我很忙。 (Míngtiān wǒ hěn máng.)",
+                    "D. 今天我不忙。 (Jīntiān wǒ bù máng.)"
+                ],
+                "answer": "B. 今天我很忙。 (Jīntiān wǒ hěn máng.)",
+                "explain": "'Hôm nay' là 今天 (jīntiān), 'tôi' là 我 (wǒ), 'rất bận' là 很忙 (hěn máng).",
+                "sound_txt": "今天我很忙。"
+            },
+            {
+                "question": "Chữ Hán '零' (líng) biểu thị chữ số nào sau đây?",
+                "pinyin": "Số 零 (líng):",
+                "choices": ["A. Số 10", "B. Số 0", "C. Số 2", "D. Số 5"],
+                "answer": "B. Số 0",
+                "explain": "'零' (líng) nghĩa là số 0. Cách viết phức tạp nhưng phiên âm rất dễ đọc.",
+                "sound_txt": "零"
+            },
+            {
+                "question": "Chọn cách viết Bính âm đúng của từ 'thời tiết' (tiānqì):",
+                "pinyin": "Viết Pinyin của tiānqì:",
+                "choices": ["A. tiānqi", "B. tiānqì", "C. tiānqī", "D. tianqí"],
+                "answer": "B. tiānqì",
+                "explain": "'天' mang thanh 1 (tiān), '气' mang thanh 4 (qì). Do đó viết Bính âm đúng là 'tiānqì'.",
+                "sound_txt": "天气"
+            },
+            {
+                "question": "Từ nào sau đây mang nghĩa là 'con gái' (biểu thị quan hệ ruột thịt với cha mẹ)?",
+                "pinyin": "Con gái ruột:",
+                "choices": ["A. 女孩 (nǚhái)", "B. 女生 (nǚshēng)", "C. 女儿 (nǚ'ér)", "D. 女人 (nǚrén)"],
+                "answer": "C. 女儿 (nǚ'ér)",
+                "explain": "'女儿' (nǚ'ér - nữ nhi) chỉ duy nhất quan hệ ruột thịt con gái đối với bố mẹ.",
+                "sound_txt": "女儿"
+            },
+            {
+                "question": "Trong các số từ 1 đến 10, số nào phát âm là 'qī'?",
+                "pinyin": "Số phát âm là qī:",
+                "choices": ["A. Số 7 (七)", "B. Số 8 (八)", "C. Số 9 (九)", "D. Số 6 (六)"],
+                "answer": "A. Số 7 (七)",
+                "explain": "Số 7 viết chữ Hán là '七', phiên âm phát âm là 'qī'.",
+                "sound_txt": "七"
+            },
+            {
+                "question": "Vận mẫu kết thúc bằng phụ âm mũi sau 'ng' được gọi là gì?",
+                "pinyin": "Vận mẫu mũi sau:",
+                "choices": [
+                    "A. Vận mẫu mũi trước",
+                    "B. Vận mẫu mũi sau",
+                    "C. Vận mẫu uốn lưỡi",
+                    "D. Vận mẫu kép"
+                ],
+                "answer": "B. Vận mẫu mũi sau",
+                "explain": "Các vận mẫu kết thúc bằng âm 'ng' (ang, eng, ing, ong...) được gọi là vận mẫu mũi sau (âm đóng ở ngạc mềm). Các vận mẫu kết thúc bằng 'n' là mũi trước.",
+                "sound_txt": "ng"
+            },
+            {
+                "question": "Chọn phó từ thích hợp điền vào chỗ trống: “这儿的天气_____热了，我不喜欢。” (Thời tiết ở đây nóng quá rồi, tôi không thích.)",
+                "pinyin": "Zhèr de tiānqì _____ rè le.",
+                "choices": ["A. 很 (hěn)", "B. 太 (tài)", "C. 最 (zuì)", "D. 非常 (fēicháng)"],
+                "answer": "B. 太 (tài)",
+                "explain": "Cấu trúc cảm thán '太...了' (quá/lắm... rồi) biểu thị mức độ cực cao hoặc không hài lòng. Điền '太' (tài) kết hợp với '了' (le) cuối câu.",
+                "sound_txt": "这儿的天气太热了。"
+            },
+            {
+                "question": "Số 10 trong tiếng Trung là '十', phiên âm Pinyin là gì?",
+                "pinyin": "Pinyin của số 10:",
+                "choices": ["A. shí", "B. sì", "C. shǐ", "D. shī"],
+                "answer": "A. shí",
+                "explain": "Số 10 viết chữ Hán là '十', phiên âm mang thanh 2 viết là 'shí'.",
+                "sound_txt": "十"
+            },
+            {
+                "question": "Từ nào biểu thị giới tính nữ nói chung theo nghĩa sinh học/xã hội thông thường (đối lập với nam giới)?",
+                "pinyin": "Nữ giới / Phụ nữ:",
+                "choices": ["A. 女性 (nǚxìng)", "B. 女人 (nǚrén)", "C. 妇女 (fùnǚ)", "D. 女生 (nǚshēng)"],
+                "answer": "B. 女人 (nǚrén)",
+                "explain": "'女人' (nǚrén - nữ nhân) là từ thông dụng chỉ phụ nữ/nữ giới nói chung. '女性' chỉ giới tính nữ trang trọng.",
+                "sound_txt": "女人"
+            }
+        ]
+    },
+    "quiz_7": {
+        "title": "📝 Đề 7: Từ để hỏi, Định ngữ với 的 & Chỉ định từ (Bài 6 - Bài 7)",
+        "description": "Luyện tập hệ thống từ nghi vấn (bao nhiêu, ai, cái gì, ở đâu, tại sao), trợ từ kết cấu 的 biểu thị sở hữu và cụm từ chỉ định 这 / 那.",
+        "questions": [
+            {
+                "question": "Khi muốn hỏi về giá tiền ('Bao nhiêu tiền?'), ta dùng cụm từ nghi vấn nào?",
+                "pinyin": "Hỏi giá tiền:",
+                "choices": ["A. 多少钱 (duōshao qián)", "B. 几钱 (jǐ qián)", "C. 什么钱 (shénme qián)", "D. 哪里钱 (nǎli qián)"],
+                "answer": "A. 多少钱 (duōshao qián)",
+                "explain": "Cụm từ để hỏi giá tiền cố định là '多少钱' (duōshao qián). '多少' hỏi số lượng lớn hoặc chưa biết khoảng bao nhiêu.",
+                "sound_txt": "多少钱"
+            },
+            {
+                "question": "Chọn đại từ chỉ định dùng để chỉ vật ở khoảng cách xa người nói ('kia / đó'):",
+                "pinyin": "Chỉ định từ khoảng cách xa:",
+                "choices": ["A. 这 (zhè)", "B. 那 (nà)", "C. 哪 (nǎ)", "D. 谁 (shéi)"],
+                "answer": "B. 那 (nà)",
+                "explain": "'那' (nà - thanh 4) là chỉ định từ khoảng cách xa ('kia/đó'). Khác với 'clean' (zhè) ở gần, và '哪' (nǎ - thanh 3) là từ dùng để hỏi ('nào').",
+                "sound_txt": "那"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “这是我_____汉语老师。” (Đây là giáo viên tiếng Trung của tôi.)",
+                "pinyin": "Zhè shì wǒ _____ Hànyǔ lǎoshī.",
+                "choices": ["A. 吗 (ma)", "B. 的 (de)", "C. 呢 (ne)", "D. 了 (le)"],
+                "answer": "B. 的 (de)",
+                "explain": "Trợ từ kết cấu '的' (de) đặt sau đại từ nhân xưng '我' làm định ngữ để xác định quan hệ sở hữu đối với danh từ '汉语老师' (giáo viên tiếng Trung của tôi).",
+                "sound_txt": "这是我的汉语老师。"
+            },
+            {
+                "question": "Khi muốn hỏi 'Đây là cái gì?', câu tiếng Trung chính xác là gì?",
+                "pinyin": "Hỏi 'Đây là cái gì?':",
+                "choices": [
+                    "A. 这是谁？ (Zhè shì shéi?)",
+                    "B. 这是什么？ (Zhè shì shénme?)",
+                    "C. 这是哪儿？ (Zhè shì nǎr?)",
+                    "D. 这是怎么样？ (Zhè shì zěnmeyàng?)"
+                ],
+                "answer": "B. 这是什么？ (Zhè shì shénme?)",
+                "explain": "'这是什么' (Zhè shì shénme?) nghĩa là 'Đây là cái gì?'. '什么' là đại từ nghi vấn chỉ vật thể.",
+                "sound_txt": "这是什么？"
+            },
+            {
+                "question": "Danh từ chỉ địa điểm 'bệnh viện' trong tiếng Trung viết bằng chữ Hán thế nào?",
+                "pinyin": "Bệnh viện:",
+                "choices": ["A. 医院 (yīyuàn)", "B. 商店 (shāngdiàn)", "C. 学校 (xuéxiào)", "D. 家 (jiā)"],
+                "answer": "A. 医院 (yīyuàn)",
+                "explain": "'医院' (yīyuàn) là bệnh viện. '商店' là cửa hàng, '学校' là trường học, '家' là nhà.",
+                "sound_txt": "医院"
+            },
+            {
+                "question": "Điền danh từ chỉ phương vị thích hợp: “我的电脑在桌子_____。” (Máy tính của tôi ở trên bàn.)",
+                "pinyin": "Wǒ de diànnǎo zài zhuōzi _____.",
+                "choices": ["A. 里 (lǐ)", "B. 上 (shàng)", "C. 下 (xià)", "D. 前 (qián)"],
+                "answer": "B. 上 (shàng)",
+                "explain": "Để biểu thị vật nằm trên bề mặt bàn, dùng danh từ chỉ phương hướng/vị trí '上' (shàng) đứng sau danh từ chính '桌子'.",
+                "sound_txt": "我的电脑在桌子上。"
+            },
+            {
+                "question": "Chọn đại từ nghi vấn hỏi về số lượng thường dùng khi ước lượng số lượng nhỏ (thường nhỏ hơn 10):",
+                "pinyin": "Hỏi số lượng nhỏ:",
+                "choices": ["A. 多少 (duōshao)", "B. 几 (jǐ)", "C. 什么 (shénme)", "D. 谁 (shéi)"],
+                "answer": "B. 几 (jǐ)",
+                "explain": "'几' (jǐ) dùng hỏi số lượng nhỏ dưới 10 và bắt buộc phải đi kèm lượng từ phía sau (ví dụ: 几个人). '多少' dùng cho số lượng lớn hoặc không giới hạn, không nhất thiết phải có lượng từ.",
+                "sound_txt": "几"
+            },
+            {
+                "question": "Điền giới từ thích hợp: “他在学校_____学习汉语。” (Anh ấy học tiếng Trung ở trường.)",
+                "pinyin": "Tā _____ xuéxiào xuéxí Hànyǔ.",
+                "choices": ["A. 去 (qù)", "B. 在 (zài)", "C. 是 (shì)", "D. 有 (yǒu)"],
+                "answer": "B. 在 (zài)",
+                "explain": "Giới từ '在' (zài - ở) đặt trước cụm địa điểm '学校' để làm trạng ngữ chỉ nơi chốn diễn ra hành động '学习汉语'.",
+                "sound_txt": "他在学校学习汉语。"
+            },
+            {
+                "question": "Chọn câu dịch đúng cho câu: “Cái cốc này bao nhiêu tiền?”",
+                "pinyin": "Dịch câu hỏi giá cốc này:",
+                "choices": [
+                    "A. 那个杯子多少钱？ (Nàge bēizi duōshao qián?)",
+                    "B. 这个杯子多少钱？ (Zhège bēizi duōshao qián?)",
+                    "C. 这个杯子几块钱？ (Zhège bēizi jǐ kuài qián?)",
+                    "D. 哪个杯子多少钱？ (Nǎge bēizi duōshao qián?)"
+                ],
+                "answer": "B. 这个杯子多少钱？ (Zhège bēizi duōshao qián?)",
+                "explain": "'Cái cốc này' là 这个杯子, 'bao nhiêu tiền' là 多少钱. Do đó câu đúng là: 这个杯子多少钱？",
+                "sound_txt": "这个杯子多少钱？"
+            },
+            {
+                "question": "Để diễn đạt cụm danh từ sở hữu 'sách của thầy giáo', ta nói như thế nào trong tiếng Trung?",
+                "pinyin": "Định ngữ chỉ sở hữu:",
+                "choices": [
+                    "A. 老师的书 (lǎoshī de shū)",
+                    "B. 书的老师 (shū de lǎoshī)",
+                    "C. 老师书 (lǎoshī shū)",
+                    "D. 书老师 (shū lǎoshī)"
+                ],
+                "answer": "A. 老师的书 (lǎoshī de shū)",
+                "explain": "Trong tiếng Trung, định ngữ đứng trước trung tâm ngữ. 'Thầy giáo' (老师) là chủ thể sở hữu đứng trước, nối bằng '的', 'sách' (书) là vật sở hữu đứng sau.",
+                "sound_txt": "老师的书"
+            },
+            {
+                "question": "Đại từ để hỏi '哪儿' (nǎr) dùng để hỏi về thông tin gì?",
+                "pinyin": "Ý nghĩa nghi vấn của '哪儿':",
+                "choices": [
+                    "A. Chỉ người (Ai)",
+                    "B. Chỉ địa điểm, nơi chốn (Ở đâu)",
+                    "C. Chỉ thời gian (Khi nào)",
+                    "D. Chỉ lý do (Tại sao)"
+                ],
+                "answer": "B. Chỉ địa điểm, nơi chốn (Ở đâu)",
+                "explain": "'哪儿' (nǎr - thanh 3, có âm cuốn lưỡi) là đại từ nghi vấn dùng để hỏi về nơi chốn, địa điểm (ở đâu, hướng nào).",
+                "sound_txt": "哪儿"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “我不喜欢这个，我要_____。” (Tôi không thích cái này, tôi muốn cái kia.)",
+                "pinyin": "Wǒ bù xǐhuan zhège, wào _____.",
+                "choices": ["A. 这个 (zhège)", "B. 那个 (nàge)", "C. 哪个 (nǎge)", "D. 什么 (shénme)"],
+                "answer": "B. 那个 (nàge)",
+                "explain": "'那个' (nàge) chỉ vật ở xa ('cái kia'). Thích hợp để tạo sự đối lập với '这个' (zhège - cái này).",
+                "sound_txt": "我要那个。"
+            },
+            {
+                "question": "Lượng từ nào là lượng từ chuyên dùng cho sách vở, tạp chí, từ điển?",
+                "pinyin": "Lượng từ của sách:",
+                "choices": ["A. 个 (gè)", "B. 本 (běn)", "C. 件 (jiàn)", "D. 口 (kǒu)"],
+                "answer": "B. 本 (běn)",
+                "explain": "'本' (běn) là lượng từ chuyên dụng đi kèm danh từ sách vở (ví dụ: 一本书 - một cuốn sách).",
+                "sound_txt": "本"
+            },
+            {
+                "question": "Cụm câu tiếng Trung '医生在医院工作' dịch sang tiếng Việt có nghĩa là gì?",
+                "pinyin": "Dịch câu 'Yīshēng zài yīyuàn gōngzuò':",
+                "choices": [
+                    "A. Thầy giáo làm việc ở trường học.",
+                    "B. Bác sĩ làm việc ở bệnh viện.",
+                    "C. Luật sư làm việc ở tòa án.",
+                    "D. Bố tôi làm việc ở bệnh viện."
+                ],
+                "answer": "B. Bác sĩ làm việc ở bệnh viện.",
+                "explain": "'医生' (yīshēng) là bác sĩ, '在医院' là ở bệnh viện, '工作' là làm việc. Dịch nghĩa là: Bác sĩ làm việc ở bệnh viện.",
+                "sound_txt": "医生在医院工作。"
+            },
+            {
+                "question": "Chọn trợ từ nghi vấn dùng để hỏi tỉnh lược theo ngữ cảnh ('Còn... thì sao?'):",
+                "pinyin": "Hỏi tỉnh lược:",
+                "choices": ["A. 吗 (ma)", "B. 呢 (ne)", "C. 的 (de)", "D. 吧 (ba)"],
+                "answer": "B. 呢 (ne)",
+                "explain": "Trợ từ ngữ khí '呢' (ne) đặt sau danh từ hoặc đại từ để tạo thành câu hỏi tỉnh lược (ví dụ: 你呢？ - Còn bạn thì sao?).",
+                "sound_txt": "呢"
+            }
+        ]
+    },
+    "quiz_8": {
+        "title": "📝 Đề 8: Quy tắc chữ Hán & Đàm thoại Thực tế (Bài 8 & Tổng hợp)",
+        "description": "Luyện tập các nét chữ Hán cơ bản, quy tắc viết bút thuận, kết cấu chữ Hán, bộ thủ, đàm thoại thực tế giao tiếp xã giao và tổng hợp toàn bộ HSK 1.",
+        "questions": [
+            {
+                "question": "Quy tắc bút thuận cơ bản nào quy định cách viết của chữ Hán có phần bao vây xung quanh và nét bên trong (như chữ '国'):",
+                "pinyin": "Quy tắc viết chữ bao quanh:",
+                "choices": [
+                    "A. Trái trước phải sau",
+                    "B. Vào trước đóng sau (先进入后关门)",
+                    "C. Giữa trước hai bên sau",
+                    "D. Trên trước dưới sau"
+                ],
+                "answer": "B. Vào trước đóng sau (先进入后关门)",
+                "explain": "Quy tắc bút thuận quy định: với các chữ có kết cấu bao quanh (như 国, 回, 园), ta viết khung ngoài trước, viết nội dung bên trong, rồi cuối cùng mới viết nét đóng đáy khung lại (gọi là Vào trước đóng sau).",
+                "sound_txt": "国"
+            },
+            {
+                "question": "Chữ Hán '她' (tā - cô ấy) có bộ thủ nào ở bên trái để chỉ giới tính nữ giới?",
+                "pinyin": "Bộ thủ của chữ '她':",
+                "choices": ["A. Bộ Nhân đứng (亻)", "B. Bộ Nữ (女)", "C. Bộ Vương (王)", "D. Bộ Khẩu (口)"],
+                "answer": "B. Bộ Nữ (女)",
+                "explain": "Chữ '她' (cô ấy) chứa bộ Nữ '女' ở bên trái làm biểu nghĩa cho phái nữ, giúp phân biệt với '他' (anh ấy - bộ Nhân đứng) và '它' (nó - chỉ vật).",
+                "sound_txt": "她"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “A: Xièxie nǐ! - B: _____” (A: Cảm ơn bạn! - B: Không khách khí / Đừng khách sáo.)",
+                "pinyin": "Giao tiếp đáp lại lời cảm ơn:",
+                "choices": ["A. 不客气 (Bú kèqi)", "B. 对不起 (Duìbuqǐ)", "C. 没关系 (Méi guānxi)", "D. 再见 (Zàijiàn)"],
+                "answer": "A. 不客气 (Bú kèqi)",
+                "explain": "Khi nhận được lời cảm ơn '谢谢', cách trả lời lịch sự phổ thông nhất là '不客气' (Bú kèqi - Đừng khách sáo/Không có gì).",
+                "sound_txt": "不客气"
+            },
+            {
+                "question": "Bộ thủ '口' (bộ Khẩu) trong chữ Hán liên quan đến ý nghĩa gì sau đây?",
+                "pinyin": "Ý nghĩa bộ Khẩu '口':",
+                "choices": [
+                    "A. Cây cối, gỗ",
+                    "B. Miệng, ngôn ngữ, ăn uống hoặc hành động liên quan đến miệng",
+                    "C. Nước, chất lỏng",
+                    "D. Bàn tay, hành động của tay"
+                ],
+                "answer": "B. Miệng, ngôn ngữ, ăn uống hoặc hành động liên quan đến miệng",
+                "explain": "Bộ Khẩu '口' mô phỏng chiếc miệng, biểu thị các chữ liên quan đến ăn uống, nói năng, gọi hoặc các hoạt động phát âm (như 吃, 叫, 听, 吗).",
+                "sound_txt": "口"
+            },
+            {
+                "question": "Nét viết chữ Hán nào kéo chéo từ trên xuống dưới và hướng dần sang bên phải?",
+                "pinyin": "Nét mác (nà):",
+                "choices": ["A. Nét phẩy (撇 - piě)", "B. Nét mác (捺 - nà)", "C. Nét sổ (竖 - shù)", "D. Nét hất (提 - tí)"],
+                "answer": "B. Nét mác (捺 - nà)",
+                "explain": "Nét mác (捺 - nà) là nét chéo kéo từ trên xuống dưới nghiêng sang bên phải. Ngược với nét phẩy (撇) kéo nghiêng sang trái.",
+                "sound_txt": "捺"
+            },
+            {
+                "question": "Bộ thủ '氵' (bộ Chấm thủy) xuất hiện trong các chữ như '汉语', '没' biểu thị ý nghĩa liên quan đến:",
+                "pinyin": "Ý nghĩa bộ Chấm thủy '氵':",
+                "choices": ["A. Lửa", "B. Nước và chất lỏng", "C. Đất đai", "D. Cây cối"],
+                "answer": "B. Nước và chất lỏng",
+                "explain": "Bộ Chấm thủy '氵' là biến thể của chữ '水' (nước), biểu thị các chữ liên quan đến nước, sông ngòi hoặc chất lỏng.",
+                "sound_txt": "水"
+            },
+            {
+                "question": "Quy tắc bút thuận khi viết chữ '小' (xiǎo - nhỏ) là quy tắc nào?",
+                "pinyin": "Quy tắc viết chữ '小':",
+                "choices": [
+                    "A. Trái trước phải sau",
+                    "B. Giữa trước hai bên sau (先中间后两边)",
+                    "C. Trên trước dưới sau",
+                    "D. Ngang trước sổ sau"
+                ],
+                "answer": "B. Giữa trước hai bên sau (先中间后两边)",
+                "explain": "Với các chữ đối xứng hai bên như '小', '水', quy tắc bút thuận yêu cầu viết nét sổ ở giữa trước, sau đó mới viết các nét đối xứng ở bên trái và bên phải.",
+                "sound_txt": "小"
+            },
+            {
+                "question": "Chữ Hán '爸' (bà - bố) thuộc loại kết cấu cấu tạo nào?",
+                "pinyin": "Kết cấu chữ '爸':",
+                "choices": ["A. Kết cấu Trái - Phải", "B. Kết cấu Trên - Dưới", "C. Kết cấu Bao quanh", "D. Kết cấu Độc thể"],
+                "answer": "B. Kết cấu Trên - Dưới",
+                "explain": "Chữ '爸' gồm bộ Phụ '父' ở phía trên và chữ '巴' ở phía dưới, thuộc kết cấu Trên - Dưới.",
+                "sound_txt": "爸"
+            },
+            {
+                "question": "Chọn câu dịch đúng nhất cho câu: “Xin lỗi, tôi không biết.”",
+                "pinyin": "Dịch câu 'Xin lỗi, tôi không biết':",
+                "choices": [
+                    "A. 没关系，/我不知道。 (Méi guānxi, wǒ bù zhīdào.)",
+                    "B. 对不起，/我不认识他。 (Duìbuqǐ, wǒ bú rènshi tā.)",
+                    "C. 对不起，/我不知道。 (Duìbuqǐ, wǒ bù zhīdào.)",
+                    "D. 谢谢你，/我不知道。 (Xièxie nǐ, wǒ bù zhīdào.)"
+                ],
+                "answer": "C. 对不起，我不知道。 (Duìbuqǐ, wǒ bù zhīdào.)",
+                "explain": "'Xin lỗi' là 对不起 (duìbuqǐ), 'tôi' là 我 (wǒ), 'không biết' là 不知道 (bù zhīdào). Do đó câu đúng là: 对不起，我不知道。",
+                "sound_txt": "对不起，我不知道。"
+            },
+            {
+                "question": "Khi có người nói lời xin lỗi với bạn bằng câu '对不起' (Duìbuqǐ), bạn nên đáp lại lịch sự bằng câu nào?",
+                "pinyin": "Đáp lại lời xin lỗi:",
+                "choices": ["A. 不客气 (Bú kèqi)", "B. 没关系 (Méi guānxi)", "C. 谢谢 (Xièxie)", "D. 再见 (Zàijiàn)"],
+                "answer": "B. 没关系 (Méi guānxi)",
+                "explain": "Lời đáp lịch sự thông dụng cho câu xin lỗi '对不起' là '没关系' (Méi guānxi - Không sao đâu/Không có gì đáng ngại).",
+                "sound_txt": "没关系"
+            },
+            {
+                "question": "Nét viết chữ Hán cơ bản '点' (diǎn) là nét viết nào sau đây?",
+                "pinyin": "Nét 点 (diǎn):",
+                "choices": ["A. Nét ngang", "B. Nét chấm", "C. Nét phẩy", "D. Nét hất"],
+                "answer": "B. Nét chấm",
+                "explain": "Nét '点' (diǎn) là nét chấm, đặt bút xuống nhẹ rồi nhấc lên nhanh tạo thành hình giọt nước nhỏ.",
+                "sound_txt": "点"
+            },
+            {
+                "question": "Chữ Hán '我' (wǒ - tôi) thuộc loại cấu trúc kết cấu nào sau đây?",
+                "pinyin": "Kết cấu chữ '我':",
+                "choices": [
+                    "A. Kết cấu Độc thể (chữ đơn không ghép bộ)",
+                    "B. Kết cấu Trái - Phải",
+                    "C. Kết cấu Trên - Dưới",
+                    "D. Kết cấu Bao quanh"
+                ],
+                "answer": "A. Kết cấu Độc thể (chữ đơn không ghép bộ)",
+                "explain": "Chữ '我' (tôi) là chữ độc thể (không phân chia thành các phần trái phải hay trên dưới độc lập mà viết liên hoàn từ các nét đơn lẻ).",
+                "sound_txt": "我"
+            },
+            {
+                "question": "Chữ Hán nào sau đây có chứa bộ thủ '亻' (Nhân đứng)?",
+                "pinyin": "Chữ chứa bộ '亻':",
+                "choices": ["A. 她 (tā)", "B. 们 (men)", "C. 国 (guó)", "D. 爸 (bà)"],
+                "answer": "B. 们 (men)",
+                "explain": "Chữ '们' (men) có bộ Nhân đứng '亻' ở bên trái biểu thị từ chỉ con người số nhiều. '她' có bộ Nữ '女', '国' có bộ vây '囗', '爸' có bộ Phụ '父'.",
+                "sound_txt": "们"
+            },
+            {
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “A: Nǐ hǎo ma? - B: Wǒ hěn hǎo, _____ nǐ?” (A: Bạn khỏe không? - B: Tôi rất khỏe, còn bạn?)",
+                "pinyin": "Hội thoại hỏi thăm sức khỏe:",
+                "choices": ["A. 吗 (ma)", "B. 呢 (ne)", "C. 的 (de)", "D. 了 (le)"],
+                "answer": "B. 呢 (ne)",
+                "explain": "Trợ từ nghi vấn tỉnh lược '呢' đặt sau đại từ nhân xưng '你' thành '你呢？' (Còn bạn thì sao?) để hỏi ngược lại câu hỏi sức khỏe.",
+                "sound_txt": "你呢"
+            },
+            {
+                "question": "Dịch câu sau sang tiếng Trung: 'Ngày mai tôi đi cửa hàng mua cốc.'",
+                "pinyin": "Dịch câu đi mua cốc:",
+                "choices": [
+                    "A. 昨天我去商店买杯子。 (Zuótiān wǒ qù shāngdiàn mǎi bēizi.)",
+                    "B. 明天我去商店买杯子。 (Míngtiān wǒ qù shāngdiàn mǎi bēizi.)",
+                    "C. 明天我去学校买杯子。 (Míngtiān wǒ qù xuéxiào mǎi bēizi.)",
+                    "D. 明天他在商店买杯子。 (Míngtiān tā zài shāngdiàn mǎi bēizi.)"
+                ],
+                "answer": "B. 明天我去商店买杯子。 (Míngtiān wǒ qù shāngdiàn mǎi bēizi.)",
+                "explain": "'Ngày mai' là 明天 (míngtiān), 'tôi' là 我 (wǒ), 'đi cửa hàng' là 去商店 (qù shāngdiàn), 'mua cốc' là 买杯子 (mǎi bēizi). Do đó câu chính xác là: 明天我去商店买杯子。",
+                "sound_txt": "明天我去商店买杯子。"
+            }
+        ]
     }
 }
 
@@ -791,61 +1380,52 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             st.session_state.hsk1_quiz_shuffled_options[selected_quiz_key] = shuffled
             st.rerun()
 
-        # Grid layout (2 rows, 2 columns)
-        row1_col1, row1_col2 = st.columns(2)
-        row2_col1, row2_col2 = st.columns(2)
+        # Grid layout (Loop through 8 quizzes in pairs to create a clean responsive grid)
+        quiz_metadata = {
+            "quiz_1": {"badge": "Bài 1 - Bài 3", "badge_bg": "#dbeafe", "badge_color": "#1e40af", "icon": "🎒", "color": "#3b82f6", "title": "Đề 1: Nhập môn Ngữ âm & Từ vựng"},
+            "quiz_2": {"badge": "Bài 4 - Bài 5", "badge_bg": "#f3e8ff", "badge_color": "#6b21a8", "icon": "🌸", "color": "#8b5cf6", "title": "Đề 2: Ngữ âm mở rộng & Số đếm"},
+            "quiz_3": {"badge": "Bài 6 - Bài 7", "badge_bg": "#fce7f3", "badge_color": "#9d174d", "icon": "⚡", "color": "#ec4899", "title": "Đề 3: Từ để hỏi & Trợ từ 的"},
+            "quiz_4": {"badge": "Bài 8 & Tổng hợp", "badge_bg": "#fef3c7", "badge_color": "#92400e", "icon": "🔥", "color": "#f59e0b", "title": "Đề 4: Chữ Hán & Đàm thoại tổng hợp"},
+            "quiz_5": {"badge": "Bài 1 - Bài 3", "badge_bg": "#e0f2fe", "badge_color": "#0369a1", "icon": "📝", "color": "#0ea5e9", "title": "Đề 5: Luyện tập Ngữ âm & Giao tiếp"},
+            "quiz_6": {"badge": "Bài 4 - Bài 5", "badge_bg": "#d1fae5", "badge_color": "#065f46", "icon": "📊", "color": "#10b981", "title": "Đề 6: Số đếm & Từ vựng Nữ giới"},
+            "quiz_7": {"badge": "Bài 6 - Bài 7", "badge_bg": "#ffedd5", "badge_color": "#9a3412", "icon": "🔍", "color": "#f97316", "title": "Đề 7: Từ để hỏi & Định ngữ"},
+            "quiz_8": {"badge": "Bài 8 & Tổng hợp", "badge_bg": "#e2e8f0", "badge_color": "#334155", "icon": "🏆", "color": "#64748b", "title": "Đề 8: Quy tắc bút thuận & Tổng hợp"}
+        }
 
-        # Quiz 1 Card
-        with row1_col1:
-            st.markdown(f"""
-            <div class="quiz-selector-card" style="border-top: 4px solid #3b82f6;">
-                <div class="quiz-card-badge" style="background-color: #dbeafe; color: #1e40af;">Bài 1 - Bài 3</div>
-                <div class="quiz-card-icon">🎒</div>
-                <div class="quiz-card-title">Đề 1: Nhập môn Ngữ âm & Từ vựng</div>
-                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_1']['description']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_1", type="primary", use_container_width=True):
-                init_quiz_state("quiz_1")
-
-        # Quiz 2 Card
-        with row1_col2:
-            st.markdown(f"""
-            <div class="quiz-selector-card" style="border-top: 4px solid #8b5cf6;">
-                <div class="quiz-card-badge" style="background-color: #f3e8ff; color: #6b21a8;">Bài 4 - Bài 5</div>
-                <div class="quiz-card-icon">🌸</div>
-                <div class="quiz-card-title">Đề 2: Ngữ âm mở rộng & Số đếm</div>
-                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_2']['description']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_2", type="primary", use_container_width=True):
-                init_quiz_state("quiz_2")
-
-        # Quiz 3 Card
-        with row2_col1:
-            st.markdown(f"""
-            <div class="quiz-selector-card" style="border-top: 4px solid #ec4899;">
-                <div class="quiz-card-badge" style="background-color: #fce7f3; color: #9d174d;">Bài 6 - Bài 7</div>
-                <div class="quiz-card-icon">⚡</div>
-                <div class="quiz-card-title">Đề 3: Từ để hỏi & Trợ từ 的</div>
-                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_3']['description']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_3", type="primary", use_container_width=True):
-                init_quiz_state("quiz_3")
-
-        # Quiz 4 Card
-        with row2_col2:
-            st.markdown(f"""
-            <div class="quiz-selector-card" style="border-top: 4px solid #f59e0b;">
-                <div class="quiz-card-badge" style="background-color: #fef3c7; color: #92400e;">Bài 8 & Tổng hợp</div>
-                <div class="quiz-card-icon">🔥</div>
-                <div class="quiz-card-title">Đề 4: Chữ Hán & Đàm thoại tổng hợp</div>
-                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_4']['description']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_4", type="primary", use_container_width=True):
-                init_quiz_state("quiz_4")
+        keys = ["quiz_1", "quiz_2", "quiz_3", "quiz_4", "quiz_5", "quiz_6", "quiz_7", "quiz_8"]
+        for row_idx in range(0, len(keys), 2):
+            col1, col2 = st.columns(2)
+            
+            # Left Column Card
+            k1 = keys[row_idx]
+            meta1 = quiz_metadata[k1]
+            with col1:
+                st.markdown(f"""
+                <div class="quiz-selector-card" style="border-top: 4px solid {meta1['color']};">
+                    <div class="quiz-card-badge" style="background-color: {meta1['badge_bg']}; color: {meta1['badge_color']};">{meta1['badge']}</div>
+                    <div class="quiz-card-icon">{meta1['icon']}</div>
+                    <div class="quiz-card-title">{meta1['title']}</div>
+                    <div class="quiz-card-desc">{QUIZZES_DATA[k1]['description']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+                if st.button("🚀 Bắt đầu làm bài", key=f"btn_start_{k1}", type="primary", use_container_width=True):
+                    init_quiz_state(k1)
+            
+            # Right Column Card
+            if row_idx + 1 < len(keys):
+                k2 = keys[row_idx + 1]
+                meta2 = quiz_metadata[k2]
+                with col2:
+                    st.markdown(f"""
+                    <div class="quiz-selector-card" style="border-top: 4px solid {meta2['color']};">
+                        <div class="quiz-card-badge" style="background-color: {meta2['badge_bg']}; color: {meta2['badge_color']};">{meta2['badge']}</div>
+                        <div class="quiz-card-icon">{meta2['icon']}</div>
+                        <div class="quiz-card-title">{meta2['title']}</div>
+                        <div class="quiz-card-desc">{QUIZZES_DATA[k2]['description']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    if st.button("🚀 Bắt đầu làm bài", key=f"btn_start_{k2}", type="primary", use_container_width=True):
+                        init_quiz_state(k2)
 
     # ================= 2. GIAO DIỆN LÀM BÀI =================
     else:
