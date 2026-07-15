@@ -83,12 +83,12 @@ QUIZZES_DATA = {
                 "sound_txt": "去"
             },
             {
-                "question": "Chọn từ thích hợp điền vào chỗ trống: “我家有_____口人。” (Nhà tôi có ... người.)",
-                "pinyin": "Wǒ jiā yǒu _____ kǒu rén.",
+                "question": "Chọn từ thích hợp điền vào chỗ trống: “你家有_____口人?” (Nhà bạn có ... người.)",
+                "pinyin": "Nǐ jiā yǒu _____ kǒu rén？",
                 "choices": ["A. 几 (jǐ)", "B. 多少 (duōshao)", "C. 什么 (shénme)", "D. 谁 (shéi)"],
                 "answer": "A. 几 (jǐ)",
                 "explain": "Để hỏi số lượng thành viên trong gia đình (thường dưới 10 người), ta dùng từ để hỏi '几' (jǐ). Cấu trúc: 几 + lượng từ (口) + danh từ (人).",
-                "sound_txt": "我家有几口人？"
+                "sound_txt": "你家有几口人？"
             },
             {
                 "question": "Dịch đại từ xưng hô thích hợp cho từ “chúng tôi/chúng ta”:",
