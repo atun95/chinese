@@ -152,10 +152,11 @@ SCORES_B6_2_FILE = USER_DATA_DIR / "scores_b6_2.csv"
 SCORES_B7_1_FILE = USER_DATA_DIR / "scores_b7_1.csv"
 SCORES_B7_2_FILE = USER_DATA_DIR / "scores_b7_2.csv"
 SCORES_B7_3_FILE = USER_DATA_DIR / "scores_b7_3.csv"
+SCORES_HSK1_CONSOLIDATED_FILE = USER_DATA_DIR / "scores_hsk1_consolidated.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "scores_b7_1.csv", "scores_b7_2.csv", "scores_b7_3.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "scores_b7_1.csv", "scores_b7_2.csv", "scores_b7_3.csv", "scores_hsk1_consolidated.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -389,6 +390,22 @@ def load_all_scores_b7_3():
     with open(SCORES_B7_3_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_hsk1_consolidated(row_data):
+    file_exists = SCORES_HSK1_CONSOLIDATED_FILE.exists()
+    try:
+        with open(SCORES_HSK1_CONSOLIDATED_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "Kết quả"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Trắc nghiệm HSK 1: {e}"); return False
+
+def load_all_scores_hsk1_consolidated():
+    if not SCORES_HSK1_CONSOLIDATED_FILE.exists(): return []
+    with open(SCORES_HSK1_CONSOLIDATED_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def add_tones(base):
     vowels = {'a':['ā','á','ǎ','à'], 'o':['ō','ó','ǒ','ò'], 'e':['ē','é','ě','è'], 'i':['ī','í','ǐ','ì'], 'u':['ū','ú','ǔ','ù'], 'ü':['ǖ','ǘ','ǚ','ǜ']}
     tones = []
@@ -437,7 +454,7 @@ st.markdown(
 
 st.sidebar.header("Danh mục giáo án")
 
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG", "🖨️ In ấn & Đồng bộ"])
+mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "📝 Trắc nghiệm Tổng hợp HSK 1", "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG", "🖨️ In ấn & Đồng bộ"])
 
 menu = None
 if mode == "📚 Lý thuyết & Bài học":
@@ -507,6 +524,10 @@ elif mode == "📝 Hệ thống bài tập":
 
 if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
     show_consolidated_flashcards()
+
+elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
+    from hsk1_quiz import show_hsk1_consolidated_quiz
+    show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
 
 elif mode == "🖨️ In ấn & Đồng bộ":
     
