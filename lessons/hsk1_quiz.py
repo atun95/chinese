@@ -860,6 +860,19 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             st.session_state.hsk1_active_quiz_id = None
             st.rerun()
 
+        # Khôi phục shuffled options nếu bị mất do hot reload / restart
+        if active_key not in st.session_state.hsk1_quiz_shuffled_options:
+            shuffled = []
+            for i, q in enumerate(questions):
+                opts = q["choices"][:]
+                random.Random(active_key + str(i)).shuffle(opts)
+                shuffled.append(opts)
+            st.session_state.hsk1_quiz_shuffled_options[active_key] = shuffled
+
+        # Khôi phục answers list nếu bị trống hoặc lệch độ dài
+        if not st.session_state.hsk1_quiz_answers or len(st.session_state.hsk1_quiz_answers) != len(questions):
+            st.session_state.hsk1_quiz_answers = [None] * len(questions)
+
         # Nếu hoàn thành tất cả câu hỏi
         if current_idx >= len(questions):
             show_quiz_results(active_key, questions, save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
