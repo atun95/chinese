@@ -899,7 +899,6 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         <div class="quiz-card">
             <div class="quiz-q-num">Câu hỏi {current_idx + 1}</div>
             <div class="quiz-q-text">{q_data['question']}</div>
-            <div class="quiz-q-pinyin">Pinyin: {q_data['pinyin']}</div>
         </div>
         """, unsafe_allow_html=True)
 
