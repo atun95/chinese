@@ -690,12 +690,62 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         border-color: #e5e7eb;
         opacity: 0.65;
     }
+    
+    /* Selection Cards CSS */
+    .quiz-selector-card {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.006);
+        transition: all 0.3s ease;
+        margin-bottom: 12px;
+        position: relative;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .quiz-selector-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.08);
+        border-color: #cbd5e1;
+    }
+    .quiz-card-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 700;
+    }
+    .quiz-card-icon {
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+        text-align: left;
+    }
+    .quiz-card-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 8px;
+        line-height: 1.35;
+        text-align: left;
+    }
+    .quiz-card-desc {
+        font-size: 0.88rem;
+        color: #475569;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        text-align: left;
+        flex-grow: 1;
+    }
     </style>
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📝 Hệ thống Đề Trắc nghiệm HSK 1",
-        "Tuyển tập các đề trắc nghiệm ôn tập trọng tâm và tổng kết toàn bộ kiến thức từ Bài 1 đến Bài 8."
+        "📝 Hệ thống Đề Trắc nghiệm HSK 1"
     )
 
     # --- KHỞI TẠO STATE CHO QUIZ MỚI ---
@@ -717,62 +767,85 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
     # ================= 1. GIAO DIỆN CHỌN ĐỀ (CHƯA BẮT ĐẦU HOẶC CHƯA CHỌN ĐỀ) =================
     if not st.session_state.hsk1_quiz_started or not st.session_state.hsk1_active_quiz_id:
         st.markdown("""
-        <div style="background-color: #f8fafc; border-left: 6px solid #e11d48; border-radius: 12px; padding: 24px; margin-bottom: 25px;">
-            <h3 style="color: #e11d48; margin-top: 0; font-weight: 800;">📚 Lựa chọn Đề trắc nghiệm ôn tập:</h3>
-            <p style="color: #334155; font-size: 1.05rem; line-height: 1.6;">
-                Dưới đây là danh sách các đề ôn tập được soạn chi tiết theo phân loại bài học. Hãy lựa chọn đề kiểm tra phù hợp để bắt đầu luyện tập và ghi điểm số của mình lên hệ thống dữ liệu nhé!
-            </p>
+        <div style="text-align: center; margin-bottom: 35px; margin-top: 10px;">
+            <h2 style="color: #0f172a; font-weight: 800; font-size: 2.2rem; margin-bottom: 0;">📚 Lựa chọn Đề trắc nghiệm ôn tập</h2>
         </div>
         """, unsafe_allow_html=True)
 
-        # Lựa chọn đề
-        selected_quiz_key = st.selectbox(
-            "Chọn Đề trắc nghiệm ôn tập:",
-            options=list(QUIZZES_DATA.keys()),
-            format_func=lambda k: QUIZZES_DATA[k]["title"]
-        )
+        # Helper function to start a quiz
+        def init_quiz_state(selected_quiz_key):
+            questions = QUIZZES_DATA[selected_quiz_key]["questions"]
+            st.session_state.hsk1_active_quiz_id = selected_quiz_key
+            st.session_state.hsk1_quiz_started = True
+            st.session_state.hsk1_quiz_idx = 0
+            st.session_state.hsk1_quiz_answers = [None] * len(questions)
+            st.session_state.hsk1_quiz_score = 0
+            st.session_state.hsk1_quiz_submitted = False
+            
+            # Xáo trộn đáp án của đề
+            shuffled = []
+            for i, q in enumerate(questions):
+                opts = q["choices"][:]
+                random.Random(selected_quiz_key + str(i)).shuffle(opts)
+                shuffled.append(opts)
+            st.session_state.hsk1_quiz_shuffled_options[selected_quiz_key] = shuffled
+            st.rerun()
 
-        quiz_info = QUIZZES_DATA[selected_quiz_key]
-        st.markdown(f"""
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
-            <h4 style="color: #1e3a8a; margin-top: 0;">📋 Mô tả đề thi:</h4>
-            <p style="color: #475569; font-size: 0.98rem; line-height: 1.5; margin-bottom: 0;">{quiz_info['description']}</p>
-            <p style="margin-top: 10px; font-weight: bold; color: #e11d48;">Số câu hỏi: {len(quiz_info['questions'])} câu.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        # Grid layout (2 rows, 2 columns)
+        row1_col1, row1_col2 = st.columns(2)
+        row2_col1, row2_col2 = st.columns(2)
 
-        col_start, col_empty = st.columns([1, 1])
-        with col_start:
-            if st.button("🚀 Bắt đầu làm bài", type="primary", use_container_width=True):
-                questions = quiz_info["questions"]
-                
-                # Khởi tạo state làm bài
-                st.session_state.hsk1_active_quiz_id = selected_quiz_key
-                st.session_state.hsk1_quiz_started = True
-                st.session_state.hsk1_quiz_idx = 0
-                st.session_state.hsk1_quiz_answers = [None] * len(questions)
-                st.session_state.hsk1_quiz_score = 0
-                st.session_state.hsk1_quiz_submitted = False
-                
-                # Xáo trộn đáp án của đề
-                shuffled = []
-                for i, q in enumerate(questions):
-                    opts = q["choices"][:]
-                    random.Random(selected_quiz_key + str(i)).shuffle(opts)
-                    shuffled.append(opts)
-                st.session_state.hsk1_quiz_shuffled_options[selected_quiz_key] = shuffled
-                
-                st.rerun()
+        # Quiz 1 Card
+        with row1_col1:
+            st.markdown(f"""
+            <div class="quiz-selector-card" style="border-top: 4px solid #3b82f6;">
+                <div class="quiz-card-badge" style="background-color: #dbeafe; color: #1e40af;">Bài 1 - Bài 3</div>
+                <div class="quiz-card-icon">🎒</div>
+                <div class="quiz-card-title">Đề 1: Nhập môn Ngữ âm & Từ vựng</div>
+                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_1']['description']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_1", type="primary", use_container_width=True):
+                init_quiz_state("quiz_1")
 
-        # Hiển thị bảng xếp hạng điểm từ CSV (Lưu ở data backend)
-        st.markdown("---")
-        st.markdown("### 🏆 Bảng điểm vàng từ học viên (Data Backend):")
-        all_scores = load_all_scores_hsk1_consolidated()
-        if all_scores:
-            # Tạo DataFrame hiển thị đẹp mắt
-            st.dataframe(all_scores, use_container_width=True)
-        else:
-            st.info("Chưa có lượt nộp điểm nào. Hãy là người đầu tiên ghi tên lên bảng vàng!")
+        # Quiz 2 Card
+        with row1_col2:
+            st.markdown(f"""
+            <div class="quiz-selector-card" style="border-top: 4px solid #8b5cf6;">
+                <div class="quiz-card-badge" style="background-color: #f3e8ff; color: #6b21a8;">Bài 4 - Bài 5</div>
+                <div class="quiz-card-icon">🌸</div>
+                <div class="quiz-card-title">Đề 2: Ngữ âm mở rộng & Số đếm</div>
+                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_2']['description']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_2", type="primary", use_container_width=True):
+                init_quiz_state("quiz_2")
+
+        # Quiz 3 Card
+        with row2_col1:
+            st.markdown(f"""
+            <div class="quiz-selector-card" style="border-top: 4px solid #ec4899;">
+                <div class="quiz-card-badge" style="background-color: #fce7f3; color: #9d174d;">Bài 6 - Bài 7</div>
+                <div class="quiz-card-icon">⚡</div>
+                <div class="quiz-card-title">Đề 3: Từ để hỏi & Trợ từ 的</div>
+                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_3']['description']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_3", type="primary", use_container_width=True):
+                init_quiz_state("quiz_3")
+
+        # Quiz 4 Card
+        with row2_col2:
+            st.markdown(f"""
+            <div class="quiz-selector-card" style="border-top: 4px solid #f59e0b;">
+                <div class="quiz-card-badge" style="background-color: #fef3c7; color: #92400e;">Bài 8 & Tổng hợp</div>
+                <div class="quiz-card-icon">🔥</div>
+                <div class="quiz-card-title">Đề 4: Chữ Hán & Đàm thoại tổng hợp</div>
+                <div class="quiz-card-desc">{QUIZZES_DATA['quiz_4']['description']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🚀 Bắt đầu làm bài", key="btn_start_quiz_4", type="primary", use_container_width=True):
+                init_quiz_state("quiz_4")
 
     # ================= 2. GIAO DIỆN LÀM BÀI =================
     else:
