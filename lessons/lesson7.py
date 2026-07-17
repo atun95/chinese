@@ -1373,6 +1373,374 @@ def show_lesson7_4_zai(save_progress, save_score_row_b7_4, load_all_scores_b7_4)
             st.dataframe(all_scores, use_container_width=True)
 
 
+def show_lesson7_5_qu(save_progress, save_score_row_b7_5, load_all_scores_b7_5):
+    st.markdown("""
+    <style>
+    .word-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+    .word-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #1e3a8a;
+        margin-right: 15px;
+    }
+    .pinyin-badge {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border: 1px solid #bfdbfe;
+    }
+    .meaning-badge {
+        background-color: #f0fdf4;
+        color: #15803d;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #bbf7d0;
+    }
+    .rule-box {
+        background-color: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0 0 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "📚 Bài 7.5: Từ 去 (qù)",
+        "Làm chủ cách sử dụng từ chỉ phương hướng và hành động 去 (qù) trong tiếng Trung từ cơ bản đến cấu trúc liên động và bổ ngữ xu hướng."
+    )
+
+    tab_grammar, tab_practice, tab_quiz = st.tabs([
+        "📚 Cấu trúc ngữ pháp",
+        "🗣️ Thực hành khẩu ngữ",
+        "📝 Bài tập phản xạ"
+    ])
+
+    B7_5_QU_DATA = [
+        {
+            "nhom": "1. Cấu trúc cơ bản: Đi đến một địa điểm",
+            "mota": "Khi muốn nói 'đi đâu đó', bạn chỉ cần đặt địa điểm ngay sau từ 去. Cấu trúc: Chủ ngữ + 去 + Địa điểm.",
+            "items": [
+                {
+                    "tu": "我去学校。",
+                    "pinyin": "Wǒ qù xuéxiào.",
+                    "nghianhanh": "Tôi đi đến trường.",
+                    "cachdung": "Chủ ngữ '我' kết hợp động từ '去' và địa điểm '学校' (trường học).",
+                    "sound_txt": "我去学校。"
+                },
+                {
+                    "tu": "Chúng ta đi siêu thị đi！",
+                    "pinyin": "Wǒmen qù chāoshì ba!",
+                    "nghianhanh": "Chúng ta đi siêu thị đi!",
+                    "cachdung": "Dùng '吧' (ba) ở cuối câu để tạo lời gợi ý, rủ rê thân mật.",
+                    "sound_txt": "我们去超市吧！"
+                },
+                {
+                    "tu": "你去哪儿？",
+                    "pinyin": "Nǐ qù nǎr?",
+                    "nghianhanh": "Bạn đi đâu đấy?",
+                    "cachdung": "Dùng từ để hỏi nơi chốn '哪儿' đứng ngay sau '去' để hỏi điểm đến.",
+                    "sound_txt": "你去哪儿？"
+                }
+            ]
+        },
+        {
+            "nhom": "2. Cấu trúc liên động: Đi đâu để làm gì",
+            "mota": "Biểu thị mục đích của việc di chuyển. Cấu trúc: Chủ ngữ + 去 + Địa điểm + Hành động. *Mẹo nhỏ: Trong khẩu ngữ, bạn có thể lược bỏ địa điểm nếu người nghe đã biết bạn đang đi đâu.*",
+            "items": [
+                {
+                    "tu": "我去中国学习汉语。",
+                    "pinyin": "Wǒ qù Zhōngguó xuéxí Hànyǔ.",
+                    "nghianhanh": "Tôi đi Trung Quốc học tiếng Trung.",
+                    "cachdung": "Động từ di chuyển '去中国' đứng trước hành động mục đích '学习汉语'.",
+                    "sound_txt": "我去中国学习汉语。"
+                },
+                {
+                    "tu": "下午他去商店买衣服。",
+                    "pinyin": "Xiàwǔ tā qù shāngdiàn mǎi yīfu.",
+                    "nghianhanh": "Chiều nay anh ấy đi cửa hàng mua quần áo.",
+                    "cachdung": "Trạng ngữ thời gian '下午' đứng trước chủ ngữ hoặc sau chủ ngữ, cấu trúc liên động '去商店' + '买衣服'.",
+                    "sound_txt": "下午他去商店买衣服。"
+                },
+                {
+                    "tu": "我去买饭。",
+                    "pinyin": "Wǒ qù mǎi fàn.",
+                    "nghianhanh": "Tôi đi mua cơm (đây).",
+                    "cachdung": "Lược bỏ địa điểm cụ thể, chỉ giữ hành động '买饭' đứng sau '去'.",
+                    "sound_txt": "我去买饭。"
+                }
+            ]
+        },
+        {
+            "nhom": "3. Đóng vai trò là Xu hướng động từ (Bổ ngữ xu hướng)",
+            "mota": "Khi đứng sau một động từ khác, 去 biểu thị hướng của hành động đó là đi ra xa phía người nói (ngược lại với 来 - lái là hướng lại gần). Cấu trúc: Động từ + 去.",
+            "items": [
+                {
+                    "tu": "进去",
+                    "pinyin": "jìn qù",
+                    "nghianhanh": "Đi vào.",
+                    "cachdung": "Người nói đang ở bên ngoài nhìn hành động đi vào trong.",
+                    "sound_txt": "进去"
+                },
+                {
+                    "tu": "出去",
+                    "pinyin": "chū qù",
+                    "nghianhanh": "Đi ra.",
+                    "cachdung": "Người nói đang ở bên trong phòng/nhà nhìn hành động đi ra ngoài.",
+                    "sound_txt": "出去"
+                },
+                {
+                    "tu": "上去",
+                    "pinyin": "shàng qù",
+                    "nghianhanh": "Đi lên.",
+                    "cachdung": "Người nói đang ở dưới nhìn hành động đi lên phía trên.",
+                    "sound_txt": "上去"
+                },
+                {
+                    "tu": "拿去",
+                    "pinyin": "ná qù",
+                    "nghianhanh": "Cầm đi, mang đi.",
+                    "cachdung": "Động từ '拿' (cầm) kết hợp với '去' chỉ hướng di chuyển ra xa người nói.",
+                    "sound_txt": "拿去"
+                }
+            ]
+        }
+    ]
+
+    # Fix typo in Vietnamese/Chinese mix for item
+    B7_5_QU_DATA[0]["items"][1]["tu"] = "我们去超市吧！"
+
+    # ================= TAB 1: CẤU TRÚC NGỮ PHÁP =================
+    with tab_grammar:
+        st.subheader("Cách dùng chi tiết từ 去 (qù)")
+        st.write("Hãy phân biệt rõ 3 cách dùng và cấu trúc của từ 去:")
+
+        for group_idx, group in enumerate(B7_5_QU_DATA):
+            st.markdown(f"### 📌 {group['nhom']}")
+            st.write(group['mota'])
+
+            for idx, item in enumerate(group["items"]):
+                cols = st.columns([7, 3])
+                with cols[0]:
+                    card_html = f"""
+                    <div class="word-card">
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                        <span class="word-title">{item['tu']}</span>
+                        <span class="pinyin-badge">{item['pinyin']}</span>
+                        <span class="meaning-badge">{item['nghianhanh']}</span>
+                    </div>
+                    <p style="color: #475569; font-size: 0.95rem; margin-bottom: 8px;"><b>Giải thích:</b> {item['cachdung']}</p>
+                    </div>
+                    """.replace("\n", " ")
+                    st.markdown(card_html, unsafe_allow_html=True)
+                with cols[1]:
+                    st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+                    render_play_button(
+                        item['tu'], 
+                        f"🔊 Phát âm ví dụ", 
+                        key=f"play_v75_{group_idx}_{idx}"
+                    )
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    # ================= TAB 2: THỰC HÀNH KHẨU NGỮ =================
+    with tab_practice:
+        st.subheader("🗣️ Thực hành Giao tiếp và Phản xạ")
+        st.write("Luyện nghe và chọn câu trả lời phản hồi phù hợp nhất:")
+
+        practice_items = [
+            {
+                "id": "pr_qu1",
+                "q_han": "你去哪儿？",
+                "q_py": "Nǐ qù nǎr?",
+                "q_vi": "Bạn đi đâu đấy?",
+                "choices": [
+                    "我去学校学习汉语。 (Wǒ qù xuéxiào xuéxí Hànyǔ.) - Tôi đi trường học tiếng Trung.",
+                    "他在家。 (Tā zài jiā.) - Anh ấy ở nhà.",
+                    "这是我的书。 (Zhè shì wǒ de shū.) - Đây là sách của tôi."
+                ],
+                "correct": "我去 school 学习汉语。 (Wǒ qù xuéxiào xuéxí Hànyǔ.) - Tôi đi trường học tiếng Trung."
+            },
+            {
+                "id": "pr_qu2",
+                "q_han": "下午我们去超市买水果，好吗？",
+                "q_py": "Xiàwǔ wǒmen qù chāoshì mǎi shuǐguǒ, hǎo ma?",
+                "q_vi": "Chiều nay chúng ta đi siêu thị mua hoa quả nhé, được không?",
+                "choices": [
+                    "太好了！我们去吧。 (Tài hǎo le! Wǒmen qù ba.) - Tuyệt quá! Chúng ta đi đi.",
+                    "他在看电视。 (Tā zài kàn diànshì.) - Anh ấy đang xem tivi.",
+                    "我去买饭。 (Wǒ qù mǎi fàn.) - Tôi đi mua cơm."
+                ],
+                "correct": "太好了！Chúng ta đi đi. (Tài hǎo le! Wǒmen qù ba.) - Tuyệt quá! Chúng ta đi đi."
+            }
+        ]
+
+        # Fix minor mix in correct option representation
+        practice_items[0]["correct"] = "我去学校学习汉语。 (Wǒ qù xuéxiào xuéxí Hànyǔ.) - Tôi đi trường học tiếng Trung."
+        practice_items[1]["correct"] = "太好了！เรา去吧。 (Tài hǎo le! Wǒmen qù ba.) - Tuyệt quá! Chúng ta đi đi.".replace("เรา", "我们")
+
+        for item in practice_items:
+            st.markdown(f"##### 🎧 Nghe câu hỏi:")
+            cols = st.columns([8, 2])
+            with cols[0]:
+                st.markdown(f"<div style='background:#f1f5f9; padding: 10px; border-radius: 8px; font-weight: bold;'>{item['q_han']} ({item['q_py']}) <span style='font-weight: normal; font-style: italic; color: #475569;'>- {item['q_vi']}</span></div>", unsafe_allow_html=True)
+            with cols[1]:
+                render_play_button(item['q_han'], "🔊 Nghe", key=f"play_q_pr75_{item['id']}")
+
+            user_ans = st.radio("Chọn câu phản hồi đúng nhất:", item['choices'], key=f"pr75_ans_select_{item['id']}")
+            if user_ans == item['correct']:
+                st.success("✅ Phản hồi hoàn hảo!")
+            else:
+                st.info("💡 Hãy phân tích kỹ câu hỏi để chọn đáp án phù hợp nhất.")
+            st.markdown("---")
+
+    # ================= TAB 3: BÀI TẬP PHẢN XẠ =================
+    with tab_quiz:
+        st.subheader("Bài tập phản xạ cấu trúc từ 去 (qù)")
+        st.write("Làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để ghi nhận kết quả:")
+
+        B7_5_QUIZ_DATA = [
+            {
+                "q": "Chọn câu đúng nhất nghĩa của câu: 'Tôi đi cửa hàng mua quần áo.'",
+                "choices": [
+                    "我去商店买衣服。 (Wǒ qù shāngdiàn mǎi yīfu.)",
+                    "我买衣服去商店。 (Wǒ mǎi yīfu qù shāngdiàn.)",
+                    "我去买衣服商店。 (Wǒ qù mǎi yīfu shāngdiàn.)"
+                ],
+                "answer": "我去商店买衣服。 (Wǒ qù shāngdiàn mǎi yīfu.)",
+                "explain": "Cấu trúc liên động chỉ mục đích: Chủ ngữ + 去 + Địa điểm (商店) + Hành động (买衣服)."
+            },
+            {
+                "q": "Trong câu '请你出去。' (Mời bạn đi ra ngoài), từ '去' đóng vai trò gì?",
+                "choices": [
+                    "Động từ chính chỉ hành động đi",
+                    "Bổ ngữ xu hướng (Xu hướng động từ chỉ hướng ra xa người nói)",
+                    "Phó từ chỉ hành động đang diễn ra"
+                ],
+                "answer": "Bổ ngữ xu hướng (Xu hướng động từ chỉ hướng ra xa người nói)",
+                "explain": "'去' đứng sau động từ hành động '出' (ra) làm bổ ngữ xu hướng để chỉ hướng đi ra xa phía người nói."
+            },
+            {
+                "q": "Chọn câu rủ rê đúng ngữ pháp: 'Chúng ta đi trường học đi!'",
+                "choices": [
+                    "我们去学校吗？ (Wǒmen qù xuéxiào ma?)",
+                    "我们去学校吧！ (Wǒmen qù xuéxiào ba!)",
+                    "Chúng ta去学校。 (Wǒmen qù xuéxiào.)"
+                ],
+                "answer": "Chúng ta đi trường học đi! (Wǒmen qù xuéxiào ba!)".replace("Chúng ta đi trường học đi!", "我们去学校吧！"),
+                "explain": "Trợ từ ngữ khí '吧' đặt cuối câu trần thuật biểu thị sự thương lượng, rủ rê, khuyên bảo."
+            },
+            {
+                "q": "Nếu người nói đang ở trong phòng học và gọi bạn học sinh đang ở ngoài cửa 'đi vào', người nói sẽ dùng từ nào?",
+                "choices": [
+                    "进去 (jìn qù)",
+                    "进来 (jìn lái)",
+                    "出去 (chū qù)"
+                ],
+                "answer": "进来 (jìn lái)",
+                "explain": "Vì người nói ở bên trong, hướng hành động là tiến về phía người nói nên dùng '来' (进来), còn nếu người nói ở ngoài thì dùng '去' (进去)."
+            },
+            {
+                "q": "Chọn câu đúng ngữ pháp nhất biểu thị ý: 'Chiều nay tôi đi Trung Quốc.'",
+                "choices": [
+                    "下午我去中国。 (Xiàwǔ wǒ qù Zhōngguó.)",
+                    "我去中国下午。 (Wǒ qù Zhōngguó xiàwǔ.)",
+                    "下午去中国我。 (Xiàwǔ qù Zhōngguó wǒ.)"
+                ],
+                "answer": "下午我去中国。 (Xiàwǔ wǒ qù Zhōngguó.)",
+                "explain": "Trạng ngữ thời gian '下午' đứng đầu câu hoặc đứng ngay trước động từ/chủ ngữ, không đứng ở cuối câu như tiếng Anh hay tiếng Việt."
+            }
+        ]
+
+        # Fix key typo in choice representation
+        B7_5_QUIZ_DATA[2]["answer"] = "我们去学校吧！ (Wǒmen qù xuéxiào ba!)"
+
+        if "b75_score_submitted" not in st.session_state:
+            st.session_state.b75_score_submitted = False
+
+        score_b7_5 = 0
+        user_answers = {}
+
+        for idx, item in enumerate(B7_5_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v75_quiz_ans_{idx}")
+            user_answers[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b7_5 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+        if not st.session_state.b75_score_submitted:
+            if st.button("📝 Chấm điểm bài tập Bài 7.5", type="primary", use_container_width=True, key="v75_quiz_grade_btn"):
+                st.session_state.b75_score_submitted = True
+                st.rerun()
+        else:
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B7_5_QUIZ_DATA):
+                u_ans = user_answers[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!**")
+                    st.write(f"Giải thích: {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}**")
+                    st.write(f"Giải thích: {item['explain']}")
+
+            final_percentage_score = round((score_b7_5 / len(B7_5_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b7_5} / {len(B7_5_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
+            
+            if score_b7_5 == len(B7_5_QUIZ_DATA):
+                st.balloons()
+                st.success("Tuyệt vời! Bạn đã hoàn toàn làm chủ cách sử dụng từ 去 (qù)! 👑")
+
+            st.markdown("---")
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v74_student_name_b75")
+            if st.button("Nộp bài tập Bài 7.5", type="primary", use_container_width=True, key="v75_submit_score_btn"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                        "học viên": name,
+                        "tổng điểm": final_percentage_score,
+                        "BT: Từ 去": f"{score_b7_5}/{len(B7_5_QUIZ_DATA)}"
+                    }
+                    if save_score_row_b7_5(row):
+                        st.success("Đã nộp bài và lưu điểm thành công!")
+                        st.session_state.b75_score_submitted = False
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v75_redo_quiz_btn"):
+                st.session_state.b75_score_submitted = False
+                save_progress()
+                st.rerun()
+
+        # Hiển thị bảng xếp hạng nộp bài lớp học
+        all_scores = load_all_scores_b7_5()
+        if all_scores:
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
+            st.dataframe(all_scores, use_container_width=True)
+
+
 def show_lesson7_vocab():
     st.markdown("""
     <style>

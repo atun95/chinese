@@ -1765,6 +1765,136 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
         """
     },
     {
+        "title": "Bài 7.5: Từ 去 (qù)",
+        "toc_desc": "Cấu trúc cơ bản đi đến địa điểm, cấu trúc liên động đi đâu làm gì và xu hướng bổ ngữ 去",
+        "content_html": """
+        <h2 class="section-title">1. Cấu trúc cơ bản: Đi đến một địa điểm</h2>
+        <p>Khi muốn biểu thị việc di chuyển đến một nơi nào đó, ta đặt địa điểm ngay sau từ <strong>去 (qù)</strong>.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 1px;">
+            Chủ ngữ + 去 + Địa điểm
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Ví dụ chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 35%;">Dịch nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>我去学校。</strong></td>
+                    <td><span class="pinyin">Wǒ qù xuéxiào.</span></td>
+                    <td>Tôi đi đến trường.</td>
+                </tr>
+                <tr>
+                    <td><strong>我们去超市吧！</strong></td>
+                    <td><span class="pinyin">Wǒmen qù chāoshì ba!</span></td>
+                    <td>Chúng ta đi siêu thị đi!</td>
+                </tr>
+                <tr>
+                    <td><strong>你去哪儿？</strong></td>
+                    <td><span class="pinyin">Nǐ qù nǎr?</span></td>
+                    <td>Bạn đi đâu đấy?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Cấu trúc liên động: Đi đâu để làm gì</h2>
+        <p>Biểu thị mục đích của việc đi lại. Theo sau cụm <strong>去 + Địa điểm</strong> là một hành động cụ thể.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; color: #1e3a8a; letter-spacing: 1px;">
+            Chủ ngữ + 去 + Địa điểm + Hành động
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Ví dụ chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 30%;">Dịch nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>我去中国学习汉语。</strong></td>
+                    <td><span class="pinyin">Wǒ qù Zhōngguó xuéxí Hànyǔ.</span></td>
+                    <td>Tôi đi Trung Quốc học tiếng Trung.</td>
+                </tr>
+                <tr>
+                    <td><strong>下午他去商店买衣服。</strong></td>
+                    <td><span class="pinyin">Xiàwǔ tā qù shāngdiàn mǎi yīfu.</span></td>
+                    <td>Chiều nay anh ấy đi cửa hàng mua quần áo.</td>
+                </tr>
+                <tr>
+                    <td><strong>我去买饭。</strong></td>
+                    <td><span class="pinyin">Wǒ qù mǎi fàn.</span></td>
+                    <td>Tôi đi mua cơm (lược bỏ địa điểm).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">3. Đóng vai trò là Xu hướng động từ (Bổ ngữ xu hướng)</h2>
+        <p>Khi đứng sau một động từ khác, <strong>去 (qù)</strong> biểu thị hướng của hành động đó là đi ra xa vị trí của người nói.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 1px;">
+            Động từ + 去
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 35%;">Ý nghĩa &amp; Ngữ cảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>进去</strong></td>
+                    <td><span class="pinyin">jìn qù</span></td>
+                    <td>Đi vào (Người nói đang ở bên ngoài).</td>
+                </tr>
+                <tr>
+                    <td><strong>出去</strong></td>
+                    <td><span class="pinyin">chū qù</span></td>
+                    <td>Đi ra (Người nói đang ở bên trong).</td>
+                </tr>
+                <tr>
+                    <td><strong>上去</strong></td>
+                    <td><span class="pinyin">shàng qù</span></td>
+                    <td>Đi lên (Người nói đang ở bên dưới).</td>
+                </tr>
+                <tr>
+                    <td><strong>拿去</strong></td>
+                    <td><span class="pinyin">ná qù</span></td>
+                    <td>Cầm đi, mang đi (Ra xa người nói).</td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        "content_md": """
+### 1. Cấu trúc cơ bản: Đi đến một địa điểm
+*   **Cấu trúc:** Chủ ngữ + 去 + Địa điểm
+*   Ví dụ:
+    *   我去学校。 (Tôi đi đến trường.)
+    *   Chúng ta đi siêu thị đi！ -> 我们去超市吧！ (Chúng ta đi siêu thị đi!)
+    *   你去哪儿？ (Bạn đi đâu đấy?)
+
+### 2. Cấu trúc liên động: Đi đâu để làm gì
+*   **Cấu trúc:** Chủ ngữ + 去 + Địa điểm + Hành động
+*   Ví dụ:
+    *   我去中国学习汉语。 (Tôi đi Trung Quốc học tiếng Trung.)
+    *   下午他去商店买衣服。 (Chiều nay anh ấy đi cửa hàng mua quần áo.)
+    *   我去买饭。 (Tôi đi mua cơm. - Lược địa điểm)
+
+### 3. Đóng vai trò là Xu hướng động từ (Bổ ngữ xu hướng)
+*   **Cấu trúc:** Động từ + 去
+*   Ý nghĩa: Di chuyển ra xa phía người nói.
+*   Ví dụ:
+    *   进去 (jìn qù): Đi vào (người nói bên ngoài).
+    *   出去 (chū qù): Đi ra (người nói bên trong).
+    *   上去 (shàng qù): Đi lên.
+    *   拿去 (ná qù): Cầm đi.
+        """
+    },
+    {
         "title": "Bài 8: Khái quát & Quy tắc viết Chữ Hán",
         "toc_desc": "Nét cơ bản, 7 quy tắc bút thuận, 8 bộ thủ cốt lõi & cấu trúc chữ Đơn thể/Hợp thể",
         "content_html": """
@@ -2343,45 +2473,45 @@ def build_individual_lessons():
                 font-size: 10px !important;
             }
 
-            /* Lesson 7.3 & 7.4 */
-            .lesson-9, .lesson-10 {
+            /* Lesson 7.3, 7.4, 7.5 */
+            .lesson-9, .lesson-10, .lesson-11 {
                 font-size: 11.5px !important;
                 line-height: 1.25 !important;
             }
-            .lesson-9 p, .lesson-10 p {
+            .lesson-9 p, .lesson-10 p, .lesson-11 p {
                 margin-top: 2px !important;
                 margin-bottom: 2px !important;
             }
-            .lesson-9 table, .lesson-10 table {
+            .lesson-9 table, .lesson-10 table, .lesson-11 table {
                 margin: 6px 0 !important;
             }
-            .lesson-9 th, .lesson-9 td, .lesson-10 th, .lesson-10 td {
+            .lesson-9 th, .lesson-9 td, .lesson-10 th, .lesson-10 td, .lesson-11 th, .lesson-11 td {
                 padding: 3.5px 5px !important;
                 font-size: 10px !important;
             }
-            .lesson-9 .info-box, .lesson-9 .warn-box, .lesson-10 .info-box, .lesson-10 .warn-box {
+            .lesson-9 .info-box, .lesson-9 .warn-box, .lesson-10 .info-box, .lesson-10 .warn-box, .lesson-11 .info-box, .lesson-11 .warn-box {
                 padding: 4px 6px !important;
                 margin: 4.5px 0 !important;
                 font-size: 10px !important;
             }
 
-            /* Lesson 8 (was index 9, now index 11): squeeze slightly to fit on 1 page */
-            .lesson-11 {
+            /* Lesson 8 (was index 9, now index 12): squeeze slightly to fit on 1 page */
+            .lesson-12 {
                 font-size: 11px !important;
                 line-height: 1.22 !important;
             }
-            .lesson-11 p {
+            .lesson-12 p {
                 margin-top: 2px !important;
                 margin-bottom: 2px !important;
             }
-            .lesson-11 table {
+            .lesson-12 table {
                 margin: 6px 0 !important;
             }
-            .lesson-11 th, .lesson-11 td {
+            .lesson-12 th, .lesson-12 td {
                 padding: 3.5px 5px !important;
                 font-size: 10px !important;
             }
-            .lesson-11 .info-box, .lesson-11 .warn-box {
+            .lesson-12 .info-box, .lesson-12 .warn-box {
                 padding: 4px 6px !important;
                 margin: 4.5px 0 !important;
                 font-size: 10px !important;
