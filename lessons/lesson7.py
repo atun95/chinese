@@ -470,6 +470,46 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
                         f"🔊 Phát âm câu ví dụ", 
                         key=f"play_v72_{group_idx}_{idx}"
                     )
+            if group_idx == 2:
+                comparison_table_html = """
+                <div class="comparison-card" style="border-left-color: #3b82f6; margin-top: 15px;">
+                    <div class="comparison-title" style="color: #1d4ed8; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                        🔍 Bảng so sánh nhanh
+                    </div>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92rem; background: #ffffff;">
+                        <thead>
+                            <tr style="background-color: #eff6ff;">
+                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 20%;">Đặc điểm</th>
+                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这本书是我的</th>
+                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这是我的书</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Dịch nghĩa</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Cuốn sách này là của tôi.</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Đây là cuốn sách của tôi.</td>
+                            </tr>
+                            <tr style="background-color: #f8fafc;">
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Tiếng Anh</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This book is mine.</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This is my book.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Trọng tâm nhấn mạnh</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #16a34a; font-weight: 600;">Người sở hữu <span style="font-weight: normal; color: #475569;">(Là của tôi, không phải của ai khác).</span></td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #ea580c; font-weight: 600;">Vật thể <span style="font-weight: normal; color: #475569;">(Giới thiệu đây là cuốn sách).</span></td>
+                            </tr>
+                            <tr style="background-color: #f8fafc;">
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Câu hỏi tương ứng</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这本书是谁的？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Cuốn sách này của ai?)</span></td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这是什么？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Đây là cái gì?)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                """
+                st.markdown(comparison_table_html.replace("\n", " "), unsafe_allow_html=True)
             st.markdown("<br/>", unsafe_allow_html=True)
 
     # ================= TAB 2: QUY TẮC LƯỢC BỎ =================
@@ -941,6 +981,393 @@ def show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7
 
         # Hiển thị bảng xếp hạng nộp bài lớp học
         all_scores = load_all_scores_b7_3()
+        if all_scores:
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
+            st.dataframe(all_scores, use_container_width=True)
+
+
+def show_lesson7_4_zai(save_progress, save_score_row_b7_4, load_all_scores_b7_4):
+    st.markdown("""
+    <style>
+    .word-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+    .word-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #1e3a8a;
+        margin-right: 15px;
+    }
+    .pinyin-badge {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border: 1px solid #bfdbfe;
+    }
+    .meaning-badge {
+        background-color: #f0fdf4;
+        color: #15803d;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #bbf7d0;
+    }
+    .rule-box {
+        background-color: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0 0 0;
+    }
+    .comparison-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-left: 6px solid #8b5cf6;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+    .comparison-title {
+        font-weight: 700;
+        color: #7c3aed;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "📚 Bài 7.4: Từ 在 (zài)",
+        "Làm chủ cách sử dụng từ đa năng 在 (zài) trong tiếng Trung với 3 vai trò quan trọng: Động từ (Ở), Giới từ (Tại), và Phó từ (Đang)."
+    )
+
+    tab_grammar, tab_practice, tab_quiz = st.tabs([
+        "📚 Cấu trúc ngữ pháp",
+        "🗣️ Thực hành khẩu ngữ",
+        "📝 Bài tập phản xạ"
+    ])
+
+    B7_4_ZAI_DATA = [
+        {
+            "nhom": "1. Đóng vai trò là Động từ: \"Ở\", \"Có mặt\"",
+            "mota": "Khi là động từ chính trong câu, 在 biểu thị sự tồn tại của người hoặc vật tại một địa điểm nào đó. Cấu trúc: Chủ ngữ + 在 + Địa điểm.",
+            "items": [
+                {
+                    "tu": "我在家。",
+                    "pinyin": "Wǒ zài jiā.",
+                    "nghianhanh": "Tôi ở nhà.",
+                    "cachdung": "Đại từ '我' kết hợp động từ '在' chỉ vị trí ở nhà '家'.",
+                    "sound_txt": "我在家。"
+                },
+                {
+                    "tu": "老师不在学校。",
+                    "pinyin": "Lǎoshī bú zài xuéxiào.",
+                    "nghianhanh": "Thầy/cô giáo không ở trường.",
+                    "cachdung": "Thể phủ định dùng '不在'. Chú ý biến điệu của '不' thành 'bú' trước thanh 4 'zài'.",
+                    "sound_txt": "老师不在学校。"
+                },
+                {
+                    "tu": "你爸爸在吗？",
+                    "pinyin": "Nǐ bàba zài ma?",
+                    "nghianhanh": "Bố bạn có nhà/có mặt không?",
+                    "cachdung": "Dùng '在吗' để hỏi sự có mặt của ai đó.",
+                    "sound_txt": "你爸爸在吗？"
+                }
+            ]
+        },
+        {
+            "nhom": "2. Đóng vai trò là Giới từ: \"Tại\", \"Ở\" (Làm gì đó ở đâu)",
+            "mota": "Khi bạn muốn nói mình làm một hành động gì đó tại một địa điểm cụ thể, 在 sẽ đứng trước địa điểm để làm rõ bối cảnh nơi chốn. Cấu trúc: Chủ ngữ + 在 + Địa điểm + Hành động (Ở đâu làm gì).",
+            "items": [
+                {
+                    "tu": "我在学校学习汉语。",
+                    "pinyin": "Wǒ zài xuéxiào xuéxí Hànyǔ.",
+                    "nghianhanh": "Tôi học tiếng Trung ở trường.",
+                    "cachdung": "Đưa trạng ngữ chỉ địa điểm '在线学校' đứng trước hành động '学习汉语' (Lưu ý: trong tiếng Trung địa điểm đứng trước hành động).",
+                    "sound_txt": "我在学校学习汉语。"
+                },
+                {
+                    "tu": "爸爸在客厅看电视。",
+                    "pinyin": "Bàba zài kètīng kàn diànshì.",
+                    "nghianhanh": "Bố đang xem tivi ở phòng khách.",
+                    "cachdung": "Trạng ngữ chỉ địa điểm '在客厅' đứng trước hành động '看电视'.",
+                    "sound_txt": "爸爸在客厅看电视。"
+                }
+            ]
+        },
+        {
+            "nhom": "3. Đóng vai trò là Phó từ: \"Đang\" (Thì hiện tại tiếp diễn)",
+            "mota": "Khi đứng ngay trước một động từ hành động, 在 (hoặc 正在 - zhèngzài) biểu thị hành động đó đang diễn ra tại thời điểm nói. Cấu trúc: Chủ ngữ + 在 + Động từ (+ Tân ngữ).",
+            "items": [
+                {
+                    "tu": "我在吃饭。",
+                    "pinyin": "Wǒ zài chī fàn.",
+                    "nghianhanh": "Tôi đang ăn cơm.",
+                    "cachdung": "Từ '在' đứng trước động từ '吃饭' làm phó từ chỉ hành động đang diễn ra.",
+                    "sound_txt": "我在吃饭。"
+                },
+                {
+                    "tu": "他在睡觉。",
+                    "pinyin": "Tā zài shuìjiào.",
+                    "nghianhanh": "Anh ấy đang ngủ.",
+                    "cachdung": "Từ '在' đứng trước động từ '睡觉' biểu thị trạng thái đang ngủ.",
+                    "sound_txt": "他在睡觉。"
+                },
+                {
+                    "tu": "你们在做什么？",
+                    "pinyin": "Nǐmen zài zuò shénme?",
+                    "nghianhanh": "Các bạn đang làm gì thế?",
+                    "cachdung": "Dùng '在' trước động từ '做' để hỏi hành động đang diễn ra.",
+                    "sound_txt": "你们在做什么？"
+                }
+            ]
+        }
+    ]
+
+    # Quick fix for typo in explanation
+    B7_4_ZAI_DATA[1]["items"][0]["cachdung"] = "Đưa trạng ngữ chỉ địa điểm '在学校' đứng trước hành động '学习汉语'."
+
+    # ================= TAB 1: CẤU TRÚC NGỮ PHÁP =================
+    with tab_grammar:
+        st.subheader("Cách dùng chi tiết từ 在 (zài)")
+        st.write("Hãy phân biệt rõ 3 cách dùng quan trọng dựa trên vị trí của từ 在 trong câu:")
+
+        for group_idx, group in enumerate(B7_4_ZAI_DATA):
+            st.markdown(f"### 📌 {group['nhom']}")
+            st.write(group['mota'])
+
+            if group_idx == 1:
+                st.markdown("""
+<div style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 12px; border-radius: 8px; margin-top: 8px; margin-bottom: 15px; font-size: 0.92rem; color: #991b1b;">
+    ⚠️ <b>LƯU Ý NGỮ PHÁP ĐẶC BIỆT:</b><br/>
+    • Tiếng Việt nói: <b>Làm gì + ở đâu</b> (<i>Tôi ăn cơm ở nhà hàng</i>).<br/>
+    • Tiếng Trung nói: <b>Ở đâu + làm gì</b> (<i>Chủ ngữ + <b>In/Tại + Địa điểm</b> + Hành động</i>).<br/>
+    Đây là lỗi sai phổ biến nhất của người mới học khi dịch từ tiếng Việt sang tiếng Trung!
+</div>
+""".replace("In/Tại", "在").replace("\n", " "), unsafe_allow_html=True)
+
+            for idx, item in enumerate(group["items"]):
+                cols = st.columns([7, 3])
+                with cols[0]:
+                    card_html = f"""
+                    <div class="word-card">
+                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                        <span class="word-title">{item['tu']}</span>
+                        <span class="pinyin-badge">{item['pinyin']}</span>
+                        <span class="meaning-badge">{item['nghianhanh']}</span>
+                    </div>
+                    <p style="color: #475569; font-size: 0.95rem; margin-bottom: 8px;"><b>Giải thích:</b> {item['cachdung']}</p>
+                    </div>
+                    """.replace("\n", " ")
+                    st.markdown(card_html, unsafe_allow_html=True)
+                with cols[1]:
+                    st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+                    render_play_button(
+                        item['tu'], 
+                        f"🔊 Phát âm ví dụ", 
+                        key=f"play_v74_{group_idx}_{idx}"
+                    )
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+    # ================= TAB 2: THỰC HÀNH KHẨU NGỮ =================
+    with tab_practice:
+        st.subheader("🗣️ Thực hành Giao tiếp và Phản xạ")
+        st.write("Luyện nghe và chọn phản hồi phù hợp với ngữ cảnh:")
+
+        practice_items = [
+            {
+                "id": "pr_zai1",
+                "q_han": "老师在学校吗？",
+                "q_py": "Lǎoshī zài xuéxiào ma?",
+                "q_vi": "Thầy giáo có ở trường không?",
+                "choices": [
+                    "老师不在学校，他在家。 (Lǎoshī bú zài xuéxiào, tā zài jiā.) - Thầy không ở trường, thầy ở nhà.",
+                    "老师在学习汉语。 (Lǎoshī zài xuéxí Hànyǔ.) - Thầy giáo đang học tiếng Trung.",
+                    "他在学校学习。 (Tā zài xuéxiào xuéxí.) - Anh ấy học ở trường."
+                ],
+                "correct": "老师不在学校，他在家。 (Lǎoshī bú zài xuéxiào, tā zài jiā.) - Thầy không ở trường, thầy ở nhà."
+            },
+            {
+                "id": "pr_zai2",
+                "q_han": "你们在哪儿吃饭？",
+                "q_py": "Nǐmen zài nǎr chī fàn?",
+                "q_vi": "Các bạn ăn cơm ở đâu?",
+                "choices": [
+                    "我们在学校吃饭。 (Wǒmen zài xuéxiào chī fàn.) - Chúng tôi ăn cơm ở trường.",
+                    "我们在吃饭。 (Wǒmen zài chī fàn.) - Chúng tôi đang ăn cơm.",
+                    "我不在家。 (Wǒ bú zài jiā.) - Tôi không ở nhà."
+                ],
+                "correct": "我们在学校吃饭。 (Wǒmen zài xuéxiào chī fàn.) - Chúng tôi ăn cơm ở trường."
+            },
+            {
+                "id": "pr_zai3",
+                "q_han": "你在做什么？",
+                "q_py": "Nǐ zài zuò shénme?",
+                "q_vi": "Bạn đang làm gì thế?",
+                "choices": [
+                    "我在看电视。 (Wǒ zài kàn diànshì.) - Tôi đang xem tivi.",
+                    "我在客厅。 (Wǒ zài kètīng.) - Tôi ở phòng khách.",
+                    "这是我的电视。 (Zhè shì wǒ de diànshì.) - Đây là tivi của tôi."
+                ],
+                "correct": "我在看电视。 (Wǒ zài kàn diànshì.) - Tôi đang xem tivi."
+            }
+        ]
+
+        for item in practice_items:
+            st.markdown(f"##### 🎧 Nghe câu hỏi:")
+            cols = st.columns([8, 2])
+            with cols[0]:
+                st.markdown(f"<div style='background:#f1f5f9; padding: 10px; border-radius: 8px; font-weight: bold;'>{item['q_han']} ({item['q_py']}) <span style='font-weight: normal; font-style: italic; color: #475569;'>- {item['q_vi']}</span></div>", unsafe_allow_html=True)
+            with cols[1]:
+                render_play_button(item['q_han'], "🔊 Nghe", key=f"play_q_pr74_{item['id']}")
+
+            user_ans = st.radio("Chọn câu phản hồi đúng nhất:", item['choices'], key=f"pr74_ans_select_{item['id']}")
+            if user_ans == item['correct']:
+                st.success("✅ Đúng ngữ cảnh rồi! Câu trả lời rất logic.")
+            else:
+                st.info("💡 Hãy nghe lại câu hỏi kỹ và lựa chọn phản hồi phù hợp hơn.")
+            st.markdown("---")
+
+    # ================= TAB 3: BÀI TẬP PHẢN XẠ =================
+    with tab_quiz:
+        st.subheader("Bài tập phản xạ cấu trúc từ 在 (zài)")
+        st.write("Làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để ghi nhận kết quả:")
+
+        B7_4_QUIZ_DATA = [
+            {
+                "q": "Dịch câu sau sang tiếng Trung: 'Tôi học tiếng Trung ở trường.'",
+                "choices": [
+                    "我在学校学习汉语。 (Wǒ zài xuéxiào xuéxí Hànyǔ.)",
+                    "我学习汉语在学校。 (Wǒ xuéxí Hànyǔ zài xuéxiào.)",
+                    "我学校学习汉语。 (Wǒ xuéxiào xuéxí Hànyǔ.)"
+                ],
+                "answer": "我在学校学习汉语。 (Wǒ zài xuéxiào xuéxí Hànyǔ.)",
+                "explain": "Trong tiếng Trung, trạng ngữ chỉ địa điểm phải đứng trước hành động: Chủ ngữ + 在 + Địa điểm + Hành động (Ở đâu làm gì)."
+            },
+            {
+                "q": "Trong câu '他在睡觉。', từ '在' đóng vai trò ngữ pháp gì?",
+                "choices": [
+                    "Động từ chính (Ở / Có mặt)",
+                    "Giới từ (Tại / Ở đâu)",
+                    "Phó từ (Đang - chỉ hành động tiếp diễn)"
+                ],
+                "answer": "Phó từ (Đang - chỉ hành động tiếp diễn)",
+                "explain": "'...在...' đứng ngay trước động từ '睡觉' (ngủ) làm phó từ biểu thị hành động đang diễn ra tại thời điểm nói."
+            },
+            {
+                "q": "Chọn câu phủ định đúng ngữ pháp: 'Thầy giáo không ở trường học.'",
+                "choices": [
+                    "老师不在学校。 (Lǎoshī bú zài xuéxiào.)",
+                    "老师没在学校。 (Lǎoshī méi zài xuéxiào.)",
+                    "老师不学校。 (Lǎoshī bù xuéxiào.)"
+                ],
+                "answer": "老师不在学校. (Lǎoshī bú zài xuéxiào.)",
+                "explain": "Phủ định của động từ '在' là '不在' (bú zài). Chú ý biến điệu của '不' thành 'bú' trước thanh 4 'zài'."
+            },
+            {
+                "q": "Chọn câu dịch đúng nhất cho câu: 'Bố bạn có nhà không?'",
+                "choices": [
+                    "你爸爸在家吗？ (Nǐ bàba zài jiā ma?)",
+                    "你爸爸在吗？ (Nǐ bàba zài ma?)",
+                    "Cả hai câu trên đều đúng ngữ pháp và thông dụng"
+                ],
+                "answer": "Cả hai câu trên đều đúng ngữ pháp và thông dụng",
+                "explain": "Cả hai cách diễn đạt đều đúng và mang nghĩa hỏi thăm ai đó có mặt/ở nhà hay không."
+            },
+            {
+                "q": "Chọn câu đúng ngữ pháp nhất: 'Bố đang xem tivi ở phòng khách.'",
+                "choices": [
+                    "爸爸看电视在客厅。 (Bàba kàn diànshì zài kètīng.)",
+                    "爸爸在客厅看电视。 (Bàba zài kètīng kàn diànshì.)",
+                    "爸爸客厅在看电视。 (Bàba kètīng zài kàn diànshì.)"
+                ],
+                "answer": "爸爸在客厅看电视。 (Bàba zài kètīng kàn diànshì.)",
+                "explain": "Trạng ngữ chỉ nơi chốn '在客厅' phải đứng trước cụm động từ '看电视' để tạo thành cấu trúc 'Ở đâu làm gì'."
+            }
+        ]
+
+        # Fix minor typo in choice comparison
+        B7_4_QUIZ_DATA[2]["answer"] = "老师不在学校。 (Lǎoshī bú zài xuéxiào.)"
+
+        if "b74_score_submitted" not in st.session_state:
+            st.session_state.b74_score_submitted = False
+
+        score_b7_4 = 0
+        user_answers = {}
+
+        for idx, item in enumerate(B7_4_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v74_quiz_ans_{idx}")
+            user_answers[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b7_4 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+        if not st.session_state.b74_score_submitted:
+            if st.button("📝 Chấm điểm bài tập Bài 7.4", type="primary", use_container_width=True, key="v74_quiz_grade_btn"):
+                st.session_state.b74_score_submitted = True
+                st.rerun()
+        else:
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B7_4_QUIZ_DATA):
+                u_ans = user_answers[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!**")
+                    st.write(f"Giải thích: {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}**")
+                    st.write(f"Giải thích: {item['explain']}")
+
+            final_percentage_score = round((score_b7_4 / len(B7_4_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b7_4} / {len(B7_4_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
+            
+            if score_b7_4 == len(B7_4_QUIZ_DATA):
+                st.balloons()
+                st.success("Xuất sắc! Bạn đã nắm vững 100% cách dùng từ 在 (zài)! 👑")
+
+            st.markdown("---")
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v74_student_name")
+            if st.button("Nộp bài tập Bài 7.4", type="primary", use_container_width=True, key="v74_submit_score_btn"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                        "học viên": name,
+                        "tổng điểm": final_percentage_score,
+                        "BT: Từ 在": f"{score_b7_4}/{len(B7_4_QUIZ_DATA)}"
+                    }
+                    if save_score_row_b7_4(row):
+                        st.success("Đã nộp bài và lưu điểm thành công!")
+                        st.session_state.b74_score_submitted = False
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v74_redo_quiz_btn"):
+                st.session_state.b74_score_submitted = False
+                save_progress()
+                st.rerun()
+
+        # Hiển thị bảng xếp hạng nộp bài lớp học
+        all_scores = load_all_scores_b7_4()
         if all_scores:
             st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
             st.dataframe(all_scores, use_container_width=True)

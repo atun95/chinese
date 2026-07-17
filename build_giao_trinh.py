@@ -1491,6 +1491,41 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
             </tbody>
         </table>
 
+        <div style="margin-top: 15px; background: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px; border-radius: 8px;">
+            <strong style="color: #1d4ed8; font-size: 14px;">🔍 Bảng so sánh nhanh:</strong>
+            <table style="width:100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; background: #ffffff;">
+                <thead>
+                    <tr style="background-color: #eff6ff;">
+                        <th style="padding: 8px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 20%;">Đặc điểm</th>
+                        <th style="padding: 8px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这本书是我的</th>
+                        <th style="padding: 8px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这是我的书</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Dịch nghĩa</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Cuốn sách này là của tôi.</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Đây là cuốn sách của tôi.</td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Tiếng Anh</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-family: monospace; color: #2563eb;">This book is mine.</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-family: monospace; color: #2563eb;">This is my book.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Trọng tâm nhấn mạnh</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #16a34a; font-weight: 600;">Người sở hữu <span style="font-weight: normal; color: #475569;">(Là của tôi, không phải của ai khác).</span></td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #ea580c; font-weight: 600;">Vật thể <span style="font-weight: normal; color: #475569;">(Giới thiệu đây là cuốn sách).</span></td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Câu hỏi tương ứng</td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: bold;">这本书是谁 de? <span style="font-weight: normal; color: #475569; font-size: 11px;"><br/>(Cuốn sách này của ai?)</span></td>
+                        <td style="padding: 8px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: bold;">这是什么？ <span style="font-weight: normal; color: #475569; font-size: 11px;"><br/>(Đây là cái gì?)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <h2 class="section-title">2. Quy tắc lược bỏ chữ 的 khi biểu thị sở hữu</h2>
         <p>Bạn có thể lược bỏ chữ <strong>的</strong> khi giữa người sở hữu và đối tượng sở hữu có mối quan hệ gắn bó khăng khít:</p>
         <table>
@@ -1534,6 +1569,14 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 2.  **Biểu thị đặc điểm:** Tính từ + 的 + Danh từ (Ví dụ: 很好的朋友 - Người bạn rất tốt).
 3.  **Cấu trúc chữ 的 rút gọn:** Bỏ danh từ phía sau (Ví dụ: 我要大的 - Tôi lấy cái to; 这本书是我的 - Sách này là của tôi).
 
+*   **Bảng so sánh nhanh:**
+    | Đặc điểm | 这本书是我的 | 这是我的书 |
+    | :--- | :--- | :--- |
+    | **Dịch nghĩa** | Cuốn sách này là của tôi. | Đây là cuốn sách của tôi. |
+    | **Tiếng Anh** | This book is mine. | This is my book. |
+    | **Trọng tâm nhấn mạnh** | Người sở hữu (Là của tôi, không phải của ai khác). | Vật thể (Giới thiệu đây là cuốn sách). |
+    | **Câu hỏi tương ứng** | 这本书是谁 de? (Cuốn sách này của ai?) | Đây là cái gì? |
+
 ### 2. Quy tắc lược bỏ "de" (Sở hữu thân thiết)
 *   **Có thể lược bỏ:**
     *   Người thân (...爸爸, 我妈妈)
@@ -1542,7 +1585,186 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 *   **Bắt buộc giữ 的:** Tài sản cá nhân, đồ vật (我的书, 他的电脑).
         """
     },
-        {
+    {
+        "title": "Bài 7.3: Cặp từ 这 và 那",
+        "toc_desc": "Cách dùng đại từ chỉ định 这/那, lượng từ 这个/那个, từ để hỏi 哪个 và từ đệm khẩu ngữ",
+        "content_html": """
+        <h2 class="section-title">1. Từ chỉ định cơ bản: 这 (zhè) và 那 (nà)</h2>
+        <p>Đại từ chỉ định dùng để xác định vị trí của đối tượng so với người nói:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Đại từ</th>
+                    <th style="width: 20%;">Phiên âm</th>
+                    <th style="width: 30%;">Cách dùng chính</th>
+                    <th style="width: 30%;">Ví dụ cụ thể (Chữ Hán - Pinyin - Việt)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>这</strong></td>
+                    <td><span class="pinyin">zhè / zhèi</span></td>
+                    <td>Chỉ người/vật ở cự ly gần người nói (Đây, này).</td>
+                    <td>这是我的书。<br><span class="pinyin">Zhè shì wǒ de shū.</span><br>(Đây là sách của tôi.)</td>
+                </tr>
+                <tr>
+                    <td><strong>那</strong></td>
+                    <td><span class="pinyin">nà / nèi</span></td>
+                    <td>Chỉ người/vật ở cự ly xa người nói (Kia, đó).</td>
+                    <td>那是老师的电脑。<br><span class="pinyin">Nà shì lǎoshī de diànnǎo.</span><br>(Kia là máy tính của thầy giáo.)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Lượng từ đi kèm: 这个 (zhège) và 那个 (nàge)</h2>
+        <p>Trong tiếng Trung, khi muốn chỉ định một sự vật cụ thể, ta sử dụng công thức: <strong>这/那 + Lượng từ + Danh từ</strong>. Lượng từ phổ biến nhất là <strong>个 (gè)</strong>:</p>
+        <ul>
+            <li><strong>这个杯子</strong> <span class="pinyin">zhège bēizi</span>: Cái cốc này (ở gần).</li>
+            <li><strong>那个学生</strong> <span class="pinyin">nàge xuésheng</span>: Học sinh kia (ở xa).</li>
+        </ul>
+
+        <h2 class="section-title">3. Hỏi lựa chọn và khẩu ngữ đặc biệt</h2>
+        <ul>
+            <li><strong>哪个 (nǎge):</strong> Dùng để hỏi lựa chọn "Cái nào? / Người nào?". Ví dụ: <span class="pinyin">Nǐ yào nǎge píngguǒ?</span> (Bạn muốn quả táo nào?).</li>
+            <li><strong>Từ đệm khẩu ngữ (Ơ... / À thì...):</strong> Trong giao tiếp thực tế, người Trung Quốc thường dùng <span class="pinyin">nèi ge...</span> hoặc <span class="pinyin">zhèi ge...</span> làm từ đệm khi ngập ngừng suy nghĩ (giống "like", "err..." trong tiếng Anh).</li>
+        </ul>
+        """,
+        "content_md": """
+### 1. Từ chỉ định cơ bản
+*   **这 (zhè / zhèi) - Đây / Này:** Chỉ đối tượng ở gần (Ví dụ: 这是我的书。 - Đây là sách của tôi).
+*   **那 (nà / nèi) - Kia / Đó:** Chỉ đối tượng ở xa (Ví dụ: 那是老师的电脑。 - Kia là máy tính của thầy giáo).
+
+### 2. Cấu trúc kết hợp lượng từ
+*   Công thức: **这 / 那 + Lượng từ + Danh từ**
+*   Ví dụ:
+    *   这个杯子 (Cái cốc này)
+    *   那个学生 (Học sinh kia)
+
+### 3. Hỏi lựa chọn và từ đệm khẩu ngữ
+*   **哪个 (nǎge) - Cái nào / Người nào:** Hỏi lựa chọn giữa các đối tượng.
+*   **Từ đệm khẩu ngữ:** Dùng 那个 (nèige) hoặc 这个 (zhèige) khi ngập ngừng nói chuyện.
+        """
+    },
+    {
+        "title": "Bài 7.4: Từ 在 (zài)",
+        "toc_desc": "Ba vai trò ngữ pháp của 在: Động từ (Ở), Giới từ (Tại - Ở đâu làm gì), và Phó từ (Đang)",
+        "content_html": """
+        <h2 class="section-title">1. Đóng vai trò là Động từ: "Ở", "Có mặt"</h2>
+        <p>Biểu thị sự tồn tại của người hoặc vật tại một địa điểm. Cấu trúc phủ định là <strong>不在 (bú zài)</strong>.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 1px;">
+            Chủ ngữ + 在 + Địa điểm
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Ví dụ chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 35%;">Dịch nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>我在家。</strong></td>
+                    <td><span class="pinyin">Wǒ zài jiā.</span></td>
+                    <td>Tôi ở nhà.</td>
+                </tr>
+                <tr>
+                    <td><strong>老师不在学校。</strong></td>
+                    <td><span class="pinyin">Lǎoshī bú zài xuéxiào.</span></td>
+                    <td>Thầy/cô giáo không ở trường.</td>
+                </tr>
+                <tr>
+                    <td><strong>你爸爸在吗？</strong></td>
+                    <td><span class="pinyin">Nǐ bàba zài ma?</span></td>
+                    <td>Bố bạn có nhà/có mặt không?</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2. Đóng vai trò là Giới từ: "Tại", "Ở" (Làm gì đó ở đâu)</h2>
+        <p>Giới thiệu nơi chốn xảy ra hành động. <strong>Lưu ý cực kỳ quan trọng:</strong> Khác với tiếng Việt, trong tiếng Trung trạng ngữ chỉ nơi chốn phải đứng trước động từ chỉ hành động.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; color: #b91c1c; letter-spacing: 1px;">
+            Chủ ngữ + 在 + Địa điểm + Hành động
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 35%;">Ví dụ chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 30%;">Dịch nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>我在学校学习汉语。</strong></td>
+                    <td><span class="pinyin">Wǒ zài xuéxiào xuéxí Hànyǔ.</span></td>
+                    <td>Tôi học tiếng Trung ở trường.</td>
+                </tr>
+                <tr>
+                    <td><strong>爸爸在客厅看电视。</strong></td>
+                    <td><span class="pinyin">Bàba zài kètīng kàn diànshì.</span></td>
+                    <td>Bố đang xem tivi ở phòng khách.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">3. Đóng vai trò là Phó từ: "Đang" (Thì tiếp diễn)</h2>
+        <p>Biểu thị hành động đang diễn ra tại thời điểm nói. Đứng trực tiếp trước động từ chính.</p>
+        <div style="text-align: center; margin: 15px 0; font-weight: bold; font-size: 16px; letter-spacing: 1px;">
+            Chủ ngữ + 在 + Động từ (+ Tân ngữ)
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Ví dụ chữ Hán</th>
+                    <th style="width: 35%;">Phiên âm Pinyin</th>
+                    <th style="width: 35%;">Dịch nghĩa tiếng Việt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>我在吃饭。</strong></td>
+                    <td><span class="pinyin">Wǒ zài chī fàn.</span></td>
+                    <td>Tôi đang ăn cơm.</td>
+                </tr>
+                <tr>
+                    <td><strong>他在睡觉。</strong></td>
+                    <td><span class="pinyin">Tā zài shuìjiào.</span></td>
+                    <td>Anh ấy đang ngủ.</td>
+                </tr>
+                <tr>
+                    <td><strong>你们在做什么？</strong></td>
+                    <td><span class="pinyin">Nǐmen zài zuò shénme?</span></td>
+                    <td>Các bạn đang làm gì thế?</td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        "content_md": """
+### 1. Đóng vai trò là Động từ: "Ở", "Có mặt"
+*   Biểu thị sự tồn tại của người hoặc vật tại một vị trí.
+*   **Cấu trúc:** Chủ ngữ + 在 + Địa điểm
+*   Ví dụ:
+    *   我在家。 (Tôi ở nhà.)
+    *   老师不在学校。 (Thầy giáo không ở trường.)
+    *   你爸爸在吗？ (Bố bạn có nhà không?)
+
+### 2. Đóng vai trò là Giới từ: "Tại", "Ở" (Ở đâu làm gì)
+*   **Cấu trúc:** Chủ ngữ + 在 + Địa điểm + Hành động
+*   *Lưu ý:* Địa điểm đứng trước hành động (Ngược với tiếng Việt).
+*   Ví dụ:
+    *   我在学校学习汉语。 (Tôi học tiếng Trung ở trường.)
+    *   爸爸在客厅看电视。 (Bố xem tivi ở phòng khách.)
+
+### 3. Đóng vai trò là Phó từ: "Đang" (Hành động tiếp diễn)
+*   **Cấu trúc:** Chủ ngữ + 在 + Động từ (+ Tân ngữ)
+*   Ví dụ:
+    *   我在吃饭。 (Tôi đang ăn cơm.)
+    *   他在睡觉。 (Anh ấy đang ngủ.)
+    *   你们在做什么？ (Các bạn đang làm gì thế?)
+        """
+    },
+    {
         "title": "Bài 8: Khái quát & Quy tắc viết Chữ Hán",
         "toc_desc": "Nét cơ bản, 7 quy tắc bút thuận, 8 bộ thủ cốt lõi & cấu trúc chữ Đơn thể/Hợp thể",
         "content_html": """
@@ -2121,23 +2343,45 @@ def build_individual_lessons():
                 font-size: 10px !important;
             }
 
-            /* Lesson 8.1 (Medium-long): squeeze slightly to fit on 1 page */
-            .lesson-9 {
-                font-size: 11px !important;
-                line-height: 1.22 !important;
+            /* Lesson 7.3 & 7.4 */
+            .lesson-9, .lesson-10 {
+                font-size: 11.5px !important;
+                line-height: 1.25 !important;
             }
-            .lesson-9 p {
+            .lesson-9 p, .lesson-10 p {
                 margin-top: 2px !important;
                 margin-bottom: 2px !important;
             }
-            .lesson-9 table {
+            .lesson-9 table, .lesson-10 table {
                 margin: 6px 0 !important;
             }
-            .lesson-9 th, .lesson-9 td {
+            .lesson-9 th, .lesson-9 td, .lesson-10 th, .lesson-10 td {
                 padding: 3.5px 5px !important;
                 font-size: 10px !important;
             }
-            .lesson-9 .info-box, .lesson-9 .warn-box {
+            .lesson-9 .info-box, .lesson-9 .warn-box, .lesson-10 .info-box, .lesson-10 .warn-box {
+                padding: 4px 6px !important;
+                margin: 4.5px 0 !important;
+                font-size: 10px !important;
+            }
+
+            /* Lesson 8 (was index 9, now index 11): squeeze slightly to fit on 1 page */
+            .lesson-11 {
+                font-size: 11px !important;
+                line-height: 1.22 !important;
+            }
+            .lesson-11 p {
+                margin-top: 2px !important;
+                margin-bottom: 2px !important;
+            }
+            .lesson-11 table {
+                margin: 6px 0 !important;
+            }
+            .lesson-11 th, .lesson-11 td {
+                padding: 3.5px 5px !important;
+                font-size: 10px !important;
+            }
+            .lesson-11 .info-box, .lesson-11 .warn-box {
                 padding: 4px 6px !important;
                 margin: 4.5px 0 !important;
                 font-size: 10px !important;

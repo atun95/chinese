@@ -152,11 +152,12 @@ SCORES_B6_2_FILE = USER_DATA_DIR / "scores_b6_2.csv"
 SCORES_B7_1_FILE = USER_DATA_DIR / "scores_b7_1.csv"
 SCORES_B7_2_FILE = USER_DATA_DIR / "scores_b7_2.csv"
 SCORES_B7_3_FILE = USER_DATA_DIR / "scores_b7_3.csv"
+SCORES_B7_4_FILE = USER_DATA_DIR / "scores_b7_4.csv"
 SCORES_HSK1_CONSOLIDATED_FILE = USER_DATA_DIR / "scores_hsk1_consolidated.csv"
 PROGRESS_FILE = USER_DATA_DIR / "progress_lesson1.json"
 
 # Sao chép các file cũ từ thư mục dự án sang thư mục Home (nếu có và chưa tồn tại ở thư mục Home)
-for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "scores_b7_1.csv", "scores_b7_2.csv", "scores_b7_3.csv", "scores_hsk1_consolidated.csv", "progress_lesson1.json"]:
+for filename in ["scores.csv", "scores_b2.csv", "scores_b3.csv", "scores_b4.csv", "scores_b5.csv", "scores_b5_3.csv", "scores_b6_1.csv", "scores_b6_2.csv", "scores_b7_1.csv", "scores_b7_2.csv", "scores_b7_3.csv", "scores_b7_4.csv", "scores_hsk1_consolidated.csv", "progress_lesson1.json"]:
     local_file = Path(__file__).parent / filename
     dest_file = USER_DATA_DIR / filename
     if local_file.exists() and not dest_file.exists():
@@ -390,6 +391,22 @@ def load_all_scores_b7_3():
     with open(SCORES_B7_3_FILE, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+def save_score_row_b7_4(row_data):
+    file_exists = SCORES_B7_4_FILE.exists()
+    try:
+        with open(SCORES_B7_4_FILE, "a", newline="", encoding="utf-8-sig") as f:
+            writer = csv.DictWriter(f, fieldnames=["thời gian", "học viên", "tổng điểm", "BT: Từ 在"])
+            if not file_exists: writer.writeheader()
+            writer.writerow(row_data)
+        return True
+    except Exception as e:
+        st.error(f"Lỗi khi lưu file CSV Bài 7.4: {e}"); return False
+
+def load_all_scores_b7_4():
+    if not SCORES_B7_4_FILE.exists(): return []
+    with open(SCORES_B7_4_FILE, "r", newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
 def save_score_row_hsk1_consolidated(row_data):
     file_exists = SCORES_HSK1_CONSOLIDATED_FILE.exists()
     try:
@@ -476,6 +493,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 7.1 - Các từ để hỏi",
         "Bài 7.2 - Cách dùng chữ 的 (de)",
         "Bài 7.3 - Cặp từ 这 và 那",
+        "Bài 7.4 - Từ 在 (zài)",
         "Bài 8.1 - Tổng quan Chữ Hán",
         "Bài 8.2 - Hệ thống Nét viết",
         "Bài 8.3 - Quy tắc Bút thuận",
@@ -519,7 +537,8 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 6.2",
         "Bài tập Bài 7.1",
         "Bài tập Bài 7.2",
-        "Bài tập Bài 7.3"
+        "Bài tập Bài 7.3",
+        "Bài tập Bài 7.4"
     ])
 
 if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
@@ -736,6 +755,9 @@ elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài
 
 elif menu == "Bài 7.3 - Cặp từ 这 và 那" or menu == "Bài tập Bài 7.3":
     lesson7.show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3)
+
+elif menu == "Bài 7.4 - Từ 在 (zài)" or menu == "Bài tập Bài 7.4":
+    lesson7.show_lesson7_4_zai(save_progress, save_score_row_b7_4, load_all_scores_b7_4)
 
 elif menu == "Bài 8.1 - Tổng quan Chữ Hán":
     lesson8.show_lesson8_1_overview()
