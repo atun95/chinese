@@ -2187,15 +2187,8 @@ Tết Đoan Ngọ diễn ra vào ngày mùng 5 tháng 5 Âm lịch. Tại Trung 
 * **火 (灬) - Hỏa:** Lửa, nhiệt độ (热, 点)
 * **讠(言) - Ngôn:** Lời nói, giao tiếp (说, 语)
 * **忄(心) - Tâm:** Cảm xúc, tâm trạng (忙, 想)
-
-### 5. Đơn Thể & Hợp Thể
-* **Đơn thể:** Chữ độc lập từ nét vẽ gốc (人, 木, 日, 月, 山, 水, 口, 女).
-* **Hợp thể:** Chữ ghép từ các thành phần chữ đơn thể khác.
-  * Trái - Phải: 好 (女+子), 你 (亻+尔).
-  * Trên - Dưới: 爸 (父+巴), 字 (宀+子).
-  * Bao vây: 国 (囗+玉), 回 (囗+口).
         """
-}
+    }
 ]
 
 def make_filename(title):
@@ -2570,6 +2563,7 @@ def build_individual_lessons():
             </table>
         </div>
     </div>
+    <script src="pinyin_note_widget.js"></script>
 </body>
 </html>"""
 
@@ -2595,6 +2589,7 @@ def build_individual_lessons():
         <h1 class="lesson-title">{lesson['title']}</h1>
         {lesson['content_html'].replace("{ASSETS_PATH}", "../assets")}
     </div>
+    <script src="pinyin_note_widget.js"></script>
 </body>
 </html>"""
         with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as f:
@@ -2651,6 +2646,7 @@ def build_individual_lessons():
         <!-- LESSONS -->
         {lessons_content}
     </div>
+    <script src="pinyin_note_widget.js"></script>
 </body>
 </html>"""
 
