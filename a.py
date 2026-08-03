@@ -835,22 +835,23 @@ components.html("""
     var P = window.parent;
     var PD = P.document;
 
-    // Guard: chỉ init 1 lần
-    if(P.__pgPopupReady) return;
-    P.__pgPopupReady = true;
+    // Remove old elements for hot-reloading
+    var oldWrap = PD.getElementById('pg-popup-container');
+    if(oldWrap) oldWrap.remove();
+    var oldCss = PD.getElementById('pg-popup-css');
+    if(oldCss) oldCss.remove();
 
     /* ---- INJECT CSS ---- */
     var st = PD.createElement('style');
     st.id = 'pg-popup-css';
-    if(!PD.getElementById('pg-popup-css')){
-        st.innerHTML = [
-        "#pg-fab-note,#pg-fab-pinyin{position:fixed!important;width:52px;height:52px;border-radius:50%;border:none;outline:none;cursor:pointer;color:#fff;font-size:22px;display:flex!important;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:2147483647!important;pointer-events:auto!important;transition:transform .2s;}",
+    st.innerHTML = [
+        "#pg-fab-note,#pg-fab-pinyin{position:fixed!important;width:52px;height:52px;border-radius:50%;border:none;outline:none;cursor:pointer;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:2147483647!important;pointer-events:auto!important;transition:transform .2s;}",
         "#pg-fab-note{bottom:24px;right:24px;background:linear-gradient(135deg,#f43f5e,#e11d48);}",
         "#pg-fab-pinyin{bottom:84px;right:24px;background:linear-gradient(135deg,#0284c7,#0369a1);}",
         "#pg-fab-note:hover,#pg-fab-pinyin:hover{transform:scale(1.12);}",
-        "#pg-popup-note,#pg-popup-pinyin{position:fixed!important;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);display:flex!important;flex-direction:column;overflow:hidden;z-index:2147483646!important;pointer-events:auto!important;resize:both;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}",
+        "#pg-popup-note,#pg-popup-pinyin{position:fixed!important;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden;z-index:2147483646!important;pointer-events:auto!important;resize:both;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}",
         "#pg-popup-note{top:80px;right:24px;width:340px;height:260px;min-width:240px;min-height:44px;border:2px solid #e11d48;background:#fff;}",
-        "#pg-popup-pinyin{bottom:148px;right:24px;width:360px;height:240px;min-width:280px;min-height:44px;border:2px solid #0284c7;background:#fff;}",
+        "#pg-popup-pinyin{bottom:148px;right:24px;width:340px;height:280px;min-width:260px;min-height:44px;border:2px solid #0284c7;background:#fff;}",
         "#pg-popup-note.pg-min,#pg-popup-pinyin.pg-min{height:44px!important;resize:none!important;}",
         ".pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:44px;min-height:44px;cursor:move;user-select:none;flex-shrink:0;color:#fff;font-weight:700;font-size:13px;}",
         "#pg-popup-note .pg-hdr{background:#e11d48;}",
@@ -861,16 +862,15 @@ components.html("""
         ".pg-body{flex:1;display:flex;flex-direction:column;overflow:hidden;}",
         "#pg-note-ta{flex:1;width:100%;height:100%;border:none;outline:none;resize:none;padding:10px 12px;font-size:15px;line-height:1.6;color:#1e293b;font-family:inherit;background:#fff;}",
         ".pg-py-body{flex:1;display:flex;flex-direction:column;padding:8px;gap:6px;overflow:hidden;}",
-        "#pg-py-inp{width:100%;height:52px;border:1.5px solid #cbd5e1;border-radius:7px;padding:7px 10px;font-size:14px;font-family:inherit;outline:none;resize:none;box-sizing:border-box;transition:border-color .15s;}",
+        "#pg-py-inp{flex:1;width:100%;min-height:60px;border:1.5px solid #cbd5e1;border-radius:7px;padding:7px 10px;font-size:14px;font-family:inherit;outline:none;resize:none;box-sizing:border-box;transition:border-color .15s;}",
         "#pg-py-inp:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.12);}",
-        "#pg-py-out{flex:1;overflow-y:auto;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:7px;padding:8px 12px;font-size:16px;font-weight:600;color:#0369a1;line-height:1.8;letter-spacing:0.5px;word-break:break-word;font-family:'Georgia',serif;}",
-        "#pg-py-copy-row{display:flex;justify-content:flex-end;flex-shrink:0;}",
+        "#pg-py-out{flex:1;overflow-y:auto;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:7px;padding:6px 10px;line-height:1.6;word-break:break-word;}",
+        "#pg-py-copy-row{display:flex;justify-content:flex-end;flex-shrink:0;margin-top:6px;}",
         "#pg-py-copy{background:#0284c7;border:none;color:#fff;border-radius:7px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;pointer-events:auto!important;transition:background .15s;display:flex;align-items:center;gap:5px;}",
         "#pg-py-copy:hover{background:#0369a1;}",
         "#pg-py-copy.copied{background:#16a34a;}"
         ].join('');
         PD.head.appendChild(st);
-    }
 
     /* ---- INJECT HTML ---- */
     var html = [
@@ -892,14 +892,16 @@ components.html("""
         '  <div class="pg-hdr" id="pg-hdr-pinyin">',
         '    <span>🔤 Tra Pinyin Từ Vựng</span>',
         '    <div class="pg-btns">',
+        '      <button id="pg-py-dec">A-</button>',
+        '      <button id="pg-py-inc">A+</button>',
         '      <button id="pg-py-min">−</button>',
         '      <button id="pg-py-cls">✕</button>',
         '    </div>',
         '  </div>',
         '  <div class="pg-body">',
         '    <div class="pg-py-body">',
-        '      <textarea id="pg-py-inp" placeholder="Nhập chữ Hán... (VD: 苹果 学习 你好)"></textarea>',
-        '      <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi gõ chữ Hán...</span></div>',
+        '      <textarea id="pg-py-inp" placeholder="Nhập chữ Hán"></textarea>',
+        '      <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin </span></div>',
         '      <div id="pg-py-copy-row"><button id="pg-py-copy">📋 Copy Pinyin</button></div>',
         '    </div>',
         '  </div>',
@@ -935,34 +937,20 @@ components.html("""
     function renderPy(){
         var inp=el('pg-py-inp'), out=el('pg-py-out'); if(!inp||!out) return;
         var txt=inp.value; ss('pg_py_txt',txt);
-        if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi gõ chữ Hán...</span>';return;}
-        // Build pinyin-only string (no Chinese characters displayed)
-        var parts = [];
-        var i = 0;
-        while(i < txt.length){
-            var c = txt[i];
-            var code = c.charCodeAt(0);
-            if(code>=0x4e00 && code<=0x9fa5){
+        if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin</span>'; out._pyText=''; return;}
+        var p='';
+        for(var i=0;i<txt.length;i++){
+            var c=txt[i];
+            if(c>='\\u4e00'&&c<='\\u9fa5') {
                 var py = getpy(c);
-                if(py) parts.push(py);
-                i++;
-            } else if(c=='\n'){
-                parts.push('\n');
-                i++;
-            } else if(c==' '){
-                // keep space between words
-                parts.push(' ');
-                i++;
+                p += (py ? py + ' ' : c);
             } else {
-                parts.push(c);
-                i++;
+                p += c;
             }
         }
-        var result = parts.join('');
-        // Store plain text for copy
+        var result = p.replace(/ +\\n/g, '\\n').trim();
         out._pyText = result;
-        // Display with line breaks
-        out.innerHTML = result.replace(/\n/g,'<br>').replace(/ /g,'&nbsp;');
+        out.innerHTML = result.replace(/\\n/g,'<br>').replace(/ /g,'&nbsp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     }
 
     /* ---- DRAG ---- */
@@ -998,30 +986,12 @@ components.html("""
         // restore visibility
         if(ls(pId+'_vis','1')==='0'){p.style.display='none';f.style.display='flex';}
         else{p.style.display='flex';f.style.display='none';}
-        // minimize helpers using direct style (CSS class won't work if resize inline style overrides)
-        p._pgMin = false;
-        p._pgDefH = (pId==='pg-popup-note') ? '260px' : '220px';
-        function doMinimize(mn){
-            p._pgMin = mn;
-            if(mn){
-                p._pgSavedH = p.style.height || p._pgDefH;
-                p.style.height = '44px';
-                p.style.overflow = 'hidden';
-                p.style.resize = 'none';
-            } else {
-                p.style.height = p._pgSavedH || p._pgDefH;
-                p.style.overflow = 'hidden';
-                p.style.resize = 'both';
-            }
-            if(m) m.textContent = mn ? '▢' : '−';
-            ss(pId+'_min', mn ? '1' : '0');
-        }
         // restore minimized
-        if(ls(pId+'_min','0')==='1') doMinimize(true);
+        if(ls(pId+'_min','0')==='1'){p.classList.add('pg-min');if(m)m.textContent='▢';}
         // bind events
         f.addEventListener('click', function(){p.style.display='flex';f.style.display='none';ss(pId+'_vis','1');});
         if(c) c.addEventListener('click', function(){p.style.display='none';f.style.display='flex';ss(pId+'_vis','0');});
-        if(m) m.addEventListener('click', function(){ doMinimize(!p._pgMin); });
+        if(m) m.addEventListener('click', function(){var mn=p.classList.toggle('pg-min');m.textContent=mn?'▢':'−';ss(pId+'_min',mn?'1':'0');});
     }
 
     setup('pg-popup-note',   'pg-fab-note',   'pg-n-min', 'pg-n-cls');
@@ -1040,35 +1010,54 @@ components.html("""
     el('pg-n-inc').addEventListener('click', function(){if(!ta)return;var f=Math.min(32,(parseInt(ta.style.fontSize)||15)+2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
     el('pg-n-dec').addEventListener('click', function(){if(!ta)return;var f=Math.max(10,(parseInt(ta.style.fontSize)||15)-2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
 
-    /* ---- PINYIN INPUT ---- */
-    var pi=el('pg-py-inp');
-    if(pi){ pi.value=ls('pg_py_txt',''); pi.addEventListener('input',renderPy); renderPy(); }
+    /* ---- PINYIN INPUT & ZOOM ---- */
+    var pi=el('pg-py-inp'), po=el('pg-py-out');
+    if(pi && po){
+        var pyfs = parseInt(ls('pg_py_fs', '14')) || 14;
+        pi.style.fontSize = pyfs + 'px';
+        po.style.fontSize = pyfs + 'px';
+        pi.value=ls('pg_py_txt',''); 
+        pi.addEventListener('input',renderPy); 
+        renderPy(); 
+    }
+    el('pg-py-inc').addEventListener('click', function(){
+        if(!pi || !po) return;
+        var f = Math.min(48, (parseInt(pi.style.fontSize) || 14) + 2);
+        pi.style.fontSize = f + 'px';
+        po.style.fontSize = f + 'px';
+        ss('pg_py_fs', f);
+    });
+    el('pg-py-dec').addEventListener('click', function(){
+        if(!pi || !po) return;
+        var f = Math.max(10, (parseInt(pi.style.fontSize) || 14) - 2);
+        pi.style.fontSize = f + 'px';
+        po.style.fontSize = f + 'px';
+        ss('pg_py_fs', f);
+    });
 
     /* ---- COPY BUTTON ---- */
     var cpBtn=el('pg-py-copy');
     if(cpBtn){
         cpBtn.addEventListener('click', function(){
-            var out=el('pg-py-out');
-            var txt = out && out._pyText ? out._pyText : (out ? out.innerText : '');
+            var o=el('pg-py-out');
+            var txt = o && o._pyText ? o._pyText : '';
             if(!txt || !txt.trim()) return;
-            try {
-                P.navigator.clipboard.writeText(txt.trim()).then(function(){
-                    cpBtn.textContent='✅ Đã copy!';
-                    cpBtn.classList.add('copied');
-                    setTimeout(function(){ cpBtn.textContent='📋 Copy Pinyin'; cpBtn.classList.remove('copied'); }, 1500);
-                });
-            } catch(e) {
-                // fallback
-                var ta2=PD.createElement('textarea');
-                ta2.value=txt.trim();
-                ta2.style.position='fixed';ta2.style.opacity='0';
-                PD.body.appendChild(ta2);
-                ta2.select();
-                PD.execCommand('copy');
-                PD.body.removeChild(ta2);
-                cpBtn.textContent='✅ Đã copy!';
-                cpBtn.classList.add('copied');
+            function fallbackCopy(){
+                try{
+                    var ta2=PD.createElement('textarea');
+                    ta2.value=txt; ta2.style.position='fixed'; ta2.style.opacity='0';
+                    PD.body.appendChild(ta2); ta2.select(); PD.execCommand('copy'); PD.body.removeChild(ta2);
+                }catch(e){}
+                cpBtn.textContent='✅ Đã copy!'; cpBtn.classList.add('copied');
                 setTimeout(function(){ cpBtn.textContent='📋 Copy Pinyin'; cpBtn.classList.remove('copied'); }, 1500);
+            }
+            if(P.navigator && P.navigator.clipboard && P.navigator.clipboard.writeText){
+                P.navigator.clipboard.writeText(txt).then(function(){
+                    cpBtn.textContent='✅ Đã copy!'; cpBtn.classList.add('copied');
+                    setTimeout(function(){ cpBtn.textContent='📋 Copy Pinyin'; cpBtn.classList.remove('copied'); }, 1500);
+                }).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
             }
         });
     }
