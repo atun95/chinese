@@ -829,240 +829,250 @@ st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
 
 # --- HIỂN THỊ 2 POPUP NỔI ĐỘC LẬP: (1) GHI CHÚ GIÁO VIÊN & (2) TRA PINYIN TỪ VỰNG ---
-st.markdown("""
-<style>
-#pg-fab-note, #pg-fab-pinyin {
-    position: fixed !important;
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    border: none; outline: none;
-    cursor: pointer;
-    color: white;
-    font-size: 22px;
-    display: flex !important; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    z-index: 2147483647 !important;
-    pointer-events: auto !important;
-    transition: transform 0.2s;
-}
-#pg-fab-note  { bottom: 24px; right: 24px; background: linear-gradient(135deg,#f43f5e,#e11d48); }
-#pg-fab-pinyin{ bottom: 84px; right: 24px; background: linear-gradient(135deg,#0284c7,#0369a1); }
-#pg-fab-note:hover,#pg-fab-pinyin:hover { transform:scale(1.12); }
-
-#pg-popup-note, #pg-popup-pinyin {
-    position: fixed !important;
-    border-radius: 14px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.22);
-    display: flex !important; flex-direction: column;
-    overflow: hidden;
-    z-index: 2147483646 !important;
-    pointer-events: auto !important;
-    resize: both;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-}
-#pg-popup-note {
-    top: 80px; right: 24px;
-    width: 340px; height: 260px;
-    min-width: 240px; min-height: 44px;
-    border: 2px solid #e11d48;
-    background: #fff;
-}
-#pg-popup-pinyin {
-    bottom: 148px; right: 24px;
-    width: 340px; height: 220px;
-    min-width: 260px; min-height: 44px;
-    border: 2px solid #0284c7;
-    background: #fff;
-}
-#pg-popup-note.pg-minimized,#pg-popup-pinyin.pg-minimized {
-    height: 44px !important;
-    resize: none !important;
-}
-.pg-popup-hdr {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 10px; height: 44px; min-height: 44px;
-    cursor: move; user-select: none; flex-shrink: 0;
-    color: #fff; font-weight: 700; font-size: 13px;
-}
-#pg-popup-note  .pg-popup-hdr { background: #e11d48; }
-#pg-popup-pinyin .pg-popup-hdr { background: linear-gradient(135deg,#0284c7,#0369a1); }
-.pg-popup-hdr .pg-btns { display:flex; gap:4px; }
-.pg-popup-hdr button {
-    background: rgba(255,255,255,0.18);
-    border: none; color: #fff;
-    width: 28px; height: 28px;
-    border-radius: 6px; cursor: pointer;
-    font-size: 13px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.15s;
-}
-.pg-popup-hdr button:hover { background: rgba(255,255,255,0.38); }
-.pg-popup-body { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-#pg-note-ta {
-    flex:1; width:100%; height:100%;
-    border:none; outline:none; resize:none;
-    padding:10px 12px; font-size:15px; line-height:1.6;
-    color:#1e293b; font-family:inherit; background:#fff;
-}
-.pg-py-body { flex:1; display:flex; flex-direction:column; padding:8px; gap:6px; overflow:hidden; }
-#pg-py-inp {
-    width:100%; height:58px;
-    border:1.5px solid #cbd5e1; border-radius:7px;
-    padding:7px 10px; font-size:14px; font-family:inherit;
-    outline:none; resize:none; box-sizing:border-box;
-    transition:border-color 0.15s;
-}
-#pg-py-inp:focus { border-color:#0284c7; box-shadow:0 0 0 3px rgba(2,132,199,0.12); }
-#pg-py-out {
-    flex:1; overflow-y:auto;
-    background:#f8fafc; border:1.5px solid #e2e8f0;
-    border-radius:7px; padding:6px 10px;
-    line-height:2.4; word-break:break-word;
-}
-#pg-py-out ruby { margin:0 2px; }
-#pg-py-out rb { font-size:18px; font-weight:700; color:#0f172a; }
-#pg-py-out rt { font-size:11px; font-weight:600; color:#0284c7; }
-</style>
-
-<button id="pg-fab-note" title="Mở bảng ghi chú">📝</button>
-<button id="pg-fab-pinyin" title="Mở tra Pinyin">🔤</button>
-
-<div id="pg-popup-note">
-    <div class="pg-popup-hdr" id="pg-hdr-note">
-        <span>📌 Ghi chú giáo viên</span>
-        <div class="pg-btns">
-            <button id="pg-n-dec" title="Chữ nhỏ">A-</button>
-            <button id="pg-n-inc" title="Chữ to">A+</button>
-            <button id="pg-n-min" title="Thu nhỏ">−</button>
-            <button id="pg-n-cls" title="Đóng">✕</button>
-        </div>
-    </div>
-    <div class="pg-popup-body">
-        <textarea id="pg-note-ta" placeholder="Nhập ghi chú tại đây..."></textarea>
-    </div>
-</div>
-
-<div id="pg-popup-pinyin">
-    <div class="pg-popup-hdr" id="pg-hdr-pinyin">
-        <span>🔤 Tra Pinyin Từ Vựng</span>
-        <div class="pg-btns">
-            <button id="pg-py-min" title="Thu nhỏ">−</button>
-            <button id="pg-py-cls" title="Đóng">✕</button>
-        </div>
-    </div>
-    <div class="pg-popup-body">
-        <div class="pg-py-body">
-            <textarea id="pg-py-inp" placeholder="Nhập chữ Hán... (VD: 苹果 学习 你好)"></textarea>
-            <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi bạn gõ chữ Hán...</span></div>
-        </div>
-    </div>
-</div>
-
+components.html("""
 <script>
 (function(){
-if(window.__pgPopupInit) return;
-window.__pgPopupInit = true;
+    var P = window.parent;
+    var PD = P.document;
 
-var D = {};
-['pg-fab-note','pg-fab-pinyin','pg-popup-note','pg-popup-pinyin',
- 'pg-hdr-note','pg-hdr-pinyin','pg-note-ta','pg-py-inp','pg-py-out',
- 'pg-n-dec','pg-n-inc','pg-n-min','pg-n-cls','pg-py-min','pg-py-cls'
-].forEach(function(id){ D[id] = document.getElementById(id); });
+    // Guard: chỉ init 1 lần
+    if(P.__pgPopupReady) return;
+    P.__pgPopupReady = true;
 
-function ls(k,d){ try{var v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;} }
-function ss(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
-
-/* move all to body so position:fixed works relative to viewport */
-['pg-fab-note','pg-fab-pinyin','pg-popup-note','pg-popup-pinyin'].forEach(function(id){
-    var el=D[id]; if(el && el.parentNode!==document.body) document.body.appendChild(el);
-});
-
-/* ---- PINYIN ---- */
-var pyDict={'我':'wǒ','你':'nǐ','他':'tā','她':'tā','它':'tā','们':'men','好':'hǎo','是':'shì','在':'zài','不':'bù','有':'yǒu','这':'zhè','那':'nà','个':'gè','上':'shàng','下':'xià','人':'rén','大':'dà','小':'xiǎo','中':'zhōng','国':'guó','年':'nián','月':'yuè','日':'rì','老':'lǎo','师':'shī','学':'xué','校':'xiào','生':'shēng','同':'tóng','朋':'péng','友':'yǒu','家':'jiā','爸':'bà','妈':'mā','哥':'gē','姐':'jiě','弟':'dì','妹':'mèi','吃':'chī','喝':'hē','茶':'chá','水':'shuǐ','菜':'cài','饭':'fàn','果':'guǒ','苹':'píng','猫':'māo','狗':'gǒu','爱':'ài','喜':'xǐ','欢':'huān','想':'xiǎng','要':'yào','去':'qù','来':'lái','买':'mǎi','卖':'mài','看':'kàn','听':'tīng','说':'shuō','读':'dú','写':'xiě','字':'zì','汉':'hàn','语':'yǔ','英':'yīng','书':'shū','电':'diàn','脑':'nǎo','视':'shì','话':'huà','车':'chē','钱':'qián','块':'kuài','百':'bǎi','千':'qiān','一':'yī','二':'èr','三':'sān','四':'sì','五':'wǔ','六':'liù','七':'qī','八':'bā','九':'jiǔ','十':'shí','谢':'xiè','再':'zài','见':'jiàn','对':'duì','起':'qǐ','没':'méi','关':'guān','系':'xì','多':'duō','少':'shǎo','冷':'lěng','热':'rè','雨':'yǔ','高':'gāo','兴':'xìng','坐':'zuò','请':'qǐng','作':'zuò','业':'yè','桌':'zhuō','椅':'yǐ','衣':'yī','服':'fu','号':'hào','时':'shí','分':'fēn','点':'diǎn','天':'tiān','什':'shén','么':'me','哪':'nǎ','呢':'ne','吗':'ma','的':'de','了':'le','和':'hé','也':'yě','都':'dōu','很':'hěn','知':'zhī','道':'dào','名':'míng','岁':'suì'};
-
-var pyLoaded=false;
-(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';s.onload=function(){pyLoaded=true;renderPy();};document.head.appendChild(s);})();
-
-function getpy(ch){
-    if(pyLoaded&&window.pinyinPro&&window.pinyinPro.pinyin){
-        try{var r=window.pinyinPro.pinyin(ch,{toneType:'symbol',type:'array'});if(r&&r[0])return r[0];}catch(e){}
+    /* ---- INJECT CSS ---- */
+    var st = PD.createElement('style');
+    st.id = 'pg-popup-css';
+    if(!PD.getElementById('pg-popup-css')){
+        st.innerHTML = [
+        "#pg-fab-note,#pg-fab-pinyin{position:fixed!important;width:52px;height:52px;border-radius:50%;border:none;outline:none;cursor:pointer;color:#fff;font-size:22px;display:flex!important;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:2147483647!important;pointer-events:auto!important;transition:transform .2s;}",
+        "#pg-fab-note{bottom:24px;right:24px;background:linear-gradient(135deg,#f43f5e,#e11d48);}",
+        "#pg-fab-pinyin{bottom:84px;right:24px;background:linear-gradient(135deg,#0284c7,#0369a1);}",
+        "#pg-fab-note:hover,#pg-fab-pinyin:hover{transform:scale(1.12);}",
+        "#pg-popup-note,#pg-popup-pinyin{position:fixed!important;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);display:flex!important;flex-direction:column;overflow:hidden;z-index:2147483646!important;pointer-events:auto!important;resize:both;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}",
+        "#pg-popup-note{top:80px;right:24px;width:340px;height:260px;min-width:240px;min-height:44px;border:2px solid #e11d48;background:#fff;}",
+        "#pg-popup-pinyin{bottom:148px;right:24px;width:360px;height:240px;min-width:280px;min-height:44px;border:2px solid #0284c7;background:#fff;}",
+        "#pg-popup-note.pg-min,#pg-popup-pinyin.pg-min{height:44px!important;resize:none!important;}",
+        ".pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:44px;min-height:44px;cursor:move;user-select:none;flex-shrink:0;color:#fff;font-weight:700;font-size:13px;}",
+        "#pg-popup-note .pg-hdr{background:#e11d48;}",
+        "#pg-popup-pinyin .pg-hdr{background:linear-gradient(135deg,#0284c7,#0369a1);}",
+        ".pg-btns{display:flex;gap:4px;}",
+        ".pg-hdr button{background:rgba(255,255,255,.18);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .15s;pointer-events:auto!important;}",
+        ".pg-hdr button:hover{background:rgba(255,255,255,.38);}",
+        ".pg-body{flex:1;display:flex;flex-direction:column;overflow:hidden;}",
+        "#pg-note-ta{flex:1;width:100%;height:100%;border:none;outline:none;resize:none;padding:10px 12px;font-size:15px;line-height:1.6;color:#1e293b;font-family:inherit;background:#fff;}",
+        ".pg-py-body{flex:1;display:flex;flex-direction:column;padding:8px;gap:6px;overflow:hidden;}",
+        "#pg-py-inp{width:100%;height:52px;border:1.5px solid #cbd5e1;border-radius:7px;padding:7px 10px;font-size:14px;font-family:inherit;outline:none;resize:none;box-sizing:border-box;transition:border-color .15s;}",
+        "#pg-py-inp:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.12);}",
+        "#pg-py-out{flex:1;overflow-y:auto;background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:7px;padding:8px 12px;font-size:16px;font-weight:600;color:#0369a1;line-height:1.8;letter-spacing:0.5px;word-break:break-word;font-family:'Georgia',serif;}",
+        "#pg-py-copy-row{display:flex;justify-content:flex-end;flex-shrink:0;}",
+        "#pg-py-copy{background:#0284c7;border:none;color:#fff;border-radius:7px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;pointer-events:auto!important;transition:background .15s;display:flex;align-items:center;gap:5px;}",
+        "#pg-py-copy:hover{background:#0369a1;}",
+        "#pg-py-copy.copied{background:#16a34a;}"
+        ].join('');
+        PD.head.appendChild(st);
     }
-    return pyDict[ch]||'';
-}
 
-function renderPy(){
-    var inp=D['pg-py-inp'],out=D['pg-py-out'];
-    if(!inp||!out)return;
-    var txt=inp.value; ss('pg_py_txt',txt);
-    if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi bạn gõ chữ Hán...</span>';return;}
-    var h='';
-    for(var i=0;i<txt.length;i++){
-        var c=txt[i];
-        if(c>='\u4e00'&&c<='\u9fa5'){
-            h+='<ruby><rb>'+c+'</rb><rt>'+getpy(c)+'</rt></ruby>';
-        }else if(c=='\n'){h+='<br>';}}
-        else if(c==' '){h+='&nbsp;';}
-        else{h+='<span style="font-size:15px;color:#475569;">'+c.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';}
+    /* ---- INJECT HTML ---- */
+    var html = [
+        '<button id="pg-fab-note" title="Mở ghi chú">📝</button>',
+        '<button id="pg-fab-pinyin" title="Mở tra Pinyin">🔤</button>',
+        '<div id="pg-popup-note">',
+        '  <div class="pg-hdr" id="pg-hdr-note">',
+        '    <span>📌 Ghi chú giáo viên</span>',
+        '    <div class="pg-btns">',
+        '      <button id="pg-n-dec">A-</button>',
+        '      <button id="pg-n-inc">A+</button>',
+        '      <button id="pg-n-min">−</button>',
+        '      <button id="pg-n-cls">✕</button>',
+        '    </div>',
+        '  </div>',
+        '  <div class="pg-body"><textarea id="pg-note-ta" placeholder="Nhập ghi chú tại đây..."></textarea></div>',
+        '</div>',
+        '<div id="pg-popup-pinyin">',
+        '  <div class="pg-hdr" id="pg-hdr-pinyin">',
+        '    <span>🔤 Tra Pinyin Từ Vựng</span>',
+        '    <div class="pg-btns">',
+        '      <button id="pg-py-min">−</button>',
+        '      <button id="pg-py-cls">✕</button>',
+        '    </div>',
+        '  </div>',
+        '  <div class="pg-body">',
+        '    <div class="pg-py-body">',
+        '      <textarea id="pg-py-inp" placeholder="Nhập chữ Hán... (VD: 苹果 学习 你好)"></textarea>',
+        '      <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi gõ chữ Hán...</span></div>',
+        '      <div id="pg-py-copy-row"><button id="pg-py-copy">📋 Copy Pinyin</button></div>',
+        '    </div>',
+        '  </div>',
+        '</div>'
+    ].join('\\n');
+
+    var wrap = PD.createElement('div');
+    wrap.id = 'pg-popup-container';
+    wrap.innerHTML = html;
+    PD.body.appendChild(wrap);
+
+    /* ---- HELPERS ---- */
+    function ls(k,d){ try{var v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;} }
+    function ss(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+    function el(id){ return PD.getElementById(id); }
+
+    /* ---- LOAD PINYIN-PRO ---- */
+    var pyLoaded = false;
+    var pyDict = {'我':'wǒ','你':'nǐ','他':'tā','她':'tā','它':'tā','们':'men','好':'hǎo','是':'shì','在':'zài','不':'bù','有':'yǒu','这':'zhè','那':'nà','个':'gè','上':'shàng','下':'xià','人':'rén','大':'dà','小':'xiǎo','中':'zhōng','国':'guó','年':'nián','月':'yuè','日':'rì','老':'lǎo','师':'shī','学':'xué','校':'xiào','生':'shēng','同':'tóng','朋':'péng','友':'yǒu','家':'jiā','爸':'bà','妈':'mā','哥':'gē','姐':'jiě','弟':'dì','妹':'mèi','吃':'chī','喝':'hē','茶':'chá','水':'shuǐ','菜':'cài','饭':'fàn','果':'guǒ','苹':'píng','猫':'māo','狗':'gǒu','爱':'ài','喜':'xǐ','欢':'huān','想':'xiǎng','要':'yào','去':'qù','来':'lái','买':'mǎi','卖':'mài','看':'kàn','听':'tīng','说':'shuō','读':'dú','写':'xiě','字':'zì','汉':'hàn','语':'yǔ','英':'yīng','书':'shū','电':'diàn','脑':'nǎo','视':'shì','话':'huà','车':'chē','钱':'qián','块':'kuài','百':'bǎi','千':'qiān','一':'yī','二':'èr','三':'sān','四':'sì','五':'wǔ','六':'liù','七':'qī','八':'bā','九':'jiǔ','十':'shí','谢':'xiè','再':'zài','见':'jiàn','对':'duì','起':'qǐ','没':'méi','关':'guān','系':'xì','多':'duō','少':'shǎo','冷':'lěng','热':'rè','雨':'yǔ','高':'gāo','兴':'xìng','坐':'zuò','请':'qǐng','作':'zuò','业':'yè','桌':'zhuō','椅':'yǐ','衣':'yī','服':'fu','号':'hào','时':'shí','分':'fēn','点':'diǎn','天':'tiān','什':'shén','么':'me','哪':'nǎ','呢':'ne','吗':'ma','的':'de','了':'le','和':'hé','也':'yě','都':'dōu','很':'hěn','知':'zhī','道':'dào','名':'míng','岁':'suì'};
+
+    var ps = PD.createElement('script');
+    ps.src = 'https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';
+    ps.onload = function(){ pyLoaded = true; renderPy(); };
+    PD.head.appendChild(ps);
+
+    function getpy(c){
+        if(pyLoaded && P.pinyinPro && P.pinyinPro.pinyin){
+            try{ var r=P.pinyinPro.pinyin(c,{toneType:'symbol',type:'array'}); if(r&&r[0]) return r[0]; }catch(e){}
+        }
+        return pyDict[c]||'';
     }
-    out.innerHTML=h;
-}
 
-/* ---- DRAG ---- */
-function drag(hdr,popup){
-    var on=false,ox=0,oy=0;
-    hdr.addEventListener('mousedown',function(e){
-        if(e.target.tagName==='BUTTON')return;
-        on=true; var r=popup.getBoundingClientRect();
-        ox=e.clientX-r.left; oy=e.clientY-r.top; e.preventDefault();
-    });
-    document.addEventListener('mousemove',function(e){
-        if(!on)return;
-        var x=Math.max(0,Math.min(window.innerWidth-popup.offsetWidth,e.clientX-ox));
-        var y=Math.max(0,Math.min(window.innerHeight-popup.offsetHeight,e.clientY-oy));
-        popup.style.cssText+='left:'+x+'px;top:'+y+'px;right:auto;bottom:auto;';
-        ss(popup.id+'_pos',JSON.stringify({x:x,y:y}));
-    });
-    document.addEventListener('mouseup',function(){on=false;});
-}
+    function renderPy(){
+        var inp=el('pg-py-inp'), out=el('pg-py-out'); if(!inp||!out) return;
+        var txt=inp.value; ss('pg_py_txt',txt);
+        if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi gõ chữ Hán...</span>';return;}
+        // Build pinyin-only string (no Chinese characters displayed)
+        var parts = [];
+        var i = 0;
+        while(i < txt.length){
+            var c = txt[i];
+            var code = c.charCodeAt(0);
+            if(code>=0x4e00 && code<=0x9fa5){
+                var py = getpy(c);
+                if(py) parts.push(py);
+                i++;
+            } else if(c=='\n'){
+                parts.push('\n');
+                i++;
+            } else if(c==' '){
+                // keep space between words
+                parts.push(' ');
+                i++;
+            } else {
+                parts.push(c);
+                i++;
+            }
+        }
+        var result = parts.join('');
+        // Store plain text for copy
+        out._pyText = result;
+        // Display with line breaks
+        out.innerHTML = result.replace(/\n/g,'<br>').replace(/ /g,'&nbsp;');
+    }
 
-/* ---- SETUP POPUP ---- */
-function setup(pId,fId,mId,cId){
-    var p=D[pId],f=D[fId],m=D[mId],c=D[cId];
-    if(!p||!f)return;
-    /* restore pos */
-    var pos=ls(pId+'_pos',null);
-    if(pos){try{var j=JSON.parse(pos);p.style.left=j.x+'px';p.style.top=j.y+'px';p.style.right='auto';p.style.bottom='auto';}catch(e){}}
-    /* restore vis */
-    if(ls(pId+'_vis','1')==='0'){p.style.display='none';f.style.display='flex';}
-    else{p.style.display='flex';f.style.display='none';}
-    /* restore min */
-    if(ls(pId+'_min','0')==='1'){p.classList.add('pg-minimized');if(m)m.textContent='▢';}
-    /* events */
-    f.onclick=function(){p.style.display='flex';f.style.display='none';ss(pId+'_vis','1');};
-    if(c)c.onclick=function(){p.style.display='none';f.style.display='flex';ss(pId+'_vis','0');};
-    if(m)m.onclick=function(){var mn=p.classList.toggle('pg-minimized');m.textContent=mn?'▢':'−';ss(pId+'_min',mn?'1':'0');};
-}
+    /* ---- DRAG ---- */
+    function makeDrag(hdr, popup){
+        var on=false, ox=0, oy=0;
+        hdr.addEventListener('mousedown', function(e){
+            if(e.target.tagName==='BUTTON') return;
+            on=true;
+            var r=popup.getBoundingClientRect();
+            ox=e.clientX-r.left; oy=e.clientY-r.top;
+            e.preventDefault();
+        });
+        PD.addEventListener('mousemove', function(e){
+            if(!on) return;
+            var x=Math.max(0,Math.min(P.innerWidth-popup.offsetWidth, e.clientX-ox));
+            var y=Math.max(0,Math.min(P.innerHeight-popup.offsetHeight, e.clientY-oy));
+            popup.style.left=x+'px'; popup.style.top=y+'px';
+            popup.style.right='auto'; popup.style.bottom='auto';
+            ss(popup.id+'_pos', JSON.stringify({x:x,y:y}));
+        });
+        PD.addEventListener('mouseup', function(){ on=false; });
+    }
 
-setup('pg-popup-note','pg-fab-note','pg-n-min','pg-n-cls');
-setup('pg-popup-pinyin','pg-fab-pinyin','pg-py-min','pg-py-cls');
-drag(D['pg-hdr-note'],D['pg-popup-note']);
-drag(D['pg-hdr-pinyin'],D['pg-popup-pinyin']);
+    /* ---- SETUP POPUP ---- */
+    function setup(pId, fId, mId, cId){
+        var p=el(pId), f=el(fId), m=el(mId), c=el(cId);
+        if(!p||!f) return;
+        // restore position
+        try{
+            var pos=ls(pId+'_pos',null);
+            if(pos){var j=JSON.parse(pos);p.style.left=j.x+'px';p.style.top=j.y+'px';p.style.right='auto';p.style.bottom='auto';}
+        }catch(e){}
+        // restore visibility
+        if(ls(pId+'_vis','1')==='0'){p.style.display='none';f.style.display='flex';}
+        else{p.style.display='flex';f.style.display='none';}
+        // minimize helpers using direct style (CSS class won't work if resize inline style overrides)
+        p._pgMin = false;
+        p._pgDefH = (pId==='pg-popup-note') ? '260px' : '220px';
+        function doMinimize(mn){
+            p._pgMin = mn;
+            if(mn){
+                p._pgSavedH = p.style.height || p._pgDefH;
+                p.style.height = '44px';
+                p.style.overflow = 'hidden';
+                p.style.resize = 'none';
+            } else {
+                p.style.height = p._pgSavedH || p._pgDefH;
+                p.style.overflow = 'hidden';
+                p.style.resize = 'both';
+            }
+            if(m) m.textContent = mn ? '▢' : '−';
+            ss(pId+'_min', mn ? '1' : '0');
+        }
+        // restore minimized
+        if(ls(pId+'_min','0')==='1') doMinimize(true);
+        // bind events
+        f.addEventListener('click', function(){p.style.display='flex';f.style.display='none';ss(pId+'_vis','1');});
+        if(c) c.addEventListener('click', function(){p.style.display='none';f.style.display='flex';ss(pId+'_vis','0');});
+        if(m) m.addEventListener('click', function(){ doMinimize(!p._pgMin); });
+    }
 
-/* note textarea */
-var ta=D['pg-note-ta'];
-if(ta){
-    ta.value=ls('pg_note_txt','');
-    var fs=parseInt(ls('pg_note_fs','15')||'15');
-    ta.style.fontSize=fs+'px';
-    ta.oninput=function(){ss('pg_note_txt',ta.value);};
-}
-if(D['pg-n-inc'])D['pg-n-inc'].onclick=function(){if(!ta)return;var f=Math.min(32,(parseInt(ta.style.fontSize)||15)+2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);};
-if(D['pg-n-dec'])D['pg-n-dec'].onclick=function(){if(!ta)return;var f=Math.max(10,(parseInt(ta.style.fontSize)||15)-2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);};
+    setup('pg-popup-note',   'pg-fab-note',   'pg-n-min', 'pg-n-cls');
+    setup('pg-popup-pinyin', 'pg-fab-pinyin', 'pg-py-min','pg-py-cls');
+    makeDrag(el('pg-hdr-note'),   el('pg-popup-note'));
+    makeDrag(el('pg-hdr-pinyin'), el('pg-popup-pinyin'));
 
-/* pinyin input */
-var pi=D['pg-py-inp'];
-if(pi){pi.value=ls('pg_py_txt','');pi.oninput=renderPy;renderPy();}
+    /* ---- NOTE TEXTAREA ---- */
+    var ta=el('pg-note-ta');
+    if(ta){
+        ta.value=ls('pg_note_txt','');
+        var fs=parseInt(ls('pg_note_fs','15'));
+        ta.style.fontSize=fs+'px';
+        ta.addEventListener('input', function(){ss('pg_note_txt',ta.value);});
+    }
+    el('pg-n-inc').addEventListener('click', function(){if(!ta)return;var f=Math.min(32,(parseInt(ta.style.fontSize)||15)+2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
+    el('pg-n-dec').addEventListener('click', function(){if(!ta)return;var f=Math.max(10,(parseInt(ta.style.fontSize)||15)-2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
+
+    /* ---- PINYIN INPUT ---- */
+    var pi=el('pg-py-inp');
+    if(pi){ pi.value=ls('pg_py_txt',''); pi.addEventListener('input',renderPy); renderPy(); }
+
+    /* ---- COPY BUTTON ---- */
+    var cpBtn=el('pg-py-copy');
+    if(cpBtn){
+        cpBtn.addEventListener('click', function(){
+            var out=el('pg-py-out');
+            var txt = out && out._pyText ? out._pyText : (out ? out.innerText : '');
+            if(!txt || !txt.trim()) return;
+            try {
+                P.navigator.clipboard.writeText(txt.trim()).then(function(){
+                    cpBtn.textContent='✅ Đã copy!';
+                    cpBtn.classList.add('copied');
+                    setTimeout(function(){ cpBtn.textContent='📋 Copy Pinyin'; cpBtn.classList.remove('copied'); }, 1500);
+                });
+            } catch(e) {
+                // fallback
+                var ta2=PD.createElement('textarea');
+                ta2.value=txt.trim();
+                ta2.style.position='fixed';ta2.style.opacity='0';
+                PD.body.appendChild(ta2);
+                ta2.select();
+                PD.execCommand('copy');
+                PD.body.removeChild(ta2);
+                cpBtn.textContent='✅ Đã copy!';
+                cpBtn.classList.add('copied');
+                setTimeout(function(){ cpBtn.textContent='📋 Copy Pinyin'; cpBtn.classList.remove('copied'); }, 1500);
+            }
+        });
+    }
 })();
 </script>
-""", unsafe_allow_html=True)
+""", height=0, scrolling=False)
 
