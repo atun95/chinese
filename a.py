@@ -1076,42 +1076,42 @@ st.markdown(
 
     <!-- POPUP 1: Floating Note Container (Ghi chú gốc) -->
     <div id="teacher-floating-note" class="floating-note" style="display: none;">
-        <div id="teacher-note-header" class="floating-note-header">
+        <div id="teacher-note-header" class="floating-note-header" onmousedown="window.parent.__startDrag && window.parent.__startDrag(event, 'teacher-floating-note')">
             <div class="title-area">
                 <span>📌 Ghi chú</span>
             </div>
             <div class="control-buttons">
-                <button id="teacher-note-font-dec" title="Chữ nhỏ hơn" style="font-weight: bold; font-size: 0.85em;">A-</button>
-                <button id="teacher-note-font-inc" title="Chữ to hơn" style="font-weight: bold; font-size: 0.85em;">A+</button>
-                <button id="teacher-note-minimize" title="Thu nhỏ/Mở rộng" style="font-weight: bold; font-size: 1.1em;">−</button>
-                <button id="teacher-note-close" title="Đóng bảng" style="font-size: 1.3em;">&times;</button>
+                <button id="teacher-note-font-dec" onclick="window.parent.__changeFontSize && window.parent.__changeFontSize(-2)" title="Chữ nhỏ hơn" style="font-weight: bold; font-size: 0.85em;">A-</button>
+                <button id="teacher-note-font-inc" onclick="window.parent.__changeFontSize && window.parent.__changeFontSize(2)" title="Chữ to hơn" style="font-weight: bold; font-size: 0.85em;">A+</button>
+                <button id="teacher-note-minimize" onclick="const note = document.getElementById('teacher-floating-note'); if (note) { note.classList.toggle('minimized'); this.innerText = note.classList.contains('minimized') ? '▢' : '−'; localStorage.setItem('teacher_note_minimized', note.classList.contains('minimized') ? 'true' : 'false'); }" title="Thu nhỏ/Mở rộng" style="font-weight: bold; font-size: 1.1em;">−</button>
+                <button id="teacher-note-close" onclick="const note = document.getElementById('teacher-floating-note'); const fab = document.getElementById('teacher-note-fab'); if (note && fab) { note.style.display = 'none'; fab.style.display = 'flex'; localStorage.setItem('teacher_note_visible', 'false'); }" title="Đóng bảng" style="font-size: 1.3em;">&times;</button>
             </div>
         </div>
         <div class="floating-note-body" id="teacher-note-body">
-            <textarea id="teacher-note-textarea" class="floating-note-textarea" placeholder="Nhập ghi chú tại đây..."></textarea>
+            <textarea id="teacher-note-textarea" class="floating-note-textarea" oninput="localStorage.setItem('teacher_note_text', this.value)" placeholder="Nhập ghi chú tại đây..."></textarea>
         </div>
     </div>
-    <button id="teacher-note-fab" class="note-fab" title="Mở bảng ghi chú">📝</button>
+    <button id="teacher-note-fab" class="note-fab" onclick="const note = document.getElementById('teacher-floating-note'); const fab = document.getElementById('teacher-note-fab'); if (note && fab) { note.style.display = 'flex'; fab.style.display = 'none'; localStorage.setItem('teacher_note_visible', 'true'); }" title="Mở bảng ghi chú">📝</button>
 
     <!-- POPUP 2: Tra Pinyin Từ Vựng (2 Hàng Đơn Giản) -->
     <div id="pinyin-floating-popup" class="pinyin-popup" style="display: flex;">
-        <div id="pinyin-popup-header" class="pinyin-popup-header">
+        <div id="pinyin-popup-header" class="pinyin-popup-header" onmousedown="window.parent.__startDrag && window.parent.__startDrag(event, 'pinyin-floating-popup')">
             <div>🔤 Tra Pinyin Từ Vựng (2 Hàng)</div>
             <div>
-                <button id="pinyin-popup-min" title="Thu nhỏ/Mở rộng">−</button>
-                <button id="pinyin-popup-close" title="Đóng bảng">&times;</button>
+                <button id="pinyin-popup-min" onclick="const pNote = document.getElementById('pinyin-floating-popup'); if (pNote) { pNote.classList.toggle('minimized'); this.innerText = pNote.classList.contains('minimized') ? '▢' : '−'; localStorage.setItem('pinyin_popup_minimized', pNote.classList.contains('minimized') ? 'true' : 'false'); }" title="Thu nhỏ/Mở rộng">−</button>
+                <button id="pinyin-popup-close" onclick="const pNote = document.getElementById('pinyin-floating-popup'); const pFab = document.getElementById('pinyin-popup-fab'); if (pNote && pFab) { pNote.style.display = 'none'; pFab.style.display = 'flex'; localStorage.setItem('pinyin_popup_visible', 'false'); }" title="Đóng bảng">&times;</button>
             </div>
         </div>
         <div class="pinyin-popup-body">
             <!-- HÀNG 1: Ô NHẬP CHỮ HÁN -->
-            <textarea id="pinyin-popup-input" class="pinyin-input-row" placeholder="Hàng 1: Nhập chữ Hán vào đây (Ví dụ: 苹果 学习)..."></textarea>
+            <textarea id="pinyin-popup-input" class="pinyin-input-row" oninput="if(window.parent.__renderPinyinPopup) window.parent.__renderPinyinPopup();" placeholder="Hàng 1: Nhập chữ Hán vào đây (Ví dụ: 苹果 学习)..."></textarea>
             <!-- HÀNG 2: KẾT QUẢ PINYIN -->
             <div id="pinyin-popup-output" class="pinyin-output-row">
                 <span style="color: #94a3b8; font-style: italic; font-size: 12px;">Hàng 2: Pinyin tự động xuất hiện ở đây...</span>
             </div>
         </div>
     </div>
-    <button id="pinyin-popup-fab" class="pinyin-fab" style="display: none;" title="Mở Tra Pinyin">🔤</button>
+    <button id="pinyin-popup-fab" class="pinyin-fab" onclick="const pNote = document.getElementById('pinyin-floating-popup'); const pFab = document.getElementById('pinyin-popup-fab'); if (pNote && pFab) { pNote.style.display = 'flex'; pFab.style.display = 'none'; localStorage.setItem('pinyin_popup_visible', 'true'); }" title="Mở Tra Pinyin">🔤</button>
     """,
     unsafe_allow_html=True
 )
@@ -1120,99 +1120,163 @@ components.html(
     """
     <script>
     const storage = window.parent.localStorage;
+    const parentDoc = window.parent.document;
 
-    // Tải thư viện pinyin-pro vào cửa sổ chính cho Popup Pinyin
-    if (window.parent && typeof window.parent.pinyinPro === 'undefined') {
-        const s = window.parent.document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';
-        s.async = true;
-        s.onload = () => {
-            if (window.parent.__renderPinyinPopup) window.parent.__renderPinyinPopup();
-        };
-        window.parent.document.head.appendChild(s);
+
+    // 1. Di chuyển các phần tử ra body chính để tránh bị che khuất và có thể tương tác được
+    function moveToBody(newElId, isFab) {
+        let oldEl = parentDoc.querySelector("body > #" + newElId);
+        let newEl = parentDoc.querySelector(".stMarkdown #" + newElId);
+        if (newEl) {
+            if (oldEl) oldEl.remove();
+            parentDoc.body.appendChild(newEl);
+        }
     }
+
+    moveToBody("teacher-floating-note", false);
+    moveToBody("teacher-note-fab", true);
+    moveToBody("pinyin-floating-popup", false);
+    moveToBody("pinyin-popup-fab", true);
+
+    // 2. Định nghĩa các hàm điều khiển toàn cục trên window.parent để tránh bị ngắt kết nối khi iframe tải lại
+    window.parent.__changeFontSize = function(delta) {
+        const textarea = parentDoc.getElementById("teacher-note-textarea");
+        if (!textarea) return;
+        let size = parseInt(storage.getItem("teacher_note_fontsize")) || 16;
+        size += delta;
+        if (size >= 12 && size <= 32) {
+            textarea.style.fontSize = size + "px";
+            storage.setItem("teacher_note_fontsize", size);
+        }
+    };
+
+    window.parent.__startDrag = function(e, elementId) {
+        if (e.target.tagName === "BUTTON") return;
+        const note = parentDoc.getElementById(elementId);
+        if (!note) return;
+
+        e.preventDefault();
+        let pos3 = e.clientX;
+        let pos4 = e.clientY;
+
+        function elementDrag(ev) {
+            ev.preventDefault();
+            let pos1 = pos3 - ev.clientX;
+            let pos2 = pos4 - ev.clientY;
+            pos3 = ev.clientX;
+            pos4 = ev.clientY;
+            note.style.top = (note.offsetTop - pos2) + "px";
+            note.style.left = (note.offsetLeft - pos1) + "px";
+            note.style.right = "auto";
+            
+            if (elementId === "teacher-floating-note") {
+                storage.setItem("teacher_note_top", note.style.top);
+                storage.setItem("teacher_note_left", note.style.left);
+            } else {
+                storage.setItem("pinyin_popup_top", note.style.top);
+                storage.setItem("pinyin_popup_left", note.style.left);
+            }
+        }
+
+        function closeDragElement() {
+            parentDoc.removeEventListener("mouseup", closeDragElement);
+            parentDoc.removeEventListener("mousemove", elementDrag);
+        }
+
+        parentDoc.addEventListener("mouseup", closeDragElement);
+        parentDoc.addEventListener("mousemove", elementDrag);
+    };
 
     const offlineDict = {
         '我': 'wǒ', '你': 'nǐ', '他': 'tā', '她': 'tā', '它': 'tā', '们': 'men', '好': 'hǎo', '是': 'shì',
-        '在': 'zài', '不': 'bù', '有': 'yǒu', '这': 'zhè', '那': 'nà', '个': 'gè', '上': 'shàng', '下': 'xià',
+        '在': 'zài', '不': 'bù', '有': 'yǒu', '这': 'zhè', '那': 'nà', '個': 'gè', '上': 'shàng', '下': 'xià',
         '人': 'rén', '大': 'dà', '小': 'xiǎo', '中': 'zhōng', '国': 'guó', '年': 'nián', '月': 'yuè', '日': 'rì',
         '老': 'lǎo', '师': 'shī', '学': 'xué', '校': 'xiào', '生': 'shēng', '同': 'tóng', '朋': 'péng', '友': 'yǒu',
         '家': 'jiā', '爸': 'bà', '妈': 'mā', '哥': 'gē', '姐': 'jiě', '弟': 'dì', '妹': 'mèi', '吃': 'chī',
         '喝': 'hē', '茶': 'chá', '水': 'shuǐ', '菜': 'cài', '饭': 'fàn', '果': 'guǒ', '苹': 'píng', '猫': 'māo',
         '狗': 'gǒu', '爱': 'ài', '喜': 'xǐ', '欢': 'huān', '想': 'xiǎng', '要': 'yào', '去': 'qù', '来': 'lái',
-        '买': 'mǎi', '卖': 'mài', '看': 'kàn', '听': 'tīng', '说': 'shuō', '读': 'dú', '写': 'xiě', '字': 'zì',
+        '买': 'mǎi', '卖': 'mài', '看': 'kàn', '听': 'tīng', '说': 'shuō', 'đọc': 'dú', 'viết': 'xiě', '字': 'zì',
         '汉': 'hàn', '语': 'yǔ', '英': 'yīng', '书': 'shū', '电': 'diàn', '脑': 'nǎo', '视': 'shì', '话': 'huà',
-        '车': 'chē', '钱': 'qián', '块': 'kuài', '百': 'bǎi', '千': 'qiān', '一': 'yī', '二': 'èr', '三': 'sān',
+        '车': 'chē', 'tiền': 'qián', 'đồng': 'kuài', 'trăm': 'bǎi', 'nghìn': 'qiān', '一': 'yī', '二': 'èr', '三': 'sān',
         '四': 'sì', '五': 'wǔ', '六': 'liù', '七': 'qī', '八': 'bā', '九': 'jiǔ', '十': 'shí', '谢': 'xiè',
-        '再': 'zài', '见': 'jiàn', '对': 'duì', '起': 'qǐ', '没': 'méi', '关': 'guān', '系': 'xì', '多': 'duō',
-        '少': 'shǎo', '冷': 'lěng', '热': 'rè', '雨': 'yǔ', '高': 'gāo', '兴': 'xìng', '坐': 'zuò', '请': 'qǐng'
+        '再': 'zài', '见': 'jiàn', 'đối': 'duì', 'khởi': 'qǐ', 'một': 'yī', 'quan': 'guān', 'hệ': 'xì', 'đa': 'duō',
+        'thiểu': 'shǎo', 'lãnh': 'lěng', 'nhiệt': 'rè', 'vũ': 'yǔ', 'cao': 'gāo', 'hưng': 'xìng', 'tọa': 'zuò', 'thỉnh': 'qǐng'
     };
 
-    // --- POPUP 1: LOGIC KHÔI PHỤC BẢNG GHI CHÚ GIÁO VIÊN GỐC ---
-    function initPopup1() {
-        const parentDoc = window.parent.document;
+    window.parent.__renderPinyinPopup = function() {
+        const pInput = parentDoc.getElementById("pinyin-popup-input");
+        const pOutput = parentDoc.getElementById("pinyin-popup-output");
+        if (!pInput || !pOutput) return;
+
+        const txt = pInput.value;
+        storage.setItem("pinyin_popup_text", txt);
+
+        if (!txt.trim()) {
+            pOutput.innerHTML = `<span style="color: #94a3b8; font-style: italic; font-size: 12px;">Hàng 2: Pinyin tự động xuất hiện ở đây...</span>`;
+            return;
+        }
+
+        const pPro = window.parent.pinyinPro;
+        let html = '';
+        for (let i = 0; i < txt.length; i++) {
+            const ch = txt[i];
+            if (/[\u4e00-\u9fa5]/.test(ch)) {
+                let py = '';
+                if (pPro && pPro.pinyin) {
+                    py = pPro.pinyin(ch, { toneType: 'symbol', type: 'array' })[0] || offlineDict[ch] || '';
+                } else {
+                    py = offlineDict[ch] || '';
+                }
+                html += `<ruby style="ruby-position:over; margin:0 2px; font-weight:bold; color:#0f172a;"><rb>${ch}</rb><rt style="font-size:11px; color:#0284c7;">${py}</rt></ruby>`;
+            } else if (ch === '\n') {
+                html += '<br>';
+            } else {
+                html += `<span>${ch.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</span>`;
+            }
+        }
+        pOutput.innerHTML = html;
+    };
+
+    // Tải pinyin-pro CDN
+    if (typeof window.parent.pinyinPro === 'undefined') {
+        const s = parentDoc.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';
+        s.async = true;
+        s.onload = () => {
+            if (window.parent.__renderPinyinPopup) window.parent.__renderPinyinPopup();
+        };
+        parentDoc.head.appendChild(s);
+    }
+
+    // 3. Khôi phục các giá trị đã lưu
+    function applySavedProperties() {
         const note = parentDoc.getElementById("teacher-floating-note");
-        const header = parentDoc.getElementById("teacher-note-header");
-        const closeBtn = parentDoc.getElementById("teacher-note-close");
-        const minBtn = parentDoc.getElementById("teacher-note-minimize");
-        const fontIncBtn = parentDoc.getElementById("teacher-note-font-inc");
-        const fontDecBtn = parentDoc.getElementById("teacher-note-font-dec");
-        const textarea = parentDoc.getElementById("teacher-note-textarea");
         const fab = parentDoc.getElementById("teacher-note-fab");
+        const textarea = parentDoc.getElementById("teacher-note-textarea");
 
-        if (note && header && closeBtn && minBtn && fontIncBtn && fontDecBtn && textarea && fab) {
-            const savedText = storage.getItem("teacher_note_text") || "";
-            textarea.value = savedText;
-            textarea.oninput = function() {
-                storage.setItem("teacher_note_text", textarea.value);
-            };
+        const pNote = parentDoc.getElementById("pinyin-floating-popup");
+        const pFab = parentDoc.getElementById("pinyin-popup-fab");
+        const pInput = parentDoc.getElementById("pinyin-popup-input");
 
-            let currentFontSize = parseInt(storage.getItem("teacher_note_fontsize")) || 16;
+        if (note && fab && textarea && pNote && pFab && pInput) {
+            // Popup 1
+            textarea.value = storage.getItem("teacher_note_text") || "";
+            const currentFontSize = parseInt(storage.getItem("teacher_note_fontsize")) || 16;
             textarea.style.fontSize = currentFontSize + "px";
 
-            fontIncBtn.onclick = function(e) {
-                e.stopPropagation();
-                if (currentFontSize < 32) {
-                    currentFontSize += 2;
-                    textarea.style.fontSize = currentFontSize + "px";
-                    storage.setItem("teacher_note_fontsize", currentFontSize);
-                }
-            };
-            fontDecBtn.onclick = function(e) {
-                e.stopPropagation();
-                if (currentFontSize > 12) {
-                    currentFontSize -= 2;
-                    textarea.style.fontSize = currentFontSize + "px";
-                    storage.setItem("teacher_note_fontsize", currentFontSize);
-                }
-            };
-
             let isMinimized = storage.getItem("teacher_note_minimized") === "true";
-            if (isMinimized) {
-                note.classList.add("minimized");
-                minBtn.innerText = "▢";
-            } else {
-                note.classList.remove("minimized");
-                minBtn.innerText = "−";
-            }
-
-            minBtn.onclick = function(e) {
-                e.stopPropagation();
-                isMinimized = !isMinimized;
+            const minBtn = parentDoc.getElementById("teacher-note-minimize");
+            if (minBtn) {
                 if (isMinimized) {
                     note.classList.add("minimized");
                     minBtn.innerText = "▢";
-                    storage.setItem("teacher_note_minimized", "true");
                 } else {
                     note.classList.remove("minimized");
                     minBtn.innerText = "−";
-                    storage.setItem("teacher_note_minimized", "false");
-                    let savedHeight = storage.getItem("teacher_note_height");
-                    if (savedHeight) note.style.height = savedHeight;
                 }
-            };
+            }
 
-            let isVisible = storage.getItem("teacher_note_visible") === "true";
+            let isVisible = storage.getItem("teacher_note_visible") !== "false";
             if (isVisible) {
                 note.style.display = "flex";
                 fab.style.display = "none";
@@ -1221,68 +1285,56 @@ components.html(
                 fab.style.display = "flex";
             }
 
-            closeBtn.onclick = function(e) {
-                e.stopPropagation();
-                note.style.display = "none";
-                fab.style.display = "flex";
-                storage.setItem("teacher_note_visible", "false");
-            };
-            fab.onclick = function(e) {
-                e.stopPropagation();
-                note.style.display = "flex";
-                fab.style.display = "none";
-                storage.setItem("teacher_note_visible", "true");
-            };
-
             let savedTop = storage.getItem("teacher_note_top");
             let savedLeft = storage.getItem("teacher_note_left");
-            let savedWidth = storage.getItem("teacher_note_width");
-            let savedHeight = storage.getItem("teacher_note_height");
-
             if (savedTop) note.style.top = savedTop;
             if (savedLeft) {
                 note.style.left = savedLeft;
                 note.style.right = "auto";
             }
-            if (savedWidth) note.style.width = savedWidth;
-            if (savedHeight && !isMinimized) note.style.height = savedHeight;
 
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-            header.onmousedown = dragMouseDown;
+            // Popup 2
+            pInput.value = storage.getItem("pinyin_popup_text") || "";
+            window.parent.__renderPinyinPopup();
 
-            function dragMouseDown(e) {
-                e = e || window.event;
-                if (e.target.tagName === "BUTTON") return;
-                e.preventDefault();
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                parentDoc.onmouseup = closeDragElement;
-                parentDoc.onmousemove = elementDrag;
-            }
-            function elementDrag(e) {
-                e = e || window.event;
-                e.preventDefault();
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                note.style.top = (note.offsetTop - pos2) + "px";
-                note.style.left = (note.offsetLeft - pos1) + "px";
-                note.style.right = "auto";
-
-                storage.setItem("teacher_note_top", note.style.top);
-                storage.setItem("teacher_note_left", note.style.left);
+            let isPMin = storage.getItem("pinyin_popup_minimized") === "true";
+            const pMinBtn = parentDoc.getElementById("pinyin-popup-min");
+            if (pMinBtn) {
+                if (isPMin) {
+                    pNote.classList.add("minimized");
+                    pMinBtn.innerText = "▢";
+                } else {
+                    pNote.classList.remove("minimized");
+                    pMinBtn.innerText = "−";
+                }
             }
 
-            function closeDragElement() {
-                parentDoc.onmouseup = null;
-                parentDoc.onmousemove = null;
+            let isPVis = storage.getItem("pinyin_popup_visible") !== "false";
+            if (isPVis) {
+                pNote.style.display = "flex";
+                pFab.style.display = "none";
+            } else {
+                pNote.style.display = "none";
+                pFab.style.display = "flex";
             }
 
-            // 7. Xử lý co giãn (Resize) bằng ResizeObserver
+            let savedPTop = storage.getItem("pinyin_popup_top");
+            let savedPLeft = storage.getItem("pinyin_popup_left");
+            if (savedPTop) pNote.style.top = savedPTop;
+            if (savedPLeft) {
+                pNote.style.left = savedPLeft;
+                pNote.style.right = "auto";
+            }
+
+            // Đăng ký ResizeObserver cho Popup 1
             if (window.parent.teacherNoteResizeObserver) {
                 window.parent.teacherNoteResizeObserver.disconnect();
             }
+            let savedWidth = storage.getItem("teacher_note_width");
+            let savedHeight = storage.getItem("teacher_note_height");
+            if (savedWidth) note.style.width = savedWidth;
+            if (savedHeight && !isMinimized) note.style.height = savedHeight;
+
             window.parent.teacherNoteResizeObserver = new window.parent.ResizeObserver(entries => {
                 for (let entry of entries) {
                     if (!note.classList.contains("minimized")) {
@@ -1300,15 +1352,16 @@ components.html(
 
     const intervalId = setInterval(() => {
         try {
-            if (initNote()) {
+            if (applySavedProperties()) {
                 clearInterval(intervalId);
             }
         } catch (e) {
-            console.error("Teacher note init error:", e);
+            console.error("Init error:", e);
         }
     }, 100);
     </script>
     """,
     height=0,
 )
+
 
