@@ -829,355 +829,240 @@ st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")
 
 # --- HIỂN THỊ 2 POPUP NỔI ĐỘC LẬP: (1) GHI CHÚ GIÁO VIÊN & (2) TRA PINYIN TỪ VỰNG ---
-components.html("""
-<!DOCTYPE html>
-<html>
-<head>
+st.markdown("""
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: transparent; overflow: hidden; }
-
-/* FABs */
-#fab-note, #fab-pinyin {
-    position: fixed;
-    width: 50px; height: 50px;
+#pg-fab-note, #pg-fab-pinyin {
+    position: fixed !important;
+    width: 52px; height: 52px;
     border-radius: 50%;
     border: none; outline: none;
     cursor: pointer;
     color: white;
     font-size: 22px;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 2147483647;
+    display: flex !important; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
     transition: transform 0.2s;
 }
-#fab-note { bottom: 20px; right: 20px; background: linear-gradient(135deg, #f43f5e, #e11d48); }
-#fab-pinyin { bottom: 80px; right: 20px; background: linear-gradient(135deg, #0284c7, #0369a1); }
-#fab-note:hover, #fab-pinyin:hover { transform: scale(1.1); }
+#pg-fab-note  { bottom: 24px; right: 24px; background: linear-gradient(135deg,#f43f5e,#e11d48); }
+#pg-fab-pinyin{ bottom: 84px; right: 24px; background: linear-gradient(135deg,#0284c7,#0369a1); }
+#pg-fab-note:hover,#pg-fab-pinyin:hover { transform:scale(1.12); }
 
-/* Popups */
-#popup-note, #popup-pinyin {
-    position: fixed;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-    display: flex; flex-direction: column;
+#pg-popup-note, #pg-popup-pinyin {
+    position: fixed !important;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.22);
+    display: flex !important; flex-direction: column;
     overflow: hidden;
-    z-index: 2147483646;
+    z-index: 2147483646 !important;
+    pointer-events: auto !important;
     resize: both;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: height 0.2s ease;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
 }
-#popup-note {
-    top: 80px; right: 20px;
+#pg-popup-note {
+    top: 80px; right: 24px;
     width: 340px; height: 260px;
     min-width: 240px; min-height: 44px;
     border: 2px solid #e11d48;
     background: #fff;
 }
-#popup-pinyin {
-    bottom: 140px; right: 20px;
+#pg-popup-pinyin {
+    bottom: 148px; right: 24px;
     width: 340px; height: 220px;
     min-width: 260px; min-height: 44px;
     border: 2px solid #0284c7;
     background: #fff;
 }
-#popup-note.minimized, #popup-pinyin.minimized {
+#pg-popup-note.pg-minimized,#pg-popup-pinyin.pg-minimized {
     height: 44px !important;
-    resize: none;
-    overflow: hidden;
+    resize: none !important;
 }
-
-/* Headers */
-.popup-header {
+.pg-popup-hdr {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 10px;
-    height: 44px; min-height: 44px;
-    cursor: move;
-    user-select: none;
-    flex-shrink: 0;
-    color: white; font-weight: 700; font-size: 13px;
+    padding: 0 10px; height: 44px; min-height: 44px;
+    cursor: move; user-select: none; flex-shrink: 0;
+    color: #fff; font-weight: 700; font-size: 13px;
 }
-#popup-note .popup-header { background: #e11d48; }
-#popup-pinyin .popup-header { background: linear-gradient(135deg, #0284c7, #0369a1); }
-
-.popup-header .btns { display: flex; gap: 4px; }
-.popup-header button {
-    background: rgba(255,255,255,0.15);
-    border: none; color: white;
-    width: 26px; height: 26px;
-    border-radius: 5px;
-    cursor: pointer; font-size: 14px; font-weight: bold;
+#pg-popup-note  .pg-popup-hdr { background: #e11d48; }
+#pg-popup-pinyin .pg-popup-hdr { background: linear-gradient(135deg,#0284c7,#0369a1); }
+.pg-popup-hdr .pg-btns { display:flex; gap:4px; }
+.pg-popup-hdr button {
+    background: rgba(255,255,255,0.18);
+    border: none; color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 6px; cursor: pointer;
+    font-size: 13px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.15s;
 }
-.popup-header button:hover { background: rgba(255,255,255,0.35); }
-
-/* Body */
-.popup-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-
-/* Ghi chú textarea */
-#note-textarea {
-    flex: 1; width: 100%; height: 100%;
-    border: none; outline: none; resize: none;
-    padding: 10px 12px;
-    font-size: 15px; line-height: 1.6; color: #1e293b;
-    font-family: inherit; background: #fff;
+.pg-popup-hdr button:hover { background: rgba(255,255,255,0.38); }
+.pg-popup-body { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+#pg-note-ta {
+    flex:1; width:100%; height:100%;
+    border:none; outline:none; resize:none;
+    padding:10px 12px; font-size:15px; line-height:1.6;
+    color:#1e293b; font-family:inherit; background:#fff;
 }
-
-/* Pinyin */
-.pinyin-body { flex: 1; display: flex; flex-direction: column; padding: 8px; gap: 6px; overflow: hidden; }
-#pinyin-input {
-    width: 100%; height: 58px;
-    border: 1.5px solid #cbd5e1; border-radius: 7px;
-    padding: 7px 10px; font-size: 14px; font-family: inherit;
-    outline: none; resize: none;
-    transition: border-color 0.15s;
+.pg-py-body { flex:1; display:flex; flex-direction:column; padding:8px; gap:6px; overflow:hidden; }
+#pg-py-inp {
+    width:100%; height:58px;
+    border:1.5px solid #cbd5e1; border-radius:7px;
+    padding:7px 10px; font-size:14px; font-family:inherit;
+    outline:none; resize:none; box-sizing:border-box;
+    transition:border-color 0.15s;
 }
-#pinyin-input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,0.12); }
-#pinyin-output {
-    flex: 1; overflow-y: auto;
-    background: #f8fafc; border: 1.5px solid #e2e8f0;
-    border-radius: 7px; padding: 6px 10px;
-    line-height: 2.2; word-break: break-word;
+#pg-py-inp:focus { border-color:#0284c7; box-shadow:0 0 0 3px rgba(2,132,199,0.12); }
+#pg-py-out {
+    flex:1; overflow-y:auto;
+    background:#f8fafc; border:1.5px solid #e2e8f0;
+    border-radius:7px; padding:6px 10px;
+    line-height:2.4; word-break:break-word;
 }
-#pinyin-output ruby { margin: 0 2px; }
-#pinyin-output rb { font-size: 18px; font-weight: 700; color: #0f172a; }
-#pinyin-output rt { font-size: 11px; font-weight: 600; color: #0284c7; }
+#pg-py-out ruby { margin:0 2px; }
+#pg-py-out rb { font-size:18px; font-weight:700; color:#0f172a; }
+#pg-py-out rt { font-size:11px; font-weight:600; color:#0284c7; }
 </style>
-</head>
-<body>
 
-<!-- FABs -->
-<button id="fab-note" title="Mở bảng ghi chú">📝</button>
-<button id="fab-pinyin" title="Mở tra Pinyin">🔤</button>
+<button id="pg-fab-note" title="Mở bảng ghi chú">📝</button>
+<button id="pg-fab-pinyin" title="Mở tra Pinyin">🔤</button>
 
-<!-- POPUP 1: Ghi chú giáo viên -->
-<div id="popup-note">
-    <div class="popup-header" id="hdr-note">
+<div id="pg-popup-note">
+    <div class="pg-popup-hdr" id="pg-hdr-note">
         <span>📌 Ghi chú giáo viên</span>
-        <div class="btns">
-            <button id="btn-note-dec" title="Chữ nhỏ hơn">A-</button>
-            <button id="btn-note-inc" title="Chữ to hơn">A+</button>
-            <button id="btn-note-min" title="Thu nhỏ">−</button>
-            <button id="btn-note-close" title="Đóng">✕</button>
+        <div class="pg-btns">
+            <button id="pg-n-dec" title="Chữ nhỏ">A-</button>
+            <button id="pg-n-inc" title="Chữ to">A+</button>
+            <button id="pg-n-min" title="Thu nhỏ">−</button>
+            <button id="pg-n-cls" title="Đóng">✕</button>
         </div>
     </div>
-    <div class="popup-body">
-        <textarea id="note-textarea" placeholder="Nhập ghi chú tại đây..."></textarea>
+    <div class="pg-popup-body">
+        <textarea id="pg-note-ta" placeholder="Nhập ghi chú tại đây..."></textarea>
     </div>
 </div>
 
-<!-- POPUP 2: Tra Pinyin -->
-<div id="popup-pinyin">
-    <div class="popup-header" id="hdr-pinyin">
+<div id="pg-popup-pinyin">
+    <div class="pg-popup-hdr" id="pg-hdr-pinyin">
         <span>🔤 Tra Pinyin Từ Vựng</span>
-        <div class="btns">
-            <button id="btn-pinyin-min" title="Thu nhỏ">−</button>
-            <button id="btn-pinyin-close" title="Đóng">✕</button>
+        <div class="pg-btns">
+            <button id="pg-py-min" title="Thu nhỏ">−</button>
+            <button id="pg-py-cls" title="Đóng">✕</button>
         </div>
     </div>
-    <div class="popup-body">
-        <div class="pinyin-body">
-            <textarea id="pinyin-input" placeholder="Nhập chữ Hán... (VD: 苹果 学习 你好)"></textarea>
-            <div id="pinyin-output"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin sẽ hiện ở đây khi bạn gõ chữ Hán...</span></div>
+    <div class="pg-popup-body">
+        <div class="pg-py-body">
+            <textarea id="pg-py-inp" placeholder="Nhập chữ Hán... (VD: 苹果 学习 你好)"></textarea>
+            <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi bạn gõ chữ Hán...</span></div>
         </div>
     </div>
 </div>
 
 <script>
-(function() {
-    // ===== STORAGE HELPERS =====
-    function load(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v; } catch(e) { return def; } }
-    function save(k, v) { try { localStorage.setItem(k, v); } catch(e) {} }
+(function(){
+if(window.__pgPopupInit) return;
+window.__pgPopupInit = true;
 
-    // ===== OFFLINE PINYIN DICT =====
-    var dict = {
-        '我':'wǒ','你':'nǐ','他':'tā','她':'tā','它':'tā','们':'men','好':'hǎo','是':'shì','在':'zài','不':'bù',
-        '有':'yǒu','这':'zhè','那':'nà','个':'gè','上':'shàng','下':'xià','人':'rén','大':'dà','小':'xiǎo','中':'zhōng',
-        '国':'guó','年':'nián','月':'yuè','日':'rì','老':'lǎo','师':'shī','学':'xué','校':'xiào','生':'shēng','同':'tóng',
-        '朋':'péng','友':'yǒu','家':'jiā','爸':'bà','妈':'mā','哥':'gē','姐':'jiě','弟':'dì','妹':'mèi','吃':'chī',
-        '喝':'hē','茶':'chá','水':'shuǐ','菜':'cài','饭':'fàn','果':'guǒ','苹':'píng','猫':'māo','狗':'gǒu','爱':'ài',
-        '喜':'xǐ','欢':'huān','想':'xiǎng','要':'yào','去':'qù','来':'lái','买':'mǎi','卖':'mài','看':'kàn','听':'tīng',
-        '说':'shuō','读':'dú','写':'xiě','字':'zì','汉':'hàn','语':'yǔ','英':'yīng','书':'shū','电':'diàn','脑':'nǎo',
-        '视':'shì','话':'huà','车':'chē','钱':'qián','块':'kuài','百':'bǎi','千':'qiān','一':'yī','二':'èr','三':'sān',
-        '四':'sì','五':'wǔ','六':'liù','七':'qī','八':'bā','九':'jiǔ','十':'shí','谢':'xiè','再':'zài','见':'jiàn',
-        '对':'duì','起':'qǐ','没':'méi','关':'guān','系':'xì','多':'duō','少':'shǎo','冷':'lěng','热':'rè','雨':'yǔ',
-        '高':'gāo','兴':'xìng','坐':'zuò','请':'qǐng','作':'zuò','业':'yè','桌':'zhuō','椅':'yǐ','衣':'yī','服':'fu',
-        '号':'hào','时':'shí','分':'fēn','点':'diǎn','天':'tiān','名':'míng','字':'zì','岁':'suì','块':'kuài',
-        '知':'zhī','道':'dào','很':'hěn','都':'dōu','也':'yě','和':'hé','了':'le','的':'de','地':'de','得':'de',
-        '什':'shén','么':'me','哪':'nǎ','呢':'ne','吗':'ma','啊':'a','吧':'ba','哦':'ó','嗯':'ń','哈':'hā'
-    };
+var D = {};
+['pg-fab-note','pg-fab-pinyin','pg-popup-note','pg-popup-pinyin',
+ 'pg-hdr-note','pg-hdr-pinyin','pg-note-ta','pg-py-inp','pg-py-out',
+ 'pg-n-dec','pg-n-inc','pg-n-min','pg-n-cls','pg-py-min','pg-py-cls'
+].forEach(function(id){ D[id] = document.getElementById(id); });
 
-    // ===== LOAD PINYIN-PRO CDN =====
-    var pinyinProLoaded = false;
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';
-    s.onload = function() { pinyinProLoaded = true; renderPinyin(); };
-    s.onerror = function() { pinyinProLoaded = false; };
-    document.head.appendChild(s);
+function ls(k,d){ try{var v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;} }
+function ss(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
 
-    function getPinyin(ch) {
-        if (pinyinProLoaded && window.pinyinPro && window.pinyinPro.pinyin) {
-            try {
-                var r = window.pinyinPro.pinyin(ch, { toneType: 'symbol', type: 'array' });
-                if (r && r[0]) return r[0];
-            } catch(e) {}
-        }
-        return dict[ch] || '';
+/* move all to body so position:fixed works relative to viewport */
+['pg-fab-note','pg-fab-pinyin','pg-popup-note','pg-popup-pinyin'].forEach(function(id){
+    var el=D[id]; if(el && el.parentNode!==document.body) document.body.appendChild(el);
+});
+
+/* ---- PINYIN ---- */
+var pyDict={'我':'wǒ','你':'nǐ','他':'tā','她':'tā','它':'tā','们':'men','好':'hǎo','是':'shì','在':'zài','不':'bù','有':'yǒu','这':'zhè','那':'nà','个':'gè','上':'shàng','下':'xià','人':'rén','大':'dà','小':'xiǎo','中':'zhōng','国':'guó','年':'nián','月':'yuè','日':'rì','老':'lǎo','师':'shī','学':'xué','校':'xiào','生':'shēng','同':'tóng','朋':'péng','友':'yǒu','家':'jiā','爸':'bà','妈':'mā','哥':'gē','姐':'jiě','弟':'dì','妹':'mèi','吃':'chī','喝':'hē','茶':'chá','水':'shuǐ','菜':'cài','饭':'fàn','果':'guǒ','苹':'píng','猫':'māo','狗':'gǒu','爱':'ài','喜':'xǐ','欢':'huān','想':'xiǎng','要':'yào','去':'qù','来':'lái','买':'mǎi','卖':'mài','看':'kàn','听':'tīng','说':'shuō','读':'dú','写':'xiě','字':'zì','汉':'hàn','语':'yǔ','英':'yīng','书':'shū','电':'diàn','脑':'nǎo','视':'shì','话':'huà','车':'chē','钱':'qián','块':'kuài','百':'bǎi','千':'qiān','一':'yī','二':'èr','三':'sān','四':'sì','五':'wǔ','六':'liù','七':'qī','八':'bā','九':'jiǔ','十':'shí','谢':'xiè','再':'zài','见':'jiàn','对':'duì','起':'qǐ','没':'méi','关':'guān','系':'xì','多':'duō','少':'shǎo','冷':'lěng','热':'rè','雨':'yǔ','高':'gāo','兴':'xìng','坐':'zuò','请':'qǐng','作':'zuò','业':'yè','桌':'zhuō','椅':'yǐ','衣':'yī','服':'fu','号':'hào','时':'shí','分':'fēn','点':'diǎn','天':'tiān','什':'shén','么':'me','哪':'nǎ','呢':'ne','吗':'ma','的':'de','了':'le','和':'hé','也':'yě','都':'dōu','很':'hěn','知':'zhī','道':'dào','名':'míng','岁':'suì'};
+
+var pyLoaded=false;
+(function(){var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.6/dist/index.js';s.onload=function(){pyLoaded=true;renderPy();};document.head.appendChild(s);})();
+
+function getpy(ch){
+    if(pyLoaded&&window.pinyinPro&&window.pinyinPro.pinyin){
+        try{var r=window.pinyinPro.pinyin(ch,{toneType:'symbol',type:'array'});if(r&&r[0])return r[0];}catch(e){}
     }
+    return pyDict[ch]||'';
+}
 
-    function renderPinyin() {
-        var inp = document.getElementById('pinyin-input');
-        var out = document.getElementById('pinyin-output');
-        if (!inp || !out) return;
-        var txt = inp.value;
-        save('pinyin_text', txt);
-        if (!txt.trim()) {
-            out.innerHTML = '<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin sẽ hiện ở đây khi bạn gõ chữ Hán...</span>';
-            return;
-        }
-        var html = '';
-        for (var i = 0; i < txt.length; i++) {
-            var ch = txt[i];
-            if (/[\u4e00-\u9fa5]/.test(ch)) {
-                var py = getPinyin(ch);
-                html += '<ruby><rb>' + ch + '</rb><rt>' + py + '</rt></ruby>';
-            } else if (ch === '\n') {
-                html += '<br>';
-            } else if (ch === ' ') {
-                html += '&nbsp;';
-            } else {
-                html += '<span style="font-size:16px;color:#475569;">' + ch.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>';
-            }
-        }
-        out.innerHTML = html;
+function renderPy(){
+    var inp=D['pg-py-inp'],out=D['pg-py-out'];
+    if(!inp||!out)return;
+    var txt=inp.value; ss('pg_py_txt',txt);
+    if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin hiện ở đây khi bạn gõ chữ Hán...</span>';return;}
+    var h='';
+    for(var i=0;i<txt.length;i++){
+        var c=txt[i];
+        if(c>='\u4e00'&&c<='\u9fa5'){
+            h+='<ruby><rb>'+c+'</rb><rt>'+getpy(c)+'</rt></ruby>';
+        }else if(c=='\n'){h+='<br>';}}
+        else if(c==' '){h+='&nbsp;';}
+        else{h+='<span style="font-size:15px;color:#475569;">'+c.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';}
     }
+    out.innerHTML=h;
+}
 
-    // ===== DRAG =====
-    function makeDraggable(hdr, popup) {
-        var isDragging = false, ox, oy, sx, sy;
-        hdr.addEventListener('mousedown', function(e) {
-            if (e.target.tagName === 'BUTTON') return;
-            isDragging = true;
-            var r = popup.getBoundingClientRect();
-            ox = e.clientX - r.left;
-            oy = e.clientY - r.top;
-            e.preventDefault();
-        });
-        document.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            var x = e.clientX - ox;
-            var y = e.clientY - oy;
-            x = Math.max(0, Math.min(window.innerWidth - popup.offsetWidth, x));
-            y = Math.max(0, Math.min(window.innerHeight - popup.offsetHeight, y));
-            popup.style.left = x + 'px';
-            popup.style.top = y + 'px';
-            popup.style.right = 'auto';
-            popup.style.bottom = 'auto';
-            save(popup.id + '_pos', JSON.stringify({x: x, y: y}));
-        });
-        document.addEventListener('mouseup', function() { isDragging = false; });
-    }
-
-    // ===== POPUP CONTROLS =====
-    function setupPopup(popupId, fabId, minBtnId, closeBtnId) {
-        var popup = document.getElementById(popupId);
-        var fab = document.getElementById(fabId);
-        var minBtn = document.getElementById(minBtnId);
-        var closeBtn = document.getElementById(closeBtnId);
-        if (!popup || !fab) return;
-
-        // Restore visibility
-        var vis = load(popupId + '_vis', 'true');
-        popup.style.display = vis === 'false' ? 'none' : 'flex';
-        fab.style.display = vis === 'false' ? 'flex' : 'none';
-
-        // Restore minimized
-        var minimized = load(popupId + '_min', 'false') === 'true';
-        if (minimized) { popup.classList.add('minimized'); if (minBtn) minBtn.textContent = '▢'; }
-
-        // Restore position
-        var pos = load(popupId + '_pos', null);
-        if (pos) {
-            try {
-                var p = JSON.parse(pos);
-                popup.style.left = p.x + 'px';
-                popup.style.top = p.y + 'px';
-                popup.style.right = 'auto';
-                popup.style.bottom = 'auto';
-            } catch(e) {}
-        }
-
-        fab.addEventListener('click', function() {
-            popup.style.display = 'flex';
-            fab.style.display = 'none';
-            save(popupId + '_vis', 'true');
-        });
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
-                popup.style.display = 'none';
-                fab.style.display = 'flex';
-                save(popupId + '_vis', 'false');
-            });
-        }
-
-        if (minBtn) {
-            minBtn.addEventListener('click', function() {
-                var isMin = popup.classList.toggle('minimized');
-                minBtn.textContent = isMin ? '▢' : '−';
-                save(popupId + '_min', isMin ? 'true' : 'false');
-            });
-        }
-    }
-
-    // ===== INIT NOTE POPUP =====
-    setupPopup('popup-note', 'fab-note', 'btn-note-min', 'btn-note-close');
-    makeDraggable(document.getElementById('hdr-note'), document.getElementById('popup-note'));
-
-    var ta = document.getElementById('note-textarea');
-    if (ta) {
-        ta.value = load('note_text', '');
-        var fs = parseInt(load('note_fs', '15'));
-        ta.style.fontSize = fs + 'px';
-        ta.addEventListener('input', function() { save('note_text', ta.value); });
-    }
-
-    document.getElementById('btn-note-inc').addEventListener('click', function() {
-        if (!ta) return;
-        var f = Math.min(32, (parseInt(ta.style.fontSize) || 15) + 2);
-        ta.style.fontSize = f + 'px'; save('note_fs', f);
+/* ---- DRAG ---- */
+function drag(hdr,popup){
+    var on=false,ox=0,oy=0;
+    hdr.addEventListener('mousedown',function(e){
+        if(e.target.tagName==='BUTTON')return;
+        on=true; var r=popup.getBoundingClientRect();
+        ox=e.clientX-r.left; oy=e.clientY-r.top; e.preventDefault();
     });
-    document.getElementById('btn-note-dec').addEventListener('click', function() {
-        if (!ta) return;
-        var f = Math.max(10, (parseInt(ta.style.fontSize) || 15) - 2);
-        ta.style.fontSize = f + 'px'; save('note_fs', f);
+    document.addEventListener('mousemove',function(e){
+        if(!on)return;
+        var x=Math.max(0,Math.min(window.innerWidth-popup.offsetWidth,e.clientX-ox));
+        var y=Math.max(0,Math.min(window.innerHeight-popup.offsetHeight,e.clientY-oy));
+        popup.style.cssText+='left:'+x+'px;top:'+y+'px;right:auto;bottom:auto;';
+        ss(popup.id+'_pos',JSON.stringify({x:x,y:y}));
     });
+    document.addEventListener('mouseup',function(){on=false;});
+}
 
-    // ===== INIT PINYIN POPUP =====
-    setupPopup('popup-pinyin', 'fab-pinyin', 'btn-pinyin-min', 'btn-pinyin-close');
-    makeDraggable(document.getElementById('hdr-pinyin'), document.getElementById('popup-pinyin'));
+/* ---- SETUP POPUP ---- */
+function setup(pId,fId,mId,cId){
+    var p=D[pId],f=D[fId],m=D[mId],c=D[cId];
+    if(!p||!f)return;
+    /* restore pos */
+    var pos=ls(pId+'_pos',null);
+    if(pos){try{var j=JSON.parse(pos);p.style.left=j.x+'px';p.style.top=j.y+'px';p.style.right='auto';p.style.bottom='auto';}catch(e){}}
+    /* restore vis */
+    if(ls(pId+'_vis','1')==='0'){p.style.display='none';f.style.display='flex';}
+    else{p.style.display='flex';f.style.display='none';}
+    /* restore min */
+    if(ls(pId+'_min','0')==='1'){p.classList.add('pg-minimized');if(m)m.textContent='▢';}
+    /* events */
+    f.onclick=function(){p.style.display='flex';f.style.display='none';ss(pId+'_vis','1');};
+    if(c)c.onclick=function(){p.style.display='none';f.style.display='flex';ss(pId+'_vis','0');};
+    if(m)m.onclick=function(){var mn=p.classList.toggle('pg-minimized');m.textContent=mn?'▢':'−';ss(pId+'_min',mn?'1':'0');};
+}
 
-    var pi = document.getElementById('pinyin-input');
-    if (pi) {
-        pi.value = load('pinyin_text', '');
-        pi.addEventListener('input', renderPinyin);
-        renderPinyin();
-    }
+setup('pg-popup-note','pg-fab-note','pg-n-min','pg-n-cls');
+setup('pg-popup-pinyin','pg-fab-pinyin','pg-py-min','pg-py-cls');
+drag(D['pg-hdr-note'],D['pg-popup-note']);
+drag(D['pg-hdr-pinyin'],D['pg-popup-pinyin']);
 
-    // ===== ESCAPE KEY =====
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            ['popup-note', 'popup-pinyin'].forEach(function(id) {
-                var p = document.getElementById(id);
-                if (p) p.style.display = 'none';
-            });
-            document.getElementById('fab-note').style.display = 'flex';
-            document.getElementById('fab-pinyin').style.display = 'flex';
-        }
-    });
+/* note textarea */
+var ta=D['pg-note-ta'];
+if(ta){
+    ta.value=ls('pg_note_txt','');
+    var fs=parseInt(ls('pg_note_fs','15')||'15');
+    ta.style.fontSize=fs+'px';
+    ta.oninput=function(){ss('pg_note_txt',ta.value);};
+}
+if(D['pg-n-inc'])D['pg-n-inc'].onclick=function(){if(!ta)return;var f=Math.min(32,(parseInt(ta.style.fontSize)||15)+2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);};
+if(D['pg-n-dec'])D['pg-n-dec'].onclick=function(){if(!ta)return;var f=Math.max(10,(parseInt(ta.style.fontSize)||15)-2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);};
+
+/* pinyin input */
+var pi=D['pg-py-inp'];
+if(pi){pi.value=ls('pg_py_txt','');pi.oninput=renderPy;renderPy();}
 })();
 </script>
-</body>
-</html>
-""", height=0, scrolling=False)
+""", unsafe_allow_html=True)
+
