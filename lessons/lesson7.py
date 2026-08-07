@@ -1914,3 +1914,284 @@ def show_lesson7_vocab():
             render_play_button(item['example_han'], "🔊 Nghe ví dụ", key=f"v7_g{cur_group_idx}_ex_{idx}")
 
 
+
+
+def show_lesson7_6_xie_dian(save_progress, save_score_row_b7_6, load_all_scores_b7_6):
+    st.markdown('''
+    <style>
+    .word-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .word-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #1e3a8a;
+        margin-right: 15px;
+    }
+    .pinyin-badge {
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border: 1px solid #bfdbfe;
+    }
+    .meaning-badge {
+        background-color: #f0fdf4;
+        color: #15803d;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid #bbf7d0;
+    }
+    .comparison-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid #e2e8f0;
+        border-left: 6px solid #8b5cf6;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+    .comparison-title {
+        font-weight: 700;
+        color: #7c3aed;
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    </style>
+    ''', unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "📚 Bài 7.6: Cặp từ 些 và 点",
+        "Làm chủ cách sử dụng 2 từ chỉ số lượng cơ bản nhất trong HSK 1: 一些 (một vài) và 一点儿 (một chút)."
+    )
+
+    tab_grammar, tab_comparison, tab_quiz = st.tabs([
+        "📚 Cấu trúc ngữ pháp",
+        "💡 So sánh nhanh",
+        "📝 Bài tập phản xạ"
+    ])
+
+    with tab_grammar:
+        st.subheader("1. 些 (xiē) - Một vài, những")
+        st.write("Dùng để chỉ số nhiều (nhiều hơn 1), chuyên dùng cho danh từ đếm được.")
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown('''
+            <div class="word-card">
+                <span style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">一些 (yì xiē)</span>
+                <span class="meaning-badge">Một vài, một số</span>
+                <p style="margin-top: 10px;">Dùng với những thứ đếm được (quả táo, cuốn sách...).</p>
+                <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #3b82f6; margin-top: 10px;">
+                    <b>我买了一些苹果。</b><br/>
+                    <span style="color: #2563eb;">Wǒ mǎi le yì xiē píngguǒ.</span><br/>
+                    <i>Tôi mua một vài quả táo.</i>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            render_play_button("我买了一些苹果。", "🔊 Nghe ví dụ", key="v76_xie_1")
+
+        with c2:
+            st.markdown('''
+            <div class="word-card">
+                <span style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">这些 / 那些 / 哪些</span>
+                <span class="meaning-badge">Những cái này / kia / nào</span>
+                <p style="margin-top: 10px;">Đi sau đại từ chỉ thị để tạo dạng số nhiều.</p>
+                <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #3b82f6; margin-top: 10px;">
+                    <b>这些书是谁的？</b><br/>
+                    <span style="color: #2563eb;">Zhè xiē shū shì shéi de?</span><br/>
+                    <i>Những cuốn sách này là của ai?</i>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            render_play_button("这些书是谁的？", "🔊 Nghe ví dụ", key="v76_xie_2")
+
+        st.subheader("2. 点儿 (diǎnr) - Một chút, một ít")
+        st.write("Dùng để chỉ một lượng rất nhỏ hoặc yêu cầu mức độ, chuyên dùng cho danh từ không đếm được.")
+        
+        c3, c4 = st.columns(2)
+        with c3:
+            st.markdown('''
+            <div class="word-card">
+                <span style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">一点儿 (yì diǎnr)</span>
+                <span class="meaning-badge">Một chút, một ít</span>
+                <p style="margin-top: 10px;">Dùng với những thứ không đếm được (nước, tiền...).</p>
+                <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #10b981; margin-top: 10px;">
+                    <b>我想喝一点儿水。</b><br/>
+                    <span style="color: #059669;">Wǒ xiǎng hē yì diǎnr shuǐ.</span><br/>
+                    <i>Tôi muốn uống một chút nước.</i>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            render_play_button("我想喝一点儿水。", "🔊 Nghe ví dụ", key="v76_dian_1")
+
+        with c4:
+            st.markdown('''
+            <div class="word-card">
+                <span style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">Tính từ + 一点儿</span>
+                <span class="meaning-badge">... một chút đi</span>
+                <p style="margin-top: 10px;">Dùng để yêu cầu hoặc so sánh.</p>
+                <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #10b981; margin-top: 10px;">
+                    <b>快一点儿！</b><br/>
+                    <span style="color: #059669;">Kuài yì diǎnr!</span><br/>
+                    <i>Nhanh một chút đi!</i>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            render_play_button("快一点儿！", "🔊 Nghe ví dụ", key="v76_dian_2")
+
+    with tab_comparison:
+        st.subheader("💡 Mẹo nhớ nhanh để phân biệt 一些 và 一点儿")
+        st.markdown('''
+        <div class="comparison-card" style="border-left-color: #f59e0b;">
+            <table style="width:100%; border-collapse: collapse; margin-top: 10px; background: #ffffff;">
+                <tr style="background-color: #fef3c7;">
+                    <th style="padding: 10px; border: 1px solid #fcd34d; text-align: left; color: #92400e;">Tiêu chí</th>
+                    <th style="padding: 10px; border: 1px solid #fcd34d; text-align: left; color: #92400e;">一些 (yì xiē)</th>
+                    <th style="padding: 10px; border: 1px solid #fcd34d; text-align: left; color: #92400e;">一点儿 (yì diǎnr)</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">Nghĩa</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a;">Một vài, một số</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a;">Một chút, một ít</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">Cách dùng</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; color: #1d4ed8;">Dùng với đồ <b>đếm được</b> (từng cái).</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; color: #047857;">Dùng với đồ <b>không đếm được</b> (chất lỏng...).</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">Ví dụ ĐÚNG</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">买一些苹果 <br><span style="font-weight:normal; font-size: 0.9em; color: #64748b;">(Mua vài quả táo)</span></td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">喝一点儿水 <br><span style="font-weight:normal; font-size: 0.9em; color: #64748b;">(Uống một chút nước)</span></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #fde68a; font-weight: bold;">Ví dụ SAI</td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; color: #b91c1c;">❌ 喝一些水 <br><span style="font-weight:normal; font-size: 0.9em;">(Nghe không tự nhiên)</span></td>
+                    <td style="padding: 10px; border: 1px solid #fde68a; color: #b91c1c;">❌ 买一点儿苹果 <br><span style="font-weight:normal; font-size: 0.9em;">(Nghe như mua táo xay)</span></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="comparison-card" style="border-left-color: #3b82f6;">
+            <div class="comparison-title" style="color: #1d4ed8;">Lưu ý về phát âm vùng miền: 一点儿 vs 一点</div>
+            <p>Về cơ bản, <b>一点儿 (yì diǎnr)</b> và <b>一点 (yì diǎn)</b> hoàn toàn KHÔNG CÓ GÌ KHÁC NHAU về mặt ý nghĩa hay ngữ pháp.</p>
+            <ul style="margin-top: 10px;">
+                <li><b>一点儿 (yì diǎnr):</b> Có âm uốn lưỡi (Nhi hóa), là đặc trưng phát âm của người Bắc Trung Quốc (Bắc Kinh). Nghe tự nhiên, thân mật.</li>
+                <li><b>一点 (yì diǎn):</b> Không uốn lưỡi, là thói quen của người Nam Trung Quốc, Đài Loan.</li>
+            </ul>
+            <p><i>Kết luận:</i> Học viên dùng từ nào người bản xứ cũng hiểu 100%. Nếu thấy uốn lưỡi khó phát âm, hoàn toàn có thể đọc là <b>一点</b> cho dễ nói!</p>
+        </div>
+        ''', unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.subheader("📝 Bài tập phản xạ")
+        st.write("Điền '一些' hoặc '一点儿' (hoặc các biến thể như 些, 那些) vào chỗ trống thích hợp:")
+
+        B7_6_QUIZ_DATA = [
+            {
+                "q": "我喝______茶。(Tôi uống một chút trà.)",
+                "choices": ["一点儿 (yì diǎnr)", "一些 (yì xiē)"],
+                "answer": "一点儿 (yì diǎnr)",
+                "explain": "'Trà' là chất lỏng không đếm được, dùng 一点儿."
+            },
+            {
+                "q": "我买了______书。(Tôi đã mua một vài cuốn sách.)",
+                "choices": ["一点儿 (yì diǎnr)", "一些 (yì xiē)"],
+                "answer": "一些 (yì xiē)",
+                "explain": "'Sách' là danh từ đếm được, dùng 一些."
+            },
+            {
+                "q": "______人是我的朋友。(Những người này là bạn của tôi.)",
+                "choices": ["这些 (zhè xiē)", "这点 (zhè diǎn)"],
+                "answer": "这些 (zhè xiē)",
+                "explain": "Để chỉ số nhiều 'những... này', dùng 这些."
+            },
+            {
+                "q": "便宜______吧！(Rẻ một chút đi!)",
+                "choices": ["一点儿 (yì diǎnr)", "一些 (yì xiē)"],
+                "answer": "一点儿 (yì diǎnr)",
+                "explain": "Đứng sau tính từ để yêu cầu '...một chút', dùng 一点儿."
+            },
+            {
+                "q": "你要买______东西？(Bạn muốn mua những món đồ nào?)",
+                "choices": ["哪些 (nǎ xiē)", "哪点 (nǎ diǎn)"],
+                "answer": "哪些 (nǎ xiē)",
+                "explain": "Hỏi 'những... nào', dùng 哪些."
+            }
+        ]
+
+        if "b76_score_submitted" not in st.session_state:
+            st.session_state.b76_score_submitted = False
+
+        score_b7_6 = 0
+        user_answers = {}
+
+        for idx, item in enumerate(B7_6_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            user_ans = st.radio(f"Chọn đáp án đúng:", item['choices'], index=0, key=f"v76_quiz_ans_{idx}")
+            user_answers[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b7_6 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+        if not st.session_state.b76_score_submitted:
+            if st.button("📝 Chấm điểm bài tập", type="primary", use_container_width=True, key="v76_quiz_grade_btn"):
+                st.session_state.b76_score_submitted = True
+                st.rerun()
+        else:
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B7_6_QUIZ_DATA):
+                u_ans = user_answers[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!** - {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}** - {item['explain']}")
+
+            final_percentage_score = round((score_b7_6 / len(B7_6_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b7_6} / {len(B7_6_QUIZ_DATA)}** ({final_percentage_score} điểm)")
+            
+            if score_b7_6 == len(B7_6_QUIZ_DATA):
+                st.balloons()
+                st.success("Xuất sắc! Bạn đã hiểu rõ cách dùng của 些 và 点! 👑")
+
+            st.markdown("---")
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v76_student_name")
+            if st.button("Nộp bài tập Bài 7.6", type="primary", use_container_width=True, key="v76_submit_score_btn"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                        "học viên": name,
+                        "tổng điểm": final_percentage_score,
+                        "BT: Cặp từ 些/点": f"{score_b7_6}/{len(B7_6_QUIZ_DATA)}"
+                    }
+                    if save_score_row_b7_6(row):
+                        st.success("Đã nộp bài và lưu điểm thành công!")
+                        st.session_state.b76_score_submitted = False
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v76_redo_quiz_btn"):
+                st.session_state.b76_score_submitted = False
+                save_progress()
+                st.rerun()
+
+        all_scores = load_all_scores_b7_6()
+        if all_scores:
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
+            st.dataframe(all_scores, use_container_width=True)
