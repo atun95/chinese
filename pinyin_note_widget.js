@@ -62,15 +62,18 @@
     function getPinyin(text, toneType = 'symbol') {
         if (!text) return [];
 
+        const chars = [...text];
+
         if (typeof pinyinPro !== 'undefined' && pinyinPro.pinyin) {
             try {
-                // Returns array of pinyin per char or word
+                // Evaluate the whole string at once to allow pinyin-pro to use its
+                // built-in dictionary / AI to detect context (like 觉得 vs 睡觉 for 觉)
+                const pyArray = pinyinPro.pinyin(text, { toneType: toneType, type: 'array', nonZh: 'spaced' });
                 const result = [];
-                for (let i = 0; i < text.length; i++) {
-                    const ch = text[i];
+                for (let i = 0; i < chars.length; i++) {
+                    const ch = chars[i];
                     if (isChineseChar(ch)) {
-                        const py = pinyinPro.pinyin(ch, { toneType: toneType, type: 'array' })[0] || offlineDict[ch] || '';
-                        result.push({ char: ch, pinyin: py });
+                        result.push({ char: ch, pinyin: pyArray[i] || offlineDict[ch] || '' });
                     } else {
                         result.push({ char: ch, pinyin: '' });
                     }
@@ -83,8 +86,8 @@
 
         // Offline fallback
         const result = [];
-        for (let i = 0; i < text.length; i++) {
-            const ch = text[i];
+        for (let i = 0; i < chars.length; i++) {
+            const ch = chars[i];
             if (isChineseChar(ch)) {
                 result.push({ char: ch, pinyin: offlineDict[ch] || '?' });
             } else {
