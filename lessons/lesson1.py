@@ -260,25 +260,96 @@ def show_lesson1_summary_table():
 
 def show_lesson1_intro():
     render_lesson_intro("📚 Bài 1.2: Phiên âm cơ bản", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
-    st.subheader("1. Thanh mẫu đơn và vận mẫu đơn")
-    st.markdown("#### 1.1. Thanh mẫu (Initials)")
-    cols_tm = st.columns(4)
-    for i, item in enumerate(B1_INITIALS_CARDS):
-        with cols_tm[i % 4]: render_pronunciation_card(item, "b1_tm")
+    st.subheader("1. Thanh mẫu đơn")
+    # Build HTML grid for initials — dùng inline styles vì Streamlit strip <style> tag
+    CARD_WRAP = 'display:inline-block; vertical-align:top; width:calc(25% - 10px); min-width:150px; box-sizing:border-box;'
+    I_CARD = 'background:#eff6ff; border:1.5px solid #bfdbfe; border-radius:14px; padding:20px 16px 14px; box-shadow:0 2px 8px rgba(37,99,235,0.07); text-align:left; margin:5px;'
+    I_CHAR = 'font-size:3rem; font-weight:900; color:#1d4ed8; font-family:Georgia,serif; line-height:1; margin-bottom:8px;'
+    I_DESC = 'font-size:0.82rem; color:#334155; line-height:1.5; margin-bottom:10px;'
+    I_BADGE = 'display:inline-flex; align-items:center; gap:6px; background:#dbeafe; border-radius:7px; padding:4px 10px;'
+    I_HAN  = 'font-size:1.1rem; font-weight:700; color:#0f172a;'
+    I_PY   = 'font-size:0.78rem; color:#475569; font-style:italic;'
+
+    initials_html = '<div style="display:flex; flex-wrap:wrap; gap:0; margin-bottom:8px;">'
+    for item in B1_INITIALS_CARDS:
+        initials_html += (
+            f'<div style="{CARD_WRAP}">'
+            f'<div style="{I_CARD}">'
+            f'<div style="{I_CHAR}">{item["chu"]}</div>'
+            f'<div style="{I_DESC}">{item["hdsd"]}</div>'
+            f'<div style="{I_BADGE}">'
+            f'<span style="{I_HAN}">{item["vd_han"]}</span>'
+            f'<span style="{I_PY}">{item["vd_py"]}</span>'
+            f'</div>'
+            f'</div></div>'
+        )
+    initials_html += '</div>'
+    st.markdown(initials_html, unsafe_allow_html=True)
+
+
     st.markdown("---")
-    st.markdown("#### 1.2. Vận mẫu (Finals)")
-    cols_vm = st.columns(4)
-    for i, item in enumerate(B1_FINALS_CARDS):
-        with cols_vm[i % 4]: render_pronunciation_card(item, "b1_vm")
+    st.markdown("#### 1.2. Vận mẫu đơn (Finals)")
+
+    F_CARD  = 'background:#fefce8; border:1.5px solid #fde68a; border-radius:14px; padding:20px 16px 14px; box-shadow:0 2px 8px rgba(234,179,8,0.08); text-align:left; margin:5px;'
+    F_WRAP  = 'display:inline-block; vertical-align:top; width:calc(33.33% - 10px); min-width:160px; box-sizing:border-box;'
+    F_CHAR  = 'font-size:3rem; font-weight:900; color:#b45309; font-family:Georgia,serif; line-height:1; margin-bottom:8px;'
+    F_BADGE = 'display:inline-flex; align-items:center; gap:6px; background:#fef3c7; border-radius:7px; padding:4px 10px;'
+    F_HAN   = 'font-size:1.1rem; font-weight:700; color:#0f172a;'
+    F_PY    = 'font-size:0.78rem; color:#475569; font-style:italic;'
+
+    finals_html = '<div style="display:flex; flex-wrap:wrap; gap:0; margin-bottom:8px;">'
+    for item in B1_FINALS_CARDS:
+        finals_html += (
+            f'<div style="{F_WRAP}">'
+            f'<div style="{F_CARD}">'
+            f'<div style="{F_CHAR}">{item["chu"]}</div>'
+            f'<div style="{I_DESC}">{item["hdsd"]}</div>'
+            f'<div style="{F_BADGE}">'
+            f'<span style="{F_HAN}">{item["vd_han"]}</span>'
+            f'<span style="{F_PY}">{item["vd_py"]}</span>'
+            f'</div>'
+            f'</div></div>'
+        )
+    finals_html += '</div>'
+    st.markdown(finals_html, unsafe_allow_html=True)
+
     
+
     st.markdown("---")
     st.subheader("2. Thanh điệu (Tones)")
     st.markdown("#### 2.1. Bốn thanh điệu cơ bản")
-    col_t1, col_t2, col_t3, col_t4 = st.columns(4)
-    with col_t1: st.info("**Thanh 1: mā**\n\n(Cao và ngang)")
-    with col_t2: st.info("**Thanh 2: má**\n\n(Đi lên)")
-    with col_t3: st.info("**Thanh 3: mǎ**\n\n(Hạ xuống rồi lên)")
-    with col_t4: st.info("**Thanh 4: mà**\n\n(Đi xuống mạnh)")
+    st.markdown("""
+    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+        <div style="flex:1; background: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #1e3a8a; margin-bottom: 6px;">Thanh 1 (阴平)</div>
+            <div style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 5rem; font-weight: 900; color: #2563eb; font-family: 'Georgia', serif; display: block;">ā</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #1d4ed8; margin-top: 8px;">Cao và ngang dài,<br>không đổi độ cao.</div>
+        </div>
+        <div style="flex:1; background: #f0fdf4; border: 2px solid #22c55e; border-radius: 12px; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #14532d; margin-bottom: 6px;">Thanh 2 (阳平)</div>
+            <div style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 5rem; font-weight: 900; color: #16a34a; font-family: 'Georgia', serif; display: block;">á</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #15803d; margin-top: 8px;">Vuốt từ dưới lên trên<br>(tương tự dấu sắc).</div>
+        </div>
+        <div style="flex:1; background: #fefce8; border: 2px solid #eab308; border-radius: 12px; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #713f12; margin-bottom: 6px;">Thanh 3 (上声)</div>
+            <div style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 5rem; font-weight: 900; color: #ca8a04; font-family: 'Georgia', serif; display: block; position: relative; top: 10px;">ǎ</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #a16207; margin-top: 8px;">Hạ giọng xuống thấp<br>rồi lên cao (dấu hỏi).</div>
+        </div>
+        <div style="flex:1; background: #fff1f2; border: 2px solid #f43f5e; border-radius: 12px; padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #881337; margin-bottom: 6px;">Thanh 4 (去声)</div>
+            <div style="height: 100px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 5rem; font-weight: 900; color: #e11d48; font-family: 'Georgia', serif; display: block;">à</span>
+            </div>
+            <div style="font-size: 0.78rem; color: #be123c; margin-top: 8px;">Dứt khoát, nhanh,<br>đi xuống mạnh.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.write("💡 *Thanh nhẹ: nhẹ, ngắn, không nhấn*")
 
     st.markdown("#### 2.2. Thanh nhẹ (轻声 - Qīngshēng)")

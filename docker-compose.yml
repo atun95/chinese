@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: chinese-app
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount thư mục hiện tại vào /app để khi bạn sửa code, app sẽ tự cập nhật (chỉ tiện cho dev)
+      - .:/app
+      # Bỏ qua mount node_modules từ máy host để dùng node_modules bên trong container
+      - /app/node_modules
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    restart: unless-stopped
