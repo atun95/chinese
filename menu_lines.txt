@@ -1,0 +1,123 @@
+0: import streamlit as st
+1: import random
+2: import streamlit.components.v1 as components
+3: import json
+4: import csv
+5: import shutil
+6: import sys
+7: from datetime import datetime
+8: from pathlib import Path
+10: # Thêm thư mục lessons vào sys.path để import các bài học
+13: from lessons.lessons_data import *
+14: from ui_utils import *
+18: import importlib
+19: import lessons.lessons_data as lessons_data
+20: import lessons.lesson1 as lesson1
+21: import lessons.lesson2 as lesson2
+22: import lessons.lesson3 as lesson3
+23: import lessons.lesson4 as lesson4
+24: import lessons.lesson5 as lesson5
+25: import lessons.lesson6 as lesson6
+26: import lessons.lesson7 as lesson7
+27: import lessons.lesson8 as lesson8
+28: import lessons.lesson9 as lesson9
+29: import lessons.hsk1_quiz as hsk1_quiz
+33:     importlib.reload(lessons_data)
+38:     importlib.reload(hsk1_quiz)
+43:     importlib.reload(lesson1)
+48:     importlib.reload(lesson2)
+53:     importlib.reload(lesson3)
+58:     importlib.reload(lesson4)
+63:     importlib.reload(lesson5)
+68:     importlib.reload(lesson6)
+73:     importlib.reload(lesson7)
+78:     importlib.reload(lesson8)
+83:     importlib.reload(lesson9)
+89:     import os
+90:     import streamlit.components.v1 as components
+99:                 import flashcard_generator
+137:         resize: both !important;
+138:         min-height: 300px !important;
+139:         min-width: 100% !important;
+140:         font-size: 1rem !important;
+497:             display: none !important;
+500:             display: none !important;
+503:             display: none !important;
+506:             padding-top: 0 !important;
+507:             padding-bottom: 0 !important;
+508:             padding-left: 20px !important;
+509:             padding-right: 20px !important;
+522: if mode == "📚 Lý thuyết & Bài học":
+523:     menu = st.sidebar.radio("Chọn bài học:", [
+550: elif mode == "📖 Hệ thống từ vựng":
+551:     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
+560: elif mode == "🗣️ Luyện tập ghép âm":
+561:     menu = st.sidebar.radio("Chọn bảng ghép âm:", [
+568: elif mode == "🗣️ Thực hành trên lớp":
+569:     menu = st.sidebar.radio("Chọn hoạt động:", [
+576: elif mode == "📝 Hệ thống bài tập":
+577:     menu = st.sidebar.radio("Chọn bài tập:", [
+593: if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
+596: elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
+599: elif mode == "🖨️ In ấn & Đồng bộ":
+603:             import build_giao_trinh
+604:             importlib.reload(build_giao_trinh)
+608:             import flashcard_generator
+609:             importlib.reload(flashcard_generator)
+618:     import os
+619:     import re
+650:                     import flashcard_generator
+708: elif menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
+711: elif menu == "Bài 1.2 - Thanh mẫu và vận mẫu đơn":
+714: elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
+717: elif menu == "Bài tập Bài 1":
+720: elif menu == "Bài 2.1 - Vận mẫu kép":
+723: elif menu == "Ghép âm Bài 2 - Vận mẫu kép cơ bản":
+726: elif menu == "Ghép âm Bài 3 - Thanh mẫu nâng cao":
+729: elif menu == "Ghép âm Bài 4 - Vận mẫu kép mở rộng":
+732: elif menu == "Bài tập Bài 2":
+735: elif menu == "Bài 3.1 - Thanh mẫu":
+738: elif menu == "Bài 3.2 - Quy tắc viết Pinyin":
+741: elif menu == "Bài 3.3 - Luyện tập ghép âm":
+744: elif menu == "Bài 3 - TỪ VỰNG":
+747: elif menu == "Bài 4 - TỪ VỰNG":
+750: elif menu == "Bài 4.1 - Từ vựng mở rộng":
+753: elif menu == "Bài 5 - TỪ VỰNG":
+756: elif menu == "Bài 6 - TỪ VỰNG":
+759: elif menu == "Bài 7 - TỪ VỰNG":
+764: elif menu == "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu":
+767: elif menu == "Bài 3.1 - Hội thoại thực hành":
+770: elif menu == "Bài tập Bài 3":
+773: elif menu == "Bài 4.1 - Vận mẫu kép":
+776: elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
+779: elif menu == "Bài 4.1 - Đấu trường Luyện tập":
+782: elif menu == "Bài 4.2 - Phản xạ & Giao tiếp":
+786: elif menu == "Bài 5.1 - Thực hành Giao tiếp & Phản xạ":
+789: elif menu == "Bài 6.1 - Thực hành Giao tiếp & Phản xạ":
+792: elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
+795: elif menu == "Bài 6.1 - Các vận mẫu mũi còn lại" or menu == "Bài tập Bài 6.1":
+798: elif menu == "Bài 7.1 - Các từ để hỏi" or menu == "Bài tập Bài 7.1":
+801: elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài 7.2":
+804: elif menu == "Bài 7.3 - Cặp từ 这 và 那" or menu == "Bài tập Bài 7.3":
+807: elif menu == "Bài 7.4 - Từ 在 (zài)" or menu == "Bài tập Bài 7.4":
+810: elif menu == "Bài 7.5 - Từ 去 (qù)" or menu == "Bài tập Bài 7.5":
+813: elif menu == "Bài 7.6 - Cặp từ 些 và 点" or menu == "Bài tập Bài 7.6":
+816: elif menu == "Bài 8.1 - Tổng quan Chữ Hán":
+819: elif menu == "Bài 8.2 - Hệ thống Nét viết":
+822: elif menu == "Bài 8.3 - Quy tắc Bút thuận":
+825: elif menu == "Bài 8.4 - Hệ thống Bộ thủ":
+828: elif menu == "Bài 8.5 - Đơn thể & Hợp thể":
+831: elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
+834: elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
+837: elif menu == "Bài 5.2 - Vận mẫu mũi":
+840: elif menu == "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ":
+843: elif menu == "Bài 5.4 - Tết Đoan Ngọ (端午节)":
+846: elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
+849: elif menu == "Ghép âm Bài 6 - Vận mẫu mũi phức hợp":
+852: elif menu == "Bài tập Bài 5":
+855: elif menu == "Bài tập Bài 4":
+878:         "#pg-fab-note,#pg-fab-pinyin{position:fixed!important;width:52px;height:52px;border-radius:50%;border:none;outline:none;cursor:pointer;color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);z-index:2147483647!important;pointer-events:auto!important;transition:transform .2s;}",
+882:         "#pg-popup-note,#pg-popup-pinyin{position:fixed!important;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden;z-index:2147483646!important;pointer-events:auto!important;resize:both;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}",
+885:         "#pg-popup-note.pg-min,#pg-popup-pinyin.pg-min{height:44px!important;resize:none!important;}",
+890:         ".pg-hdr button{background:rgba(255,255,255,.18);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .15s;pointer-events:auto!important;}",
+899:         "#pg-py-copy{background:#0284c7;border:none;color:#fff;border-radius:7px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;pointer-events:auto!important;transition:background .15s;display:flex;align-items:center;gap:5px;}",

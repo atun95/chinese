@@ -26,6 +26,12 @@ import lessons.lesson5 as lesson5
 import lessons.lesson6 as lesson6
 import lessons.lesson7 as lesson7
 import lessons.lesson8 as lesson8
+import sys
+if 'lessons.lesson9' in sys.modules:
+    del sys.modules['lessons.lesson9']
+if 'lesson9' in sys.modules:
+    del sys.modules['lesson9']
+import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
 
 
@@ -78,6 +84,11 @@ try:
     importlib.reload(lesson8)
 except Exception as e:
     pass
+
+try:
+    importlib.reload(lesson9)
+except Exception as e:
+    st.error(f'Error reloading lesson9: {e}')
 
 
 def show_consolidated_flashcards():
@@ -540,7 +551,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 8.2 - Hệ thống Nét viết",
         "Bài 8.3 - Quy tắc Bút thuận",
         "Bài 8.4 - Hệ thống Bộ thủ",
-        "Bài 8.5 - Đơn thể & Hợp thể"
+        "Bài 8.5 - Đơn thể & Hợp thể",
+        "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -566,7 +578,8 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 4.1 - Đấu trường Luyện tập",
         "Bài 4.2 - Phản xạ & Giao tiếp",
         "Bài 5.1 - Thực hành Giao tiếp & Phản xạ",
-        "Bài 6.1 - Thực hành Giao tiếp & Phản xạ"
+        "Bài 6.1 - Thực hành Giao tiếp & Phản xạ",
+        "Bài 9.1 - Thực hành Giao tiếp & Phản xạ"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -783,6 +796,9 @@ elif menu == "Bài 5.1 - Thực hành Giao tiếp & Phản xạ":
 
 elif menu == "Bài 6.1 - Thực hành Giao tiếp & Phản xạ":
     lesson6.show_lesson6_1_classroom_practice()
+    
+elif menu == "Bài 9.1 - Thực hành Giao tiếp & Phản xạ":
+    lesson9.show_lesson9_1_classroom_practice()
 
 elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)
@@ -822,6 +838,9 @@ elif menu == "Bài 8.4 - Hệ thống Bộ thủ":
 
 elif menu == "Bài 8.5 - Đơn thể & Hợp thể":
     lesson8.show_lesson8_5_structures()
+    
+elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
+    lesson9.show_lesson9_1_countries_currency()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
@@ -1086,4 +1105,6 @@ components.html("""
 })();
 </script>
 """, height=0, scrolling=False)
+
+ 
 

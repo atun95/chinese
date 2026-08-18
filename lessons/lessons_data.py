@@ -1707,3 +1707,75 @@ B7_2_QUIZ_DATA = [
         "explain": "Cụm '他的' thay thế cho '他的书' để tránh lặp từ."
     }
 ]
+
+
+B9_1_QUOC_GIA = [
+    {"Chữ Hán": "中国", "Pinyin": "Zhōngguó", "Nghĩa tiếng Việt": "Trung Quốc"},
+    {"Chữ Hán": "越南", "Pinyin": "Yuènán", "Nghĩa tiếng Việt": "Việt Nam"},
+    {"Chữ Hán": "美国", "Pinyin": "Měiguó", "Nghĩa tiếng Việt": "Mỹ / Hoa Kỳ"},
+    {"Chữ Hán": "英国", "Pinyin": "Yīngguó", "Nghĩa tiếng Việt": "Anh"},
+    {"Chữ Hán": "法国", "Pinyin": "Fǎguó", "Nghĩa tiếng Việt": "Pháp"},
+    {"Chữ Hán": "德国", "Pinyin": "Déguó", "Nghĩa tiếng Việt": "Đức"},
+    {"Chữ Hán": "日本", "Pinyin": "Rìběn", "Nghĩa tiếng Việt": "Nhật Bản"},
+    {"Chữ Hán": "韩国", "Pinyin": "Hánguó", "Nghĩa tiếng Việt": "Hàn Quốc"},
+    {"Chữ Hán": "俄罗斯", "Pinyin": "Éluósī", "Nghĩa tiếng Việt": "Nga"},
+    {"Chữ Hán": "泰国", "Pinyin": "Tàiguó", "Nghĩa tiếng Việt": "Thái Lan"},
+    {"Chữ Hán": "西班牙", "Pinyin": "Xībānyá", "Nghĩa tiếng Việt": "Tây Ban Nha"}
+]
+
+B9_1_QUOC_TICH = [
+    {"Chữ Hán": "中国人", "Pinyin": "Zhōngguó rén", "Nghĩa tiếng Việt": "Người Trung Quốc"},
+    {"Chữ Hán": "越南人", "Pinyin": "Yuènán rén", "Nghĩa tiếng Việt": "Người Việt Nam"},
+    {"Chữ Hán": "美国人", "Pinyin": "Měiguó rén", "Nghĩa tiếng Việt": "Người Mỹ"},
+    {"Chữ Hán": "英国人", "Pinyin": "Yīngguó rén", "Nghĩa tiếng Việt": "Người Anh"},
+    {"Chữ Hán": "日本人", "Pinyin": "Rìběn rén", "Nghĩa tiếng Việt": "Người Nhật"},
+    {"Chữ Hán": "韩国人", "Pinyin": "Hánguó rén", "Nghĩa tiếng Việt": "Người Hàn Quốc"}
+]
+
+B9_1_TIEN_TE = [
+    {"Chữ Hán": "人民币", "Pinyin": "Rénmínbì", "Nghĩa tiếng Việt": "Nhân dân tệ"},
+    {"Chữ Hán": "元", "Pinyin": "yuán", "Nghĩa tiếng Việt": "Đồng/Nguyên (văn viết)"},
+    {"Chữ Hán": "块", "Pinyin": "kuài", "Nghĩa tiếng Việt": "Tệ/Đồng (khẩu ngữ)"},
+    {"Chữ Hán": "越南盾", "Pinyin": "Yuènán dùn", "Nghĩa tiếng Việt": "Đồng Việt Nam"},
+    {"Chữ Hán": "美元", "Pinyin": "Měiyuán", "Nghĩa tiếng Việt": "Đô la Mỹ"},
+    {"Chữ Hán": "欧元", "Pinyin": "Ōuyuán", "Nghĩa tiếng Việt": "Euro"},
+    {"Chữ Hán": "日元", "Pinyin": "Rìyuán", "Nghĩa tiếng Việt": "Yên Nhật"},
+    {"Chữ Hán": "英镑", "Pinyin": "Yīngbàng", "Nghĩa tiếng Việt": "Bảng Anh"},
+    {"Chữ Hán": "韩元", "Pinyin": "Hányuán", "Nghĩa tiếng Việt": "Won Hàn Quốc"}
+]
+
+
+B9_1_PRACTICE_DATA = {
+    "dialogues": [
+        {
+            "title": "Hội thoại 1: Gặp gỡ bạn mới ở sân bay",
+            "grammar": "Đại từ nghi vấn (哪, 什么), 的 (của)",
+            "lines": [
+                {"speaker": "A", "han": "你好，你是哪国人？", "py": "Nǐ hǎo, nǐ shì nǎ guórén?", "vi": "Xin chào, bạn là người nước nào?"},
+                {"speaker": "B", "han": "你好，我是美国人。你呢？", "py": "Nǐ hǎo, wǒ shì Měiguó rén. Nǐ ne?", "vi": "Chào bạn, mình là người Mỹ. Còn bạn?"},
+                {"speaker": "A", "han": "我是越南人。这是我的朋友，她是法国人。", "py": "Wǒ shì Yuènán rén. Zhè shì wǒ de péngyou, tā shì Fǎguó rén.", "vi": "Mình là người Việt Nam. Đây là bạn của mình, cô ấy là người Pháp."},
+                {"speaker": "B", "han": "很高兴认识你们！", "py": "Hěn gāoxìng rènshi nǐmen!", "vi": "Rất vui được gặp các bạn!"}
+            ]
+        },
+        {
+            "title": "Hội thoại 2: Đi du lịch và Đổi tiền",
+            "grammar": "去 (đi), 这/那 (đây/kia), Số đếm",
+            "lines": [
+                {"speaker": "A", "han": "明天你去哪儿？", "py": "Míngtiān nǐ qù nǎr?", "vi": "Ngày mai bạn đi đâu?"},
+                {"speaker": "B", "han": "明天我去中国。", "py": "Míngtiān wǒ qù Zhōngguó.", "vi": "Ngày mai mình đi Trung Quốc."},
+                {"speaker": "A", "han": "那是什么钱？是人民币吗？", "py": "Nà shì shénme qián? Shì Rénmínbì ma?", "vi": "Kia là tiền gì vậy? Có phải Nhân dân tệ không?"},
+                {"speaker": "B", "han": "不是，那是美元。这才是人民币。", "py": "Bú shì, nà shì Měiyuán. Zhè cái shì Rénmínbì.", "vi": "Không phải, kia là Đô la Mỹ. Đây mới là Nhân dân tệ."}
+            ]
+        },
+        {
+            "title": "Hội thoại 3: Bạn đang ở đâu?",
+            "grammar": "在 (ở), 些 (một vài)",
+            "lines": [
+                {"speaker": "A", "han": "喂，现在你在哪儿？", "py": "Wéi, xiànzài nǐ zài nǎr?", "vi": "Alo, hiện tại bạn đang ở đâu?"},
+                {"speaker": "B", "han": "我在日本。这里有一些英国人和德国人。", "py": "Wǒ zài Rìběn. Zhèlǐ yǒu yìxiē Yīngguó rén hé Déguó rén.", "vi": "Mình đang ở Nhật Bản. Ở đây có một vài người Anh và người Đức."},
+                {"speaker": "A", "han": "他们去日本做什么？", "py": "Tāmen qù Rìběn zuò shénme?", "vi": "Bọn họ đi Nhật Bản làm gì?"},
+                {"speaker": "B", "han": "他们去买东西。这里的东西很好！", "py": "Tāmen qù mǎi dōngxi. Zhèlǐ de dōngxi hěn hǎo!", "vi": "Họ đến để mua sắm. Đồ ở đây rất tốt!"}
+            ]
+        }
+    ]
+}
