@@ -552,6 +552,7 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 8.3 - Quy tắc Bút thuận",
         "Bài 8.4 - Hệ thống Bộ thủ",
         "Bài 8.5 - Đơn thể & Hợp thể",
+        "Bài 8.6 - Các bộ thủ thông dụng",
         "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ"
     ])
 elif mode == "📖 Hệ thống từ vựng":
@@ -838,6 +839,9 @@ elif menu == "Bài 8.4 - Hệ thống Bộ thủ":
 
 elif menu == "Bài 8.5 - Đơn thể & Hợp thể":
     lesson8.show_lesson8_5_structures()
+
+elif menu == "Bài 8.6 - Các bộ thủ thông dụng":
+    lesson8.show_lesson8_6_radicals_common()
     
 elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
     lesson9.show_lesson9_1_countries_currency()

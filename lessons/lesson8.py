@@ -443,3 +443,256 @@ def show_lesson8_5_structures():
         st.warning("🔄 **Bao vây**")
         st.write("国 (Nước) = Vi + Ngọc")
         render_hanzi_anim("国", key="struct_enc")
+
+def show_lesson8_6_radicals_common():
+    inject_lesson8_css()
+    render_lesson_intro(
+        "🌟 Bài 8.6 - Hệ thống Bộ thủ",
+        "Bộ thủ là linh hồn của chữ Hán. Nắm vững bộ thủ giúp bạn đoán nghĩa, dễ nhớ chữ và tra từ điển nhanh chóng."
+    )
+    
+    st.markdown("<br/>", unsafe_allow_html=True)
+    
+    tab1, tab2, tab3, tab4 = st.tabs(["📖 Phần 1: Giải thích Bộ thủ", "🔄 Phần 2: Biến thể của Bộ thủ", "📍 Phần 3: Vị trí của Bộ thủ", "🗂️ Phần 4: Các Bộ thủ thông dụng"])
+    
+    with tab1:
+        st.markdown("<h3 style='color: #1e3a8a; margin-top: 10px;'>BỘ THỦ LÀ GÌ?</h3>", unsafe_allow_html=True)
+        st.write("Trong tiếng Việt, chúng ta ghép các chữ cái (a, b, c) lại để tạo thành từ. Còn trong tiếng Trung, người ta ghép các nét bút cơ bản để tạo thành chữ Hán. Tuy nhiên, nếu chỉ nhớ từng nét thì sẽ rất khó và dễ quên. Do đó, người xưa đã tạo ra **Bộ thủ (部首 - Bùshǒu)**.")
+        st.write("Bộ thủ là thành phần cấu tạo nên chữ Hán, thường mang ý nghĩa biểu thị phạm trù, giống loài, hoặc nhóm từ vựng của chữ đó. Có thể coi Bộ thủ giống như 'gốc từ' trong tiếng Anh.")
+        
+        st.markdown("<h4 style='color: #0f172a; margin-top: 20px;'>CHỮ ĐƠN THỂ & CHỮ HỢP THỂ</h4>", unsafe_allow_html=True)
+        st.write("Dựa vào cấu trúc, chữ Hán được chia làm 2 loại chính:")
+        
+        col_type1, col_type2 = st.columns(2)
+        with col_type1:
+            st.info("**1. Chữ Đơn thể (Độc thể tự)**")
+            st.write("Là những chữ được cấu tạo trực tiếp từ các nét bút cơ bản, **không thể tách rời** thành các phần nhỏ hơn có ý nghĩa.")
+            st.write("🎯 **Lưu ý:** Chữ đơn thể thường **chính là một bộ thủ độc lập** (cấu thành từ 1 bộ thủ duy nhất). Chúng đóng vai trò là 'gốc' để ghép ra các chữ khác.")
+            st.write("👉 *Ví dụ:* **人** (người), **木** (cây), **日** (mặt trời).")
+            
+        with col_type2:
+            st.success("**2. Chữ Hợp thể (Hợp thể tự)**")
+            st.write("Là những chữ được tạo thành bằng cách **ghép từ 2 hoặc nhiều bộ thủ** (hoặc chữ đơn thể) lại với nhau.")
+            st.write("🎯 **Lưu ý:** Hơn 80% chữ Hán hiện đại là chữ hợp thể. Việc học bộ thủ chủ yếu là để phân tích loại chữ này.")
+            st.write("👉 *Ví dụ:* **林** (rừng - ghép 2 chữ 木), **明** (sáng - ghép 日 và 月).")
+        
+        st.markdown("<h4 style='color: #0f172a; margin-top: 20px;'>TẠI SAO PHẢI HỌC BỘ THỦ?</h4>", unsafe_allow_html=True)
+        st.info("💡 **1. Gợi ý nghĩa của chữ (Biểu ý):**\nChữ Hán đa phần là chữ hình thanh (một phần chỉ âm, một phần chỉ ý). Nhìn vào bộ thủ, bạn có thể đoán được 80% chữ đó liên quan đến lĩnh vực gì. \n*Ví dụ:* Những chữ có bộ Thủy (氵) thường liên quan đến nước như 海 (biển), 河 (sông), 洗 (rửa).")
+        
+        st.success("💡 **2. Dễ nhớ chữ phức tạp (Phân tích cấu tạo):**\nThay vì học vẹt hàng chục nét vẽ chằng chịt, bạn chỉ cần nhớ chữ Hán đó được ghép từ những bộ thủ nào. \n*Ví dụ:* Chữ **妈 (Mẹ)** được ghép từ bộ **女 (Nữ - phụ nữ)** và chữ **马 (Mã - con ngựa)** chỉ âm đọc. Mẹ là phụ nữ, đọc giống chữ Mã -> 妈 (mā).")
+        
+        st.warning("💡 **3. Tra cứu từ điển:**\nNếu không biết cách phát âm pinyin của một chữ lạ, bạn bắt buộc phải nhận diện được bộ thủ của nó để tra cứu trong từ điển giấy hoặc vẽ lại trên từ điển điện tử.")
+        
+        st.write("Tiếng Trung có tổng cộng 214 bộ thủ (theo Khang Hy Tự Điển). Tuy nhiên, đối với người học hiện đại, chúng ta chỉ cần nắm vững khoảng **50 - 80 bộ thủ thông dụng nhất** là đã đủ để đọc hiểu phần lớn Hán ngữ.")
+
+    with tab2:
+        st.markdown("<h3 style='color: #1e3a8a; margin-top: 10px;'>SỰ BIẾN THỂ KHI GHÉP CHỮ</h3>", unsafe_allow_html=True)
+        st.write("Chữ Hán được viết gọn gàng trong một ô vuông cân đối (chữ vuông). Do đó, khi nhiều bộ thủ ghép lại với nhau, một số bộ thủ bắt buộc phải **'biến thể' (thay đổi hình dáng)**: bị thu hẹp lại, bẹp xuống, hoặc nét ngang biến thành nét hất để 'nhường chỗ' cho thành phần khác.")
+        st.write("Nắm được quy tắc này, bạn sẽ không bị bỡ ngỡ khi thấy 'cùng là bộ đó mà sao viết lạ quá'.")
+        
+        st.markdown("---")
+        
+        variants = [
+            {"char": "亻", "name": "1. Bộ Nhân (Người) : 人 ➔ 亻", "meaning": "Khi đứng bên trái, chữ Nhân (人) xòe 2 chân bị thu gọn lại thành Nhân đứng (亻).", "example": "他 (anh ấy), 休 (nghỉ ngơi)"},
+            {"char": "忄", "name": "2. Bộ Tâm (Tim) : 心 ➔ 忄 hoặc 㣺", "meaning": "Khi đứng trái biến thành Tâm đứng (忄). Đứng dưới đáy có thể biến thành 4 chấm (㣺).", "example": "忙 (bận rộn), 慕 (hâm mộ)"},
+            {"char": "氵", "name": "3. Bộ Thủy (Nước) : 水 ➔ 氵", "meaning": "Khi đứng bên trái, bộ Thủy (水) biến thành 3 chấm thủy (氵) để tiết kiệm diện tích.", "example": "海 (biển), 江 (sông)"},
+            {"char": "灬", "name": "4. Bộ Hỏa (Lửa) : 火 ➔ 灬", "meaning": "Khi nằm dưới đáy, ngọn lửa vươn cao (火) biến thành 4 chấm hỏa nằm bẹp xuống (灬).", "example": "热 (nóng), 黑 (đen)"},
+            {"char": "扌", "name": "5. Bộ Thủ (Tay) : 手 ➔ 扌", "meaning": "Khi đứng bên trái, bàn tay xòe ra (手) biến thành bộ Gảy (扌) với nét hất nhọn ngược lên.", "example": "打 (đánh), 拉 (kéo)"},
+            {"char": "刂", "name": "6. Bộ Đao (Dao) : 刀 ➔ 刂", "meaning": "Khi nằm bên phải, con dao (刀) biến thành 2 nét sổ dọc gọi là Đao đứng (刂).", "example": "刻 (khắc), 剑 (kiếm)"}
+        ]
+        
+        var_cards = "<div class='radical-list'>\n"
+        for v in variants:
+            examples = v['example'].split(', ')
+            ex_html = "".join([f"<li>🔸 <span class='ex-hl'>{ex.split(' ')[0]}</span> {' '.join(ex.split(' ')[1:])}</li>" for ex in examples])
+            
+            var_cards += f"<div class='radical-row'>\n"
+            var_cards += f"<div class='radical-char-left'>{v['char']}</div>\n"
+            var_cards += f"<div class='radical-info'>\n"
+            var_cards += f"<div class='radical-title'>{v['name']}</div>\n"
+            var_cards += f"<div class='radical-desc'>{v['meaning']}</div>\n"
+            var_cards += f"<ul class='radical-ex-list'>\n{ex_html}\n</ul>\n"
+            var_cards += f"</div>\n"
+            var_cards += f"</div>\n"
+        var_cards += "</div>"
+        
+        st.markdown(var_cards, unsafe_allow_html=True)
+
+    with tab3:
+        st.markdown("<h3 style='color: #1e3a8a; margin-top: 10px;'>VỊ TRÍ ĐỨNG CỦA BỘ THỦ</h3>", unsafe_allow_html=True)
+        st.write("Bộ thủ có thể xuất hiện ở **7 vị trí cơ bản**. Nhận diện đúng vị trí giúp bạn hiểu hình thể chữ và tra từ điển nhanh hơn.")
+        
+        st.markdown("---")
+        
+        # Nhóm 1: Ngang (Trái - Phải)
+        st.markdown("<div style='background:#f8fafc; padding:20px; border-radius:12px; border-left:6px solid #3b82f6; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#1e3a8a; margin-top:0; font-size: 1.2rem;'>➡️ 1. CẤU TRÚC NGANG (TRÁI - PHẢI)</h4>", unsafe_allow_html=True)
+        
+        st.markdown("**Bên Trái (Tả)**: Vị trí phổ biến nhất.")
+        st.markdown("""
+        * 🔸 **氵** (Thủy) trong chữ **海** (biển)
+        * 🔸 **亻** (Nhân) trong chữ **他** (anh ấy)
+        """)
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("**Bên Phải (Hữu)**:")
+        st.markdown("""
+        * 🔸 **刂** (Đao) trong chữ **刻** (khắc)
+        * 🔸 **阝** (Phụ) trong chữ **都** (đô thị)
+        """)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Nhóm 2: Dọc (Trên - Dưới)
+        st.markdown("<div style='background:#f0fdf4; padding:20px; border-radius:12px; border-left:6px solid #10b981; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#065f46; margin-top:0; font-size: 1.2rem;'>↕️ 2. CẤU TRÚC DỌC (TRÊN - DƯỚI)</h4>", unsafe_allow_html=True)
+        
+        st.markdown("**Bên Trên (Thượng)**: Thường mang ý che phủ.")
+        st.markdown("""
+        * 🔸 **艹** (Thảo) trong chữ **花** (hoa)
+        * 🔸 **宀** (Miên) trong chữ **家** (nhà)
+        """)
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("**Bên Dưới (Hạ)**: Thường dùng để làm nền tảng đỡ.")
+        st.markdown("""
+        * 🔸 **灬** (Hỏa) trong chữ **热** (nóng)
+        * 🔸 **心** (Tâm) trong chữ **想** (nhớ)
+        """)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Nhóm 3: Bao quanh & Bọc góc
+        st.markdown("<div style='background:#fffbeb; padding:20px; border-radius:12px; border-left:6px solid #f59e0b; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);'>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#b45309; margin-top:0; font-size: 1.2rem;'>🔳 3. BAO QUANH & BỌC GÓC</h4>", unsafe_allow_html=True)
+        
+        st.markdown("**Bao quanh (Vi)**: Ôm trọn vẹn chữ.")
+        st.markdown("""
+        * 🔸 **囗** (Vi) trong chữ **国** (quốc gia)
+        * 🔸 **门** (Môn) trong chữ **问** (hỏi)
+        """)
+        
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("**Bọc góc trên trái**: Giống mái hiên.")
+        st.markdown("""
+        * 🔸 **广** (Nghiễm) trong chữ **店** (cửa hàng)
+        * 🔸 **厂** (Hán) trong chữ **原** (nguyên)
+        """)
+
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("**Bọc góc dưới trái**: Giống bệ đỡ.")
+        st.markdown("""
+        * 🔸 **辶** (Xước) trong chữ **进** (vào)
+        * 🔸 **廴** (Dẫn) trong chữ **建** (xây dựng)
+        """)
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    with tab4:
+        st.markdown("<h3 style='color: #1e3a8a; margin-top: 10px;'>CÁC BỘ THỦ THÔNG DỤNG</h3>", unsafe_allow_html=True)
+        st.write("Dưới đây là các bộ thủ bạn sẽ gặp thường xuyên nhất, được thiết kế dạng thẻ trực quan để bạn dễ ghi nhớ.")
+        
+        st.markdown("""<style>
+.radical-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.radical-row {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #3b82f6;
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.radical-row:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.radical-char-left {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #e11d48;
+    min-width: 80px;
+    text-align: center;
+    margin-right: 20px;
+    line-height: 1;
+}
+.radical-info {
+    flex: 1;
+}
+.radical-title {
+    font-weight: 800;
+    color: #1e293b;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+.radical-desc {
+    color: #475569;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+.radical-ex-list {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #334155;
+    margin: 0;
+    list-style-type: none;
+}
+.radical-ex-list li {
+    margin-bottom: 4px;
+}
+.radical-ex-list li:last-child {
+    margin-bottom: 0;
+}
+.ex-hl {
+    color: #e11d48;
+    font-weight: bold;
+}
+</style>""", unsafe_allow_html=True)
+        
+        radicals = [
+            {"char": "亻", "name": "Nhân đứng", "meaning": "Con người", "example": "他 (anh ấy), 们 (chúng tôi)"},
+            {"char": "女", "name": "Nữ", "meaning": "Phụ nữ", "example": "妈 (mẹ), 妹 (em gái)"},
+            {"char": "口", "name": "Khẩu", "meaning": "Cái miệng", "example": "吃 (ăn), 喝 (uống)"},
+            {"char": "氵", "name": "Thủy", "meaning": "Nước", "example": "海 (biển), 洗 (rửa)"},
+            {"char": "灬", "name": "Hỏa", "meaning": "Lửa", "example": "热 (nóng), 煮 (nấu)"},
+            {"char": "木", "name": "Mộc", "meaning": "Cây, gỗ", "example": "树 (cây), 林 (rừng)"},
+            {"char": "艹", "name": "Thảo", "meaning": "Cỏ, thực vật", "example": "花 (hoa), 茶 (trà)"},
+            {"char": "忄", "name": "Tâm", "meaning": "Trái tim, tâm trí", "example": "想 (nhớ), 忙 (bận)"},
+            {"char": "宀", "name": "Miên", "meaning": "Mái nhà", "example": "家 (nhà), 安 (an toàn)"},
+            {"char": "门", "name": "Môn", "meaning": "Cửa", "example": "间 (phòng), 问 (hỏi)"},
+            {"char": "讠", "name": "Ngôn", "meaning": "Lời nói", "example": "语 (ngôn ngữ), 认 (nhận)"},
+            {"char": "辶", "name": "Xước", "meaning": "Đi lại", "example": "进 (vào), 过 (qua)"},
+            {"char": "日", "name": "Nhật", "meaning": "Mặt trời, ngày", "example": "明 (sáng), 昨 (hôm qua)"},
+            {"char": "月", "name": "Nguyệt/Nhục", "meaning": "Trăng / Thịt cơ thể", "example": "肚 (bụng), 腿 (chân)"},
+            {"char": "扌", "name": "Thủ (Gảy)", "meaning": "Bàn tay", "example": "打 (đánh), 拿 (cầm)"},
+            {"char": "⻊", "name": "Túc", "meaning": "Bàn chân", "example": "跑 (chạy), 跳 (nhảy)"},
+            {"char": "犭", "name": "Khuyển", "meaning": "Động vật", "example": "狗 (chó), 猫 (mèo)"},
+            {"char": "虫", "name": "Trùng", "meaning": "Côn trùng", "example": "蛇 (rắn), 蜂 (ong)"},
+            {"char": "广", "name": "Nghiễm", "meaning": "Mái che, nhà", "example": "店 (cửa hàng), 床 (giường)"},
+            {"char": "饣", "name": "Thực", "meaning": "Ăn uống", "example": "饭 (cơm), 饿 (đói)"}
+        ]
+        
+        html_cards = "<div class='radical-list'>\n"
+        for r in radicals:
+            examples = r['example'].split(', ')
+            ex_html = "".join([f"<li>🔸 <span class='ex-hl'>{ex.split(' ')[0]}</span> {' '.join(ex.split(' ')[1:])}</li>" for ex in examples])
+            
+            html_cards += f"<div class='radical-row'>\n"
+            html_cards += f"<div class='radical-char-left'>{r['char']}</div>\n"
+            html_cards += f"<div class='radical-info'>\n"
+            html_cards += f"<div class='radical-title'>Bộ {r['name']}</div>\n"
+            html_cards += f"<div class='radical-desc'>Ý nghĩa: {r['meaning']}</div>\n"
+            html_cards += f"<ul class='radical-ex-list'>\n{ex_html}\n</ul>\n"
+            html_cards += f"</div>\n"
+            html_cards += f"</div>\n"
+        html_cards += "</div>"
+        
+        st.markdown(html_cards, unsafe_allow_html=True)
