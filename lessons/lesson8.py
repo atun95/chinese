@@ -458,7 +458,7 @@ def show_lesson8_6_radicals_common():
     with tab1:
         st.markdown("<h3 style='color: #1e3a8a; margin-top: 10px;'>BỘ THỦ LÀ GÌ?</h3>", unsafe_allow_html=True)
         st.write("Trong tiếng Việt, chúng ta ghép các chữ cái (a, b, c) lại để tạo thành từ. Còn trong tiếng Trung, người ta ghép các nét bút cơ bản để tạo thành chữ Hán. Tuy nhiên, nếu chỉ nhớ từng nét thì sẽ rất khó và dễ quên. Do đó, người xưa đã tạo ra **Bộ thủ (部首 - Bùshǒu)**.")
-        st.write("Bộ thủ là thành phần cấu tạo nên chữ Hán, thường mang ý nghĩa biểu thị phạm trù, giống loài, hoặc nhóm từ vựng của chữ đó. Có thể coi Bộ thủ giống như 'gốc từ' trong tiếng Anh.")
+        st.write("Bộ thủ là thành phần cấu tạo nên chữ Hán, thường mang ý nghĩa biểu thị phạm trù, giống loài, hoặc nhóm từ vựng của chữ đó.")
         
         st.markdown("<h4 style='color: #0f172a; margin-top: 20px;'>CHỮ ĐƠN THỂ & CHỮ HỢP THỂ</h4>", unsafe_allow_html=True)
         st.write("Dựa vào cấu trúc, chữ Hán được chia làm 2 loại chính:")
