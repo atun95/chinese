@@ -553,7 +553,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 8.4 - Hệ thống Bộ thủ",
         "Bài 8.5 - Đơn thể & Hợp thể",
         "Bài 8.6 - Các bộ thủ thông dụng",
-        "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ"
+        "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ",
+        "Bài 9.2 - So sánh 不 và 没"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -845,6 +846,9 @@ elif menu == "Bài 8.6 - Các bộ thủ thông dụng":
     
 elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
     lesson9.show_lesson9_1_countries_currency()
+
+elif menu == "Bài 9.2 - So sánh 不 và 没":
+    lesson9.show_lesson9_2_bu_mei()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
