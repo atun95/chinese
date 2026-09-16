@@ -427,10 +427,10 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
         "Quy tắc cốt lõi nhất cần nhớ: Cái quan trọng, chính yếu hơn đứng sau; cái phụ trợ, bổ nghĩa đứng trước. Nắm vững 3 cấu trúc cốt lõi cùng quy tắc giản lược chữ 的."
     )
 
-    tab_grammar, tab_omission, tab_practice, tab_quiz = st.tabs([
+    tab_grammar, tab_omission, tab_dinhngu, tab_quiz = st.tabs([
         "📚 Cấu trúc ngữ pháp",
         "💡 Quy tắc lược bỏ 的",
-        "🗣️ Thực hành khẩu ngữ",
+        "🔍 Định ngữ + 的",
         "📝 Bài tập phản xạ"
     ])
 
@@ -471,46 +471,49 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
                         key=f"play_v72_{group_idx}_{idx}"
                     )
             if group_idx == 2:
-                comparison_table_html = """
-                <div class="comparison-card" style="border-left-color: #3b82f6; margin-top: 15px;">
-                    <div class="comparison-title" style="color: #1d4ed8; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
-                        🔍 Bảng so sánh nhanh
-                    </div>
-                    <table style="width:100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92rem; background: #ffffff;">
-                        <thead>
-                            <tr style="background-color: #eff6ff;">
-                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 20%;">Đặc điểm</th>
-                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这本书是我的</th>
-                                <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这是我的书</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Dịch nghĩa</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Cuốn sách này là của tôi.</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Đây là cuốn sách của tôi.</td>
-                            </tr>
-                            <tr style="background-color: #f8fafc;">
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Tiếng Anh</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This book is mine.</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This is my book.</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Trọng tâm nhấn mạnh</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #16a34a; font-weight: 600;">Người sở hữu <span style="font-weight: normal; color: #475569;">(Là của tôi, không phải của ai khác).</span></td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #ea580c; font-weight: 600;">Vật thể <span style="font-weight: normal; color: #475569;">(Giới thiệu đây là cuốn sách).</span></td>
-                            </tr>
-                            <tr style="background-color: #f8fafc;">
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Câu hỏi tương ứng</td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这本书是谁的？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Cuốn sách này của ai?)</span></td>
-                                <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这是什么？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Đây là cái gì?)</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                """
-                st.markdown(comparison_table_html.replace("\n", " "), unsafe_allow_html=True)
+                pass  # tính từ đơn âm, không cần thêm gì
             st.markdown("<br/>", unsafe_allow_html=True)
+
+        # Bảng so sánh nhanh — đặt cuối cùng sau tất cả các nhóm
+        comparison_table_html = """
+        <div class="comparison-card" style="border-left-color: #3b82f6; margin-top: 15px;">
+            <div class="comparison-title" style="color: #1d4ed8; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                🔍 Bảng so sánh nhanh: 这本书是我的 vs 这是我的书
+            </div>
+            <table style="width:100%; border-collapse: collapse; margin-top: 12px; font-size: 0.92rem; background: #ffffff;">
+                <thead>
+                    <tr style="background-color: #eff6ff;">
+                        <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 20%;">Đặc điểm</th>
+                        <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这本书是我的</th>
+                        <th style="padding: 10px; border: 1px solid #bfdbfe; text-align: left; color: #1e3a8a; font-weight: 700; width: 40%;">这是我的书</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Dịch nghĩa</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Cuốn sách này là của tôi.</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a; font-weight: 500;">Đây là cuốn sách của tôi.</td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Tiếng Anh</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This book is mine.</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 0.95rem; color: #2563eb;">This is my book.</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Trọng tâm nhấn mạnh</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #16a34a; font-weight: 600;">Người sở hữu <span style="font-weight: normal; color: #475569;">(Là của tôi, không phải của ai khác).</span></td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #ea580c; font-weight: 600;">Vật thể <span style="font-weight: normal; color: #475569;">(Giới thiệu đây là cuốn sách).</span></td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Câu hỏi tương ứng</td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这本书是谁的？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Cuốn sách này của ai?)</span></td>
+                        <td style="padding: 10px; border: 1px solid #e2e8f0; color: #0f172a;"><span style="font-size: 1rem; font-weight: bold;">这是什么？</span><br/><span style="font-size: 0.85rem; color: #475569;">(Đây là cái gì?)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        """
+        st.markdown(comparison_table_html.replace("\n", " "), unsafe_allow_html=True)
 
     # ================= TAB 2: QUY TẮC LƯỢC BỎ =================
     with tab_omission:
@@ -562,37 +565,254 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
             unsafe_allow_html=True
         )
 
-    # ================= TAB 3: THỰC HÀNH KHẨU NGỮ =================
-    with tab_practice:
-        st.subheader("🗣️ Thực hành Giao tiếp và Phản xạ")
-        st.write("Nghe câu hỏi hoặc câu khẳng định và chọn phương án phản hồi hợp lý nhất:")
+    # ================= TAB 3: ĐỊNH NGỮ + 的 =================
+    with tab_dinhngu:
+        st.subheader("🔍 Định ngữ + 的 + Danh Từ ")
 
-        practice_items_de = [
+        # --- PHẦN 1: ĐỊNH NGỮ LÀ GÌ? ---
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border-radius: 16px; padding: 24px; margin-bottom: 24px; border: 1px solid #bfdbfe;">
+            <div style="font-size: 1.5rem; font-weight: 800; color: #1e3a8a; margin-bottom: 12px;">📖 Định ngữ (定语) là gì?</div>
+            <p style="font-size: 1.05rem; color: #334155; line-height: 1.8;">
+                <b>Định ngữ</b> là thành phần đứng <b>trước danh từ</b> để bổ sung thông tin, mô tả, xác định hoặc giới hạn nghĩa cho danh từ đó.
+                Trong tiếng Trung, toàn bộ định ngữ đều đứng <b>trước</b> danh từ (ngược lại với tiếng Việt thường đứng sau).
+            </p>
+            <div style="display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+                <div style="background: #fff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 18px; flex: 1; min-width: 200px;">
+                    <div style="font-weight: 700; color: #1d4ed8; margin-bottom: 6px;">🇻🇳 Tiếng Việt</div>
+                    <div style="color: #475569;">Danh từ đứng <b>trước</b>, định ngữ đứng <b>sau</b>:<br/>
+                    → <b>người</b> <span style="color:#dc2626">làm việc ở Trung Quốc</span><br/>
+                    → <b>cuốn sách</b> <span style="color:#dc2626">mà anh ấy mua</span></div>
+                </div>
+                <div style="background: #fff; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px 18px; flex: 1; min-width: 200px;">
+                    <div style="font-weight: 700; color: #15803d; margin-bottom: 6px;">🇨🇳 Tiếng Trung</div>
+                    <div style="color: #475569;">Định ngữ đứng <b>trước</b> + 的 + Danh từ:<br/>
+                    → <span style="color:#dc2626">在中国工作</span> + 的 + <b>人</b><br/>
+                    → <span style="color:#dc2626">他买</span> + 的 + <b>书</b></div>
+                </div>
+                <div style="background: #fff; border: 1px solid #fed7aa; border-radius: 10px; padding: 12px 18px; flex: 1; min-width: 200px;">
+                    <div style="font-weight: 700; color: #c2410c; margin-bottom: 6px;">🇬🇧 Tiếng Anh</div>
+                    <div style="color: #475569;">Mệnh đề quan hệ đứng <b>sau</b> danh từ:<br/>
+                    → the person <span style="color:#dc2626">who works in China</span><br/>
+                    → the book <span style="color:#dc2626">that he bought</span></div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### 📐 Công thức tổng quát")
+        st.markdown("""
+        <div style="background: #1e293b; color: #f8fafc; border-radius: 12px; padding: 20px 28px; font-size: 1.25rem; font-weight: 700; text-align: center; letter-spacing: 0.5px; margin-bottom: 24px;">
+            <span style="color: #f59e0b;">[ Định ngữ ]</span>
+            <span style="color: #94a3b8; margin: 0 12px;">+</span>
+            <span style="color: #34d399; font-size: 1.6rem;">的</span>
+            <span style="color: #94a3b8; margin: 0 12px;">+</span>
+            <span style="color: #60a5fa;">[ Danh từ  ]</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # --- PHẦN 2: 4 LOẠI ĐỊNH NGỮ ---
+        st.markdown("### 🗂️ 4 loại định ngữ thường gặp")
+
+        dinhngu_types = [
             {
-                "id": "pr_de1",
-                "q_han": "这是谁的电脑？",
-                "q_py": "Zhè shì shéi de diànnǎo?",
-                "q_vi": "Đây là máy tính của ai?",
-                "choices": [
-                    "这是我爸爸的电脑。 (Zhè shì wǒ bàba de diànnǎo.) - Đây là máy tính của bố tôi.",
-                    "这是 tôi 电脑。 (Zhè shì wǒ diànnǎo.) - Đây là máy tính tôi.",
-                    "我爸爸很忙。 (Wǒ bàba hěn máng.) - Bố tôi rất bận."
-                ],
-                "correct": "这是 tôi 电脑。 (Zhè shì wǒ de diànnǎo.) - Đây là máy tính của bố tôi." # Wait, let's fix this option to match correctness
+                "so": "① ",
+                "ten": "Đại từ / Danh từ sở hữu",
+                "color_border": "#3b82f6",
+                "color_bg": "#eff6ff",
+                "color_title": "#1d4ed8",
+                "congthuc": "Đại từ / Danh từ + 的 + Danh từ",
+                "giaithich": "Biểu thị quyền sở hữu hoặc thuộc về. Tương đương 'của' trong tiếng Việt.",
+                "vidu": [
+                    ("我的书", "wǒ de shū", "sách của tôi", "我 (tôi) → của tôi → sách"),
+                    ("老师的电脑", "lǎoshī de diànnǎo", "máy tính của thầy giáo", "老师 (thầy giáo) → của thầy → máy tính"),
+                    ("中国的文化", "Zhōngguó de wénhuà", "văn hóa của Trung Quốc", "中国 (Trung Quốc) → của Trung Quốc → văn hóa"),
+                ]
             },
             {
-                "id": "pr_de2",
-                "q_han": "你要买哪个苹果？",
-                "q_py": "Nǐ yào mǎi nǎge píngguǒ?",
-                "q_vi": "Bạn muốn mua quả táo nào?",
-                "choices": [
-                    "我要大的。 (Wǒ yào dà de.) - Tôi lấy quả to.",
-                    "苹果很好吃。 (Píngguǒ hěn hǎochī.) - Táo rất ngon.",
-                    "这是我的。 (Zhè shì wǒ de.) - Đây là của tôi."
-                ],
-                "correct": "我要大的。 (Wǒ yào dà de.) - Tôi lấy quả to."
+                "so": "② ",
+                "ten": "Tính từ / Cụm tính từ",
+                "color_border": "#8b5cf6",
+                "color_bg": "#faf5ff",
+                "color_title": "#7c3aed",
+                "congthuc": "Tính từ + 的 + Danh từ",
+                "giaithich": "Mô tả tính chất, đặc điểm của danh từ. Tính từ đơn âm có thể bỏ 的; tính từ đa âm hoặc có bổ trợ (很/非常) phải có 的.",
+                "vidu": [
+                    ("很好的朋友", "hěn hǎo de péngyou", "người bạn rất tốt", "很好 (rất tốt) + 的 → bổ nghĩa cho 朋友"),
+                    ("漂亮的衣服", "piàoliang de yīfu", "bộ quần áo đẹp", "漂亮 (đẹp, 2 âm) + 的 → bổ nghĩa cho 衣服"),
+                    ("很贵的东西", "hěn guì de dōngxi", "thứ rất đắt", "很贵 (rất đắt) + 的 → bổ nghĩa cho 东西"),
+                ]
+            },
+            {
+                "so": "③ ",
+                "ten": "Mệnh đề động từ (S + V)",
+                "color_border": "#0ea5e9",
+                "color_bg": "#f0f9ff",
+                "color_title": "#0369a1",
+                "congthuc": "[Chủ ngữ + Động từ] + 的 + Danh từ",
+                "giaithich": "Toàn bộ một mệnh đề (có chủ ngữ và động từ) đứng trước 的 làm định ngữ. Đây là cấu trúc tương đương mệnh đề quan hệ 'that / who / which' trong tiếng Anh.",
+                "vidu": [
+                    ("他买的书", "tā mǎi de shū", "cuốn sách anh ấy mua", "他买 (anh ấy mua) + 的 → xác định cuốn sách NÀO"),
+                    ("我喜欢的颜色", "wǒ xǐhuān de yánsè", "màu sắc tôi thích", "我喜欢 (tôi thích) + 的 → xác định màu SẮC nào"),
+                    ("妈妈做的菜", "māma zuò de cài", "món ăn mẹ nấu", "妈妈做 (mẹ nấu) + 的 → xác định món ăn nào"),
+                ]
+            },
+            {
+                "so": "④ ",
+                "ten": "Cụm giới từ / Trạng ngữ địa điểm-thời gian",
+                "color_border": "#10b981",
+                "color_bg": "#f0fdf4",
+                "color_title": "#047857",
+                "congthuc": "[Giới từ + Danh từ + Động từ] + 的 + Danh từ",
+                "giaithich": "Cụm giới từ chỉ địa điểm (在...) hoặc thời gian (昨天...) đứng đầu mệnh đề định ngữ.",
+                "vidu": [
+                    ("在中国工作的人", "zài Zhōngguó gōngzuò de rén", "người làm việc ở Trung Quốc", "在中国工作 (làm việc ở TQ) + 的 → người NÀO?"),
+                    ("昨天来的老师", "zuótiān lái de lǎoshī", "người thầy đến hôm qua", "昨天来 (đến hôm qua) + 的 → thầy NÀO?"),
+                    ("在学校学习的学生", "zài xuéxiào xuéxí de xuésheng", "học sinh học ở trường", "在学校学习 (học ở trường) + 的 → học sinh NÀO?"),
+                ]
             }
         ]
+
+        for dt in dinhngu_types:
+            st.markdown(f"""
+            <div style="border-left: 5px solid {dt['color_border']}; background: {dt['color_bg']}; border-radius: 10px; padding: 18px 22px; margin-bottom: 20px;">
+                <div style="font-size: 1.15rem; font-weight: 800; color: {dt['color_title']}; margin-bottom: 6px;">{dt['so']}{dt['ten']}</div>
+                <div style="background: {dt['color_border']}; color: #fff; display: inline-block; padding: 3px 14px; border-radius: 20px; font-family: monospace; font-size: 0.95rem; font-weight: 700; margin-bottom: 10px;">{dt['congthuc']}</div>
+                <p style="color: #334155; font-size: 0.95rem; margin: 8px 0 12px 0;">{dt['giaithich']}</p>
+                <table style="width:100%; border-collapse: collapse; font-size: 0.93rem;">
+                    <thead>
+                        <tr style="background: rgba(0,0,0,0.06);">
+                            <th style="padding: 8px 12px; text-align:left; border-radius: 6px 0 0 0;">Chữ Hán</th>
+                            <th style="padding: 8px 12px; text-align:left;">Pinyin</th>
+                            <th style="padding: 8px 12px; text-align:left;">Dịch nghĩa</th>
+                            <th style="padding: 8px 12px; text-align:left; border-radius: 0 6px 0 0;">Phân tích</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {''.join([f'<tr style="background:rgba(255,255,255,0.6); border-bottom: 1px solid rgba(0,0,0,0.06);"><td style="padding:8px 12px; font-size:1.15rem; font-weight:700; color:#0f172a;">{v[0]}</td><td style="padding:8px 12px; font-family:monospace; color:#2563eb; font-weight:600;">{v[1]}</td><td style="padding:8px 12px; color:#475569; font-style:italic;">{v[2]}</td><td style="padding:8px 12px; color:#64748b; font-size:0.87rem;">{v[3]}</td></tr>' for v in dt['vidu']])}
+                    </tbody>
+                </table>
+            </div>
+            """, unsafe_allow_html=True)
+
+        # --- PHẦN 3: BẢNG TỔNG KẾT ---
+        st.markdown("### 📊 Bảng tổng kết: Khi nào CẦN và KHÔNG CẦN 的?")
+        st.markdown("""
+        <table style="width:100%; border-collapse: collapse; font-size: 0.95rem; margin-bottom: 20px;">
+            <thead>
+                <tr style="background: #1e3a8a; color: #fff;">
+                    <th style="padding: 12px; text-align: left;">Loại định ngữ</th>
+                    <th style="padding: 12px; text-align: center;">Dùng 的?</th>
+                    <th style="padding: 12px; text-align: left;">Ví dụ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #fef2f2;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Tính từ đơn âm (1 chữ)</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">⚡ Không cần</td>
+                    <td style="padding: 10px 12px;">大苹果 (táo to), 好人 (người tốt), 新书 (sách mới)</td>
+                </tr>
+                <tr style="background: #fff7ed;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Tính từ đa âm (≥2 chữ)</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">✅ Bắt buộc</td>
+                    <td style="padding: 10px 12px;">漂亮<b>的</b>衣服, 高兴<b>的</b>事情</td>
+                </tr>
+                <tr style="background: #fef2f2;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Tính từ có bổ nghĩa (很/非常)</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">✅ Bắt buộc</td>
+                    <td style="padding: 10px 12px;">很大<b>的</b>苹果, 非常好<b>的</b>朋友</td>
+                </tr>
+                <tr style="background: #f0fdf4;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Đại từ sở hữu + người thân/nơi chốn thân thuộc</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">⚡ Có thể bỏ</td>
+                    <td style="padding: 10px 12px;">我(的)妈妈, 我(的)学校, 他(的)朋友</td>
+                </tr>
+                <tr style="background: #fff;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Đại từ sở hữu + đồ vật cá nhân</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">✅ Bắt buộc</td>
+                    <td style="padding: 10px 12px;">我<b>的</b>书, 他<b>的</b>电脑, 你<b>的</b>衣服</td>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td style="padding: 10px 12px; font-weight: 600;">Mệnh đề S+V làm định ngữ</td>
+                    <td style="padding: 10px 12px; text-align: center; font-size: 1.2rem;">✅ Bắt buộc</td>
+                    <td style="padding: 10px 12px;">他买<b>的</b>书, 我喜欢<b>的</b>颜色</td>
+                </tr>
+            </tbody>
+        </table>
+        """, unsafe_allow_html=True)
+
+        st.info("💡 **Quy tắc vàng:** Nếu phần định ngữ dài hơn 1 chữ hoặc là một mệnh đề có động từ → luôn luôn cần 的!")
+
+    # ================= TAB 4: BÀI TẬP PHẢN XẠ =================
+    with tab_quiz:
+        st.subheader("📝 Bài tập phản xạ chữ 的 (de)")
+        st.write("Làm bài trắc nghiệm dưới đây và nhấn nút Nộp bài để ghi nhận kết quả:")
+
+        if "b72_score_submitted" not in st.session_state:
+            st.session_state.b72_score_submitted = False
+
+        score_b7_2 = 0
+        user_answers_b72 = {}
+
+        for idx, item in enumerate(B7_2_QUIZ_DATA):
+            st.markdown(f"#### Câu {idx+1}: {item['q']}")
+            user_ans = st.radio(f"Chọn đáp án đúng cho Câu {idx+1}:", item['choices'], index=0, key=f"v72_quiz_ans_{idx}")
+            user_answers_b72[idx] = user_ans
+            if user_ans == item['answer']:
+                score_b7_2 += 1
+            st.markdown("<hr style='margin: 15px 0; border: 0; border-top: 1px dashed #e2e8f0;'/>", unsafe_allow_html=True)
+
+        if not st.session_state.b72_score_submitted:
+            if st.button("📝 Chấm điểm bài tập Bài 7.2", type="primary", use_container_width=True, key="v72_quiz_grade_btn"):
+                st.session_state.b72_score_submitted = True
+                st.rerun()
+        else:
+            st.markdown("### Kết quả chấm điểm chi tiết:")
+            for idx, item in enumerate(B7_2_QUIZ_DATA):
+                u_ans = user_answers_b72[idx]
+                if u_ans == item['answer']:
+                    st.success(f"✅ **Câu {idx+1}: Chính xác!**")
+                    st.write(f"Giải thích: {item['explain']}")
+                else:
+                    st.error(f"❌ **Câu {idx+1}: Chưa chính xác!** (Bạn chọn: {u_ans})")
+                    st.write(f"👉 Đáp án đúng: **{item['answer']}**")
+                    st.write(f"Giải thích: {item['explain']}")
+
+            final_percentage_score = round((score_b7_2 / len(B7_2_QUIZ_DATA)) * 10, 2)
+            st.markdown(f"### Điểm tổng kết: **{score_b7_2} / {len(B7_2_QUIZ_DATA)}** ({final_percentage_score} điểm hệ 10)")
+
+            if score_b7_2 == len(B7_2_QUIZ_DATA):
+                st.balloons()
+                st.success("Xuất sắc! Bạn đã nắm vững 100% cách dùng chữ 的! 👑")
+
+            st.markdown("---")
+            name = st.text_input("Nhập tên học viên để nộp điểm:", key="v72_student_name")
+            if st.button("Nộp bài tập Bài 7.2", type="primary", use_container_width=True, key="v72_submit_score_btn"):
+                if name:
+                    row = {
+                        "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                        "học viên": name,
+                        "tổng điểm": final_percentage_score,
+                        "BT: Chữ 的": f"{score_b7_2}/{len(B7_2_QUIZ_DATA)}"
+                    }
+                    if save_score_row_b7_2(row):
+                        st.success("Đã nộp bài và lưu điểm thành công!")
+                        st.session_state.b72_score_submitted = False
+                        save_progress()
+                        st.rerun()
+                else:
+                    st.error("Vui lòng nhập tên để nộp bài!")
+
+            if st.button("🔄 Làm lại bài tập", use_container_width=True, key="v72_redo_quiz_btn"):
+                st.session_state.b72_score_submitted = False
+                save_progress()
+                st.rerun()
+
+        # Hiển thị bảng xếp hạng nộp bài lớp học
+        all_scores = load_all_scores_b7_2()
+        if all_scores:
+            st.write("### 🏆 Bảng xếp hạng nộp bài lớp học:")
+            st.dataframe(all_scores, use_container_width=True)
 
 def show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3):
     st.markdown("""

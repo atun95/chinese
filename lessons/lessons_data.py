@@ -1618,7 +1618,43 @@ B7_2_DE_DATA = [
         ]
     },
     {
-        "nhom": "3. Cấu trúc lược bỏ danh từ (Cấu trúc chữ 的)",
+        "nhom": "3. Tính từ đơn âm tiết + Danh từ (KHÔNG cần 的)",
+        "mota": "Tính từ đơn âm tiết (1 chữ) có thể ghép trực tiếp với danh từ mà KHÔNG cần chữ 的. Đây là ngoại lệ quan trọng cần ghi nhớ. Khi thêm 的, câu vẫn đúng nhưng nghe cứng và formal hơn.",
+        "items": [
+            {
+                "tu": "大苹果",
+                "pinyin": "dà píngguǒ",
+                "nghianhanh": "Quả táo to",
+                "cachdung": "Tính từ đơn âm '大' ghép thẳng với '苹果', không cần 的. So sánh: '大苹果' (tự nhiên) vs '大的苹果' (formal, sách vở).",
+                "vd_han": "我要买大苹果，不要小苹果。",
+                "vd_py": "Wǒ yào mǎi dà píngguǒ, bú yào xiǎo píngguǒ.",
+                "vd_vi": "Tôi muốn mua táo to, không muốn táo nhỏ.",
+                "sound_txt": "我要买大苹果，不要小苹果。"
+            },
+            {
+                "tu": "好人",
+                "pinyin": "hǎo rén",
+                "nghianhanh": "Người tốt",
+                "cachdung": "Tính từ đơn âm '好' ghép trực tiếp với '人'. Dùng '好人' nghe tự nhiên; '好的人' vẫn đúng nhưng thường chỉ xuất hiện trong văn viết hoặc khi nhấn mạnh đặc biệt.",
+                "vd_han": "他是好人。",
+                "vd_py": "Tā shì hǎo rén.",
+                "vd_vi": "Anh ấy là người tốt.",
+                "sound_txt": "他是好人。"
+            },
+            {
+                "tu": "新书 / 旧书",
+                "pinyin": "xīn shū / jiù shū",
+                "nghianhanh": "Sách mới / Sách cũ",
+                "cachdung": "Các tính từ đơn âm chỉ trạng thái như 新 (mới), 旧 (cũ), 热 (nóng), 冷 (lạnh) đều ghép trực tiếp với danh từ. Khi tính từ được bổ nghĩa thêm (VD: 很新), bắt buộc thêm 的: 很新的书.",
+                "vd_han": "这是新书，那是旧书。",
+                "vd_py": "Zhè shì xīn shū, nà shì jiù shū.",
+                "vd_vi": "Đây là sách mới, kia là sách cũ.",
+                "sound_txt": "这是新书，那是旧书。"
+            }
+        ]
+    },
+    {
+        "nhom": "4. Cấu trúc lược bỏ danh từ (Cấu trúc chữ 的)",
         "mota": "Lược bỏ danh từ phía sau 的 khi ngữ cảnh đã rõ ràng để tránh lặp từ.",
         "items": [
             {
