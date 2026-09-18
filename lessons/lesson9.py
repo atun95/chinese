@@ -578,9 +578,8 @@ def show_lesson9_2_bu_mei():
         "Hai từ phủ định quan trọng nhất tiếng Trung — dùng sai là câu sai nghĩa hoàn toàn!"
     )
 
-    tab_theory, tab_compare, tab_examples, tab_tips, tab_quiz = st.tabs([
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
         "📚 Lý thuyết",
-        "🔄 So sánh",
         "📝 Ví dụ song song",
         "⚠️ Lưu ý & Mẹo nhớ",
         "🎮 Luyện tập"
@@ -612,135 +611,216 @@ def show_lesson9_2_bu_mei():
 
         st.markdown("<br/>", unsafe_allow_html=True)
 
-        # 不 rules
-        st.markdown("### 🔴 Khi nào dùng 不 (bù)?")
+        # ══════════════════════════════════════════════════
+        # PHẦN 不
+        # ══════════════════════════════════════════════════
+        st.markdown("### 🔴 3 trường hợp  dùng 不 (bù)")
 
-        rules_bu = [
-            ("💬", "Từ chối / Ý chí chủ động",
-             "Người nói <em>tự quyết định</em> không làm — không phải vì hoàn cảnh.",
-             "我<b>不</b>去。", "Wǒ bù qù.", "Tôi <b>không đi</b> (tôi không muốn đi)."),
-            ("🔄", "Thói quen / Tính chất thường xuyên",
-             "Điều không bao giờ xảy ra theo <em>thói quen</em> của chủ thể.",
-             "他<b>不</b>吃辣。", "Tā bù chī là.", "Anh ấy <b>không ăn</b> cay (thói quen lâu dài)."),
-            ("🎨", "Phủ định tính từ / Trạng thái",
-             "Dùng trước tính từ hoặc từ chỉ trạng thái.",
-             "这个<b>不</b>好。", "Zhège bù hǎo.", "Cái này <b>không tốt</b>."),
-            ("🏷️", "Phủ định 是 và động từ ý chí",
-             "Trước 是, 想, 喜欢, 知道... — những từ thể hiện suy nghĩ, danh tính.",
-             "我<b>不</b>是老师。", "Wǒ bú shì lǎoshī.", "Tôi <b>không phải</b> giáo viên."),
-            ("🔮", "Phủ định tương lai",
-             "Sự việc <em>chưa xảy ra</em>, mang ý định / kế hoạch.",
-             "明天我<b>不</b>来。", "Míngtiān wǒ bù lái.", "Ngày mai tôi <b>sẽ không</b> đến."),
+        cases_bu = [
+            {
+                "so": "1",
+                "ten": "Phủ định ý chí, quyết định, thói quen",
+                "mo_ta": "Người nói <b>chủ động quyết định</b> không làm, hoặc đó là <b>thói quen lâu dài</b> của chủ thể. Không liên quan đến một sự kiện cụ thể đã xảy ra.",
+                "congthuc": [
+                    {"text": "Chủ ngữ", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "不", "color": "#e11d48", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "Động từ hành động", "color": "#60a5fa"},
+                ],
+                "vi_du": [
+                    ("我不去。", "Wǒ bù qù.", "Tôi không đi.", "→ Tôi quyết định không đi (ý chí)"),
+                    ("他不吃辣。", "Tā bù chī là.", "Anh ấy không ăn cay.", "→ Thói quen: anh ấy kiêng cay lâu dài"),
+                    ("明天我不来。", "Míngtiān wǒ bù lái.", "Ngày mai tôi sẽ không đến.", "→ Kế hoạch/ý định tương lai"),
+                ],
+            },
+            {
+                "so": "2",
+                "ten": "Phủ định tính từ và trạng thái",
+                "mo_ta": "Dùng trước <b>tính từ</b> để phủ định một tính chất, đặc điểm. <b>Không</b> dùng 没 với tính từ (ngoại lệ so sánh xem phần 没).",
+                "congthuc": [
+                    {"text": "Chủ ngữ", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "不", "color": "#e11d48", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "Tính từ", "color": "#60a5fa"},
+                ],
+                "vi_du": [
+                    ("这个不好。", "Zhège bù hǎo.", "Cái này không tốt.", "→ Phủ định tính chất 好"),
+                    ("他不高。", "Tā bù gāo.", "Anh ấy không cao.", "→ Phủ định trạng thái 高"),
+                    ("今天不冷。", "Jīntiān bù lěng.", "Hôm nay không lạnh.", "→ Phủ định tính chất thời tiết"),
+                ],
+            },
+            {
+                "so": "3",
+                "ten": "Phủ định 是 và động từ tâm lý / nhận thức",
+                "mo_ta": "Dùng trước <b>是</b> (là/phải), <b>想</b> (muốn), <b>喜欢</b> (thích), <b>知道</b> (biết)... — những từ thể hiện <b>danh tính, cảm xúc, suy nghĩ</b>.",
+                "congthuc": [
+                    {"text": "Chủ ngữ", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "不", "color": "#e11d48", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "是 / 想 / 喜欢 / 知道...", "color": "#60a5fa"},
+                ],
+                "vi_du": [
+                    ("我不是老师。", "Wǒ bú shì lǎoshī.", "Tôi không phải giáo viên.", "→ 不是 = không phải (danh tính)"),
+                    ("她不想去。", "Tā bù xiǎng qù.", "Cô ấy không muốn đi.", "→ 不 + 想 = không muốn (ý chí)"),
+                    ("我不喜欢咖啡。", "Wǒ bù xǐhuān kāfēi.", "Tôi không thích cà phê.", "→ 不 + 喜欢 = không thích (cảm xúc)"),
+                ],
+            },
         ]
 
-        for icon, title, desc, han, py, vi in rules_bu:
+        for case in cases_bu:
+            spans = ""
+            for p in case["congthuc"]:
+                if p.get("big"):
+                    spans += f'<span style="color:{p["color"]};font-size:2rem;font-weight:900;margin:0 6px;line-height:1;">{p["text"]}</span>'
+                else:
+                    spans += f'<span style="color:{p["color"]};font-size:1.0rem;font-weight:700;margin:0 6px;">{p["text"]}</span>'
+
+            rows = ""
+            for han, py, vi, note in case["vi_du"]:
+                rows += f"""
+                <tr style="border-bottom:1px solid #fee2e2;">
+                    <td style="padding:9px 12px;font-size:1.1rem;font-weight:700;color:#0f172a;">{han}</td>
+                    <td style="padding:9px 12px;font-family:monospace;color:#be123c;font-weight:600;">{py}</td>
+                    <td style="padding:9px 12px;color:#475569;font-style:italic;">{vi}</td>
+                    <td style="padding:9px 12px;color:#64748b;font-size:0.85rem;">{note}</td>
+                </tr>"""
+
             st.markdown(f"""
-            <div class="b92-rule-row">
-                <div class="b92-rule-icon">{icon}</div>
-                <div style="flex:1">
-                    <div class="b92-rule-title">{title}</div>
-                    <div class="b92-rule-desc">{desc}</div>
-                    <div class="b92-example">
-                        <span class="han">{han}</span><br/>
-                        <span class="py">{py}</span><br/>
-                        <span class="vi">→ {vi}</span>
-                    </div>
+            <div style="border-left:5px solid #e11d48;background:#fff1f2;border-radius:12px;padding:18px 22px;margin-bottom:20px;">
+                <div style="font-size:1.1rem;font-weight:800;color:#be123c;margin-bottom:6px;">
+                    Trường hợp {case['so']}: {case['ten']}
                 </div>
+                <p style="color:#334155;font-size:0.93rem;margin:0 0 10px 0;">{case['mo_ta']}</p>
+                <div style="background:#1e293b;border-radius:10px;padding:12px 20px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:14px;">
+                    {spans}
+                </div>
+                <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+                    <thead>
+                        <tr style="background:rgba(225,29,72,0.08);">
+                            <th style="padding:8px 12px;text-align:left;color:#9f1239;">Chữ Hán</th>
+                            <th style="padding:8px 12px;text-align:left;color:#9f1239;">Pinyin</th>
+                            <th style="padding:8px 12px;text-align:left;color:#9f1239;">Dịch nghĩa</th>
+                            <th style="padding:8px 12px;text-align:left;color:#9f1239;">Phân tích</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
             </div>
             """, unsafe_allow_html=True)
 
         st.markdown("<br/>", unsafe_allow_html=True)
-        st.markdown("### 🔵 Khi nào dùng 没 (méi)?")
 
-        rules_mei = [
-            ("⏪", "Phủ định hành động đã/chưa xảy ra trong quá khứ",
-             "Hành động <em>đã không / chưa</em> xảy ra — là sự thật khách quan.",
-             "我<b>没</b>去。", "Wǒ méi qù.", "Tôi <b>đã không đi</b> (hành động không xảy ra)."),
-            ("📦", "Phủ định sự tồn tại / sở hữu",
-             "Luôn đứng trước 有 (yǒu) — không có, không tồn tại.",
-             "我<b>没</b>有钱。", "Wǒ méiyǒu qián.", "Tôi <b>không có</b> tiền."),
-            ("📏", "So sánh (chưa đến mức)",
-             "Đứng trước tính từ để so sánh: A 没 B + tính từ = A không bằng B về...",
-             "他<b>没</b>你高。", "Tā méi nǐ gāo.", "Anh ấy <b>không cao bằng</b> bạn."),
+        # ══════════════════════════════════════════════════
+        # PHẦN 没
+        # ══════════════════════════════════════════════════
+        st.markdown("### 🔵 3 trường hợp  dùng 没 (méi)")
+
+        cases_mei = [
+            {
+                "so": "1",
+                "ten": "Phủ định hành động đã xảy ra (quá khứ)",
+                "mo_ta": "Hành động <b>đã không / chưa xảy ra</b> trong thực tế — là sự thật khách quan, không phụ thuộc vào ý chí. Thường đi kèm từ chỉ thời gian quá khứ như <b>昨天, 上午, 刚才</b>...",
+                "congthuc": [
+                    {"text": "Chủ ngữ", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "没", "color": "#1d4ed8", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "Động từ hành động", "color": "#60a5fa"},
+                    {"text": "(sự kiện không xảy ra)", "color": "#94a3b8", "note": True},
+                ],
+                "vi_du": [
+                    ("我没去。", "Wǒ méi qù.", "Tôi đã không đi.", "→ Thực tế: hành động không xảy ra"),
+                    ("他昨天没来。", "Tā zuótiān méi lái.", "Anh ấy hôm qua không đến.", "→ 昨天 (hôm qua) → dùng 没"),
+                    ("我没吃早饭。", "Wǒ méi chī zǎofàn.", "Tôi chưa ăn sáng.", "→ Lần này chưa xảy ra"),
+                ],
+            },
+            {
+                "so": "2",
+                "ten": "Phủ định sự tồn tại / sở hữu — luôn đi với 有",
+                "mo_ta": "Trước <b>有 (yǒu)</b> — phủ định sự tồn tại hoặc sở hữu. <b>Bắt buộc dùng 没, tuyệt đối không dùng 不有</b>.",
+                "congthuc": [
+                    {"text": "Chủ ngữ", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "没", "color": "#1d4ed8", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "有", "color": "#34d399", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "Danh từ", "color": "#60a5fa"},
+                ],
+                "vi_du": [
+                    ("我没有钱。", "Wǒ méiyǒu qián.", "Tôi không có tiền.", "→ 没有 = không có (sở hữu)"),
+                    ("这里没有椅子。", "Zhèlǐ méiyǒu yǐzi.", "Ở đây không có ghế.", "→ 没有 = không tồn tại"),
+                    ("他没有时间。", "Tā méiyǒu shíjiān.", "Anh ấy không có thời gian.", "→ 没有 = không có"),
+                ],
+            },
+            {
+                "so": "3",
+                "ten": "So sánh — A không bằng B",
+                "mo_ta": "Cấu trúc so sánh <b>A 没 B + Tính từ</b>: A không đạt đến mức của B. Đây là trường hợp đặc biệt 没 đứng trước tính từ (không phải phủ định thông thường).",
+                "congthuc": [
+                    {"text": "A", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "没", "color": "#1d4ed8", "big": True},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "B", "color": "#f59e0b"},
+                    {"text": "+", "color": "#94a3b8"},
+                    {"text": "Tính từ", "color": "#60a5fa"},
+                ],
+                "vi_du": [
+                    ("他没你高。", "Tā méi nǐ gāo.", "Anh ấy không cao bằng bạn.", "→ A 没 B + 高 = so sánh"),
+                    ("这个没那个贵。", "Zhège méi nàge guì.", "Cái này không đắt bằng cái kia.", "→ so sánh độ đắt"),
+                    ("今天没昨天冷。", "Jīntiān méi zuótiān lěng.", "Hôm nay không lạnh bằng hôm qua.", "→ so sánh thời tiết"),
+                ],
+            },
         ]
 
-        for icon, title, desc, han, py, vi in rules_mei:
+        for case in cases_mei:
+            spans = ""
+            for p in case["congthuc"]:
+                if p.get("note"):
+                    spans += f'<span style="color:{p["color"]};font-size:0.82rem;font-style:italic;font-weight:600;margin:0 4px;align-self:center;">{p["text"]}</span>'
+                elif p.get("big"):
+                    spans += f'<span style="color:{p["color"]};font-size:2rem;font-weight:900;margin:0 6px;line-height:1;">{p["text"]}</span>'
+                else:
+                    spans += f'<span style="color:{p["color"]};font-size:1.0rem;font-weight:700;margin:0 6px;">{p["text"]}</span>'
+
+            rows = ""
+            for han, py, vi, note in case["vi_du"]:
+                rows += f"""
+                <tr style="border-bottom:1px solid #dbeafe;">
+                    <td style="padding:9px 12px;font-size:1.1rem;font-weight:700;color:#0f172a;">{han}</td>
+                    <td style="padding:9px 12px;font-family:monospace;color:#1d4ed8;font-weight:600;">{py}</td>
+                    <td style="padding:9px 12px;color:#475569;font-style:italic;">{vi}</td>
+                    <td style="padding:9px 12px;color:#64748b;font-size:0.85rem;">{note}</td>
+                </tr>"""
+
             st.markdown(f"""
-            <div class="b92-rule-row">
-                <div class="b92-rule-icon">{icon}</div>
-                <div style="flex:1">
-                    <div class="b92-rule-title">{title}</div>
-                    <div class="b92-rule-desc">{desc}</div>
-                    <div class="b92-example">
-                        <span class="han">{han}</span><br/>
-                        <span class="py">{py}</span><br/>
-                        <span class="vi">→ {vi}</span>
-                    </div>
+            <div style="border-left:5px solid #1d4ed8;background:#eff6ff;border-radius:12px;padding:18px 22px;margin-bottom:20px;">
+                <div style="font-size:1.1rem;font-weight:800;color:#1d4ed8;margin-bottom:6px;">
+                    Trường hợp {case['so']}: {case['ten']}
                 </div>
+                <p style="color:#334155;font-size:0.93rem;margin:0 0 10px 0;">{case['mo_ta']}</p>
+                <div style="background:#1e293b;border-radius:10px;padding:12px 20px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:14px;">
+                    {spans}
+                </div>
+                <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+                    <thead>
+                        <tr style="background:rgba(29,78,216,0.08);">
+                            <th style="padding:8px 12px;text-align:left;color:#1e3a8a;">Chữ Hán</th>
+                            <th style="padding:8px 12px;text-align:left;color:#1e3a8a;">Pinyin</th>
+                            <th style="padding:8px 12px;text-align:left;color:#1e3a8a;">Dịch nghĩa</th>
+                            <th style="padding:8px 12px;text-align:left;color:#1e3a8a;">Phân tích</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
             </div>
             """, unsafe_allow_html=True)
 
-    # ─────────────────────────────────────────────────────────────
-    # TAB 2: BẢNG SO SÁNH
-    # ─────────────────────────────────────────────────────────────
-    with tab_compare:
-        st.markdown("### 🔄 Bảng so sánh trực quan")
-        st.markdown("""
-        <table class="b92-compare-table">
-            <thead>
-                <tr>
-                    <th class="hdr-criterion">Tiêu chí</th>
-                    <th class="hdr-bu">不 (bù)</th>
-                    <th class="hdr-mei">没 (méi)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Ý nghĩa cốt lõi</td>
-                    <td class="cell-bu">Phủ định ý chí, tính chất, thói quen</td>
-                    <td class="cell-mei">Phủ định hành động đã/chưa xảy ra</td>
-                </tr>
-                <tr>
-                    <td>Thì thường gặp</td>
-                    <td class="cell-bu">Hiện tại · Tương lai · Thói quen</td>
-                    <td class="cell-mei">Quá khứ · Thực tế đã xảy ra</td>
-                </tr>
-                <tr>
-                    <td>Đứng trước</td>
-                    <td class="cell-bu">Động từ ý chí + Tính từ + 是</td>
-                    <td class="cell-mei">Động từ hành động + 有</td>
-                </tr>
-                <tr>
-                    <td>Dùng với tính từ</td>
-                    <td class="cell-bu">✅ Trực tiếp: 不好, 不大</td>
-                    <td class="cell-mei">⚠️ Chỉ khi so sánh: 没你高</td>
-                </tr>
-                <tr>
-                    <td>Dùng với 有</td>
-                    <td class="cell-bu">❌ Không dùng: ~~不有~~</td>
-                    <td class="cell-mei">✅ Bắt buộc: 没有</td>
-                </tr>
-                <tr>
-                    <td>So sánh ngang bằng</td>
-                    <td class="cell-bu">❌ Không dùng</td>
-                    <td class="cell-mei">✅ Dùng được: 他没你高</td>
-                </tr>
-                <tr>
-                    <td>Câu hỏi 吗 tương ứng</td>
-                    <td class="cell-bu">他不去吗？ → 对，他不去。</td>
-                    <td class="cell-mei">他没去吗？ → 对，他没去。</td>
-                </tr>
-                <tr>
-                    <td>Ví dụ điển hình</td>
-                    <td class="cell-bu">我不去。(Tôi không muốn đi.)</td>
-                    <td class="cell-mei">我没去。(Tôi đã không đi.)</td>
-                </tr>
-            </tbody>
-        </table>
-        """, unsafe_allow_html=True)
 
-        st.markdown("<br/>", unsafe_allow_html=True)
-        st.info("💡 **Tóm gọn nhất:** 不 = *chủ quan, ý chí* | 没 = *khách quan, thực tế*")
 
     # ─────────────────────────────────────────────────────────────
     # TAB 3: VÍ DỤ SONG SONG

@@ -1568,6 +1568,13 @@ B7_2_DE_DATA = [
     {
         "nhom": "1. Biểu thị sự sở hữu (Của...)",
         "mota": "Người sở hữu + 的 + Vật sở hữu. Ngược lại với tiếng Việt.",
+        "congthuc_parts": [
+            {"text": "[ Người / Vật sở hữu ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "的", "color": "#34d399", "big": True},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "[ Vật được sở hữu ]", "color": "#60a5fa"},
+        ],
         "items": [
             {
                 "tu": "我的书",
@@ -1594,6 +1601,13 @@ B7_2_DE_DATA = [
     {
         "nhom": "2. Biểu thị tính chất, đặc điểm",
         "mota": "Tính từ + 的 + Danh từ để mô tả đặc điểm của danh từ đó.",
+        "congthuc_parts": [
+            {"text": "[ Tính từ / Cụm tính từ ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "的", "color": "#34d399", "big": True},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "[ Danh từ ]", "color": "#60a5fa"},
+        ],
         "items": [
             {
                 "tu": "很好的朋友",
@@ -1619,7 +1633,13 @@ B7_2_DE_DATA = [
     },
     {
         "nhom": "3. Tính từ đơn âm tiết + Danh từ (KHÔNG cần 的)",
-        "mota": "Tính từ đơn âm tiết (1 chữ) có thể ghép trực tiếp với danh từ mà KHÔNG cần chữ 的. Đây là ngoại lệ quan trọng cần ghi nhớ. Khi thêm 的, câu vẫn đúng nhưng nghe cứng và formal hơn.",
+        "mota": "📌 Bổ sung cho phần 2 (Biểu thị tính chất, đặc điểm): Khi tính từ chỉ có 1 âm tiết, có thể ghép trực tiếp với danh từ mà KHÔNG cần chữ 的. Khi thêm 的, câu vẫn đúng nhưng nghe cứng và formal hơn. Trái lại, tính từ đa âm tiết hoặc có bổ trợ (很/非常) bắt buộc phải có 的 (xem phần 2).",
+        "congthuc_parts": [
+            {"text": "[ Tính từ đơn âm ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "[ Danh từ ]", "color": "#60a5fa"},
+            {"text": "(không cần 的)", "color": "#f87171", "note": True},
+        ],
         "items": [
             {
                 "tu": "大苹果",
@@ -1654,8 +1674,14 @@ B7_2_DE_DATA = [
         ]
     },
     {
-        "nhom": "4. Cấu trúc lược bỏ danh từ (Cấu trúc chữ 的)",
+        "nhom": "4. Cấu trúc lược bỏ danh từ",
         "mota": "Lược bỏ danh từ phía sau 的 khi ngữ cảnh đã rõ ràng để tránh lặp từ.",
+        "congthuc_parts": [
+            {"text": "[ Tính từ / Đại từ ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "的", "color": "#34d399", "big": True},
+            {"text": "(lược bỏ danh từ)", "color": "#f87171", "note": True},
+        ],
         "items": [
             {
                 "tu": "大的",
@@ -1666,12 +1692,27 @@ B7_2_DE_DATA = [
                 "vd_py": "Nǐ yào nǎge píngguǒ? Wǒ yào dà de.",
                 "vd_vi": "Bạn muốn quả táo nào? Tôi muốn quả to.",
                 "sound_txt": "我要大的。"
-            },
+            }
+        ]
+    },
+    {
+        "nhom": "5. 的 cuối câu — Xác nhận quyền sở hữu",
+        "mota": "Cấu trúc [Chủ ngữ + 是 + Người sở hữu + 的] dùng để xác nhận chủ sở hữu của một vật. Chữ 的 ở cuối câu thay thế cho toàn bộ danh từ đã đề cập trước đó.",
+        "congthuc_parts": [
+            {"text": "[ Chủ ngữ ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "是", "color": "#c084fc", "big": True},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "[ Người sở hữu ]", "color": "#f59e0b"},
+            {"text": "+", "color": "#94a3b8"},
+            {"text": "的", "color": "#34d399", "big": True},
+        ],
+        "items": [
             {
                 "tu": "我的",
                 "pinyin": "wǒ de",
                 "nghianhanh": "Của tôi",
-                "cachdung": "Rút gọn thay thế cho 'đồ vật của tôi'.",
+                "cachdung": "Cấu trúc: 这本书是我的。 → 的 ở cuối thay cho '我的书' đã nhắc ở đầu câu, nhấn mạnh vào người sở hữu ('là của TÔI, không phải của người khác').",
                 "vd_han": "这本书是我的。",
                 "vd_py": "Zhè běn shū shì wǒ de.",
                 "vd_vi": "Cuốn sách này là của tôi.",

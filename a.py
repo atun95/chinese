@@ -492,7 +492,6 @@ if "initialized" not in st.session_state:
     st.session_state.initialized = True
 
 # --- GIAO DIỆN CHÍNH ---
-st.title("Học Pinyin Cơ Bản")
 
 # Tích hợp CSS in ấn
 st.markdown(

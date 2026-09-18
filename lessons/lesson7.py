@@ -436,12 +436,32 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
 
     # ================= TAB 1: CẤU TRÚC NGỮ PHÁP =================
     with tab_grammar:
-        st.subheader("3 cấu trúc ngữ pháp cơ bản của chữ 的")
+        st.subheader("5 cấu trúc ngữ pháp cơ bản của chữ 的")
         st.write("Dưới đây là các cách dùng cốt lõi của chữ 的 bạn chắc chắn sẽ gặp trong bài thi HSK 1:")
 
         for group_idx, group in enumerate(B7_2_DE_DATA):
             st.markdown(f"### 📌 {group['nhom']}")
             st.write(group['mota'])
+
+            # --- Box công thức ---
+            if "congthuc_parts" in group:
+                parts = group["congthuc_parts"]
+                spans = ""
+                for p in parts:
+                    if p.get("note"):
+                        spans += f'<span style="color:{p["color"]};font-size:0.85rem;font-style:italic;font-weight:600;margin:0 6px;align-self:center;">{p["text"]}</span>'
+                    elif p.get("big"):
+                        spans += f'<span style="color:{p["color"]};font-size:2rem;font-weight:900;margin:0 6px;line-height:1;">{p["text"]}</span>'
+                    else:
+                        spans += f'<span style="color:{p["color"]};font-size:1.05rem;font-weight:700;margin:0 6px;">{p["text"]}</span>'
+                formula_html = f"""
+                <div style="background:#1e293b;border-radius:12px;padding:16px 28px;
+                            display:flex;align-items:center;flex-wrap:wrap;gap:4px;
+                            margin:10px 0 18px 0;justify-content:center;">
+                    {spans}
+                </div>
+                """
+                st.markdown(formula_html, unsafe_allow_html=True)
 
             for idx, item in enumerate(group["items"]):
                 cols = st.columns([7, 3])

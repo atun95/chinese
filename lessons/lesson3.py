@@ -380,7 +380,7 @@ Lặp lại chữ cuối trong tên (ví dụ Vy ➔ Vy Vy). Cách gọi này c�
 </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("2. Cấu trúc câu & Từ để hỏi (Mở rộng chi tiết)")
+    st.subheader("2. Cấu trúc câu & Từ để hỏi")
     st.write("Trong tiếng Trung sơ cấp, hai động từ cốt lõi được sử dụng nhiều nhất là **是 (shì - là)** và **有 (yǒu - có)**.")
 
     st.markdown("""<div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-left: 6px solid #2563EB; border-radius: 12px; padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #e2e8f0;">
