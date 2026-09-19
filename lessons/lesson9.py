@@ -981,10 +981,10 @@ def show_lesson9_2_bu_mei():
     # TAB 5: QUIZ TƯƠNG TÁC
     # ─────────────────────────────────────────────────────────────
     with tab_quiz:
-        st.markdown("### 🎮 Luyện tập: Chọn 不 hay 没?")
-        st.caption("Điền vào chỗ trống: mỗi câu chọn 不 (bù) hoặc 没 (méi) cho đúng.")
+        st.markdown("### 🎮 Luyện tập: Bài tập về 不 và 没")
 
         quiz_data = [
+            # ── DẠNG 1: Chọn 不 hay 没 (10 câu) ──
             {
                 "q":       "我___是学生。",
                 "py":      "Wǒ ___ shì xuésheng.",
@@ -999,7 +999,7 @@ def show_lesson9_2_bu_mei():
                 "vi":      "Anh ấy hôm qua không đến trường.",
                 "options": ["不", "没"],
                 "answer":  "没",
-                "explain": "Hành động quá khứ không xảy ra — dùng 没."
+                "explain": "Hành động quá khứ (昨天) không xảy ra — dùng 没."
             },
             {
                 "q":       "她___有手机。",
@@ -1007,7 +1007,7 @@ def show_lesson9_2_bu_mei():
                 "vi":      "Cô ấy không có điện thoại.",
                 "options": ["不", "没"],
                 "answer":  "没",
-                "explain": "Trước 有 luôn dùng 没."
+                "explain": "Trước 有 luôn dùng 没. (没有 = không có)"
             },
             {
                 "q":       "这个菜___好吃。",
@@ -1064,6 +1064,88 @@ def show_lesson9_2_bu_mei():
                 "options": ["不", "没"],
                 "answer":  "不",
                 "explain": "Tương lai, ý định không làm — dùng 不."
+            },
+            # ── DẠNG 2: Chọn câu dịch ĐÚNG (5 câu) ──
+            {
+                "q":       '🈯 "Anh ấy không ăn thịt." (thói quen lâu dài)',
+                "py":      "→ Chọn câu tiếng Trung đúng:",
+                "vi":      "Gợi ý: đây là thói quen, không phải sự kiện đã xảy ra.",
+                "options": ["他不吃肉。", "他没吃肉。"],
+                "answer":  "他不吃肉。",
+                "explain": "Thói quen lâu dài → 不. Câu 他没吃肉 có nghĩa 'lần này anh ấy chưa ăn thịt' (sự kiện cụ thể)."
+            },
+            {
+                "q":       '🈯 "Sáng nay tôi chưa uống nước." (sự kiện sáng nay)',
+                "py":      "→ Chọn câu tiếng Trung đúng:",
+                "vi":      "Gợi ý: sự kiện cụ thể buổi sáng hôm nay.",
+                "options": ["今天早上我没喝水。", "今天早上我不喝水。"],
+                "answer":  "今天早上我没喝水。",
+                "explain": "Sự kiện sáng nay chưa xảy ra → 没. Câu dùng 不 mang nghĩa 'tôi không uống nước' (thói quen/ý chí)."
+            },
+            {
+                "q":       '🈯 "Tôi không biết." (trạng thái, nhận thức)',
+                "py":      "→ Chọn câu tiếng Trung đúng:",
+                "vi":      "Gợi ý: 知道 (biết) là động từ nhận thức.",
+                "options": ["我不知道。", "我没知道。"],
+                "answer":  "我不知道。",
+                "explain": "知道 (biết) là động từ nhận thức/trạng thái → phủ định bằng 不. 没知道 không đúng ngữ pháp."
+            },
+            {
+                "q":       '🈯 "Cô ấy chưa về nhà." (hành động chưa xảy ra)',
+                "py":      "→ Chọn câu tiếng Trung đúng:",
+                "vi":      "Gợi ý: hành động 回家 chưa diễn ra.",
+                "options": ["她没回家。", "她不回家。"],
+                "answer":  "她没回家。",
+                "explain": "Hành động 回家 chưa xảy ra → 没. Câu 她不回家 nghĩa 'cô ấy không về nhà' (quyết định/thói quen)."
+            },
+            {
+                "q":       '🈯 "Phòng này không có cửa sổ."',
+                "py":      "→ Chọn câu tiếng Trung đúng:",
+                "vi":      "Gợi ý: phủ định sự tồn tại.",
+                "options": ["这个房间没有窗户。", "这个房间不有窗户。"],
+                "answer":  "这个房间没有窗户。",
+                "explain": "Phủ định sự tồn tại 有 → bắt buộc dùng 没有. 不有 sai hoàn toàn trong tiếng Trung."
+            },
+            # ── DẠNG 3: Câu nào ĐÚNG / SAI ngữ pháp? (5 câu) ──
+            {
+                "q":       "⚖️ Câu nào ĐÚNG ngữ pháp?",
+                "py":      "Ngữ cảnh: phủ định tính từ 冷 (lạnh)",
+                "vi":      "→ Chọn câu đúng:",
+                "options": ["今天不冷。", "今天没冷。"],
+                "answer":  "今天不冷。",
+                "explain": "Phủ định tính từ 冷 → dùng 不. 没冷 không đúng ngữ pháp (trừ cấu trúc so sánh: 今天没昨天冷)."
+            },
+            {
+                "q":       "⚖️ Câu nào ĐÚNG ngữ pháp?",
+                "py":      "Ngữ cảnh: phủ định 'có thời gian'",
+                "vi":      "→ Chọn câu đúng:",
+                "options": ["我没有时间。", "我不有时间。"],
+                "answer":  "我没有时间。",
+                "explain": "Trước 有 bắt buộc dùng 没. 不有 là lỗi cực kỳ phổ biến của người học — tuyệt đối không dùng!"
+            },
+            {
+                "q":       "⚖️ Câu nào ĐÚNG ngữ pháp?",
+                "py":      "Ngữ cảnh: tuần trước không xem phim",
+                "vi":      "→ Chọn câu đúng:",
+                "options": ["上周我没看电影。", "上周我不看电影。"],
+                "answer":  "上周我没看电影。",
+                "explain": "Hành động tuần trước (上周) không xảy ra → dùng 没. Câu dùng 不 mang nghĩa 'thói quen không xem phim'."
+            },
+            {
+                "q":       "⚖️ Câu nào ĐÚNG ngữ pháp?",
+                "py":      "Ngữ cảnh: từ chối làm việc đó",
+                "vi":      "→ Chọn câu đúng:",
+                "options": ["我不做这件事。", "我没做这件事。"],
+                "answer":  "我不做这件事。",
+                "explain": "Từ chối, ý chí không làm → 不. Câu 我没做这件事 nghĩa 'tôi đã không làm việc đó' (thực tế)."
+            },
+            {
+                "q":       "⚖️ Câu nào ĐÚNG ngữ pháp?",
+                "py":      "Ngữ cảnh: so sánh chiều cao — A không cao bằng B",
+                "vi":      "→ Chọn câu đúng:",
+                "options": ["弟弟没哥哥高。", "弟弟不哥哥高。"],
+                "answer":  "弟弟没哥哥高。",
+                "explain": "Cấu trúc so sánh A 没 B + tính từ → dùng 没. 不哥哥高 sai hoàn toàn về cấu trúc so sánh."
             },
         ]
 
