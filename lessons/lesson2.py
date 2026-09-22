@@ -263,17 +263,30 @@ def show_lesson2_intro(add_tones):
 def show_lesson2_spelling(add_tones):
     render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
     st.subheader("Bảng luyện tập ghép âm")
-    h_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-    h_cols[0].markdown("**T/V**")
-    for i, f in enumerate(B2_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
-    for init in B2_LUYEN_TAP_ROWS.keys():
-        r_cols = st.columns([1.5] + [1] * len(B2_LUYEN_TAP_FINALS))
-        r_cols[0].markdown(f"**{init}**")
-        for i, combo in enumerate(B2_LUYEN_TAP_ROWS[init]):
-            if combo:
-                with r_cols[i+1]:
-                    with st.popover(combo, use_container_width=True):
-                        for t in add_tones(combo): st.write(f"- {t}")
+
+    # Chú thích nhóm màu
+    c1, c2, c3 = st.columns(3)
+    c1.markdown("<div style='background:#fdf4ff;border:1px solid #e9d5ff;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟣 <b>b p m f</b> — Âm môi</div>",
+                unsafe_allow_html=True)
+    c2.markdown("<div style='background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🔵 <b>d t n l</b> — Âm đầu lưỡi</div>",
+                unsafe_allow_html=True)
+    c3.markdown("<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟢 <b>g k h</b> — Âm cuống lưỡi</div>",
+                unsafe_allow_html=True)
+    st.markdown("<br/>", unsafe_allow_html=True)
+
+    GC = {
+        "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",
+        "b__border": "#e9d5ff", "p__border": "#e9d5ff", "m__border": "#e9d5ff", "f__border": "#e9d5ff",
+        "d": "#eff6ff", "t": "#eff6ff", "n": "#eff6ff", "l": "#eff6ff",
+        "d__border": "#bfdbfe", "t__border": "#bfdbfe", "n__border": "#bfdbfe", "l__border": "#bfdbfe",
+        "g": "#f0fdf4", "k": "#f0fdf4", "h": "#f0fdf4",
+        "g__border": "#bbf7d0", "k__border": "#bbf7d0", "h__border": "#bbf7d0",
+    }
+    render_spelling_table(B2_LUYEN_TAP_FINALS, B2_LUYEN_TAP_ROWS, "b2sp", add_tones, GC)
+
 
 def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2):
     st.header("📝 Bài 2: Bài tập vận mẫu kép")

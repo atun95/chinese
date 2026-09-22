@@ -270,23 +270,29 @@ def show_lesson3_pinyin_rules():
 def show_lesson3_practice(add_tones):
     render_lesson_intro("📚 Bài 3: Luyện tập ghép âm", "Luyện ghép các thanh mẫu nâng cao (z, c, s, zh, ch, sh, r, j, q, x) với các vận mẫu cơ bản và vận mẫu kép.")
     st.subheader("Bảng luyện tập ghép âm nâng cao")
-    h_cols = st.columns([1.5] + [1] * len(B3_LUYEN_TAP_FINALS))
-    h_cols[0].markdown("**T/V**")
-    for i, f in enumerate(B3_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
-    for init in B3_LUYEN_TAP_ROWS.keys():
-        r_cols = st.columns([1.5] + [1] * len(B3_LUYEN_TAP_FINALS))
-        r_cols[0].markdown(f"**{init}**")
-        for i, combo in enumerate(B3_LUYEN_TAP_ROWS[init]):
-            if combo:
-                with r_cols[i+1]:
-                    with st.popover(combo, use_container_width=True):
-                        for t in add_tones(combo):
-                            col_t, col_btn = st.columns([2, 1])
-                            col_t.write(f"- {t}")
-                            with col_btn:
-                                render_play_button(t, "🔊", key=f"btn_p_{init}_{combo}_{t}", height=45)
-            else:
-                r_cols[i+1].write("")
+
+    # Chú thích nhóm màu
+    c1, c2, c3 = st.columns(3)
+    c1.markdown("<div style='background:#fefce8;border:1px solid #fde047;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟡 <b>z c s</b> — Đầu lưỡi răng</div>",
+                unsafe_allow_html=True)
+    c2.markdown("<div style='background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟠 <b>zh ch sh r</b> — Uốn lưỡi</div>",
+                unsafe_allow_html=True)
+    c3.markdown("<div style='background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;"
+                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟣 <b>j q x</b> — Mặt lưỡi</div>",
+                unsafe_allow_html=True)
+    st.markdown("<br/>", unsafe_allow_html=True)
+
+    GC = {
+        "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
+        "z__border": "#fde047", "c__border": "#fde047", "s__border": "#fde047",
+        "zh": "#fff7ed", "ch": "#fff7ed", "sh": "#fff7ed", "r": "#fff7ed",
+        "zh__border": "#fed7aa", "ch__border": "#fed7aa", "sh__border": "#fed7aa", "r__border": "#fed7aa",
+        "j": "#f5f3ff", "q": "#f5f3ff", "x": "#f5f3ff",
+        "j__border": "#ddd6fe", "q__border": "#ddd6fe", "x__border": "#ddd6fe",
+    }
+    render_spelling_table(B3_LUYEN_TAP_FINALS, B3_LUYEN_TAP_ROWS, "b3sp", add_tones, GC)
 
 def show_lesson3_vocab():
     render_lesson_intro("📚 Bài 3: Từ vựng & Tên riêng", "Học từ vựng mới và tên riêng cơ bản.")

@@ -3,7 +3,7 @@ import random
 import base64
 import os
 from datetime import datetime, timezone, timedelta
-from ui_utils import render_lesson_intro, render_play_button, shuffled_options
+from ui_utils import render_lesson_intro, render_play_button, shuffled_options, render_spelling_table
 from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS
 
 def get_nasal_audio(syllable):
@@ -954,7 +954,7 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
 
 def show_lesson5_nasal_spelling(add_tones):
     render_lesson_intro("📚 Bài 5: Luyện tập ghép âm Vận mẫu mũi", "Luyện tập ghép âm các thanh mẫu với 7 vận mẫu mũi (an, ang, en, eng, in, ing, ong).")
-    
+
     B5_LUYEN_TAP_FINALS = ["an", "ang", "en", "eng", "in", "ing", "ong"]
     B5_LUYEN_TAP_ROWS = {
         "(Không có)": ["an", "ang", "en", "eng", "yin", "ying", "weng"],
@@ -980,25 +980,41 @@ def show_lesson5_nasal_spelling(add_tones):
         "c": ["can", "cang", "cen", "ceng", "", "", "cong"],
         "s": ["san", "sang", "sen", "seng", "", "", "song"]
     }
-    
+
     st.subheader("Bảng luyện tập ghép âm vận mẫu mũi (Bài 5)")
-    h_cols = st.columns([1.5] + [1] * len(B5_LUYEN_TAP_FINALS))
-    h_cols[0].markdown("**T/V**")
-    for i, f in enumerate(B5_LUYEN_TAP_FINALS): h_cols[i+1].markdown(f"**{f}**")
-    for init in B5_LUYEN_TAP_ROWS.keys():
-        r_cols = st.columns([1.5] + [1] * len(B5_LUYEN_TAP_FINALS))
-        r_cols[0].markdown(f"**{init}**")
-        for i, combo in enumerate(B5_LUYEN_TAP_ROWS[init]):
-            if combo:
-                with r_cols[i+1]:
-                    with st.popover(combo, use_container_width=True):
-                        for t in add_tones(combo):
-                            col_t, col_btn = st.columns([2, 1])
-                            col_t.write(f"- {t}")
-                            with col_btn:
-                                render_play_button(get_nasal_audio(t), "🔊", key=f"btn_p_b5_{init}_{combo}_{t}", height=45)
-            else:
-                r_cols[i+1].write("")
+
+    # Chú thích nhóm màu
+    c1, c2, c3, c4 = st.columns(4)
+    c1.markdown("<div style='background:#fdf4ff;border:1px solid #e9d5ff;border-radius:6px;"
+                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟣 <b>b p m f</b></div>",
+                unsafe_allow_html=True)
+    c2.markdown("<div style='background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;"
+                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🔵 <b>d t n l</b></div>",
+                unsafe_allow_html=True)
+    c3.markdown("<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;"
+                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟢 <b>g k h / zh ch sh r</b></div>",
+                unsafe_allow_html=True)
+    c4.markdown("<div style='background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;"
+                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟡 <b>j q x / z c s</b></div>",
+                unsafe_allow_html=True)
+    st.markdown("<br/>", unsafe_allow_html=True)
+
+    GC = {
+        "(Không có)": "#f1f5f9", "(Không có)__border": "#cbd5e1",
+        "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",
+        "b__border": "#e9d5ff", "p__border": "#e9d5ff", "m__border": "#e9d5ff", "f__border": "#e9d5ff",
+        "d": "#eff6ff", "t": "#eff6ff", "n": "#eff6ff", "l": "#eff6ff",
+        "d__border": "#bfdbfe", "t__border": "#bfdbfe", "n__border": "#bfdbfe", "l__border": "#bfdbfe",
+        "g": "#f0fdf4", "k": "#f0fdf4", "h": "#f0fdf4",
+        "g__border": "#bbf7d0", "k__border": "#bbf7d0", "h__border": "#bbf7d0",
+        "j": "#f5f3ff", "q": "#f5f3ff", "x": "#f5f3ff",
+        "j__border": "#ddd6fe", "q__border": "#ddd6fe", "x__border": "#ddd6fe",
+        "zh": "#fff7ed", "ch": "#fff7ed", "sh": "#fff7ed", "r": "#fff7ed",
+        "zh__border": "#fed7aa", "ch__border": "#fed7aa", "sh__border": "#fed7aa", "r__border": "#fed7aa",
+        "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
+        "z__border": "#fde047", "c__border": "#fde047", "s__border": "#fde047",
+    }
+    render_spelling_table(B5_LUYEN_TAP_FINALS, B5_LUYEN_TAP_ROWS, "b5sp", add_tones, GC)
 
 def show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scores_b5):
     st.subheader("📝 Bài tập Luyện tập & Đánh giá (Vận mẫu mũi)")

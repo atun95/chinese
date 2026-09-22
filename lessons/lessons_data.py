@@ -303,10 +303,10 @@ B2_LUYEN_TAP_ROWS = {
     "f": ["fa", "fo", "", "", "fu", "", "", "fei", "", "fou"],
     "d": ["da", "", "de", "di", "du", "", "dai", "dei", "dao", "dou"],
     "t": ["ta", "", "te", "ti", "tu", "", "tai", "", "tao", "tou"],
-    "n": ["na", "", "ne", "ni", "nu", "nü", "nai", "nei", "nao", "nou"],
+    "n": ["na", "", "ne", "ni", "nu", "nü", "nai", "nei", "nao", ""],
     "l": ["la", "", "le", "li", "lu", "lü", "lai", "lei", "lao", "lou"],
     "g": ["ga", "", "ge", "", "gu", "", "gai", "gei", "gao", "gou"],
-    "k": ["ka", "", "ke", "", "ku", "", "kai", "kei", "kao", "kou"],
+    "k": ["ka", "", "ke", "", "ku", "", "kai", "", "kao", "kou"],
     "h": ["ha", "", "he", "", "hu", "", "hai", "hei", "hao", "hou"],
 }
 
