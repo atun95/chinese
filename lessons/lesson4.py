@@ -2386,21 +2386,6 @@ def show_lesson4_spelling(add_tones):
 
     st.subheader("Bảng luyện tập ghép âm mở rộng (Bài 4)")
 
-    # Chú thích nhóm màu
-    c1, c2, c3, c4 = st.columns(4)
-    c1.markdown("<div style='background:#fdf4ff;border:1px solid #e9d5ff;border-radius:6px;"
-                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟣 <b>b p m f</b></div>",
-                unsafe_allow_html=True)
-    c2.markdown("<div style='background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;"
-                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🔵 <b>d t n l</b></div>",
-                unsafe_allow_html=True)
-    c3.markdown("<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;"
-                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟢 <b>g k h / z c s</b></div>",
-                unsafe_allow_html=True)
-    c4.markdown("<div style='background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;"
-                "padding:4px 6px;font-size:0.75rem;text-align:center;'>🟠 <b>j q x / zh ch sh r</b></div>",
-                unsafe_allow_html=True)
-    st.markdown("<br/>", unsafe_allow_html=True)
 
     GC = {
         "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",

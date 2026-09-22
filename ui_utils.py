@@ -381,11 +381,7 @@ def render_spelling_table(finals, rows, key_prefix, add_tones, group_colors=None
 
     # ── Header ────────────────────────────────────────────────────────────────
     h_cols = st.columns(ratio)
-    h_cols[0].markdown(
-        "<div style='background:linear-gradient(135deg,#1e40af,#3b82f6);"
-        "color:#fff;border-radius:8px;padding:8px 6px;font-weight:800;"
-        "text-align:center;font-size:0.88rem;letter-spacing:1px;'>T / V</div>",
-        unsafe_allow_html=True)
+    h_cols[0].markdown("<div style='height:36px;'></div>", unsafe_allow_html=True)
     for j, f in enumerate(finals):
         h_cols[j + 1].markdown(
             f"<div style='background:linear-gradient(135deg,#1e40af,#3b82f6);"

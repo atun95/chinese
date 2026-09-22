@@ -264,18 +264,6 @@ def show_lesson2_spelling(add_tones):
     render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
     st.subheader("Bảng luyện tập ghép âm")
 
-    # Chú thích nhóm màu
-    c1, c2, c3 = st.columns(3)
-    c1.markdown("<div style='background:#fdf4ff;border:1px solid #e9d5ff;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟣 <b>b p m f</b> — Âm môi</div>",
-                unsafe_allow_html=True)
-    c2.markdown("<div style='background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🔵 <b>d t n l</b> — Âm đầu lưỡi</div>",
-                unsafe_allow_html=True)
-    c3.markdown("<div style='background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟢 <b>g k h</b> — Âm cuống lưỡi</div>",
-                unsafe_allow_html=True)
-    st.markdown("<br/>", unsafe_allow_html=True)
 
     GC = {
         "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",

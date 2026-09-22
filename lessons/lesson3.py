@@ -271,18 +271,6 @@ def show_lesson3_practice(add_tones):
     render_lesson_intro("📚 Bài 3: Luyện tập ghép âm", "Luyện ghép các thanh mẫu nâng cao (z, c, s, zh, ch, sh, r, j, q, x) với các vận mẫu cơ bản và vận mẫu kép.")
     st.subheader("Bảng luyện tập ghép âm nâng cao")
 
-    # Chú thích nhóm màu
-    c1, c2, c3 = st.columns(3)
-    c1.markdown("<div style='background:#fefce8;border:1px solid #fde047;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟡 <b>z c s</b> — Đầu lưỡi răng</div>",
-                unsafe_allow_html=True)
-    c2.markdown("<div style='background:#fff7ed;border:1px solid #fed7aa;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟠 <b>zh ch sh r</b> — Uốn lưỡi</div>",
-                unsafe_allow_html=True)
-    c3.markdown("<div style='background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;"
-                "padding:5px 10px;font-size:0.8rem;text-align:center;'>🟣 <b>j q x</b> — Mặt lưỡi</div>",
-                unsafe_allow_html=True)
-    st.markdown("<br/>", unsafe_allow_html=True)
 
     GC = {
         "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
