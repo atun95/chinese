@@ -1496,7 +1496,7 @@ def show_lesson9_3_zi():
                 <div>
                     <div style="font-weight:800;color:#065f46;font-size:1rem;">Danh từ 1 âm tiết</div>
                     <div style="font-size:0.9rem;color:#374151;margin-top:2px;">
-                        Bắt buộc <b>+ 子</b> trong văn nói hàng ngày<br/>
+                        Thêm chữ <b> 子</b> để thành từ 2 âm tiết <br/>
                         <span style="font-family:monospace;color:#059669;">桌 → 桌<b>子</b> &nbsp;|&nbsp; 椅 → 椅<b>子</b> &nbsp;|&nbsp; 帽 → 帽<b>子</b></span>
                     </div>
                 </div>
@@ -1685,7 +1685,7 @@ def show_lesson9_3_zi():
         <div style="background:#f8fafc;border-radius:14px;padding:20px 24px;margin-bottom:20px;border:1px solid #e2e8f0;">
             <p style="margin:0;font-size:0.95rem;color:#374151;line-height:1.8;">
             Nhiều học viên băn khoăn: <i>Tại sao <b>Chó (狗)</b>, <b>Gà (鸡)</b>, <b>Bò (牛)</b> không có 子, nhưng <b>Thỏ (兔子)</b>, <b>Vịt (鸭子)</b>, <b>Khỉ (猴子)</b>, <b>Sư tử (狮子)</b> lại bắt buộc phải có 子?</i><br/>
-            Đây không phải sự ngẫu nhiên, mà tuân theo <b>quy luật lịch sử văn hóa & ngữ âm tiếng Hán</b> cực kỳ chặt chẽ!
+            Đây không phải sự ngẫu nhiên, mà tuân theo <b>quy luật lịch sử văn hóa & ngữ âm tiếng Hán</b>
             </p>
         </div>
         """, unsafe_allow_html=True)
