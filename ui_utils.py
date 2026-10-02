@@ -495,6 +495,7 @@ _TTS_JS_CORE = """
 })();
 </script>
 """
+TTS_JS_CORE = _TTS_JS_CORE
 
 
 def inject_tts_to_parent():

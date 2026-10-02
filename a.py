@@ -8,15 +8,27 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# Thêm thư mục lessons vào sys.path để import các bài học
-sys.path.append(str(Path(__file__).parent / "lessons"))
+# Thêm thư mục gốc và lessons vào sys.path để import an toàn trên mọi môi trường
+_ROOT_DIR = str(Path(__file__).resolve().parent)
+if _ROOT_DIR not in sys.path:
+    sys.path.insert(0, _ROOT_DIR)
+
+_LESSONS_DIR = str(Path(__file__).resolve().parent / "lessons")
+if _LESSONS_DIR not in sys.path:
+    sys.path.insert(0, _LESSONS_DIR)
+
+import importlib
+if 'ui_utils' in sys.modules:
+    try:
+        importlib.reload(sys.modules['ui_utils'])
+    except Exception:
+        pass
 
 from lessons.lessons_data import *
 from ui_utils import *
 
 
 # Import các bài học đã tách file và reload để tránh cache
-import importlib
 import lessons.lessons_data as lessons_data
 import lessons.lesson1 as lesson1
 import lessons.lesson2 as lesson2
@@ -26,13 +38,17 @@ import lessons.lesson5 as lesson5
 import lessons.lesson6 as lesson6
 import lessons.lesson7 as lesson7
 import lessons.lesson8 as lesson8
-import sys
 if 'lessons.lesson9' in sys.modules:
     del sys.modules['lessons.lesson9']
 if 'lesson9' in sys.modules:
     del sys.modules['lesson9']
 import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
+
+if 'lessons.pinyin_practice' in sys.modules:
+    del sys.modules['lessons.pinyin_practice']
+if 'pinyin_practice' in sys.modules:
+    del sys.modules['pinyin_practice']
 import lessons.pinyin_practice as pinyin_practice
 
 
@@ -90,6 +106,11 @@ try:
     importlib.reload(lesson9)
 except Exception as e:
     st.error(f'Error reloading lesson9: {e}')
+
+try:
+    importlib.reload(pinyin_practice)
+except Exception as e:
+    pass
 
 
 def show_consolidated_flashcards():

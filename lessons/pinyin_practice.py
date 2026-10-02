@@ -9,8 +9,36 @@ Cho phép học viên tự chọn Thanh mẫu + Vận mẫu + Thanh điệu:
 """
 import streamlit as st
 import streamlit.components.v1 as components
-from ui_utils import inject_tts_to_parent, _TTS_JS_CORE
 import json
+import sys
+from pathlib import Path
+
+# Thêm thư mục gốc vào sys.path để luôn tìm thấy ui_utils
+_ROOT_DIR = str(Path(__file__).resolve().parent.parent)
+if _ROOT_DIR not in sys.path:
+    sys.path.insert(0, _ROOT_DIR)
+
+try:
+    from ui_utils import inject_tts_to_parent, _TTS_JS_CORE
+except (ImportError, AttributeError):
+    try:
+        import ui_utils
+        import importlib
+        importlib.reload(ui_utils)
+        from ui_utils import inject_tts_to_parent, _TTS_JS_CORE
+    except Exception:
+        _TTS_JS_CORE = """
+<script>
+(function(){
+  window.chineseTTS = function(txt) {
+    if (!txt) return;
+    window.parent.postMessage({type:'CHINESE_TTS', text: String(txt).trim()}, '*');
+  };
+})();
+</script>
+"""
+        def inject_tts_to_parent():
+            pass
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 1. HỆ THỐNG DỮ LIỆU THANH MẪU & VẬN MẪU
