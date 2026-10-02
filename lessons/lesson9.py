@@ -1488,6 +1488,33 @@ def show_lesson9_3_zi():
     with tab_vocab:
         st.markdown("### 📦 Từ vựng phổ biến có hậu tố 子 — chia theo nhóm")
 
+        st.markdown("""
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+            <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:2px solid #6ee7b7;
+                        border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
+                <span style="font-size:2rem;">1️⃣</span>
+                <div>
+                    <div style="font-weight:800;color:#065f46;font-size:1rem;">Danh từ 1 âm tiết</div>
+                    <div style="font-size:0.9rem;color:#374151;margin-top:2px;">
+                        Bắt buộc <b>+ 子</b> trong văn nói hàng ngày<br/>
+                        <span style="font-family:monospace;color:#059669;">桌 → 桌<b>子</b> &nbsp;|&nbsp; 椅 → 椅<b>子</b> &nbsp;|&nbsp; 帽 → 帽<b>子</b></span>
+                    </div>
+                </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#fff1f2,#ffe4e6);border:2px solid #fca5a5;
+                        border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;">
+                <span style="font-size:2rem;">2️⃣</span>
+                <div>
+                    <div style="font-weight:800;color:#9f1239;font-size:1rem;">Danh từ 2 âm tiết</div>
+                    <div style="font-size:0.9rem;color:#374151;margin-top:2px;">
+                        <b>Không cần</b> thêm 子 — đã đủ âm tiết rồi<br/>
+                        <span style="font-family:monospace;color:#e11d48;">电话 &nbsp;|&nbsp; 汽车 &nbsp;|&nbsp; 手机 &nbsp;|&nbsp; 衣服</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
         groups = [
             {
                 "label": "🪑 Đồ vật / Nội thất",
@@ -1702,7 +1729,6 @@ def show_lesson9_3_zi():
             st.markdown("#### 🐾 Nhóm 1: Động vật KHÔNG THÊM 子 ❌")
             animals_no = [
                 ("🐶", "狗", "gǒu", "con chó", "Gia súc cổ xưa, 12 con giáp (狗子 chỉ là lóng thân mật)"),
-                ("🐱", "猫", "māo", "con mèo", "Thú nuôi thân thuộc nghìn năm, không bao giờ nói 猫子"),
                 ("🐔", "鸡", "jī", "con gà", "Gia cầm bản địa cổ nhất, đứng một mình trọn nghĩa"),
                 ("🐷", "猪", "zhū", "con lợn", "Đại gia súc thuần hóa cổ đại, 12 con giáp"),
                 ("🐮", "牛", "niú", "con bò / trâu", "Gia súc cày cấy, linh vật văn hóa nông nghiệp"),
@@ -1858,13 +1884,7 @@ def show_lesson9_3_zi():
                 "answer": "帽子 (có 子)",
                 "explain": "帽 là từ 1 âm tiết chỉ đồ vật → bắt buộc thêm 子 trong văn nói."
             },
-            {
-                "q": "Con mèo",
-                "py": "māo / māozi",
-                "options": ["猫 (không có 子)", "猫子 (có 子)"],
-                "answer": "猫 (không có 子)",
-                "explain": "Tên động vật thường không cần 子. 猫子 không phải từ chuẩn."
-            },
+
             {
                 "q": "Điện thoại",
                 "py": "diànhuà",
