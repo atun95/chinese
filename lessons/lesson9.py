@@ -1390,11 +1390,10 @@ def show_lesson9_3_zi():
         "Tìm hiểu nghĩa gốc của 子, lý do tồn tại của hậu tố này và khi nào cần (hoặc không cần) thêm vào danh từ."
     )
 
-    tab_meaning, tab_vocab, tab_rules, tab_compare, tab_quiz = st.tabs([
+    tab_meaning, tab_vocab, tab_compare, tab_quiz = st.tabs([
         "📖 Nghĩa & Phát âm",
         "📦 Từ vựng theo nhóm",
-        "📏 Khi nào thêm / không thêm",
-        "🐶 So sánh thú vị",
+        "🦁 Động vật: Thêm hay Không?",
         "🎮 Luyện tập"
     ])
 
@@ -1581,6 +1580,23 @@ def show_lesson9_3_zi():
                     ("位子", "wèizi", "chỗ ngồi / vị trí"),
                 ]
             },
+            {
+                "label": "🐾 Động vật & Côn trùng",
+                "note": "✅ Thú nhỏ, loài chim phụ, côn trùng hoặc thú ngoại lai → CÓ 子 (khác gia súc lớn 12 con giáp)",
+                "color": "#c2410c",
+                "bg": "#fff7ed",
+                "border": "#fdba74",
+                "words": [
+                    ("兔子", "tùzi", "con thỏ"),
+                    ("鸭子", "yāzi", "con vịt"),
+                    ("猴子", "hóuzi", "con khỉ"),
+                    ("狮子", "shīzi", "sư tử"),
+                    ("鸽子", "gēzi", "chim bồ câu"),
+                    ("燕子", "yànzi", "chim én"),
+                    ("虫子", "chóngzi", "con sâu / bọ"),
+                    ("蚊子", "wénzi", "con muỗi"),
+                ]
+            },
         ]
 
         for i in range(0, len(groups), 2):
@@ -1633,118 +1649,74 @@ def show_lesson9_3_zi():
 
 
     # ─────────────────────────────────────────────────────────────
-    # TAB 3: KHI NÀO THÊM / KHÔNG THÊM
-    # ─────────────────────────────────────────────────────────────
-    with tab_rules:
-        st.markdown("### 📏 Quy tắc: Khi nào thêm 子, khi nào không?")
-
-        st.markdown("""
-        <div class="b93-rule-box green">
-            <div class="b93-rule-title green">✅ THÊM 子 — Những trường hợp này</div>
-            <div class="b93-rule-item">
-                <div class="dot green"></div>
-                <div><b>Từ 1 âm tiết chỉ đồ vật thông thường</b> — dùng trong văn nói hàng ngày: 椅<b>子</b>, 杯<b>子</b>, 帽<b>子</b>, 桌<b>子</b></div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot green"></div>
-                <div><b>Tính từ + 子 = danh từ chỉ người</b> theo tính chất đó: 胖 → 胖<b>子</b> (người béo), 傻 → 傻<b>子</b> (kẻ ngốc)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot green"></div>
-                <div><b>Bộ phận cơ thể</b> thường gặp: 鼻<b>子</b> (mũi), 脖<b>子</b> (cổ), 肚<b>子</b> (bụng)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot green"></div>
-                <div><b>Từ đã quen dùng với 子</b> từ lâu — chỉ cần học thuộc</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="b93-rule-box red">
-            <div class="b93-rule-title red">❌ KHÔNG THÊM 子 — Những trường hợp này</div>
-            <div class="b93-rule-item">
-                <div class="dot red"></div>
-                <div><b>Từ đã có 2 âm tiết trở lên</b> — đã đủ rồi: 电话 (điện thoại), 汽车 (ô tô), 手机 (điện thoại di động)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot red"></div>
-                <div><b>Khái niệm trừu tượng</b>: 爱情 (tình yêu), 自由 (tự do), 幸福 (hạnh phúc)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot red"></div>
-                <div><b>Nghề nghiệp</b> — dùng 者/员/师 thay thế: 老师 (giáo viên), 医生 (bác sĩ), 司机 (tài xế)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot red"></div>
-                <div><b>Từ hiện đại / từ mượn</b>: điện thoại, máy tính, internet — không có 子</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="b93-rule-box yellow">
-            <div class="b93-rule-title yellow">🟡 CÓ THỂ DÙNG CÁ HAI — Tùy ngữ cảnh</div>
-            <div class="b93-rule-item">
-                <div class="dot yellow"></div>
-                <div><b>桌</b> (văn viết trang trọng) / <b>桌子</b> (văn nói tự nhiên hơn)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot yellow"></div>
-                <div><b>鞋</b> (trong thơ, văn cổ) / <b>鞋子</b> (hội thoại hàng ngày)</div>
-            </div>
-            <div class="b93-rule-item">
-                <div class="dot yellow"></div>
-                <div><b>狗</b> (chuẩn) / <b>狗子</b> (tiếng lóng, gọi chó cưng thân mật) 🐶</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:14px;padding:20px 24px;color:white;margin-top:4px;">
-            <div style="font-weight:800;font-size:1rem;margin-bottom:10px;">🎯 Kết luận thực tế</div>
-            <p style="margin:0;opacity:0.9;font-size:0.93rem;line-height:1.8;">
-            Không có công thức toán học hoàn hảo. Cách tốt nhất là <b>học thuộc từng từ</b>.
-            Tuy nhiên, hai mẹo lớn là:<br/>
-            • Đồ vật thông thường → <b style="color:#6ee7b7;">thường CÓ 子</b><br/>
-            • Động vật, từ 2 âm tiết, từ hiện đại → <b style="color:#fca5a5;">thường KHÔNG CÓ 子</b>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # ─────────────────────────────────────────────────────────────
-    # TAB 4: SO SÁNH THÚ VỊ
+    # TAB 3: THẾ GIỚI ĐỘNG VẬT & HẬU TỐ 子
     # ─────────────────────────────────────────────────────────────
     with tab_compare:
-        st.markdown("### 🐶 Vì sao 桌子 có 子 mà 狗 thì không?")
+        st.markdown("### 🦁 Bí mật thế giới động vật: Con nào THÊM 子, con nào KHÔNG?")
 
         st.markdown("""
         <div style="background:#f8fafc;border-radius:14px;padding:20px 24px;margin-bottom:20px;border:1px solid #e2e8f0;">
             <p style="margin:0;font-size:0.95rem;color:#374151;line-height:1.8;">
-            Câu hỏi hay nhất khi học về 子! Lý do là <b>lịch sử ngôn ngữ</b>, không phải quy tắc ngữ pháp:<br/>
-            • <b>Tên động vật</b> (chó, mèo, chim...) là từ <b>cổ xưa, đã định hình nghìn năm</b> — người Trung Quốc đã quen nghe 1 âm tiết nên không cần thêm 子.<br/>
-            • <b>Đồ vật</b> (bàn, ghế, cốc...) được dùng nhiều trong văn nói — nghe 1 âm tiết cảm giác <b>chưa đủ, lạ tai</b>, nên thêm 子 cho tự nhiên.
+            Nhiều học viên băn khoăn: <i>Tại sao <b>Chó (狗)</b>, <b>Gà (鸡)</b>, <b>Bò (牛)</b> không có 子, nhưng <b>Thỏ (兔子)</b>, <b>Vịt (鸭子)</b>, <b>Khỉ (猴子)</b>, <b>Sư tử (狮子)</b> lại bắt buộc phải có 子?</i><br/>
+            Đây không phải sự ngẫu nhiên, mà tuân theo <b>quy luật lịch sử văn hóa & ngữ âm tiếng Hán</b> cực kỳ chặt chẽ!
             </p>
         </div>
         """, unsafe_allow_html=True)
 
+        # ── 2 HỘP NGUYÊN TẮC CỐT LÕI ──
+        col_rule_no, col_rule_yes = st.columns(2, gap="medium")
+        with col_rule_no:
+            st.markdown("""
+            <div class="b93-rule-box red" style="margin-bottom:0;height:100%;">
+                <div class="b93-rule-title red">❌ VÌ SAO KHÔNG THÊM 子?</div>
+                <div style="font-size:0.9rem;color:#374151;line-height:1.7;">
+                    <b>1. Gia súc lớn & 12 con giáp cổ xưa:</b><br/>
+                    Những loài này gắn bó với người Trung Quốc từ thời Thượng Cổ (chữ Giáp Cốt trên 3000 năm trước: 牛, 马, 羊, 猪, 狗, 鸡, 虎...).<br/>
+                    <b>2. Tần suất xuất hiện cực cao:</b><br/>
+                    Được dùng hàng ngày từ ngàn năm, chỉ 1 âm tiết đã mang trọn vẹn nghĩa và đi sâu vào văn hóa, thơ ca, phong tục, nên <b>không cần hậu tố 'đệm'</b>.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col_rule_yes:
+            st.markdown("""
+            <div class="b93-rule-box green" style="margin-bottom:0;height:100%;">
+                <div class="b93-rule-title green">✅ VÌ SAO BẮT BUỘC / THÊM 子?</div>
+                <div style="font-size:0.9rem;color:#374151;line-height:1.7;">
+                    <b>1. Kích thước nhỏ & sâu bọ (nghĩa gốc 子 = hạt nhỏ, con non):</b><br/>
+                    Gắn vào sinh vật nhỏ bé: 兔子 (thỏ), 猴子 (khỉ), 虫子 (sâu bọ), 蚊子 (muỗi)...<br/>
+                    <b>2. Động vật ngoại lai (mượn từ nước ngoài):</b><br/>
+                    Sư tử không có ở Trung Quốc bản địa. Chữ 狮 (shī) bắt nguồn từ tiếng Phạn/Ba Tư qua Con đường Tơ Lụa → thêm 子 thành 狮子 cho quen cấu trúc song âm tiết.<br/>
+                    <b>3. Tránh đồng âm (Phát âm):</b><br/>
+                    Âm 鸭 (yā) trùng với 压 (áp lực), 押... → thêm 子 thành 鸭子 để phân biệt rõ con vịt.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
+
+        # ── BẢNG ĐỐI CHIẾU 2 CỘT CHI TIẾT ──
         col_a, col_b = st.columns(2, gap="large")
 
         with col_a:
-            st.markdown("#### 🐾 Động vật — Không cần 子")
+            st.markdown("#### 🐾 Nhóm 1: Động vật KHÔNG THÊM 子 ❌")
             animals_no = [
-                ("🐶", "狗", "gǒu", "con chó", "狗子 = tiếng lóng thân mật"),
-                ("🐱", "猫", "māo", "con mèo", "猫子 = không dùng"),
-                ("🐦", "鸟", "niǎo", "con chim", "鸟子 = không tự nhiên"),
-                ("🐟", "鱼", "yú", "con cá", "鱼子 = trứng cá (nghĩa khác!)"),
-                ("🐻", "熊", "xióng", "con gấu", "熊子 = không dùng"),
-                ("🐯", "虎", "hǔ", "con hổ", "虎子 = từ cổ, không phổ biến"),
+                ("🐶", "狗", "gǒu", "con chó", "Gia súc cổ xưa, 12 con giáp (狗子 chỉ là lóng thân mật)"),
+                ("🐱", "猫", "māo", "con mèo", "Thú nuôi thân thuộc nghìn năm, không bao giờ nói 猫子"),
+                ("🐔", "鸡", "jī", "con gà", "Gia cầm bản địa cổ nhất, đứng một mình trọn nghĩa"),
+                ("🐷", "猪", "zhū", "con lợn", "Đại gia súc thuần hóa cổ đại, 12 con giáp"),
+                ("🐮", "牛", "niú", "con bò / trâu", "Gia súc cày cấy, linh vật văn hóa nông nghiệp"),
+                ("🐴", "马", "mǎ", "con ngựa", "Chiến mã, thú cưỡi truyền thống, 12 con giáp"),
+                ("🐑", "羊", "yáng", "con dê / cừu", "Biểu tượng hiền lành, ẩm thực cổ truyền"),
+                ("🐯", "虎", "hǔ", "con hổ", "Chúa sơn lâm bản địa Trung Quốc (虎子 là từ cổ hiếm)"),
+                ("🐟", "鱼", "yú", "con cá", "Thuần 1 âm tiết (鱼子 = trứng cá, không phải con cá!)"),
+                ("🐦", "鸟", "niǎo", "con chim", "Tên loài chung cổ xưa, văn nói không thêm 子"),
             ]
             for emoji, han, py, vi, note in animals_no:
                 st.markdown(f"""
                 <div class="b93-compare-row">
                     <span class="b93-compare-animal">{emoji}</span>
-                    <div>
+                    <div style="flex:1;">
                         <div class="b93-compare-han">{han}</div>
                         <div style="font-family:monospace;color:#64748b;font-size:0.85rem;">{py} — {vi}</div>
                         <div style="font-size:0.78rem;color:#94a3b8;margin-top:3px;">{note}</div>
@@ -1754,16 +1726,20 @@ def show_lesson9_3_zi():
                 """, unsafe_allow_html=True)
 
         with col_b:
-            st.markdown("#### 🪑 Đồ vật — Phải có 子")
-            objects_yes = [
-                ("🪑", "椅子", "yǐzi", "cái ghế", "椅 một mình nghe cụt"),
-                ("🫙", "杯子", "bēizi", "cái cốc", "杯 một mình cảm giác lạ"),
-                ("🧢", "帽子", "màozi", "cái mũ", "帽 một mình không tự nhiên"),
-                ("👟", "鞋子", "xiézi", "đôi giày", "鞋 dùng được nhưng 鞋子 phổ biến hơn"),
-                ("👖", "裤子", "kùzi", "cái quần", "裤 một mình không dùng trong nói"),
-                ("📦", "箱子", "xiāngzi", "cái thùng", "箱 một mình thấy trong văn viết"),
+            st.markdown("#### 🐾 Nhóm 2: Động vật CÓ THÊM 子 ✅")
+            animals_yes = [
+                ("🐰", "兔子", "tùzi", "con thỏ", "Thú nhỏ gặm nhấm hiền lành, văn nói luôn nói 兔子"),
+                ("🦆", "鸭子", "yāzi", "con vịt", "Khác với 鸡, 鸭 cần 子 để tránh đồng âm với 压/押"),
+                ("🐵", "猴子", "hóuzi", "con khỉ", "Thú rừng nhỏ tinh nghịch, luôn đi cùng 子"),
+                ("🦁", "狮子", "shīzi", "sư tử", "Thú ngoại lai từ Tây Vực (tiếng Phạn) → cần 子 đệm âm"),
+                ("🕊️", "鸽子", "gēzi", "chim bồ câu", "Loài chim phụ gần gũi, dùng 鸽子 tự nhiên hơn"),
+                ("🐦", "燕子", "yànzi", "chim én", "Chim én mùa xuân, luôn dùng 燕子 trong khẩu ngữ"),
+                ("🐛", "虫子", "chóngzi", "con sâu / bọ", "Côn trùng nhỏ bé (nghĩa gốc 子 = vật nhỏ)"),
+                ("🦟", "蚊子", "wénzi", "con muỗi", "Côn trùng hút máu nhỏ bé, bắt buộc có 子"),
+                ("🦂", "蝎子", "xiēzi", "con bọ cạp", "Bò sát / chân khớp độc hại nhỏ bé"),
+                ("🐴", "骡子", "luózi", "con la", "Con lai giữa lừa & ngựa, luôn có 子"),
             ]
-            for emoji, han, py, vi, note in objects_yes:
+            for emoji, han, py, vi, note in animals_yes:
                 zi_idx = han.find("子")
                 if zi_idx >= 0:
                     han_display = han[:zi_idx] + '<span style="color:#059669;font-weight:900;">子</span>' + han[zi_idx+1:]
@@ -1772,7 +1748,7 @@ def show_lesson9_3_zi():
                 st.markdown(f"""
                 <div class="b93-compare-row">
                     <span class="b93-compare-animal">{emoji}</span>
-                    <div>
+                    <div style="flex:1;">
                         <div class="b93-compare-han">{han_display}</div>
                         <div style="font-family:monospace;color:#64748b;font-size:0.85rem;">{py} — {vi}</div>
                         <div style="font-size:0.78rem;color:#94a3b8;margin-top:3px;">{note}</div>
@@ -1781,26 +1757,89 @@ def show_lesson9_3_zi():
                 </div>
                 """, unsafe_allow_html=True)
 
+        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
+
+        # ── 4 CẶP ĐỐI ĐẦU KINH ĐIỂN ──
+        st.markdown("### ⚔️ 4 Cặp đối đầu kinh điển — Rất hay bị nhầm lẫn")
+
+        pairs = [
+            {
+                "title": "🐔 Gà (鸡) vs 🦆 Vịt (鸭子)",
+                "sub": "Cùng là gia cầm quen thuộc trên bàn ăn, vì sao gà không có 子 mà vịt lại có?",
+                "left": ("🐔", "鸡 (jī)", "KHÔNG có 子 ❌", "Chữ tượng hình Giáp Cốt cổ xưa nhất, là đại diện gia cầm đầu bảng nên độc lập 1 âm tiết."),
+                "right": ("🦆", "鸭子 (yāzi)", "CÓ 子 ✅", "Âm 'yā' đồng âm với 压 (áp lực), 押 (giam)... Thêm 子 để phân biệt dứt khoát là con vịt.")
+            },
+            {
+                "title": "🐯 Hổ (虎) vs 🦁 Sư tử (狮子)",
+                "sub": "Cùng là mãnh thú ăn thịt hàng đầu, vì sao hổ không có 子 mà sư tử lại có?",
+                "left": ("🐯", "虎 (hǔ)", "KHÔNG có 子 ❌", "Hổ là chúa sơn lâm bản địa Trung Quốc từ thời tiền sử, thuộc 12 con giáp cổ."),
+                "right": ("🦁", "狮子 (shīzi)", "CÓ 子 ✅", "Sư tử là thú ngoại lai (Tây Vực, nguồn gốc tiếng Phạn 'Simha'). Từ mượn ngoại lai được thêm 子 để thành từ 2 âm tiết.")
+            },
+            {
+                "title": "🐶 Chó (狗) vs 🐰 Thỏ (兔子)",
+                "sub": "Vì sao chó trung thành không có 子 mà thỏ lại bắt buộc có 子?",
+                "left": ("🐶", "狗 (gǒu)", "KHÔNG có 子 ❌", "Đại gia súc giữ nhà gắn liền nông nghiệp nguyên thủy, tần suất dùng nghìn năm."),
+                "right": ("🐰", "兔子 (tùzi)", "CÓ 子 ✅", "Thú nhỏ gặm nhấm. Hậu tố 子 mang tính chất miêu tả con vật nhỏ bé, dễ thương.")
+            },
+            {
+                "title": "🐴 Ngựa (马) vs 🐵 Khỉ (猴子)",
+                "sub": "Ngựa trong 12 con giáp vs Khỉ rừng tinh nghịch",
+                "left": ("🐴", "马 (mǎ)", "KHÔNG có 子 ❌", "Phương tiện giao thông & quân sự cốt lõi thời cổ đại, luôn là 1 âm tiết cô đọng."),
+                "right": ("🐵", "猴子 (hóuzi)", "CÓ 子 ✅", "Loài linh trưởng nhỏ sống ở rừng núi, khẩu ngữ luôn gắn thêm 子 thành 猴子.")
+            },
+        ]
+
+        for p in pairs:
+            st.markdown(f"""
+            <div style="background:white;border-radius:14px;border:1.5px solid #e2e8f0;padding:16px 20px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+                <div style="font-weight:800;font-size:1.05rem;color:#1e293b;margin-bottom:4px;">{p['title']}</div>
+                <div style="font-size:0.83rem;color:#64748b;margin-bottom:12px;">{p['sub']}</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:10px;padding:10px 14px;">
+                        <div style="font-weight:800;color:#9f1239;font-size:1.05rem;margin-bottom:4px;">{p['left'][0]} {p['left'][1]} — <span style="font-size:0.82rem;">{p['left'][2]}</span></div>
+                        <div style="font-size:0.85rem;color:#475569;line-height:1.5;">{p['left'][3]}</div>
+                    </div>
+                    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;">
+                        <div style="font-weight:800;color:#15803d;font-size:1.05rem;margin-bottom:4px;">{p['right'][0]} {p['right'][1]} — <span style="font-size:0.82rem;">{p['right'][2]}</span></div>
+                        <div style="font-size:0.85rem;color:#475569;line-height:1.5;">{p['right'][3]}</div>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("<div style='height:16px;'></div>", unsafe_allow_html=True)
+
+        # ── 2 CẢNH BÁO BẪY NGÔN NGỮ ──
+        st.markdown("### ⚠️ 2 'Bẫy' thú vị học viên cần lưu ý")
         st.markdown("""
-        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #fcd34d;border-radius:14px;padding:20px 24px;margin-top:16px;">
-            <div style="font-weight:800;color:#713f12;margin-bottom:10px;">📝 Ví dụ câu thực tế</div>
-            <table style="width:100%;font-size:0.93rem;color:#374151;">
-                <tr style="background:rgba(255,255,255,0.6);">
-                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">我爱我的桌<span style="color:#059669;">子</span>。</td>
-                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Wǒ ài wǒ de zhuōzi.</td>
-                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Tôi yêu cái bàn của tôi. → <b>Đồ vật</b> → CÓ 子</td>
-                </tr>
-                <tr>
-                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">我爱我的狗。</td>
-                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Wǒ ài wǒ de gǒu.</td>
-                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Tôi yêu con chó của tôi. → <b>Động vật</b> → KHÔNG có 子</td>
-                </tr>
-                <tr style="background:rgba(255,255,255,0.6);">
-                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">这里没有椅<span style="color:#059669;">子</span>。</td>
-                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Zhèlǐ méiyǒu yǐzi.</td>
-                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Ở đây không có ghế. → <b>Đồ vật</b> → CÓ 子</td>
-                </tr>
-            </table>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+            <div style="background:#fffbeb;border:1.5px solid #fde047;border-radius:12px;padding:16px 18px;">
+                <div style="font-weight:800;color:#854d0e;font-size:1rem;margin-bottom:6px;">🐶 1. Có từ 狗子 (gǒuzi) không?</div>
+                <div style="font-size:0.88rem;color:#374151;line-height:1.6;">
+                    <b>CÓ</b>, nhưng là <b>tiếng lóng khẩu ngữ thân mật</b> (gọi đùa chó cưng hoặc trêu bạn thân chí cốt kiểu 'thằng cún').<br/>
+                    Trong văn viết hoặc giao tiếp chuẩn mực, con chó vẫn luôn là <b>狗 (gǒu)</b>, không dùng 狗子 làm danh từ chính quy!
+                </div>
+            </div>
+            <div style="background:#f0f9ff;border:1.5px solid #7dd3fc;border-radius:12px;padding:16px 18px;">
+                <div style="font-weight:800;color:#0369a1;font-size:1rem;margin-bottom:6px;">🐟 2. 鱼子 (yúzǐ) có phải là con cá không?</div>
+                <div style="font-size:0.88rem;color:#374151;line-height:1.6;">
+                    <b>KHÔNG!</b> 鱼子 (đọc thanh 3 <i>yúzǐ</i>) nghĩa là <b>'trứng cá'</b> (trứng cá hồi, trứng cá tầm) — vì 子 giữ nghĩa gốc là hạt nhỏ, mầm mống.<br/>
+                    Con cá trong tiếng Trung chuẩn vẫn là <b>鱼 (yú)</b>!
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ── KHẨU QUYẾT GHI NHỚ 3 GIÂY ──
+        st.markdown("""
+        <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:14px;padding:22px 26px;color:white;box-shadow:0 8px 20px rgba(49,46,129,0.25);">
+            <div style="font-weight:800;font-size:1.15rem;color:#fbbf24;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                <span>🎯</span> Khẩu quyết ghi nhớ quy luật Động vật trong 3 giây
+            </div>
+            <div style="font-size:1.02rem;line-height:1.9;font-weight:600;letter-spacing:0.3px;">
+                🐮 <b>Gia súc lớn, thú linh, mười hai con</b> ➔ Giữ nguyên một chữ, chớ thêm 子 vào!<br/>
+                🐰 <b>Thú nhỏ, côn trùng, giống ngoại lai</b> ➔ Thêm 子 nhẹ giọng, nghe xuôi ngọt ngào!
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1867,6 +1906,20 @@ def show_lesson9_3_zi():
                 "options": ["袜 (không có 子)", "袜子 (có 子)"],
                 "answer": "袜子 (có 子)",
                 "explain": "Quần áo / phụ kiện 1 âm tiết thường có 子: 袜子, 裤子, 帽子..."
+            },
+            {
+                "q": "Con thỏ",
+                "py": "tù / tùzi",
+                "options": ["兔 (không có 子)", "兔子 (có 子)"],
+                "answer": "兔子 (có 子)",
+                "explain": "Thú nhỏ gặm nhấm, theo quy luật ngôn ngữ văn nói luôn thêm 子: 兔子 (tùzi)."
+            },
+            {
+                "q": "Con vịt",
+                "py": "yā / yāzi",
+                "options": ["鸭 (không có 子)", "鸭子 (có 子)"],
+                "answer": "鸭子 (có 子)",
+                "explain": "Khác với con gà 鸡 (không có 子), 鸭 cần thêm 子 thành 鸭子 để tránh đồng âm với 压 (đè), 押 (giam)..."
             },
         ]
 
