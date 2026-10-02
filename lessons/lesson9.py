@@ -1402,13 +1402,6 @@ def show_lesson9_3_zi():
     # TAB 1: NGHĨA & PHÁT ÂM
     # ─────────────────────────────────────────────────────────────
     with tab_meaning:
-        st.markdown("""
-        <div class="b93-hero">
-            <h1>子 — Chữ đa năng bậc nhất tiếng Trung</h1>
-            <p>Từ nghĩa gốc "con cái" đến hậu tố danh từ hóa phổ biến nhất trong văn nói hiện đại.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
         st.markdown("### 🔤 Hai cách đọc — Hai vai trò khác nhau")
         st.markdown("""
         <div class="b93-tone-box">
@@ -1423,7 +1416,7 @@ def show_lesson9_3_zi():
             </div>
             <div class="b93-tone-card light">
                 <div class="b93-tone-char light">子</div>
-                <div class="b93-tone-label light">Nhẹ giọng (轻声)</div>
+                <div class="b93-tone-label light">Thanh giọng (轻声)</div>
                 <div class="b93-tone-py">zi</div>
                 <div class="b93-tone-desc">
                     Đọc <b>lướt nhẹ</b>, <b>không mang nghĩa</b>.<br/>
@@ -1456,7 +1449,7 @@ def show_lesson9_3_zi():
             },
             {
                 "icon": "🏷️",
-                "title": "Hậu tố danh từ (quan trọng nhất hiện đại!)",
+                "title": "Hậu tố danh từ (hiện đại hóa)",
                 "desc": "Dùng phổ biến nhất ngày nay — thêm vào sau danh từ 1 âm tiết để tạo từ 2 âm tiết tự nhiên hơn trong văn nói. <b>Đọc nhẹ (zi)</b>, không mang nghĩa riêng.",
                 "examples": [("桌子", "zhuōzi", "cái bàn"), ("椅子", "yǐzi", "cái ghế"), ("孩子", "háizi", "đứa trẻ")]
             },
