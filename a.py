@@ -33,6 +33,7 @@ if 'lesson9' in sys.modules:
     del sys.modules['lesson9']
 import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
+import lessons.pinyin_practice as pinyin_practice
 
 
 try:
@@ -521,7 +522,16 @@ st.markdown(
 
 st.sidebar.header("Danh mục giáo án")
 
-mode = st.sidebar.selectbox("Khu vực học tập:", ["📚 Lý thuyết & Bài học", "📖 Hệ thống từ vựng", "🗣️ Luyện tập ghép âm", "🗣️ Thực hành trên lớp", "📝 Hệ thống bài tập", "📝 Trắc nghiệm Tổng hợp HSK 1", "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG", "🖨️ In ấn & Đồng bộ"])
+mode = st.sidebar.selectbox("Khu vực học tập:", [
+    "📚 Lý thuyết & Bài học",
+    "📖 Hệ thống từ vựng",
+    "🔊 Luyện tập Ghép âm",
+    "🗣️ Thực hành trên lớp",
+    "📝 Hệ thống bài tập",
+    "📝 Trắc nghiệm Tổng hợp HSK 1",
+    "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG",
+    "🖨️ In ấn & Đồng bộ"
+])
 
 menu = None
 if mode == "📚 Lý thuyết & Bài học":
@@ -553,7 +563,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 8.5 - Đơn thể & Hợp thể",
         "Bài 8.6 - Các bộ thủ thông dụng",
         "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ",
-        "Bài 9.2 - So sánh 不 và 没"
+        "Bài 9.2 - So sánh 不 và 没",
+        "Bài 9.3 - Hậu tố 子 (zi)"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -565,14 +576,9 @@ elif mode == "📖 Hệ thống từ vựng":
         "Bài 6 - TỪ VỰNG",
         "Bài 7 - TỪ VỰNG"
     ])
-elif mode == "🗣️ Luyện tập ghép âm":
-    menu = st.sidebar.radio("Chọn bảng ghép âm:", [
-        "Ghép âm Bài 2 - Vận mẫu kép cơ bản",
-        "Ghép âm Bài 3 - Thanh mẫu nâng cao",
-        "Ghép âm Bài 4 - Vận mẫu kép mở rộng",
-        "Ghép âm Bài 5 - Vận mẫu mũi",
-        "Ghép âm Bài 6 - Vận mẫu mũi phức hợp"
-    ])
+elif mode == "🔊 Luyện tập Ghép âm":
+    pinyin_practice.show_pinyin_practice()
+
 elif mode == "🗣️ Thực hành trên lớp":
     menu = st.sidebar.radio("Chọn hoạt động:", [
         "Bài 3.1 - Hội thoại thực hành",
@@ -729,15 +735,6 @@ elif menu == "Bài tập Bài 1":
 elif menu == "Bài 2.1 - Vận mẫu kép":
     lesson2.show_lesson2_intro(add_tones)
 
-elif menu == "Ghép âm Bài 2 - Vận mẫu kép cơ bản":
-    lesson2.show_lesson2_spelling(add_tones)
-
-elif menu == "Ghép âm Bài 3 - Thanh mẫu nâng cao":
-    lesson3.show_lesson3_practice(add_tones)
-
-elif menu == "Ghép âm Bài 4 - Vận mẫu kép mở rộng":
-    lesson4.show_lesson4_spelling(add_tones)
-
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
@@ -746,9 +743,6 @@ elif menu == "Bài 3.1 - Thanh mẫu":
 
 elif menu == "Bài 3.2 - Quy tắc viết Pinyin":
     lesson3.show_lesson3_pinyin_rules()
-
-elif menu == "Bài 3.3 - Luyện tập ghép âm":
-    lesson3.show_lesson3_practice(add_tones)
 
 elif menu == "Bài 3 - TỪ VỰNG":
     lesson3.show_lesson3_vocab()
@@ -849,6 +843,9 @@ elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
 elif menu == "Bài 9.2 - So sánh 不 và 没":
     lesson9.show_lesson9_2_bu_mei()
 
+elif menu == "Bài 9.3 - Hậu tố 子 (zi)":
+    lesson9.show_lesson9_3_zi()
+
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
 
@@ -860,12 +857,6 @@ elif menu == "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ":
 
 elif menu == "Bài 5.4 - Tết Đoan Ngọ (端午节)":
     lesson5.show_lesson5_duanwu()
-
-elif menu == "Ghép âm Bài 5 - Vận mẫu mũi":
-    lesson5.show_lesson5_nasal_spelling(add_tones)
-
-elif menu == "Ghép âm Bài 6 - Vận mẫu mũi phức hợp":
-    lesson6.show_lesson6_spelling(add_tones)
 
 elif menu == "Bài tập Bài 5":
     lesson5.show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scores_b5)

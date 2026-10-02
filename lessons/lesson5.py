@@ -3,7 +3,7 @@ import random
 import base64
 import os
 from datetime import datetime, timezone, timedelta
-from ui_utils import render_lesson_intro, render_play_button, shuffled_options, render_spelling_table
+from ui_utils import render_lesson_intro, render_play_button, shuffled_options
 from lessons_data import B5_NASAL_FINALS_DATA, B5_QUIZ_VOCAB, B5_QUIZ_LISTENING, B5_QUIZ_FILL_BLANKS
 
 def get_nasal_audio(syllable):
@@ -952,54 +952,6 @@ def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_
                 st.write("### 📜 Lịch sử nộp bài lớp học:")
                 st.dataframe(all_scores, use_container_width=True)
 
-def show_lesson5_nasal_spelling(add_tones):
-    render_lesson_intro("📚 Bài 5: Luyện tập ghép âm Vận mẫu mũi", "Luyện tập ghép âm các thanh mẫu với 7 vận mẫu mũi (an, ang, en, eng, in, ing, ong).")
-
-    B5_LUYEN_TAP_FINALS = ["an", "ang", "en", "eng", "in", "ing", "ong"]
-    B5_LUYEN_TAP_ROWS = {
-        "(Không có)": ["an", "ang", "en", "eng", "yin", "ying", "weng"],
-        "b": ["ban", "bang", "ben", "beng", "bin", "bing", ""],
-        "p": ["pan", "pang", "pen", "peng", "pin", "ping", ""],
-        "m": ["man", "mang", "men", "meng", "min", "ming", ""],
-        "f": ["fan", "fang", "fen", "feng", "", "", ""],
-        "d": ["dan", "dang", "", "deng", "", "ding", "dong"],
-        "t": ["tan", "tang", "", "teng", "", "ting", "tong"],
-        "n": ["nan", "nang", "nen", "neng", "nin", "ning", "nong"],
-        "l": ["lan", "lang", "", "leng", "lin", "ling", "long"],
-        "g": ["gan", "gang", "gen", "geng", "", "", "gong"],
-        "k": ["kan", "kang", "ken", "keng", "", "", "kong"],
-        "h": ["han", "hang", "hen", "heng", "", "", "hong"],
-        "j": ["", "", "", "", "jin", "jing", ""],
-        "q": ["", "", "", "", "qin", "qing", ""],
-        "x": ["", "", "", "", "xin", "xing", ""],
-        "zh": ["zhan", "zhang", "zhen", "zheng", "", "", "zhong"],
-        "ch": ["chan", "chang", "chen", "cheng", "", "", "chong"],
-        "sh": ["shan", "shang", "shen", "sheng", "", "", ""],
-        "r": ["ran", "rang", "ren", "reng", "", "", "rong"],
-        "z": ["zan", "zang", "zen", "zeng", "", "", "zong"],
-        "c": ["can", "cang", "cen", "ceng", "", "", "cong"],
-        "s": ["san", "sang", "sen", "seng", "", "", "song"]
-    }
-
-    st.subheader("Bảng luyện tập ghép âm vận mẫu mũi (Bài 5)")
-
-
-    GC = {
-        "(Không có)": "#f1f5f9", "(Không có)__border": "#cbd5e1",
-        "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",
-        "b__border": "#e9d5ff", "p__border": "#e9d5ff", "m__border": "#e9d5ff", "f__border": "#e9d5ff",
-        "d": "#eff6ff", "t": "#eff6ff", "n": "#eff6ff", "l": "#eff6ff",
-        "d__border": "#bfdbfe", "t__border": "#bfdbfe", "n__border": "#bfdbfe", "l__border": "#bfdbfe",
-        "g": "#f0fdf4", "k": "#f0fdf4", "h": "#f0fdf4",
-        "g__border": "#bbf7d0", "k__border": "#bbf7d0", "h__border": "#bbf7d0",
-        "j": "#f5f3ff", "q": "#f5f3ff", "x": "#f5f3ff",
-        "j__border": "#ddd6fe", "q__border": "#ddd6fe", "x__border": "#ddd6fe",
-        "zh": "#fff7ed", "ch": "#fff7ed", "sh": "#fff7ed", "r": "#fff7ed",
-        "zh__border": "#fed7aa", "ch__border": "#fed7aa", "sh__border": "#fed7aa", "r__border": "#fed7aa",
-        "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
-        "z__border": "#fde047", "c__border": "#fde047", "s__border": "#fde047",
-    }
-    render_spelling_table(B5_LUYEN_TAP_FINALS, B5_LUYEN_TAP_ROWS, "b5sp", add_tones, GC)
 
 def show_lesson5_nasal_exercises(save_progress, save_score_row_b5, load_all_scores_b5):
     st.subheader("📝 Bài tập Luyện tập & Đánh giá (Vận mẫu mũi)")

@@ -295,34 +295,6 @@ B2_VAN_MAU_KEP_DATA = [
     }
 ]
 
-B2_LUYEN_TAP_FINALS = ["a", "o", "e", "i", "u", "ü", "ai", "ei", "ao", "ou"]
-B2_LUYEN_TAP_ROWS = {
-    "b": ["ba", "bo", "", "bi", "bu", "", "bai", "bei", "bao", ""],
-    "p": ["pa", "po", "", "pi", "pu", "", "pai", "pei", "pao", "pou"],
-    "m": ["ma", "mo", "me", "mi", "mu", "", "mai", "mei", "mao", "mou"],
-    "f": ["fa", "fo", "", "", "fu", "", "", "fei", "", "fou"],
-    "d": ["da", "", "de", "di", "du", "", "dai", "dei", "dao", "dou"],
-    "t": ["ta", "", "te", "ti", "tu", "", "tai", "", "tao", "tou"],
-    "n": ["na", "", "ne", "ni", "nu", "nü", "nai", "nei", "nao", ""],
-    "l": ["la", "", "le", "li", "lu", "lü", "lai", "lei", "lao", "lou"],
-    "g": ["ga", "", "ge", "", "gu", "", "gai", "gei", "gao", "gou"],
-    "k": ["ka", "", "ke", "", "ku", "", "kai", "", "kao", "kou"],
-    "h": ["ha", "", "he", "", "hu", "", "hai", "hei", "hao", "hou"],
-}
-
-B3_LUYEN_TAP_FINALS = ["a", "o", "e", "i", "u", "ü", "ai", "ao", "ou", "ei"]
-B3_LUYEN_TAP_ROWS = {
-    "z": ["za", "", "ze", "zi", "zu", "", "zai", "zao", "zou", "zei"],
-    "c": ["ca", "", "ce", "ci", "cu", "", "cai", "cao", "cou", ""],
-    "s": ["sa", "", "se", "si", "su", "", "sai", "sao", "sou", ""],
-    "zh": ["zha", "", "zhe", "zhi", "zhu", "", "zhai", "zhao", "zhou", "zhei"],
-    "ch": ["cha", "", "che", "chi", "chu", "", "chai", "chao", "chou", ""],
-    "sh": ["sha", "", "she", "shi", "shu", "", "shai", "shao", "shou", "shei"],
-    "r": ["", "", "re", "ri", "ru", "", "", "rao", "rou", ""],
-    "j": ["", "", "", "ji", "", "ju", "", "", "", ""],
-    "q": ["", "", "", "qi", "", "qu", "", "", "", ""],
-    "x": ["", "", "", "xi", "", "xu", "", "", "", ""],
-}
 
 NET_CO_BAN = [
     {"Nét": "横", "Pinyin": "héng", "Mô tả": "nét ngang"},

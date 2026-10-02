@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 from datetime import datetime, timezone, timedelta
-from ui_utils import render_lesson_intro, render_play_button, render_spelling_table
+from ui_utils import render_lesson_intro, render_play_button
 from lessons_data import B6_1_NASAL_FINALS_DATA, B6_1_QUIZ_DATA, B6_2_STANDALONE_FINALS_DATA, B6_2_QUIZ_DATA
 
 def check_nasal_spelling_rule_6_1(initial, final, tone_idx):
@@ -863,54 +863,6 @@ def show_lesson6_vocab():
         """.replace("\n", " "), unsafe_allow_html=True)
 
 
-def show_lesson6_spelling(add_tones):
-    render_lesson_intro("📚 Bài 6: Luyện tập ghép âm Vận mẫu mũi phức hợp", "Luyện tập ghép âm các thanh mẫu với 8 vận mẫu mũi phức hợp (ian, iang, iong, uan, uang, un, ün, üan).")
-
-    B6_LUYEN_TAP_FINALS = ["ian", "iang", "iong", "uan", "uang", "un", "ün", "üan"]
-    B6_LUYEN_TAP_ROWS = {
-        "(Không có)": ["yan", "yang", "yong", "wan", "wang", "wen", "yun", "yuan"],
-        "b": ["bian", "", "", "", "", "", "", ""],
-        "p": ["pian", "", "", "", "", "", "", ""],
-        "m": ["mian", "", "", "", "", "", "", ""],
-        "f": ["", "", "", "", "", "", "", ""],
-        "d": ["dian", "", "", "duan", "", "dun", "", ""],
-        "t": ["tian", "", "", "tuan", "", "tun", "", ""],
-        "n": ["nian", "niang", "", "nuan", "", "nun", "", ""],
-        "l": ["lian", "liang", "", "luan", "", "lun", "", ""],
-        "g": ["", "", "", "guan", "guang", "gun", "", ""],
-        "k": ["", "", "", "kuan", "kuang", "kun", "", ""],
-        "h": ["", "", "", "huan", "huang", "hun", "", ""],
-        "j": ["jian", "jiang", "jiong", "", "", "", "jun", "juan"],
-        "q": ["qian", "qiang", "qiong", "", "", "", "qun", "quan"],
-        "x": ["xian", "xiang", "xiong", "", "", "", "xun", "xuan"],
-        "zh": ["", "", "", "zhuan", "zhuang", "zhun", "", ""],
-        "ch": ["", "", "", "chuan", "chuang", "chun", "", ""],
-        "sh": ["", "", "", "shuan", "shuang", "shun", "", ""],
-        "r": ["", "", "", "ruan", "", "run", "", ""],
-        "z": ["", "", "", "zuan", "", "zun", "", ""],
-        "c": ["", "", "", "cuan", "", "cun", "", ""],
-        "s": ["", "", "", "suan", "", "sun", "", ""]
-    }
-
-    st.subheader("Bảng luyện tập ghép âm vận mẫu mũi phức hợp (Bài 6)")
-
-
-    GC = {
-        "(Không có)": "#f1f5f9", "(Không có)__border": "#cbd5e1",
-        "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",
-        "b__border": "#e9d5ff", "p__border": "#e9d5ff", "m__border": "#e9d5ff", "f__border": "#e9d5ff",
-        "d": "#eff6ff", "t": "#eff6ff", "n": "#eff6ff", "l": "#eff6ff",
-        "d__border": "#bfdbfe", "t__border": "#bfdbfe", "n__border": "#bfdbfe", "l__border": "#bfdbfe",
-        "g": "#f0fdf4", "k": "#f0fdf4", "h": "#f0fdf4",
-        "g__border": "#bbf7d0", "k__border": "#bbf7d0", "h__border": "#bbf7d0",
-        "j": "#f5f3ff", "q": "#f5f3ff", "x": "#f5f3ff",
-        "j__border": "#ddd6fe", "q__border": "#ddd6fe", "x__border": "#ddd6fe",
-        "zh": "#fff7ed", "ch": "#fff7ed", "sh": "#fff7ed", "r": "#fff7ed",
-        "zh__border": "#fed7aa", "ch__border": "#fed7aa", "sh__border": "#fed7aa", "r__border": "#fed7aa",
-        "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
-        "z__border": "#fde047", "c__border": "#fde047", "s__border": "#fde047",
-    }
-    render_spelling_table(B6_LUYEN_TAP_FINALS, B6_LUYEN_TAP_ROWS, "b6sp", add_tones, GC)
 
 
 def show_lesson6_1_classroom_practice():

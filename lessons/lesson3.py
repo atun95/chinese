@@ -267,21 +267,6 @@ def show_lesson3_pinyin_rules():
 </tbody>
 </table>""", unsafe_allow_html=True)
 
-def show_lesson3_practice(add_tones):
-    render_lesson_intro("📚 Bài 3: Luyện tập ghép âm", "Luyện ghép các thanh mẫu nâng cao (z, c, s, zh, ch, sh, r, j, q, x) với các vận mẫu cơ bản và vận mẫu kép.")
-    st.subheader("Bảng luyện tập ghép âm nâng cao")
-
-
-    GC = {
-        "z": "#fefce8", "c": "#fefce8", "s": "#fefce8",
-        "z__border": "#fde047", "c__border": "#fde047", "s__border": "#fde047",
-        "zh": "#fff7ed", "ch": "#fff7ed", "sh": "#fff7ed", "r": "#fff7ed",
-        "zh__border": "#fed7aa", "ch__border": "#fed7aa", "sh__border": "#fed7aa", "r__border": "#fed7aa",
-        "j": "#f5f3ff", "q": "#f5f3ff", "x": "#f5f3ff",
-        "j__border": "#ddd6fe", "q__border": "#ddd6fe", "x__border": "#ddd6fe",
-    }
-    render_spelling_table(B3_LUYEN_TAP_FINALS, B3_LUYEN_TAP_ROWS, "b3sp", add_tones, GC)
-
 def show_lesson3_vocab():
     render_lesson_intro("📚 Bài 3: Từ vựng & Tên riêng", "Học từ vựng mới và tên riêng cơ bản.")
     st.subheader("1. Từ vựng & Tên riêng")

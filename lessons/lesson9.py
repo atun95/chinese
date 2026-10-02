@@ -1230,4 +1230,723 @@ def show_lesson9_2_bu_mei():
             """, unsafe_allow_html=True)
 
 
+
+def show_lesson9_3_zi():
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+    .b93-hero {
+        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+        border-radius: 20px;
+        padding: 32px 36px;
+        color: white;
+        margin-bottom: 28px;
+        box-shadow: 0 12px 40px rgba(5,150,105,0.30);
+        position: relative;
+        overflow: hidden;
+    }
+    .b93-hero::before {
+        content: '子';
+        position: absolute;
+        right: 36px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 9rem;
+        font-weight: 900;
+        opacity: 0.12;
+        line-height: 1;
+        font-family: 'Inter', sans-serif;
+    }
+    .b93-hero h1 { margin: 0 0 8px 0; font-size: 2rem; font-weight: 900; font-family: 'Inter', sans-serif; }
+    .b93-hero p { margin: 0; opacity: 0.88; font-size: 1rem; }
+
+    .b93-meaning-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        border: 1px solid #d1fae5;
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+    }
+    .b93-meaning-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .b93-meaning-title { font-size: 1rem; font-weight: 800; color: #065f46; margin-bottom: 4px; }
+    .b93-meaning-desc { font-size: 0.92rem; color: #374151; line-height: 1.6; }
+    .b93-meaning-char {
+        font-size: 3rem; font-weight: 900; color: #059669;
+        min-width: 60px; text-align: center; line-height: 1;
+    }
+
+    .b93-tone-box {
+        display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .b93-tone-card {
+        flex: 1; min-width: 200px;
+        border-radius: 14px; padding: 18px 20px;
+        text-align: center;
+    }
+    .b93-tone-card.heavy {
+        background: linear-gradient(145deg, #ecfdf5, #d1fae5);
+        border: 2px solid #6ee7b7;
+    }
+    .b93-tone-card.light {
+        background: linear-gradient(145deg, #fffbeb, #fef3c7);
+        border: 2px solid #fcd34d;
+    }
+    .b93-tone-char { font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+    .b93-tone-char.heavy { color: #065f46; }
+    .b93-tone-char.light { color: #92400e; }
+    .b93-tone-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .b93-tone-label.heavy { color: #065f46; }
+    .b93-tone-label.light { color: #92400e; }
+    .b93-tone-py { font-family: monospace; font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .b93-tone-desc { font-size: 0.88rem; color: #4b5563; line-height: 1.5; }
+
+    .b93-word-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .b93-word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .b93-word-han { font-size: 1.8rem; font-weight: 900; color: #0f172a; margin-right: 12px; }
+    .b93-word-zi { color: #059669; }
+    .b93-word-py {
+        font-family: monospace; font-size: 1rem; color: #1d4ed8;
+        background: #eff6ff; padding: 3px 10px; border-radius: 12px;
+        font-weight: 600; display: inline-block; margin-right: 8px;
+    }
+    .b93-word-vi {
+        font-size: 0.9rem; color: #15803d; background: #f0fdf4;
+        padding: 3px 10px; border-radius: 12px; font-weight: 600;
+        border: 1px solid #bbf7d0; display: inline-block;
+    }
+
+    .b93-rule-box {
+        border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
+    }
+    .b93-rule-box.green {
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        border: 2px solid #6ee7b7;
+    }
+    .b93-rule-box.red {
+        background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+        border: 2px solid #fca5a5;
+    }
+    .b93-rule-box.yellow {
+        background: linear-gradient(135deg, #fffbeb, #fef9c3);
+        border: 2px solid #fde047;
+    }
+    .b93-rule-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; }
+    .b93-rule-title.green { color: #065f46; }
+    .b93-rule-title.red   { color: #9f1239; }
+    .b93-rule-title.yellow { color: #713f12; }
+    .b93-rule-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+    .b93-rule-item .dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .b93-rule-item .dot.green { background: #059669; }
+    .b93-rule-item .dot.red   { background: #e11d48; }
+    .b93-rule-item .dot.yellow { background: #d97706; }
+
+    .b93-compare-row {
+        display: flex; align-items: center; gap: 14px;
+        background: white; border-radius: 12px;
+        padding: 14px 18px; margin-bottom: 10px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .b93-compare-animal { font-size: 1.5rem; flex-shrink: 0; }
+    .b93-compare-han { font-size: 1.4rem; font-weight: 800; color: #0f172a; }
+    .b93-compare-verdict {
+        margin-left: auto;
+        font-size: 0.82rem; font-weight: 700;
+        padding: 4px 12px; border-radius: 12px;
+    }
+    .b93-compare-verdict.yes { background: #dcfce7; color: #15803d; }
+    .b93-compare-verdict.no  { background: #fee2e2; color: #b91c1c; }
+
+    .b93-quiz-q { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .b93-quiz-sub { font-family: monospace; color: #64748b; font-size: 0.95rem; margin-bottom: 4px; }
+    .b93-score-box {
+        background: linear-gradient(135deg, #065f46, #047857);
+        color: white; border-radius: 16px;
+        padding: 28px; text-align: center; margin-top: 24px;
+    }
+    .b93-score-num { font-size: 3.5rem; font-weight: 900; }
+    .b93-score-label { opacity: 0.88; font-size: 1rem; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "🌿 Bài 9.3 - Hậu tố 子 (zi)",
+        "Tìm hiểu nghĩa gốc của 子, lý do tồn tại của hậu tố này và khi nào cần (hoặc không cần) thêm vào danh từ."
+    )
+
+    tab_meaning, tab_vocab, tab_rules, tab_compare, tab_quiz = st.tabs([
+        "📖 Nghĩa & Phát âm",
+        "📦 Từ vựng theo nhóm",
+        "📏 Khi nào thêm / không thêm",
+        "🐶 So sánh thú vị",
+        "🎮 Luyện tập"
+    ])
+
+    # ─────────────────────────────────────────────────────────────
+    # TAB 1: NGHĨA & PHÁT ÂM
+    # ─────────────────────────────────────────────────────────────
+    with tab_meaning:
+        st.markdown("""
+        <div class="b93-hero">
+            <h1>子 — Chữ đa năng bậc nhất tiếng Trung</h1>
+            <p>Từ nghĩa gốc "con cái" đến hậu tố danh từ hóa phổ biến nhất trong văn nói hiện đại.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### 🔤 Hai cách đọc — Hai vai trò khác nhau")
+        st.markdown("""
+        <div class="b93-tone-box">
+            <div class="b93-tone-card heavy">
+                <div class="b93-tone-char heavy">子</div>
+                <div class="b93-tone-label heavy">Thanh 3 (Nặng)</div>
+                <div class="b93-tone-py">zǐ</div>
+                <div class="b93-tone-desc">
+                    Đọc <b>đầy thanh</b>, mang <b>nghĩa độc lập</b>.<br/>
+                    Dùng trong văn viết, danh từ độc lập.
+                </div>
+            </div>
+            <div class="b93-tone-card light">
+                <div class="b93-tone-char light">子</div>
+                <div class="b93-tone-label light">Nhẹ giọng (轻声)</div>
+                <div class="b93-tone-py">zi</div>
+                <div class="b93-tone-desc">
+                    Đọc <b>lướt nhẹ</b>, <b>không mang nghĩa</b>.<br/>
+                    Chỉ là hậu tố "đệm âm" trong văn nói.
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### 📚 4 nghĩa gốc của 子 (zǐ)")
+
+        meanings = [
+            {
+                "icon": "👶",
+                "title": "Con cái (nghĩa gốc cơ bản nhất)",
+                "desc": "Nghĩa nguyên thủy — chỉ con người được sinh ra. Dùng trong cả văn nói lẫn văn viết.",
+                "examples": [("子女", "zǐnǚ", "con cái (trai + gái)"), ("儿子", "érzi", "con trai"), ("女儿", "nǚ'ér", "con gái (dùng 儿 thay 子)")]
+            },
+            {
+                "icon": "🌱",
+                "title": "Hạt, hạt giống (sự vật nhỏ, tròn)",
+                "desc": "Vì hình ảnh 'hạt' giống 'con nhỏ' nên nghĩa mở rộng sang chỉ vật nhỏ, hạt nhỏ.",
+                "examples": [("种子", "zhǒngzi", "hạt giống"), ("莲子", "liánzi", "hạt sen"), ("栗子", "lìzi", "hạt dẻ")]
+            },
+            {
+                "icon": "🎓",
+                "title": "Người đáng kính (kính ngữ cổ)",
+                "desc": "Thời cổ đại dùng để tôn xưng người có học thức, bậc thầy. Hay gặp trong tên hiệu.",
+                "examples": [("孔子", "Kǒngzǐ", "Khổng Tử"), ("孟子", "Mèngzǐ", "Mạnh Tử"), ("老子", "Lǎozǐ", "Lão Tử")]
+            },
+            {
+                "icon": "🏷️",
+                "title": "Hậu tố danh từ (quan trọng nhất hiện đại!)",
+                "desc": "Dùng phổ biến nhất ngày nay — thêm vào sau danh từ 1 âm tiết để tạo từ 2 âm tiết tự nhiên hơn trong văn nói. <b>Đọc nhẹ (zi)</b>, không mang nghĩa riêng.",
+                "examples": [("桌子", "zhuōzi", "cái bàn"), ("椅子", "yǐzi", "cái ghế"), ("孩子", "háizi", "đứa trẻ")]
+            },
+        ]
+
+        for m in meanings:
+            ex_html = ""
+            for han, py, vi in m["examples"]:
+                ex_html += f'<span style="margin-right:18px;"><b style="font-size:1.05rem;">{han}</b> <span style="font-family:monospace;color:#4f46e5;">{py}</span> <span style="color:#64748b;font-style:italic;">— {vi}</span></span>'
+            st.markdown(f"""
+            <div class="b93-meaning-card">
+                <div class="b93-meaning-icon">{m['icon']}</div>
+                <div>
+                    <div class="b93-meaning-title">{m['title']}</div>
+                    <div class="b93-meaning-desc">{m['desc']}</div>
+                    <div style="margin-top:10px; background:#f8fafc; border-radius:8px; padding:10px 14px;">
+                        {ex_html}
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style="background:linear-gradient(135deg,#1e3a8a,#3730a3);border-radius:14px;padding:20px 24px;color:white;margin-top:8px;">
+            <div style="font-size:1rem;font-weight:800;margin-bottom:10px;">💡 Tại sao tiếng Trung hiện đại lại cần hậu tố 子?</div>
+            <p style="margin:0;opacity:0.9;font-size:0.93rem;line-height:1.7;">
+            Tiếng Trung cổ đại dùng <b>1 âm tiết</b> là đủ (桌 = bàn). Nhưng theo thời gian, ngôn ngữ có quá nhiều
+            <b>từ đồng âm</b> — chỉ nghe âm thanh dễ nhầm lẫn. Để câu văn <b>rõ ràng và tự nhiên hơn</b> khi nói,
+            người Trung Quốc thêm 子 để tạo từ <b>2 âm tiết</b>. Lúc này 子 chỉ là "đệm âm", không có nghĩa gì cả.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ─────────────────────────────────────────────────────────────
+    # TAB 2: TỪ VỰNG THEO NHÓM
+    # ─────────────────────────────────────────────────────────────
+    with tab_vocab:
+        st.markdown("### 📦 Từ vựng phổ biến có hậu tố 子 — chia theo nhóm")
+
+        groups = [
+            {
+                "label": "🪑 Đồ vật / Nội thất",
+                "note": "✅ Đồ vật dùng hàng ngày (1 âm tiết) → BẮT BUỘC thêm 子 trong văn nói",
+                "color": "#1d4ed8",
+                "bg": "#eff6ff",
+                "border": "#93c5fd",
+                "words": [
+                    ("桌子", "zhuōzi", "cái bàn"),
+                    ("椅子", "yǐzi", "cái ghế"),
+                    ("杯子", "bēizi", "cái cốc"),
+                    ("盘子", "pánzi", "cái đĩa"),
+                    ("箱子", "xiāngzi", "cái hòm / thùng"),
+                    ("镜子", "jìngzi", "cái gương"),
+                    ("柜子", "guìzi", "tủ"),
+                    ("瓶子", "píngzi", "cái chai"),
+                ]
+            },
+            {
+                "label": "👗 Trang phục / Phụ kiện",
+                "note": "✅ Quần áo & phụ kiện (1 âm tiết) → BẮT BUỘC thêm 子, không có 子 nghe rất lạ",
+                "color": "#7c3aed",
+                "bg": "#f5f3ff",
+                "border": "#c4b5fd",
+                "words": [
+                    ("帽子", "màozi", "cái mũ"),
+                    ("袜子", "wàzi", "đôi tất"),
+                    ("裤子", "kùzi", "cái quần"),
+                    ("鞋子", "xiézi", "đôi giày"),
+                    ("裙子", "qúnzi", "cái váy"),
+                    ("扣子", "kòuzi", "cái nút áo"),
+                ]
+            },
+            {
+                "label": "🍜 Thức ăn / Hoa quả",
+                "note": "✅ Thức ăn & quả (1 âm tiết, hình tròn nhỏ) → 子 từ nghĩa 'hạt nhỏ' mở rộng sang tên quả",
+                "color": "#b45309",
+                "bg": "#fffbeb",
+                "border": "#fcd34d",
+                "words": [
+                    ("包子", "bāozi", "bánh bao"),
+                    ("饺子", "jiǎozi", "sủi cảo"),
+                    ("橘子", "júzi", "quả quýt"),
+                    ("栗子", "lìzi", "hạt dẻ"),
+                    ("柿子", "shìzi", "quả hồng"),
+                    ("馒头", "mántou", "bánh mì hấp"),
+                ]
+            },
+            {
+                "label": "🧑 Người / Nhân vật",
+                "note": "✅ Tính từ/danh từ + 子 = người có tính chất đó. Một số từ quan hệ gia đình cũng có 子",
+                "color": "#065f46",
+                "bg": "#ecfdf5",
+                "border": "#6ee7b7",
+                "words": [
+                    ("孩子", "háizi", "đứa trẻ"),
+                    ("儿子", "érzi", "con trai"),
+                    ("妻子", "qīzi", "vợ"),
+                    ("胖子", "pàngzi", "người béo"),
+                    ("瘦子", "shòuzi", "người gầy"),
+                    ("傻子", "shǎzi", "kẻ ngốc"),
+                    ("骗子", "piànzi", "kẻ lừa đảo"),
+                ]
+            },
+            {
+                "label": "🧠 Bộ phận cơ thể",
+                "note": "✅ Một số bộ phận cơ thể có 子 cố định — đây là từ đã được định hình, phải học thuộc",
+                "color": "#9f1239",
+                "bg": "#fff1f2",
+                "border": "#fca5a5",
+                "words": [
+                    ("脖子", "bózi", "cổ"),
+                    ("肚子", "dùzi", "bụng"),
+                    ("鼻子", "bízi", "mũi"),
+                    ("嗓子", "sǎngzi", "cổ họng"),
+                    ("胡子", "húzi", "râu"),
+                ]
+            },
+            {
+                "label": "🏡 Địa điểm / Không gian",
+                "note": "✅ Không gian nhỏ, cụ thể (1 âm tiết) → thêm 子 để từ nghe đầy đủ và tự nhiên hơn",
+                "color": "#0369a1",
+                "bg": "#f0f9ff",
+                "border": "#7dd3fc",
+                "words": [
+                    ("院子", "yuànzi", "sân"),
+                    ("巷子", "xiàngzi", "ngõ hẻm"),
+                    ("屋子", "wūzi", "căn phòng"),
+                    ("村子", "cūnzi", "làng"),
+                    ("位子", "wèizi", "chỗ ngồi / vị trí"),
+                ]
+            },
+        ]
+
+        for i in range(0, len(groups), 2):
+            col1, col2 = st.columns(2, gap="medium")
+            for col, g in zip([col1, col2], groups[i:i+2]):
+                with col:
+                    # Header nhóm + note
+                    note_html = (
+                        f'<div style="font-size:0.78rem;color:#475569;margin-top:6px;'
+                        f'background:rgba(255,255,255,0.6);border-radius:6px;padding:5px 8px;'
+                        f'border-left:3px solid {g["border"]};line-height:1.4;">'
+                        f'{g["note"]}</div>'
+                    ) if g.get("note") else ""
+                    st.markdown(
+                        f'<div style="background:{g["bg"]};border:2px solid {g["border"]};'
+                        f'border-radius:16px 16px 0 0;padding:14px 18px 12px 18px;">'
+                        f'<span style="font-size:1rem;font-weight:800;color:{g["color"]};">{g["label"]}</span>'
+                        f'{note_html}'
+                        f'</div>',
+                        unsafe_allow_html=True
+                    )
+                    # Từng từ
+                    for han, py, vi in g["words"]:
+                        zi_idx = han.find("子")
+                        if zi_idx >= 0:
+                            han_display = (
+                                han[:zi_idx]
+                                + '<span style="color:#059669;font-weight:900;">子</span>'
+                                + han[zi_idx+1:]
+                            )
+                        else:
+                            han_display = han
+                        st.markdown(
+                            f'<div style="background:{g["bg"]};border-left:2px solid {g["border"]};'
+                            f'border-right:2px solid {g["border"]};padding:10px 18px;">'
+                            f'<span style="font-size:1.6rem;font-weight:900;color:#0f172a;margin-right:10px;">{han_display}</span>'
+                            f'<span style="font-family:monospace;font-size:0.9rem;color:#1d4ed8;'
+                            f'background:#eff6ff;padding:2px 8px;border-radius:10px;margin-right:6px;">{py}</span>'
+                            f'<span style="font-size:0.85rem;color:#15803d;background:#f0fdf4;'
+                            f'padding:2px 8px;border-radius:10px;border:1px solid #bbf7d0;">{vi}</span>'
+                            f'</div>',
+                            unsafe_allow_html=True
+                        )
+                    # Đáy nhóm
+                    st.markdown(
+                        f'<div style="background:{g["bg"]};border:2px solid {g["border"]};'
+                        f'border-top:none;border-radius:0 0 16px 16px;padding:6px 18px;margin-bottom:16px;"></div>',
+                        unsafe_allow_html=True
+                    )
+
+
+    # ─────────────────────────────────────────────────────────────
+    # TAB 3: KHI NÀO THÊM / KHÔNG THÊM
+    # ─────────────────────────────────────────────────────────────
+    with tab_rules:
+        st.markdown("### 📏 Quy tắc: Khi nào thêm 子, khi nào không?")
+
+        st.markdown("""
+        <div class="b93-rule-box green">
+            <div class="b93-rule-title green">✅ THÊM 子 — Những trường hợp này</div>
+            <div class="b93-rule-item">
+                <div class="dot green"></div>
+                <div><b>Từ 1 âm tiết chỉ đồ vật thông thường</b> — dùng trong văn nói hàng ngày: 椅<b>子</b>, 杯<b>子</b>, 帽<b>子</b>, 桌<b>子</b></div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot green"></div>
+                <div><b>Tính từ + 子 = danh từ chỉ người</b> theo tính chất đó: 胖 → 胖<b>子</b> (người béo), 傻 → 傻<b>子</b> (kẻ ngốc)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot green"></div>
+                <div><b>Bộ phận cơ thể</b> thường gặp: 鼻<b>子</b> (mũi), 脖<b>子</b> (cổ), 肚<b>子</b> (bụng)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot green"></div>
+                <div><b>Từ đã quen dùng với 子</b> từ lâu — chỉ cần học thuộc</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="b93-rule-box red">
+            <div class="b93-rule-title red">❌ KHÔNG THÊM 子 — Những trường hợp này</div>
+            <div class="b93-rule-item">
+                <div class="dot red"></div>
+                <div><b>Từ đã có 2 âm tiết trở lên</b> — đã đủ rồi: 电话 (điện thoại), 汽车 (ô tô), 手机 (điện thoại di động)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot red"></div>
+                <div><b>Khái niệm trừu tượng</b>: 爱情 (tình yêu), 自由 (tự do), 幸福 (hạnh phúc)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot red"></div>
+                <div><b>Nghề nghiệp</b> — dùng 者/员/师 thay thế: 老师 (giáo viên), 医生 (bác sĩ), 司机 (tài xế)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot red"></div>
+                <div><b>Từ hiện đại / từ mượn</b>: điện thoại, máy tính, internet — không có 子</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="b93-rule-box yellow">
+            <div class="b93-rule-title yellow">🟡 CÓ THỂ DÙNG CÁ HAI — Tùy ngữ cảnh</div>
+            <div class="b93-rule-item">
+                <div class="dot yellow"></div>
+                <div><b>桌</b> (văn viết trang trọng) / <b>桌子</b> (văn nói tự nhiên hơn)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot yellow"></div>
+                <div><b>鞋</b> (trong thơ, văn cổ) / <b>鞋子</b> (hội thoại hàng ngày)</div>
+            </div>
+            <div class="b93-rule-item">
+                <div class="dot yellow"></div>
+                <div><b>狗</b> (chuẩn) / <b>狗子</b> (tiếng lóng, gọi chó cưng thân mật) 🐶</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border-radius:14px;padding:20px 24px;color:white;margin-top:4px;">
+            <div style="font-weight:800;font-size:1rem;margin-bottom:10px;">🎯 Kết luận thực tế</div>
+            <p style="margin:0;opacity:0.9;font-size:0.93rem;line-height:1.8;">
+            Không có công thức toán học hoàn hảo. Cách tốt nhất là <b>học thuộc từng từ</b>.
+            Tuy nhiên, hai mẹo lớn là:<br/>
+            • Đồ vật thông thường → <b style="color:#6ee7b7;">thường CÓ 子</b><br/>
+            • Động vật, từ 2 âm tiết, từ hiện đại → <b style="color:#fca5a5;">thường KHÔNG CÓ 子</b>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ─────────────────────────────────────────────────────────────
+    # TAB 4: SO SÁNH THÚ VỊ
+    # ─────────────────────────────────────────────────────────────
+    with tab_compare:
+        st.markdown("### 🐶 Vì sao 桌子 có 子 mà 狗 thì không?")
+
+        st.markdown("""
+        <div style="background:#f8fafc;border-radius:14px;padding:20px 24px;margin-bottom:20px;border:1px solid #e2e8f0;">
+            <p style="margin:0;font-size:0.95rem;color:#374151;line-height:1.8;">
+            Câu hỏi hay nhất khi học về 子! Lý do là <b>lịch sử ngôn ngữ</b>, không phải quy tắc ngữ pháp:<br/>
+            • <b>Tên động vật</b> (chó, mèo, chim...) là từ <b>cổ xưa, đã định hình nghìn năm</b> — người Trung Quốc đã quen nghe 1 âm tiết nên không cần thêm 子.<br/>
+            • <b>Đồ vật</b> (bàn, ghế, cốc...) được dùng nhiều trong văn nói — nghe 1 âm tiết cảm giác <b>chưa đủ, lạ tai</b>, nên thêm 子 cho tự nhiên.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_a, col_b = st.columns(2, gap="large")
+
+        with col_a:
+            st.markdown("#### 🐾 Động vật — Không cần 子")
+            animals_no = [
+                ("🐶", "狗", "gǒu", "con chó", "狗子 = tiếng lóng thân mật"),
+                ("🐱", "猫", "māo", "con mèo", "猫子 = không dùng"),
+                ("🐦", "鸟", "niǎo", "con chim", "鸟子 = không tự nhiên"),
+                ("🐟", "鱼", "yú", "con cá", "鱼子 = trứng cá (nghĩa khác!)"),
+                ("🐻", "熊", "xióng", "con gấu", "熊子 = không dùng"),
+                ("🐯", "虎", "hǔ", "con hổ", "虎子 = từ cổ, không phổ biến"),
+            ]
+            for emoji, han, py, vi, note in animals_no:
+                st.markdown(f"""
+                <div class="b93-compare-row">
+                    <span class="b93-compare-animal">{emoji}</span>
+                    <div>
+                        <div class="b93-compare-han">{han}</div>
+                        <div style="font-family:monospace;color:#64748b;font-size:0.85rem;">{py} — {vi}</div>
+                        <div style="font-size:0.78rem;color:#94a3b8;margin-top:3px;">{note}</div>
+                    </div>
+                    <span class="b93-compare-verdict no">Không có 子</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+        with col_b:
+            st.markdown("#### 🪑 Đồ vật — Phải có 子")
+            objects_yes = [
+                ("🪑", "椅子", "yǐzi", "cái ghế", "椅 một mình nghe cụt"),
+                ("🫙", "杯子", "bēizi", "cái cốc", "杯 một mình cảm giác lạ"),
+                ("🧢", "帽子", "màozi", "cái mũ", "帽 một mình không tự nhiên"),
+                ("👟", "鞋子", "xiézi", "đôi giày", "鞋 dùng được nhưng 鞋子 phổ biến hơn"),
+                ("👖", "裤子", "kùzi", "cái quần", "裤 một mình không dùng trong nói"),
+                ("📦", "箱子", "xiāngzi", "cái thùng", "箱 một mình thấy trong văn viết"),
+            ]
+            for emoji, han, py, vi, note in objects_yes:
+                zi_idx = han.find("子")
+                if zi_idx >= 0:
+                    han_display = han[:zi_idx] + '<span style="color:#059669;font-weight:900;">子</span>' + han[zi_idx+1:]
+                else:
+                    han_display = han
+                st.markdown(f"""
+                <div class="b93-compare-row">
+                    <span class="b93-compare-animal">{emoji}</span>
+                    <div>
+                        <div class="b93-compare-han">{han_display}</div>
+                        <div style="font-family:monospace;color:#64748b;font-size:0.85rem;">{py} — {vi}</div>
+                        <div style="font-size:0.78rem;color:#94a3b8;margin-top:3px;">{note}</div>
+                    </div>
+                    <span class="b93-compare-verdict yes">Có 子 ✅</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #fcd34d;border-radius:14px;padding:20px 24px;margin-top:16px;">
+            <div style="font-weight:800;color:#713f12;margin-bottom:10px;">📝 Ví dụ câu thực tế</div>
+            <table style="width:100%;font-size:0.93rem;color:#374151;">
+                <tr style="background:rgba(255,255,255,0.6);">
+                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">我爱我的桌<span style="color:#059669;">子</span>。</td>
+                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Wǒ ài wǒ de zhuōzi.</td>
+                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Tôi yêu cái bàn của tôi. → <b>Đồ vật</b> → CÓ 子</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">我爱我的狗。</td>
+                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Wǒ ài wǒ de gǒu.</td>
+                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Tôi yêu con chó của tôi. → <b>Động vật</b> → KHÔNG có 子</td>
+                </tr>
+                <tr style="background:rgba(255,255,255,0.6);">
+                    <td style="padding:10px;border-radius:8px 0 0 8px;font-size:1.2rem;font-weight:700;">这里没有椅<span style="color:#059669;">子</span>。</td>
+                    <td style="padding:10px;font-family:monospace;color:#4f46e5;">Zhèlǐ méiyǒu yǐzi.</td>
+                    <td style="padding:10px;border-radius:0 8px 8px 0;font-style:italic;color:#64748b;">Ở đây không có ghế. → <b>Đồ vật</b> → CÓ 子</td>
+                </tr>
+            </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ─────────────────────────────────────────────────────────────
+    # TAB 5: QUIZ
+    # ─────────────────────────────────────────────────────────────
+    with tab_quiz:
+        st.markdown("### 🎮 Luyện tập: Có cần thêm 子 không?")
+        st.markdown("Chọn dạng đúng cho mỗi từ bên dưới:")
+
+        quiz_data = [
+            {
+                "q": "Cái mũ",
+                "py": "mào / màozi",
+                "options": ["帽 (không có 子)", "帽子 (có 子)"],
+                "answer": "帽子 (có 子)",
+                "explain": "帽 là từ 1 âm tiết chỉ đồ vật → bắt buộc thêm 子 trong văn nói."
+            },
+            {
+                "q": "Con mèo",
+                "py": "māo / māozi",
+                "options": ["猫 (không có 子)", "猫子 (có 子)"],
+                "answer": "猫 (không có 子)",
+                "explain": "Tên động vật thường không cần 子. 猫子 không phải từ chuẩn."
+            },
+            {
+                "q": "Điện thoại",
+                "py": "diànhuà",
+                "options": ["电话 (không có 子)", "电话子 (có 子)"],
+                "answer": "电话 (không có 子)",
+                "explain": "电话 đã là từ 2 âm tiết → không thêm 子."
+            },
+            {
+                "q": "Cái bụng",
+                "py": "dù / dùzi",
+                "options": ["肚 (không có 子)", "肚子 (có 子)"],
+                "answer": "肚子 (có 子)",
+                "explain": "Bộ phận cơ thể như 肚子 (bụng) bắt buộc có 子 trong văn nói."
+            },
+            {
+                "q": "Tình yêu",
+                "py": "àiqíng",
+                "options": ["爱情 (không có 子)", "爱情子 (có 子)"],
+                "answer": "爱情 (không có 子)",
+                "explain": "Khái niệm trừu tượng không dùng 子. Hơn nữa 爱情 đã là 2 âm tiết."
+            },
+            {
+                "q": "Kẻ lừa đảo",
+                "py": "piàn / piànzi",
+                "options": ["骗 (không có 子)", "骗子 (có 子)"],
+                "answer": "骗子 (có 子)",
+                "explain": "Tính từ/động từ + 子 = danh từ chỉ người có tính chất đó: 骗子 = kẻ lừa đảo."
+            },
+            {
+                "q": "Con chim",
+                "py": "niǎo / niǎozi",
+                "options": ["鸟 (không có 子)", "鸟子 (có 子)"],
+                "answer": "鸟 (không có 子)",
+                "explain": "Tên động vật không cần 子. 鸟子 không phải từ chuẩn."
+            },
+            {
+                "q": "Đôi tất",
+                "py": "wà / wàzi",
+                "options": ["袜 (không có 子)", "袜子 (có 子)"],
+                "answer": "袜子 (có 子)",
+                "explain": "Quần áo / phụ kiện 1 âm tiết thường có 子: 袜子, 裤子, 帽子..."
+            },
+        ]
+
+        if "b93_submitted" not in st.session_state:
+            st.session_state.b93_submitted = False
+        if "b93_answers" not in st.session_state:
+            st.session_state.b93_answers = {}
+
+        for i, q in enumerate(quiz_data):
+            with st.container():
+                st.markdown(f"""
+                <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;box-shadow:0 3px 10px rgba(0,0,0,0.04);">
+                    <div class="b93-quiz-q">Q{i+1}: {q['q']}</div>
+                    <div class="b93-quiz-sub">Pinyin gợi ý: {q['py']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+                key = f"b93_a{i}"
+                st.radio(
+                    f"Chọn đáp án câu {i+1}:",
+                    q["options"],
+                    key=key,
+                    disabled=st.session_state.b93_submitted,
+                    label_visibility="collapsed"
+                )
+                if st.session_state.b93_submitted:
+                    user_ans = st.session_state.b93_answers.get(key)
+                    if user_ans == q["answer"]:
+                        st.success(f"✅ Đúng! {q['explain']}")
+                    else:
+                        st.error(f"❌ Sai. Đáp án đúng: **{q['answer']}**. {q['explain']}")
+                st.markdown("<br/>", unsafe_allow_html=True)
+
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b93_submitted:
+                if st.button("✅ Nộp bài", use_container_width=True, key="b93_submit"):
+                    st.session_state.b93_answers = {
+                        f"b93_a{i}": st.session_state.get(f"b93_a{i}") for i in range(len(quiz_data))
+                    }
+                    st.session_state.b93_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b93_submitted:
+                if st.button("🔄 Làm lại", use_container_width=True, key="b93_reset"):
+                    st.session_state.b93_submitted = False
+                    st.session_state.b93_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b93_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+
+        if st.session_state.b93_submitted:
+            correct = sum(
+                1 for i, q in enumerate(quiz_data)
+                if st.session_state.b93_answers.get(f"b93_a{i}") == q["answer"]
+            )
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "🏆 Xuất sắc! Bạn đã nắm vững hậu tố 子!"
+            elif pct >= 70:
+                msg = "👍 Khá tốt! Xem lại các câu sai để hoàn thiện nhé."
+            else:
+                msg = "📖 Hãy đọc lại phần Lý thuyết và thử lại!"
+
+            st.markdown(f"""
+            <div class="b93-score-box">
+                <div class="b93-score-num">{correct}/{total}</div>
+                <div class="b93-score-label">{pct}% chính xác</div>
+                <div style="margin-top:10px;font-size:1.1rem;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+
 # Force reload

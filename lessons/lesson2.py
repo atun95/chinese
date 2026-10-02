@@ -260,20 +260,6 @@ def show_lesson2_intro(add_tones):
         st.markdown("<br/>", unsafe_allow_html=True)
         render_play_button(spelled_res, "🔊 Phát âm Âm tiết vừa ghép", key="b2_sandbox_play_btn", type="primary")
 
-def show_lesson2_spelling(add_tones):
-    render_lesson_intro("📚 Bài 2.2: Bảng luyện tập ghép âm", "Luyện tập ghép âm các thanh mẫu với vận mẫu kép cơ bản kèm theo 4 thanh điệu.")
-    st.subheader("Bảng luyện tập ghép âm")
-
-
-    GC = {
-        "b": "#fdf4ff", "p": "#fdf4ff", "m": "#fdf4ff", "f": "#fdf4ff",
-        "b__border": "#e9d5ff", "p__border": "#e9d5ff", "m__border": "#e9d5ff", "f__border": "#e9d5ff",
-        "d": "#eff6ff", "t": "#eff6ff", "n": "#eff6ff", "l": "#eff6ff",
-        "d__border": "#bfdbfe", "t__border": "#bfdbfe", "n__border": "#bfdbfe", "l__border": "#bfdbfe",
-        "g": "#f0fdf4", "k": "#f0fdf4", "h": "#f0fdf4",
-        "g__border": "#bbf7d0", "k__border": "#bbf7d0", "h__border": "#bbf7d0",
-    }
-    render_spelling_table(B2_LUYEN_TAP_FINALS, B2_LUYEN_TAP_ROWS, "b2sp", add_tones, GC)
 
 
 def show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2):
