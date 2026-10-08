@@ -519,31 +519,7 @@ if "initialized" not in st.session_state:
 
 # --- GIAO DIỆN CHÍNH ---
 
-# Tích hợp CSS in ấn
-st.markdown(
-    """
-    <style>
-    @media print {
-        section[data-testid="stSidebar"] {
-            display: none !important;
-        }
-        header, footer, [data-testid="stHeader"], [data-testid="stFooter"] {
-            display: none !important;
-        }
-        [data-testid="column"]:has(button[key="btn_print_lesson"]), .stButton, button, iframe, .note-fab, #teacher-floating-note {
-            display: none !important;
-        }
-        .block-container {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            padding-left: 20px !important;
-            padding-right: 20px !important;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 st.sidebar.header("Danh mục giáo án")
 
@@ -554,8 +530,7 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "🗣️ Thực hành trên lớp",
     "📝 Hệ thống bài tập",
     "📝 Trắc nghiệm Tổng hợp HSK 1",
-    "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG",
-    "🖨️ In ấn & Đồng bộ"
+    "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG"
 ])
 
 menu = None
@@ -637,114 +612,6 @@ if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
 elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
     hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
 
-elif mode == "🖨️ In ấn & Đồng bộ":
-    
-    if st.button("🔄 Đồng bộ & Cập nhật giáo trình", type="primary", use_container_width=True):
-        try:
-            import build_giao_trinh
-            importlib.reload(build_giao_trinh)
-            build_giao_trinh.build_individual_lessons()
-            
-            # Also regenerate vocabulary JSON, CSV and print HTML
-            import flashcard_generator
-            importlib.reload(flashcard_generator)
-            flashcard_generator.generate_vocabulary()
-            
-            st.success("Đồng bộ thành công! Các bài học và danh sách từ vựng đã được cập nhật và sẵn sàng tải xuống.")
-        except Exception as e:
-            st.error(f"Có lỗi xảy ra khi đồng bộ: {e}")
-            
-    st.subheader("📁 Danh sách tài liệu học tập:")
-    
-    import os
-    import re
-    output_dir = "giao_trinh_in_an"
-    if os.path.exists(output_dir):
-        files = sorted(os.listdir(output_dir))
-        if files:
-            # Combined file option
-            combined_path = "giao_trinh_in_an.html"
-            if os.path.exists(combined_path):
-                try:
-                    with open(combined_path, "r", encoding="utf-8") as f_data:
-                        combined_bytes = f_data.read()
-                except Exception as e:
-                    combined_bytes = f"Error reading combined file: {e}"
-                
-                col_file, col_dl = st.columns([7, 3])
-                with col_file:
-                    st.markdown("**🎴 In toàn bộ giáo trình (File gộp)** (`giao_trinh_in_an.html`)")
-                with col_dl:
-                    st.download_button(
-                        label="📥 Tải file gộp",
-                        data=combined_bytes,
-                        file_name="giao_trinh_in_an.html",
-                        mime="text/html",
-                        key="dl_combined_giao_trinh"
-                    )
-                st.markdown("---")
-            
-            # Vocabulary Print file option
-            vocab_print_path = os.path.join("assets", "vocabulary_print.html")
-            if not os.path.exists(vocab_print_path):
-                try:
-                    import flashcard_generator
-                    flashcard_generator.generate_vocabulary()
-                except Exception as e:
-                    pass
-            
-            if os.path.exists(vocab_print_path):
-                try:
-                    with open(vocab_print_path, "r", encoding="utf-8") as f_data:
-                        vocab_bytes = f_data.read()
-                except Exception as e:
-                    vocab_bytes = f"Error reading vocabulary print file: {e}"
-                
-                col_file, col_dl = st.columns([7, 3])
-                with col_file:
-                    st.markdown("**🎴 In toàn bộ Từ vựng (Flashcard HTML)** (`vocabulary_print.html`)")
-                with col_dl:
-                    st.download_button(
-                        label="📥 Tải bảng từ vựng",
-                        data=vocab_bytes,
-                        file_name="vocabulary_print.html",
-                        mime="text/html",
-                        key="dl_vocab_print_html"
-                    )
-                st.markdown("---")
-            
-            for f_name in files:
-                filepath = os.path.join(output_dir, f_name)
-                try:
-                    with open(filepath, "r", encoding="utf-8") as f_data:
-                        html_bytes = f_data.read()
-                except Exception as e:
-                    html_bytes = f"Error reading file: {e}"
-                
-                if "trang_bia" in f_name:
-                    display_name = "🎴 Trang bìa và Mục lục"
-                else:
-                    num_match = re.search(r"bai_(\d+)", f_name)
-                    if num_match:
-                        display_name = f"📖 Giáo án Bài {num_match.group(1)}"
-                    else:
-                        display_name = f"📄 {f_name.replace('.html', '')}"
-                
-                col_file, col_dl = st.columns([7, 3])
-                with col_file:
-                    st.markdown(f"**{display_name}** (`{f_name}`)")
-                with col_dl:
-                    st.download_button(
-                        label="📥 Tải file để in",
-                        data=html_bytes,
-                        file_name=f_name,
-                        mime="text/html",
-                        key=f"dl_{f_name}"
-                    )
-        else:
-            st.info("Chưa có file nào được tạo. Nhấp vào nút đồng bộ ở trên để tạo file.")
-    else:
-        st.info("Thư mục in ấn chưa tồn tại. Nhấp vào nút đồng bộ ở trên để tạo.")
 
 elif menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
     lesson1.show_lesson1_summary_table()
