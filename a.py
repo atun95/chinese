@@ -42,6 +42,10 @@ if 'lessons.lesson9' in sys.modules:
     del sys.modules['lessons.lesson9']
 if 'lesson9' in sys.modules:
     del sys.modules['lesson9']
+if 'lessons.lesson9_game' in sys.modules:
+    del sys.modules['lessons.lesson9_game']
+if 'lesson9_game' in sys.modules:
+    del sys.modules['lesson9_game']
 import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
 
@@ -607,7 +611,8 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 4.2 - Phản xạ & Giao tiếp",
         "Bài 5.1 - Thực hành Giao tiếp & Phản xạ",
         "Bài 6.1 - Thực hành Giao tiếp & Phản xạ",
-        "Bài 9.1 - Thực hành Giao tiếp & Phản xạ"
+        "Bài 9.1 - Thực hành Giao tiếp & Phản xạ",
+        "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -815,6 +820,9 @@ elif menu == "Bài 6.1 - Thực hành Giao tiếp & Phản xạ":
     
 elif menu == "Bài 9.1 - Thực hành Giao tiếp & Phản xạ":
     lesson9.show_lesson9_1_classroom_practice()
+
+elif menu == "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ":
+    lesson9.show_lesson9_1_review_game()
 
 elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)

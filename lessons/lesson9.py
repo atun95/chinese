@@ -3,48 +3,67 @@ from ui_utils import render_lesson_intro
 from lessons_data import (
     B9_1_QUOC_GIA, B9_1_QUOC_TICH, B9_1_TIEN_TE
 )
+try:
+    from lessons.lesson9_game import render_lesson9_1_game, show_lesson9_1_review_game
+except ImportError:
+    from lesson9_game import render_lesson9_1_game, show_lesson9_1_review_game
 
 def show_lesson9_1_countries_currency():
     st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
     .word-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 22px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 14px;
     }
     .word-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+    }
+    .flag-icon {
+        font-size: 2.8rem;
+        line-height: 1;
+        flex-shrink: 0;
+    }
+    .card-body {
+        flex: 1;
     }
     .word-title {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
         font-weight: 800;
         font-family: 'Inter', sans-serif;
         color: #1e3a8a;
-        margin-right: 15px;
     }
     .pinyin-badge {
+        display: inline-block;
         background-color: #eff6ff;
         color: #1d4ed8;
-        padding: 4px 10px;
+        padding: 3px 10px;
         border-radius: 20px;
         font-family: 'Courier New', monospace;
         font-weight: bold;
-        font-size: 1.1rem;
+        font-size: 1rem;
         border: 1px solid #bfdbfe;
+        margin-left: 8px;
     }
     .meaning-badge {
+        display: inline-block;
         background-color: #f0fdf4;
         color: #15803d;
-        padding: 4px 10px;
+        padding: 3px 10px;
         border-radius: 20px;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         border: 1px solid #bbf7d0;
+        margin-top: 6px;
     }
     .rule-box {
         background-color: #f8fafc;
@@ -52,6 +71,16 @@ def show_lesson9_1_countries_currency():
         border-radius: 8px;
         padding: 15px;
         margin: 15px 0 0 0;
+    }
+    .continent-header {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin: 20px 0 10px 0;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #e2e8f0;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -61,31 +90,48 @@ def show_lesson9_1_countries_currency():
         "Học cách gọi tên các quốc gia, hỏi đáp về quốc tịch và nhận biết tiền tệ của các quốc gia nổi tiếng."
     )
 
-    tab_countries, tab_nationality, tab_currency, tab_sentences = st.tabs([
+    tab_countries, tab_nationality, tab_currency, tab_sentences, tab_game = st.tabs([
         "🗺️ Các quốc gia",
         "🧑‍🤝‍🧑 Quốc tịch",
         "💵 Tiền tệ",
-        "🗣️ Mẫu câu"
+        "🗣️ Mẫu câu",
+        "🎮 Trò chơi ôn tập"
     ])
 
     with tab_countries:
         st.subheader("1. Tên một số quốc gia trên thế giới")
-        cols = st.columns(2)
-        for idx, item in enumerate(B9_1_QUOC_GIA):
-            col = cols[idx % 2]
-            with col:
-                card_html = f"""
-                <div class="word-card">
-                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 5px;">
-                        <span class="word-title">{item['Chữ Hán']}</span>
-                        <span class="pinyin-badge">{item['Pinyin']}</span>
+        st.caption(f"📊 Tổng cộng {len(B9_1_QUOC_GIA)} quốc gia từ khắp thế giới")
+        
+        # Group by continent based on index order (matching data order in lessons_data.py)
+        continents = [
+            ("🌏 Châu Á", B9_1_QUOC_GIA[:14]),
+            ("🌍 Châu Âu", B9_1_QUOC_GIA[14:25]),
+            ("🌎 Châu Mỹ & Châu Đại Dương", B9_1_QUOC_GIA[25:32]),
+            ("🌏 Trung Đông & Châu Phi", B9_1_QUOC_GIA[32:]),
+        ]
+        for continent_name, countries in continents:
+            st.markdown(f"<div class='continent-header'>{continent_name}</div>", unsafe_allow_html=True)
+            cols = st.columns(2)
+            for idx, item in enumerate(countries):
+                col = cols[idx % 2]
+                with col:
+                    code = item.get('FlagCode', 'un')
+                    flag_img = f'<img src="https://flagcdn.com/w40/{code}.png" width="44" height="30" style="border-radius:4px;object-fit:cover;box-shadow:0 1px 4px rgba(0,0,0,0.18);" alt="{code}">'
+                    card_html = f"""
+                    <div class="word-card">
+                        <div class="flag-icon" style="min-width:48px;">{flag_img}</div>
+                        <div class="card-body">
+                            <div>
+                                <span class="word-title">{item['Chữ Hán']}</span>
+                                <span class="pinyin-badge">{item['Pinyin']}</span>
+                            </div>
+                            <div>
+                                <span class="meaning-badge">{item['Nghĩa tiếng Việt']}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div style="margin-top: 10px;">
-                        <span class="meaning-badge">{item['Nghĩa tiếng Việt']}</span>
-                    </div>
-                </div>
-                """
-                st.markdown(card_html, unsafe_allow_html=True)
+                    """
+                    st.markdown(card_html, unsafe_allow_html=True)
 
     with tab_nationality:
         st.subheader("2. Người các nước (Quốc tịch)")
@@ -103,14 +149,19 @@ def show_lesson9_1_countries_currency():
         for idx, item in enumerate(B9_1_QUOC_TICH):
             col = cols[idx % 2]
             with col:
+                code = item.get('FlagCode', 'un')
+                flag_img = f'<img src="https://flagcdn.com/w40/{code}.png" width="44" height="30" style="border-radius:4px;object-fit:cover;box-shadow:0 1px 4px rgba(0,0,0,0.18);" alt="{code}">'
                 card_html = f"""
                 <div class="word-card">
-                    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 5px;">
-                        <span class="word-title">{item['Chữ Hán']}</span>
-                        <span class="pinyin-badge">{item['Pinyin']}</span>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <span class="meaning-badge">{item['Nghĩa tiếng Việt']}</span>
+                    <div class="flag-icon" style="min-width:48px;">{flag_img}</div>
+                    <div class="card-body">
+                        <div>
+                            <span class="word-title">{item['Chữ Hán']}</span>
+                            <span class="pinyin-badge">{item['Pinyin']}</span>
+                        </div>
+                        <div>
+                            <span class="meaning-badge">{item['Nghĩa tiếng Việt']}</span>
+                        </div>
                     </div>
                 </div>
                 """
@@ -182,6 +233,9 @@ def show_lesson9_1_countries_currency():
             </div>
             """, unsafe_allow_html=True)
 
+    with tab_game:
+        render_lesson9_1_game()
+
 
 from lessons_data import B9_1_PRACTICE_DATA
 import random
@@ -241,7 +295,7 @@ def show_lesson9_1_classroom_practice():
         "Luyện tập phản xạ thông qua các tình huống thực tế và kết hợp điểm ngữ pháp của các bài trước."
     )
 
-    tab_dialogues, tab_activities = st.tabs(["💬 Hội thoại thực hành", "🎮 Hoạt động nhóm"])
+    tab_dialogues, tab_activities, tab_game = st.tabs(["💬 Hội thoại thực hành", "🎮 Hoạt động nhóm", "🏆 Game phản xạ & ôn tập"])
 
     with tab_dialogues:
         st.subheader("Thực hành đóng vai (Role-play)")
@@ -375,6 +429,9 @@ def show_lesson9_1_classroom_practice():
                 </ul>
             </div>
             """)
+
+    with tab_game:
+        render_lesson9_1_game()
 
 
 

@@ -80,9 +80,10 @@ def show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_s
         "Làm chủ hệ thống đại từ và trợ từ nghi vấn trong HSK 1 để hỏi về người, vật, địa điểm, số lượng, phương thức và trạng thái."
     )
 
-    tab_vocab, tab_comparison, tab_practice, tab_quiz = st.tabs([
+    tab_vocab, tab_comparison, tab_na, tab_practice, tab_quiz = st.tabs([
         "📚 Bảng từ để hỏi",
         "💡 Phân tích & So sánh",
+        "🎯 Cách dùng 哪",
         "🗣️ Thực hành khẩu ngữ",
         "📝 Bài tập phản xạ"
     ])
@@ -219,6 +220,196 @@ def show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_s
             """,
             unsafe_allow_html=True
         )
+
+    # ================= TAB 2B: CÁCH DÙNG 哪 =================
+    with tab_na:
+        st.subheader("🎯 Cách dùng chữ 哪 (nǎ) – \"Nào?\"")
+        st.markdown("""
+<div style="background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); border: 1px solid #c7d2fe; border-radius: 14px; padding: 18px 22px; margin-bottom: 18px;">
+<div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+<span style="font-size:3rem; font-weight:800; color:#4338ca;">哪</span>
+<span class="pinyin-badge">nǎ (khẩu ngữ: něi)</span>
+<span class="meaning-badge">nào / cái nào / ở đâu</span>
+</div>
+<p style="margin:10px 0 0 0; color:#334155; line-height:1.65;">
+<b>哪</b> là <b>đại từ nghi vấn</b> dùng để hỏi, yêu cầu người nghe <b>chọn ra một (hoặc vài) đối tượng</b> trong một phạm vi nhất định.
+⚠️ <b>哪 gần như không đứng một mình</b> – nó luôn phải <b>kết hợp với một thành phần phía sau</b> (lượng từ, danh từ, 儿/里, 些...).
+</p>
+</div>
+""".replace("\n", " "), unsafe_allow_html=True)
+
+        # ---- 1. Các kết hợp của 哪 ----
+        st.markdown("### 🧩 1. 哪 kết hợp với những từ nào?")
+        na_patterns = [
+            {
+                "title": "哪 + Lượng từ + (Danh từ)",
+                "color": "#3b82f6",
+                "desc": "Cách dùng <b>phổ biến nhất</b>. Hỏi “cái nào / người nào / quyển nào...”. Danh từ có thể lược bỏ nếu ngữ cảnh đã rõ.",
+                "combos": "哪个 (cái nào) · 哪本 (quyển nào) · 哪位 (vị nào – lịch sự) · 哪件 · 哪张",
+                "vd_han": "你要哪个杯子？", "vd_py": "Nǐ yào nǎge bēizi?", "vd_vi": "Bạn muốn cái cốc nào?",
+            },
+            {
+                "title": "哪 + Số từ + Lượng từ + Danh từ",
+                "color": "#8b5cf6",
+                "desc": "Khi hỏi chọn <b>nhiều hơn một</b> đối tượng, chèn số từ vào giữa 哪 và lượng từ. (Số “一” thường được lược bỏ.)",
+                "combos": "哪两本书 · 哪三个人 · 哪几天",
+                "vd_han": "你喜欢哪两本书？", "vd_py": "Nǐ xǐhuan nǎ liǎng běn shū?", "vd_vi": "Bạn thích hai quyển sách nào?",
+            },
+            {
+                "title": "哪 + Danh từ (không cần lượng từ)",
+                "color": "#10b981",
+                "desc": "Chỉ có <b>rất ít danh từ</b> được <b>đi thẳng sau 哪</b> mà không cần lượng từ. Chúng chia làm <b>2 nhóm với 2 lý do khác nhau</b>. Còn lại <b>hầu hết danh từ đều phải có lượng từ</b> (xem mục 1).",
+                "combos": "",
+                "vd_han": "你是哪国人？", "vd_py": "Nǐ shì nǎ guó rén?", "vd_vi": "Bạn là người nước nào?",
+                "extra": """
+<div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:10px; padding:12px 14px; margin-bottom:10px; color:#064e3b; line-height:1.65;">
+🅰️ <b>Nhóm A – 天, 年, 周:</b> là <b>đơn vị thời gian</b>, nên dùng như lượng từ.<br/>
+💡 Mẹo: nói được 一天, 两年 → nói được 哪天, 哪年. (Nhưng 月, 星期 phải có 个: 哪个月, 哪个星期.)
+</div>
+<div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-bottom:10px; color:#7c2d12; line-height:1.65;">
+🅱️ <b>Nhóm B – 国, 省, 族…:</b> <b>không phải đơn vị</b>, chỉ là <b>cụm cố định</b> (gốc Hán cổ) → <b>học thuộc</b>.<br/>
+• <b>哪国人？</b> – Người nước nào? &nbsp;(= 哪个国家的人)<br/>
+• <b>哪省人？</b> – Người tỉnh nào? &nbsp;(= 哪个省的人)<br/>
+• <b>哪族人？</b> – Người dân tộc nào? &nbsp;(= 哪个民族的人)<br/>
+• <b>哪方面？</b> – Phương diện / mặt nào?
+</div>
+<table style="width:100%; border-collapse:collapse; font-size:0.92rem; margin-bottom:10px;">
+<tr style="background:#f1f5f9;">
+<th style="padding:8px; border:1px solid #cbd5e1; text-align:left; color:#15803d;">✅ KHÔNG cần lượng từ</th>
+<th style="padding:8px; border:1px solid #cbd5e1; text-align:left; color:#b91c1c;">⚠️ BẮT BUỘC có lượng từ</th>
+</tr>
+<tr>
+<td style="padding:8px; border:1px solid #cbd5e1;">🅰️ <b>天</b> tiān (ngày): 一天 → <b>哪天</b></td>
+<td style="padding:8px; border:1px solid #cbd5e1;"><b>月</b> yuè (tháng): 一个月 → <b>哪个月</b> (❌ 哪月)</td>
+</tr>
+<tr>
+<td style="padding:8px; border:1px solid #cbd5e1;">🅰️ <b>年</b> nián (năm): 两年 → <b>哪年</b></td>
+<td style="padding:8px; border:1px solid #cbd5e1;"><b>星期</b> xīngqī (tuần): 一个星期 → <b>哪个星期</b> (❌ 哪星期)</td>
+</tr>
+<tr>
+<td style="padding:8px; border:1px solid #cbd5e1;">🅰️ <b>周</b> zhōu (tuần): 一周 → <b>哪周</b></td>
+<td style="padding:8px; border:1px solid #cbd5e1;"><b>国家</b> guójiā (quốc gia): <b>哪个国家</b> (❌ 哪国家)</td>
+</tr>
+<tr>
+<td style="padding:8px; border:1px solid #cbd5e1;">🅱️ <b>国</b> guó (nước): <b>哪国</b>, <b>哪国人</b> <i>(cụm cố định)</i></td>
+<td style="padding:8px; border:1px solid #cbd5e1;"><b>人 / 老师 / 学校 / 书 / 杯子</b>...: <b>哪个人 (哪位)</b>, <b>哪个学校</b>, <b>哪本书</b>, <b>哪个杯子</b></td>
+</tr>
+</table>
+<p style="font-size:0.88rem; color:#64748b; margin:0 0 10px 0;">📌 Với nhóm A có thể chèn 一 mà nghĩa không đổi: 哪天 = 哪一天, 哪年 = 哪一年.</p>
+""",
+            },
+            {
+                "title": "哪 + 些 → 哪些",
+                "color": "#f59e0b",
+                "desc": "Hỏi về <b>số nhiều không xác định</b> – “những cái nào / những ai”. 哪些 đã bao hàm số nhiều nên <b>không cần lượng từ</b>.",
+                "combos": "哪些 · 哪些人 · 哪些书 · 哪些菜",
+                "vd_han": "你会说哪些汉字？", "vd_py": "Nǐ huì shuō nǎxiē Hànzì?", "vd_vi": "Bạn biết nói những chữ Hán nào?",
+            },
+            {
+                "title": "哪 + 儿 / 里 → 哪儿 / 哪里",
+                "color": "#ef4444",
+                "desc": "Biến thành từ hỏi <b>địa điểm</b> “ở đâu”. Thường đứng <b>sau 在 / 去 / 来</b>.",
+                "combos": "在哪儿 (ở đâu) · 去哪儿 (đi đâu) · 来自哪里 (đến từ đâu)",
+                "vd_han": "你去哪儿？", "vd_py": "Nǐ qù nǎr?", "vd_vi": "Bạn đi đâu thế?",
+            },
+        ]
+
+        for p_idx, p in enumerate(na_patterns):
+            cols = st.columns([7, 3])
+            with cols[0]:
+                combos_html = ""
+                if p.get("combos"):
+                    combos_html = (
+                        '<p style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; '
+                        'padding:6px 10px; font-size:0.95rem; color:#0f172a; margin-bottom:8px;">'
+                        '🔗 <b>Kết hợp thường gặp:</b> ' + p["combos"] + '</p>'
+                    )
+                st.markdown(f"""
+<div class="word-card" style="border-left: 6px solid {p['color']};">
+<div style="font-family:'Courier New',monospace; font-weight:800; font-size:1.15rem; color:{p['color']}; margin-bottom:6px;">📐 {p_idx+1}. {p['title']}</div>
+<p style="color:#475569; font-size:0.95rem; margin-bottom:8px;">{p['desc']}</p>
+{combos_html}
+{p.get('extra', '')}
+<div class="rule-box" style="border-left-color:{p['color']};">
+<span style="font-size:1.3rem; font-weight:700; color:#0f172a; display:block;">{p['vd_han']}</span>
+<span style="font-family:monospace; font-size:1.05rem; font-weight:bold; color:#2563eb; display:block;">{p['vd_py']}</span>
+<span style="font-size:0.95rem; color:#475569; display:block; font-style:italic; margin-top:2px;">➔ Dịch: {p['vd_vi']}</span>
+</div>
+</div>
+""".replace("\n", " "), unsafe_allow_html=True)
+            with cols[1]:
+                st.markdown("<div style='margin-top: 25px;'></div>", unsafe_allow_html=True)
+                render_play_button(p['vd_han'], "🔊 Phát âm câu ví dụ", key=f"play_na_pat_{p_idx}")
+
+        # ---- 2. Vị trí trong câu ----
+        st.markdown("### 📍 2. Cụm từ có 哪 đứng ở đâu trong câu?")
+        st.markdown("""
+<div class="comparison-card" style="border-left-color:#0ea5e9;">
+<p style="color:#334155; line-height:1.6; margin:0;">Tiếng Trung <b>không đảo cụm từ để hỏi lên đầu câu</b> như tiếng Anh. Muốn hỏi thành phần nào, chỉ cần <b>thay đúng thành phần đó bằng cụm “哪 + ...”</b> và giữ nguyên vị trí.</p>
+</div>
+<table style="width:100%; border-collapse:collapse; margin:10px 0 20px 0; font-size:0.95rem;">
+<tr style="background:#f1f5f9;">
+<th style="padding:10px; border:1px solid #cbd5e1; text-align:left;">Vị trí</th>
+<th style="padding:10px; border:1px solid #cbd5e1; text-align:left;">Cấu trúc</th>
+<th style="padding:10px; border:1px solid #cbd5e1; text-align:left;">Ví dụ</th>
+</tr>
+<tr>
+<td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; color:#1d4ed8;">Chủ ngữ<br/>(đầu câu)</td>
+<td style="padding:10px; border:1px solid #cbd5e1; font-family:'Courier New',monospace;">哪 + Lượng từ + (Danh từ) + Vị ngữ？</td>
+<td style="padding:10px; border:1px solid #cbd5e1;"><b>哪个</b>是你的？<br/><span style="color:#2563eb;">Nǎge shì nǐ de?</span><br/><i>Cái nào là của bạn?</i></td>
+</tr>
+<tr>
+<td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; color:#7c3aed;">Tân ngữ<br/>(sau động từ)</td>
+<td style="padding:10px; border:1px solid #cbd5e1; font-family:'Courier New',monospace;">Chủ ngữ + Động từ + 哪 + Lượng từ + (Danh từ)？</td>
+<td style="padding:10px; border:1px solid #cbd5e1;">你喜欢<b>哪本书</b>？<br/><span style="color:#2563eb;">Nǐ xǐhuan nǎ běn shū?</span><br/><i>Bạn thích quyển sách nào?</i></td>
+</tr>
+<tr>
+<td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; color:#059669;">Định ngữ<br/>(bổ nghĩa cho danh từ)</td>
+<td style="padding:10px; border:1px solid #cbd5e1; font-family:'Courier New',monospace;">Chủ ngữ + 是 + 哪 + Danh từ + 人？</td>
+<td style="padding:10px; border:1px solid #cbd5e1;">他是<b>哪国</b>人？<br/><span style="color:#2563eb;">Tā shì nǎ guó rén?</span><br/><i>Anh ấy là người nước nào?</i></td>
+</tr>
+<tr>
+<td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; color:#dc2626;">Trạng ngữ địa điểm<br/>(trước động từ chính)</td>
+<td style="padding:10px; border:1px solid #cbd5e1; font-family:'Courier New',monospace;">Chủ ngữ + 在 + 哪儿 + Động từ？</td>
+<td style="padding:10px; border:1px solid #cbd5e1;">你在<b>哪儿</b>工作？<br/><span style="color:#2563eb;">Nǐ zài nǎr gōngzuò?</span><br/><i>Bạn làm việc ở đâu?</i></td>
+</tr>
+<tr>
+<td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; color:#d97706;">Trạng ngữ thời gian<br/>(sau chủ ngữ, trước động từ)</td>
+<td style="padding:10px; border:1px solid #cbd5e1; font-family:'Courier New',monospace;">Chủ ngữ + 哪天 / 哪年 + Động từ？</td>
+<td style="padding:10px; border:1px solid #cbd5e1;">你<b>哪天</b>去北京？<br/><span style="color:#2563eb;">Nǐ nǎ tiān qù Běijīng?</span><br/><i>Ngày nào bạn đi Bắc Kinh?</i></td>
+</tr>
+</table>
+""".replace("\n", " "), unsafe_allow_html=True)
+
+        # ---- 3. Hỏi – Đáp: thay thế ----
+        st.markdown("### 🔄 3. Cách trả lời câu hỏi có 哪")
+        st.markdown("""
+<div style="background:#f0fdf4; border-left:4px solid #16a34a; padding:14px 16px; border-radius:8px; margin-bottom:12px; color:#14532d; line-height:1.7;">
+Trả lời bằng cách <b>thay 哪 bằng 这 (này) / 那 (kia)</b> hoặc bằng <b>thông tin cụ thể</b> – giữ nguyên vị trí:<br/>
+• 你要<b>哪</b>个？ ➔ 我要<b>这</b>个。 <i>(Bạn muốn cái nào? ➔ Tôi muốn cái này.)</i><br/>
+• 你是<b>哪国</b>人？ ➔ 我是<b>越南</b>人。 <i>(Bạn là người nước nào? ➔ Tôi là người Việt Nam.)</i><br/>
+• 你去<b>哪儿</b>？ ➔ 我去<b>学校</b>。 <i>(Bạn đi đâu? ➔ Tôi đi đến trường.)</i>
+</div>
+""".replace("\n", " "), unsafe_allow_html=True)
+        qa_cols = st.columns(3)
+        qa_sounds = ["你要哪个？我要这个。", "你是哪国人？我是越南人。", "你去哪儿？我去学校。"]
+        for qa_idx, qa_txt in enumerate(qa_sounds):
+            with qa_cols[qa_idx]:
+                render_play_button(qa_txt, f"🔊 Nghe hỏi – đáp {qa_idx+1}", key=f"play_na_qa_{qa_idx}")
+
+        # ---- 4. Lưu ý ----
+        st.markdown("### ⚠️ 4. Lỗi thường gặp cần tránh")
+        st.markdown("""
+<div class="comparison-card" style="border-left-color:#ef4444;">
+<ul style="line-height:1.75; margin-left:18px; color:#334155;">
+<li><b>Không thêm 吗 cuối câu</b> khi đã có 哪: ❌ 你是哪国人<b>吗</b>？ ➔ ✅ 你是哪国人？</li>
+<li><b>Không bỏ lượng từ</b> với danh từ thông thường: ❌ 你喜欢哪书？ ➔ ✅ 你喜欢哪<b>本</b>书？</li>
+<li><b>Đừng dịch theo thói quen tiếng Anh</b> (“Which book do you like?”) mà đưa cụm 哪 lên đầu: cách nói chuẩn, tự nhiên là ✅ 你喜欢哪本书？ (哪本书你喜欢？ chỉ dùng khi muốn nhấn mạnh chủ đề).</li>
+<li><b>Phân biệt 哪 (nǎ – thanh 3, “nào?”)</b> với <b>那 (nà – thanh 4, “kia / đó”)</b>: 哪个？(cái nào?) ≠ 那个 (cái kia). Chữ 哪 có thêm bộ <b>口</b> (miệng) – gợi nhớ “dùng miệng để hỏi”.</li>
+<li><b>哪位</b> là cách hỏi <b>lịch sự</b> của 哪个人: 您是哪位？(Xin hỏi ngài là ai?) – hay dùng khi nghe điện thoại.</li>
+</ul>
+</div>
+""".replace("\n", " "), unsafe_allow_html=True)
 
     # ================= TAB 3: THỰC HÀNH KHẨU NGỮ =================
     with tab_practice:
