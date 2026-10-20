@@ -1154,5 +1154,411 @@ QUIZZES_DATA = {
                 "sound_txt": "明天space我去商店买杯子。"
             }
         ]
+    },
+    "quiz_exam_50": {
+        "title": "🎯 ĐỀ THI TỔNG HỢP ÔN TẬP TOÀN DIỆN (50 CÂU)",
+        "description": "Bài thi 50 câu gồm 7 dạng: Ngữ âm, Chữ Hán, Từ vựng, Điền từ ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ, Tìm lỗi sai, Sắp xếp câu và Giao tiếp đối thoại.",
+        "questions": [
+            {
+                "question": "Phiên âm Pinyin đúng của chữ “老师” (thầy/cô giáo) là:",
+                "pinyin": "Lǎoshī (Giáo viên)",
+                "choices": ["A. lǎoshì", "B. lǎoshī", "C. lǎosī", "D. nǎoshī"],
+                "answer": "B. lǎoshī",
+                "explain": "Từ '老师' (thầy cô giáo) có pinyin là 'lǎoshī' (thanh 3 + thanh 1, âm đầu lưỡi uốn sh).",
+                "sound_txt": "老师"
+            },
+            {
+                "question": "Trong cụm từ “你好”, quy tắc biến điệu hai thanh 3 đi liền nhau sẽ phát âm thế nào?",
+                "pinyin": "Biến điệu thanh 3: nǐ hǎo",
+                "choices": ["A. Giữ nguyên hai thanh 3 (nǐ hǎo)", "B. Đọc thành thanh 2 + thanh 3 (ní hǎo)", "C. Đọc thành thanh 4 + thanh 3 (nì hǎo)", "D. Đọc thành thanh 1 + thanh 3 (nī hǎo)"],
+                "answer": "B. Đọc thành thanh 2 + thanh 3 (ní hǎo)",
+                "explain": "Quy tắc ngữ âm: Khi hai âm tiết mang thanh 3 đi liền nhau, âm tiết thứ nhất sẽ biến thành thanh 2 (ní hǎo).",
+                "sound_txt": "你好"
+            },
+            {
+                "question": "Quy tắc biến điệu của từ “不” (bù): Khi đứng trước một từ mang thanh 4, “不” sẽ phát âm thành:",
+                "pinyin": "Biến điệu của 不 (bù)",
+                "choices": ["A. Thanh 1 (bū)", "B. Thanh 2 (bú)", "C. Thanh 3 (bǔ)", "D. Giữ nguyên thanh 4 (bù)"],
+                "answer": "B. Thanh 2 (bú)",
+                "explain": "Từ '不' vốn mang thanh 4 (bù), nhưng khi đi trước một từ mang thanh 4 (như 是 shì, 去 qù, 对 duì), '不' sẽ biến điệu thành thanh 2 (bú).",
+                "sound_txt": "不是"
+            },
+            {
+                "question": "Chữ Hán nào dưới đây có nghĩa là “em gái”?",
+                "pinyin": "Từ vựng xưng hô gia đình",
+                "choices": ["A. 姐姐 (jiějie)", "B. 妈妈 (māma)", "C. 妹妹 (mèimei)", "D. 弟弟 (dìdi)"],
+                "answer": "C. 妹妹 (mèimei)",
+                "explain": "'妹妹' (mèimei) là em gái; '姐姐' là chị gái; '弟弟' là em trai; '妈妈' là mẹ.",
+                "sound_txt": "妹妹"
+            },
+            {
+                "question": "Chữ “去” (đi) có phát âm Pinyin đúng là gì?",
+                "pinyin": "Quy tắc viết và đọc vận mẫu ü",
+                "choices": ["A. qù (đọc âm uy tròn môi)", "B. cù", "C. qù (đọc âm u dẹt môi)", "D. xù"],
+                "answer": "A. qù (đọc âm uy tròn môi)",
+                "explain": "Khi vận mẫu 'ü' kết hợp với thanh mẫu 'j, q, x', trên chữ viết sẽ lược bỏ hai dấu chấm trên đầu thành 'qu', nhưng cách phát âm vẫn giữ nguyên là âm 'ü' (tròn môi).",
+                "sound_txt": "去"
+            },
+            {
+                "question": "Nhóm từ nào sau đây đều có chứa hậu tố danh từ “子” (zi) mang thanh nhẹ?",
+                "pinyin": "Hậu tố 子 (zi)",
+                "choices": ["A. 爸爸、妈妈、哥哥", "B. 桌子、椅子、杯子", "C. 老师、学生、医生", "D. 中国、越南、美国"],
+                "answer": "B. 桌子、椅子、杯子",
+                "explain": "桌子 (zhuōzi - bàn), 椅子 (yǐzi - ghế), 杯子 (bēizi - cốc) đều là các danh từ phổ biến có hậu tố '子'.",
+                "sound_txt": "桌子 椅子 杯子"
+            },
+            {
+                "question": "Số 7 và số 9 trong chữ Hán lần lượt viết là:",
+                "pinyin": "Số đếm 0 - 10",
+                "choices": ["A. 八、十", "B. 六、九", "C. 七、九", "D. 五、七"],
+                "answer": "C. 七、九",
+                "explain": "Số 7 viết là 七 (qī), số 9 viết là 九 (jiǔ).",
+                "sound_txt": "七 九"
+            },
+            {
+                "question": "Bộ thủ nào dưới đây thường liên quan đến phụ nữ hoặc nữ giới?",
+                "pinyin": "Bộ thủ thường gặp",
+                "choices": ["A. Bộ Nhân đứng (亻)", "B. Bộ Nữ (女)", "C. Bộ Khẩu (口)", "D. Bộ Mộc (木)"],
+                "answer": "B. Bộ Nữ (女)",
+                "explain": "Bộ Nữ (女) thường xuất hiện trong các chữ liên quan đến phụ nữ: 妈, 姐, 妹, 奶, 她, 好...",
+                "sound_txt": "女"
+            },
+            {
+                "question": "Chọn từ điền vào chỗ trống: “我不是中国人，我是______人。” (Tôi là người Việt Nam).",
+                "pinyin": "Quốc gia và quốc tịch",
+                "choices": ["A. 英国 (Yīngguó)", "B. 美国 (Měiguó)", "C. 日本 (Rìběn)", "D. 越南 (Yuènán)"],
+                "answer": "D. 越南 (Yuènán)",
+                "explain": "'越南' (Yuènán) nghĩa là Việt Nam; '越南人' nghĩa là người Việt Nam.",
+                "sound_txt": "我是越南人"
+            },
+            {
+                "question": "Cách xưng hô trang trọng và lịch sự khi hỏi họ của đối phương: “您______？”",
+                "pinyin": "Hỏi họ lịch sự",
+                "choices": ["A. 叫什么 (jiào shénme)", "B. 贵姓 (guìxìng)", "C. 是谁 (shì shéi)", "D. 好吗 (hǎo ma)"],
+                "answer": "B. 贵姓 (guìxìng)",
+                "explain": "'您贵姓？' (Nín guìxìng?) là câu kính ngữ thông dụng để hỏi họ của người lớn tuổi hoặc đối tác.",
+                "sound_txt": "您贵姓"
+            },
+            {
+                "question": "Đơn vị tiền tệ chính trong khẩu ngữ tiếng Trung hàng ngày là gì? (Ví dụ: 5 tệ = 5 ______)",
+                "pinyin": "Tiền tệ trong khẩu ngữ",
+                "choices": ["A. 块 (kuài)", "B. 分 (fēn)", "C. 毛 (máo)", "D. 点 (diǎn)"],
+                "answer": "A. 块 (kuài)",
+                "explain": "Trong khẩu ngữ hàng ngày, đơn vị đồng/tệ dùng '块' (kuài), văn viết hoặc niêm yết trang trọng dùng '元' (yuán).",
+                "sound_txt": "五块钱"
+            },
+            {
+                "question": "Từ mang nghĩa đối lập trái ngược với “大” (dà - to, lớn) là:",
+                "pinyin": "Tính từ trái nghĩa",
+                "choices": ["A. 多 (duō)", "B. 小 (xiǎo)", "C. 少 (shǎo)", "D. 冷 (lěng)"],
+                "answer": "B. 小 (xiǎo)",
+                "explain": "'大' (dà - to/lớn) đối lập với '小' (xiǎo - nhỏ/bé).",
+                "sound_txt": "大小"
+            },
+            {
+                "question": "“他叫王明，他是我的______，我们在一个学校上课。” (Anh ấy là... của tôi, chúng tôi học cùng trường).",
+                "pinyin": "Từ vựng quan hệ bạn bè/học tập",
+                "choices": ["A. 爸爸 (bàba)", "B. 老师 (lǎoshī)", "C. 同学 (tóngxué)", "D. 医生 (yīshēng)"],
+                "answer": "C. 同学 (tóngxué)",
+                "explain": "'同学' (tóngxué) có nghĩa là bạn học/bạn cùng trường, cùng lớp.",
+                "sound_txt": "同学"
+            },
+            {
+                "question": "Từ nào trong tiếng Trung có nghĩa là “Hôm nay”?",
+                "pinyin": "Từ chỉ thời gian",
+                "choices": ["A. 昨天 (zuótiān)", "B. 今天 (jīntiān)", "C. 明天 (míngtiān)", "D. 去年 (qùnián)"],
+                "answer": "B. 今天 (jīntiān)",
+                "explain": "'今天' (jīntiān) = Hôm nay; '昨天' = Hôm qua; '明天' = Ngày mai.",
+                "sound_txt": "今天"
+            },
+            {
+                "question": "Người phụ nữ đã kết hôn, xưng hô trang trọng là “bà xã / phu nhân / bà” trong tiếng Trung gọi là:",
+                "pinyin": "Từ vựng chỉ nữ giới",
+                "choices": ["A. 女生 (nǚshēng)", "B. 女儿 (nǚ'ér)", "C. 太太 (tàitai)", "D. 姑娘 (gūniang)"],
+                "answer": "C. 太太 (tàitai)",
+                "explain": "'太太' (tàitai) dùng để chỉ người phụ nữ đã có gia đình (bà xã, phu nhân, bà lớn tuổi).",
+                "sound_txt": "太太"
+            },
+            {
+                "question": "Từ nào dưới đây KHÔNG phải là danh từ chỉ đồ ăn hay thức uống?",
+                "pinyin": "Phân loại từ vựng",
+                "choices": ["A. 茶 (chá)", "B. 米饭 (mǐfàn)", "C. 水 (shuǐ)", "D. 桌子 (zhuōzi)"],
+                "answer": "D. 桌子 (zhuōzi)",
+                "explain": "'桌子' là cái bàn (đồ vật), còn '茶' (trà), '米饭' (cơm), '水' (nước) là đồ ăn uống.",
+                "sound_txt": "桌子"
+            },
+            {
+                "question": "Chọn từ điền vào chỗ trống: “这______我______书。” (Đây là sách của tôi).",
+                "pinyin": "Cấu trúc câu phán đoán và chữ 的",
+                "choices": ["A. 是 / 的", "B. 的 / 是", "C. 在 / 的", "D. 有 / 的"],
+                "answer": "A. 是 / 的",
+                "explain": "Cấu trúc: '这是 + Cụm danh từ' (Đây là...). Để biểu thị sở hữu dùng trợ từ '的': '我的书' (sách của tôi).",
+                "sound_txt": "这是我的书"
+            },
+            {
+                "question": "“你______去学校？” — “我坐公共汽车去。” (Chọn từ để hỏi cách thức, phương tiện đi lại):",
+                "pinyin": "Từ để hỏi 怎么",
+                "choices": ["A. 什么 (shénme)", "B. 怎么 (zěnme)", "C. 谁 (shéi)", "D. 哪儿 (nǎr)"],
+                "answer": "B. 怎么 (zěnme)",
+                "explain": "'怎么 + Động từ' dùng để hỏi về cách thức hoặc phương tiện thực hiện hành động ('Đi bằng cách nào?').",
+                "sound_txt": "你怎么去学校"
+            },
+            {
+                "question": "Chọn từ phủ định phù hợp: “我______吃牛肉，我今天也______有钱。”",
+                "pinyin": "Phân biệt 不 và 没",
+                "choices": ["A. 不 / 不", "B. 没 / 没", "C. 不 / 没", "D. 没 / 不"],
+                "answer": "C. 不 / 没",
+                "explain": "'不' dùng để phủ định thói quen/ý chí (不吃 - không ăn); phủ định của '有' (có) bắt buộc dùng '没' (没有 - không có tiền), tuyệt đối không dùng '不有'.",
+                "sound_txt": "我不吃牛肉 我没有钱"
+            },
+            {
+                "question": "Điền cặp từ “这” và “那” thích hợp: “______是我的笔（ở gần），______是他的笔（ở xa）。”",
+                "pinyin": "Cặp từ 这 và 那",
+                "choices": ["A. 这 / 那", "B. 那 / 这", "C. 哪 / 那", "D. 这 / 哪"],
+                "answer": "A. 这 / 那",
+                "explain": "'这' (zhè) chỉ cự ly gần (đây/này); '那' (nà) chỉ cự ly xa (kia/đó).",
+                "sound_txt": "这是我的笔 那是他的笔"
+            },
+            {
+                "question": "Chọn từ điền vào chỗ trống: “妈妈______家做饭。” (Mẹ ở nhà nấu cơm).",
+                "pinyin": "Giới từ chỉ nơi chốn 在",
+                "choices": ["A. 去 (qù)", "B. 在 (zài)", "C. 是 (shì)", "D. 到 (dào)"],
+                "answer": "B. 在 (zài)",
+                "explain": "Cấu trúc: 'Chủ ngữ + 在 + Nơi chốn + Động từ': 在家做饭 (ở nhà nấu cơm).",
+                "sound_txt": "妈妈在家做饭"
+            },
+            {
+                "question": "“明天上午我想______超市买东西。” (Biểu thị di chuyển đến một nơi để làm việc gì):",
+                "pinyin": "Động từ 去 trong câu liên động",
+                "choices": ["A. 在 (zài)", "B. 去 (qù)", "C. 来 (lái)", "D. 和 (hé)"],
+                "answer": "B. 去 (qù)",
+                "explain": "Cấu trúc: '去 + Địa điểm + Làm gì': 去超市买东西 (đi siêu thị mua đồ).",
+                "sound_txt": "明天上午我想去超市买东西"
+            },
+            {
+                "question": "Điền “一点儿” hoặc “有点儿”: “今天的天气______冷，我想喝______热茶。”",
+                "pinyin": "Phân biệt 一点儿 và 有点儿",
+                "choices": ["A. 有点儿 / 一点儿", "B. 一点儿 / 有点儿", "C. 有点儿 / 有点儿", "D. 一点儿 / 一点儿"],
+                "answer": "A. 有点儿 / 一点儿",
+                "explain": "'有点儿 + Tính từ' biểu thị mức độ nhẹ, không vừa ý (有点儿冷 - hơi lạnh); 'Động từ + 一点儿 + Danh từ' biểu thị số lượng ít (喝一点儿热茶 - uống chút trà nóng).",
+                "sound_txt": "今天的天气有点儿冷 我想喝一点儿热茶"
+            },
+            {
+                "question": "“______苹果都很甜。” (Những quả táo này - số lượng nhiều):",
+                "pinyin": "Lượng từ 些 (xiē)",
+                "choices": ["A. 这个 (zhè ge)", "B. 这些 (zhè xiē)", "C. 这点 (zhè diǎn)", "D. 哪儿 (nǎr)"],
+                "answer": "B. 这些 (zhè xiē)",
+                "explain": "'这些' (những cái này/những quả này) chỉ số lượng nhiều; '这个' chỉ số ít (quả này).",
+                "sound_txt": "这些苹果都很甜"
+            },
+            {
+                "question": "Chọn cặp từ tạo câu cảm thán mức độ cao: “汉语______意思______！” (Tiếng Hán quá là thú vị!).",
+                "pinyin": "Cấu trúc 太...了",
+                "choices": ["A. 很 / 的", "B. 非常 / 了", "C. 太 / 了", "D. 不 / 吗"],
+                "answer": "C. 太 / 了",
+                "explain": "Cấu trúc cảm thán: '太 + Tính từ/Cụm biểu cảm + 了' (quá... / thật là...).",
+                "sound_txt": "汉语太有意思了"
+            },
+            {
+                "question": "“这本书是______？” — “是老师的。” (Chọn từ để hỏi quyền sở hữu):",
+                "pinyin": "Đại từ nghi vấn 谁",
+                "choices": ["A. 哪 (nǎ)", "B. 谁的 (shéi de)", "C. 什么 (shénme)", "D. 多少 (duōshao)"],
+                "answer": "B. 谁的 (shéi de)",
+                "explain": "'谁的' nghĩa là 'của ai'. '这本书是谁的？' (Cuốn sách này là của ai?).",
+                "sound_txt": "这本书是谁的"
+            },
+            {
+                "question": "Lượng từ thích hợp cho từ “书” (sách): “我买了三______书。”",
+                "pinyin": "Lượng từ 本 (běn)",
+                "choices": ["A. 个 (gè)", "B. 本 (běn)", "C. 张 (zhāng)", "D. 块 (kuài)"],
+                "answer": "B. 本 (běn)",
+                "explain": "'本' (běn) là lượng từ chuyên dùng cho sách báo, tập vở (三本书 - ba cuốn sách).",
+                "sound_txt": "三本书"
+            },
+            {
+                "question": "Lượng từ trang trọng thể hiện sự tôn kính dùng cho người (ví dụ: một người giáo viên): “一______老师”。",
+                "pinyin": "Lượng từ 位 (wèi)",
+                "choices": ["A. 位 (wèi)", "B. 只 (zhī)", "C. 条 (tiáo)", "D. 本 (běn)"],
+                "answer": "A. 位 (wèi)",
+                "explain": "'位' (wèi) là lượng từ lịch sự, kính trọng dành cho người (一位老师, 一位客人).",
+                "sound_txt": "一位老师"
+            },
+            {
+                "question": "Hỏi số lượng nhỏ (thường dưới 10, ví dụ hỏi người trong gia đình): “你家有______口人？”",
+                "pinyin": "Từ để hỏi 几",
+                "choices": ["A. 多少 (duōshao)", "B. 几 (jǐ)", "C. 什么 (shénme)", "D. 哪 (nǎ)"],
+                "answer": "B. 几 (jǐ)",
+                "explain": "'几' dùng để hỏi số lượng ước tính nhỏ hơn 10 và bắt buộc phải đi kèm lượng từ (几口人).",
+                "sound_txt": "你家有几口人"
+            },
+            {
+                "question": "Chọn cụm từ chuẩn để hỏi giá tiền: “这个杯子______钱？”",
+                "pinyin": "Hỏi giá cả 多少钱",
+                "choices": ["A. 几 (jǐ)", "B. 多少 (duōshao)", "C. 怎么 (zěnme)", "D. 哪儿 (nǎr)"],
+                "answer": "B. 多少 (duōshao)",
+                "explain": "Trong tiếng Hán, hỏi giá tiền luôn dùng cấu trúc '多少钱？', không dùng '几钱'.",
+                "sound_txt": "这个杯子多少钱"
+            },
+            {
+                "question": "Điền lượng từ phù hợp: “桌子上有两______椅子和一______纸。”",
+                "pinyin": "Lượng từ 把 và 张",
+                "choices": ["A. 张 / 张", "B. 把 / 张", "C. 个 / 本", "D. 把 / 块"],
+                "answer": "B. 把 / 张",
+                "explain": "Lượng từ của ghế có chỗ vịn/chỗ dựa (椅子) là '把'; lượng từ của vật phẳng mỏng như giấy (纸) là '张'.",
+                "sound_txt": "两把椅子 一张纸"
+            },
+            {
+                "question": "Cách nói đúng “2 tệ tiền” trong khẩu ngữ hàng ngày là gì?",
+                "pinyin": "Số đếm 2 khi đi với lượng từ",
+                "choices": ["A. 二块 (èr kuài)", "B. 两块 (liǎng kuài)", "C. 二元 (èr yuán)", "D. 两分 (liǎng fēn)"],
+                "answer": "B. 两块 (liǎng kuài)",
+                "explain": "Khi đứng trước lượng từ để chỉ số lượng, số 2 bắt buộc dùng '两' (liǎng), nên nói '两块钱'.",
+                "sound_txt": "两块钱"
+            },
+            {
+                "question": "Xác định lỗi sai trong câu: “他(A) 是(B) 很高兴(C) 今天(D)。”",
+                "pinyin": "Lỗi dùng 是 trước tính từ",
+                "choices": ["A. 他", "B. 是", "C. 很高兴", "D. 今天"],
+                "answer": "B. 是",
+                "explain": "Câu vị ngữ tính từ không dùng động từ '是'. Nói đúng: '他今天很高兴', bỏ chữ '是'.",
+                "sound_txt": "他今天很高兴"
+            },
+            {
+                "question": "Tìm vị trí đặt sai trật tự ngữ pháp: “我们(A) 吃饭(B) 在饭馆(C) 下午(D)。”",
+                "pinyin": "Trật tự trạng ngữ nơi chốn",
+                "choices": ["A. 我们", "B. 吃饭", "C. 在饭馆", "D. 下午"],
+                "answer": "C. 在饭馆",
+                "explain": "Trong tiếng Trung, trạng ngữ nơi chốn bắt buộc đứng TRƯỚC động từ: '我们在饭馆吃饭', không được để sau động từ như tiếng Việt.",
+                "sound_txt": "我们在饭馆吃饭"
+            },
+            {
+                "question": "Tìm lỗi sai trong câu phủ định quá khứ: “昨天(A) 他(B) 不来(C) 上课(D)。”",
+                "pinyin": "Phủ định quá khứ dùng 没",
+                "choices": ["A. 昨天", "B. 他", "C. 不来", "D. 上课"],
+                "answer": "C. 不来",
+                "explain": "Sự việc đã diễn ra trong quá khứ ('昨天') thì phủ định phải dùng '没' hoặc '没有': sửa '不来' thành '没来'.",
+                "sound_txt": "昨天他没来上课"
+            },
+            {
+                "question": "Xác định lỗi sai trong câu hỏi giá tiền: “这个(A) 手机(B) 几(C) 钱(D)？”",
+                "pinyin": "Lỗi dùng 几 để hỏi giá cả",
+                "choices": ["A. 这个", "B. 手机", "C. 几", "D. 钱"],
+                "answer": "C. 几",
+                "explain": "Hỏi giá tiền bắt buộc dùng '多少', không dùng '几'. Câu đúng: '这个手机多少钱？'",
+                "sound_txt": "这个手机多少钱"
+            },
+            {
+                "question": "Tìm lỗi sai trong câu: “我(A) 买(B) 有点儿(C) 水果(D)。” (Tôi mua một ít hoa quả).",
+                "pinyin": "Lỗi nhầm 有点儿 và 一点儿",
+                "choices": ["A. 我", "B. 买", "C. 有点儿", "D. 水果"],
+                "answer": "C. 有点儿",
+                "explain": "'有点儿' chỉ đứng trước tính từ. Đứng trước danh từ biểu thị số lượng ít phải dùng '一点儿': '我买一点儿水果'.",
+                "sound_txt": "我买一点儿水果"
+            },
+            {
+                "question": "Tìm lỗi sai trong câu: “她(A) 没有(B) 是(C) 中国人(D)。” (Cô ấy không phải người Trung Quốc).",
+                "pinyin": "Phủ định câu chữ 是",
+                "choices": ["A. 她", "B. 没有", "C. 是", "D. 中国人"],
+                "answer": "B. 没有",
+                "explain": "Phủ định của động từ phán đoán '是' bắt buộc dùng '不' (不是), tuyệt đối không dùng '没有是'.",
+                "sound_txt": "她不是中国人"
+            },
+            {
+                "question": "Sắp xếp từ thành câu chuẩn: (1)学习 (2)我们 (3)在 (4)图书馆 (5)汉语",
+                "pinyin": "Trật tự câu nơi chốn",
+                "choices": ["A. (2) (3) (4) (1) (5)", "B. (2) (1) (5) (3) (4)", "C. (3) (4) (1) (5) (2)", "D. (2) (5) (3) (4) (1)"],
+                "answer": "A. (2) (3) (4) (1) (5)",
+                "explain": "Trật tự chuẩn: Chủ ngữ (我们) + 在 + Nơi chốn (图书馆) + Động từ (学习) + Tân ngữ (汉语) -> 我们在图书馆学习汉语。",
+                "sound_txt": "我们在图书馆学习汉语"
+            },
+            {
+                "question": "Sắp xếp từ thành câu chuẩn: (1)朋友 (2)的 (3)这 (4)我 (5)是 (6)电脑",
+                "pinyin": "Câu chữ 的 định ngữ",
+                "choices": ["A. (3) (5) (4) (1) (2) (6)", "B. (3) (5) (6) (2) (4) (1)", "C. (4) (1) (2) (6) (5) (3)", "D. (3) (2) (6) (5) (4) (1)"],
+                "answer": "A. (3) (5) (4) (1) (2) (6)",
+                "explain": "Câu hoàn chỉnh: 这是我朋友的电脑 (Đây là máy tính của bạn tôi) -> (3) (5) (4) (1) (2) (6).",
+                "sound_txt": "这是我朋友的电脑"
+            },
+            {
+                "question": "Sắp xếp từ thành câu chuẩn: (1)去 (2)喝茶 (3)朋友家 (4)他 (5)明天",
+                "pinyin": "Câu liên động chỉ mục đích",
+                "choices": ["A. (4) (5) (1) (3) (2)", "B. (4) (1) (2) (5) (3)", "C. (5) (1) (3) (4) (2)", "D. (4) (5) (2) (1) (3)"],
+                "answer": "A. (4) (5) (1) (3) (2)",
+                "explain": "Chủ ngữ (他) + Thời gian (明天) + 去 + Địa điểm (朋友家) + Hành động (喝茶) -> 他明天去朋友家喝茶。",
+                "sound_txt": "他明天去朋友家喝茶"
+            },
+            {
+                "question": "Sắp xếp từ thành câu hỏi chuẩn: (1)哪国人 (2)你的 (3)是 (4)汉语老师",
+                "pinyin": "Câu hỏi quốc tịch",
+                "choices": ["A. (2) (4) (3) (1)", "B. (1) (3) (2) (4)", "C. (2) (3) (4) (1)", "D. (4) (3) (2) (1)"],
+                "answer": "A. (2) (4) (3) (1)",
+                "explain": "Chủ ngữ (你的汉语老师) + 是 + Từ để hỏi (哪国人) -> 你的汉语老师是哪国人？",
+                "sound_txt": "你的汉语老师是哪国人"
+            },
+            {
+                "question": "Sắp xếp từ thành câu chuẩn: (1)菜 (2)妈妈 (3)做的 (4)好吃 (5)很",
+                "pinyin": "Cụm danh từ chữ 的 làm chủ ngữ",
+                "choices": ["A. (2) (1) (3) (5) (4)", "B. (2) (3) (1) (5) (4)", "C. (5) (4) (2) (3) (1)", "D. (1) (3) (2) (4) (5)"],
+                "answer": "B. (2) (3) (1) (5) (4)",
+                "explain": "Cụm chủ ngữ: 妈妈做的菜 (Món mẹ nấu) + Vị ngữ: 很好吃 (rất ngon) -> (2) (3) (1) (5) (4).",
+                "sound_txt": "妈妈做的菜很好吃"
+            },
+            {
+                "question": "Sắp xếp từ thành câu hỏi vị trí: (1)在 (2)我的 (3)哪儿 (4)手机",
+                "pinyin": "Hỏi nơi chốn ở đâu",
+                "choices": ["A. (2) (4) (1) (3)", "B. (1) (3) (2) (4)", "C. (3) (1) (2) (4)", "D. (2) (1) (4) (3)"],
+                "answer": "A. (2) (4) (1) (3)",
+                "explain": "Chủ ngữ (我的手机) + 在 + 哪儿？ -> 我的手机在哪儿？ (Điện thoại của tôi ở đâu?).",
+                "sound_txt": "我的手机在哪儿"
+            },
+            {
+                "question": "Sắp xếp từ thành câu chuẩn: (1)不 (2)咖啡 (3)我 (4)喝 (5)喜欢",
+                "pinyin": "Phó từ phủ định đứng trước động từ năng nguyện",
+                "choices": ["A. (3) (1) (5) (4) (2)", "B. (3) (5) (1) (4) (2)", "C. (1) (5) (3) (4) (2)", "D. (3) (2) (1) (5) (4)"],
+                "answer": "A. (3) (1) (5) (4) (2)",
+                "explain": "Chủ ngữ (我) + 不 + Động từ năng nguyện (喜欢) + Động từ (喝) + Tân ngữ (咖啡) -> 我不喜欢喝咖啡。",
+                "sound_txt": "我不喜欢喝咖啡"
+            },
+            {
+                "question": "Chọn câu đối thoại đáp lại lịch sự: — A: “谢谢你！” — B: “______”",
+                "pinyin": "Đối thoại cảm ơn",
+                "choices": ["A. 对不起 (Duìbuqǐ)", "B. 不客气 (Bú kèqi)", "C. 没关系 (Méi guānxi)", "D. 很高兴 (Hěn gāoxìng)"],
+                "answer": "B. 不客气 (Bú kèqi)",
+                "explain": "Khi người khác cảm ơn '谢谢你', câu đáp lại thông dụng và lịch sự là '不客气' (Đừng khách sáo) hoặc '不用谢'.",
+                "sound_txt": "不客气"
+            },
+            {
+                "question": "Chọn câu đối thoại đáp lại: — A: “对不起！” — B: “______”",
+                "pinyin": "Đối thoại xin lỗi",
+                "choices": ["A. 不用谢 (Bú yòng xiè)", "B. 没关系 (Méi guānxi)", "C. 很好 (Hěn hǎo)", "D. 再见 (Zàijiàn)"],
+                "answer": "B. 没关系 (Méi guānxi)",
+                "explain": "Khi người khác nói lời xin lỗi '对不起', câu đáp lại là '没关系' (Không có gì/Không sao đâu).",
+                "sound_txt": "没关系"
+            },
+            {
+                "question": "Chọn phản hồi phù hợp: — A: “你身体好吗？” — B: “______”",
+                "pinyin": "Hỏi thăm sức khỏe",
+                "choices": ["A. 我也是中国人。", "B. 我很好，谢谢！", "C. 他不在家。", "D. 我去学校。"],
+                "answer": "B. 我很好，谢谢！",
+                "explain": "Khi được hỏi thăm sức khỏe '你身体好吗？' (Sức khỏe bạn tốt không?), phản hồi logic là '我很好，谢谢！' (Tôi rất khỏe, cảm ơn!).",
+                "sound_txt": "我很好 谢谢"
+            },
+            {
+                "question": "Chọn câu phản hồi logic: — A: “请问，王老师在吗？” — B: “______，他去图书馆了。”",
+                "pinyin": "Hỏi ai đó có ở đây không",
+                "choices": ["A. 他在", "B. 不在", "C. 没去", "D. 很好"],
+                "answer": "B. 不在",
+                "explain": "Vế sau nói rõ thầy đã đi thư viện ('他去图书馆了'), nên câu trả lời ở vế trước là '不在' (Thầy không có ở đây).",
+                "sound_txt": "不在 他去图书馆了"
+            },
+            {
+                "question": "Chọn phản hồi phù hợp với câu hỏi cảm nhận: — A: “这件衣服怎么样？” — B: “______”",
+                "pinyin": "Đánh giá cảm nhận 怎么样",
+                "choices": ["A. 五十块钱。", "B. 它是我的。", "C. 太大了，有点儿不舒服。", "D. 我喜欢吃包子。"],
+                "answer": "C. 太大了，有点儿不舒服。",
+                "explain": "'怎么样？' dùng để hỏi cảm nghĩ, nhận xét về một sự vật. Câu C đưa ra nhận xét: 'Rộng quá, hơi không thoải mái' là phù hợp nhất.",
+                "sound_txt": "太大了 有点儿不舒服"
+            }
+        ]
     }
 }

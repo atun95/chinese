@@ -230,6 +230,20 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             st.session_state.hsk1_quiz_shuffled_options[selected_quiz_key] = shuffled
             st.rerun()
 
+        # Banner đặc biệt: Đề thi Tổng hợp 50 câu ôn tập toàn diện
+        if "quiz_exam_50" in QUIZZES_DATA:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; padding: 26px 30px; color: white; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); border: 2px solid #f59e0b; position: relative;">
+                <div style="position: absolute; top: 15px; right: 20px; background-color: #f59e0b; color: #1e293b; font-weight: 800; font-size: 0.8rem; padding: 4px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;">⭐ ĐỀ THI ĐẶC BIỆT 50 CÂU</div>
+                <div style="font-size: 2.2rem; margin-bottom: 8px;">🎯</div>
+                <h3 style="color: #fbbf24; font-size: 1.45rem; font-weight: 800; margin-bottom: 8px;">ĐỀ THI TỔNG HỢP ÔN TẬP TOÀN DIỆN (50 CÂU)</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">Bài thi gồm 50 câu bao quát 7 dạng bài: Ngữ âm & Biến điệu, Chữ Hán & Bộ thủ, Từ vựng cơ bản, Ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ & Số từ, Tìm lỗi sai, Sắp xếp câu hoàn chỉnh, và Đối thoại giao tiếp phản xạ.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("🚀 BẮT ĐẦU LÀM BÀI THI 50 CÂU TOÀN DIỆN NGAY", key="btn_start_exam_50", type="primary", use_container_width=True):
+                init_quiz_state("quiz_exam_50")
+            st.markdown("<div style='margin-bottom: 25px;'></div><hr style='border: none; border-top: 1px dashed #cbd5e1; margin: 25px 0;'/>", unsafe_allow_html=True)
+
         # Grid layout (Loop through 8 quizzes in pairs to create a clean responsive grid)
         quiz_metadata = {
             "quiz_1": {"badge": "Bài 1 - Bài 3", "badge_bg": "#dbeafe", "badge_color": "#1e40af", "icon": "🎒", "color": "#3b82f6", "title": "Đề 1: Nhập môn Ngữ âm & Từ vựng"},
