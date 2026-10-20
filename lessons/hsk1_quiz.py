@@ -195,16 +195,20 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 24px; padding: 32px 36px; color: white; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); border: 2px solid #3b82f6;">
             <div style="font-size: 2.4rem; margin-bottom: 10px;">📝</div>
             <h2 style="color: #60a5fa; font-size: 1.65rem; font-weight: 800; margin-bottom: 10px;">ÔN TẬP BÀI CŨ (50 CÂU)</h2>
-            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.65; margin-bottom: 20px;">
+            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.65; margin-bottom: 0;">
                 Bài ôn tập trắc nghiệm toàn diện gồm <b>50 câu hỏi</b> bao quát 7 dạng bài cốt lõi: Ngữ âm & Biến điệu, Chữ Hán & Bộ thủ, Từ vựng cơ bản, Ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ & Số từ, Tìm lỗi sai, Sắp xếp câu hoàn chỉnh, và Đối thoại giao tiếp phản xạ.
             </p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">📊 Số lượng: <b>50 câu hỏi</b></div>
-                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">🎯 Cách tính điểm: <b>Số câu đúng / 50</b></div>
-                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">☁️ Lưu trữ: <b>Supabase Cloud</b></div>
-            </div>
         </div>
         """, unsafe_allow_html=True)
+
+        # Trạng thái kết nối Supabase hiển thị rõ ràng
+        if supabase_client.is_supabase_configured():
+            st.markdown("""
+            <div style="background-color: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 12px; padding: 12px 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; color: #15803d; font-size: 0.95rem; font-weight: 600;">
+                <span style="font-size: 1.2rem;">🟢</span>
+                <span><b>Trạng thái Database:</b> Đã kết nối Supabase thành công! Điểm học viên sẽ được tự động lưu lên Cloud.</span>
+            </div>
+            """, unsafe_allow_html=True)
 
         if st.button("🚀 BẮT ĐẦU LÀM BÀI ÔN TẬP (50 CÂU)", key="btn_start_quiz_50", type="primary", use_container_width=True):
             start_new_quiz()
