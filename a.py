@@ -48,6 +48,7 @@ if 'lesson9_game' in sys.modules:
     del sys.modules['lesson9_game']
 import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
+import lessons.hsk1_quizzes_data as hsk1_quizzes_data
 
 if 'lessons.pinyin_practice' in sys.modules:
     del sys.modules['lessons.pinyin_practice']
@@ -58,6 +59,11 @@ import lessons.pinyin_practice as pinyin_practice
 
 try:
     importlib.reload(lessons_data)
+except Exception as e:
+    pass
+
+try:
+    importlib.reload(hsk1_quizzes_data)
 except Exception as e:
     pass
 
