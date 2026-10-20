@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Supabase client helper for storing and retrieving student scores.
-Supports Streamlit secrets, environment variables, local JSON configuration, and UI entry.
+Supports Streamlit secrets, environment variables, local JSON configuration, and preconfigured defaults.
 """
 
 import os
@@ -19,16 +19,16 @@ except ImportError:
 
 CONFIG_FILE = Path(__file__).resolve().parent / "supabase_config.json"
 SECRETS_FILE = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
+
+# Pre-configured default credentials for the user
+DEFAULT_URL = "https://gibrwrsnpzdyaqwxpyil.supabase.co"
+DEFAULT_KEY = "sb_secret_sxAqm-PXRd-tO0Bo87ZUGw_l_FlfXID"
 DEFAULT_TABLE = "student_scores"
 
 
 def get_supabase_config():
     """
-    Retrieve Supabase URL, Key, and Table Name from available sources:
-    1. st.secrets
-    2. Environment variables
-    3. supabase_config.json
-    4. st.session_state
+    Retrieve Supabase URL, Key, and Table Name from available sources with preconfigured fallback.
     """
     url = ""
     key = ""
@@ -77,16 +77,27 @@ def get_supabase_config():
             pass
 
     # 4. From st.session_state if saved dynamically in current session
-    if not url and "supabase_url" in st.session_state:
-        url = st.session_state["supabase_url"]
-    if not key and "supabase_key" in st.session_state:
-        key = st.session_state["supabase_key"]
-    if "supabase_table" in st.session_state:
-        table = st.session_state["supabase_table"]
+    try:
+        if not url and "supabase_url" in st.session_state:
+            url = st.session_state["supabase_url"]
+        if not key and "supabase_key" in st.session_state:
+            key = st.session_state["supabase_key"]
+        if "supabase_table" in st.session_state:
+            table = st.session_state["supabase_table"]
+    except Exception:
+        pass
+
+    # 5. Preconfigured defaults (Guarantee zero configuration friction)
+    if not url:
+        url = DEFAULT_URL
+    if not key:
+        key = DEFAULT_KEY
+    if not table:
+        table = DEFAULT_TABLE
 
     return {
-        "url": url.strip() if url else "",
-        "key": key.strip() if key else "",
+        "url": url.strip() if url else DEFAULT_URL,
+        "key": key.strip() if key else DEFAULT_KEY,
         "table": table.strip() if table else DEFAULT_TABLE
     }
 
@@ -134,49 +145,8 @@ def test_supabase_connection(url=None, key=None, table=None):
     except Exception as e:
         err_msg = str(e)
         if "relation" in err_msg and "does not exist" in err_msg or "PGRST205" in err_msg:
-            return False, f"Kết nối Supabase thành công, nhưng bảng '{target_table}' chưa được tạo. Hãy chạy câu lệnh SQL tạo bảng trong SQL Editor của Supabase."
+            return False, f"Kết nối Supabase thành công, nhưng bảng '{target_table}' chưa được tạo."
         return False, f"Lỗi kết nối: {err_msg}"
-
-
-def save_config_locally(url: str, key: str, table: str = DEFAULT_TABLE):
-    """
-    Save Supabase credentials to supabase_config.json and .streamlit/secrets.toml.
-    """
-    cfg = {
-        "url": url.strip(),
-        "key": key.strip(),
-        "table": table.strip() or DEFAULT_TABLE
-    }
-    
-    # Save to JSON
-    try:
-        with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-            json.dump(cfg, f, indent=2, ensure_ascii=False)
-    except Exception as e:
-        logging.error(f"Error writing to {CONFIG_FILE}: {e}")
-
-    # Also save to .streamlit/secrets.toml
-    try:
-        secrets_dir = SECRETS_FILE.parent
-        secrets_dir.mkdir(parents=True, exist_ok=True)
-        toml_content = f"""# Supabase Configuration
-SUPABASE_URL = "{cfg['url']}"
-SUPABASE_KEY = "{cfg['key']}"
-SUPABASE_TABLE = "{cfg['table']}"
-"""
-        with open(SECRETS_FILE, "w", encoding="utf-8") as f:
-            f.write(toml_content)
-    except Exception as e:
-        logging.error(f"Error writing to {SECRETS_FILE}: {e}")
-
-    # Clear cached client
-    if "supabase_client_instance" in st.session_state:
-        del st.session_state["supabase_client_instance"]
-
-    st.session_state["supabase_url"] = cfg["url"]
-    st.session_state["supabase_key"] = cfg["key"]
-    st.session_state["supabase_table"] = cfg["table"]
-    return True
 
 
 def save_score_to_supabase(student_name: str, score_str: str):
@@ -191,7 +161,6 @@ def save_score_to_supabase(student_name: str, score_str: str):
     cfg = get_supabase_config()
     table_name = cfg["table"]
 
-    # Thử lưu với các trường phổ biến: name và score
     try:
         payload = {
             "name": student_name,
@@ -200,7 +169,6 @@ def save_score_to_supabase(student_name: str, score_str: str):
         client.table(table_name).insert(payload).execute()
         return True, "Đã lưu điểm vào Supabase thành công!"
     except Exception as e1:
-        # Fallback với student_name nếu cột tên là student_name
         try:
             payload2 = {
                 "student_name": student_name,
@@ -212,7 +180,7 @@ def save_score_to_supabase(student_name: str, score_str: str):
             logging.error(f"Supabase insert error: {e2}")
             err_msg = str(e1)
             if "relation" in err_msg and "does not exist" in err_msg or "PGRST205" in err_msg:
-                return False, f"Bảng '{table_name}' chưa được tạo trên Supabase. Vui lòng mở SQL Editor trên Supabase và chạy lệnh tạo bảng."
+                return False, f"Bảng '{table_name}' chưa được tạo trên Supabase."
             return False, f"Lỗi lưu Supabase: {e1}"
 
 
@@ -252,71 +220,3 @@ def load_scores_from_supabase(limit: int = 50):
     except Exception as e:
         logging.error(f"Error loading scores from Supabase: {e}")
         return []
-
-
-def render_supabase_config_ui():
-    """
-    Render Streamlit configuration expander for Supabase connection.
-    """
-    cfg = get_supabase_config()
-    is_connected = is_supabase_configured()
-
-    header_status = "🟢 Supabase: Đã kết nối" if is_connected else "⚙️ Cấu hình Supabase (Lưu điểm trên Cloud)"
-    
-    with st.expander(header_status, expanded=False):
-        if is_connected:
-            st.success(f"✅ Đang kết nối tới Supabase: `{cfg['url']}` (Bảng: `{cfg['table']}`)")
-        else:
-            st.info("💡 Điền URL và API Key từ Supabase để đồng bộ và lưu điểm học viên trực tiếp lên Cloud.")
-
-        with st.form("supabase_config_form"):
-            new_url = st.text_input("Supabase Project URL:", value=cfg["url"], placeholder="https://xyzcompany.supabase.co")
-            new_key = st.text_input("Supabase API Key (Secret Key hoặc Anon Key):", value=cfg["key"], type="password", placeholder="sb_secret_...")
-            new_table = st.text_input("Tên bảng lưu điểm:", value=cfg["table"], placeholder="student_scores")
-
-            col_submit, col_test = st.columns([1, 1])
-            with col_submit:
-                submitted = st.form_submit_button("💾 Lưu cấu hình", type="primary", use_container_width=True)
-            with col_test:
-                tested = st.form_submit_button("🔍 Kiểm tra kết nối", use_container_width=True)
-
-            if submitted:
-                if new_url and new_key:
-                    save_config_locally(new_url, new_key, new_table)
-                    st.success("Đã lưu cấu hình Supabase thành công!")
-                    ok, msg = test_supabase_connection(new_url, new_key, new_table)
-                    if ok:
-                        st.success(f"🎉 {msg}")
-                    else:
-                        st.warning(f"⚠️ {msg}")
-                    st.rerun()
-                else:
-                    st.error("Vui lòng nhập cả Project URL và API Key!")
-
-            if tested:
-                if new_url and new_key:
-                    ok, msg = test_supabase_connection(new_url, new_key, new_table)
-                    if ok:
-                        st.success(f"🎉 {msg}")
-                    else:
-                        st.error(f"❌ {msg}")
-                else:
-                    st.error("Vui lòng nhập Project URL và API Key để kiểm tra.")
-
-        # Hướng dẫn tạo bảng SQL
-        st.markdown("""
-        **📋 Câu lệnh SQL tạo bảng trong Supabase (Chạy trong SQL Editor của Supabase):**
-        ```sql
-        -- Tạo bảng lưu điểm học viên (chỉ gồm tên và điểm đúng/50)
-        CREATE TABLE IF NOT EXISTS student_scores (
-            id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-            created_at TIMESTAMPTZ DEFAULT NOW(),
-            name TEXT NOT NULL,
-            score TEXT NOT NULL
-        );
-
-        -- Bật phân quyền truy cập
-        ALTER TABLE student_scores ENABLE ROW LEVEL SECURITY;
-        CREATE POLICY "Cho phep them va xem diem" ON student_scores FOR ALL USING (true) WITH CHECK (true);
-        ```
-        """)
