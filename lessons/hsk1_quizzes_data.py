@@ -1156,8 +1156,8 @@ QUIZZES_DATA = {
         ]
     },
     "quiz_exam_50": {
-        "title": "🎯 ĐỀ THI TỔNG HỢP ÔN TẬP TOÀN DIỆN (50 CÂU)",
-        "description": "Bài thi 50 câu gồm 7 dạng: Ngữ âm, Chữ Hán, Từ vựng, Điền từ ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ, Tìm lỗi sai, Sắp xếp câu và Giao tiếp đối thoại.",
+        "title": "📝 ÔN TẬP BÀI CŨ (50 CÂU)",
+        "description": "Bài ôn tập 50 câu gồm 7 dạng: Ngữ âm, Chữ Hán, Từ vựng, Điền từ ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ, Tìm lỗi sai, Sắp xếp câu và Giao tiếp đối thoại.",
         "questions": [
             {
                 "question": "Phiên âm Pinyin đúng của chữ “老师” (thầy/cô giáo) là:",

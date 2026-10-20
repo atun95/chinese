@@ -5,6 +5,15 @@ import csv
 from datetime import datetime, timezone, timedelta
 from ui_utils import render_lesson_intro, render_play_button
 
+# IMPORT SUPABASE CLIENT
+try:
+    import supabase_client
+except ImportError:
+    import sys
+    from pathlib import Path
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+    import supabase_client
+
 # IMPORT ĐỀ QUIZ TỪ FILE DỮ LIỆU RIÊNG BIỆT
 try:
     from hsk1_quizzes_data import QUIZZES_DATA
@@ -13,7 +22,7 @@ except ImportError:
 
 
 def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
-    # CSS Styles cao cấp, mô phỏng đúng thiết kế của ảnh người dùng gửi và tăng trải nghiệm premium
+    # CSS Styles cao cấp
     st.markdown("""
     <style>
     /* Card Container */
@@ -33,7 +42,7 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
     .quiz-q-num {
         font-size: 1.4rem;
         font-weight: 800;
-        color: #e11d48;
+        color: #2563eb;
         margin-bottom: 12px;
         font-family: 'Inter', sans-serif;
     }
@@ -70,39 +79,39 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         margin-bottom: 20px;
     }
     
-    /* Styled Streamlit buttons inside container - EXACTLY like the image */
+    /* Styled Streamlit buttons inside container */
     .quiz-option-container div.stButton > button {
-        background-color: #f3f4f6 !important;
+        background-color: #f8fafc !important;
         color: #1f2937 !important;
-        border-radius: 24px !important;
-        border: 1px solid transparent !important;
-        padding: 20px 25px !important;
-        font-size: 1.15rem !important;
+        border-radius: 20px !important;
+        border: 1.5px solid #e2e8f0 !important;
+        padding: 18px 24px !important;
+        font-size: 1.1rem !important;
         font-weight: 600 !important;
         text-align: left !important;
         align-items: center !important;
         justify-content: flex-start !important;
         width: 100% !important;
         display: flex !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.01) !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
         transition: all 0.2s ease !important;
     }
     
     .quiz-option-container div.stButton > button:hover {
-        background-color: #e5e7eb !important;
-        border-color: #d1d5db !important;
-        color: #000000 !important;
+        background-color: #f1f5f9 !important;
+        border-color: #cbd5e1 !important;
+        color: #0f172a !important;
         transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
     }
     
     /* Static Option Cards (for showing result) */
     .quiz-option-static {
-        background-color: #f3f4f6;
+        background-color: #f8fafc;
         color: #1f2937;
-        border-radius: 24px;
-        padding: 20px 25px;
-        font-size: 1.15rem;
+        border-radius: 20px;
+        padding: 18px 24px;
+        font-size: 1.1rem;
         font-weight: 600;
         text-align: left;
         display: flex;
@@ -129,67 +138,20 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         border-color: #e5e7eb;
         opacity: 0.65;
     }
-    
-    /* Selection Cards CSS */
-    .quiz-selector-card {
-        background-color: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        padding: 24px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.006);
-        transition: all 0.3s ease;
-        margin-bottom: 12px;
-        position: relative;
-        min-height: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .quiz-selector-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.08);
-        border-color: #cbd5e1;
-    }
-    .quiz-card-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.78rem;
-        font-weight: 700;
-    }
-    .quiz-card-icon {
-        font-size: 2.2rem;
-        margin-bottom: 12px;
-        text-align: left;
-    }
-    .quiz-card-title {
-        font-size: 1.15rem;
-        font-weight: 800;
-        color: #0f172a;
-        margin-bottom: 8px;
-        line-height: 1.35;
-        text-align: left;
-    }
-    .quiz-card-desc {
-        font-size: 0.88rem;
-        color: #475569;
-        line-height: 1.5;
-        margin-bottom: 15px;
-        text-align: left;
-        flex-grow: 1;
-    }
     </style>
     """, unsafe_allow_html=True)
 
-    render_lesson_intro(
-        "📝 Hệ thống Đề Trắc nghiệm HSK 1"
-    )
+    render_lesson_intro("📝 Trắc nghiệm Tổng hợp HSK 1 - Ôn tập bài cũ")
 
-    # --- KHỞI TẠO STATE CHO QUIZ MỚI ---
+    # Đề thi mặc định cho toàn bộ phần này là quiz_exam_50
+    active_key = "quiz_exam_50"
+
+    # --- KHỞI TẠO STATE ---
     if "hsk1_active_quiz_id" not in st.session_state:
-        st.session_state.hsk1_active_quiz_id = None
+        st.session_state.hsk1_active_quiz_id = active_key
+    else:
+        st.session_state.hsk1_active_quiz_id = active_key
+
     if "hsk1_quiz_started" not in st.session_state:
         st.session_state.hsk1_quiz_started = False
     if "hsk1_quiz_idx" not in st.session_state:
@@ -203,108 +165,88 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
     if "hsk1_quiz_shuffled_options" not in st.session_state:
         st.session_state.hsk1_quiz_shuffled_options = {}
 
-    # ================= 1. GIAO DIỆN CHỌN ĐỀ (CHƯA BẮT ĐẦU HOẶC CHƯA CHỌN ĐỀ) =================
-    if not st.session_state.hsk1_quiz_started or not st.session_state.hsk1_active_quiz_id:
-        st.markdown("""
-        <div style="text-align: center; margin-bottom: 35px; margin-top: 10px;">
-            <h2 style="color: #0f172a; font-weight: 800; font-size: 2.2rem; margin-bottom: 0;">📚 Lựa chọn Đề trắc nghiệm ôn tập</h2>
+    quiz_info = QUIZZES_DATA.get(active_key)
+    if not quiz_info:
+        st.error("Không tìm thấy dữ liệu đề ôn tập bài cũ!")
+        return
+
+    questions = quiz_info["questions"]
+
+    # Hàm khởi tạo / làm lại bài thi
+    def start_new_quiz():
+        st.session_state.hsk1_active_quiz_id = active_key
+        st.session_state.hsk1_quiz_started = True
+        st.session_state.hsk1_quiz_idx = 0
+        st.session_state.hsk1_quiz_answers = [None] * len(questions)
+        st.session_state.hsk1_quiz_score = 0
+        st.session_state.hsk1_quiz_submitted = False
+        
+        # Xáo trộn đáp án
+        shuffled = []
+        for i, q in enumerate(questions):
+            opts = q["choices"][:]
+            random.Random(active_key + str(i)).shuffle(opts)
+            shuffled.append(opts)
+        st.session_state.hsk1_quiz_shuffled_options[active_key] = shuffled
+
+    # ================= 1. GIAO DIỆN CHƯA BẮT ĐẦU =================
+    if not st.session_state.hsk1_quiz_started:
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 24px; padding: 32px 36px; color: white; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); border: 2px solid #3b82f6;">
+            <div style="font-size: 2.4rem; margin-bottom: 10px;">📝</div>
+            <h2 style="color: #60a5fa; font-size: 1.65rem; font-weight: 800; margin-bottom: 10px;">ÔN TẬP BÀI CŨ (50 CÂU)</h2>
+            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.65; margin-bottom: 20px;">
+                Bài ôn tập trắc nghiệm toàn diện gồm <b>50 câu hỏi</b> bao quát 7 dạng bài cốt lõi: Ngữ âm & Biến điệu, Chữ Hán & Bộ thủ, Từ vựng cơ bản, Ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ & Số từ, Tìm lỗi sai, Sắp xếp câu hoàn chỉnh, và Đối thoại giao tiếp phản xạ.
+            </p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">📊 Số lượng: <b>50 câu hỏi</b></div>
+                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">🎯 Cách tính điểm: <b>Số câu đúng / 50</b></div>
+                <div style="background: rgba(255,255,255,0.08); padding: 10px 18px; border-radius: 12px; font-size: 0.92rem;">☁️ Lưu trữ: <b>Supabase Cloud</b></div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Helper function to start a quiz
-        def init_quiz_state(selected_quiz_key):
-            questions = QUIZZES_DATA[selected_quiz_key]["questions"]
-            st.session_state.hsk1_active_quiz_id = selected_quiz_key
-            st.session_state.hsk1_quiz_started = True
-            st.session_state.hsk1_quiz_idx = 0
-            st.session_state.hsk1_quiz_answers = [None] * len(questions)
-            st.session_state.hsk1_quiz_score = 0
-            st.session_state.hsk1_quiz_submitted = False
-            
-            # Xáo trộn đáp án của đề
-            shuffled = []
-            for i, q in enumerate(questions):
-                opts = q["choices"][:]
-                random.Random(selected_quiz_key + str(i)).shuffle(opts)
-                shuffled.append(opts)
-            st.session_state.hsk1_quiz_shuffled_options[selected_quiz_key] = shuffled
+        if st.button("🚀 BẮT ĐẦU LÀM BÀI ÔN TẬP (50 CÂU)", key="btn_start_quiz_50", type="primary", use_container_width=True):
+            start_new_quiz()
+            save_progress()
             st.rerun()
 
-        # Banner đặc biệt: Đề thi Tổng hợp 50 câu ôn tập toàn diện
-        if "quiz_exam_50" in QUIZZES_DATA:
-            st.markdown("""
-            <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; padding: 26px 30px; color: white; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); border: 2px solid #f59e0b; position: relative;">
-                <div style="position: absolute; top: 15px; right: 20px; background-color: #f59e0b; color: #1e293b; font-weight: 800; font-size: 0.8rem; padding: 4px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;">⭐ ĐỀ THI ĐẶC BIỆT 50 CÂU</div>
-                <div style="font-size: 2.2rem; margin-bottom: 8px;">🎯</div>
-                <h3 style="color: #fbbf24; font-size: 1.45rem; font-weight: 800; margin-bottom: 8px;">ĐỀ THI TỔNG HỢP ÔN TẬP TOÀN DIỆN (50 CÂU)</h3>
-                <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">Bài thi gồm 50 câu bao quát 7 dạng bài: Ngữ âm & Biến điệu, Chữ Hán & Bộ thủ, Từ vựng cơ bản, Ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ & Số từ, Tìm lỗi sai, Sắp xếp câu hoàn chỉnh, và Đối thoại giao tiếp phản xạ.</p>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button("🚀 BẮT ĐẦU LÀM BÀI THI 50 CÂU TOÀN DIỆN NGAY", key="btn_start_exam_50", type="primary", use_container_width=True):
-                init_quiz_state("quiz_exam_50")
-            st.markdown("<div style='margin-bottom: 25px;'></div><hr style='border: none; border-top: 1px dashed #cbd5e1; margin: 25px 0;'/>", unsafe_allow_html=True)
+        st.markdown("<br/>", unsafe_allow_html=True)
 
-        # Grid layout (Loop through 8 quizzes in pairs to create a clean responsive grid)
-        quiz_metadata = {
-            "quiz_1": {"badge": "Bài 1 - Bài 3", "badge_bg": "#dbeafe", "badge_color": "#1e40af", "icon": "🎒", "color": "#3b82f6", "title": "Đề 1: Nhập môn Ngữ âm & Từ vựng"},
-            "quiz_2": {"badge": "Bài 4 - Bài 5", "badge_bg": "#f3e8ff", "badge_color": "#6b21a8", "icon": "🌸", "color": "#8b5cf6", "title": "Đề 2: Ngữ âm mở rộng & Số đếm"},
-            "quiz_3": {"badge": "Bài 6 - Bài 7", "badge_bg": "#fce7f3", "badge_color": "#9d174d", "icon": "⚡", "color": "#ec4899", "title": "Đề 3: Từ để hỏi & Trợ từ 的"},
-            "quiz_4": {"badge": "Bài 8 & Tổng hợp", "badge_bg": "#fef3c7", "badge_color": "#92400e", "icon": "🔥", "color": "#f59e0b", "title": "Đề 4: Chữ Hán & Đàm thoại tổng hợp"},
-            "quiz_5": {"badge": "Bài 1 - Bài 3", "badge_bg": "#e0f2fe", "badge_color": "#0369a1", "icon": "📝", "color": "#0ea5e9", "title": "Đề 5: Luyện tập Ngữ âm & Giao tiếp"},
-            "quiz_6": {"badge": "Bài 4 - Bài 5", "badge_bg": "#d1fae5", "badge_color": "#065f46", "icon": "📊", "color": "#10b981", "title": "Đề 6: Số đếm & Từ vựng Nữ giới"},
-            "quiz_7": {"badge": "Bài 6 - Bài 7", "badge_bg": "#ffedd5", "badge_color": "#9a3412", "icon": "🔍", "color": "#f97316", "title": "Đề 7: Từ để hỏi & Định ngữ"},
-            "quiz_8": {"badge": "Bài 8 & Tổng hợp", "badge_bg": "#e2e8f0", "badge_color": "#334155", "icon": "🏆", "color": "#64748b", "title": "Đề 8: Quy tắc bút thuận & Tổng hợp"}
-        }
+        # Cấu hình Supabase (Expander)
+        supabase_client.render_supabase_config_ui()
 
-        keys = ["quiz_1", "quiz_2", "quiz_3", "quiz_4", "quiz_5", "quiz_6", "quiz_7", "quiz_8"]
-        for row_idx in range(0, len(keys), 2):
-            col1, col2 = st.columns(2)
-            
-            # Left Column Card
-            k1 = keys[row_idx]
-            meta1 = quiz_metadata[k1]
-            with col1:
-                st.markdown(f"""
-                <div class="quiz-selector-card" style="border-top: 4px solid {meta1['color']};">
-                    <div class="quiz-card-badge" style="background-color: {meta1['badge_bg']}; color: {meta1['badge_color']};">{meta1['badge']}</div>
-                    <div class="quiz-card-icon">{meta1['icon']}</div>
-                    <div class="quiz-card-title">{meta1['title']}</div>
-                    <div class="quiz-card-desc">{QUIZZES_DATA[k1]['description']}</div>
-                </div>
-                """, unsafe_allow_html=True)
-                if st.button("🚀 Bắt đầu làm bài", key=f"btn_start_{k1}", type="primary", use_container_width=True):
-                    init_quiz_state(k1)
-            
-            # Right Column Card
-            if row_idx + 1 < len(keys):
-                k2 = keys[row_idx + 1]
-                meta2 = quiz_metadata[k2]
-                with col2:
-                    st.markdown(f"""
-                    <div class="quiz-selector-card" style="border-top: 4px solid {meta2['color']};">
-                        <div class="quiz-card-badge" style="background-color: {meta2['badge_bg']}; color: {meta2['badge_color']};">{meta2['badge']}</div>
-                        <div class="quiz-card-icon">{meta2['icon']}</div>
-                        <div class="quiz-card-title">{meta2['title']}</div>
-                        <div class="quiz-card-desc">{QUIZZES_DATA[k2]['description']}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    if st.button("🚀 Bắt đầu làm bài", key=f"btn_start_{k2}", type="primary", use_container_width=True):
-                        init_quiz_state(k2)
+        # Bảng xếp hạng điểm học viên
+        st.markdown("---")
+        st.markdown("### 🏆 Bảng xếp hạng nộp bài")
+        scores_data = []
+        if supabase_client.is_supabase_configured():
+            scores_data = supabase_client.load_scores_from_supabase()
+        if not scores_data:
+            raw_csv = load_all_scores_hsk1_consolidated()
+            for r in raw_csv:
+                scores_data.append({
+                    "Thời gian": r.get("thời gian", ""),
+                    "Học viên": r.get("học viên", ""),
+                    "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
+                })
+
+        if scores_data:
+            st.dataframe(scores_data, use_container_width=True)
+        else:
+            st.info("Chưa có lượt nộp điểm nào. Hãy bấm bắt đầu để làm bài ôn tập và lưu điểm!")
 
     # ================= 2. GIAO DIỆN LÀM BÀI =================
     else:
-        active_key = st.session_state.hsk1_active_quiz_id
-        quiz_info = QUIZZES_DATA[active_key]
-        questions = quiz_info["questions"]
         current_idx = st.session_state.hsk1_quiz_idx
 
-        # Nút Quay lại chọn đề (chỉ khi chưa hoàn thành hoặc muốn đổi)
-        if st.sidebar.button("🔙 Chọn đề thi khác", use_container_width=True):
-            st.session_state.hsk1_quiz_started = False
-            st.session_state.hsk1_active_quiz_id = None
+        # Nút sidebar: Làm lại bài từ đầu
+        if st.sidebar.button("🔄 Làm lại từ đầu", use_container_width=True):
+            start_new_quiz()
+            save_progress()
             st.rerun()
 
-        # Khôi phục shuffled options nếu bị mất do hot reload / restart
+        # Khôi phục shuffled options nếu cần
         if active_key not in st.session_state.hsk1_quiz_shuffled_options:
             shuffled = []
             for i, q in enumerate(questions):
@@ -313,13 +255,13 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                 shuffled.append(opts)
             st.session_state.hsk1_quiz_shuffled_options[active_key] = shuffled
 
-        # Khôi phục answers list nếu bị trống hoặc lệch độ dài
+        # Khôi phục answers list nếu bị lệch độ dài
         if not st.session_state.hsk1_quiz_answers or len(st.session_state.hsk1_quiz_answers) != len(questions):
             st.session_state.hsk1_quiz_answers = [None] * len(questions)
 
-        # Nếu hoàn thành tất cả câu hỏi
+        # Nếu đã hoàn thành tất cả câu hỏi
         if current_idx >= len(questions):
-            show_quiz_results(active_key, questions, save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
+            show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
             return
 
         q_data = questions[current_idx]
@@ -332,27 +274,27 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         percent_done = int((current_idx / len(questions)) * 100)
         st.markdown(f"""
         <div style="display: flex; justify-content: space-between; font-weight: bold; color: #475569; margin-bottom: 8px; font-size: 0.95rem;">
-            <span>{quiz_info['title']}</span>
+            <span>📝 Ôn tập bài cũ (50 câu)</span>
             <span>Câu {current_idx + 1} / {len(questions)} ({percent_done}%)</span>
         </div>
         """, unsafe_allow_html=True)
         st.progress(current_idx / len(questions))
 
-        # Khung thẻ câu hỏi chuẩn giao diện
+        # Khung thẻ câu hỏi
         st.markdown(f"""
         <div class="quiz-card">
-            <div class="quiz-q-num">Câu hỏi {current_idx + 1}</div>
+            <div class="quiz-q-num">Câu hỏi {current_idx + 1} / {len(questions)}</div>
             <div class="quiz-q-text">{q_data['question']}</div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Phát âm câu mẫu
+        # Phát âm câu hỏi mẫu
         col_audio, col_empty = st.columns([4, 6])
         with col_audio:
             render_play_button(q_data["sound_txt"], "🔊 Phát âm câu hỏi mẫu", key=f"audio_q_{active_key}_{current_idx}")
         st.markdown("<br/>", unsafe_allow_html=True)
 
-        # ================= 2.1 TRẠNG THÁI: CHƯA TRẢ LỜI =================
+        # Trạng thái: Chưa trả lời
         if not is_answered:
             st.markdown('<div class="quiz-option-container">', unsafe_allow_html=True)
             for i, choice in enumerate(shuffled_choices):
@@ -364,9 +306,8 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
-        # ================= 2.2 TRẠNG THÁI: ĐÃ TRẢ LỜI =================
+        # Trạng thái: Đã trả lời
         else:
-            # Hiển thị các block đáp án tĩnh, tô màu chuẩn
             static_options_html = '<div class="quiz-option-container">'
             for choice in shuffled_choices:
                 if choice == correct_choice:
@@ -378,13 +319,13 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             static_options_html += '</div>'
             st.markdown(static_options_html, unsafe_allow_html=True)
 
-            # Khung thông báo và giải thích kết quả
+            # Giải thích kết quả
             if user_choice == correct_choice:
                 st.success(f"🎉 **Chính xác!**\n\n**Giải thích:** {q_data['explain']}")
             else:
                 st.error(f"😢 **Chưa chính xác!** (Bạn đã chọn: {user_choice})\n\n👉 Đáp án đúng là: **{correct_choice}**\n\n**Giải thích:** {q_data['explain']}")
 
-            # Điều hướng
+            # Điều hướng câu hỏi
             st.markdown("<br/>", unsafe_allow_html=True)
             col_nav_1, col_nav_2 = st.columns([1, 1])
             with col_nav_1:
@@ -399,69 +340,103 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                     st.rerun()
 
 
-def show_quiz_results(active_key, questions, save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
+def show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
     score = st.session_state.hsk1_quiz_score
     total = len(questions)
-    final_score_10 = round((score / total) * 10, 2)
-    quiz_title = QUIZZES_DATA[active_key]["title"]
+    score_display = f"{score}/{total}"
+    quiz_title = "Ôn tập bài cũ (50 câu)"
 
     st.balloons()
     st.markdown(f"""
-    <div style="background-color: #fff; border: 2px solid #22c55e; border-radius: 20px; padding: 40px; text-align: center; max-width: 600px; margin: 30px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-        <span style="font-size: 4rem;">🏆</span>
-        <h2 style="color: #1e3a8a; margin-top: 15px; font-weight: 800;">Hoàn thành bài thi!</h2>
-        <p style="font-size: 1.1rem; color: #475569; margin-bottom: 25px;">Bạn đã hoàn thành <b>{quiz_title}</b></p>
-        <div style="background-color: #f0fdf4; border-radius: 12px; padding: 20px; display: inline-block; margin-bottom: 10px;">
-            <span style="font-size: 1.1rem; color: #166534; font-weight: bold; display: block;">KẾT QUẢ ĐẠT ĐƯỢC:</span>
-            <span style="font-size: 3rem; color: #15803d; font-weight: 900;">{score} / {total}</span>
-            <span style="font-size: 1.3rem; color: #15803d; font-weight: 700; display: block; margin-top: 5px;">({final_score_10} điểm hệ 10)</span>
+    <div style="background-color: #fff; border: 2px solid #22c55e; border-radius: 20px; padding: 35px; text-align: center; max-width: 650px; margin: 25px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+        <span style="font-size: 3.5rem;">🏆</span>
+        <h2 style="color: #1e3a8a; margin-top: 10px; font-weight: 800; font-size: 1.8rem;">Hoàn thành bài ôn tập!</h2>
+        <p style="font-size: 1.05rem; color: #475569; margin-bottom: 20px;">Bạn đã hoàn thành <b>{quiz_title}</b></p>
+        <div style="background-color: #f0fdf4; border-radius: 16px; padding: 20px 35px; display: inline-block; margin-bottom: 10px; border: 1.5px solid #86efac;">
+            <span style="font-size: 1.05rem; color: #166534; font-weight: bold; display: block;">KẾT QUẢ ĐẠT ĐƯỢC:</span>
+            <span style="font-size: 3.5rem; color: #15803d; font-weight: 900; letter-spacing: 1px;">{score_display}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Form nộp bài lên data backend (lưu ở CSV)
+    # Mục BẮT BUỘC nhập tên học viên để lưu điểm
     if not st.session_state.hsk1_quiz_submitted:
-        name = st.text_input("Nhập họ và tên học viên để nộp điểm lên data backend:", placeholder="Ví dụ: Nguyễn Văn A", key="hsk1_quiz_student_name")
-        if st.button("💾 Nộp bài & Lưu điểm lên hệ thống", type="primary", use_container_width=True):
-            if name:
-                row = {
-                    "thời gian": datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
-                    "học viên": name,
-                    "Đề kiểm tra": quiz_title,
-                    "tổng điểm": final_score_10,
-                    "Kết quả": f"{score}/{total}"
-                }
-                if save_score_row_hsk1_consolidated(row):
-                    st.session_state.hsk1_quiz_submitted = True
-                    st.success("Đã nộp bài và lưu điểm số vào data backend thành công!")
-                    save_progress()
-                    st.rerun()
-            else:
-                st.error("Vui lòng điền tên trước khi bấm nộp bài!")
-    else:
-        st.success("Chúc mừng bạn đã nộp bài thành công lên hệ thống data backend!")
+        st.markdown(f"""
+        <div style="background-color: #eff6ff; border: 2px dashed #3b82f6; border-radius: 18px; padding: 22px 26px; margin: 20px auto; max-width: 650px;">
+            <h4 style="color: #1e40af; margin-top: 0; font-size: 1.2rem; font-weight: 800;">✍️ Bắt buộc nhập tên học viên để lưu điểm</h4>
+            <p style="color: #475569; margin-bottom: 5px; font-size: 0.95rem;">Hệ thống sẽ ghi nhận <b>Họ tên học viên</b> và kết quả <b>{score_display}</b> trực tiếp lên cơ sở dữ liệu Supabase.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("🔄 Làm lại đề này", use_container_width=True):
-            st.session_state.hsk1_quiz_idx = 0
-            st.session_state.hsk1_quiz_answers = [None] * len(questions)
-            st.session_state.hsk1_quiz_score = 0
-            st.session_state.hsk1_quiz_submitted = False
-            save_progress()
-            st.rerun()
-    with col2:
-        if st.button("🔙 Trở về danh sách đề thi", use_container_width=True):
-            st.session_state.hsk1_quiz_started = False
-            st.session_state.hsk1_active_quiz_id = None
-            save_progress()
-            st.rerun()
+        with st.form("form_submit_student_score"):
+            name = st.text_input("Nhập họ và tên học viên * :", placeholder="Ví dụ: Nguyễn Văn A", key="hsk1_quiz_student_name")
+            submitted = st.form_submit_button("💾 Nộp bài & Lưu điểm lên Supabase", type="primary", use_container_width=True)
+
+            if submitted:
+                clean_name = name.strip() if name else ""
+                if clean_name:
+                    now_str = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
+
+                    # 1. Lưu lên Supabase: Chỉ lưu tên và điểm (câu đúng/50)
+                    saved_sb, msg_sb = supabase_client.save_score_to_supabase(
+                        student_name=clean_name,
+                        score_str=score_display
+                    )
+
+                    # 2. Lưu dự phòng vào CSV cục bộ
+                    row_csv = {
+                        "thời gian": now_str,
+                        "học viên": clean_name,
+                        "Đề kiểm tra": quiz_title,
+                        "tổng điểm": score_display,
+                        "Kết quả": score_display
+                    }
+                    save_score_row_hsk1_consolidated(row_csv)
+
+                    st.session_state.hsk1_quiz_submitted = True
+                    st.session_state.submitted_student_name = clean_name
+                    save_progress()
+
+                    if saved_sb:
+                        st.success(f"🎉 Đã lưu điểm thành công! Học viên: **{clean_name}** — Điểm: **{score_display}**")
+                    else:
+                        st.warning(f"Đã lưu điểm vào CSV cục bộ. (Thông báo Supabase: {msg_sb})")
+                    st.rerun()
+                else:
+                    st.error("⚠️ Bạn bắt buộc phải nhập họ và tên học viên trước khi bấm nộp bài!")
+    else:
+        saved_name = st.session_state.get("submitted_student_name", "")
+        st.success(f"✅ Đã lưu điểm thành công cho học viên: **{saved_name}** — Điểm số: **{score_display}**")
+
+    # Nút làm lại bài
+    if st.button("🔄 Làm lại bài ôn tập", use_container_width=True, type="secondary"):
+        st.session_state.hsk1_quiz_idx = 0
+        st.session_state.hsk1_quiz_answers = [None] * len(questions)
+        st.session_state.hsk1_quiz_score = 0
+        st.session_state.hsk1_quiz_submitted = False
+        save_progress()
+        st.rerun()
+
+    # Expander cấu hình Supabase
+    st.markdown("<br/>", unsafe_allow_html=True)
+    supabase_client.render_supabase_config_ui()
 
     # Bảng xếp hạng nộp bài
     st.markdown("---")
-    st.markdown("### 🏆 Bảng xếp hạng nộp bài trắc nghiệm HSK 1")
-    all_scores = load_all_scores_hsk1_consolidated()
-    if all_scores:
-        st.dataframe(all_scores, use_container_width=True)
+    st.markdown("### 🏆 Bảng xếp hạng nộp bài")
+    scores_data = []
+    if supabase_client.is_supabase_configured():
+        scores_data = supabase_client.load_scores_from_supabase()
+    if not scores_data:
+        raw_csv = load_all_scores_hsk1_consolidated()
+        for r in raw_csv:
+            scores_data.append({
+                "Thời gian": r.get("thời gian", ""),
+                "Học viên": r.get("học viên", ""),
+                "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
+            })
+
+    if scores_data:
+        st.dataframe(scores_data, use_container_width=True)
     else:
-        st.info("Chưa có lượt nộp điểm nào cho các đề. Hãy nộp điểm đầu tiên!")
+        st.info("Chưa có lượt nộp điểm nào. Hãy nộp điểm đầu tiên!")

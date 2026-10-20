@@ -530,7 +530,6 @@ if "initialized" not in st.session_state:
 st.sidebar.header("Danh mục giáo án")
 
 mode = st.sidebar.selectbox("Khu vực học tập:", [
-    "🎯 ĐỀ THI TỔNG HỢP (50 CÂU)",
     "📚 Lý thuyết & Bài học",
     "📖 Hệ thống từ vựng",
     "🔊 Luyện tập Ghép âm",
@@ -613,26 +612,7 @@ elif mode == "📝 Hệ thống bài tập":
         "Bài tập Bài 7.6"
     ])
 
-if mode == "🎯 ĐỀ THI TỔNG HỢP (50 CÂU)":
-    if st.session_state.get("hsk1_active_quiz_id") != "quiz_exam_50":
-        st.session_state.hsk1_active_quiz_id = "quiz_exam_50"
-        st.session_state.hsk1_quiz_started = True
-        st.session_state.hsk1_quiz_idx = 0
-        questions = hsk1_quizzes_data.QUIZZES_DATA["quiz_exam_50"]["questions"]
-        st.session_state.hsk1_quiz_answers = [None] * len(questions)
-        st.session_state.hsk1_quiz_score = 0
-        st.session_state.hsk1_quiz_submitted = False
-        shuffled = []
-        for i, q in enumerate(questions):
-            opts = q["choices"][:]
-            random.Random("quiz_exam_50" + str(i)).shuffle(opts)
-            shuffled.append(opts)
-        if "hsk1_quiz_shuffled_options" not in st.session_state:
-            st.session_state.hsk1_quiz_shuffled_options = {}
-        st.session_state.hsk1_quiz_shuffled_options["quiz_exam_50"] = shuffled
-    hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
-
-elif mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
+if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
     show_consolidated_flashcards()
 
 elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
