@@ -48,6 +48,7 @@ if 'lesson9_game' in sys.modules:
     del sys.modules['lesson9_game']
 import lessons.lesson9 as lesson9
 import lessons.hsk1_quiz as hsk1_quiz
+import supabase_client
 import lessons.hsk1_quizzes_data as hsk1_quizzes_data
 
 if 'lessons.pinyin_practice' in sys.modules:
@@ -528,6 +529,22 @@ if "initialized" not in st.session_state:
 
 
 st.sidebar.header("Danh mục giáo án")
+
+# Trạng thái kết nối Supabase ở bên trái màn hình
+if supabase_client.is_supabase_configured():
+    st.sidebar.markdown("""
+    <div style="background-color: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 12px; padding: 8px 12px; margin-bottom: 15px; color: #15803d; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.95rem;">🟢</span>
+        <span>Supabase: Đã kết nối</span>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.sidebar.markdown("""
+    <div style="background-color: #fef2f2; border: 1.5px solid #ef4444; border-radius: 12px; padding: 8px 12px; margin-bottom: 15px; color: #991b1b; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.95rem;">🔴</span>
+        <span>Supabase: Chưa kết nối</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 mode = st.sidebar.selectbox("Khu vực học tập:", [
     "📚 Lý thuyết & Bài học",
