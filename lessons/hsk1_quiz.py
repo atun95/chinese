@@ -201,24 +201,10 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
         </div>
         """, unsafe_allow_html=True)
 
-        # Trạng thái kết nối Supabase hiển thị rõ ràng
-        if supabase_client.is_supabase_configured():
-            st.markdown("""
-            <div style="background-color: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 12px; padding: 12px 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 10px; color: #15803d; font-size: 0.95rem; font-weight: 600;">
-                <span style="font-size: 1.2rem;">🟢</span>
-                <span><b>Trạng thái Database:</b> Đã kết nối Supabase thành công! Điểm học viên sẽ được tự động lưu lên Cloud.</span>
-            </div>
-            """, unsafe_allow_html=True)
-
         if st.button("🚀 BẮT ĐẦU LÀM BÀI ÔN TẬP (50 CÂU)", key="btn_start_quiz_50", type="primary", use_container_width=True):
             start_new_quiz()
             save_progress()
             st.rerun()
-
-        st.markdown("<br/>", unsafe_allow_html=True)
-
-        # Cấu hình Supabase (Expander)
-        supabase_client.render_supabase_config_ui()
 
         # Bảng xếp hạng điểm học viên
         st.markdown("---")
@@ -420,10 +406,6 @@ def show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated
         st.session_state.hsk1_quiz_submitted = False
         save_progress()
         st.rerun()
-
-    # Expander cấu hình Supabase
-    st.markdown("<br/>", unsafe_allow_html=True)
-    supabase_client.render_supabase_config_ui()
 
     # Bảng xếp hạng nộp bài
     st.markdown("---")
