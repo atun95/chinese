@@ -21,6 +21,60 @@ except ImportError:
     from lessons.hsk1_quizzes_data import QUIZZES_DATA
 
 
+# POPUP DIALOG CHO HỌC VIÊN ĐIỀN TÊN KHI HOÀN THÀNH BÀI THI
+@st.dialog("📝 Nộp bài & Lưu điểm", dismissible=True)
+def popup_submit_score(score_display, questions, save_progress, save_score_row_hsk1_consolidated):
+    st.markdown(f"""
+    <div style="text-align: center; margin-bottom: 18px;">
+        <span style="font-size: 2.2rem;">🎉</span>
+        <h3 style="margin: 6px 0 10px 0; color: #1e3a8a; font-size: 1.5rem; font-weight: 800;">
+            Kết quả: <span style="color: #15803d;">{score_display}</span>
+        </h3>
+        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 0;">Điền họ và tên học viên để lưu điểm vào hệ thống:</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    name = st.text_input("Họ và tên học viên *:", placeholder="Ví dụ: Nguyễn Văn A", key="popup_student_name_input")
+
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        if st.button("💾 Lưu điểm", type="primary", use_container_width=True):
+            clean_name = name.strip() if name else ""
+            if clean_name:
+                now_str = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
+
+                # 1. Lưu vào Supabase: chỉ lưu tên và điểm (câu đúng/50)
+                saved_sb, msg_sb = supabase_client.save_score_to_supabase(
+                    student_name=clean_name,
+                    score_str=score_display
+                )
+
+                # 2. Lưu dự phòng vào CSV
+                row_csv = {
+                    "thời gian": now_str,
+                    "học viên": clean_name,
+                    "Đề kiểm tra": "Ôn tập bài cũ (50 câu)",
+                    "tổng điểm": score_display,
+                    "Kết quả": score_display
+                }
+                save_score_row_hsk1_consolidated(row_csv)
+
+                st.session_state.hsk1_quiz_submitted = True
+                st.session_state.submitted_student_name = clean_name
+                save_progress()
+                st.rerun()
+            else:
+                st.error("⚠️ Vui lòng điền họ và tên trước khi lưu điểm!")
+    with col2:
+        if st.button("🔄 Làm lại bài", use_container_width=True):
+            st.session_state.hsk1_quiz_idx = 0
+            st.session_state.hsk1_quiz_answers = [None] * len(questions)
+            st.session_state.hsk1_quiz_score = 0
+            st.session_state.hsk1_quiz_submitted = False
+            save_progress()
+            st.rerun()
+
+
 def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
     # CSS Styles cao cấp
     st.markdown("""
@@ -334,69 +388,34 @@ def show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated
     score = st.session_state.hsk1_quiz_score
     total = len(questions)
     score_display = f"{score}/{total}"
-    quiz_title = "Ôn tập bài cũ (50 câu)"
+
+    # Bật popup cho học viên điền tên nếu chưa nộp
+    if not st.session_state.hsk1_quiz_submitted:
+        popup_submit_score(score_display, questions, save_progress, save_score_row_hsk1_consolidated)
 
     st.balloons()
-    st.markdown(f"""
-    <div style="background-color: #fff; border: 2px solid #22c55e; border-radius: 20px; padding: 35px; text-align: center; max-width: 650px; margin: 25px auto; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-        <span style="font-size: 3.5rem;">🏆</span>
-        <h2 style="color: #1e3a8a; margin-top: 10px; font-weight: 800; font-size: 1.8rem;">Hoàn thành bài ôn tập!</h2>
-        <p style="font-size: 1.05rem; color: #475569; margin-bottom: 20px;">Bạn đã hoàn thành <b>{quiz_title}</b></p>
-        <div style="background-color: #f0fdf4; border-radius: 16px; padding: 20px 35px; display: inline-block; margin-bottom: 10px; border: 1.5px solid #86efac;">
-            <span style="font-size: 1.05rem; color: #166534; font-weight: bold; display: block;">KẾT QUẢ ĐẠT ĐƯỢC:</span>
-            <span style="font-size: 3.5rem; color: #15803d; font-weight: 900; letter-spacing: 1px;">{score_display}</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
-    # Mục BẮT BUỘC nhập tên học viên để lưu điểm
-    if not st.session_state.hsk1_quiz_submitted:
+    # Màn hình kết quả tinh gọn, không hiện quá nhiều thông tin
+    saved_name = st.session_state.get("submitted_student_name", "")
+    if st.session_state.hsk1_quiz_submitted and saved_name:
         st.markdown(f"""
-        <div style="background-color: #eff6ff; border: 2px dashed #3b82f6; border-radius: 18px; padding: 22px 26px; margin: 20px auto; max-width: 650px;">
-            <h4 style="color: #1e40af; margin-top: 0; font-size: 1.2rem; font-weight: 800;">✍️ Bắt buộc nhập tên học viên để lưu điểm</h4>
-            <p style="color: #475569; margin-bottom: 5px; font-size: 0.95rem;">Hệ thống sẽ ghi nhận <b>Họ tên học viên</b> và kết quả <b>{score_display}</b> trực tiếp lên cơ sở dữ liệu Supabase.</p>
+        <div style="background-color: #fff; border: 2px solid #22c55e; border-radius: 18px; padding: 25px; text-align: center; max-width: 550px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <div style="font-size: 2.2rem; margin-bottom: 5px;">🏆</div>
+            <h3 style="color: #1e3a8a; margin: 5px 0; font-weight: 800;">Đã lưu điểm thành công!</h3>
+            <p style="color: #475569; font-size: 1.1rem; margin-bottom: 5px;">Học viên: <b>{saved_name}</b></p>
+            <p style="color: #15803d; font-size: 1.8rem; font-weight: 900; margin: 5px 0;">Điểm số: {score_display}</p>
         </div>
         """, unsafe_allow_html=True)
-
-        with st.form("form_submit_student_score"):
-            name = st.text_input("Nhập họ và tên học viên * :", placeholder="Ví dụ: Nguyễn Văn A", key="hsk1_quiz_student_name")
-            submitted = st.form_submit_button("💾 Nộp bài & Lưu điểm lên Supabase", type="primary", use_container_width=True)
-
-            if submitted:
-                clean_name = name.strip() if name else ""
-                if clean_name:
-                    now_str = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
-
-                    # 1. Lưu lên Supabase: Chỉ lưu tên và điểm (câu đúng/50)
-                    saved_sb, msg_sb = supabase_client.save_score_to_supabase(
-                        student_name=clean_name,
-                        score_str=score_display
-                    )
-
-                    # 2. Lưu dự phòng vào CSV cục bộ
-                    row_csv = {
-                        "thời gian": now_str,
-                        "học viên": clean_name,
-                        "Đề kiểm tra": quiz_title,
-                        "tổng điểm": score_display,
-                        "Kết quả": score_display
-                    }
-                    save_score_row_hsk1_consolidated(row_csv)
-
-                    st.session_state.hsk1_quiz_submitted = True
-                    st.session_state.submitted_student_name = clean_name
-                    save_progress()
-
-                    if saved_sb:
-                        st.success(f"🎉 Đã lưu điểm thành công! Học viên: **{clean_name}** — Điểm: **{score_display}**")
-                    else:
-                        st.warning(f"Đã lưu điểm vào CSV cục bộ. (Thông báo Supabase: {msg_sb})")
-                    st.rerun()
-                else:
-                    st.error("⚠️ Bạn bắt buộc phải nhập họ và tên học viên trước khi bấm nộp bài!")
     else:
-        saved_name = st.session_state.get("submitted_student_name", "")
-        st.success(f"✅ Đã lưu điểm thành công cho học viên: **{saved_name}** — Điểm số: **{score_display}**")
+        st.markdown(f"""
+        <div style="background-color: #fff; border: 2px solid #3b82f6; border-radius: 18px; padding: 25px; text-align: center; max-width: 550px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <div style="font-size: 2.2rem; margin-bottom: 5px;">📝</div>
+            <h3 style="color: #1e3a8a; margin: 5px 0; font-weight: 800;">Kết quả: {score_display}</h3>
+            <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 15px;">Vui lòng điền tên trong popup để lưu điểm</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("✍️ Mở popup điền tên", use_container_width=True, type="primary"):
+            popup_submit_score(score_display, questions, save_progress, save_score_row_hsk1_consolidated)
 
     # Nút làm lại bài
     if st.button("🔄 Làm lại bài ôn tập", use_container_width=True, type="secondary"):
@@ -425,4 +444,4 @@ def show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated
     if scores_data:
         st.dataframe(scores_data, use_container_width=True)
     else:
-        st.info("Chưa có lượt nộp điểm nào. Hãy nộp điểm đầu tiên!")
+        st.info("Chưa có lượt nộp điểm nào.")
