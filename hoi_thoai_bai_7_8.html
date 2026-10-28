@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện Nói Phản Xạ Tiếng Trung (Hội Thoại 3 Người)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ea580c;
+      --primary-hover: #c2410c;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      
+      --p1-color: #2563eb;
+      --p1-bg: #eff6ff;
+      --p2-color: #db2777;
+      --p2-bg: #fdf2f8;
+      --p3-color: #059669;
+      --p3-bg: #ecfdf5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .main-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ea580c;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn.active {
+      background: #ea580c;
+      color: #fff;
+      border-color: #ea580c;
+    }
+
+    .btn-primary {
+      background: #ea580c;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover { background: #c2410c; }
+
+    /* Scenario Tabs */
+    .scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tab-card {
+      background: var(--card);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      text-align: left;
+    }
+
+    .tab-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    .tab-card.active {
+      border-color: #ea580c;
+      background: #fffaf5;
+      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.12);
+    }
+
+    .tab-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tab-1 .tab-badge { background: #dbeafe; color: #1e40af; }
+    .tab-2 .tab-badge { background: #fce7f3; color: #9d174d; }
+    .tab-3 .tab-badge { background: #dcfce7; color: #166534; }
+
+    .tab-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .tab-goal {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Layout Content */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Column: Flow Steps */
+    .steps-board {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .board-header {
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .board-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .board-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Step Card */
+    .step-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .step-item.p-1 { border-left: 5px solid var(--p1-color); background: #fafcff; }
+    .step-item.p-2 { border-left: 5px solid var(--p2-color); background: #fffafd; }
+    .step-item.p-3 { border-left: 5px solid var(--p3-color); background: #fafffc; }
+
+    .step-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .speaker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .p-1 .speaker-pill { background: var(--p1-bg); color: var(--p1-color); }
+    .p-2 .speaker-pill { background: var(--p2-bg); color: var(--p2-color); }
+    .p-3 .speaker-pill { background: var(--p3-bg); color: var(--p3-color); }
+
+    .step-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* Viet Target prompt */
+    .prompt-viet {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .prompt-viet span.label {
+      font-size: 0.78rem;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-weight: normal;
+    }
+
+    /* Hints area */
+    .hints-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hint-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .vocab-chip {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .vocab-chip:hover {
+      border-color: #ea580c;
+      color: #ea580c;
+      background: #fff7ed;
+    }
+
+    .grammar-chip {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+    }
+
+    /* Reveal Answer Box */
+    .answer-box {
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-reveal {
+      background: transparent;
+      border: 1px dashed #cbd5e1;
+      color: #64748b;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-reveal:hover {
+      border-color: #ea580c;
+      color: #ea580c;
+      background: #fffaf5;
+    }
+
+    .answer-content {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .answer-content.show {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ans-hanzi {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: 0.03em;
+    }
+
+    .ans-pinyin {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #c2410c;
+      margin-top: 2px;
+    }
+
+    .ans-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .ans-speak {
+      background: #ea580c;
+      color: white;
+      border: none;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Right Column: Bank & Helpers */
+    .toolbox {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .tool-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid #fed7aa;
+      padding-bottom: 6px;
+    }
+
+    .quick-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quick-group-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-item {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tag-item:hover {
+      background: #ea580c;
+      color: #fff;
+      border-color: #ea580c;
+    }
+
+    .tag-item b { font-weight: 700; }
+
+    /* Teacher notes */
+    .pedagogy-box {
+      background: #fff7ed;
+      border: 1px solid #ffedd5;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.82rem;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+    .pedagogy-box ol {
+      padding-left: 18px;
+      margin-top: 6px;
+    }
+
+    /* Scaling */
+    body.large-mode .prompt-viet { font-size: 1.25rem; }
+    body.large-mode .ans-hanzi { font-size: 1.7rem; }
+    body.large-mode .ans-pinyin { font-size: 1.15rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header: Không nhân vật, không tên bài học rườm rà -->
+  <header>
+    <div>
+      <h1 class="main-title">🎯 Luyện Phản Xạ Giao Tiếp Theo Tình Huống</h1>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn" id="btnRevealAll" onclick="toggleAllAnswers()">
+        <span>👁️</span> Mở/Ẩn Tất Cả Gợi Ý Tiếng Trung
+      </button>
+      <button class="btn" id="btnZoom" onclick="toggleZoom()">
+        <span>🔍</span> Phóng To Chữ
+      </button>
+      <button class="btn btn-primary" onclick="randomRole()">
+        <span>🎲</span> Đổi Vai Ngẫu Nhiên
+      </button>
+    </div>
+  </header>
+
+  <!-- Scenario Selector -->
+  <div class="scenario-tabs">
+    <div class="tab-card tab-1 active" onclick="selectScenario(0)">
+      <span class="tab-badge">Tình huống 1</span>
+      <div class="tab-name">Rủ nhau đi ăn trưa tại nhà ăn</div>
+      <div class="tab-goal">3 bạn rủ nhau đi đâu ăn, hỏi món ăn, gọi bánh bao/mì/sủi cảo và đồ uống.</div>
+    </div>
+    
+    <div class="tab-card tab-2" onclick="selectScenario(1)">
+      <span class="tab-badge">Tình huống 2</span>
+      <div class="tab-name">Đi mua hoa quả &amp; Mặc cả giá</div>
+      <div class="tab-goal">2 bạn đi mua táo/quýt/chuối cùng người bán hàng, hỏi giá, mặc cả và tính tiền.</div>
+    </div>
+
+    <div class="tab-card tab-3" onclick="selectScenario(2)">
+      <span class="tab-badge">Tình huống 3</span>
+      <div class="tab-name">Ăn trưa xong mua tráng miệng &amp; Góp tiền</div>
+      <div class="tab-goal">Nhận xét món ăn vừa dùng, rủ đi mua dưa hấu/quýt và bàn chuyện cùng góp tiền trả.</div>
+    </div>
+  </div>
+
+  <!-- Main Content Layout -->
+  <div class="content-grid">
+    
+    <!-- Left: Flow of Turns -->
+    <div class="steps-board">
+      <div class="board-header">
+        <div>
+          <div class="board-title" id="scenarioTitle">Rủ nhau đi ăn trưa tại nhà ăn</div>
+        </div>
+      </div>
+
+      <div class="steps-list" id="stepsContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Right: Vocabulary & Grammar Bank -->
+    <div class="toolbox">
+      
+      <!-- Word Bank -->
+      <div class="tool-card">
+        <div class="tool-title">
+          <span>📚</span> Ngân Hàng Từ Khóa Gợi Ý
+        </div>
+        
+        <div class="quick-list">
+          <div class="quick-group-title">Món ăn &amp; Đồ uống</div>
+          <div class="tag-cloud">
+            <span class="tag-item" onclick="speak('馒头')"><b>馒头</b> mántou (bánh bao chay)</span>
+            <span class="tag-item" onclick="speak('包子')"><b>包子</b> bāozi (bánh bao)</span>
+            <span class="tag-item" onclick="speak('米饭')"><b>米饭</b> mǐfàn (cơm)</span>
+            <span class="tag-item" onclick="speak('饺子')"><b>饺子</b> jiǎozi (sủi cảo)</span>
+            <span class="tag-item" onclick="speak('面条')"><b>面条</b> miàntiáo (mì sợi)</span>
+            <span class="tag-item" onclick="speak('鸡蛋汤')"><b>鸡蛋汤</b> jīdàn tāng (canh trứng)</span>
+            <span class="tag-item" onclick="speak('啤酒')"><b>啤酒</b> píjiǔ (bia)</span>
+          </div>
+
+          <div class="quick-group-title" style="margin-top: 8px;">Hoa quả &amp; Mua bán</div>
+          <div class="tag-cloud">
+            <span class="tag-item" onclick="speak('苹果')"><b>苹果</b> píngguǒ (táo)</span>
+            <span class="tag-item" onclick="speak('橘子')"><b>橘子</b> júzi (quýt)</span>
+            <span class="tag-item" onclick="speak('香蕉')"><b>香蕉</b> xiāngjiāo (chuối)</span>
+            <span class="tag-item" onclick="speak('西瓜')"><b>西瓜</b> xīguā (dưa hấu)</span>
+            <span class="tag-item" onclick="speak('斤')"><b>斤</b> jīn (cân = 0.5kg)</span>
+            <span class="tag-item" onclick="speak('块')"><b>块</b> kuài (tệ)</span>
+            <span class="tag-item" onclick="speak('毛')"><b>毛</b> máo (hào)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grammar Helper -->
+      <div class="tool-card">
+        <div class="tool-title">
+          <span>💡</span> Mẫu Cấu Trúc Gợi Ý
+        </div>
+        <div style="font-size: 0.82rem; color: #475569; display: flex; flex-direction: column; gap: 8px;">
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">Hỏi đi đâu làm gì:</b><br>
+            去 + [Địa điểm] + [Làm gì]?<br>
+            <i>VD: 去食堂吃饭 / 去买水果</i>
+          </div>
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">Hỏi giá &amp; Mặc cả:</b><br>
+            • ...一斤多少钱？ / ...怎么卖？<br>
+            • 太贵了，[giá] 吧！<br>
+            <i>VD: 太贵了，三块五吧！</i>
+          </div>
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">Hỏi thêm &amp; Tính tổng:</b><br>
+            • 还要别的吗？<br>
+            • 一共多少钱？
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const scenarios = [
+  {
+    id: 1,
+    title: "Rủ nhau đi ăn trưa tại nhà ăn",
+    steps: [
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Hỏi hai bạn trưa nay đi đâu ăn cơm?",
+        vocab: [{ hz: "中午", py: "zhōngwǔ" }, { hz: "去哪儿", py: "qù nǎr" }, { hz: "吃饭", py: "chīfàn" }],
+        grammar: "中午你们去哪儿...？",
+        sampleHz: "中午你们去哪儿吃饭？",
+        samplePy: "Zhōngwǔ nǐmen qù nǎr chīfàn?"
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói mình đi nhà ăn, hỏi Người 3 có đi không?",
+        vocab: [{ hz: "去食堂", py: "qù shítáng" }, { hz: "你去吗", py: "nǐ qù ma" }],
+        grammar: "我去...，你去吗？",
+        sampleHz: "我去食堂，你去吗？",
+        samplePy: "Wǒ qù shítáng, nǐ qù ma?"
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói mình cũng đi, rủ cả ba người cùng nhau đi nhé!",
+        vocab: [{ hz: "也", py: "yě" }, { hz: "一起", py: "yìqǐ" }, { hz: "吧", py: "ba" }],
+        grammar: "我们也...。我们一起去吧！",
+        sampleHz: "我也去。我们一起去吧！",
+        samplePy: "Wǒ yě qù. Wǒmen yìqǐ qù ba!"
+      },
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Đến nhà ăn, hỏi Người 2 muốn ăn món gì?",
+        vocab: [{ hz: "吃什么", py: "chī shénme" }],
+        grammar: "你吃什么？",
+        sampleHz: "你吃什么？",
+        samplePy: "Nǐ chī shénme?"
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói mình ăn sủi cảo, hỏi Người 1 ăn cơm hay là ăn bánh bao?",
+        vocab: [{ hz: "饺子", py: "jiǎozi" }, { hz: "米饭", py: "mǐfàn" }, { hz: "包子", py: "bāozi" }, { hz: "还是", py: "háishì" }],
+        grammar: "我吃...。你吃...还是...？",
+        sampleHz: "我吃饺子。你吃米饭还是包子？",
+        samplePy: "Wǒ chī jiǎozi. Nǐ chī mǐfàn háishì bāozi?"
+      },
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Nói mình không ăn cơm, mình muốn lấy 2 cái bánh bao to. Quay sang hỏi Người 3 còn bạn thì sao?",
+        vocab: [{ hz: "不吃", py: "bù chī" }, { hz: "要", py: "yào" }, { hz: "两个", py: "liǎng gè" }, { hz: "大包子", py: "dà bāozi" }, { hz: "你呢", py: "nǐ ne" }],
+        grammar: "我不吃...，我要两个...。你呢？",
+        sampleHz: "我不吃米饭，我要两个大包子。你呢？",
+        samplePy: "Wǒ bù chī mǐfàn, wǒ yào liǎng gè dà bāozi. Nǐ ne?"
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói mình ăn mì sợi. Hỏi hai bạn uống gì, bản thân muốn lấy một bát canh trứng gà.",
+        vocab: [{ hz: "面条", py: "miàntiáo" }, { hz: "喝什么", py: "hē shénme" }, { hz: "一碗", py: "yì wǎn" }, { hz: "鸡蛋汤", py: "jīdàn tāng" }],
+        grammar: "我吃...。你们喝什么？我要一碗...",
+        sampleHz: "我吃面条。你们喝什么？我要一碗鸡蛋汤。",
+        samplePy: "Wǒ chī miàntiáo. Nǐmen hē shénme? Wǒ yào yì wǎn jīdàn tāng."
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói mình cũng muốn lấy một bát canh trứng gà. Hỏi Người 1 có uống không?",
+        vocab: [{ hz: "也", py: "yě" }, { hz: "一碗鸡蛋汤", py: "yì wǎn jīdàn tāng" }, { hz: "你喝吗", py: "nǐ hē ma" }],
+        grammar: "我也要...。你喝吗？",
+        sampleHz: "我也要一碗鸡蛋汤。你喝吗？",
+        samplePy: "Wǒ yě yào yì wǎn jīdàn tāng. Nǐ hē ma?"
+      },
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Nói không uống, mình không uống canh, mình uống bia!",
+        vocab: [{ hz: "不喝", py: "bù hē" }, { hz: "汤", py: "tāng" }, { hz: "啤酒", py: "píjiǔ" }],
+        grammar: "不喝，我不喝...，我喝...",
+        sampleHz: "不喝，我不喝汤，我喝啤酒。",
+        samplePy: "Bù hē, wǒ bù hē tāng, wǒ hē píjiǔ."
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Đi mua hoa quả & Mặc cả giá",
+    steps: [
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Chào khách và hỏi: Các bạn muốn mua gì nào?",
+        vocab: [{ hz: "买什么", py: "mǎi shénme" }, { hz: "你们", py: "nǐmen" }],
+        grammar: "你们买什么？",
+        sampleHz: "你们买什么？",
+        samplePy: "Nǐmen mǎi shénme?"
+      },
+      {
+        person: "Người 2 (Khách)",
+        pClass: "p-2",
+        vietPrompt: "Nói chúng tôi muốn mua hoa quả. Hỏi: Táo bao nhiêu tiền một cân?",
+        vocab: [{ hz: "水果", py: "shuǐguǒ" }, { hz: "苹果", py: "píngguǒ" }, { hz: "一斤", py: "yì jīn" }, { hz: "多少钱", py: "duōshao qián" }],
+        grammar: "我们买...。...一斤多少钱？",
+        sampleHz: "老板，我们买水果。苹果一斤多少钱？",
+        samplePy: "Lǎobǎn, wǒmen mǎi shuǐguǒ. Píngguǒ yì jīn duōshao qián?"
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Báo giá: 4 tệ một cân.",
+        vocab: [{ hz: "四块", py: "sì kuài" }, { hz: "一斤", py: "yì jīn" }],
+        grammar: "[Số tiền] 块 (钱) 一斤。",
+        sampleHz: "四块钱一斤。",
+        samplePy: "Sì kuài qián yì jīn."
+      },
+      {
+        person: "Người 3 (Khách)",
+        pClass: "p-3",
+        vietPrompt: "Mặc cả: 4 tệ á? Đắt quá rồi! 3 tệ rưỡi nhé?",
+        vocab: [{ hz: "太贵了", py: "tài guì le" }, { hz: "三块五", py: "sān kuài wǔ" }, { hz: "吧", py: "ba" }],
+        grammar: "太...了！...吧？",
+        sampleHz: "四块？太贵了！三块五吧？",
+        samplePy: "Sì kuài? Tài guì le! Sān kuài wǔ ba?"
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Thanh minh không đắt, khen táo rất to rất ngon. Hỏi hai bạn muốn mua mấy cân?",
+        vocab: [{ hz: "不贵", py: "bú guì" }, { hz: "很大", py: "hěn dà" }, { hz: "很好吃", py: "hěn hǎochī" }, { hz: "几斤", py: "jǐ jīn" }],
+        grammar: "不贵，...。你们要几斤？",
+        sampleHz: "不贵，苹果很大很好吃。你们要几斤？",
+        samplePy: "Bú guì, píngguǒ hěn dà hěn hǎochī. Nǐmen yào jǐ jīn?"
+      },
+      {
+        person: "Người 2 (Khách)",
+        pClass: "p-2",
+        vietPrompt: "Nói: Chúng tôi lấy 2 cân.",
+        vocab: [{ hz: "要", py: "yào" }, { hz: "两斤", py: "liǎng jīn" }],
+        grammar: "我们要两斤。(chú ý dùng 两 thay vì 二)",
+        sampleHz: "我们要两斤。",
+        samplePy: "Wǒmen yào liǎng jīn."
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Hỏi thêm: Còn muốn thứ khác nữa không?",
+        vocab: [{ hz: "还", py: "hái" }, { hz: "要", py: "yào" }, { hz: "别的", py: "biéde" }],
+        grammar: "还要别的吗？",
+        sampleHz: "还要别的吗？",
+        samplePy: "Hái yào biéde ma?"
+      },
+      {
+        person: "Người 3 (Khách)",
+        pClass: "p-3",
+        vietPrompt: "Hỏi: Quýt và chuối bán thế nào?",
+        vocab: [{ hz: "橘子", py: "júzi" }, { hz: "香蕉", py: "xiāngjiāo" }, { hz: "怎么卖", py: "zěnme mài" }],
+        grammar: "A 和 B 怎么卖？",
+        sampleHz: "橘子和香蕉怎么卖？",
+        samplePy: "Júzi hé xiāngjiāo zěnme mài?"
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Báo giá: Quýt 2 tệ một cân, chuối 3 tệ một cân.",
+        vocab: [{ hz: "两块", py: "liǎng kuài" }, { hz: "三块", py: "sān kuài" }],
+        grammar: "[Hoa quả] + [Số tiền] + 一斤",
+        sampleHz: "橘子两块一斤，香蕉三块一斤。",
+        samplePy: "Júzi liǎng kuài yì jīn, xiāngjiāo sān kuài yì jīn."
+      },
+      {
+        person: "Người 2 (Khách)",
+        pClass: "p-2",
+        vietPrompt: "Bàn với bạn đi cùng: Chúng mình mua 2 cân quýt nhé, được không?",
+        vocab: [{ hz: "买", py: "mǎi" }, { hz: "两斤橘子", py: "liǎng jīn júzi" }, { hz: "好吗", py: "hǎo ma" }],
+        grammar: "我们买...，好吗？",
+        sampleHz: "我们买两斤橘子，好吗？",
+        samplePy: "Wǒmen mǎi liǎng jīn júzi, hǎo ma?"
+      },
+      {
+        person: "Người 3 (Khách)",
+        pClass: "p-3",
+        vietPrompt: "Đồng ý. Nói với chủ quán: Lấy 2 cân táo, 2 cân quýt. Tổng cộng bao nhiêu tiền?",
+        vocab: [{ hz: "好", py: "hǎo" }, { hz: "一共", py: "yígòng" }, { hz: "多少钱", py: "duōshao qián" }],
+        grammar: "我们要...。一共多少钱？",
+        sampleHz: "好。老板，我们要两斤苹果，两斤橘子。一共多少钱？",
+        samplePy: "Hǎo. Lǎobǎn, wǒmen yào liǎng jīn píngguǒ, liǎng jīn júzi. Yígòng duōshao qián?"
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Tính tổng: Táo 7 tệ, quýt 4 tệ, tổng cộng 11 tệ.",
+        vocab: [{ hz: "七块", py: "qī kuài" }, { hz: "四块", py: "sì kuài" }, { hz: "十一块", py: "shíyī kuài" }],
+        grammar: "...，一共 [số tiền] 块。",
+        sampleHz: "苹果七块，橘子四块，一共十一块。",
+        samplePy: "Píngguǒ qī kuài, júzi sì kuài, yígòng shíyī kuài."
+      },
+      {
+        person: "Người 3 (Khách)",
+        pClass: "p-3",
+        vietPrompt: "Đưa tiền: Gửi ông chủ 20 tệ.",
+        vocab: [{ hz: "给", py: "gěi" }, { hz: "二十块", py: "èrshí kuài" }],
+        grammar: "给你 [số tiền] 块。",
+        sampleHz: "给你二十块。",
+        samplePy: "Gěi nǐ èrshí kuài."
+      },
+      {
+        person: "Người 1 (Chủ sạp)",
+        pClass: "p-1",
+        vietPrompt: "Thối tiền: Thối lại bạn 9 tệ. Cảm ơn nhé!",
+        vocab: [{ hz: "找", py: "zhǎo" }, { hz: "九块", py: "jiǔ kuài" }, { hz: "谢谢", py: "xièxie" }],
+        grammar: "找你 [số tiền] 块。谢谢！",
+        sampleHz: "找你九块。谢谢！",
+        samplePy: "Zhǎo nǐ jiǔ kuài. Xièxie!"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Ăn trưa xong mua tráng miệng & Góp tiền",
+    steps: [
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Khen bánh bao và mì sợi trưa nay thật ngon! Hỏi hai bạn đã ăn no chưa?",
+        vocab: [{ hz: "真好吃", py: "zhēn hǎochī" }, { hz: "吃饱了吗", py: "chī bǎo le ma" }],
+        grammar: "中午的...真好吃！你们...了吗？",
+        sampleHz: "中午的包子和面条真好吃！你们吃饱了吗？",
+        samplePy: "Zhōngwǔ de bāozi hé miàntiáo zhēn hǎochī! Nǐmen chī bǎo le ma?"
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói mình ăn no rồi. Đã ăn 1 cái bánh bao, 1 bát mì, còn uống 1 bát canh trứng nữa.",
+        vocab: [{ hz: "吃饱了", py: "chī bǎo le" }, { hz: "一个包子", py: "yí gè bāozi" }, { hz: "一碗面条", py: "yì wǎn miàntiáo" }, { hz: "还喝了", py: "hái hē le" }],
+        grammar: "我吃了...，还喝了...",
+        sampleHz: "我吃饱了。我吃了一个包子、一碗面条，还喝了一碗鸡蛋汤。",
+        samplePy: "Wǒ chī bǎo le. Wǒ chī le yí gè bāozi, yì wǎn miàntiáo, hái hē le yì wǎn jīdàn tāng."
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói mình mới chỉ ăn 1 bát cơm. Rủ: Bây giờ chúng mình đi mua một ít hoa quả nhé, được không?",
+        vocab: [{ hz: "只吃了", py: "zhǐ chī le" }, { hz: "现在", py: "xiànzài" }, { hz: "一些水果", py: "yìxiē shuǐguǒ" }, { hz: "好吗", py: "hǎo ma" }],
+        grammar: "现在我们去买...，好吗？",
+        sampleHz: "我只吃了一碗米饭。现在我们去买一些水果，好吗？",
+        samplePy: "Wǒ zhǐ chī le yì wǎn mǐfàn. Xiànzài wǒmen qù mǎi yìxiē shuǐguǒ, hǎo ma?"
+      },
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Đồng ý ngay! Khen mấy quả dưa hấu và táo đằng kia trông rất ngon. Hỏi Người 3 muốn mua gì?",
+        vocab: [{ hz: "好啊", py: "hǎo a" }, { hz: "那些", py: "nàxiē" }, { hz: "西瓜", py: "xīguā" }, { hz: "看起来很好", py: "kàn qǐlái hěn hǎo" }, { hz: "想买什么", py: "xiǎng mǎi shénme" }],
+        grammar: "那些...看起来很好。你想买什么？",
+        sampleHz: "好啊！那些西瓜和苹果看起来很好。你想买什么？",
+        samplePy: "Hǎo a! Nàxiē xīguā hé píngguǒ kàn qǐlái hěn hǎo. Nǐ xiǎng mǎi shénme?"
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói muốn mua dưa hấu. Dưa hấu 2 tệ một cân, chúng mình lấy một quả dưa hấu đi. Hỏi Người 2 có mua táo không?",
+        vocab: [{ hz: "想买西瓜", py: "xiǎng mǎi xīguā" }, { hz: "两块钱", py: "liǎng kuài qián" }, { hz: "一个西瓜", py: "yí gè xīguā" }, { hz: "你买苹果吗", py: "nǐ mǎi píngguǒ ma" }],
+        grammar: "...一斤两块钱，我们要一个...吧。你买...吗？",
+        sampleHz: "我想买西瓜。西瓜一斤两块钱，我们要一个西瓜吧。你买苹果吗？",
+        samplePy: "Wǒ xiǎng mǎi xīguā. Xīguā yì jīn liǎng kuài qián, wǒmen yào yí gè xīguā ba. Nǐ mǎi píngguǒ ma?"
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Chê táo đắt quá (5 tệ một cân lận). Đề xuất: Chúng mình mua quýt đi, quýt có 2 tệ rưỡi một cân thôi.",
+        vocab: [{ hz: "太贵了", py: "tài guì le" }, { hz: "五块钱一斤", py: "wǔ kuài qián yì jīn" }, { hz: "橘子", py: "júzi" }, { hz: "两块五", py: "liǎng kuài wǔ" }],
+        grammar: "...太贵了，...。我们买...吧，...一斤两块五。",
+        sampleHz: "苹果太贵了，五块钱一斤。我们买橘子吧，橘子两块五一斤。",
+        samplePy: "Píngguǒ tài guì le, wǔ kuài qián yì jīn. Wǒmen mǎi júzi ba, júzi liǎng kuài wǔ yì jīn."
+      },
+      {
+        person: "Người 1",
+        pClass: "p-1",
+        vietPrompt: "Đồng ý! Chốt: Mua 1 quả dưa hấu, 3 cân quýt. Dưa hấu 10 tệ, quýt 7 tệ rưỡi, tổng cộng 17 tệ 5 hào.",
+        vocab: [{ hz: "行", py: "xíng" }, { hz: "三斤橘子", py: "sān jīn júzi" }, { hz: "十块", py: "shí kuài" }, { hz: "七块五", py: "qī kuài wǔ" }, { hz: "十七块五毛", py: "shíqī kuài wǔ máo" }],
+        grammar: "行！买...，...。一共...",
+        sampleHz: "行！买一个西瓜，三斤橘子。西瓜十块，橘子七块五，一共十七块五毛。",
+        samplePy: "Xíng! Mǎi yí gè xīguā, sān jīn júzi. Xīguā shí kuài, júzi qī kuài wǔ, yígòng shíqī kuài wǔ máo."
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Rút tiền: Đây là 20 tệ, để tôi trả tiền cho.",
+        vocab: [{ hz: "这是", py: "zhè shì" }, { hz: "二十块", py: "èrshí kuài" }, { hz: "我来给钱", py: "wǒ lái gěi qián" }],
+        grammar: "这是...，我来...",
+        sampleHz: "这是二十块，我来给钱。",
+        samplePy: "Zhè shì èrshí kuài, wǒ lái gěi qián."
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Can lại: Không cần không cần, ba đứa mình cùng góp trả chung đi!",
+        vocab: [{ hz: "不用", py: "bú yòng" }, { hz: "三个人", py: "sān gè rén" }, { hz: "一起给", py: "yìqǐ gěi" }, { hz: "吧", py: "ba" }],
+        grammar: "不用不用，我们...一起...吧！",
+        sampleHz: "不用不用，我们三个人一起给吧！",
+        samplePy: "Bú yòng bú yòng, wǒmen sān gè rén yìqǐ gěi ba!"
+      }
+    ]
+  }
+];
+
+let curScenarioIdx = 0;
+let areAllRevealed = false;
+
+function renderScenario() {
+  const sc = scenarios[curScenarioIdx];
+  document.getElementById('scenarioTitle').innerText = sc.title;
+
+  const container = document.getElementById('stepsContainer');
+  container.innerHTML = '';
+
+  sc.steps.forEach((step, idx) => {
+    const card = document.createElement('div');
+    card.className = `step-item ${step.pClass}`;
+    card.id = `step-card-${idx}`;
+
+    const vocabTags = step.vocab.map(v => 
+      `<span class="vocab-chip" onclick="speak('${v.hz}')" title="Bấm nghe phát âm">🔊 <b>${v.hz}</b> [${v.py}]</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="step-top">
+        <span class="speaker-pill">🗣️ ${step.person}</span>
+        <span class="step-number">Lượt ${idx + 1}</span>
+      </div>
+
+      <div class="prompt-viet">
+        <span class="label">Ý cần nói:</span> ${step.vietPrompt}
+      </div>
+
+      <div class="hints-row">
+        <span class="hint-label">Gợi ý từ khóa:</span>
+        ${vocabTags}
+        <span class="grammar-chip">📐 ${step.grammar}</span>
+      </div>
+
+      <div class="answer-box">
+        <button class="btn-reveal" onclick="toggleAnswer(${idx})">
+          <span id="btn-icon-${idx}">👁️</span> <span id="btn-text-${idx}">Xem gợi ý câu mẫu tiếng Trung</span>
+        </button>
+
+        <div class="answer-content" id="ans-box-${idx}">
+          <div class="ans-hanzi">${step.sampleHz}</div>
+          <div class="ans-pinyin">${step.samplePy}</div>
+          <div class="ans-actions">
+            <button class="ans-speak" onclick="speak('${step.sampleHz.replace(/'/g, "\\'")}')">
+              🔊 Nghe phát âm mẫu
+            </button>
+            <span style="font-size: 0.75rem; color: #64748b;">(Học viên có thể nói khác, miễn đúng nghĩa)</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function selectScenario(idx) {
+  curScenarioIdx = idx;
+  document.querySelectorAll('.tab-card').forEach((tab, i) => {
+    tab.classList.toggle('active', i === idx);
+  });
+  areAllRevealed = false;
+  document.getElementById('btnRevealAll').classList.remove('active');
+  renderScenario();
+}
+
+function toggleAnswer(idx) {
+  const box = document.getElementById(`ans-box-${idx}`);
+  const icon = document.getElementById(`btn-icon-${idx}`);
+  const text = document.getElementById(`btn-text-${idx}`);
+
+  const isShown = box.classList.contains('show');
+  if (isShown) {
+    box.classList.remove('show');
+    icon.innerText = '👁️';
+    text.innerText = 'Xem gợi ý câu mẫu tiếng Trung';
+  } else {
+    box.classList.add('show');
+    icon.innerText = '🙈';
+    text.innerText = 'Đóng gợi ý câu mẫu';
+  }
+}
+
+function toggleAllAnswers() {
+  areAllRevealed = !areAllRevealed;
+  const sc = scenarios[curScenarioIdx];
+  const btn = document.getElementById('btnRevealAll');
+  btn.classList.toggle('active', areAllRevealed);
+
+  sc.steps.forEach((_, idx) => {
+    const box = document.getElementById(`ans-box-${idx}`);
+    const icon = document.getElementById(`btn-icon-${idx}`);
+    const text = document.getElementById(`btn-text-${idx}`);
+    if (box) {
+      if (areAllRevealed) {
+        box.classList.add('show');
+        if (icon) icon.innerText = '🙈';
+        if (text) text.innerText = 'Đóng gợi ý';
+      } else {
+        box.classList.remove('show');
+        if (icon) icon.innerText = '👁️';
+        if (text) text.innerText = 'Xem gợi ý câu mẫu tiếng Trung';
+      }
+    }
+  });
+}
+
+function toggleZoom() {
+  document.body.classList.toggle('large-mode');
+  document.getElementById('btnZoom').classList.toggle('active');
+}
+
+function randomRole() {
+  const roles = ["Học viên 1", "Học viên 2", "Học viên 3"];
+  // Shuffle
+  for (let i = roles.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [roles[i], roles[j]] = [roles[j], roles[i]];
+  }
+  alert(`🎲 Bốc thăm phân vai ngẫu nhiên:\n• Người 1: ${roles[0]}\n• Người 2: ${roles[1]}\n• Người 3: ${roles[2]}`);
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) {
+    alert("Trình duyệt không hỗ trợ Web Speech API.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+window.onload = () => {
+  renderScenario();
+};
+</script>
+
+</body>
+</html>

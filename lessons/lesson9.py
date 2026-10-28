@@ -1,4 +1,6 @@
 import streamlit as st
+import streamlit.components.v1 as components
+import os
 from ui_utils import render_lesson_intro
 from lessons_data import (
     B9_1_QUOC_GIA, B9_1_QUOC_TICH, B9_1_TIEN_TE
@@ -2070,6 +2072,27 @@ def show_lesson9_3_zi():
                 <div style="margin-top:10px;font-size:1.1rem;font-weight:700;">{msg}</div>
             </div>
             """, unsafe_allow_html=True)
+
+# ─────────────────────────────────────────────────────────────
+# BÀI 9.2 - THỰC HÀNH GIAO TIẾP TRÊN LỚP (HTML Interactive)
+# ─────────────────────────────────────────────────────────────
+def show_lesson9_2_classroom_practice():
+    render_lesson_intro(
+        "🗣️ Bài 9.2 - Bài tập Giao tiếp Trên lớp",
+        "Luyện phản xạ hội thoại 3 người theo 3 tình huống thực tế: rủ nhau ăn trưa, mua hoa quả và tính tiền."
+    )
+
+    # Tìm file HTML trong cùng repo hoặc thư mục cha
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    html_path = os.path.join(base_dir, "hoi_thoai_bai_7_8.html")
+
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        components.html(html_content, height=900, scrolling=True)
+    else:
+        st.error(f"❌ Không tìm thấy file `hoi_thoai_bai_7_8.html` tại: `{html_path}`")
+        st.info("Hãy đảm bảo file `hoi_thoai_bai_7_8.html` nằm trong thư mục gốc của dự án.")
 
 
 # Force reload

@@ -125,6 +125,9 @@ except Exception as e:
 
 
 def show_consolidated_flashcards():
+    import streamlit as st
+    import random
+    # existing code unchanged
     import os
     import streamlit.components.v1 as components
     
@@ -530,8 +533,10 @@ if "initialized" not in st.session_state:
 
 st.sidebar.header("Danh mục giáo án")
 
-# Trạng thái kết nối Supabase ở bên trái màn hình
-if supabase_client.is_supabase_configured():
+# Kiểm tra kết nối THỰC TẾ với Supabase (Live database ping)
+is_live_ok, live_conn_msg = supabase_client.check_real_connection()
+
+if is_live_ok:
     st.sidebar.markdown("""
     <div style="background-color: #f0fdf4; border: 1.5px solid #22c55e; border-radius: 12px; padding: 8px 12px; margin-bottom: 15px; color: #15803d; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
         <span style="font-size: 0.95rem;">🟢</span>
@@ -539,8 +544,8 @@ if supabase_client.is_supabase_configured():
     </div>
     """, unsafe_allow_html=True)
 else:
-    st.sidebar.markdown("""
-    <div style="background-color: #fef2f2; border: 1.5px solid #ef4444; border-radius: 12px; padding: 8px 12px; margin-bottom: 15px; color: #991b1b; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+    st.sidebar.markdown(f"""
+    <div style="background-color: #fef2f2; border: 1.5px solid #ef4444; border-radius: 12px; padding: 8px 12px; margin-bottom: 15px; color: #991b1b; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; gap: 8px;" title="{live_conn_msg}">
         <span style="font-size: 0.95rem;">🔴</span>
         <span>Supabase: Chưa kết nối</span>
     </div>
@@ -610,7 +615,8 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 5.1 - Thực hành Giao tiếp & Phản xạ",
         "Bài 6.1 - Thực hành Giao tiếp & Phản xạ",
         "Bài 9.1 - Thực hành Giao tiếp & Phản xạ",
-        "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ"
+        "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ",
+        "Bài 9.2 - Bài tập Giao tiếp Trên lớp"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -713,6 +719,9 @@ elif menu == "Bài 9.1 - Thực hành Giao tiếp & Phản xạ":
 
 elif menu == "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ":
     lesson9.show_lesson9_1_review_game()
+
+elif menu == "Bài 9.2 - Bài tập Giao tiếp Trên lớp":
+    lesson9.show_lesson9_2_classroom_practice()
 
 elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)
