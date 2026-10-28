@@ -2077,10 +2077,36 @@ def show_lesson9_3_zi():
 # BÀI 9.2 - THỰC HÀNH GIAO TIẾP TRÊN LỚP (HTML Interactive)
 # ─────────────────────────────────────────────────────────────
 def show_lesson9_2_classroom_practice():
-    render_lesson_intro(
-        "🗣️ Bài 9.2 - Bài tập Giao tiếp Trên lớp",
-        "Luyện phản xạ hội thoại 3 người theo 3 tình huống thực tế: rủ nhau ăn trưa, mua hoa quả và tính tiền."
-    )
+    # Ẩn toàn bộ chrome của Streamlit: header, toolbar, footer, padding
+    # để giao diện HTML chiếm toàn bộ màn hình với 1 thanh scrollbar duy nhất
+    st.markdown("""
+    <style>
+        /* Ẩn header, toolbar, footer Streamlit */
+        header[data-testid="stHeader"]       { display: none !important; }
+        div[data-testid="stToolbar"]         { display: none !important; }
+        footer                               { display: none !important; }
+        #MainMenu                            { display: none !important; }
+
+        /* Xoá padding trên/dưới của main block */
+        .block-container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            max-width: 100% !important;
+        }
+
+        /* Ẩn nút Deploy và hamburger menu */
+        div[data-testid="stDecoration"]      { display: none !important; }
+        div[data-testid="collapsedControl"]  { display: none !important; }
+
+        /* Tắt scroll của trang Streamlit bên ngoài */
+        html, body, [data-testid="stAppViewContainer"] {
+            overflow: hidden !important;
+            height: 100% !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
     # Tìm file HTML trong cùng repo hoặc thư mục cha
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -2089,7 +2115,29 @@ def show_lesson9_2_classroom_practice():
     if os.path.exists(html_path):
         with open(html_path, "r", encoding="utf-8") as f:
             html_content = f.read()
-        components.html(html_content, height=900, scrolling=True)
+
+        # Thêm JS auto-resize iframe để lấp đầy toàn bộ viewport
+        auto_resize_js = """
+        <script>
+        (function() {
+            function fillViewport() {
+                var h = window.parent ? window.parent.innerHeight : window.innerHeight;
+                document.documentElement.style.height = h + 'px';
+                document.body.style.height = h + 'px';
+                document.body.style.overflowY = 'auto';
+                document.body.style.margin = '0';
+            }
+            fillViewport();
+            window.addEventListener('resize', fillViewport);
+        })();
+        </script>
+        """
+        # Chèn JS vào cuối <body>
+        html_with_resize = html_content.replace("</body>", auto_resize_js + "\n</body>")
+
+        # Lấy chiều cao cửa sổ ước tính (để component lấp đầy 1 trang)
+        # scrolling=False: chỉ scroll bên trong HTML, không tạo thanh cuộn ngoài
+        components.html(html_with_resize, height=10000, scrolling=False)
     else:
         st.error(f"❌ Không tìm thấy file `hoi_thoai_bai_7_8.html` tại: `{html_path}`")
         st.info("Hãy đảm bảo file `hoi_thoai_bai_7_8.html` nằm trong thư mục gốc của dự án.")
