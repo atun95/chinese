@@ -592,7 +592,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 8.6 - Các bộ thủ thông dụng",
         "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ",
         "Bài 9.2 - So sánh 不 và 没",
-        "Bài 9.3 - Hậu tố 子 (zi)"
+        "Bài 9.3 - Hậu tố 子 (zi)",
+        "Bài 9.4 - So sánh 二 và 两"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -773,6 +774,9 @@ elif menu == "Bài 9.2 - So sánh 不 và 没":
 
 elif menu == "Bài 9.3 - Hậu tố 子 (zi)":
     lesson9.show_lesson9_3_zi()
+
+elif menu == "Bài 9.4 - So sánh 二 và 两":
+    lesson9.show_lesson9_4_er_liang()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()

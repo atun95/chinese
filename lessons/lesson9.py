@@ -2073,6 +2073,536 @@ def show_lesson9_3_zi():
             </div>
             """, unsafe_allow_html=True)
 
+def show_lesson9_4_er_liang():
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+    .b94-char-card {
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    }
+    .b94-char-card.er { background: linear-gradient(145deg, #eff6ff, #dbeafe); border: 2px solid #93c5fd; }
+    .b94-char-card.liang { background: linear-gradient(145deg, #fff7ed, #ffedd5); border: 2px solid #fdba74; }
+    .b94-char-main { font-size: 5.5rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+    .b94-char-main.er { color: #1d4ed8; }
+    .b94-char-main.liang { color: #c2410c; }
+    .b94-pinyin { font-size: 1.3rem; font-family: monospace; font-weight: 700; margin-bottom: 10px; }
+    .b94-pinyin.er { color: #1e40af; }
+    .b94-pinyin.liang { color: #9a3412; }
+    .b94-tag {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+    .b94-tag.er { background: #93c5fd; color: #1e3a8a; }
+    .b94-tag.liang { background: #fdba74; color: #7c2d12; }
+
+    .b94-rule {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .b94-rule-title { font-weight: 800; font-size: 1.02rem; color: #0f172a; margin-bottom: 4px; }
+    .b94-rule-desc { font-size: 0.92rem; color: #475569; margin-bottom: 8px; line-height: 1.55; }
+    .b94-ex {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.55;
+    }
+    .b94-ex .han { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
+    .b94-ex .py { font-family: monospace; color: #64748b; }
+    .b94-ex .vi { font-style: italic; color: #64748b; }
+
+    .b94-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .b94-table th {
+        text-align: left;
+        padding: 10px 12px;
+        background: #f1f5f9;
+        color: #334155;
+        font-weight: 800;
+    }
+    .b94-table td { padding: 10px 12px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b94-table tr:nth-child(even) td { background: #fafafa; }
+    .b94-ok { color: #166534; font-weight: 700; }
+    .b94-bad { color: #be123c; text-decoration: line-through; }
+
+    .b94-pair {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .b94-pair-title { font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+    .b94-line {
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin-bottom: 8px;
+    }
+    .b94-line.er { background: #eff6ff; border-left: 4px solid #1d4ed8; }
+    .b94-line.liang { background: #fff7ed; border-left: 4px solid #c2410c; }
+    .b94-line .han { font-size: 1.2rem; font-weight: 800; color: #0f172a; }
+    .b94-line .meta { font-size: 0.88rem; color: #64748b; }
+
+    .b94-dlg {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-top: 8px;
+    }
+    .b94-turn { margin-bottom: 12px; }
+    .b94-who {
+        display: inline-block;
+        font-weight: 800;
+        font-size: 0.8rem;
+        padding: 2px 8px;
+        border-radius: 8px;
+        margin-bottom: 4px;
+    }
+    .b94-who.a { background: #dbeafe; color: #1e3a8a; }
+    .b94-who.b { background: #ffedd5; color: #9a3412; }
+
+    .b94-tip {
+        background: linear-gradient(135deg, #fefce8, #fef9c3);
+        border: 2px solid #fde047;
+        border-radius: 16px;
+        padding: 20px 22px;
+        margin-bottom: 14px;
+    }
+    .b94-trap {
+        background: #fff1f2;
+        border: 2px solid #fda4af;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+    }
+    .b94-key {
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        color: white;
+        border-radius: 16px;
+        padding: 20px 22px;
+        margin-top: 16px;
+    }
+    .b94-key table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .b94-key td { padding: 8px 10px; border-top: 1px solid rgba(255,255,255,0.15); vertical-align: top; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "⚖️ Bài 9.4 - So sánh 二 (èr) và 两 (liǎng)",
+        "二 là chữ số trên giấy. 两 là số 2 khi đang đếm đồ."
+    )
+
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
+        "📚 Lý thuyết",
+        "📝 Ví dụ song song",
+        "⚠️ Lưu ý & Mẹo nhớ",
+        "🎮 Luyện tập"
+    ])
+
+    with tab_theory:
+        col_er, col_liang = st.columns(2, gap="large")
+        with col_er:
+            st.markdown("""
+            <div class="b94-char-card er">
+                <div class="b94-char-main er">二</div>
+                <div class="b94-pinyin er">èr</div>
+                <div class="b94-tag er">Chữ số 2</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with col_liang:
+            st.markdown("""
+            <div class="b94-char-card liang">
+                <div class="b94-char-main liang">两</div>
+                <div class="b94-pinyin liang">liǎng</div>
+                <div class="b94-tag liang">Số lượng “hai”</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("### 🔵 Khi nào dùng 二 (èr)")
+
+        rules_er = [
+            {
+                "title": "1. Đếm số thuần",
+                "desc": "Đọc dãy 1, 2, 3… thì số 2 là 二.",
+                "han": "一、二、三、四",
+                "py": "yī, èr, sān, sì",
+                "vi": "một, hai, ba, bốn",
+            },
+            {
+                "title": "2. Hàng chục và hàng đơn vị",
+                "desc": "Hàng chục và hàng đơn vị luôn đọc 二. ",
+                "han": "十二 · 二十 · 二十二 · 二零二六",
+                "py": "shí'èr · èrshí · èrshí'èr · èr líng èr liù",
+                "vi": "12 · 20 · 22 · năm 2026",
+            },
+            {
+                "title": "3. Số thứ tự, tháng, thứ, tầng, lớp",
+                "desc": "Chỗ nào mang nghĩa “thứ hai” thì dùng 二.",
+                "han": "第二 · 二月 · 星期二 · 二楼 · 二年级",
+                "py": "dì-èr · èryuè · xīngqī'èr · èr lóu · èr niánjí",
+                "vi": "thứ hai · tháng Hai · thứ Ba · tầng 2 · lớp 2",
+            },
+            {
+                "title": "4. Số điện thoại, số phòng, số xe, năm",
+                "desc": "Đọc từng chữ số. Gặp số 2 thì đọc èr.",
+                "han": "房间号是 302。",
+                "py": "Fángjiān hào shì sān líng èr.",
+                "vi": "Số phòng là 302.",
+            },
+        ]
+        for r in rules_er:
+            st.markdown(f"""
+            <div class="b94-rule">
+                <div class="b94-rule-title">{r['title']}</div>
+                <div class="b94-rule-desc">{r['desc']}</div>
+                <div class="b94-ex">
+                    <div class="han">{r['han']}</div>
+                    <div class="py">{r['py']}</div>
+                    <div class="vi">{r['vi']}</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("### 🟠 Khi nào dùng 两 (liǎng)")
+        rules_liang = [
+            {
+                "title": "1. Đứng ngay trước lượng từ",
+                "desc": "Công thức: <b>两 + lượng từ + danh từ</b>. Không nói 二个人, 二块钱, 二斤.",
+                "han": "两个人 · 两个包子 · 两斤橘子 · 两块钱 · 两本书 · 两岁",
+                "py": "liǎng gè rén · liǎng gè bāozi · liǎng jīn júzi · liǎng kuài qián · liǎng běn shū · liǎng suì",
+                "vi": "hai người · hai bánh bao · hai cân quýt · hai đồng · hai quyển sách · hai tuổi",
+            },
+            {
+                "title": "2. Đúng 2 giờ",
+                "desc": "2 giờ dùng 两. 12 giờ vẫn là 十二点, vì số 2 nằm trong số 12.",
+                "han": "两点。 · 两点半。 · 十二点。",
+                "py": "Liǎng diǎn. · Liǎng diǎn bàn. · Shí'èr diǎn.",
+                "vi": "2 giờ. · 2 giờ rưỡi. · 12 giờ.",
+            },
+            {
+                "title": "3. Trước 百, 千, 万, 亿",
+                "desc": "Trong bài này, cách nói mặc định là 两. 二百, 二千 vẫn gặp trong văn viết; chưa cần phân biệt.",
+                "han": "两百 · 两千 · 两万",
+                "py": "liǎngbǎi · liǎngqiān · liǎngwàn",
+                "vi": "200 · 2.000 · 20.000",
+            },
+        ]
+        for r in rules_liang:
+            st.markdown(f"""
+            <div class="b94-rule">
+                <div class="b94-rule-title">{r['title']}</div>
+                <div class="b94-rule-desc">{r['desc']}</div>
+                <div class="b94-ex">
+                    <div class="han">{r['han']}</div>
+                    <div class="py">{r['py']}</div>
+                    <div class="vi">{r['vi']}</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown(
+            """<div class="b94-key">
+<div style="font-size:1.15rem;font-weight:800;margin-bottom:8px;">⚡ Quy tắc then chốt</div>
+<table>
+<thead>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.25);font-weight:800;">
+<th style="text-align:left;padding:8px 10px;">Muốn nói</th>
+<th style="text-align:left;padding:8px 10px;color:#86efac;">Đúng</th>
+<th style="text-align:left;padding:8px 10px;color:#fca5a5;">Sai</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>2 cái</td><td style="color:#86efac;font-weight:700;">两个</td><td style="color:#fca5a5;text-decoration:line-through;">二个</td></tr>
+<tr><td>12 cái</td><td style="color:#86efac;font-weight:700;">十二个</td><td style="color:#fca5a5;text-decoration:line-through;">十两个</td></tr>
+<tr><td>20 đồng</td><td style="color:#86efac;font-weight:700;">二十块</td><td style="color:#fca5a5;text-decoration:line-through;">两十块</td></tr>
+<tr><td>22 cân</td><td style="color:#86efac;font-weight:700;">二十二斤</td><td style="color:#fca5a5;text-decoration:line-through;">两十二斤</td></tr>
+<tr><td>2 giờ</td><td style="color:#86efac;font-weight:700;">两点</td><td style="color:#fca5a5;text-decoration:line-through;">二点</td></tr>
+<tr><td>12 giờ</td><td style="color:#86efac;font-weight:700;">十二点</td><td style="color:#fca5a5;text-decoration:line-through;">十两点</td></tr>
+</tbody>
+</table>
+</div>""",
+            unsafe_allow_html=True
+        )
+
+    with tab_examples:
+        st.markdown("### Bảng đối chiếu")
+        st.markdown("""<table class="b94-table">
+<thead>
+<tr>
+<th>Tình huống</th>
+<th>Dùng</th>
+<th>Ví dụ đúng</th>
+<th>Không nói</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Đếm 1, 2, 3</td><td>二</td><td class="b94-ok">一、二、三</td><td class="b94-bad">一、两、三</td></tr>
+<tr><td>2 + lượng từ</td><td>两</td><td class="b94-ok">两个人</td><td class="b94-bad">二个人</td></tr>
+<tr><td>Hàng chục, hàng đơn vị</td><td>二</td><td class="b94-ok">十二 · 二十 · 二十二</td><td class="b94-bad">十两 · 两十</td></tr>
+<tr><td>Số lớn + lượng từ</td><td>二</td><td class="b94-ok">十二个 · 二十二块</td><td class="b94-bad">十两个</td></tr>
+<tr><td>Giờ “2 giờ”</td><td>两</td><td class="b94-ok">两点</td><td class="b94-bad">二点</td></tr>
+<tr><td>Tháng, thứ, số thứ tự</td><td>二</td><td class="b94-ok">二月 · 星期二 · 第二</td><td class="b94-bad">两月 · 第两</td></tr>
+<tr><td>Năm, số phòng, số điện thoại</td><td>二</td><td class="b94-ok">二零二六 · 三零二</td><td></td></tr>
+<tr><td>Trăm, nghìn, vạn</td><td>两</td><td class="b94-ok">两百 · 两千</td><td></td></tr>
+</tbody>
+</table>""", unsafe_allow_html=True)
+
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.markdown("### Sáu cặp đối chiếu")
+        pairs = [
+            ("1. Đếm người", [
+                ("liang", "两个人。", "Liǎng gè rén.", "Hai người."),
+                ("er", "十二个人。", "Shí'èr gè rén.", "Mười hai người."),
+            ]),
+            ("2. Đi chợ", [
+                ("liang", "我要两斤橘子。", "Wǒ yào liǎng jīn júzi.", "Tôi muốn hai cân quýt."),
+                ("liang", "橘子两块五一斤。", "Júzi liǎng kuài wǔ yì jīn.", "Quýt hai đồng rưỡi một cân."),
+                ("er", "一共二十二块。", "Yígòng èrshí'èr kuài.", "Tất cả hai mươi hai đồng."),
+            ]),
+            ("3. Bánh bao", [
+                ("liang", "我要两个大包子。", "Wǒ yào liǎng gè dà bāozi.", "Tôi muốn hai cái bánh bao to."),
+            ]),
+            ("4. Giờ", [
+                ("liang", "现在两点。", "Xiànzài liǎng diǎn.", "Bây giờ là 2 giờ."),
+                ("er", "十二点吃饭。", "Shí'èr diǎn chīfàn.", "12 giờ ăn cơm."),
+            ]),
+            ("5. Ngày tháng", [
+                ("er", "今天是二月十二号。", "Jīntiān shì èryuè shí'èr hào.", "Hôm nay là ngày 12 tháng Hai."),
+                ("er", "星期二我不去。", "Xīngqī'èr wǒ bú qù.", "Thứ Ba tôi không đi."),
+            ]),
+            ("6. Thứ tự", [
+                ("er", "我是第二。", "Wǒ shì dì-èr.", "Tôi là người thứ hai."),
+                ("liang", "他有两个哥哥。", "Tā yǒu liǎng gè gēge.", "Anh ấy có hai người anh trai."),
+            ]),
+        ]
+        for title, lines in pairs:
+            rows_html = "".join([
+                f'<div class="b94-line {kind}">'
+                f'<div class="han">{han}</div>'
+                f'<div class="meta">{py}<br/>{vi}</div>'
+                f'</div>'
+                for kind, han, py, vi in lines
+            ])
+            st.markdown(
+                f'<div class="b94-pair">'
+                f'<div class="b94-pair-title">{title}</div>'
+                f'{rows_html}'
+                f'</div>',
+                unsafe_allow_html=True
+            )
+
+        st.markdown("### Hội thoại ngắn")
+        turns = [
+            ("a", "A", "现在几点？", "Xiànzài jǐ diǎn?", "Bây giờ mấy giờ?"),
+            ("b", "B", "两点。我们买两个包子吧。", "Liǎng diǎn. Wǒmen mǎi liǎng gè bāozi ba.", "2 giờ. Chúng ta mua hai cái bánh bao nhé."),
+            ("a", "A", "多少钱？", "Duōshao qián?", "Bao nhiêu tiền?"),
+            ("b", "B", "一个两块，两个四块。给你二十块。", "Yí gè liǎng kuài, liǎng gè sì kuài. Gěi nǐ èrshí kuài.", "Một cái hai đồng, hai cái bốn đồng. Đưa bạn hai mươi đồng."),
+        ]
+        body = "".join([
+            f'<div class="b94-turn">'
+            f'<div class="b94-who {who}">{label}</div>'
+            f'<div class="han" style="font-size:1.2rem;font-weight:800;">{han}</div>'
+            f'<div class="meta" style="color:#64748b;font-size:0.9rem;">{py}<br/>{vi}</div>'
+            f'</div>'
+            for who, label, han, py, vi in turns
+        ])
+        st.markdown(f'<div class="b94-dlg">{body}</div>', unsafe_allow_html=True)
+
+    with tab_tips:
+        st.markdown("### Năm câu dễ nói sai")
+        traps = [
+            ("二个人", "两个人", "2 đứng ngay trước 个"),
+            ("二块钱", "两块钱", "2 đứng ngay trước 块"),
+            ("二点", "两点", "2 giờ dùng 两"),
+            ("两十", "二十", "hàng chục luôn là 二"),
+            ("十两个", "十二个", "12 là số lớn, chữ số 2 đọc èr"),
+        ]
+        for wrong, right, why in traps:
+            st.markdown(f"""
+            <div class="b94-trap">
+                <span class="b94-bad">{wrong}</span>
+                &nbsp;→&nbsp;
+                <span class="b94-ok">{right}</span>
+                <div style="color:#475569;margin-top:4px;">{why}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("### Ba mẹo")
+        st.markdown("""
+        <div class="b94-tip">
+            <div style="font-weight:800;color:#713f12;margin-bottom:10px;">Nhìn chỗ đứng của số 2</div>
+            <div style="color:#3f3f46;line-height:1.7;">
+                1. Thấy lượng từ (个, 斤, 块, 本, 岁) và số đúng bằng 2 → <b>两</b>.<br/>
+                2. Thấy 十, 第, 月, 星期, 零, hoặc đang đọc từng số → <b>二</b>.<br/>
+                3. 12, 20, 22 viết và đọc bằng <b>二</b>, kể cả khi phía sau có lượng từ:
+                十二个, 二十块, 二十二斤.
+            </div>
+        </div>
+        <div class="b94-tip">
+            <div style="font-weight:800;color:#713f12;margin-bottom:8px;">Khác với Bài 5</div>
+            <div style="color:#3f3f46;line-height:1.6;">
+                Bài 5 chỉ cần nhớ: trước 个 thì dùng 两.
+                Bài này thêm giờ, tiền, số lớn và số thứ tự.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.markdown("### Chọn 二 hoặc 两")
+        quiz_data = [
+            {
+                "q": "我有 ___ 个哥哥。",
+                "py": "Wǒ yǒu ___ gè gēge.",
+                "vi": "Tôi có hai người anh trai.",
+                "options": ["二", "两"],
+                "answer": "两",
+                "explain": "Số đúng bằng 2 đứng trước lượng từ 个 → 两. 两个 liǎng gè."
+            },
+            {
+                "q": "现在 ___ 点。",
+                "py": "Xiànzài ___ diǎn.",
+                "vi": "Bây giờ là 2 giờ.",
+                "options": ["二", "两"],
+                "answer": "两",
+                "explain": "2 giờ nói 两点 liǎng diǎn."
+            },
+            {
+                "q": "今天是 ___ 月十二号。",
+                "py": "Jīntiān shì ___ yuè shí'èr hào.",
+                "vi": "Hôm nay là ngày 12 tháng Hai.",
+                "options": ["二", "两"],
+                "answer": "二",
+                "explain": "Tên tháng dùng 二: 二月 èryuè. Ngày 12 cũng là 十二."
+            },
+            {
+                "q": "一共 ___ 十块。",
+                "py": "Yígòng ___ shí kuài.",
+                "vi": "Tất cả hai mươi đồng.",
+                "options": ["二", "两"],
+                "answer": "二",
+                "explain": "Hàng chục luôn là 二: 二十 èrshí. Không nói 两十."
+            },
+            {
+                "q": "我们要 ___ 斤苹果。",
+                "py": "Wǒmen yào ___ jīn píngguǒ.",
+                "vi": "Chúng tôi muốn hai cân táo.",
+                "options": ["二", "两"],
+                "answer": "两",
+                "explain": "2 đứng ngay trước lượng từ 斤 → 两斤 liǎng jīn."
+            },
+            {
+                "q": "班里有十 ___ 个人。",
+                "py": "Bān lǐ yǒu shí ___ gè rén.",
+                "vi": "Trong lớp có mười hai người.",
+                "options": ["二", "两"],
+                "answer": "二",
+                "explain": "12 là số lớn. Chữ số 2 đọc èr: 十二个 shí'èr gè. Không nói 十两个."
+            },
+            {
+                "q": "他是第 ___ 。",
+                "py": "Tā shì dì-___.",
+                "vi": "Anh ấy đứng thứ hai.",
+                "options": ["二", "两"],
+                "answer": "二",
+                "explain": "Số thứ tự dùng 二: 第二 dì-èr."
+            },
+            {
+                "q": "一个包子 ___ 块钱。",
+                "py": "Yí gè bāozi ___ kuài qián.",
+                "vi": "Một cái bánh bao hai đồng.",
+                "options": ["二", "两"],
+                "answer": "两",
+                "explain": "2 đứng ngay trước lượng từ 块 → 两块 liǎng kuài."
+            },
+        ]
+
+        if "b94_submitted" not in st.session_state:
+            st.session_state.b94_submitted = False
+        if "b94_answers" not in st.session_state:
+            st.session_state.b94_answers = {}
+
+        for i, q in enumerate(quiz_data):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.35rem;font-weight:800;color:#0f172a;">Câu {i+1}: {q['q']}</div>
+                <div style="font-family:monospace;color:#64748b;">{q['py']}</div>
+                <div style="font-style:italic;color:#64748b;">→ {q['vi']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b94_a{i}"
+            st.radio(
+                f"Chọn đáp án câu {i+1}:",
+                q["options"],
+                key=key,
+                horizontal=True,
+                disabled=st.session_state.b94_submitted,
+                label_visibility="collapsed"
+            )
+            if st.session_state.b94_submitted:
+                user_ans = st.session_state.b94_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"✅ Đúng! {q['explain']}")
+                else:
+                    st.error(f"❌ Sai. Đáp án đúng: **{q['answer']}**. {q['explain']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b94_submitted:
+                if st.button("✅ Nộp bài", use_container_width=True, key="b94_submit"):
+                    st.session_state.b94_answers = {
+                        f"b94_a{i}": st.session_state.get(f"b94_a{i}") for i in range(len(quiz_data))
+                    }
+                    st.session_state.b94_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b94_submitted:
+                if st.button("🔄 Làm lại", use_container_width=True, key="b94_reset"):
+                    st.session_state.b94_submitted = False
+                    st.session_state.b94_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b94_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+
+        if st.session_state.b94_submitted:
+            correct = sum(
+                1 for i, q in enumerate(quiz_data)
+                if st.session_state.b94_answers.get(f"b94_a{i}") == q["answer"]
+            )
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "Xuất sắc! Bạn đã chọn đúng 二 và 两."
+            elif pct >= 70:
+                msg = "Khá tốt. Xem lại các câu sai."
+            else:
+                msg = "Đọc lại phần Lý thuyết rồi làm lại."
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#1e3a8a,#c2410c);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
+                <div>{pct}% chính xác</div>
+                <div style="margin-top:8px;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+
 # ─────────────────────────────────────────────────────────────
 # BÀI 9.2 - THỰC HÀNH GIAO TIẾP TRÊN LỚP (HTML Interactive)
 # ─────────────────────────────────────────────────────────────
