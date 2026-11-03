@@ -526,7 +526,7 @@
     <div class="tab-card tab-4 active" onclick="selectScenario(0)">
       <span class="tab-badge">Bài 9.3</span>
       <div class="tab-name">Đổi tiền tại tiệm</div>
-      <div class="tab-goal">Chủ tiệm đổi đô la và euro sang nhân dân tệ cho ba khách. Chú ý 两 trước lượng từ, 二 trong 二十.</div>
+      <div class="tab-goal">Chủ tiệm đổi lần lượt với từng người: 120 đô, 250 euro, rồi 100 đô và 120 euro. Tỉ giá: 1 đô = 7 tệ, 1 euro = 8 tệ.</div>
     </div>
   </div>
 
@@ -569,9 +569,9 @@
 
           <div class="quick-group-title" style="margin-top: 8px;">两 và 二</div>
           <div class="tag-cloud">
-            <span class="tag-item" onclick="speak('两百')"><b>两百</b> liǎng bǎi (hai trăm)</span>
-            <span class="tag-item" onclick="speak('两张')"><b>两张</b> liǎng zhāng (hai tờ)</span>
-            <span class="tag-item" onclick="speak('二十')"><b>二十</b> èrshí (hai mươi)</span>
+            <span class="tag-item" onclick="speak('一百二十')"><b>一百二十</b> yìbǎi èrshí (120)</span>
+            <span class="tag-item" onclick="speak('两百五十')"><b>两百五十</b> liǎng bǎi wǔshí (250)</span>
+            <span class="tag-item" onclick="speak('两千')"><b>两千</b> liǎng qiān (hai nghìn)</span>
             <span class="tag-item" onclick="speak('一共')"><b>一共</b> yígòng (tổng cộng)</span>
           </div>
         </div>
@@ -589,12 +589,14 @@
             一美元换几块？
           </div>
           <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
-            <b style="color: #ea580c;">两 trước lượng từ:</b><br>
-            两百美元 · 两张一百美元
+            <b style="color: #ea580c;">Số tiền từng người:</b><br>
+            一百二十美元 · 两百五十欧元<br>
+            一百美元和一百二十欧元
           </div>
           <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
-            <b style="color: #ea580c;">二 trong số:</b><br>
-            二十美元 · 一共一千九百四十块
+            <b style="color: #ea580c;">Ra tiền tệ:</b><br>
+            八百四十块 · 两千块<br>
+            一共一千六百六十块
           </div>
         </div>
       </div>
@@ -614,119 +616,119 @@ const scenarios = [
       {
         person: "Chủ tiệm",
         pClass: "p-1",
-        vietPrompt: "Chào ba bạn và hỏi: Các bạn muốn đổi tiền phải không?",
-        vocab: [{ hz: "你们好", py: "nǐmen hǎo" }, { hz: "换钱", py: "huàn qián" }],
-        grammar: "你们要换钱吗？",
-        sampleHz: "你们好！你们要换钱吗？",
-        samplePy: "Nǐmen hǎo! Nǐmen yào huàn qián ma?"
+        vietPrompt: "Chào ba bạn. Hỏi có muốn đổi tiền không, rồi mời từng người một.",
+        vocab: [{ hz: "你们好", py: "nǐmen hǎo" }, { hz: "换钱", py: "huàn qián" }, { hz: "一个一个", py: "yí gè yí gè" }],
+        grammar: "你们要换钱吗？请一个一个来。",
+        sampleHz: "你们好！你们要换钱吗？请一个一个来。",
+        samplePy: "Nǐmen hǎo! Nǐmen yào huàn qián ma? Qǐng yí gè yí gè lái."
       },
       {
         person: "Người 2",
         pClass: "p-2",
-        vietPrompt: "Nói muốn đổi đô la Mỹ sang nhân dân tệ. Hỏi đổi được không?",
-        vocab: [{ hz: "老板", py: "lǎobǎn" }, { hz: "人民币", py: "Rénmínbì" }, { hz: "美元", py: "Měiyuán" }, { hz: "可以", py: "kěyǐ" }],
-        grammar: "我们想换...。这是...，可以换吗？",
-        sampleHz: "老板，我们想换人民币。这是美元，可以换吗？",
-        samplePy: "Lǎobǎn, wǒmen xiǎng huàn Rénmínbì. Zhè shì Měiyuán, kěyǐ huàn ma?"
+        vietPrompt: "Nói mình đổi trước. Muốn đổi 120 đô la Mỹ sang nhân dân tệ.",
+        vocab: [{ hz: "先换", py: "xiān huàn" }, { hz: "一百二十美元", py: "yìbǎi èrshí Měiyuán" }, { hz: "人民币", py: "Rénmínbì" }],
+        grammar: "我先换。我想换一百二十美元。",
+        sampleHz: "老板，我先换。我想换一百二十美元。",
+        samplePy: "Lǎobǎn, wǒ xiān huàn. Wǒ xiǎng huàn yìbǎi èrshí Měiyuán."
       },
       {
         person: "Chủ tiệm",
         pClass: "p-1",
-        vietPrompt: "Đồng ý. Báo tỉ giá: một đô la đổi bảy tệ. Hỏi các bạn muốn đổi bao nhiêu?",
-        vocab: [{ hz: "可以", py: "kěyǐ" }, { hz: "一美元", py: "yì Měiyuán" }, { hz: "七块", py: "qī kuài" }, { hz: "多少", py: "duōshao" }],
-        grammar: "一美元换七块。你们要换多少？",
-        sampleHz: "可以。一美元换七块。你们要换多少？",
-        samplePy: "Kěyǐ. Yì Měiyuán huàn qī kuài. Nǐmen yào huàn duōshao?"
+        vietPrompt: "Đồng ý. Một đô đổi bảy tệ. 120 đô là 840 tệ.",
+        vocab: [{ hz: "一美元", py: "yì Měiyuán" }, { hz: "七块", py: "qī kuài" }, { hz: "八百四十块", py: "bābǎi sìshí kuài" }],
+        grammar: "一美元换七块。一百二十美元是八百四十块。",
+        sampleHz: "可以。一美元换七块。一百二十美元是八百四十块。",
+        samplePy: "Kěyǐ. Yì Měiyuán huàn qī kuài. Yìbǎi èrshí Měiyuán shì bābǎi sìshí kuài."
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Đưa 120 đô và cảm ơn.",
+        vocab: [{ hz: "这是", py: "zhè shì" }, { hz: "一百二十美元", py: "yìbǎi èrshí Měiyuán" }, { hz: "谢谢", py: "xièxie" }],
+        grammar: "这是一百二十美元。谢谢！",
+        sampleHz: "这是一百二十美元。谢谢！",
+        samplePy: "Zhè shì yìbǎi èrshí Měiyuán. Xièxie!"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Đưa 840 tệ, rồi mời người tiếp theo.",
+        vocab: [{ hz: "八百四十块", py: "bābǎi sìshí kuài" }, { hz: "下一位", py: "xià yí wèi" }],
+        grammar: "这是八百四十块。下一位！",
+        sampleHz: "这是八百四十块。下一位！",
+        samplePy: "Zhè shì bābǎi sìshí kuài. Xià yí wèi!"
       },
       {
         person: "Người 3",
         pClass: "p-3",
-        vietPrompt: "Nói mình đổi hai trăm đô. Hỏi hai trăm đô là bao nhiêu tiền?",
-        vocab: [{ hz: "两百美元", py: "liǎng bǎi Měiyuán" }, { hz: "多少钱", py: "duōshao qián" }],
-        grammar: "我换两百...。两百...是多少钱？",
-        sampleHz: "我换两百美元。两百美元是多少钱？",
-        samplePy: "Wǒ huàn liǎng bǎi Měiyuán. Liǎng bǎi Měiyuán shì duōshao qián?"
+        vietPrompt: "Nói mình đổi 250 euro. Hỏi 250 euro là bao nhiêu tiền?",
+        vocab: [{ hz: "两百五十欧元", py: "liǎng bǎi wǔshí Ōuyuán" }, { hz: "多少钱", py: "duōshao qián" }],
+        grammar: "我换两百五十欧元。...是多少钱？",
+        sampleHz: "老板，我换两百五十欧元。两百五十欧元是多少钱？",
+        samplePy: "Lǎobǎn, wǒ huàn liǎng bǎi wǔshí Ōuyuán. Liǎng bǎi wǔshí Ōuyuán shì duōshao qián?"
       },
       {
         person: "Chủ tiệm",
         pClass: "p-1",
-        vietPrompt: "Trả lời: hai trăm đô là một nghìn bốn trăm tệ.",
-        vocab: [{ hz: "一千四百块", py: "yìqiān sìbǎi kuài" }],
-        grammar: "两百美元是一千四百块。",
-        sampleHz: "两百美元是一千四百块。",
-        samplePy: "Liǎng bǎi Měiyuán shì yìqiān sìbǎi kuài."
-      },
-      {
-        person: "Người 4",
-        pClass: "p-4",
-        vietPrompt: "Nói mình không đổi đô la, muốn đổi euro. Hỏi một euro đổi mấy tệ?",
-        vocab: [{ hz: "不换", py: "bú huàn" }, { hz: "欧元", py: "Ōuyuán" }, { hz: "几块", py: "jǐ kuài" }],
-        grammar: "我不换...，我想换...。一欧元换几块？",
-        sampleHz: "我不换美元，我想换欧元。一欧元换几块？",
-        samplePy: "Wǒ bú huàn Měiyuán, wǒ xiǎng huàn Ōuyuán. Yì Ōuyuán huàn jǐ kuài?"
-      },
-      {
-        person: "Chủ tiệm",
-        pClass: "p-1",
-        vietPrompt: "Báo tỉ giá: một euro đổi tám tệ.",
-        vocab: [{ hz: "一欧元", py: "yì Ōuyuán" }, { hz: "八块", py: "bā kuài" }],
-        grammar: "一欧元换八块。",
-        sampleHz: "一欧元换八块。",
-        samplePy: "Yì Ōuyuán huàn bā kuài."
-      },
-      {
-        person: "Người 2",
-        pClass: "p-2",
-        vietPrompt: "Nói mình chỉ đổi hai mươi đô, rồi đưa hai mươi đô.",
-        vocab: [{ hz: "只换", py: "zhǐ huàn" }, { hz: "二十美元", py: "èrshí Měiyuán" }],
-        grammar: "我只换二十...。这是二十...。",
-        sampleHz: "我只换二十美元。这是二十美元。",
-        samplePy: "Wǒ zhǐ huàn èrshí Měiyuán. Zhè shì èrshí Měiyuán."
+        vietPrompt: "Một euro đổi tám tệ. 250 euro là 2000 tệ.",
+        vocab: [{ hz: "一欧元", py: "yì Ōuyuán" }, { hz: "八块", py: "bā kuài" }, { hz: "两千块", py: "liǎng qiān kuài" }],
+        grammar: "一欧元换八块。两百五十欧元是两千块。",
+        sampleHz: "一欧元换八块。两百五十欧元是两千块。",
+        samplePy: "Yì Ōuyuán huàn bā kuài. Liǎng bǎi wǔshí Ōuyuán shì liǎng qiān kuài."
       },
       {
         person: "Người 3",
         pClass: "p-3",
-        vietPrompt: "Nói mình đổi hai trăm đô, đây là hai tờ một trăm đô.",
-        vocab: [{ hz: "两张", py: "liǎng zhāng" }, { hz: "一百美元", py: "yìbǎi Měiyuán" }],
-        grammar: "这是两张一百美元。",
-        sampleHz: "我换两百美元。这是两张一百美元。",
-        samplePy: "Wǒ huàn liǎng bǎi Měiyuán. Zhè shì liǎng zhāng yìbǎi Měiyuán."
+        vietPrompt: "Đưa 250 euro.",
+        vocab: [{ hz: "这是", py: "zhè shì" }, { hz: "两百五十欧元", py: "liǎng bǎi wǔshí Ōuyuán" }],
+        grammar: "这是两百五十欧元。",
+        sampleHz: "这是两百五十欧元。",
+        samplePy: "Zhè shì liǎng bǎi wǔshí Ōuyuán."
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Đưa 2000 tệ, rồi mời người tiếp theo.",
+        vocab: [{ hz: "两千块", py: "liǎng qiān kuài" }, { hz: "下一位", py: "xià yí wèi" }],
+        grammar: "这是两千块。下一位！",
+        sampleHz: "这是两千块。下一位！",
+        samplePy: "Zhè shì liǎng qiān kuài. Xià yí wèi!"
       },
       {
         person: "Người 4",
         pClass: "p-4",
-        vietPrompt: "Nói mình đổi năm mươi euro, và hỏi: năm mươi euro là bốn trăm tệ, đúng không?",
-        vocab: [{ hz: "五十欧元", py: "wǔshí Ōuyuán" }, { hz: "四百块", py: "sìbǎi kuài" }, { hz: "对吗", py: "duì ma" }],
-        grammar: "五十欧元是四百块，对吗？",
-        sampleHz: "我换五十欧元。五十欧元是四百块，对吗？",
-        samplePy: "Wǒ huàn wǔshí Ōuyuán. Wǔshí Ōuyuán shì sìbǎi kuài, duì ma?"
+        vietPrompt: "Nói mình đổi 100 đô và 120 euro.",
+        vocab: [{ hz: "一百美元", py: "yìbǎi Měiyuán" }, { hz: "还换", py: "hái huàn" }, { hz: "一百二十欧元", py: "yìbǎi èrshí Ōuyuán" }],
+        grammar: "我换一百美元，还换一百二十欧元。",
+        sampleHz: "老板，我换一百美元，还换一百二十欧元。",
+        samplePy: "Lǎobǎn, wǒ huàn yìbǎi Měiyuán, hái huàn yìbǎi èrshí Ōuyuán."
       },
       {
         person: "Chủ tiệm",
         pClass: "p-1",
-        vietPrompt: "Xác nhận đúng. Cộng: 20 đô là 140 tệ, 200 đô là 1400 tệ, 50 euro là 400 tệ. Tổng cộng 1940 tệ.",
-        vocab: [{ hz: "一百四十块", py: "yìbǎi sìshí kuài" }, { hz: "一共", py: "yígòng" }, { hz: "一千九百四十块", py: "yìqiān jiǔbǎi sìshí kuài" }],
-        grammar: "对。...，一共一千九百四十块。",
-        sampleHz: "对。二十美元一百四十块，两百美元一千四百块，五十欧元四百块。一共一千九百四十块。",
-        samplePy: "Duì. Èrshí Měiyuán yìbǎi sìshí kuài, liǎng bǎi Měiyuán yìqiān sìbǎi kuài, wǔshí Ōuyuán sìbǎi kuài. Yígòng yìqiān jiǔbǎi sìshí kuài."
+        vietPrompt: "Tính: 100 đô là 700 tệ, 120 euro là 960 tệ. Tổng cộng 1660 tệ.",
+        vocab: [{ hz: "七百块", py: "qībǎi kuài" }, { hz: "九百六十块", py: "jiǔbǎi liùshí kuài" }, { hz: "一共", py: "yígòng" }, { hz: "一千六百六十块", py: "yìqiān liùbǎi liùshí kuài" }],
+        grammar: "一百美元是七百块，一百二十欧元是九百六十块。一共一千六百六十块。",
+        sampleHz: "一百美元是七百块，一百二十欧元是九百六十块。一共一千六百六十块。",
+        samplePy: "Yìbǎi Měiyuán shì qībǎi kuài, yìbǎi èrshí Ōuyuán shì jiǔbǎi liùshí kuài. Yígòng yìqiān liùbǎi liùshí kuài."
       },
       {
-        person: "Người 2",
-        pClass: "p-2",
-        vietPrompt: "Đưa tiền và cảm ơn chủ tiệm.",
-        vocab: [{ hz: "我们的钱", py: "wǒmen de qián" }, { hz: "谢谢", py: "xièxie" }],
-        grammar: "这是我们的钱。谢谢老板！",
-        sampleHz: "这是我们的钱。谢谢老板！",
-        samplePy: "Zhè shì wǒmen de qián. Xièxie lǎobǎn!"
+        person: "Người 4",
+        pClass: "p-4",
+        vietPrompt: "Đưa 100 đô và 120 euro.",
+        vocab: [{ hz: "一百美元", py: "yìbǎi Měiyuán" }, { hz: "和", py: "hé" }, { hz: "一百二十欧元", py: "yìbǎi èrshí Ōuyuán" }],
+        grammar: "这是一百美元和一百二十欧元。",
+        sampleHz: "这是一百美元和一百二十欧元。",
+        samplePy: "Zhè shì yìbǎi Měiyuán hé yìbǎi èrshí Ōuyuán."
       },
       {
         person: "Chủ tiệm",
         pClass: "p-1",
-        vietPrompt: "Đưa 1940 tệ nhân dân tệ, bảo ba bạn xem lại, rồi cảm ơn.",
-        vocab: [{ hz: "人民币", py: "Rénmínbì" }, { hz: "看一看", py: "kàn yi kàn" }, { hz: "谢谢", py: "xièxie" }],
-        grammar: "这是...人民币。你们看一看。",
-        sampleHz: "这是一千九百四十块人民币。你们看一看。谢谢！",
-        samplePy: "Zhè shì yìqiān jiǔbǎi sìshí kuài Rénmínbì. Nǐmen kàn yi kàn. Xièxie!"
+        vietPrompt: "Đưa 1660 tệ, bảo xem lại, rồi cảm ơn.",
+        vocab: [{ hz: "一千六百六十块", py: "yìqiān liùbǎi liùshí kuài" }, { hz: "看一看", py: "kàn yi kàn" }, { hz: "谢谢", py: "xièxie" }],
+        grammar: "这是一千六百六十块。你们看一看。谢谢！",
+        sampleHz: "这是一千六百六十块。你们看一看。谢谢！",
+        samplePy: "Zhè shì yìqiān liùbǎi liùshí kuài. Nǐmen kàn yi kàn. Xièxie!"
       }
     ]
   }
