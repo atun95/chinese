@@ -2673,4 +2673,55 @@ def show_lesson9_2_classroom_practice():
         st.info("Hãy đảm bảo file `hoi_thoai_bai_7_8.html` nằm trong thư mục gốc của dự án.")
 
 
+def show_lesson9_3_classroom_practice():
+    st.markdown("""
+    <style>
+        header[data-testid="stHeader"]       { display: none !important; }
+        div[data-testid="stToolbar"]         { display: none !important; }
+        footer                               { display: none !important; }
+        #MainMenu                            { display: none !important; }
+        .block-container {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            max-width: 100% !important;
+        }
+        div[data-testid="stDecoration"]      { display: none !important; }
+        div[data-testid="collapsedControl"]  { display: none !important; }
+        html, body, [data-testid="stAppViewContainer"] {
+            overflow: hidden !important;
+            height: 100% !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    html_path = os.path.join(base_dir, "hoi_thoai_bai_9_3.html")
+
+    if os.path.exists(html_path):
+        with open(html_path, "r", encoding="utf-8") as f:
+            html_content = f.read()
+
+        auto_resize_js = """
+        <script>
+        (function() {
+            function fillViewport() {
+                var h = window.parent ? window.parent.innerHeight : window.innerHeight;
+                document.documentElement.style.height = h + 'px';
+                document.body.style.height = h + 'px';
+                document.body.style.overflowY = 'auto';
+                document.body.style.margin = '0';
+            }
+            fillViewport();
+            window.addEventListener('resize', fillViewport);
+        })();
+        </script>
+        """
+        html_with_resize = html_content.replace("</body>", auto_resize_js + "\n</body>")
+        components.html(html_with_resize, height=10000, scrolling=False)
+    else:
+        st.error(f"Không tìm thấy file `hoi_thoai_bai_9_3.html` tại: `{html_path}`")
+
+
 # Force reload

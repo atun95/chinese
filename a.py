@@ -47,6 +47,7 @@ if 'lessons.lesson9_game' in sys.modules:
 if 'lesson9_game' in sys.modules:
     del sys.modules['lesson9_game']
 import lessons.lesson9 as lesson9
+import lessons.lesson10 as lesson10
 import lessons.hsk1_quiz as hsk1_quiz
 import supabase_client
 import lessons.hsk1_quizzes_data as hsk1_quizzes_data
@@ -117,6 +118,11 @@ try:
     importlib.reload(lesson9)
 except Exception as e:
     st.error(f'Error reloading lesson9: {e}')
+
+try:
+    importlib.reload(lesson10)
+except Exception as e:
+    st.error(f'Error reloading lesson10: {e}')
 
 try:
     importlib.reload(pinyin_practice)
@@ -593,7 +599,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ",
         "Bài 9.2 - So sánh 不 và 没",
         "Bài 9.3 - Hậu tố 子 (zi)",
-        "Bài 9.4 - So sánh 二 và 两"
+        "Bài 9.4 - So sánh 二 và 两",
+        "Bài 10.1 - Cách dùng 吧 (ba)"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -617,7 +624,8 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 6.1 - Thực hành Giao tiếp & Phản xạ",
         "Bài 9.1 - Thực hành Giao tiếp & Phản xạ",
         "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ",
-        "Bài 9.2 - Bài tập Giao tiếp Trên lớp"
+        "Bài 9.2 - Bài tập Giao tiếp Trên lớp",
+        "Bài 9.3 - Hội thoại đổi tiền"
     ])
 elif mode == "📝 Hệ thống bài tập":
     menu = st.sidebar.radio("Chọn bài tập:", [
@@ -724,6 +732,9 @@ elif menu == "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ":
 elif menu == "Bài 9.2 - Bài tập Giao tiếp Trên lớp":
     lesson9.show_lesson9_2_classroom_practice()
 
+elif menu == "Bài 9.3 - Hội thoại đổi tiền":
+    lesson9.show_lesson9_3_classroom_practice()
+
 elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)
 
@@ -777,6 +788,9 @@ elif menu == "Bài 9.3 - Hậu tố 子 (zi)":
 
 elif menu == "Bài 9.4 - So sánh 二 và 两":
     lesson9.show_lesson9_4_er_liang()
+
+elif menu == "Bài 10.1 - Cách dùng 吧 (ba)":
+    lesson10.show_lesson10_1_ba()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
@@ -871,7 +885,7 @@ components.html("""
         '  </div>',
         '  <div class="pg-body">',
         '    <div class="pg-py-body">',
-        '      <textarea id="pg-py-inp" placeholder="Nhập chữ Hán"></textarea>',
+        '      <textarea id="pg-py-inp" placeholder="Nhập cả từ, ví dụ: 音乐 快乐"></textarea>',
         '      <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin </span></div>',
         '      <div id="pg-py-copy-row"><button id="pg-py-copy">📋 Copy Pinyin</button></div>',
         '    </div>',
@@ -898,30 +912,99 @@ components.html("""
     ps.onload = function(){ pyLoaded = true; renderPy(); };
     PD.head.appendChild(ps);
 
-    function getpy(c){
-        if(pyLoaded && P.pinyinPro && P.pinyinPro.pinyin){
-            try{ var r=P.pinyinPro.pinyin(c,{toneType:'symbol',type:'array'}); if(r&&r[0]) return r[0]; }catch(e){}
+    function isZh(c){
+        var code = c.charCodeAt(0);
+        return code >= 19968 && code <= 40959;
+    }
+
+    var wordDict = {
+        '音乐':'yīn yuè','快乐':'kuài lè','银行':'yín háng','行走':'xíng zǒu','行业':'háng yè','行李':'xíng li',
+        '觉得':'jué de','睡觉':'shuì jiào','长大':'zhǎng dà','长城':'cháng chéng','还是':'hái shì','还有':'hái yǒu',
+        '了解':'liǎo jiě','大夫':'dài fu','重复':'chóng fù','重庆':'chóng qìng','好了':'hǎo le','行长':'háng zhǎng'
+    };
+
+    function fallbackPhrase(chunk){
+        var out = '', i = 0;
+        while(i < chunk.length){
+            var hit = '', hitLen = 1;
+            var max = Math.min(chunk.length, i + 6);
+            for(var j = max; j > i; j--){
+                var w = chunk.slice(i, j);
+                if(wordDict[w]){ hit = wordDict[w]; hitLen = j - i; break; }
+            }
+            var piece = hit || pyDict[chunk[i]] || chunk[i];
+            if(!hit) hitLen = 1;
+            var addSpace = (hit || pyDict[chunk[i]]) && out && /[a-zA-Z\u00C0-\u024F]$/.test(out);
+            if(addSpace) out += ' ';
+            out += piece;
+            i += hitLen;
         }
-        return pyDict[c]||'';
+        return out;
+    }
+
+    function startsWord(chunk, i){
+        var max = Math.min(chunk.length, i + 6);
+        for(var j = max; j > i; j--){
+            if(wordDict[chunk.slice(i, j)]) return true;
+        }
+        return false;
+    }
+
+    function libraryPhrase(chunk){
+        if(pyLoaded && P.pinyinPro && P.pinyinPro.pinyin){
+            try{
+                var arr = P.pinyinPro.pinyin(chunk, {toneType:'symbol', type:'array', nonZh:'removed'});
+                if(arr && arr.length) return arr.join(' ');
+            }catch(e){}
+        }
+        return fallbackPhrase(chunk);
+    }
+
+    function phrasePinyin(chunk){
+        var out = '', i = 0;
+        while(i < chunk.length){
+            var hit = '', hitLen = 0;
+            var max = Math.min(chunk.length, i + 6);
+            for(var j = max; j > i; j--){
+                var w = chunk.slice(i, j);
+                if(wordDict[w]){ hit = wordDict[w]; hitLen = j - i; break; }
+            }
+            var piece;
+            if(hit){
+                piece = hit;
+            }else{
+                var k = i + 1;
+                while(k < chunk.length && !startsWord(chunk, k)) k++;
+                piece = libraryPhrase(chunk.slice(i, k));
+                hitLen = k - i;
+            }
+            if(out && piece) out += ' ';
+            out += piece;
+            i += hitLen;
+        }
+        return out;
     }
 
     function renderPy(){
         var inp=el('pg-py-inp'), out=el('pg-py-out'); if(!inp||!out) return;
         var txt=inp.value; ss('pg_py_txt',txt);
         if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin</span>'; out._pyText=''; return;}
-        var p='';
-        for(var i=0;i<txt.length;i++){
-            var c=txt[i];
-            if(c>='\\u4e00'&&c<='\\u9fa5') {
-                var py = getpy(c);
-                p += (py ? py + ' ' : c);
-            } else {
-                p += c;
-            }
+        var result = '';
+        var buf = '';
+        function flush(){
+            if(!buf) return;
+            result += phrasePinyin(buf);
+            buf = '';
         }
-        var result = p.replace(/ +\\n/g, '\\n').trim();
+        for(var i=0;i<txt.length;i++){
+            var c = txt[i];
+            if(isZh(c)) buf += c;
+            else { flush(); result += c; }
+        }
+        flush();
+        result = result.replace(/[ \\t]+\\n/g, '\\n').replace(/\\n[ \\t]+/g, '\\n').trim();
         out._pyText = result;
-        out.innerHTML = result.replace(/\\n/g,'<br>').replace(/ /g,'&nbsp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        out.innerHTML = result.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\\n/g,'<br>').replace(/ /g,'&nbsp;');
     }
 
     /* ---- DRAG ---- */

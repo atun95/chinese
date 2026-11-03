@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 9.3 - Hội thoại đổi tiền</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ea580c;
+      --primary-hover: #c2410c;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      
+      --p1-color: #2563eb;
+      --p1-bg: #eff6ff;
+      --p2-color: #db2777;
+      --p2-bg: #fdf2f8;
+      --p3-color: #059669;
+      --p3-bg: #ecfdf5;
+      --p4-color: #d97706;
+      --p4-bg: #fffbeb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .main-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ea580c;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn.active {
+      background: #ea580c;
+      color: #fff;
+      border-color: #ea580c;
+    }
+
+    .btn-primary {
+      background: #ea580c;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover { background: #c2410c; }
+
+    /* Scenario Tabs */
+    .scenario-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tab-card {
+      background: var(--card);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      text-align: left;
+    }
+
+    .tab-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    .tab-card.active {
+      border-color: #ea580c;
+      background: #fffaf5;
+      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.12);
+    }
+
+    .tab-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tab-1 .tab-badge { background: #dbeafe; color: #1e40af; }
+    .tab-2 .tab-badge { background: #fce7f3; color: #9d174d; }
+    .tab-3 .tab-badge { background: #dcfce7; color: #166534; }
+    .tab-4 .tab-badge { background: #fef3c7; color: #92400e; }
+
+    .tab-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .tab-goal {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Layout Content */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Column: Flow Steps */
+    .steps-board {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .board-header {
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--border);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .board-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .board-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Step Card */
+    .step-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .step-item.p-1 { border-left: 5px solid var(--p1-color); background: #fafcff; }
+    .step-item.p-2 { border-left: 5px solid var(--p2-color); background: #fffafd; }
+    .step-item.p-3 { border-left: 5px solid var(--p3-color); background: #fafffc; }
+    .step-item.p-4 { border-left: 5px solid var(--p4-color); background: #fffdf5; }
+
+    .step-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .speaker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .p-1 .speaker-pill { background: var(--p1-bg); color: var(--p1-color); }
+    .p-2 .speaker-pill { background: var(--p2-bg); color: var(--p2-color); }
+    .p-3 .speaker-pill { background: var(--p3-bg); color: var(--p3-color); }
+    .p-4 .speaker-pill { background: var(--p4-bg); color: var(--p4-color); }
+
+    .step-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* Viet Target prompt */
+    .prompt-viet {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .prompt-viet span.label {
+      font-size: 0.78rem;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-weight: normal;
+    }
+
+    /* Hints area */
+    .hints-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hint-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .vocab-chip {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .vocab-chip:hover {
+      border-color: #ea580c;
+      color: #ea580c;
+      background: #fff7ed;
+    }
+
+    .grammar-chip {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+    }
+
+    /* Reveal Answer Box */
+    .answer-box {
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-reveal {
+      background: transparent;
+      border: 1px dashed #cbd5e1;
+      color: #64748b;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-reveal:hover {
+      border-color: #ea580c;
+      color: #ea580c;
+      background: #fffaf5;
+    }
+
+    .answer-content {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .answer-content.show {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ans-hanzi {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: 0.03em;
+    }
+
+    .ans-pinyin {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #c2410c;
+      margin-top: 2px;
+    }
+
+    .ans-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .ans-speak {
+      background: #ea580c;
+      color: white;
+      border: none;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Right Column: Bank & Helpers */
+    .toolbox {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+
+    .tool-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid #fed7aa;
+      padding-bottom: 6px;
+    }
+
+    .quick-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quick-group-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-item {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tag-item:hover {
+      background: #ea580c;
+      color: #fff;
+      border-color: #ea580c;
+    }
+
+    .tag-item b { font-weight: 700; }
+
+    /* Teacher notes */
+    .pedagogy-box {
+      background: #fff7ed;
+      border: 1px solid #ffedd5;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.82rem;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+    .pedagogy-box ol {
+      padding-left: 18px;
+      margin-top: 6px;
+    }
+
+    /* Scaling */
+    body.large-mode .prompt-viet { font-size: 1.25rem; }
+    body.large-mode .ans-hanzi { font-size: 1.7rem; }
+    body.large-mode .ans-pinyin { font-size: 1.15rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header: Không nhân vật, không tên bài học rườm rà -->
+  <header>
+    <div>
+      <h1 class="main-title">🎯 Bài 9.3 — Hội thoại đổi tiền</h1>
+      <div class="subtitle">1 chủ tiệm và 3 người đến đổi tiền. Bấm từng lượt để xem câu mẫu.</div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn" id="btnRevealAll" onclick="toggleAllAnswers()">
+        <span>👁️</span> Mở/Ẩn Tất Cả Gợi Ý Tiếng Trung
+      </button>
+      <button class="btn" id="btnZoom" onclick="toggleZoom()">
+        <span>🔍</span> Phóng To Chữ
+      </button>
+      <button class="btn btn-primary" onclick="randomRole()">
+        <span>🎲</span> Đổi Vai Ngẫu Nhiên
+      </button>
+    </div>
+  </header>
+
+  <!-- Scenario Selector -->
+  <div class="scenario-tabs">
+    <div class="tab-card tab-4 active" onclick="selectScenario(0)">
+      <span class="tab-badge">Bài 9.3</span>
+      <div class="tab-name">Đổi tiền tại tiệm</div>
+      <div class="tab-goal">Chủ tiệm đổi đô la và euro sang nhân dân tệ cho ba khách. Chú ý 两 trước lượng từ, 二 trong 二十.</div>
+    </div>
+  </div>
+
+  <!-- Main Content Layout -->
+  <div class="content-grid">
+    
+    <!-- Left: Flow of Turns -->
+    <div class="steps-board">
+      <div class="board-header">
+        <div>
+          <div class="board-title" id="scenarioTitle">Đổi tiền tại tiệm</div>
+        </div>
+      </div>
+
+      <div class="steps-list" id="stepsContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Right: Vocabulary & Grammar Bank -->
+    <div class="toolbox">
+      
+      <!-- Word Bank -->
+      <div class="tool-card">
+        <div class="tool-title">
+          <span>📚</span> Ngân Hàng Từ Khóa Gợi Ý
+        </div>
+        
+        <div class="quick-list">
+          <div class="quick-group-title">Đổi tiền</div>
+          <div class="tag-cloud">
+            <span class="tag-item" onclick="speak('换钱')"><b>换钱</b> huàn qián (đổi tiền)</span>
+            <span class="tag-item" onclick="speak('人民币')"><b>人民币</b> Rénmínbì (nhân dân tệ)</span>
+            <span class="tag-item" onclick="speak('美元')"><b>美元</b> Měiyuán (đô la Mỹ)</span>
+            <span class="tag-item" onclick="speak('欧元')"><b>欧元</b> Ōuyuán (euro)</span>
+            <span class="tag-item" onclick="speak('老板')"><b>老板</b> lǎobǎn (chủ tiệm)</span>
+            <span class="tag-item" onclick="speak('块')"><b>块</b> kuài (tệ)</span>
+            <span class="tag-item" onclick="speak('张')"><b>张</b> zhāng (tờ)</span>
+          </div>
+
+          <div class="quick-group-title" style="margin-top: 8px;">两 và 二</div>
+          <div class="tag-cloud">
+            <span class="tag-item" onclick="speak('两百')"><b>两百</b> liǎng bǎi (hai trăm)</span>
+            <span class="tag-item" onclick="speak('两张')"><b>两张</b> liǎng zhāng (hai tờ)</span>
+            <span class="tag-item" onclick="speak('二十')"><b>二十</b> èrshí (hai mươi)</span>
+            <span class="tag-item" onclick="speak('一共')"><b>一共</b> yígòng (tổng cộng)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grammar Helper -->
+      <div class="tool-card">
+        <div class="tool-title">
+          <span>💡</span> Mẫu Cấu Trúc Gợi Ý
+        </div>
+        <div style="font-size: 0.82rem; color: #475569; display: flex; flex-direction: column; gap: 8px;">
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">Hỏi đổi tiền:</b><br>
+            你们要换钱吗？<br>
+            一美元换几块？
+          </div>
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">两 trước lượng từ:</b><br>
+            两百美元 · 两张一百美元
+          </div>
+          <div style="background: #f8fafc; padding: 8px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <b style="color: #ea580c;">二 trong số:</b><br>
+            二十美元 · 一共一千九百四十块
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const scenarios = [
+  {
+    id: 1,
+    title: "Đổi tiền tại tiệm",
+    steps: [
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Chào ba bạn và hỏi: Các bạn muốn đổi tiền phải không?",
+        vocab: [{ hz: "你们好", py: "nǐmen hǎo" }, { hz: "换钱", py: "huàn qián" }],
+        grammar: "你们要换钱吗？",
+        sampleHz: "你们好！你们要换钱吗？",
+        samplePy: "Nǐmen hǎo! Nǐmen yào huàn qián ma?"
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói muốn đổi đô la Mỹ sang nhân dân tệ. Hỏi đổi được không?",
+        vocab: [{ hz: "老板", py: "lǎobǎn" }, { hz: "人民币", py: "Rénmínbì" }, { hz: "美元", py: "Měiyuán" }, { hz: "可以", py: "kěyǐ" }],
+        grammar: "我们想换...。这是...，可以换吗？",
+        sampleHz: "老板，我们想换人民币。这是美元，可以换吗？",
+        samplePy: "Lǎobǎn, wǒmen xiǎng huàn Rénmínbì. Zhè shì Měiyuán, kěyǐ huàn ma?"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Đồng ý. Báo tỉ giá: một đô la đổi bảy tệ. Hỏi các bạn muốn đổi bao nhiêu?",
+        vocab: [{ hz: "可以", py: "kěyǐ" }, { hz: "一美元", py: "yì Měiyuán" }, { hz: "七块", py: "qī kuài" }, { hz: "多少", py: "duōshao" }],
+        grammar: "一美元换七块。你们要换多少？",
+        sampleHz: "可以。一美元换七块。你们要换多少？",
+        samplePy: "Kěyǐ. Yì Měiyuán huàn qī kuài. Nǐmen yào huàn duōshao?"
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói mình đổi hai trăm đô. Hỏi hai trăm đô là bao nhiêu tiền?",
+        vocab: [{ hz: "两百美元", py: "liǎng bǎi Měiyuán" }, { hz: "多少钱", py: "duōshao qián" }],
+        grammar: "我换两百...。两百...是多少钱？",
+        sampleHz: "我换两百美元。两百美元是多少钱？",
+        samplePy: "Wǒ huàn liǎng bǎi Měiyuán. Liǎng bǎi Měiyuán shì duōshao qián?"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Trả lời: hai trăm đô là một nghìn bốn trăm tệ.",
+        vocab: [{ hz: "一千四百块", py: "yìqiān sìbǎi kuài" }],
+        grammar: "两百美元是一千四百块。",
+        sampleHz: "两百美元是一千四百块。",
+        samplePy: "Liǎng bǎi Měiyuán shì yìqiān sìbǎi kuài."
+      },
+      {
+        person: "Người 4",
+        pClass: "p-4",
+        vietPrompt: "Nói mình không đổi đô la, muốn đổi euro. Hỏi một euro đổi mấy tệ?",
+        vocab: [{ hz: "不换", py: "bú huàn" }, { hz: "欧元", py: "Ōuyuán" }, { hz: "几块", py: "jǐ kuài" }],
+        grammar: "我不换...，我想换...。一欧元换几块？",
+        sampleHz: "我不换美元，我想换欧元。一欧元换几块？",
+        samplePy: "Wǒ bú huàn Měiyuán, wǒ xiǎng huàn Ōuyuán. Yì Ōuyuán huàn jǐ kuài?"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Báo tỉ giá: một euro đổi tám tệ.",
+        vocab: [{ hz: "一欧元", py: "yì Ōuyuán" }, { hz: "八块", py: "bā kuài" }],
+        grammar: "一欧元换八块。",
+        sampleHz: "一欧元换八块。",
+        samplePy: "Yì Ōuyuán huàn bā kuài."
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Nói mình chỉ đổi hai mươi đô, rồi đưa hai mươi đô.",
+        vocab: [{ hz: "只换", py: "zhǐ huàn" }, { hz: "二十美元", py: "èrshí Měiyuán" }],
+        grammar: "我只换二十...。这是二十...。",
+        sampleHz: "我只换二十美元。这是二十美元。",
+        samplePy: "Wǒ zhǐ huàn èrshí Měiyuán. Zhè shì èrshí Měiyuán."
+      },
+      {
+        person: "Người 3",
+        pClass: "p-3",
+        vietPrompt: "Nói mình đổi hai trăm đô, đây là hai tờ một trăm đô.",
+        vocab: [{ hz: "两张", py: "liǎng zhāng" }, { hz: "一百美元", py: "yìbǎi Měiyuán" }],
+        grammar: "这是两张一百美元。",
+        sampleHz: "我换两百美元。这是两张一百美元。",
+        samplePy: "Wǒ huàn liǎng bǎi Měiyuán. Zhè shì liǎng zhāng yìbǎi Měiyuán."
+      },
+      {
+        person: "Người 4",
+        pClass: "p-4",
+        vietPrompt: "Nói mình đổi năm mươi euro, và hỏi: năm mươi euro là bốn trăm tệ, đúng không?",
+        vocab: [{ hz: "五十欧元", py: "wǔshí Ōuyuán" }, { hz: "四百块", py: "sìbǎi kuài" }, { hz: "对吗", py: "duì ma" }],
+        grammar: "五十欧元是四百块，对吗？",
+        sampleHz: "我换五十欧元。五十欧元是四百块，对吗？",
+        samplePy: "Wǒ huàn wǔshí Ōuyuán. Wǔshí Ōuyuán shì sìbǎi kuài, duì ma?"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Xác nhận đúng. Cộng: 20 đô là 140 tệ, 200 đô là 1400 tệ, 50 euro là 400 tệ. Tổng cộng 1940 tệ.",
+        vocab: [{ hz: "一百四十块", py: "yìbǎi sìshí kuài" }, { hz: "一共", py: "yígòng" }, { hz: "一千九百四十块", py: "yìqiān jiǔbǎi sìshí kuài" }],
+        grammar: "对。...，一共一千九百四十块。",
+        sampleHz: "对。二十美元一百四十块，两百美元一千四百块，五十欧元四百块。一共一千九百四十块。",
+        samplePy: "Duì. Èrshí Měiyuán yìbǎi sìshí kuài, liǎng bǎi Měiyuán yìqiān sìbǎi kuài, wǔshí Ōuyuán sìbǎi kuài. Yígòng yìqiān jiǔbǎi sìshí kuài."
+      },
+      {
+        person: "Người 2",
+        pClass: "p-2",
+        vietPrompt: "Đưa tiền và cảm ơn chủ tiệm.",
+        vocab: [{ hz: "我们的钱", py: "wǒmen de qián" }, { hz: "谢谢", py: "xièxie" }],
+        grammar: "这是我们的钱。谢谢老板！",
+        sampleHz: "这是我们的钱。谢谢老板！",
+        samplePy: "Zhè shì wǒmen de qián. Xièxie lǎobǎn!"
+      },
+      {
+        person: "Chủ tiệm",
+        pClass: "p-1",
+        vietPrompt: "Đưa 1940 tệ nhân dân tệ, bảo ba bạn xem lại, rồi cảm ơn.",
+        vocab: [{ hz: "人民币", py: "Rénmínbì" }, { hz: "看一看", py: "kàn yi kàn" }, { hz: "谢谢", py: "xièxie" }],
+        grammar: "这是...人民币。你们看一看。",
+        sampleHz: "这是一千九百四十块人民币。你们看一看。谢谢！",
+        samplePy: "Zhè shì yìqiān jiǔbǎi sìshí kuài Rénmínbì. Nǐmen kàn yi kàn. Xièxie!"
+      }
+    ]
+  }
+];
+
+let curScenarioIdx = 0;
+let areAllRevealed = false;
+
+function renderScenario() {
+  const sc = scenarios[curScenarioIdx];
+  document.getElementById('scenarioTitle').innerText = sc.title;
+
+  const container = document.getElementById('stepsContainer');
+  container.innerHTML = '';
+
+  sc.steps.forEach((step, idx) => {
+    const card = document.createElement('div');
+    card.className = `step-item ${step.pClass}`;
+    card.id = `step-card-${idx}`;
+
+    const vocabTags = step.vocab.map(v => 
+      `<span class="vocab-chip" onclick="speak('${v.hz}')" title="Bấm nghe phát âm">🔊 <b>${v.hz}</b> [${v.py}]</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="step-top">
+        <span class="speaker-pill">🗣️ ${step.person}</span>
+        <span class="step-number">Lượt ${idx + 1}</span>
+      </div>
+
+      <div class="prompt-viet">
+        <span class="label">Ý cần nói:</span> ${step.vietPrompt}
+      </div>
+
+      <div class="hints-row">
+        <span class="hint-label">Gợi ý từ khóa:</span>
+        ${vocabTags}
+        <span class="grammar-chip">📐 ${step.grammar}</span>
+      </div>
+
+      <div class="answer-box">
+        <button class="btn-reveal" onclick="toggleAnswer(${idx})">
+          <span id="btn-icon-${idx}">👁️</span> <span id="btn-text-${idx}">Xem gợi ý câu mẫu tiếng Trung</span>
+        </button>
+
+        <div class="answer-content" id="ans-box-${idx}">
+          <div class="ans-hanzi">${step.sampleHz}</div>
+          <div class="ans-pinyin">${step.samplePy}</div>
+          <div class="ans-actions">
+            <button class="ans-speak" onclick="speak('${step.sampleHz.replace(/'/g, "\\'")}')">
+              🔊 Nghe phát âm mẫu
+            </button>
+            <span style="font-size: 0.75rem; color: #64748b;">(Học viên có thể nói khác, miễn đúng nghĩa)</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function selectScenario(idx) {
+  curScenarioIdx = idx;
+  document.querySelectorAll('.tab-card').forEach((tab, i) => {
+    tab.classList.toggle('active', i === idx);
+  });
+  areAllRevealed = false;
+  document.getElementById('btnRevealAll').classList.remove('active');
+  renderScenario();
+}
+
+function toggleAnswer(idx) {
+  const box = document.getElementById(`ans-box-${idx}`);
+  const icon = document.getElementById(`btn-icon-${idx}`);
+  const text = document.getElementById(`btn-text-${idx}`);
+
+  const isShown = box.classList.contains('show');
+  if (isShown) {
+    box.classList.remove('show');
+    icon.innerText = '👁️';
+    text.innerText = 'Xem gợi ý câu mẫu tiếng Trung';
+  } else {
+    box.classList.add('show');
+    icon.innerText = '🙈';
+    text.innerText = 'Đóng gợi ý câu mẫu';
+  }
+}
+
+function toggleAllAnswers() {
+  areAllRevealed = !areAllRevealed;
+  const sc = scenarios[curScenarioIdx];
+  const btn = document.getElementById('btnRevealAll');
+  btn.classList.toggle('active', areAllRevealed);
+
+  sc.steps.forEach((_, idx) => {
+    const box = document.getElementById(`ans-box-${idx}`);
+    const icon = document.getElementById(`btn-icon-${idx}`);
+    const text = document.getElementById(`btn-text-${idx}`);
+    if (box) {
+      if (areAllRevealed) {
+        box.classList.add('show');
+        if (icon) icon.innerText = '🙈';
+        if (text) text.innerText = 'Đóng gợi ý';
+      } else {
+        box.classList.remove('show');
+        if (icon) icon.innerText = '👁️';
+        if (text) text.innerText = 'Xem gợi ý câu mẫu tiếng Trung';
+      }
+    }
+  });
+}
+
+function toggleZoom() {
+  document.body.classList.toggle('large-mode');
+  document.getElementById('btnZoom').classList.toggle('active');
+}
+
+function randomRole() {
+  const roles = ["Học viên A", "Học viên B", "Học viên C", "Học viên D"];
+  for (let i = roles.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [roles[i], roles[j]] = [roles[j], roles[i]];
+  }
+  alert(`🎲 Bốc thăm phân vai ngẫu nhiên:\n• Chủ tiệm: ${roles[0]}\n• Người 2: ${roles[1]}\n• Người 3: ${roles[2]}\n• Người 4: ${roles[3]}`);
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) {
+    alert("Trình duyệt không hỗ trợ Web Speech API.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
+
+window.onload = () => {
+  renderScenario();
+};
+</script>
+
+</body>
+</html>
