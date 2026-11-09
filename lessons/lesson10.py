@@ -844,3 +844,430 @@ def show_lesson10_2_constituents():
                 <div>{int(correct / total * 100)}% đúng</div>
             </div>
             """, unsafe_allow_html=True)
+
+
+def show_lesson10_3_ne():
+    st.markdown("""
+    <style>
+    .b103-hero {
+        background: linear-gradient(135deg, #0f172a, #065f46);
+        color: white;
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        margin-bottom: 18px;
+    }
+    .b103-char { font-size: 4rem; font-weight: 900; line-height: 1; }
+    .b103-py { font-size: 1.2rem; opacity: .9; margin-top: 8px; }
+    .b103-tag { display: inline-block; margin-top: 10px; background: rgba(255,255,255,.15); border-radius: 999px; padding: 4px 14px; font-size: .85rem; font-weight: 700; }
+    .b103-rule {
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-left: 6px solid #059669;
+        border-radius: 14px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+    }
+    .b103-rule h4 { margin: 0 0 6px 0; }
+    .b103-desc { color: #475569; line-height: 1.6; margin-bottom: 10px; }
+    .b103-formula {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
+    }
+    .b103-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    .b103-table th { text-align: left; color: #64748b; font-size: .78rem; text-transform: uppercase; padding: 6px 8px; border-bottom: 2px solid #e2e8f0; }
+    .b103-table td { padding: 8px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b103-han { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
+    .b103-py2 { font-family: monospace; font-weight: 700; }
+    .b103-vi { color: #475569; }
+    .b103-note { color: #64748b; font-style: italic; font-size: .88rem; }
+    .b103-pair { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+    .b103-pair-title { font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .b103-line { border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+    .b103-line .han { font-size: 1.25rem; font-weight: 900; color: #0f172a; }
+    .b103-line .meta { color: #475569; font-size: .9rem; }
+    .b103-dlg { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px 18px; }
+    .b103-turn { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+    .b103-turn:last-child { margin-bottom: 0; }
+    .b103-who { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white; flex-shrink: 0; }
+    .b103-who.a { background: #2563eb; }
+    .b103-who.b { background: #059669; }
+    .b103-tip { background: #fefce8; border: 2px solid #fde047; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+    .b103-trap { background: #fff1f2; border: 2px solid #fda4af; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+    .b103-bad { color: #be123c; text-decoration: line-through; }
+    .b103-ok { color: #166534; font-weight: 700; }
+    .b103-key { background: linear-gradient(135deg, #0f172a, #064e3b); color: white; border-radius: 16px; padding: 20px 22px; margin-top: 16px; }
+    .b103-key table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .b103-key td { padding: 8px 10px; border-top: 1px solid rgba(255,255,255,0.15); vertical-align: top; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "💬 Bài 10.3 - Cách dùng 呢 (ne)",
+        "呢 đọc ngang thanh, đứng cuối câu hoặc sau chủ ngữ. Nó hỏi ngược lại, hỏi thân mật, hoặc nhấn mạnh “đang... đấy”."
+    )
+
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
+        "📚 Lý thuyết",
+        "📝 Ví dụ đối chiếu",
+        "⚠️ Lưu ý & Mẹo nhớ",
+        "🎮 Luyện tập"
+    ])
+
+    cases = [
+        {
+            "color": "#059669",
+            "bg": "#ecfdf5",
+            "title": "1. Hỏi ngược lại — “còn ... thì sao?”",
+            "desc": "Khi câu trước đã nêu một người hoặc một việc, 呢？ dùng để hỏi về phần còn lại. Giống “thì sao?” trong tiếng Việt.",
+            "formula": [
+                ("Câu", "#6ee7b7"),
+                (",", "#94a3b8"),
+                ("呢？", "#6ee7b7", True),
+            ],
+            "rows": [
+                ("你呢？", "Nǐ ne?", "Còn bạn thì sao?", "Hỏi lại người vừa nói"),
+                ("我很好，你呢？", "Wǒ hěn hǎo, nǐ ne?", "Tôi khỏe, còn bạn?", "Trả lời xong rồi hỏi lại"),
+                ("今天很热，明天呢？", "Jīntiān hěn rè, míngtiān ne?", "Hôm nay nóng, còn ngày mai?", "Hỏi về khả năng còn lại"),
+                ("苹果五块，香蕉呢？", "Píngguǒ wǔ kuài, xiāngjiāo ne?", "Táo năm nghìn, còn chuối?", "Hỏi giá món khác"),
+            ],
+        },
+        {
+            "color": "#2563eb",
+            "bg": "#eff6ff",
+            "title": "2. Hỏi thông tin — nhẹ nhàng, thân mật",
+            "desc": "Đặt 呢 cuối câu hỏi có từ để hỏi (什么, 谁, 哪儿...) hoặc sau chủ ngữ để hỏi “còn A thì...?”. 呢 khiến câu hỏi nghe tò mò, thân mật hơn.",
+            "formula": [
+                ("Chủ ngữ", "#93c5fd"),
+                ("+", "#94a3b8"),
+                ("呢", "#93c5fd", True),
+                (",", "#e2e8f0"),
+                ("... ?", "#93c5fd"),
+            ],
+            "rows": [
+                ("你在哪儿呢？", "Nǐ zài nǎr ne?", "Bạn đang ở đâu đấy?", "Thân mật hơn 你在哪儿？"),
+                ("你喜欢吃什么呢？", "Nǐ xǐhuan chī shénme ne?", "Bạn thích ăn gì thế?", "Hỏi thăm, kỳ vọng được chia sẻ"),
+                ("他呢，会不会说中文？", "Tā ne, huì bu huì shuō Zhōngwén?", "Còn anh ấy thì có biết tiếng Trung không?", "呢 sau chủ ngữ = còn... thì"),
+                ("这家店呢，贵不贵？", "Zhè jiā diàn ne, guì bu guì?", "Còn cửa hàng này thì đắt không?", "Chuyển sang đối tượng mới để hỏi"),
+            ],
+        },
+        {
+            "color": "#d97706",
+            "bg": "#fffbeb",
+            "title": "3. “Đang ... đấy” — hành động tiếp diễn",
+            "desc": "Với động từ hành động (吃, 做, 写, 睡, 等...), thêm 在/正/正在 + 呢 cuối câu để nhấn mạnh việc đang xảy ra ngay lúc nói. Đây là cách nói “thì hiện tại tiếp diễn” của tiếng Trung.",
+            "formula": [
+                ("Chủ ngữ", "#fcd34d"),
+                ("+ 在/正/正在", "#fcd34d", True),
+                ("+ Động từ + (Tân ngữ)", "#fcd34d"),
+                ("+ 呢", "#fcd34d", True),
+                ("。", "#e2e8f0"),
+            ],
+            "rows": [
+                ("我在做饭呢，你等一下。", "Wǒ zài zuòfàn ne, nǐ děng yíxià.", "Tôi đang nấu cơm, bạn đợi chút.", "在 + 做饭 + 呢"),
+                ("她正在睡觉呢。", "Tā zhèngzài shuìjiào ne.", "Cô ấy đang ngủ đấy.", "正在 nhấn mạnh hơn 在"),
+                ("别吵，我在写作业呢。", "Bié chǎo, wǒ zài xiě zuòyè ne.", "Đừng ồn, tôi đang làm bài tập.", "Ngụ ý: đừng làm phiền"),
+                ("我们正等你呢！", "Wǒmen zhèng děng nǐ ne!", "Chúng tôi đang đợi bạn đấy!", "正 = ngay lúc này"),
+            ],
+        },
+        {
+            "color": "#be123c",
+            "bg": "#fff1f2",
+            "title": "4. Nhấn mạnh — “rồi đấy, mà”",
+            "desc": "呢 cuối câu trần thuật nhấn mạnh điều người nói khẳng định: đã xong rồi, biết từ lâu, hoặc tôi nói thật đấy. Hay đi với 已经/早就/都.",
+            "formula": [
+                ("Câu trần thuật", "#fda4af"),
+                ("+ 呢", "#fda4af", True),
+                ("。", "#e2e8f0"),
+            ],
+            "rows": [
+                ("钱我已经付了呢。", "Qián wǒ yǐjīng fù le ne.", "Tiền tôi trả rồi đấy.", "Ngụ ý: đừng đòi nữa"),
+                ("我早就知道呢。", "Wǒ zǎo jiù zhīdào ne.", "Tôi biết từ lâu rồi mà.", "早就 + 呢"),
+                ("事情都解决了呢。", "Shìqing dōu jiějué le ne.", "Mọi việc đã giải quyết xong rồi.", "都 ... 了 + 呢"),
+                ("他在家呢。", "Tā zài jiā ne.", "Anh ấy đang ở nhà đấy.", "Nhấn mạnh, ngụ ý rõ ràng"),
+            ],
+        },
+    ]
+
+    with tab_theory:
+        st.markdown("""
+        <div class="b103-hero">
+            <div class="b103-char">呢</div>
+            <div class="b103-py">ne · thanh ngang</div>
+            <div class="b103-tag">Trợ từ cuối câu / sau chủ ngữ</div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br/>", unsafe_allow_html=True)
+
+        for case in cases:
+            spans = ""
+            for part in case["formula"]:
+                text, color = part[0], part[1]
+                big = len(part) > 2 and part[2]
+                size = "2rem" if big else "1.05rem"
+                spans += (
+                    f'<span style="color:{color};font-size:{size};font-weight:800;margin:0 4px;">{text}</span>'
+                )
+            rows = ""
+            for han, py, vi, note in case["rows"]:
+                rows += f"""
+                <tr>
+                    <td class="b103-han">{han}</td>
+                    <td class="b103-py2" style="color:{case['color']};">{py}</td>
+                    <td class="b103-vi">{vi}</td>
+                    <td class="b103-note">{note}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div class="b103-rule" style="border-left:5px solid {case['color']};background:{case['bg']};">
+                <h4 style="color:{case['color']};">{case['title']}</h4>
+                <p class="b103-desc">{case['desc']}</p>
+                <div class="b103-formula">{spans}</div>
+                <table class="b103-table">
+                    <thead>
+                        <tr style="color:{case['color']};">
+                            <th>Chữ Hán</th><th>Pinyin</th><th>Nghĩa</th><th>Vì sao có 呢</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with tab_examples:
+        st.markdown("### 吗 hỏi có/không · 呢 hỏi ngược lại và “đang”")
+        st.markdown("""
+        <div class="b103-pair">
+            <div class="b103-pair-title">Bạn có phải học sinh không? — vs — Còn bạn thì sao?</div>
+            <div class="b103-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">你是学生吗？</div>
+                <div class="meta">Nǐ shì xuéshēng ma? — Chưa biết, hỏi có/không.</div>
+            </div>
+            <div class="b103-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">你呢？你是学生吗？</div>
+                <div class="meta">Nǐ ne? Nǐ shì xuéshēng ma? — Còn bạn thì sao? Bạn là học sinh không?</div>
+            </div>
+        </div>
+        <div class="b103-pair">
+            <div class="b103-pair-title">“Đang làm gì?” — ba cách nói</div>
+            <div class="b103-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">你做什么？</div>
+                <div class="meta">Nǐ zuò shénme? — Bạn làm gì? (trung lập, có thể hỏi thói quen)</div>
+            </div>
+            <div class="b103-line" style="background:#fffbeb;border-left:4px solid #d97706;">
+                <div class="han">你在做什么？</div>
+                <div class="meta">Nǐ zài zuò shénme? — Bạn đang làm gì? (nhấn mạnh lúc này)</div>
+            </div>
+            <div class="b103-line" style="background:#fffbeb;border-left:4px solid #d97706;">
+                <div class="han">你在做什么呢？</div>
+                <div class="meta">Nǐ zài zuò shénme ne? — Bạn đang làm gì đấy? (thân mật, tò mò)</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### Hội thoại ngắn — hỏi thăm bạn bè")
+        st.caption("呢 xuất hiện ba lần: hỏi lại, hỏi thông tin, và “đang... đấy”.")
+        st.markdown("""
+        <div class="b103-dlg">
+            <div class="b103-turn">
+                <div class="b103-who a">A</div>
+                <div class="han" style="font-size:1.15rem;font-weight:800;">你好吗？</div>
+                <div class="meta" style="color:#64748b;">Nǐ hǎo ma? — Bạn khỏe không?</div>
+            </div>
+            <div class="b103-turn">
+                <div class="b103-who b">B</div>
+                <div class="han" style="font-size:1.15rem;font-weight:800;">我很好，你呢？</div>
+                <div class="meta" style="color:#64748b;">Wǒ hěn hǎo, nǐ ne? — Tôi khỏe, còn bạn?</div>
+            </div>
+            <div class="b103-turn">
+                <div class="b103-who a">A</div>
+                <div class="han" style="font-size:1.15rem;font-weight:800;">我也很好。你在做什么呢？</div>
+                <div class="meta" style="color:#64748b;">Wǒ yě hěn hǎo. Nǐ zài zuò shénme ne? — Tôi cũng khỏe. Bạn đang làm gì đấy?</div>
+            </div>
+            <div class="b103-turn">
+                <div class="b103-who b">B</div>
+                <div class="han" style="font-size:1.15rem;font-weight:800;">我在看书呢。你呢？</div>
+                <div class="meta" style="color:#64748b;">Wǒ zài kàn shū ne. Nǐ ne? — Tôi đang đọc sách đấy. Còn bạn?</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_tips:
+        st.markdown("""
+        <div class="b103-tip">
+            <div style="font-weight:800;font-size:1.05rem;color:#713f12;margin-bottom:8px;">Một câu để nhớ</div>
+            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Hỏi lại → 呢？ &nbsp;·&nbsp; “Đang... đấy” → 在/正 + V + 呢 &nbsp;·&nbsp; Nhấn mạnh → ...了/都 + 呢</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        traps = [
+            (
+                "呢 đọc thanh ngang",
+                "Viết <b>ne</b>, không dấu. Không đọc né, nē hay nè. Trong câu, 呢 không nhấn.",
+            ),
+            (
+                "呢 không thay 吗 trong câu hỏi có/không",
+                "你是学生<b>吗</b>？ = chưa biết. <span class='b103-bad'>你是学生呢？</span> nghe không tự nhiên. Dùng 呢 khi hỏi lại, hỏi thông tin, hoặc “đang”.",
+            ),
+            (
+                "呢 chỉ mang nghĩa “đang” với động từ hành động",
+                "吃饭, 做作业, 看书, 等 → được: 我在吃饭<b>呢</b>. Nhưng 是, 喜欢, 知道 là trạng thái → không diễn tả tiếp diễn.",
+            ),
+            (
+                "呢 đứng cuối câu hoặc sau chủ ngữ",
+                "我在看书<b>呢</b> ✓ &nbsp; 他<b>呢</b>，会说中文 ✓ &nbsp; <span class='b103-bad'>我呢在看书。</span> ✗",
+            ),
+            (
+                "呢 và 吧 khác nhau",
+                "我们去吃饭<b>吧</b> = rủ đi ăn. 我们去吃饭<b>呢</b> = chúng tôi đang đi ăn đấy. 吧 rủ/kêu, 呢 thông báo đang làm.",
+            ),
+        ]
+        for title, body in traps:
+            st.markdown(f"""
+            <div class="b103-trap">
+                <div style="font-weight:800;color:#9f1239;margin-bottom:4px;">⚠️ {title}</div>
+                <div style="color:#334155;line-height:1.55;">{body}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="b103-key">
+            <div style="font-weight:800;font-size:1.05rem;">Bảng chọn nhanh</div>
+            <table>
+                <tr><td style="width:34%;font-weight:700;">Việc người nói muốn</td><td>Câu</td></tr>
+                <tr><td>Hỏi lại “còn... thì sao?”</td><td>你呢？ / 明天呢？</td></tr>
+                <tr><td>Hỏi thông tin, thân mật</td><td>你在哪儿呢？ / 你喜欢什么呢？</td></tr>
+                <tr><td>Nói “đang... đấy”</td><td>我在做饭呢。 / 她正在睡觉呢。</td></tr>
+                <tr><td>Nhấn mạnh “rồi đấy, mà”</td><td>钱我已经付了呢。 / 我早就知道呢。</td></tr>
+                <tr><td>Hỏi có/không (không dùng 呢)</td><td>你是学生吗？</td></tr>
+            </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.markdown("Chọn câu hoặc chữ đúng. Nộp bài để xem giải thích.")
+        quiz_data = [
+            {
+                "q": "“Tôi khỏe, còn bạn thì sao?”",
+                "options": ["我很好，你吗？", "我很好，你呢？", "我很好，你吧？"],
+                "answer": "我很好，你呢？",
+                "explain": "Hỏi ngược lại “còn... thì sao?” dùng 呢, không dùng 吗 hay 吧."
+            },
+            {
+                "q": "“Bạn đang làm gì đấy?” (thân mật, tò mò)",
+                "options": ["你做什么呢？", "你做什么吗？", "你做什么吧？"],
+                "answer": "你做什么呢？",
+                "explain": "什么 đã là từ để hỏi. Thêm 呢 cuối câu cho sắc thái thân mật. 吗/吧 không đứng sau từ để hỏi."
+            },
+            {
+                "q": "“Tôi đang nấu cơm, bạn đợi chút.”",
+                "options": ["我做饭呢，你等一下。", "我在做饭呢，你等一下。", "我做饭吗，你等一下。"],
+                "answer": "我在做饭呢，你等一下。",
+                "explain": "Diễn tả “đang” cần 在/正/正在 trước động từ + 呢 cuối câu."
+            },
+            {
+                "q": "Điền vào chỗ trống: 你___，会不会说中文？ (Còn bạn thì có biết tiếng Trung không?)",
+                "options": ["呢", "吗", "吧"],
+                "answer": "呢",
+                "explain": "呢 sau chủ ngữ = “còn... thì...?”. 吗 chỉ hỏi có/không, 吧 là đoán/rủ."
+            },
+            {
+                "q": "Câu nào đúng?",
+                "options": ["他在家呢。", "他呢在家。", "他在家吗呢。"],
+                "answer": "他在家呢。",
+                "explain": "呢 đứng cuối câu khi nhấn mạnh “đang ở nhà đấy”. 呢 không đứng giữa câu."
+            },
+            {
+                "q": "“Tiền tôi trả rồi đấy.” (ngụ ý: đừng đòi nữa)",
+                "options": ["钱我付了呢。", "钱我呢付了。", "钱付了吗呢。"],
+                "answer": "钱我付了呢。",
+                "explain": "已/了 + 呢 cuối câu = nhấn mạnh đã xong, “rồi đấy”."
+            },
+            {
+                "q": "Hôm nay nóng, còn ngày mai thì sao?",
+                "options": ["今天很热，明天呢？", "今天很热，明天吗？", "今天很热，明天吧？"],
+                "answer": "今天很热，明天呢？",
+                "explain": "Hỏi về khả năng còn lại trong so sánh dùng 呢. 吗 là hỏi có/không, 吧 là đoán."
+            },
+            {
+                "q": "Câu nào sai?",
+                "options": ["我在看书呢。", "你是学生呢？", "你在哪儿呢？"],
+                "answer": "你是学生呢？",
+                "explain": "是 là động từ trạng thái, câu hỏi có/không phải dùng 吗: 你是学生吗？ 呢 chỉ dùng hỏi lại/thông tin/đang."
+            },
+        ]
+
+        if "b103_submitted" not in st.session_state:
+            st.session_state.b103_submitted = False
+        if "b103_answers" not in st.session_state:
+            st.session_state.b103_answers = {}
+
+        for i, q in enumerate(quiz_data):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Câu {i+1}. {q['q']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b103_a{i}"
+            st.radio(
+                f"Chọn đáp án câu {i+1}:",
+                q["options"],
+                key=key,
+                horizontal=True,
+                disabled=st.session_state.b103_submitted,
+                label_visibility="collapsed",
+            )
+            if st.session_state.b103_submitted:
+                user_ans = st.session_state.b103_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"Đúng. {q['explain']}")
+                else:
+                    st.error(f"Đáp án đúng: **{q['answer']}**. {q['explain']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b103_submitted:
+                if st.button("Nộp bài", use_container_width=True, key="b103_submit", type="primary"):
+                    st.session_state.b103_answers = {
+                        f"b103_a{i}": st.session_state.get(f"b103_a{i}") for i in range(len(quiz_data))
+                    }
+                    st.session_state.b103_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b103_submitted:
+                if st.button("Làm lại", use_container_width=True, key="b103_reset"):
+                    st.session_state.b103_submitted = False
+                    st.session_state.b103_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b103_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+
+        if st.session_state.b103_submitted:
+            correct = sum(
+                1 for i, q in enumerate(quiz_data)
+                if st.session_state.b103_answers.get(f"b103_a{i}") == q["answer"]
+            )
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "Nắm vững cả bốn cách dùng 呢."
+            elif pct >= 70:
+                msg = "Xem lại các câu sai, nhất là chỗ 呢 khác 吗 và 吧."
+            else:
+                msg = "Đọc lại phần Lý thuyết rồi làm lại."
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#1e3a8a,#065f46);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
+                <div>{pct}% đúng</div>
+                <div style="margin-top:8px;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
