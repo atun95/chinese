@@ -490,3 +490,357 @@ def show_lesson10_1_ba():
                 <div style="margin-top:8px;font-weight:700;">{msg}</div>
             </div>
             """, unsafe_allow_html=True)
+
+
+def show_lesson10_2_constituents():
+    st.markdown("""
+    <style>
+    .b102-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .b102-rung { border-radius: 16px; padding: 16px 18px; border: 2px solid; box-sizing: border-box; }
+    .b102-rung h3 { margin: 0 0 4px 0; }
+    .b102-rung .sub { margin: 0 0 8px 0; color: #334155; line-height: 1.5; }
+    .b102-w1 { width: 100%; background: #dbeafe; border-color: #2563eb; }
+    .b102-w2 { width: 93%; background: #ecfdf5; border-color: #059669; }
+    .b102-w3 { width: 86%; background: #fef3c7; border-color: #d97706; }
+    .b102-w4 { width: 79%; background: #fdf2f8; border-color: #db2777; }
+    .b102-w5 { width: 72%; background: #f3e8ff; border-color: #9333ea; }
+    .b102-arrow { color: #94a3b8; font-weight: 800; font-size: 0.85rem; }
+    .b102-ex { font-size: 1.35rem; font-weight: 900; color: #0f172a; }
+    .b102-py { font-family: monospace; color: #c2410c; font-weight: 700; }
+    .b102-vi { color: #475569; font-style: italic; }
+    .b102-chip { display: inline-block; margin: 4px 6px 0 0; padding: 4px 8px; border-radius: 8px; font-weight: 800; background: rgba(255,255,255,.75); border: 1px solid rgba(15,23,42,.08); }
+    .b102-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+    .b102-card h4 { margin: 0 0 6px 0; }
+    .b102-num { display: inline-block; background: #0f172a; color: #fff; border-radius: 8px; padding: 2px 8px; margin-right: 8px; font-size: 0.85rem; }
+    .b102-han { font-size: 1.2rem; font-weight: 800; color: #0f172a; }
+    .b102-sent { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+    .b102-tok { border-radius: 10px; padding: 8px 10px; min-width: 72px; }
+    .b102-tok .hz { font-size: 1.25rem; font-weight: 900; }
+    .b102-tok .role { font-size: 0.75rem; font-weight: 800; }
+    .b102-formula { background: #0f172a; color: #fff; border-radius: 12px; padding: 14px 16px; font-weight: 700; line-height: 1.7; margin-bottom: 12px; }
+    .b102-map { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .b102-map th, .b102-map td { text-align: left; padding: 8px 10px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b102-map th { color: #64748b; font-size: 0.78rem; text-transform: uppercase; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "🧩 Bài 10.2 - Các loại từ",
+        "Câu bắt đầu bằng chủ ngữ và vị ngữ. Các phần còn lại gắn dần vào hai phần này, càng xuống càng nhỏ."
+    )
+
+    tab_map, tab_parts, tab_words, tab_quiz = st.tabs([
+        "Các loại từ",
+        "📘 Thành phần câu",
+        "🔤 Phó từ",
+        "🎮 Luyện tập",
+    ])
+
+    with tab_map:
+        st.markdown("""
+        <div class="b102-stack">
+          <div class="b102-rung b102-w1">
+            <h3>1 · 主语 (zhǔyǔ) - chủ ngữ + 谓语 (wèiyǔ) - vị ngữ</h3>
+            <div class="b102-ex">老师 / 来了。</div>
+            <div class="b102-py">Lǎoshī / lái le.</div>
+            <div class="b102-vi">老师 là chủ ngữ, 来了 là vị ngữ. (Thầy giáo đến rồi)</div>
+          </div>
+          <div class="b102-rung b102-w2">
+            <h3>2 · 宾语 (bīnyǔ) - tân ngữ</h3>
+            <div class="b102-ex">老师 / 喜欢 / 菜。</div>
+            <div class="b102-py">Lǎoshī / xǐhuan / cài.</div>
+            <div class="b102-vi">老师 là chủ ngữ, 喜欢 là vị ngữ, 菜 là tân ngữ đứng sau động từ. (Thầy giáo thích món ăn)</div>
+          </div>
+          <div class="b102-rung b102-w3">
+            <h3>3 · 状语 (zhuàngyǔ) - trạng ngữ · 补语 (bǔyǔ) - bổ ngữ</h3>
+            <div class="b102-ex">老师 / 很 / 喜欢 / 菜。</div>
+            <div class="b102-py">Lǎoshī / hěn / xǐhuan / cài.</div>
+            <div class="b102-vi">很 là trạng ngữ (đứng trước vị ngữ 喜欢).</div>
+            <div class="b102-ex" style="margin-top:10px;">他 / 说 / 得 / 很好。</div>
+            <div class="b102-py">Tā / shuō / de / hěn hǎo.</div>
+            <div class="b102-vi">很好 là bổ ngữ (đứng sau vị ngữ 说 qua 得).</div>
+          </div>
+          <div class="b102-rung b102-w4">
+            <h3>4 · 定语 (dìngyǔ) - định ngữ</h3>
+            <div class="b102-ex">我的 / 老师 / 很 / 喜欢 / 中国 / 菜。</div>
+            <div class="b102-py">Wǒ de / lǎoshī / hěn / xǐhuan / Zhōngguó / cài.</div>
+            <div class="b102-vi">我的 là định ngữ bổ nghĩa cho 老师, 中国 là định ngữ bổ nghĩa cho 菜. (Thầy giáo của tôi rất thích món ăn Trung Quốc)</div>
+          </div>
+          <div class="b102-rung b102-w5">
+            <h3>5 · 副词 (fùcí) - phó từ</h3>
+            <div class="b102-ex">他 / 不 / 吃 / 米饭。</div>
+            <div class="b102-py">Tā / bù / chī / mǐfàn.</div>
+            <div class="b102-vi">不 là phó từ (đứng trước động từ 吃, làm trạng ngữ).</div>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_parts:
+        st.markdown("""
+        <div class="b102-card">
+          <h4><span class="b102-num">1</span>主语 và 谓语 (Chủ ngữ & Vị ngữ)</h4>
+          <div class="b102-han">老师来了。</div>
+          <div class="b102-py">Lǎoshī lái le.</div>
+          <div class="b102-vi">Thầy giáo đến rồi. (老师 là chủ ngữ, 来了 là vị ngữ)</div>
+        </div>
+        <div class="b102-card">
+          <h4><span class="b102-num">2</span>宾语 (bīnyǔ) - Tân ngữ</h4>
+          <p><b>Vị trí:</b> Đứng <b>sau động từ vị ngữ</b>, là đối tượng tiếp nhận hoặc chịu tác động của hành động.</p>
+          <div class="b102-sent">
+            <div class="b102-tok" style="background:#dbeafe;"><div class="role">主语</div><div class="hz">老师</div></div>
+            <div class="b102-tok" style="background:#bbf7d0;"><div class="role">谓语</div><div class="hz">喜欢</div></div>
+            <div class="b102-tok" style="background:#fecaca;"><div class="role">宾语</div><div class="hz">菜</div></div>
+          </div>
+          <div class="b102-han">老师喜欢菜。</div>
+          <div class="b102-py">Lǎoshī xǐhuan cài.</div>
+          <div class="b102-vi">Thầy giáo thích món ăn. (菜 là tân ngữ của 喜欢)</div>
+        </div>
+        <div class="b102-card">
+          <h4><span class="b102-num">3</span>状语 (zhuàngyǔ) - Trạng ngữ</h4>
+          <p><b>1. Đứng ở đâu (Cấu trúc)?</b>
+            <br>• Luôn đứng <b>trước Vị ngữ</b> (Động từ / Tính từ):
+            <br><code style="background:#f1f5f9;padding:3px 8px;border-radius:6px;font-weight:700;color:#0f172a;">Chủ ngữ + [ Trạng ngữ ] + Vị ngữ (Động từ / Tính từ) + Tân ngữ</code>
+            <br>• <i>Trạng ngữ chỉ thời gian / địa điểm cũng có thể đứng ở đầu câu (trước Chủ ngữ).</i>
+          </p>
+          <p><b>2. Thường là loại từ gì?</b>
+            <br>• <b>Phó từ</b> (mức độ, phủ định, phạm vi...): 很, 太, 非常, 不, 没, 也, 都
+            <br>• <b>Danh từ / Cụm thời gian, nơi chốn</b>: 今天, 明天, 现在, 在学校, 在家
+            <br>• <b>Tính từ / Cụm tính từ</b> (thường có trợ từ 地): 认真地 (chăm chỉ), 慢慢地 (từ từ)
+          </p>
+          <div class="b102-sent">
+            <div class="b102-tok" style="background:#dbeafe;"><div class="role">主语</div><div class="hz">老师</div></div>
+            <div class="b102-tok" style="background:#fde68a;"><div class="role">状语</div><div class="hz">很</div></div>
+            <div class="b102-tok" style="background:#bbf7d0;"><div class="role">谓语</div><div class="hz">喜欢</div></div>
+            <div class="b102-tok" style="background:#fecaca;"><div class="role">宾语</div><div class="hz">菜</div></div>
+          </div>
+          <div class="b102-han">老师很喜欢菜。</div>
+          <div class="b102-py">Lǎoshī hěn xǐhuan cài.</div>
+          <div class="b102-vi">很 là trạng ngữ (phó từ) đứng trước vị ngữ 喜欢. (Thầy giáo rất thích món ăn)</div>
+        </div>
+        <div class="b102-card">
+          <h4><span class="b102-num">4</span>补语 (bǔyǔ) - Bổ ngữ</h4>
+          <p><b>1. Đứng ở đâu (Cấu trúc)?</b>
+            <br>• Luôn đứng <b>ngay sau Vị ngữ</b> (Động từ / Tính từ):
+            <br><code style="background:#f1f5f9;padding:3px 8px;border-radius:6px;font-weight:700;color:#0f172a;">Động từ + 得 + [ Bổ ngữ ]</code> <i>(Bổ ngữ trạng thái / trình độ)</i>
+            <br><code style="background:#f1f5f9;padding:3px 8px;border-radius:6px;font-weight:700;color:#0f172a;">Động từ + [ Bổ ngữ ]</code> <i>(Bổ ngữ kết quả, số lượng)</i>
+          </p>
+          <p><b>2. Thường là loại từ gì?</b>
+            <br>• <b>Tính từ / Cụm tính từ</b> (đứng sau 得, đánh giá trình độ, mức độ): 好, 快, 很好, 很快 (说得很好 - nói rất hay)
+            <br>• <b>Động từ / Tính từ kết quả</b> (đứng sát sau động từ): 懂 (hiểu), 见 (thấy), 完 (xong), 饱 (no) (听懂 - nghe hiểu, 做完 - làm xong)
+            <br>• <b>Số từ + Lượng từ</b> (thời lượng, số lần): 一次 (1 lần), 两年 (2 năm) (学了两年 - học hai năm)
+          </p>
+          <div class="b102-sent">
+            <div class="b102-tok" style="background:#dbeafe;"><div class="role">主语</div><div class="hz">他</div></div>
+            <div class="b102-tok" style="background:#bbf7d0;"><div class="role">谓语</div><div class="hz">说</div></div>
+            <div class="b102-tok" style="background:#fef9c3;"><div class="role">助词</div><div class="hz">得</div></div>
+            <div class="b102-tok" style="background:#e9d5ff;"><div class="role">补语</div><div class="hz">很好</div></div>
+          </div>
+          <div class="b102-han">他说得很好。</div>
+          <div class="b102-py">Tā shuō de hěn hǎo.</div>
+          <div class="b102-vi">很好 là bổ ngữ (cụm tính từ) đứng sau vị ngữ 说 (qua 得), nói rõ mức độ nói tốt.</div>
+        </div>
+        <div class="b102-card">
+          <h4><span class="b102-num">5</span>定语 (dìngyǔ) - Định ngữ</h4>
+          <p><b>1. Đứng ở đâu (Cấu trúc)?</b>
+            <br>• Luôn đứng <b>trước Danh từ (Trung tâm ngữ)</b>:
+            <br><code style="background:#f1f5f9;padding:3px 8px;border-radius:6px;font-weight:700;color:#0f172a;">[ Định ngữ ] + (的) + Danh từ (Chủ ngữ hoặc Tân ngữ)</code>
+            <br>• <i>⚡ Lưu ý: Thứ tự ngược hoàn toàn với tiếng Việt (Tiếng Việt: "Sách của tôi" → Tiếng Trung: "Tôi của sách" 我的书).</i>
+          </p>
+          <p><b>2. Thường là loại từ gì?</b>
+            <br>• <b>Đại từ / Danh từ</b> (sở hữu, phân loại, nguồn gốc): 我的 (của tôi), 老师的 (của thầy cô), 中国 (Trung Quốc)
+            <br>• <b>Tính từ / Cụm tính từ</b> (miêu tả đặc điểm, tính chất): 好 (tốt), 漂亮的 (đẹp)
+            <br>• <b>Số từ + Lượng từ</b> (chỉ số lượng): 一位 (một vị), 三本 (ba quyển)
+          </p>
+          <div class="b102-sent">
+            <div class="b102-tok" style="background:#fde68a;"><div class="role">定语</div><div class="hz">我的</div></div>
+            <div class="b102-tok" style="background:#dbeafe;"><div class="role">主语</div><div class="hz">老师</div></div>
+            <div class="b102-tok" style="background:#fde68a;"><div class="role">状语</div><div class="hz">很</div></div>
+            <div class="b102-tok" style="background:#bbf7d0;"><div class="role">谓语</div><div class="hz">喜欢</div></div>
+            <div class="b102-tok" style="background:#fecaca;"><div class="role">定语</div><div class="hz">中国</div></div>
+            <div class="b102-tok" style="background:#fca5a5;"><div class="role">宾语</div><div class="hz">菜</div></div>
+          </div>
+          <div class="b102-han">我的老师很喜欢中国菜。</div>
+          <div class="b102-py">Wǒ de lǎoshī hěn xǐhuan Zhōngguó cài.</div>
+          <div class="b102-vi">我的 (định ngữ) bổ nghĩa cho 老师 (chủ ngữ) &nbsp;|&nbsp; 中国 (định ngữ) bổ nghĩa cho 菜 (tân ngữ). (Thầy giáo của tôi rất thích món ăn Trung Quốc)</div>
+        </div>
+
+        """, unsafe_allow_html=True)
+
+    with tab_words:
+        st.markdown("""
+        <div class="b102-card">
+          <h4><span class="b102-num">★</span>副词 (fùcí) · Phó từ</h4>
+          <p><b>Đặc điểm & Vị trí:</b> Phó từ dùng để bổ nghĩa cho động từ hoặc tính từ. Phó từ <b>luôn đứng trước Động từ / Tính từ</b> và giữ vai trò làm <b>Trạng ngữ</b> trong câu.</p>
+          <div class="b102-formula">📌 Cấu trúc: Phó từ + Động từ / Tính từ &nbsp;&nbsp;(Không đứng độc lập làm chủ ngữ hay tân ngữ)</div>
+        </div>
+
+        <div class="b102-card">
+          <h4 style="color:#2563eb;">1. Phó từ chỉ mức độ (程度副词)</h4>
+          <table class="b102-map">
+            <tr><th style="width:130px;">Phó từ</th><th>Pinyin & Nghĩa</th><th>Ví dụ</th><th>Dịch nghĩa</th></tr>
+            <tr><td><b>很</b></td><td>hěn · rất</td><td><b>很</b>好 / <b>很</b>喜欢</td><td>rất tốt / rất thích</td></tr>
+            <tr><td><b>太</b></td><td>tài · quá, lắm</td><td><b>太</b>大 / <b>太</b>累了</td><td>quá to / quá mệt rồi</td></tr>
+            <tr><td><b>非常</b></td><td>fēicháng · vô cùng, cực kỳ</td><td><b>非常</b>高兴</td><td>vô cùng vui mừng</td></tr>
+            <tr><td><b>最</b></td><td>zuì · nhất</td><td><b>最</b>喜欢 / <b>最</b>大</td><td>thích nhất / to nhất</td></tr>
+            <tr><td><b>比较</b></td><td>bǐjiào · khá, tương đối</td><td><b>比较</b>好</td><td>tương đối tốt / khá tốt</td></tr>
+            <tr><td><b>真</b></td><td>zhēn · thật là</td><td><b>真</b>好吃</td><td>thật là ngon</td></tr>
+          </table>
+        </div>
+
+        <div class="b102-card">
+          <h4 style="color:#dc2626;">2. Phó từ phủ định (否定副词)</h4>
+          <table class="b102-map">
+            <tr><th style="width:130px;">Phó từ</th><th>Pinyin & Nghĩa</th><th>Ví dụ</th><th>Dịch nghĩa</th></tr>
+            <tr><td><b>不</b></td><td>bù · không (thói quen, hiện tại, tương lai)</td><td><b>不</b>吃 / <b>不</b>去</td><td>không ăn / không đi</td></tr>
+            <tr><td><b>没 / 没有</b></td><td>méi / méiyǒu · chưa, không (hành động đã/chưa xảy ra)</td><td><b>没</b>来 / <b>没</b>做</td><td>chưa đến / chưa làm</td></tr>
+            <tr><td><b>别</b></td><td>bié · đừng (khuyên ngăn, cấm đoán)</td><td><b>别</b>说 / <b>别</b>走</td><td>đừng nói / đừng đi</td></tr>
+          </table>
+        </div>
+
+        <div class="b102-card">
+          <h4 style="color:#059669;">3. Phó từ chỉ phạm vi (范围副词)</h4>
+          <table class="b102-map">
+            <tr><th style="width:130px;">Phó từ</th><th>Pinyin & Nghĩa</th><th>Ví dụ</th><th>Dịch nghĩa</th></tr>
+            <tr><td><b>都</b></td><td>dōu · đều</td><td>我们<b>都</b>去</td><td>chúng tôi đều đi</td></tr>
+            <tr><td><b>只</b></td><td>zhǐ · chỉ</td><td><b>只</b>买一个</td><td>chỉ mua một cái</td></tr>
+            <tr><td><b>一共</b></td><td>yígòng · tổng cộng</td><td><b>一共</b>多少钱</td><td>tổng cộng bao nhiêu tiền</td></tr>
+            <tr><td><b>一起</b></td><td>yìqǐ · cùng nhau</td><td><b>一起</b>学</td><td>cùng nhau học</td></tr>
+          </table>
+        </div>
+
+        <div class="b102-card">
+          <h4 style="color:#d97706;">4. Phó từ chỉ thời gian & tần suất (时间/频率副词)</h4>
+          <table class="b102-map">
+            <tr><th style="width:130px;">Phó từ</th><th>Pinyin & Nghĩa</th><th>Ví dụ</th><th>Dịch nghĩa</th></tr>
+            <tr><td><b>正在 / 在</b></td><td>zhèngzài / zài · đang</td><td><b>正在</b>看书</td><td>đang đọc sách</td></tr>
+            <tr><td><b>已经</b></td><td>yǐjīng · đã (rồi)</td><td><b>已经</b>走了</td><td>đã đi rồi</td></tr>
+            <tr><td><b>常常 / 常</b></td><td>chángcháng · thường, thường xuyên</td><td><b>常常</b>去</td><td>thường xuyên đi</td></tr>
+            <tr><td><b>又</b></td><td>yòu · lại (hành động lặp lại đã xảy ra)</td><td>他<b>又</b>来了</td><td>anh ấy lại đến rồi</td></tr>
+            <tr><td><b>再</b></td><td>zài · lại, nữa (hành động lặp lại chưa xảy ra)</td><td><b>再</b>见 / <b>再</b>吃一个</td><td>hẹn gặp lại / ăn thêm một cái nữa</td></tr>
+          </table>
+        </div>
+
+        <div class="b102-card">
+          <h4 style="color:#7c3aed;">5. Phó từ chỉ ngữ khí & liên kết (语气/关联副词)</h4>
+          <table class="b102-map">
+            <tr><th style="width:130px;">Phó từ</th><th>Pinyin & Nghĩa</th><th>Ví dụ</th><th>Dịch nghĩa</th></tr>
+            <tr><td><b>也</b></td><td>yě · cũng</td><td>我<b>也</b>喜欢</td><td>tôi cũng thích</td></tr>
+            <tr><td><b>就</b></td><td>jiù · thì, ngay, liền</td><td>我<b>就</b>去</td><td>tôi đi ngay đây</td></tr>
+            <tr><td><b>才</b></td><td>cái · mới (muộn, khó khăn)</td><td>他<b>才</b>来</td><td>anh ấy mới đến</td></tr>
+            <tr><td><b>一定</b></td><td>yídìng · nhất định</td><td><b>一定</b>要来</td><td>nhất định phải đến</td></tr>
+            <tr><td><b>真的</b></td><td>zhēnde · thật sự</td><td><b>真的</b>很好</td><td>thật sự rất tốt</td></tr>
+          </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        quiz = [
+            {
+                "q": "Phần lớn nhất của câu là cặp nào?",
+                "options": ["主语 + 谓语", "定语 + 助词", "副词 + 补语"],
+                "answer": "主语 + 谓语",
+                "explain": "Khung câu là chủ ngữ và vị ngữ. Các phần khác gắn vào sau."
+            },
+            {
+                "q": "宾语 đứng ở đâu?",
+                "options": ["Sau động từ vị ngữ", "Trước chủ ngữ", "Cuối câu, sau 吧"],
+                "answer": "Sau động từ vị ngữ",
+                "explain": "老师喜欢菜. 菜 là tân ngữ, đứng sau 喜欢."
+            },
+            {
+                "q": "状语 và 补语 nằm thế nào so với vị ngữ?",
+                "options": ["Trạng ngữ phía trước, bổ ngữ phía sau", "Cả hai đứng trước chủ ngữ", "Cả hai là tân ngữ"],
+                "answer": "Trạng ngữ phía trước, bổ ngữ phía sau",
+                "explain": "很喜欢: 很 ở trước. 说得很好: 很好 ở sau."
+            },
+            {
+                "q": "定语 gắn vào tiếng nào?",
+                "options": ["Danh từ của chủ ngữ hoặc tân ngữ", "Trợ từ ngữ khí cuối câu", "Chỉ gắn vào phó từ"],
+                "answer": "Danh từ của chủ ngữ hoặc tân ngữ",
+                "explain": "我的 đứng trước 老师. 中国 đứng trước 菜."
+            },
+            {
+                "q": "Trong 很喜欢, 很 là gì?",
+                "options": ["Phó từ, làm trạng ngữ", "Tân ngữ", "Trợ từ ngữ khí"],
+                "answer": "Phó từ, làm trạng ngữ",
+                "explain": "很 là 副词, ngồi trước vị ngữ 喜欢."
+            },
+            {
+                "q": "的, 地, 得 lần lượt bám vào đâu?",
+                "options": ["Định ngữ, trạng ngữ, bổ ngữ", "Chủ ngữ, vị ngữ, tân ngữ", "Cả ba đứng cuối câu"],
+                "answer": "Định ngữ, trạng ngữ, bổ ngữ",
+                "explain": "我的老师, 慢慢地走, 说得很好."
+            },
+            {
+                "q": "吧 trong 我们去吧 thuộc nhóm nào?",
+                "options": ["Trợ từ ngữ khí, cuối câu", "Định ngữ", "Vị ngữ"],
+                "answer": "Trợ từ ngữ khí, cuối câu",
+                "explain": "吧 cùng nhóm 吗, 呢. Nó đứng ngoài sáu thành phần lớn."
+            },
+            {
+                "q": "Trong 他说得很好, 很好 là gì?",
+                "options": ["补语", "主语", "定语"],
+                "answer": "补语",
+                "explain": "说 là vị ngữ, 得 là trợ từ, 很好 là bổ ngữ."
+            },
+        ]
+
+        if "b102_submitted" not in st.session_state:
+            st.session_state.b102_submitted = False
+        if "b102_answers" not in st.session_state:
+            st.session_state.b102_answers = {}
+
+        for i, q in enumerate(quiz):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.05rem;font-weight:800;color:#0f172a;">Câu {i+1}. {q['q']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b102_a{i}"
+            st.radio(
+                f"Chọn đáp án câu {i+1}:",
+                q["options"],
+                key=key,
+                horizontal=False,
+                disabled=st.session_state.b102_submitted,
+                label_visibility="collapsed",
+            )
+            if st.session_state.b102_submitted:
+                user_ans = st.session_state.b102_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"Đúng. {q['explain']}")
+                else:
+                    st.error(f"Đáp án đúng: **{q['answer']}**. {q['explain']}")
+
+        c1, c2 = st.columns(2)
+        with c1:
+            if not st.session_state.b102_submitted:
+                if st.button("Nộp bài", use_container_width=True, key="b102_submit", type="primary"):
+                    st.session_state.b102_answers = {
+                        f"b102_a{i}": st.session_state.get(f"b102_a{i}") for i in range(len(quiz))
+                    }
+                    st.session_state.b102_submitted = True
+                    st.rerun()
+        with c2:
+            if st.session_state.b102_submitted:
+                if st.button("Làm lại", use_container_width=True, key="b102_reset"):
+                    st.session_state.b102_submitted = False
+                    st.session_state.b102_answers = {}
+                    for i in range(len(quiz)):
+                        key = f"b102_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+
+        if st.session_state.b102_submitted:
+            correct = sum(
+                1 for i, q in enumerate(quiz)
+                if st.session_state.b102_answers.get(f"b102_a{i}") == q["answer"]
+            )
+            total = len(quiz)
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#1e3a8a,#a16207);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3rem;font-weight:900;">{correct}/{total}</div>
+                <div>{int(correct / total * 100)}% đúng</div>
+            </div>
+            """, unsafe_allow_html=True)

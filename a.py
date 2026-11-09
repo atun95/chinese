@@ -600,7 +600,8 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 9.2 - So sánh 不 và 没",
         "Bài 9.3 - Hậu tố 子 (zi)",
         "Bài 9.4 - So sánh 二 và 两",
-        "Bài 10.1 - Cách dùng 吧 (ba)"
+        "Bài 10.1 - Cách dùng 吧 (ba)",
+        "Bài 10.2 - Các loại từ"
     ])
 elif mode == "📖 Hệ thống từ vựng":
     menu = st.sidebar.radio("Chọn bảng từ vựng:", [
@@ -791,6 +792,9 @@ elif menu == "Bài 9.4 - So sánh 二 và 两":
 
 elif menu == "Bài 10.1 - Cách dùng 吧 (ba)":
     lesson10.show_lesson10_1_ba()
+
+elif menu == "Bài 10.2 - Các loại từ":
+    lesson10.show_lesson10_2_constituents()
 
 elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
