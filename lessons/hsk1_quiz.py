@@ -353,6 +353,43 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                 st.session_state.hsk1_exam_choice = key
                 st.rerun()
             st.markdown("<br/>", unsafe_allow_html=True)
+
+        # ================= XEM LẠI BÀI ĐÃ NỘP (SUPABASE) =================
+        with st.expander("📋 Xem bài làm học viên đã nộp (Đề 2 - Bài test HSK 1)"):
+            try:
+                sb_client = supabase_client.get_supabase_client()
+                if sb_client:
+                    res = sb_client.table("hsk1_exam2_answers").select(
+                        "id,student_name,score,max_score,part_scores,answers,order_answers,essay,submitted_at"
+                    ).order("submitted_at", desc=True).limit(50).execute()
+                    rows = res.data or []
+                    if not rows:
+                        st.info("Chưa có bài nộp nào trong database.")
+                    else:
+                        overview = [{
+                            "Học viên": r.get("student_name", "Ẩn danh"),
+                            "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
+                            "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
+                            "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
+                            "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
+                            "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
+                            "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
+                            "Phần VIII": (r.get("part_scores") or {}).get("p8", "-"),
+                            "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
+                        } for r in rows]
+                        st.dataframe(overview, use_container_width=True)
+
+                        labels = [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows]
+                        pick = st.selectbox("Chọn bài để xem chi tiết:", labels, key="hsk1_exam2_pick_menu")
+                        sel = rows[labels.index(pick)]
+                        st.markdown("**Bài tự luận (Phần IX):**")
+                        st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_menu")
+                        st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
+                        st.markdown(render_exam2_review(sel), unsafe_allow_html=True)
+                else:
+                    st.warning("Chưa kết nối được Supabase.")
+            except Exception as e:
+                st.error(f"Lỗi tải bài nộp: {e}")
         return
 
     # ================= NÚT QUAY LẠI DANH SÁCH ĐỀ =================
@@ -451,48 +488,6 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             st.markdown("<br/>", unsafe_allow_html=True)
 
             components.html(html_content, height=900, scrolling=True)
-
-            # ================= XEM LẠI BÀI ĐÃ NỘP (SUPABASE) =================
-            with st.expander("📋 Xem bài làm học viên đã nộp"):
-                try:
-                    sb_client = supabase_client.get_supabase_client()
-                    if sb_client:
-                        res = sb_client.table("hsk1_exam2_answers").select(
-                            "id,student_name,score,max_score,part_scores,answers,order_answers,essay,submitted_at"
-                        ).order("submitted_at", desc=True).limit(50).execute()
-                        rows = res.data or []
-                        if not rows:
-                            st.info("Chưa có bài nộp nào trong database.")
-                        else:
-                            # Bảng tổng quan
-                            overview = [{
-                                "Học viên": r.get("student_name", "Ẩn danh"),
-                                "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
-                                "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
-                                "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
-                                "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
-                                "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
-                                "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
-                                "Phần VIII": (r.get("part_scores") or {}).get("p8", "-"),
-                                "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
-                            } for r in rows]
-                            st.dataframe(overview, use_container_width=True)
-
-                            # Chi tiết từng bài
-                            pick = st.selectbox(
-                                "Chọn bài để xem chi tiết:",
-                                [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows],
-                                key="hsk1_exam2_pick"
-                            )
-                            sel = rows[[f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows].index(pick)]
-                            st.markdown(f"**Bài tự luận (Phần IX):**")
-                            st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view")
-                            st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
-                            st.markdown(render_exam2_review(sel), unsafe_allow_html=True)
-                    else:
-                        st.warning("Chưa kết nối được Supabase.")
-                except Exception as e:
-                    st.error(f"Lỗi tải bài nộp: {e}")
 
             if only_part == "full":
                 st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
