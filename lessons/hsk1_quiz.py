@@ -136,7 +136,7 @@ def render_exam2_review(sel):
     # ---------- PHẦN VIII: Ngữ pháp ----------
     qs = data.get("part8Data", [])
     if qs:
-        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần VIII. Ngữ pháp điền từ</h4>")
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần VI. Ngữ pháp điền từ</h4>")
         for i, q in enumerate(qs, 1):
             stem = f"<span style='color:#2563eb;font-weight:800;'>{i}.</span> <span style='font-size:1.15rem;font-weight:800;letter-spacing:1px;'>{q.get('q','')}</span>"
             out.append(mcq_html(q, stem))
@@ -374,7 +374,7 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                             "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
                             "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
                             "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
-                            "Phần VIII": (r.get("part_scores") or {}).get("p8", "-"),
+                            "Phần VI": (r.get("part_scores") or {}).get("p8", "-"),
                             "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
                         } for r in rows]
                         st.dataframe(overview, use_container_width=True)
@@ -427,8 +427,8 @@ h4 {{ margin: 22px 0 10px 0; }}
             ("III. Sắp xếp câu (10 câu)", "3"),
             ("IV. Đúng / Sai (10 câu)", "4"),
             ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
-            ("VIII. Ngữ pháp (10 câu)", "8"),
-            ("VII. Viết đoạn văn (tự luận)", "9"),
+            ("VI. Ngữ pháp (10 câu)", "8"),
+            ("VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "9"),
             ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
         ]
         part_labels = [p[0] for p in part_options]
