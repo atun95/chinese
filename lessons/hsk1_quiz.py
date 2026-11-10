@@ -385,7 +385,28 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                         st.markdown("**Bài tự luận (Phần IX):**")
                         st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_menu")
                         st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
-                        st.markdown(render_exam2_review(sel), unsafe_allow_html=True)
+                        frag = render_exam2_review(sel)
+                        review_page = f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>
+body {{ font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; padding: 18px; margin: 0; color: #1f2937; }}
+.zh {{ font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif; }}
+h4 {{ margin: 22px 0 10px 0; }}
+</style></head><body>{frag}
+<script>
+(function(){{
+  function fit(){{
+    try{{
+      var h = document.body ? document.body.scrollHeight : 0;
+      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
+    }}catch(e){{}}
+  }}
+  window.addEventListener('load', function(){{ setTimeout(fit, 100); }});
+  var t = setInterval(fit, 500);
+  setTimeout(function(){{ clearInterval(t); }}, 5000);
+}})();
+</script>
+</body></html>"""
+                        components.html(review_page, height=1200, scrolling=True)
                 else:
                     st.warning("Chưa kết nối được Supabase.")
             except Exception as e:
