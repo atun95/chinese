@@ -382,7 +382,7 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                         labels = [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows]
                         pick = st.selectbox("Chọn bài để xem chi tiết:", labels, key="hsk1_exam2_pick_menu")
                         sel = rows[labels.index(pick)]
-                        st.markdown("**Bài tự luận (Phần IX):**")
+                        st.markdown("**Bài tự luận (Phần VII):**")
                         st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_menu")
                         st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
                         frag = render_exam2_review(sel)
@@ -428,7 +428,7 @@ h4 {{ margin: 22px 0 10px 0; }}
             ("IV. Đúng / Sai (10 câu)", "4"),
             ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
             ("VIII. Ngữ pháp (10 câu)", "8"),
-            ("IX. Viết đoạn văn (tự luận)", "9"),
+            ("VII. Viết đoạn văn (tự luận)", "9"),
             ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
         ]
         part_labels = [p[0] for p in part_options]
