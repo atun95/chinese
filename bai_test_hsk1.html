@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,11 +33,13 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
+      /* Firefox */
     }
 
     *::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Edge */
+      display: none;
+      /* Chrome, Safari, Edge */
     }
 
     body {
@@ -58,7 +61,7 @@
       top: 0;
       z-index: 100;
       background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       border-bottom: 2px solid var(--primary);
     }
 
@@ -167,7 +170,8 @@
       transition: all 0.2s;
     }
 
-    .nav-pill:hover, .nav-pill.active {
+    .nav-pill:hover,
+    .nav-pill.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
@@ -355,13 +359,15 @@
       transition: all 0.2s;
     }
 
-    .tf-btn.btn-true:hover, .tf-btn.btn-true.selected {
+    .tf-btn.btn-true:hover,
+    .tf-btn.btn-true.selected {
       background: var(--success-light);
       border-color: var(--success);
       color: var(--success);
     }
 
-    .tf-btn.btn-false:hover, .tf-btn.btn-false.selected {
+    .tf-btn.btn-false:hover,
+    .tf-btn.btn-false.selected {
       background: var(--primary-light);
       border-color: var(--danger);
       color: var(--danger);
@@ -387,7 +393,7 @@
       font-size: 1.25rem;
       font-family: var(--font-zh);
       cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
       transition: all 0.2s;
       user-select: none;
     }
@@ -395,7 +401,7 @@
     .word-chip:hover {
       border-color: var(--secondary);
       transform: translateY(-2px);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
     }
 
     .word-chip.used {
@@ -572,7 +578,7 @@
       right: 0;
       background: white;
       border-top: 2px solid var(--gray-300);
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
       padding: 12px 20px;
       z-index: 99;
     }
@@ -648,7 +654,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       display: none;
       align-items: center;
       justify-content: center;
@@ -662,14 +668,21 @@
       width: 100%;
       max-width: 580px;
       padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       text-align: center;
       animation: modalFadeIn 0.3s ease;
     }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .score-circle {
@@ -727,28 +740,38 @@
     }
 
     @media print {
-      .test-header, .bottom-bar, .section-nav, .order-actions, .audio-btn {
+
+      .test-header,
+      .bottom-bar,
+      .section-nav,
+      .order-actions,
+      .audio-btn {
         display: none !important;
       }
+
       body {
         background: white;
         padding-bottom: 0;
       }
+
       .section-card {
         box-shadow: none;
         border: 1px solid #ccc;
         page-break-inside: avoid;
       }
+
       .target-slot {
         min-height: 35px;
         border: 1px solid #000;
       }
+
       .explanation-box {
         display: block !important;
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Sticky Header -->
@@ -763,7 +786,7 @@
       <div class="header-controls">
         <div class="candidate-info">
           <label for="studentName" style="font-size: 0.85rem; font-weight: 600;">Họ tên:</label>
-          <input type="text" id="studentName" placeholder="Nhập tên học viên..." >
+          <input type="text" id="studentName" placeholder="Nhập tên học viên...">
         </div>
         <div class="timer-box">
           <span>⏱️</span>
@@ -780,8 +803,8 @@
         <a href="#sec-3" class="nav-pill">Phần III: Sắp xếp câu (10c)</a>
         <a href="#sec-4" class="nav-pill">Phần IV: Đúng/Sai (10c)</a>
         <a href="#sec-5" class="nav-pill">Phần V: Đọc hiểu đoạn văn (5c)</a>
-        <a href="#sec-8" class="nav-pill">Phần VIII: Ngữ pháp trắc nghiệm (10c)</a>
-        <a href="#sec-9" class="nav-pill">Phần VII: Viết đoạn văn (5đ)</a>
+        <a href="#sec-8" class="nav-pill">Phần VI: Ngữ pháp trắc nghiệm (10c)</a>
+        <a href="#sec-9" class="nav-pill">Phần VII: Viết đoạn văn ngắn giới thiệu bản thân(5đ)</a>
       </div>
     </nav>
   </header>
@@ -854,12 +877,14 @@
         <small style="color: var(--gray-600)">Đọc kỹ đoạn văn ngắn về Lý Minh rồi chọn đáp án đúng</small>
       </div>
       <div class="section-body">
-        
+
         <!-- Đoạn văn bài đọc -->
         <div class="passage-box">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <strong style="color: #d9480f; font-size: 1rem;">📖 ĐOẠN VĂN ĐỌC HIỂU (短文)</strong>
-            <button type="button" class="audio-btn" style="width: auto; height: auto; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem;" onclick="speakChinese(passageText)">
+            <button type="button" class="audio-btn"
+              style="width: auto; height: auto; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem;"
+              onclick="speakChinese(passageText)">
               🔊 Nghe bài đọc
             </button>
           </div>
@@ -867,7 +892,11 @@
             我叫李明，今年二十岁，是一名大学生。我在北京的一所大学学习汉语。我的专业是中文，我很喜欢汉语和中国文化。我的家有四口人：爸爸、妈妈、我和妹妹。我的妹妹今年十五岁，是一名中学生。她也喜欢学习汉语。我们常常一起看电影、听音乐，有时候也去公园散步。周末我喜欢去图书馆看书，或者和朋友去打篮球。
           </div>
           <div class="passage-content-pinyin">
-            Wǒ jiào Lǐ Míng, jīnnián èrshí suì, shì yì míng dàxuéshēng. Wǒ zài Běijīng de yì suǒ dàxué xuéxí Hànyǔ. Wǒ de zhuānyè shì Zhōngwén, wǒ hěn xǐhuan Hànyǔ hé Zhōngguó wénhuà. Wǒ de jiā yǒu sì kǒu rén: bàba, māma, wǒ hé mèimei. Wǒ de mèimei jīnnián shíwǔ suì, shì yì míng zhōngxuéshēng. Tā yě xǐhuan xuéxí Hànyǔ. Wǒmen chángcháng yìqǐ kàn diànyǐng, tīng yīnyuè, yǒu shíhou yě qù gōngyuán sànbù. Zhōumò wǒ xǐhuan qù túshūguǎn kàn shū, huòzhě hé péngyou qù dǎ lánqiú.
+            Wǒ jiào Lǐ Míng, jīnnián èrshí suì, shì yì míng dàxuéshēng. Wǒ zài Běijīng de yì suǒ dàxué xuéxí Hànyǔ. Wǒ
+            de zhuānyè shì Zhōngwén, wǒ hěn xǐhuan Hànyǔ hé Zhōngguó wénhuà. Wǒ de jiā yǒu sì kǒu rén: bàba, māma, wǒ hé
+            mèimei. Wǒ de mèimei jīnnián shíwǔ suì, shì yì míng zhōngxuéshēng. Tā yě xǐhuan xuéxí Hànyǔ. Wǒmen
+            chángcháng yìqǐ kàn diànyǐng, tīng yīnyuè, yǒu shíhou yě qù gōngyuán sànbù. Zhōumò wǒ xǐhuan qù túshūguǎn
+            kàn shū, huòzhě hé péngyou qù dǎ lánqiú.
           </div>
         </div>
 
@@ -911,14 +940,16 @@
           </ul>
         </div>
 
-        <textarea id="essayInput" class="writing-textarea" placeholder="Nhập bài viết bằng chữ Hán tại đây (ví dụ: 你好！我叫王华，今年二十岁...)..."></textarea>
-        
+        <textarea id="essayInput" class="writing-textarea"
+          placeholder="Nhập bài viết bằng chữ Hán tại đây (ví dụ: 你好！我叫王华，今年二十岁...)..."></textarea>
+
         <div class="writing-footer">
           <div>
             Số ký tự: <strong id="charCount">0</strong> chữ | Ước tính: <strong id="sentenceCount">0</strong> câu
           </div>
           <div>
-            <button type="button" class="btn-reset-order" onclick="toggleSampleEssay()">👁️ Xem đoạn văn mẫu tham khảo</button>
+            <button type="button" class="btn-reset-order" onclick="toggleSampleEssay()">👁️ Xem đoạn văn mẫu tham
+              khảo</button>
           </div>
         </div>
 
@@ -932,7 +963,10 @@
             很高兴认识大家！
           </p>
           <p style="margin-top: 6px; font-size: 0.85rem; color: #555;">
-            <em>Dịch nghĩa: Xin chào! Tôi tên là Nguyễn Minh, năm nay 21 tuổi, là sinh viên đại học. Tôi rất thích học tiếng Trung, cũng thích xem phim Trung Quốc. Nhà tôi có 4 người: bố, mẹ, anh trai và tôi. Cuối tuần tôi thường cùng bạn đến thư viện đọc sách, thỉnh thoảng cũng đi công viên dạo bộ. Rất vui được làm quen với mọi người!</em>
+            <em>Dịch nghĩa: Xin chào! Tôi tên là Nguyễn Minh, năm nay 21 tuổi, là sinh viên đại học. Tôi rất thích học
+              tiếng Trung, cũng thích xem phim Trung Quốc. Nhà tôi có 4 người: bố, mẹ, anh trai và tôi. Cuối tuần tôi
+              thường cùng bạn đến thư viện đọc sách, thỉnh thoảng cũng đi công viên dạo bộ. Rất vui được làm quen với
+              mọi người!</em>
           </p>
         </div>
       </div>
@@ -970,7 +1004,8 @@
         <div class="result-item">Phần IV (Đúng/Sai): <strong id="score-p4">0/10</strong></div>
         <div class="result-item">Phần V (Đọc hiểu): <strong id="score-p5">0/5</strong></div>
         <div class="result-item">Phần VIII (Ngữ pháp): <strong id="score-p8">0/10</strong></div>
-        <div class="result-item" style="grid-column: span 2;">Phần VII (Tự luận viết): <strong>Đã ghi nhận để giáo viên chấm (tối đa 5đ)</strong></div>
+        <div class="result-item" style="grid-column: span 2;">Phần VII (Tự luận viết): <strong>Đã ghi nhận để giáo viên
+            chấm (tối đa 5đ)</strong></div>
       </div>
 
       <div style="margin: 14px 0;">
@@ -1106,7 +1141,7 @@
     let userAnswers = {};
     let userOrderAnswers = {}; // { '3_1': ['我', '是', '学生。'] }
     let scoreP1_global = 0, scoreP2_global = 0, scoreP3_global = 0,
-        scoreP4_global = 0, scoreP5_global = 0, scoreP8_global = 0;
+      scoreP4_global = 0, scoreP5_global = 0, scoreP8_global = 0;
 
     // Chế độ chia phần: Streamlit có thể truyền window.__EXAM_ONLY_PART__ = '1'|'2'|'3'|'4'|'5'|'8'|'9'
     const ONLY_PART = window.__EXAM_ONLY_PART__ || null;
@@ -1117,7 +1152,7 @@
     const LS_ESSAY = 'hsk1x_essay';
 
     function saveAnswers() {
-      try { localStorage.setItem(LS_ANS, JSON.stringify(userAnswers)); } catch(e) {}
+      try { localStorage.setItem(LS_ANS, JSON.stringify(userAnswers)); } catch (e) { }
     }
     function saveOrder() {
       try {
@@ -1126,7 +1161,7 @@
           simple[qId] = (userOrderAnswers[qId] || []).map(x => x.word);
         });
         localStorage.setItem(LS_ORD, JSON.stringify(simple));
-      } catch(e) {}
+      } catch (e) { }
     }
 
     // TTS PHÁT ÂM TIẾNG TRUNG
@@ -1428,7 +1463,7 @@
       const sentences = text.length > 0 ? text.split(/[。？！.?!]+/).filter(s => s.trim().length > 0).length : 0;
       document.getElementById('charCount').innerText = chars;
       document.getElementById('sentenceCount').innerText = sentences;
-      try { localStorage.setItem(LS_ESSAY, essayInput.value); } catch(e) {}
+      try { localStorage.setItem(LS_ESSAY, essayInput.value); } catch (e) { }
     });
 
     function toggleSampleEssay() {
@@ -1477,7 +1512,7 @@
           },
           body: JSON.stringify(payload)
         });
-      } catch(e) {
+      } catch (e) {
         console.warn('Không lưu được đáp án lên Supabase:', e);
       }
     }
@@ -1577,7 +1612,7 @@
         const exp = document.getElementById(`exp-${q.id}`);
         if (!item || !exp) return;
         exp.style.display = 'block';
-        
+
         let isCorrect = false;
         // Câu 8_6 xử lý linh hoạt: B (在) hoặc D (去)
         if (q.id === "8_6") {
@@ -1728,7 +1763,7 @@
           essayInput.value = savedEssay;
           essayInput.dispatchEvent(new Event('input'));
         }
-      } catch(e) {}
+      } catch (e) { }
     }
 
     // INIT
@@ -1764,4 +1799,5 @@
     });
   </script>
 </body>
+
 </html>
