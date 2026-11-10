@@ -1,0 +1,599 @@
+{
+ "part1Data": [
+  {
+   "id": "1_1",
+   "zh": "你好",
+   "py": "nǐ hǎo",
+   "options": [
+    "A. Xin chào",
+    "B. Tạm biệt",
+    "C. Cảm ơn",
+    "D. Xin lỗi"
+   ],
+   "ans": 0,
+   "exp": "你好 (nǐ hǎo) = Xin chào."
+  },
+  {
+   "id": "1_2",
+   "zh": "学生",
+   "py": "xuésheng",
+   "options": [
+    "A. Giáo viên",
+    "B. Học sinh",
+    "C. Bạn bè",
+    "D. Gia đình"
+   ],
+   "ans": 1,
+   "exp": "学生 (xuésheng) = Học sinh, sinh viên."
+  },
+  {
+   "id": "1_3",
+   "zh": "书",
+   "py": "shū",
+   "options": [
+    "A. Sách",
+    "B. Bút",
+    "C. Vở",
+    "D. Bàn"
+   ],
+   "ans": 0,
+   "exp": "书 (shū) = Sách."
+  },
+  {
+   "id": "1_4",
+   "zh": "水",
+   "py": "shuǐ",
+   "options": [
+    "A. Nước",
+    "B. Trà",
+    "C. Sữa",
+    "D. Cà phê"
+   ],
+   "ans": 0,
+   "exp": "水 (shuǐ) = Nước."
+  },
+  {
+   "id": "1_5",
+   "zh": "爸爸",
+   "py": "bàba",
+   "options": [
+    "A. Mẹ",
+    "B. Bố",
+    "C. Anh",
+    "D. Em trai"
+   ],
+   "ans": 1,
+   "exp": "爸爸 (bàba) = Bố, ba."
+  },
+  {
+   "id": "1_6",
+   "zh": "今天",
+   "py": "jīntiān",
+   "options": [
+    "A. Hôm qua",
+    "B. Hôm nay",
+    "C. Ngày mai",
+    "D. Tuần này"
+   ],
+   "ans": 1,
+   "exp": "今天 (jīntiān) = Hôm nay."
+  },
+  {
+   "id": "1_7",
+   "zh": "喜欢",
+   "py": "xǐhuan",
+   "options": [
+    "A. Thích",
+    "B. Ghét",
+    "C. Vui",
+    "D. Buồn"
+   ],
+   "ans": 0,
+   "exp": "喜欢 (xǐhuan) = Thích."
+  },
+  {
+   "id": "1_8",
+   "zh": "中国",
+   "py": "Zhōngguó",
+   "options": [
+    "A. Trung Quốc",
+    "B. Nhật Bản",
+    "C. Hàn Quốc",
+    "D. Việt Nam"
+   ],
+   "ans": 0,
+   "exp": "中国 (Zhōngguó) = Trung Quốc."
+  },
+  {
+   "id": "1_9",
+   "zh": "老师",
+   "py": "lǎoshī",
+   "options": [
+    "A. Học sinh",
+    "B. Giáo viên",
+    "C. Bác sĩ",
+    "D. Kỹ sư"
+   ],
+   "ans": 1,
+   "exp": "老师 (lǎoshī) = Giáo viên, thầy/cô giáo."
+  },
+  {
+   "id": "1_10",
+   "zh": "朋友",
+   "py": "péngyou",
+   "options": [
+    "A. Bạn bè",
+    "B. Anh chị",
+    "C. Gia đình",
+    "D. Đồng nghiệp"
+   ],
+   "ans": 0,
+   "exp": "朋友 (péngyou) = Bạn bè."
+  }
+ ],
+ "part2Data": [
+  {
+   "id": "2_1",
+   "zh": "我是中国人。",
+   "py": "Wǒ shì Zhōngguó rén.",
+   "vi": "Tôi là người Trung Quốc.",
+   "ans": "D",
+   "exp": "Đúng. '我是中国人' chính là 'Tôi là người Trung Quốc'."
+  },
+  {
+   "id": "2_2",
+   "zh": "他是老师。",
+   "py": "Tā shì lǎoshī.",
+   "vi": "Anh ấy là giáo viên.",
+   "ans": "D",
+   "exp": "Đúng. '他是老师' nghĩa là 'Anh ấy là giáo viên'."
+  },
+  {
+   "id": "2_3",
+   "zh": "我不喜欢喝茶。",
+   "py": "Wǒ bù xǐhuan hē chá.",
+   "vi": "Tôi không thích uống trà.",
+   "ans": "D",
+   "exp": "Đúng. 不 (không) + 喜欢 (thích) + 喝茶 (uống trà)."
+  },
+  {
+   "id": "2_4",
+   "zh": "今天是星期天。",
+   "py": "Jīntiān shì Xīngqītiān.",
+   "vi": "Hôm nay là Chủ nhật.",
+   "ans": "D",
+   "exp": "Đúng. 星期天 (Xīngqītiān) = Chủ nhật."
+  },
+  {
+   "id": "2_5",
+   "zh": "她有一本书。",
+   "py": "Tā yǒu yì běn shū.",
+   "vi": "Cô ấy có một quyển sách.",
+   "ans": "D",
+   "exp": "Đúng. 她 (Cô ấy) + 有 (có) + 一本书 (một quyển sách)."
+  },
+  {
+   "id": "2_6",
+   "zh": "我们在学校。",
+   "py": "Wǒmen zài xuéxiào.",
+   "vi": "Chúng tôi ở trường.",
+   "ans": "D",
+   "exp": "Đúng. 我们 (Chúng tôi) + 在 (ở) + 学校 (trường học)."
+  },
+  {
+   "id": "2_7",
+   "zh": "这个是我的朋友。",
+   "py": "Zhège shì wǒ de péngyou.",
+   "vi": "Đây là bạn của tôi.",
+   "ans": "D",
+   "exp": "Đúng. 这个 (cái này/người này/đây) + 是我的朋友 (là bạn tôi)."
+  },
+  {
+   "id": "2_8",
+   "zh": "他不喝咖啡。",
+   "py": "Tā bù hē kāfēi.",
+   "vi": "Anh ấy không uống cà phê.",
+   "ans": "D",
+   "exp": "Đúng. 他 (Anh ấy) + 不喝咖啡 (không uống cà phê)."
+  },
+  {
+   "id": "2_9",
+   "zh": "明天我去公园。",
+   "py": "Míngtiān wǒ qù gōngyuán.",
+   "vi": "Ngày mai tôi đi công viên.",
+   "ans": "D",
+   "exp": "Đúng. 明天 (Ngày mai) + 我去公园 (tôi đi công viên)."
+  },
+  {
+   "id": "2_10",
+   "zh": "我没有手机。",
+   "py": "Wǒ méiyǒu shǒujī.",
+   "vi": "Tôi có điện thoại.",
+   "ans": "S",
+   "exp": "Sai. '没有' nghĩa là 'không có'. Câu đúng phải dịch là: 'Tôi không có điện thoại'."
+  }
+ ],
+ "part3Data": [
+  {
+   "id": "3_1",
+   "tokens": [
+    "我",
+    "是",
+    "学生。"
+   ],
+   "correct": "我是学生。",
+   "exp": "Cấu trúc: Chủ ngữ + 是 + Tân ngữ danh từ."
+  },
+  {
+   "id": "3_2",
+   "tokens": [
+    "你",
+    "叫什么",
+    "名字？"
+   ],
+   "correct": "你叫什么名字？",
+   "exp": "Cấu trúc hỏi tên: 你叫什么名字？(Bạn tên là gì?)."
+  },
+  {
+   "id": "3_3",
+   "tokens": [
+    "他",
+    "在",
+    "学校",
+    "学习。"
+   ],
+   "correct": "他在学校学习。",
+   "exp": "Cấu trúc: Chủ ngữ + 在 + Địa điểm + Động từ (Làm gì ở đâu)."
+  },
+  {
+   "id": "3_4",
+   "tokens": [
+    "我",
+    "喜欢",
+    "看",
+    "电影。"
+   ],
+   "correct": "我喜欢看电影。",
+   "exp": "Cấu trúc: 我 (Tôi) + 喜欢 (thích) + 看电影 (xem phim)."
+  },
+  {
+   "id": "3_5",
+   "tokens": [
+    "今天",
+    "天气",
+    "很",
+    "好。"
+   ],
+   "correct": "今天天气很好。",
+   "exp": "Cấu trúc vị ngữ tính từ: Chủ ngữ + 很 + Tính từ (không dùng 是)."
+  },
+  {
+   "id": "3_6",
+   "tokens": [
+    "她",
+    "是",
+    "我的",
+    "朋友。"
+   ],
+   "correct": "她是我的朋友。",
+   "exp": "Cấu trúc: Cô ấy là bạn của tôi."
+  },
+  {
+   "id": "3_7",
+   "tokens": [
+    "我们",
+    "去",
+    "公园",
+    "吧。"
+   ],
+   "correct": "我们去公园吧。",
+   "exp": "Trợ từ ngữ khí 吧 đứng cuối câu biểu thị đề nghị, rủ rê."
+  },
+  {
+   "id": "3_8",
+   "tokens": [
+    "他",
+    "不",
+    "喝",
+    "茶。"
+   ],
+   "correct": "他不喝茶。",
+   "exp": "Phó từ phủ định 不 đứng trước động từ 喝."
+  },
+  {
+   "id": "3_9",
+   "tokens": [
+    "这",
+    "是",
+    "一",
+    "本",
+    "书。"
+   ],
+   "correct": "这是一本书。",
+   "exp": "Cấu trúc số từ + lượng từ + danh từ: 一本书 (một quyển sách)."
+  },
+  {
+   "id": "3_10",
+   "tokens": [
+    "你",
+    "有",
+    "手机",
+    "吗？"
+   ],
+   "correct": "你有手机吗？",
+   "exp": "Trợ từ nghi vấn 吗 đứng ở cuối câu hỏi Yes/No."
+  }
+ ],
+ "part4Data": [
+  {
+   "id": "4_1",
+   "zh": "我是学生。",
+   "py": "Wǒ shì xuésheng.",
+   "vi": "Tôi là học sinh.",
+   "ans": "D",
+   "exp": "Đúng. Câu dịch hoàn toàn chính xác."
+  },
+  {
+   "id": "4_2",
+   "zh": "她是老师。",
+   "py": "Tā shì lǎoshī.",
+   "vi": "Cô ấy là giáo viên.",
+   "ans": "D",
+   "exp": "Đúng. 她 (Cô ấy) + 是老师 (là giáo viên)."
+  },
+  {
+   "id": "4_3",
+   "zh": "我喜欢喝咖啡。",
+   "py": "Wǒ xǐhuan hē kāfēi.",
+   "vi": "Tôi thích uống trà.",
+   "ans": "S",
+   "exp": "Sai. 咖啡 (kāfēi) là 'cà phê', không phải 'trà' (trà là 茶 chá)."
+  },
+  {
+   "id": "4_4",
+   "zh": "今天是星期六。",
+   "py": "Jīntiān shì xīngqīliù.",
+   "vi": "Hôm nay là thứ Bảy.",
+   "ans": "D",
+   "exp": "Đúng. 星期六 (xīngqīliù) = Thứ Bảy."
+  },
+  {
+   "id": "4_5",
+   "zh": "他有一个妹妹。",
+   "py": "Tā yǒu yí ge mèimei.",
+   "vi": "Anh ấy có một em gái.",
+   "ans": "D",
+   "exp": "Đúng. 一个妹妹 = một em gái."
+  },
+  {
+   "id": "4_6",
+   "zh": "我们在家。",
+   "py": "Wǒmen zài jiā.",
+   "vi": "Chúng tôi ở trường.",
+   "ans": "S",
+   "exp": "Sai. 家 (jiā) là 'nhà', còn 'trường học' là 学校 (xuéxiào)."
+  },
+  {
+   "id": "4_7",
+   "zh": "这是一杯水。",
+   "py": "Zhè shì yì bēi shuǐ.",
+   "vi": "Đây là một cốc nước.",
+   "ans": "D",
+   "exp": "Đúng. 一杯水 = một cốc/ly nước."
+  },
+  {
+   "id": "4_8",
+   "zh": "我不喜欢运动。",
+   "py": "Wǒ bù xǐhuan yùndòng.",
+   "vi": "Tôi không thích thể thao.",
+   "ans": "D",
+   "exp": "Đúng. 运动 (yùndòng) = vận động, thể thao."
+  },
+  {
+   "id": "4_9",
+   "zh": "明天我去图书馆。",
+   "py": "Míngtiān wǒ qù túshūguǎn.",
+   "vi": "Ngày mai tôi đi thư viện.",
+   "ans": "D",
+   "exp": "Đúng. 图书馆 (túshūguǎn) = thư viện."
+  },
+  {
+   "id": "4_10",
+   "zh": "她没有手机。",
+   "py": "Tā méiyǒu shǒujī.",
+   "vi": "Cô ấy có điện thoại.",
+   "ans": "S",
+   "exp": "Sai. 没有 (méiyǒu) nghĩa là 'không có'. Bản dịch ghi 'có' là sai."
+  }
+ ],
+ "part5Data": [
+  {
+   "id": "5_1",
+   "q_zh": "李明今年多少岁？",
+   "q_py": "Lǐ Míng jīnnián duōshao suì?",
+   "options": [
+    "A. 十五岁 (15 tuổi)",
+    "B. 十八岁 (18 tuổi)",
+    "C. 二十岁 (20 tuổi)",
+    "D. 二十二岁 (22 tuổi)"
+   ],
+   "ans": 2,
+   "exp": "Thông tin trong bài: '我叫李明，今年二十岁' -> 20 tuổi (C)."
+  },
+  {
+   "id": "5_2",
+   "q_zh": "李明的专业是什么？",
+   "q_py": "Lǐ Míng de zhuānyè shì shénme?",
+   "options": [
+    "A. 英语 (Tiếng Anh)",
+    "B. 中文 (Tiếng Trung)",
+    "C. 历史 (Lịch sử)",
+    "D. 数学 (Toán học)"
+   ],
+   "ans": 1,
+   "exp": "Thông tin trong bài: '我的专业是中文' -> Chuyên ngành là Trung văn (B)."
+  },
+  {
+   "id": "5_3",
+   "q_zh": "李明的家有几口人？",
+   "q_py": "Lǐ Míng de jiā yǒu jǐ kǒu rén?",
+   "options": [
+    "A. 三口人 (3 người)",
+    "B. 四口人 (4 người)",
+    "C. 五口人 (5 người)",
+    "D. 六口人 (6 người)"
+   ],
+   "ans": 1,
+   "exp": "Thông tin trong bài: '我的家有四口人：爸爸、妈妈、我和妹妹' -> 4 người (B)."
+  },
+  {
+   "id": "5_4",
+   "q_zh": "李明和妹妹常常做什么？",
+   "q_py": "Lǐ Míng hé mèimei chángcháng zuò shénme?",
+   "options": [
+    "A. 去旅行 (Đi du lịch)",
+    "B. 看电影、听音乐 (Xem phim, nghe nhạc)",
+    "C. 打篮球 (Chơi bóng rổ)",
+    "D. 去图书馆 (Đi thư viện)"
+   ],
+   "ans": 1,
+   "exp": "Thông tin trong bài: '我们常常一起看电影、听音乐' -> B."
+  },
+  {
+   "id": "5_5",
+   "q_zh": "周末李明喜欢做什么？",
+   "q_py": "Zhōumò Lǐ Míng xǐhuan zuò shénme?",
+   "options": [
+    "A. 去公园散步",
+    "B. 看电影",
+    "C. 去图书馆看书",
+    "D. 学习英语"
+   ],
+   "ans": 2,
+   "exp": "Thông tin trong bài: '周末我喜欢去图书馆看书，或者和朋友去打篮球' -> C."
+  }
+ ],
+ "part8Data": [
+  {
+   "id": "8_1",
+   "q": "我____学生。",
+   "options": [
+    "A. 是",
+    "B. 有",
+    "C. 在",
+    "D. 看"
+   ],
+   "ans": 0,
+   "exp": "我是学生 = Tôi là học sinh. Dùng '是' làm vị ngữ nối đại từ và danh từ."
+  },
+  {
+   "id": "8_2",
+   "q": "你____什么？",
+   "options": [
+    "A. 叫",
+    "B. 是",
+    "C. 有",
+    "D. 喝"
+   ],
+   "ans": 0,
+   "exp": "你叫什么？ = Bạn tên là gì? (rút gọn của 你叫什么名字？)."
+  },
+  {
+   "id": "8_3",
+   "q": "他____老师。",
+   "options": [
+    "A. 是",
+    "B. 叫",
+    "C. 在",
+    "D. 去"
+   ],
+   "ans": 0,
+   "exp": "他是老师 = Anh ấy là giáo viên."
+  },
+  {
+   "id": "8_4",
+   "q": "这是____书。",
+   "options": [
+    "A. 我",
+    "B. 我的",
+    "C. 我是",
+    "D. 我有"
+   ],
+   "ans": 1,
+   "exp": "这是我的书 = Đây là sách của tôi. Định ngữ biểu thị sở hữu dùng '的'."
+  },
+  {
+   "id": "8_5",
+   "q": "今天的天气____好。",
+   "options": [
+    "A. 很",
+    "B. 是",
+    "C. 有",
+    "D. 在"
+   ],
+   "ans": 0,
+   "exp": "Câu vị ngữ tính từ tiếng Hán không dùng '是', mà dùng phó từ chỉ mức độ '很' đứng trước tính từ: 很 + 好."
+  },
+  {
+   "id": "8_6",
+   "q": "我们____去公园。",
+   "options": [
+    "A. 是",
+    "B. 在",
+    "C. 有",
+    "D. 去"
+   ],
+   "ans": 1,
+   "exp": "Theo ngữ pháp biểu thị hành động đang diễn tiến: 在 + V (我们在去公园: Chúng tôi đang trên đường đến công viên) hoặc nếu đề gốc hỏi '我们____公园' thì đáp án là 去. Ở đây chọn '在' hoặc '去' đều được chấp nhận hợp lý."
+  },
+  {
+   "id": "8_7",
+   "q": "她____喝咖啡。",
+   "options": [
+    "A. 不",
+    "B. 没有",
+    "C. 也",
+    "D. 很"
+   ],
+   "ans": 0,
+   "exp": "Phủ định thói quen hoặc hiện tại dùng '不': 她不喝咖啡 (Cô ấy không uống cà phê)."
+  },
+  {
+   "id": "8_8",
+   "q": "你____有手机？",
+   "options": [
+    "A. 是",
+    "B. 叫",
+    "C. 在",
+    "D. 有"
+   ],
+   "ans": 3,
+   "exp": "Câu hỏi chính phản: '你有[没有]手机？' hoặc câu hỏi ngữ điệu '你有手机？'. Ở đây chọn D: '有'."
+  },
+  {
+   "id": "8_9",
+   "q": "他是____的爸爸。",
+   "options": [
+    "A. 我",
+    "B. 我的",
+    "C. 我是",
+    "D. 我有"
+   ],
+   "ans": 0,
+   "exp": "他是我的爸爸 (Anh ấy là bố của tôi). Chỗ trống trước '的爸爸' cần đại từ '我' -> '我的爸爸'."
+  },
+  {
+   "id": "8_10",
+   "q": "明天我们____图书馆。",
+   "options": [
+    "A. 去",
+    "B. 在",
+    "C. 是",
+    "D. 有"
+   ],
+   "ans": 0,
+   "exp": "明天我们去图书馆 = Ngày mai chúng tôi đi thư viện. Động từ '去' + địa điểm."
+  }
+ ],
+ "passageText": "我叫李明，今年二十岁，是一名大学生。我在北京的一所大学学习汉语。我的专业是中文，我很喜欢汉语和中国文化。我的家有四口人：爸爸、妈妈、我和妹妹。我的妹妹今年十五岁，是一名中学生。她也喜欢学习汉语。我们常常一起看电影、听音乐，有时候也去公园散步。周末我喜欢去图书馆看书，或者和朋友去打篮球。"
+}

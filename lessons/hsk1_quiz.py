@@ -3,6 +3,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import random
 import csv
+import json
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from ui_utils import render_lesson_intro, render_play_button
@@ -21,6 +22,126 @@ try:
     from hsk1_quizzes_data import QUIZZES_DATA
 except ImportError:
     from lessons.hsk1_quizzes_data import QUIZZES_DATA
+
+EXAM2_DATA_PATH = Path(__file__).resolve().parent / "hsk1_exam2_data.json"
+
+
+def _load_exam2_data():
+    try:
+        return json.loads(EXAM2_DATA_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def render_exam2_review(sel):
+    """Render bài làm của học viên (từ Supabase) dạng chấm điểm, không phải JSON."""
+    data = _load_exam2_data()
+    answers = sel.get("answers") or {}
+    order_ans = sel.get("order_answers") or {}
+    out = []
+
+    def qcard(inner):
+        return f"""
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px 18px;margin-bottom:10px;">
+            {inner}
+        </div>"""
+
+    def mcq_html(q, stem_html, note=""):
+        user = answers.get(q["id"])
+        opts = ""
+        for oi, opt in enumerate(q.get("options", [])):
+            if oi == q.get("ans"):
+                mark, bg, bd, color = "✅", "#f0fdf4", "#22c55e", "#14532d"
+            elif user == oi:
+                mark, bg, bd, color = "❌", "#fef2f2", "#ef4444", "#7f1d1d"
+            else:
+                mark, bg, bd, color = "", "#f8fafc", "#e2e8f0", "#374151"
+            opts += f'<div style="display:flex;gap:8px;align-items:center;background:{bg};border:1.5px solid {bd};border-radius:10px;padding:8px 12px;margin:5px 0;color:{color};font-weight:600;font-size:0.95rem;"><span style="min-width:20px;">{mark}</span><span>{opt}</span></div>'
+        exp = q.get("exp", "")
+        return qcard(f"""
+            <div style="font-weight:800;color:#0f172a;margin-bottom:6px;">{stem_html}</div>
+            {opts}
+            <div style="margin-top:8px;font-size:0.85rem;color:#475569;background:#f8fafc;border-left:3px solid #94a3b8;padding:6px 10px;border-radius:6px;">{exp}</div>
+            {note}
+        """)
+
+    def tf_html(q, idx):
+        user = answers.get(q["id"])
+        correct = "Đúng (Đ)" if q.get("ans") == "D" else "Sai (S)"
+        user_txt = "Đúng (Đ)" if user == "D" else ("Sai (S)" if user == "S" else "(bỏ trống)")
+        ok = user == q.get("ans")
+        return qcard(f"""
+            <div style="font-weight:800;color:#0f172a;">{idx}. <span class="zh" style="font-size:1.1rem;">{q.get('zh','')}</span>
+            <span style="color:#64748b;font-weight:600;"> ({q.get('py','')})</span></div>
+            <div style="color:#475569;font-size:0.9rem;margin:4px 0 8px 0;">{q.get('vi','')}</div>
+            <div style="font-size:0.9rem;">Học viên chọn: <b style="color:{'#15803d' if ok else '#b91c1c'};">{user_txt}</b>
+            &nbsp;|&nbsp; Đáp án: <b>{correct}</b></div>
+            <div style="margin-top:6px;font-size:0.85rem;color:#475569;background:#f8fafc;border-left:3px solid #94a3b8;padding:6px 10px;border-radius:6px;">{q.get('exp','')}</div>
+        """)
+
+    # ---------- PHẦN I: Từ vựng ----------
+    qs = data.get("part1Data", [])
+    if qs:
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần I. Chọn nghĩa đúng của từ vựng</h4>")
+        for i, q in enumerate(qs, 1):
+            stem = f"<span style='color:#2563eb;font-weight:800;'>{i}.</span> <span style='font-size:1.2rem;font-weight:800;'>{q.get('zh','')}</span> <span style='color:#64748b;'>({q.get('py','')})</span>"
+            out.append(mcq_html(q, stem))
+
+    # ---------- PHẦN II: Đúng/Sai ----------
+    qs = data.get("part2Data", [])
+    if qs:
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần II. Đọc câu chọn Đúng/Sai</h4>")
+        for i, q in enumerate(qs, 1):
+            out.append(tf_html(q, i))
+
+    # ---------- PHẦN III: Sắp xếp câu ----------
+    qs = data.get("part3Data", [])
+    if qs:
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần III. Sắp xếp từ thành câu</h4>")
+        for i, q in enumerate(qs, 1):
+            user_words = order_ans.get(q["id"]) or []
+            user_sent = "".join(user_words).replace(" ", "")
+            target = (q.get("correct") or "").replace(" ", "")
+            ok = user_sent == target and bool(user_sent)
+            user_disp = " ".join(user_words) if user_words else "(bỏ trống)"
+            out.append(qcard(f"""
+                <div style="font-weight:800;color:#0f172a;margin-bottom:6px;">{i}. Sắp xếp các từ: <span style="color:#64748b;font-weight:600;">{' '.join(q.get('tokens',[]))}</span></div>
+                <div style="font-size:0.95rem;">Học viên xếp: <b style="color:{'#15803d' if ok else '#b91c1c'};">{user_disp}</b></div>
+                <div style="font-size:0.95rem;margin-top:4px;">Câu đúng: <b style="color:#15803d;">{q.get('correct','')}</b></div>
+                <div style="margin-top:6px;font-size:0.85rem;color:#475569;background:#f8fafc;border-left:3px solid #94a3b8;padding:6px 10px;border-radius:6px;">{q.get('exp','')}</div>
+            """))
+
+    # ---------- PHẦN IV: Đúng/Sai ----------
+    qs = data.get("part4Data", [])
+    if qs:
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần IV. Đối chiếu nghĩa Trung - Việt</h4>")
+        for i, q in enumerate(qs, 1):
+            out.append(tf_html(q, i))
+
+    # ---------- PHẦN V: Đọc hiểu ----------
+    qs = data.get("part5Data", [])
+    if qs:
+        passage = data.get("passageText", "")
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần V. Đọc hiểu đoạn văn</h4>")
+        if passage:
+            out.append(f"""
+            <div style="background:#fff9db;border:1px solid #ffe066;border-left:5px solid #f59f00;border-radius:10px;padding:14px 18px;margin-bottom:10px;">
+                <div style="font-weight:800;color:#d9480f;margin-bottom:6px;">📖 Đoạn văn</div>
+                <div style="font-size:1.05rem;line-height:1.9;">{passage}</div>
+            </div>""")
+        for i, q in enumerate(qs, 1):
+            stem = f"<span style='color:#2563eb;font-weight:800;'>{i}.</span> <span style='font-size:1.1rem;font-weight:800;'>{q.get('q_zh','')}</span> <span style='color:#64748b;'>({q.get('q_py','')})</span>"
+            out.append(mcq_html(q, stem))
+
+    # ---------- PHẦN VIII: Ngữ pháp ----------
+    qs = data.get("part8Data", [])
+    if qs:
+        out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần VIII. Ngữ pháp điền từ</h4>")
+        for i, q in enumerate(qs, 1):
+            stem = f"<span style='color:#2563eb;font-weight:800;'>{i}.</span> <span style='font-size:1.15rem;font-weight:800;letter-spacing:1px;'>{q.get('q','')}</span>"
+            out.append(mcq_html(q, stem))
+
+    return "".join(out) if out else "<p>Không có dữ liệu câu hỏi.</p>"
 
 
 # POPUP DIALOG CHO HỌC VIÊN ĐIỀN TÊN KHI HOÀN THÀNH BÀI THI
@@ -366,10 +487,8 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                             sel = rows[[f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows].index(pick)]
                             st.markdown(f"**Bài tự luận (Phần IX):**")
                             st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view")
-                            with st.expander("Đáp án trắc nghiệm (JSON)"):
-                                st.json(sel.get("answers") or {})
-                            with st.expander("Thứ tự sắp xếp câu (JSON)"):
-                                st.json(sel.get("order_answers") or {})
+                            st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
+                            st.markdown(render_exam2_review(sel), unsafe_allow_html=True)
                     else:
                         st.warning("Chưa kết nối được Supabase.")
                 except Exception as e:
