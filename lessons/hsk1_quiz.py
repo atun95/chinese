@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
+import streamlit.components.v1 as components
 import random
 import csv
 from datetime import datetime, timezone, timedelta
+from pathlib import Path
 from ui_utils import render_lesson_intro, render_play_button
 
 # IMPORT SUPABASE CLIENT
@@ -197,6 +199,144 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
 
     render_lesson_intro("📝 Trắc nghiệm Tổng hợp HSK 1 - Ôn tập bài cũ")
 
+    # ================= TRANG DANH SÁCH ĐỀ (2 BÀI KIỂM TRA HSK 1) =================
+    exam_view = st.session_state.get("hsk1_exam_view", "menu")
+
+    if exam_view == "menu":
+        exams = [
+            (
+                "exam1",
+                "📝",
+                "Đề 1: Ôn tập bài cũ (50 câu trắc nghiệm)",
+                "50 câu trắc nghiệm ôn tập toàn diện: ngữ âm, chữ Hán, từ vựng, ngữ pháp, lượng từ, tìm lỗi sai, sắp xếp câu và đối thoại.",
+                "#3b82f6"
+            ),
+            (
+                "exam2",
+                "🎓",
+                "Đề 2: Bài test HSK 1 (55 câu + tự luận)",
+                "Bài kiểm tra tổng hợp 6 phần: từ vựng, đúng/sai, sắp xếp câu, đọc hiểu, ngữ pháp và viết đoạn văn. Có nghe phát âm tiếng Trung và đồng hồ 45 phút.",
+                "#c92a2a"
+            ),
+        ]
+        for key, icon, title, desc, color in exams:
+            st.markdown(f"""
+            <div style="background: white; border: 2px solid #e2e8f0; border-left: 6px solid {color}; border-radius: 18px; padding: 24px 28px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+                <div style="font-size: 2rem; margin-bottom: 6px;">{icon}</div>
+                <div style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">{title}</div>
+                <div style="color: #475569; font-size: 0.95rem; line-height: 1.6;">{desc}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button(f"🚀 Bắt đầu làm bài", key=f"hsk1_open_{key}", type="primary", use_container_width=True):
+                st.session_state.hsk1_exam_view = key
+                st.session_state.hsk1_exam_choice = key
+                st.rerun()
+            st.markdown("<br/>", unsafe_allow_html=True)
+        return
+
+    # ================= NÚT QUAY LẠI DANH SÁCH ĐỀ =================
+    if st.button("⬅️ Quay lại danh sách đề", key="hsk1_back_to_menu", use_container_width=False):
+        st.session_state.hsk1_exam_view = "menu"
+        st.rerun()
+    st.markdown("---")
+
+    # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
+    if exam_view == "exam2":
+        part_options = [
+            ("I. Từ vựng (10 câu)", "1"),
+            ("II. Đúng / Sai (10 câu)", "2"),
+            ("III. Sắp xếp câu (10 câu)", "3"),
+            ("IV. Đúng / Sai (10 câu)", "4"),
+            ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
+            ("VIII. Ngữ pháp (10 câu)", "8"),
+            ("IX. Viết đoạn văn (tự luận)", "9"),
+            ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
+        ]
+        part_labels = [p[0] for p in part_options]
+        # Áp dụng điều hướng từ nút Trước/Sau (phải set TRƯỚC khi selectbox render)
+        pending_part = st.session_state.pop("hsk1_exam2_pending", None)
+        if pending_part in part_labels:
+            st.session_state.hsk1_exam2_part = pending_part
+        part_choice = st.selectbox(
+            "Chọn phần của bài test:",
+            part_labels,
+            key="hsk1_exam2_part",
+            help="Đáp án đã chọn được tự động lưu — bạn có thể chuyển qua lại giữa các phần mà không mất bài."
+        )
+        only_part = dict(part_options)[part_choice]
+
+        html_path = Path(__file__).resolve().parent.parent / "bai_test_hsk1.html"
+        if html_path.exists():
+            html_content = html_path.read_text(encoding="utf-8")
+            inject_parts = ["<style>body{padding-bottom:0 !important;}</style>"]
+            # Inject cấu hình Supabase để đề thi tự lưu đáp án
+            try:
+                sb_cfg = supabase_client.get_supabase_config()
+                inject_parts.append(
+                    f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
+                    f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
+                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';</script>"
+                )
+            except Exception:
+                pass
+            if only_part != "full":
+                inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
+            else:
+                # Bản full không cuộn trong khung -> đưa thanh nộp bài về cuối tài liệu
+                inject_parts.append("<style>.bottom-bar{position:static !important;}</style>")
+            # Script tự chỉnh chiều cao iframe sát nội dung (hết khoảng trắng thừa)
+            inject_parts.append("""
+<script>
+(function(){
+  function fit(){
+    try{
+      var h = document.body ? document.body.scrollHeight : 0;
+      if (!h || h < 100) h = document.documentElement.scrollHeight;
+      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
+    }catch(e){}
+  }
+  window.addEventListener('load', function(){ setTimeout(fit, 100); });
+  window.addEventListener('resize', fit);
+  var t = setInterval(fit, 500);
+  setTimeout(function(){ clearInterval(t); }, 5000);
+})();
+</script>""")
+            html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
+
+            # ================= NÚT ĐIỀU HƯỚNG (đặt trên đầu đề) =================
+            order_keys = ["1", "2", "3", "4", "5", "8", "9", "full"]
+            label_by_key = {v: k for k, v in part_options}
+            idx = order_keys.index(only_part)
+
+            def render_nav_buttons(suffix):
+                if only_part == "full":
+                    return
+                prev_col, next_col = st.columns([1, 2])
+                with prev_col:
+                    if idx > 0:
+                        prev_label = label_by_key[order_keys[idx - 1]]
+                        if st.button("⬅️ Phần trước", key=f"hsk1_prev_{only_part}{suffix}", use_container_width=True):
+                            st.session_state.hsk1_exam2_pending = prev_label
+                            st.rerun()
+                with next_col:
+                    next_key = order_keys[idx + 1]
+                    if next_key != "full":
+                        next_label = label_by_key[next_key]
+                        if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
+                            st.session_state.hsk1_exam2_pending = next_label
+                            st.rerun()
+
+            render_nav_buttons("_top")
+            st.markdown("<br/>", unsafe_allow_html=True)
+
+            components.html(html_content, height=900, scrolling=True)
+
+            if only_part == "full":
+                st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
+        else:
+            st.error(f"Không tìm thấy file đề thi: {html_path}")
+        return
+
     # Đề thi mặc định cho toàn bộ phần này là quiz_exam_50
     active_key = "quiz_exam_50"
 
@@ -245,16 +385,6 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
 
     # ================= 1. GIAO DIỆN CHƯA BẮT ĐẦU =================
     if not st.session_state.hsk1_quiz_started:
-        st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 24px; padding: 32px 36px; color: white; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); border: 2px solid #3b82f6;">
-            <div style="font-size: 2.4rem; margin-bottom: 10px;">📝</div>
-            <h2 style="color: #60a5fa; font-size: 1.65rem; font-weight: 800; margin-bottom: 10px;">ÔN TẬP BÀI CŨ (50 CÂU)</h2>
-            <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.65; margin-bottom: 0;">
-                Bài ôn tập trắc nghiệm toàn diện gồm <b>50 câu hỏi</b> bao quát 7 dạng bài cốt lõi: Ngữ âm & Biến điệu, Chữ Hán & Bộ thủ, Từ vựng cơ bản, Ngữ pháp (的, 在, 去, 不/没, 有点儿/一点儿), Lượng từ & Số từ, Tìm lỗi sai, Sắp xếp câu hoàn chỉnh, và Đối thoại giao tiếp phản xạ.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
         if st.button("🚀 BẮT ĐẦU LÀM BÀI ÔN TẬP (50 CÂU)", key="btn_start_quiz_50", type="primary", use_container_width=True):
             start_new_quiz()
             save_progress()

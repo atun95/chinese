@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BÀI TEST HSK 1 - HỆ THỐNG THI TRỰC TUYẾN</title>
+  <style>
+    :root {
+      --primary: #c92a2a;
+      --primary-light: #ffe3e3;
+      --primary-dark: #a61e1e;
+      --secondary: #1971c2;
+      --secondary-light: #e7f5ff;
+      --success: #2b8a3e;
+      --success-light: #ebfbee;
+      --warning: #f08c00;
+      --danger: #e03131;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f5;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-600: #868e96;
+      --gray-700: #495057;
+      --gray-800: #343a40;
+      --gray-900: #212529;
+      --radius: 10px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --font-zh: "PingFang SC", "Microsoft YaHei", "SimHei", "Noto Sans SC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f4f6f8;
+      color: var(--gray-800);
+      line-height: 1.6;
+      font-size: 17px;
+      padding-bottom: 80px;
+    }
+
+    .zh {
+      font-family: var(--font-zh);
+    }
+
+    /* Header & Navigation Bar */
+    .test-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hsk-badge {
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      color: var(--gray-900);
+      font-weight: 700;
+    }
+
+    .brand-title p {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .candidate-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .candidate-info input {
+      padding: 6px 12px;
+      border: 1px solid var(--gray-300);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .candidate-info input:focus {
+      border-color: var(--secondary);
+    }
+
+    /* Sub Navigation - Quick Section Switcher */
+    .section-nav {
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+      padding: 8px 20px;
+    }
+
+    .section-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .nav-pill {
+      background: white;
+      border: 1px solid var(--gray-300);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      color: var(--gray-700);
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .nav-pill:hover, .nav-pill.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+
+    /* Section Card */
+    .section-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      scroll-margin-top: 130px;
+    }
+
+    .section-header {
+      background: linear-gradient(135deg, #fff 0%, #fdf5f5 100%);
+      padding: 20px 28px;
+      border-bottom: 2px solid var(--primary-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-score-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .section-body {
+      padding: 28px 32px;
+    }
+
+    /* Question Item */
+    .question-item {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--gray-200);
+      transition: background 0.2s;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .question-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .question-item:hover {
+      background: var(--gray-50);
+    }
+
+    .question-title {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .q-num {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 28px;
+    }
+
+    .q-text-zh {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #111;
+      font-family: var(--font-zh);
+    }
+
+    .q-pinyin {
+      color: #666;
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .audio-btn {
+      background: none;
+      border: 1px solid var(--gray-300);
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      transition: all 0.2s;
+      vertical-align: middle;
+    }
+
+    .audio-btn:hover {
+      background: var(--secondary-light);
+      border-color: var(--secondary);
+    }
+
+    /* Multiple Choice Options */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 18px;
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1.05rem;
+      background: white;
+      user-select: none;
+    }
+
+    .option-label:hover {
+      border-color: var(--secondary);
+      background: var(--secondary-light);
+    }
+
+    .option-label input[type="radio"] {
+      margin-right: 10px;
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+    }
+
+    .option-label.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    /* True/False (Đ/S) Buttons */
+    .tf-container {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .tf-btn {
+      flex: 1;
+      max-width: 170px;
+      padding: 12px 20px;
+      border: 2px solid var(--gray-300);
+      background: white;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tf-btn.btn-true:hover, .tf-btn.btn-true.selected {
+      background: var(--success-light);
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .tf-btn.btn-false:hover, .tf-btn.btn-false.selected {
+      background: var(--primary-light);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* Word Order Question (Phần III) */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+      padding: 10px;
+      background: var(--gray-100);
+      border-radius: 8px;
+      min-height: 48px;
+    }
+
+    .word-chip {
+      background: white;
+      border: 1px solid var(--gray-300);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 1.25rem;
+      font-family: var(--font-zh);
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .word-chip:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    }
+
+    .word-chip.used {
+      opacity: 0.35;
+      pointer-events: none;
+      background: var(--gray-200);
+    }
+
+    .target-slot {
+      border: 2px dashed var(--gray-300);
+      border-radius: 8px;
+      min-height: 48px;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      margin-bottom: 8px;
+    }
+
+    .target-slot.active {
+      border-color: var(--secondary);
+      background: #fdfdfd;
+    }
+
+    .slot-chip {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 1.25rem;
+      font-family: var(--font-zh);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slot-chip:after {
+      content: "×";
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .slot-chip:hover {
+      background: #ffe3e3;
+      border-color: #e03131;
+      color: #e03131;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-reset-order {
+      padding: 4px 10px;
+      background: none;
+      border: 1px solid var(--gray-300);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .btn-reset-order:hover {
+      background: var(--gray-200);
+    }
+
+    /* Reading Passage Card (Phần V) */
+    .passage-box {
+      background: #fff9db;
+      border: 1px solid #ffe066;
+      border-left: 5px solid #f59f00;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+      line-height: 1.9;
+    }
+
+    .passage-content-zh {
+      font-size: 1.4rem;
+      font-weight: 500;
+      font-family: var(--font-zh);
+      color: #212529;
+      margin-bottom: 12px;
+    }
+
+    .passage-content-pinyin {
+      font-size: 0.92rem;
+      color: #555;
+      font-style: italic;
+      line-height: 1.6;
+      border-top: 1px dashed #eed67c;
+      padding-top: 10px;
+    }
+
+    /* Writing Section (Phần IX) */
+    .writing-guide {
+      background: var(--secondary-light);
+      border-left: 4px solid var(--secondary);
+      padding: 12px 18px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+
+    .writing-guide ul {
+      margin-left: 20px;
+      margin-top: 6px;
+    }
+
+    .writing-textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px;
+      border: 2px solid var(--gray-300);
+      border-radius: 10px;
+      font-family: var(--font-zh);
+      font-size: 1.3rem;
+      line-height: 1.8;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .writing-textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .writing-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    /* Feedback & Explanation styles */
+    .explanation-box {
+      display: none;
+      margin-top: 10px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8f9fa;
+      border-left: 4px solid var(--gray-600);
+    }
+
+    .is-correct {
+      background: var(--success-light) !important;
+      border-color: var(--success) !important;
+    }
+
+    .is-incorrect {
+      background: var(--primary-light) !important;
+      border-color: var(--danger) !important;
+    }
+
+    .result-icon {
+      font-weight: bold;
+      margin-right: 6px;
+    }
+
+    /* Floating / Sticky Footer Action Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 2px solid var(--gray-300);
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+      padding: 12px 20px;
+      z-index: 99;
+    }
+
+    .bottom-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .progress-stats {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 10px rgba(201, 42, 42, 0.35);
+    }
+
+    .btn-reset {
+      background: var(--gray-200);
+      color: var(--gray-800);
+    }
+
+    .btn-reset:hover {
+      background: var(--gray-300);
+    }
+
+    .btn-print {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+
+    .btn-print:hover {
+      background: var(--secondary);
+      color: white;
+    }
+
+    /* Modal Result */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 580px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      text-align: center;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .score-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
+      color: white;
+      margin: 0 auto 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(201, 42, 42, 0.35);
+    }
+
+    .score-val {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score-total {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: left;
+      margin: 20px 0;
+      background: var(--gray-50);
+      padding: 14px;
+      border-radius: 8px;
+    }
+
+    .result-item {
+      font-size: 0.88rem;
+    }
+
+    .result-item strong {
+      color: var(--gray-900);
+    }
+
+    .sample-essay-box {
+      margin-top: 15px;
+      background: #f1f8ff;
+      border: 1px solid #b6d4fe;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    @media print {
+      .test-header, .bottom-bar, .section-nav, .order-actions, .audio-btn {
+        display: none !important;
+      }
+      body {
+        background: white;
+        padding-bottom: 0;
+      }
+      .section-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+      }
+      .target-slot {
+        min-height: 35px;
+        border: 1px solid #000;
+      }
+      .explanation-box {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="test-header">
+    <div class="header-content">
+      <div class="brand">
+        <span class="hsk-badge">HSK 1</span>
+        <div class="brand-title">
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="candidate-info">
+          <label for="studentName" style="font-size: 0.85rem; font-weight: 600;">Họ tên:</label>
+          <input type="text" id="studentName" placeholder="Nhập tên học viên..." >
+        </div>
+        <div class="timer-box">
+          <span>⏱️</span>
+          <span id="timerDisplay">45:00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Navigation Pills -->
+    <nav class="section-nav">
+      <div class="section-nav-inner">
+        <a href="#sec-1" class="nav-pill">Phần I: Nghĩa từ vựng (10c)</a>
+        <a href="#sec-2" class="nav-pill">Phần II: Đúng/Sai Đọc câu (10c)</a>
+        <a href="#sec-3" class="nav-pill">Phần III: Sắp xếp câu (10c)</a>
+        <a href="#sec-4" class="nav-pill">Phần IV: Đúng/Sai (10c)</a>
+        <a href="#sec-5" class="nav-pill">Phần V: Đọc hiểu đoạn văn (5c)</a>
+        <a href="#sec-8" class="nav-pill">Phần VIII: Ngữ pháp trắc nghiệm (10c)</a>
+        <a href="#sec-9" class="nav-pill">Phần IX: Viết đoạn văn (5đ)</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- ==================== PHẦN I ==================== -->
+    <section class="section-card" id="sec-1">
+      <div class="section-header">
+        <div class="section-title">
+          <span>I. Chọn nghĩa đúng của từ vựng</span>
+          <span class="section-score-badge">10 câu • 10 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Kiểm tra độ nhận diện từ vựng HSK1 cơ bản</small>
+      </div>
+      <div class="section-body" id="part-1-container">
+        <!-- JS render questions -->
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN II ==================== -->
+    <section class="section-card" id="sec-2">
+      <div class="section-header">
+        <div class="section-title">
+          <span>II. Đọc câu và chọn Đúng (Đ) hoặc Sai (S)</span>
+          <span class="section-score-badge">10 câu • 10 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">So sánh câu chữ Hán và câu dịch nghĩa tiếng Việt</small>
+      </div>
+      <div class="section-body" id="part-2-container">
+        <!-- JS render questions -->
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN III ==================== -->
+    <section class="section-card" id="sec-3">
+      <div class="section-header">
+        <div class="section-title">
+          <span>III. Sắp xếp từ thành câu hoàn chỉnh</span>
+          <span class="section-score-badge">10 câu • 10 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Nhấp vào các từ để ghép thành câu hoàn chỉnh theo thứ tự</small>
+      </div>
+      <div class="section-body" id="part-3-container">
+        <!-- JS render questions -->
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN IV ==================== -->
+    <section class="section-card" id="sec-4">
+      <div class="section-header">
+        <div class="section-title">
+          <span>IV. Đọc câu và chọn Đúng (Đ) hoặc Sai (S)</span>
+          <span class="section-score-badge">10 câu • 10 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Đối chiếu nghĩa tiếng Trung và bản dịch tiếng Việt</small>
+      </div>
+      <div class="section-body" id="part-4-container">
+        <!-- JS render questions -->
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN V ==================== -->
+    <section class="section-card" id="sec-5">
+      <div class="section-header">
+        <div class="section-title">
+          <span>V. Đọc hiểu đoạn văn và trả lời câu hỏi</span>
+          <span class="section-score-badge">5 câu • 5 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Đọc kỹ đoạn văn ngắn về Lý Minh rồi chọn đáp án đúng</small>
+      </div>
+      <div class="section-body">
+        
+        <!-- Đoạn văn bài đọc -->
+        <div class="passage-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="color: #d9480f; font-size: 1rem;">📖 ĐOẠN VĂN ĐỌC HIỂU (短文)</strong>
+            <button type="button" class="audio-btn" style="width: auto; height: auto; padding: 3px 10px; border-radius: 12px; font-size: 0.85rem;" onclick="speakChinese(passageText)">
+              🔊 Nghe bài đọc
+            </button>
+          </div>
+          <div class="passage-content-zh zh">
+            我叫李明，今年二十岁，是一名大学生。我在北京的一所大学学习汉语。我的专业是中文，我很喜欢汉语和中国文化。我的家有四口人：爸爸、妈妈、我和妹妹。我的妹妹今年十五岁，是一名中学生。她也喜欢学习汉语。我们常常一起看电影、听音乐，有时候也去公园散步。周末我喜欢去图书馆看书，或者和朋友去打篮球。
+          </div>
+          <div class="passage-content-pinyin">
+            Wǒ jiào Lǐ Míng, jīnnián èrshí suì, shì yì míng dàxuéshēng. Wǒ zài Běijīng de yì suǒ dàxué xuéxí Hànyǔ. Wǒ de zhuānyè shì Zhōngwén, wǒ hěn xǐhuan Hànyǔ hé Zhōngguó wénhuà. Wǒ de jiā yǒu sì kǒu rén: bàba, māma, wǒ hé mèimei. Wǒ de mèimei jīnnián shíwǔ suì, shì yì míng zhōngxuéshēng. Tā yě xǐhuan xuéxí Hànyǔ. Wǒmen chángcháng yìqǐ kàn diànyǐng, tīng yīnyuè, yǒu shíhou yě qù gōngyuán sànbù. Zhōumò wǒ xǐhuan qù túshūguǎn kàn shū, huòzhě hé péngyou qù dǎ lánqiú.
+          </div>
+        </div>
+
+        <div id="part-5-container">
+          <!-- JS render questions -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN VIII ==================== -->
+    <section class="section-card" id="sec-8">
+      <div class="section-header">
+        <div class="section-title">
+          <span>VIII. Khoanh chọn đáp án đúng về ngữ pháp, cấu trúc</span>
+          <span class="section-score-badge">10 câu • 10 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Chọn từ thích hợp điền vào chỗ trống</small>
+      </div>
+      <div class="section-body" id="part-8-container">
+        <!-- JS render questions -->
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN IX ==================== -->
+    <section class="section-card" id="sec-9">
+      <div class="section-header">
+        <div class="section-title">
+          <span>IX. Viết đoạn văn từ tiếng Việt sang tiếng Trung</span>
+          <span class="section-score-badge">Tự luận • 5 điểm</span>
+        </div>
+        <small style="color: var(--gray-600)">Viết đoạn văn khoảng 5 – 7 câu giới thiệu về bản thân</small>
+      </div>
+      <div class="section-body">
+        <div class="writing-guide">
+          <strong>📌 Gợi ý dàn ý viết:</strong>
+          <ul>
+            <li>• Tên, tuổi (我叫..., 今年...岁)</li>
+            <li>• Nghề nghiệp / là học sinh, sinh viên (我是学生 / 大学生 / 老师...)</li>
+            <li>• Gia đình (có mấy người, gồm những ai) (我家有...口人: ...)</li>
+            <li>• Sở thích (我喜欢喝茶 / 看电影 / 学习汉语...)</li>
+            <li>• Hoạt động hằng ngày / cuối tuần (周末我常常去...)</li>
+          </ul>
+        </div>
+
+        <textarea id="essayInput" class="writing-textarea" placeholder="Nhập bài viết bằng chữ Hán tại đây (ví dụ: 你好！我叫王华，今年二十岁...)..."></textarea>
+        
+        <div class="writing-footer">
+          <div>
+            Số ký tự: <strong id="charCount">0</strong> chữ | Ước tính: <strong id="sentenceCount">0</strong> câu
+          </div>
+          <div>
+            <button type="button" class="btn-reset-order" onclick="toggleSampleEssay()">👁️ Xem đoạn văn mẫu tham khảo</button>
+          </div>
+        </div>
+
+        <div id="sampleEssayBox" class="sample-essay-box" style="display: none;">
+          <strong>💡 Đoạn văn mẫu gợi ý (5 - 7 câu đạt chuẩn HSK1):</strong>
+          <p class="zh" style="margin-top: 6px; font-size: 1.15rem; line-height: 1.8;">
+            你好！我叫阮明，今年二十一岁，是一名大学生。<br>
+            我很喜欢学习汉语，也喜欢看中国电影。<br>
+            我家有四口人：爸爸、妈妈、哥哥和我。<br>
+            周末我常常和朋友去图书馆看书，有时候也去公园散步。<br>
+            很高兴认识大家！
+          </p>
+          <p style="margin-top: 6px; font-size: 0.85rem; color: #555;">
+            <em>Dịch nghĩa: Xin chào! Tôi tên là Nguyễn Minh, năm nay 21 tuổi, là sinh viên đại học. Tôi rất thích học tiếng Trung, cũng thích xem phim Trung Quốc. Nhà tôi có 4 người: bố, mẹ, anh trai và tôi. Cuối tuần tôi thường cùng bạn đến thư viện đọc sách, thỉnh thoảng cũng đi công viên dạo bộ. Rất vui được làm quen với mọi người!</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Footer Action Bar -->
+  <footer class="bottom-bar">
+    <div class="bottom-content">
+      <div class="progress-stats">
+        <span>Tiến độ hoàn thành: </span>
+        <strong id="answeredStats" style="color: var(--primary);">0/55</strong> câu trắc nghiệm
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-submit" onclick="submitExam()">✅ Nộp bài & Chấm điểm</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Score Result -->
+  <div class="modal-overlay" id="resultModal" onclick="if(event.target===this)closeModal()">
+    <div class="modal-box">
+      <div class="score-circle">
+        <div class="score-val" id="modalFinalScore">0</div>
+        <div class="score-total">/ 55 ĐIỂM TRẮC NGHIỆM</div>
+      </div>
+      <h2 style="color: var(--gray-900); margin-bottom: 6px;" id="modalVerdict">Kết Quả Bài Thi</h2>
+      <p style="color: var(--gray-600); font-size: 0.9rem;" id="modalCandidateName">Thí sinh: </p>
+
+      <div class="result-grid">
+        <div class="result-item">Phần I (Từ vựng): <strong id="score-p1">0/10</strong></div>
+        <div class="result-item">Phần II (Đúng/Sai): <strong id="score-p2">0/10</strong></div>
+        <div class="result-item">Phần III (Sắp xếp câu): <strong id="score-p3">0/10</strong></div>
+        <div class="result-item">Phần IV (Đúng/Sai): <strong id="score-p4">0/10</strong></div>
+        <div class="result-item">Phần V (Đọc hiểu): <strong id="score-p5">0/5</strong></div>
+        <div class="result-item">Phần VIII (Ngữ pháp): <strong id="score-p8">0/10</strong></div>
+        <div class="result-item" style="grid-column: span 2;">Phần IX (Tự luận viết): <strong>Đã ghi nhận để giáo viên chấm (tối đa 5đ)</strong></div>
+      </div>
+
+      <div style="margin: 14px 0;">
+        <input id="modalStudentName" type="text" placeholder="Họ và tên học viên *"
+          style="width: 100%; padding: 10px 14px; border: 2px solid var(--gray-300); border-radius: 8px; font-size: 1rem; outline: none;"
+          onfocus="this.style.borderColor='var(--secondary)'">
+      </div>
+      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 14px;">
+        <button class="btn btn-submit" id="saveScoreBtn" onclick="saveScoreFromModal()">💾 Lưu đáp án & điểm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DATA SOURCE TỪ 4 HÌNH ẢNH
+    const passageText = "我叫李明，今年二十岁，是一名大学生。我在北京的一所大学学习汉语。我的专业是中文，我很喜欢汉语和中国文化。我的家有四口人：爸爸、妈妈、我和妹妹。我的妹妹今年十五岁，是一名中学生。她也喜欢学习汉语。我们常常一起看电影、听音乐，有时候也去公园散步。周末我喜欢去图书馆看书，或者和朋友去打篮球。";
+
+    // PHẦN I: Từ vựng (10 câu)
+    const part1Data = [
+      { id: "1_1", zh: "你好", py: "nǐ hǎo", options: ["A. Xin chào", "B. Tạm biệt", "C. Cảm ơn", "D. Xin lỗi"], ans: 0, exp: "你好 (nǐ hǎo) = Xin chào." },
+      { id: "1_2", zh: "学生", py: "xuésheng", options: ["A. Giáo viên", "B. Học sinh", "C. Bạn bè", "D. Gia đình"], ans: 1, exp: "学生 (xuésheng) = Học sinh, sinh viên." },
+      { id: "1_3", zh: "书", py: "shū", options: ["A. Sách", "B. Bút", "C. Vở", "D. Bàn"], ans: 0, exp: "书 (shū) = Sách." },
+      { id: "1_4", zh: "水", py: "shuǐ", options: ["A. Nước", "B. Trà", "C. Sữa", "D. Cà phê"], ans: 0, exp: "水 (shuǐ) = Nước." },
+      { id: "1_5", zh: "爸爸", py: "bàba", options: ["A. Mẹ", "B. Bố", "C. Anh", "D. Em trai"], ans: 1, exp: "爸爸 (bàba) = Bố, ba." },
+      { id: "1_6", zh: "今天", py: "jīntiān", options: ["A. Hôm qua", "B. Hôm nay", "C. Ngày mai", "D. Tuần này"], ans: 1, exp: "今天 (jīntiān) = Hôm nay." },
+      { id: "1_7", zh: "喜欢", py: "xǐhuan", options: ["A. Thích", "B. Ghét", "C. Vui", "D. Buồn"], ans: 0, exp: "喜欢 (xǐhuan) = Thích." },
+      { id: "1_8", zh: "中国", py: "Zhōngguó", options: ["A. Trung Quốc", "B. Nhật Bản", "C. Hàn Quốc", "D. Việt Nam"], ans: 0, exp: "中国 (Zhōngguó) = Trung Quốc." },
+      { id: "1_9", zh: "老师", py: "lǎoshī", options: ["A. Học sinh", "B. Giáo viên", "C. Bác sĩ", "D. Kỹ sư"], ans: 1, exp: "老师 (lǎoshī) = Giáo viên, thầy/cô giáo." },
+      { id: "1_10", zh: "朋友", py: "péngyou", options: ["A. Bạn bè", "B. Anh chị", "C. Gia đình", "D. Đồng nghiệp"], ans: 0, exp: "朋友 (péngyou) = Bạn bè." }
+    ];
+
+    // PHẦN II: Đúng / Sai (10 câu)
+    const part2Data = [
+      { id: "2_1", zh: "我是中国人。", py: "Wǒ shì Zhōngguó rén.", vi: "Tôi là người Trung Quốc.", ans: "D", exp: "Đúng. '我是中国人' chính là 'Tôi là người Trung Quốc'." },
+      { id: "2_2", zh: "他是老师。", py: "Tā shì lǎoshī.", vi: "Anh ấy là giáo viên.", ans: "D", exp: "Đúng. '他是老师' nghĩa là 'Anh ấy là giáo viên'." },
+      { id: "2_3", zh: "我不喜欢喝茶。", py: "Wǒ bù xǐhuan hē chá.", vi: "Tôi không thích uống trà.", ans: "D", exp: "Đúng. 不 (không) + 喜欢 (thích) + 喝茶 (uống trà)." },
+      { id: "2_4", zh: "今天是星期天。", py: "Jīntiān shì Xīngqītiān.", vi: "Hôm nay là Chủ nhật.", ans: "D", exp: "Đúng. 星期天 (Xīngqītiān) = Chủ nhật." },
+      { id: "2_5", zh: "她有一本书。", py: "Tā yǒu yì běn shū.", vi: "Cô ấy có một quyển sách.", ans: "D", exp: "Đúng. 她 (Cô ấy) + 有 (có) + 一本书 (một quyển sách)." },
+      { id: "2_6", zh: "我们在学校。", py: "Wǒmen zài xuéxiào.", vi: "Chúng tôi ở trường.", ans: "D", exp: "Đúng. 我们 (Chúng tôi) + 在 (ở) + 学校 (trường học)." },
+      { id: "2_7", zh: "这个是我的朋友。", py: "Zhège shì wǒ de péngyou.", vi: "Đây là bạn của tôi.", ans: "D", exp: "Đúng. 这个 (cái này/người này/đây) + 是我的朋友 (là bạn tôi)." },
+      { id: "2_8", zh: "他不喝咖啡。", py: "Tā bù hē kāfēi.", vi: "Anh ấy không uống cà phê.", ans: "D", exp: "Đúng. 他 (Anh ấy) + 不喝咖啡 (không uống cà phê)." },
+      { id: "2_9", zh: "明天我去公园。", py: "Míngtiān wǒ qù gōngyuán.", vi: "Ngày mai tôi đi công viên.", ans: "D", exp: "Đúng. 明天 (Ngày mai) + 我去公园 (tôi đi công viên)." },
+      { id: "2_10", zh: "我没有手机。", py: "Wǒ méiyǒu shǒujī.", vi: "Tôi có điện thoại.", ans: "S", exp: "Sai. '没有' nghĩa là 'không có'. Câu đúng phải dịch là: 'Tôi không có điện thoại'." }
+    ];
+
+    // PHẦN III: Sắp xếp từ (10 câu)
+    const part3Data = [
+      { id: "3_1", tokens: ["我", "是", "学生。"], correct: "我是学生。", exp: "Cấu trúc: Chủ ngữ + 是 + Tân ngữ danh từ." },
+      { id: "3_2", tokens: ["你", "叫什么", "名字？"], correct: "你叫什么名字？", exp: "Cấu trúc hỏi tên: 你叫什么名字？(Bạn tên là gì?)." },
+      { id: "3_3", tokens: ["他", "在", "学校", "学习。"], correct: "他在学校学习。", exp: "Cấu trúc: Chủ ngữ + 在 + Địa điểm + Động từ (Làm gì ở đâu)." },
+      { id: "3_4", tokens: ["我", "喜欢", "看", "电影。"], correct: "我喜欢看电影。", exp: "Cấu trúc: 我 (Tôi) + 喜欢 (thích) + 看电影 (xem phim)." },
+      { id: "3_5", tokens: ["今天", "天气", "很", "好。"], correct: "今天天气很好。", exp: "Cấu trúc vị ngữ tính từ: Chủ ngữ + 很 + Tính từ (không dùng 是)." },
+      { id: "3_6", tokens: ["她", "是", "我的", "朋友。"], correct: "她是我的朋友。", exp: "Cấu trúc: Cô ấy là bạn của tôi." },
+      { id: "3_7", tokens: ["我们", "去", "公园", "吧。"], correct: "我们去公园吧。", exp: "Trợ từ ngữ khí 吧 đứng cuối câu biểu thị đề nghị, rủ rê." },
+      { id: "3_8", tokens: ["他", "不", "喝", "茶。"], correct: "他不喝茶。", exp: "Phó từ phủ định 不 đứng trước động từ 喝." },
+      { id: "3_9", tokens: ["这", "是", "一", "本", "书。"], correct: "这是一本书。", exp: "Cấu trúc số từ + lượng từ + danh từ: 一本书 (một quyển sách)." },
+      { id: "3_10", tokens: ["你", "有", "手机", "吗？"], correct: "你有手机吗？", exp: "Trợ từ nghi vấn 吗 đứng ở cuối câu hỏi Yes/No." }
+    ];
+
+    // PHẦN IV: Đọc câu chọn Đúng / Sai (10 câu)
+    const part4Data = [
+      { id: "4_1", zh: "我是学生。", py: "Wǒ shì xuésheng.", vi: "Tôi là học sinh.", ans: "D", exp: "Đúng. Câu dịch hoàn toàn chính xác." },
+      { id: "4_2", zh: "她是老师。", py: "Tā shì lǎoshī.", vi: "Cô ấy là giáo viên.", ans: "D", exp: "Đúng. 她 (Cô ấy) + 是老师 (là giáo viên)." },
+      { id: "4_3", zh: "我喜欢喝咖啡。", py: "Wǒ xǐhuan hē kāfēi.", vi: "Tôi thích uống trà.", ans: "S", exp: "Sai. 咖啡 (kāfēi) là 'cà phê', không phải 'trà' (trà là 茶 chá)." },
+      { id: "4_4", zh: "今天是星期六。", py: "Jīntiān shì xīngqīliù.", vi: "Hôm nay là thứ Bảy.", ans: "D", exp: "Đúng. 星期六 (xīngqīliù) = Thứ Bảy." },
+      { id: "4_5", zh: "他有一个妹妹。", py: "Tā yǒu yí ge mèimei.", vi: "Anh ấy có một em gái.", ans: "D", exp: "Đúng. 一个妹妹 = một em gái." },
+      { id: "4_6", zh: "我们在家。", py: "Wǒmen zài jiā.", vi: "Chúng tôi ở trường.", ans: "S", exp: "Sai. 家 (jiā) là 'nhà', còn 'trường học' là 学校 (xuéxiào)." },
+      { id: "4_7", zh: "这是一杯水。", py: "Zhè shì yì bēi shuǐ.", vi: "Đây là một cốc nước.", ans: "D", exp: "Đúng. 一杯水 = một cốc/ly nước." },
+      { id: "4_8", zh: "我不喜欢运动。", py: "Wǒ bù xǐhuan yùndòng.", vi: "Tôi không thích thể thao.", ans: "D", exp: "Đúng. 运动 (yùndòng) = vận động, thể thao." },
+      { id: "4_9", zh: "明天我去图书馆。", py: "Míngtiān wǒ qù túshūguǎn.", vi: "Ngày mai tôi đi thư viện.", ans: "D", exp: "Đúng. 图书馆 (túshūguǎn) = thư viện." },
+      { id: "4_10", zh: "她没有手机。", py: "Tā méiyǒu shǒujī.", vi: "Cô ấy có điện thoại.", ans: "S", exp: "Sai. 没有 (méiyǒu) nghĩa là 'không có'. Bản dịch ghi 'có' là sai." }
+    ];
+
+    // PHẦN V: Đọc hiểu (5 câu)
+    const part5Data = [
+      {
+        id: "5_1",
+        q_zh: "李明今年多少岁？",
+        q_py: "Lǐ Míng jīnnián duōshao suì?",
+        options: ["A. 十五岁 (15 tuổi)", "B. 十八岁 (18 tuổi)", "C. 二十岁 (20 tuổi)", "D. 二十二岁 (22 tuổi)"],
+        ans: 2,
+        exp: "Thông tin trong bài: '我叫李明，今年二十岁' -> 20 tuổi (C)."
+      },
+      {
+        id: "5_2",
+        q_zh: "李明的专业是什么？",
+        q_py: "Lǐ Míng de zhuānyè shì shénme?",
+        options: ["A. 英语 (Tiếng Anh)", "B. 中文 (Tiếng Trung)", "C. 历史 (Lịch sử)", "D. 数学 (Toán học)"],
+        ans: 1,
+        exp: "Thông tin trong bài: '我的专业是中文' -> Chuyên ngành là Trung văn (B)."
+      },
+      {
+        id: "5_3",
+        q_zh: "李明的家有几口人？",
+        q_py: "Lǐ Míng de jiā yǒu jǐ kǒu rén?",
+        options: ["A. 三口人 (3 người)", "B. 四口人 (4 người)", "C. 五口人 (5 người)", "D. 六口人 (6 người)"],
+        ans: 1,
+        exp: "Thông tin trong bài: '我的家有四口人：爸爸、妈妈、我和妹妹' -> 4 người (B)."
+      },
+      {
+        id: "5_4",
+        q_zh: "李明和妹妹常常做什么？",
+        q_py: "Lǐ Míng hé mèimei chángcháng zuò shénme?",
+        options: ["A. 去旅行 (Đi du lịch)", "B. 看电影、听音乐 (Xem phim, nghe nhạc)", "C. 打篮球 (Chơi bóng rổ)", "D. 去图书馆 (Đi thư viện)"],
+        ans: 1,
+        exp: "Thông tin trong bài: '我们常常一起看电影、听音乐' -> B."
+      },
+      {
+        id: "5_5",
+        q_zh: "周末李明喜欢做什么？",
+        q_py: "Zhōumò Lǐ Míng xǐhuan zuò shénme?",
+        options: ["A. 去公园散步", "B. 看电影", "C. 去图书馆看书", "D. 学习英语"],
+        ans: 2,
+        exp: "Thông tin trong bài: '周末我喜欢去图书馆看书，或者和朋友去打篮球' -> C."
+      }
+    ];
+
+    // PHẦN VIII: Ngữ pháp trắc nghiệm (10 câu)
+    const part8Data = [
+      { id: "8_1", q: "我____学生。", options: ["A. 是", "B. 有", "C. 在", "D. 看"], ans: 0, exp: "我是学生 = Tôi là học sinh. Dùng '是' làm vị ngữ nối đại từ và danh từ." },
+      { id: "8_2", q: "你____什么？", options: ["A. 叫", "B. 是", "C. 有", "D. 喝"], ans: 0, exp: "你叫什么？ = Bạn tên là gì? (rút gọn của 你叫什么名字？)." },
+      { id: "8_3", q: "他____老师。", options: ["A. 是", "B. 叫", "C. 在", "D. 去"], ans: 0, exp: "他是老师 = Anh ấy là giáo viên." },
+      { id: "8_4", q: "这是____书。", options: ["A. 我", "B. 我的", "C. 我是", "D. 我有"], ans: 1, exp: "这是我的书 = Đây là sách của tôi. Định ngữ biểu thị sở hữu dùng '的'." },
+      { id: "8_5", q: "今天的天气____好。", options: ["A. 很", "B. 是", "C. 有", "D. 在"], ans: 0, exp: "Câu vị ngữ tính từ tiếng Hán không dùng '是', mà dùng phó từ chỉ mức độ '很' đứng trước tính từ: 很 + 好." },
+      { id: "8_6", q: "我们____去公园。", options: ["A. 是", "B. 在", "C. 有", "D. 去"], ans: 1, exp: "Theo ngữ pháp biểu thị hành động đang diễn tiến: 在 + V (我们在去公园: Chúng tôi đang trên đường đến công viên) hoặc nếu đề gốc hỏi '我们____公园' thì đáp án là 去. Ở đây chọn '在' hoặc '去' đều được chấp nhận hợp lý." },
+      { id: "8_7", q: "她____喝咖啡。", options: ["A. 不", "B. 没有", "C. 也", "D. 很"], ans: 0, exp: "Phủ định thói quen hoặc hiện tại dùng '不': 她不喝咖啡 (Cô ấy không uống cà phê)." },
+      { id: "8_8", q: "你____有手机？", options: ["A. 是", "B. 叫", "C. 在", "D. 有"], ans: 3, exp: "Câu hỏi chính phản: '你有[没有]手机？' hoặc câu hỏi ngữ điệu '你有手机？'. Ở đây chọn D: '有'." },
+      { id: "8_9", q: "他是____的爸爸。", options: ["A. 我", "B. 我的", "C. 我是", "D. 我有"], ans: 0, exp: "他是我的爸爸 (Anh ấy là bố của tôi). Chỗ trống trước '的爸爸' cần đại từ '我' -> '我的爸爸'." },
+      { id: "8_10", q: "明天我们____图书馆。", options: ["A. 去", "B. 在", "C. 是", "D. 有"], ans: 0, exp: "明天我们去图书馆 = Ngày mai chúng tôi đi thư viện. Động từ '去' + địa điểm." }
+    ];
+
+    // LƯU TRỮ TRẠNG THÁI BÀI THI
+    let userAnswers = {};
+    let userOrderAnswers = {}; // { '3_1': ['我', '是', '学生。'] }
+    let scoreP1_global = 0, scoreP2_global = 0, scoreP3_global = 0,
+        scoreP4_global = 0, scoreP5_global = 0, scoreP8_global = 0;
+
+    // Chế độ chia phần: Streamlit có thể truyền window.__EXAM_ONLY_PART__ = '1'|'2'|'3'|'4'|'5'|'8'|'9'
+    const ONLY_PART = window.__EXAM_ONLY_PART__ || null;
+
+    // Lưu đáp án vào localStorage để chuyển qua lại giữa các phần không mất bài
+    const LS_ANS = 'hsk1x_answers';
+    const LS_ORD = 'hsk1x_order';
+    const LS_ESSAY = 'hsk1x_essay';
+
+    function saveAnswers() {
+      try { localStorage.setItem(LS_ANS, JSON.stringify(userAnswers)); } catch(e) {}
+    }
+    function saveOrder() {
+      try {
+        const simple = {};
+        Object.keys(userOrderAnswers).forEach(qId => {
+          simple[qId] = (userOrderAnswers[qId] || []).map(x => x.word);
+        });
+        localStorage.setItem(LS_ORD, JSON.stringify(simple));
+      } catch(e) {}
+    }
+
+    // TTS PHÁT ÂM TIẾNG TRUNG
+    function speakChinese(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('Trình duyệt của bạn không hỗ trợ phát âm trực tiếp.');
+      }
+    }
+
+    // RENDER FUNCTIONS
+    function renderPart1() {
+      const container = document.getElementById('part-1-container');
+      container.innerHTML = part1Data.map((q, idx) => `
+        <div class="question-item" id="item-${q.id}">
+          <div class="question-title">
+            <span class="q-num">${idx + 1}.</span>
+            <span class="q-text-zh zh">${q.zh}</span>
+            <span class="q-pinyin">(${q.py})</span>
+            <button type="button" class="audio-btn" title="Nghe phát âm" onclick="speakChinese('${q.zh}')">🔊</button>
+          </div>
+          <div class="options-grid">
+            ${q.options.map((opt, oIdx) => `
+              <label class="option-label" onclick="selectOption('${q.id}', ${oIdx}, this)">
+                <input type="radio" name="${q.id}" value="${oIdx}">
+                <span>${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <strong>Đáp án đúng: ${q.options[q.ans]}</strong><br>
+            <span>${q.exp}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPart2() {
+      const container = document.getElementById('part-2-container');
+      container.innerHTML = part2Data.map((q, idx) => `
+        <div class="question-item" id="item-${q.id}">
+          <div class="question-title">
+            <span class="q-num">${idx + 1}.</span>
+            <span class="q-text-zh zh">${q.zh}</span>
+            <span class="q-pinyin">(${q.py})</span>
+            <button type="button" class="audio-btn" title="Nghe phát âm" onclick="speakChinese('${q.zh}')">🔊</button>
+            <span style="color: #495057; margin-left: 6px;">– ${q.vi}</span>
+          </div>
+          <div class="tf-container">
+            <button type="button" class="tf-btn btn-true" onclick="selectTF('${q.id}', 'D', this)">
+              <span>Đúng (Đ)</span>
+            </button>
+            <button type="button" class="tf-btn btn-false" onclick="selectTF('${q.id}', 'S', this)">
+              <span>Sai (S)</span>
+            </button>
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <strong>Đáp án: ${q.ans === 'D' ? 'Đúng (Đ)' : 'Sai (S)'}</strong><br>
+            <span>${q.exp}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPart3() {
+      const container = document.getElementById('part-3-container');
+      container.innerHTML = part3Data.map((q, idx) => {
+        userOrderAnswers[q.id] = [];
+        // Xáo trộn nhẹ để học sinh xếp
+        const shuffled = [...q.tokens].sort(() => Math.random() - 0.5);
+        return `
+          <div class="question-item" id="item-${q.id}">
+            <div class="question-title">
+              <span class="q-num">${idx + 1}.</span>
+              <span style="color: var(--gray-600); font-size: 0.95rem;">Nhấp vào từ để ghép vào ô bên dưới:</span>
+            </div>
+            
+            <!-- Từ gốc dạng thẻ -->
+            <div class="word-bank" id="bank-${q.id}">
+              ${shuffled.map((tok, tIdx) => `
+                <div class="word-chip zh" id="chip-${q.id}-${tIdx}" onclick="addWordToSlot('${q.id}', '${tok}', 'chip-${q.id}-${tIdx}')">
+                  ${tok}
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Ô kết quả sắp xếp -->
+            <div class="target-slot" id="slot-${q.id}">
+              <span style="color: #aaa; font-size: 0.9rem;" id="placeholder-${q.id}">Chưa chọn từ nào... (nhấp vào từ ở trên để xếp)</span>
+            </div>
+
+            <div class="order-actions">
+              <button type="button" class="btn-reset-order" onclick="resetWordOrder('${q.id}')">🔄 Xếp lại câu này</button>
+              <button type="button" class="audio-btn" style="width: auto; height: auto; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;" onclick="speakChinese('${q.correct}')">
+                🔊 Nghe câu chuẩn
+              </button>
+            </div>
+
+            <div class="explanation-box" id="exp-${q.id}">
+              <strong>Câu đúng: <span class="zh" style="font-size: 1.1rem; color: var(--success);">${q.correct}</span></strong><br>
+              <span>${q.exp}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPart4() {
+      const container = document.getElementById('part-4-container');
+      container.innerHTML = part4Data.map((q, idx) => `
+        <div class="question-item" id="item-${q.id}">
+          <div class="question-title">
+            <span class="q-num">${idx + 1}.</span>
+            <span class="q-text-zh zh">${q.zh}</span>
+            <span class="q-pinyin">(${q.py})</span>
+            <button type="button" class="audio-btn" title="Nghe phát âm" onclick="speakChinese('${q.zh}')">🔊</button>
+            <span style="color: #495057; margin-left: 6px;">– ${q.vi}</span>
+          </div>
+          <div class="tf-container">
+            <button type="button" class="tf-btn btn-true" onclick="selectTF('${q.id}', 'D', this)">
+              <span>Đúng (Đ)</span>
+            </button>
+            <button type="button" class="tf-btn btn-false" onclick="selectTF('${q.id}', 'S', this)">
+              <span>Sai (S)</span>
+            </button>
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <strong>Đáp án: ${q.ans === 'D' ? 'Đúng (Đ)' : 'Sai (S)'}</strong><br>
+            <span>${q.exp}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPart5() {
+      const container = document.getElementById('part-5-container');
+      container.innerHTML = part5Data.map((q, idx) => `
+        <div class="question-item" id="item-${q.id}">
+          <div class="question-title">
+            <span class="q-num">${idx + 1}.</span>
+            <span class="q-text-zh zh">${q.q_zh}</span>
+            <span class="q-pinyin">(${q.q_py})</span>
+            <button type="button" class="audio-btn" title="Nghe phát âm" onclick="speakChinese('${q.q_zh}')">🔊</button>
+          </div>
+          <div class="options-grid">
+            ${q.options.map((opt, oIdx) => `
+              <label class="option-label" onclick="selectOption('${q.id}', ${oIdx}, this)">
+                <input type="radio" name="${q.id}" value="${oIdx}">
+                <span class="zh">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <strong>Đáp án đúng: ${q.options[q.ans]}</strong><br>
+            <span>${q.exp}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPart8() {
+      const container = document.getElementById('part-8-container');
+      container.innerHTML = part8Data.map((q, idx) => `
+        <div class="question-item" id="item-${q.id}">
+          <div class="question-title">
+            <span class="q-num">${idx + 1}.</span>
+            <span class="q-text-zh zh" style="letter-spacing: 1px;">${q.q}</span>
+          </div>
+          <div class="options-grid">
+            ${q.options.map((opt, oIdx) => `
+              <label class="option-label" onclick="selectOption('${q.id}', ${oIdx}, this)">
+                <input type="radio" name="${q.id}" value="${oIdx}">
+                <span class="zh" style="font-size: 1.1rem;">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <strong>Đáp án đúng: ${q.options[q.ans]}</strong><br>
+            <span>${q.exp}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // INTERACTION HANDLERS
+    function selectOption(qId, optIdx, labelEl) {
+      userAnswers[qId] = optIdx;
+      const parent = labelEl.closest('.options-grid');
+      parent.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+      labelEl.classList.add('selected');
+      saveAnswers();
+      updateProgress();
+    }
+
+    function selectTF(qId, val, btnEl) {
+      userAnswers[qId] = val;
+      const parent = btnEl.closest('.tf-container');
+      parent.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+      btnEl.classList.add('selected');
+      saveAnswers();
+      updateProgress();
+    }
+
+    // XẾP TỪ (PHẦN III)
+    function addWordToSlot(qId, word, chipId) {
+      const chipEl = document.getElementById(chipId);
+      if (chipEl.classList.contains('used')) return;
+
+      chipEl.classList.add('used');
+      userOrderAnswers[qId].push({ word, chipId });
+      renderSlot(qId);
+      saveOrder();
+      updateProgress();
+    }
+
+    function removeWordFromSlot(qId, index) {
+      const removed = userOrderAnswers[qId].splice(index, 1)[0];
+      if (removed && removed.chipId) {
+        const chipEl = document.getElementById(removed.chipId);
+        if (chipEl) chipEl.classList.remove('used');
+      }
+      renderSlot(qId);
+      saveOrder();
+      updateProgress();
+    }
+
+    function renderSlot(qId) {
+      const slot = document.getElementById(`slot-${qId}`);
+      const list = userOrderAnswers[qId] || [];
+      if (list.length === 0) {
+        slot.innerHTML = `<span style="color: #aaa; font-size: 0.9rem;" id="placeholder-${qId}">Chưa chọn từ nào... (nhấp vào từ ở trên để xếp)</span>`;
+      } else {
+        slot.innerHTML = list.map((item, idx) => `
+          <div class="slot-chip zh" onclick="removeWordFromSlot('${qId}', ${idx})" title="Nhấp để xóa">
+            ${item.word}
+          </div>
+        `).join('');
+      }
+    }
+
+    function resetWordOrder(qId) {
+      const list = userOrderAnswers[qId] || [];
+      list.forEach(item => {
+        const chipEl = document.getElementById(item.chipId);
+        if (chipEl) chipEl.classList.remove('used');
+      });
+      userOrderAnswers[qId] = [];
+      renderSlot(qId);
+      saveOrder();
+      updateProgress();
+    }
+
+    // UPDATE STATS
+    function updateProgress() {
+      let count = 0;
+      // Trắc nghiệm P1, P2, P4, P5, P8
+      const totalKeys = [...part1Data, ...part2Data, ...part4Data, ...part5Data, ...part8Data];
+      totalKeys.forEach(q => {
+        if (userAnswers[q.id] !== undefined) count++;
+      });
+      // P3 sắp xếp câu
+      part3Data.forEach(q => {
+        if (userOrderAnswers[q.id] && userOrderAnswers[q.id].length > 0) count++;
+      });
+
+      document.getElementById('answeredStats').innerText = `${count}/55`;
+    }
+
+    // TIMER
+    let timeLeft = 45 * 60; // 45 phút
+    let timerInterval = null;
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert('Hết thời gian làm bài! Hệ thống sẽ tự động thu bài và tính điểm.');
+          submitExam();
+          return;
+        }
+        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        const sec = (timeLeft % 60).toString().padStart(2, '0');
+        document.getElementById('timerDisplay').innerText = `${min}:${sec}`;
+      }, 1000);
+    }
+
+    // WRITING COUNT
+    const essayInput = document.getElementById('essayInput');
+    essayInput.addEventListener('input', () => {
+      const text = essayInput.value.trim();
+      const chars = text.replace(/\s+/g, '').length;
+      // Đếm câu dựa trên dấu chấm, hỏi, than tiếng Trung hoặc tiếng Việt (。？！.?!)
+      const sentences = text.length > 0 ? text.split(/[。？！.?!]+/).filter(s => s.trim().length > 0).length : 0;
+      document.getElementById('charCount').innerText = chars;
+      document.getElementById('sentenceCount').innerText = sentences;
+      try { localStorage.setItem(LS_ESSAY, essayInput.value); } catch(e) {}
+    });
+
+    function toggleSampleEssay() {
+      const box = document.getElementById('sampleEssayBox');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    let lastTotalScore = 0;
+    let scoreSaved = false;
+
+    // LƯU ĐÁP ÁN LÊN SUPABASE
+    async function saveSubmissionToSupabase(totalScore, studentName) {
+      try {
+        const url = window.__SUPABASE_URL__;
+        const key = window.__SUPABASE_KEY__;
+        const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
+        if (!url || !key) return;
+
+        const name = (studentName || document.getElementById('studentName').value || 'Ẩn danh').trim();
+        const orderSimple = {};
+        Object.keys(userOrderAnswers).forEach(qId => {
+          orderSimple[qId] = (userOrderAnswers[qId] || []).map(x => x.word);
+        });
+
+        const payload = {
+          student_name: name,
+          score: totalScore,
+          max_score: 55,
+          part_scores: {
+            p1: scoreP1_global, p2: scoreP2_global, p3: scoreP3_global,
+            p4: scoreP4_global, p5: scoreP5_global, p8: scoreP8_global
+          },
+          answers: userAnswers,
+          order_answers: orderSimple,
+          essay: essayInput.value,
+          submitted_at: new Date().toISOString()
+        };
+
+        await fetch(url + '/rest/v1/' + table, {
+          method: 'POST',
+          headers: {
+            'apikey': key,
+            'Authorization': 'Bearer ' + key,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch(e) {
+        console.warn('Không lưu được đáp án lên Supabase:', e);
+      }
+    }
+
+    // CHẤM ĐIỂM
+    function submitExam() {
+      let scoreP1 = 0, scoreP2 = 0, scoreP3 = 0, scoreP4 = 0, scoreP5 = 0, scoreP8 = 0;
+
+      // P1: Từ vựng (10 câu)
+      part1Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        if (userAnswers[q.id] === q.ans) {
+          scoreP1++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      // P2: Đúng / Sai (10 câu)
+      part2Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        if (userAnswers[q.id] === q.ans) {
+          scoreP2++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      // P3: Sắp xếp câu (10 câu)
+      part3Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        const userBuilt = (userOrderAnswers[q.id] || []).map(x => x.word).join('');
+        // Làm sạch khoảng trắng để so sánh
+        const cleanUser = userBuilt.replace(/\s+/g, '');
+        const cleanTarget = q.correct.replace(/\s+/g, '');
+
+        if (cleanUser === cleanTarget) {
+          scoreP3++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      // P4: Đúng / Sai (10 câu)
+      part4Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        if (userAnswers[q.id] === q.ans) {
+          scoreP4++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      // P5: Đọc hiểu (5 câu)
+      part5Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        if (userAnswers[q.id] === q.ans) {
+          scoreP5++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      // P8: Ngữ pháp (10 câu)
+      part8Data.forEach(q => {
+        const item = document.getElementById(`item-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (!item || !exp) return;
+        exp.style.display = 'block';
+        
+        let isCorrect = false;
+        // Câu 8_6 xử lý linh hoạt: B (在) hoặc D (去)
+        if (q.id === "8_6") {
+          isCorrect = (userAnswers[q.id] === 1 || userAnswers[q.id] === 3);
+        } else if (q.id === "8_8") {
+          isCorrect = (userAnswers[q.id] === 3); // D. 有
+        } else {
+          isCorrect = (userAnswers[q.id] === q.ans);
+        }
+
+        if (isCorrect) {
+          scoreP8++;
+          item.classList.add('is-correct');
+          item.classList.remove('is-incorrect');
+        } else {
+          item.classList.add('is-incorrect');
+          item.classList.remove('is-correct');
+        }
+      });
+
+      const totalScore = scoreP1 + scoreP2 + scoreP3 + scoreP4 + scoreP5 + scoreP8;
+      scoreP1_global = scoreP1; scoreP2_global = scoreP2; scoreP3_global = scoreP3;
+      scoreP4_global = scoreP4; scoreP5_global = scoreP5; scoreP8_global = scoreP8;
+      lastTotalScore = totalScore;
+      scoreSaved = false;
+
+      // Cập nhật Modal
+      document.getElementById('modalFinalScore').innerText = totalScore;
+      document.getElementById('score-p1').innerText = `${scoreP1}/10`;
+      document.getElementById('score-p2').innerText = `${scoreP2}/10`;
+      document.getElementById('score-p3').innerText = `${scoreP3}/10`;
+      document.getElementById('score-p4').innerText = `${scoreP4}/10`;
+      document.getElementById('score-p5').innerText = `${scoreP5}/5`;
+      document.getElementById('score-p8').innerText = `${scoreP8}/10`;
+
+      const candidateName = document.getElementById('studentName').value || '';
+      document.getElementById('modalCandidateName').innerText = candidateName ? `Học viên: ${candidateName}` : 'Học viên: (chưa nhập tên)';
+      const nameInput = document.getElementById('modalStudentName');
+      nameInput.value = candidateName;
+      const saveBtn = document.getElementById('saveScoreBtn');
+      saveBtn.disabled = false;
+      saveBtn.innerText = '💾 Lưu đáp án & điểm';
+      saveBtn.style.opacity = '1';
+
+      let verdict = "Xuất sắc! Bạn đã nắm rất vững kiến thức HSK1 🎉";
+      if (totalScore < 33) {
+        verdict = "Cần ôn tập thêm từ vựng và ngữ pháp HSK1 📚";
+      } else if (totalScore < 45) {
+        verdict = "Khá tốt! Bạn đã vượt qua bài test HSK1 👍";
+      }
+      document.getElementById('modalVerdict').innerText = verdict;
+
+      document.getElementById('resultModal').style.display = 'flex';
+      clearInterval(timerInterval);
+    }
+
+    // Nút Lưu trong modal: yêu cầu nhập tên rồi mới gửi Supabase
+    async function saveScoreFromModal() {
+      const nameInput = document.getElementById('modalStudentName');
+      const name = (nameInput.value || '').trim();
+      if (!name) {
+        nameInput.style.borderColor = '#e03131';
+        nameInput.focus();
+        return;
+      }
+      const saveBtn = document.getElementById('saveScoreBtn');
+      saveBtn.disabled = true;
+      saveBtn.innerText = '⏳ Đang lưu...';
+      saveBtn.style.opacity = '0.6';
+      await saveSubmissionToSupabase(lastTotalScore, name);
+      scoreSaved = true;
+      saveBtn.innerText = '✅ Đã lưu đáp án & điểm';
+      saveBtn.style.opacity = '1';
+      document.getElementById('modalCandidateName').innerText = `Học viên: ${name}`;
+    }
+
+    function closeModal() {
+      document.getElementById('resultModal').style.display = 'none';
+    }
+
+    function closeModalAndViewDetails() {
+      closeModal();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetExam() {
+      if (!confirm('Bạn có chắc chắn muốn làm lại từ đầu không?')) return;
+      userAnswers = {};
+      userOrderAnswers = {};
+      document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+      document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('.question-item').forEach(i => i.classList.remove('is-correct', 'is-incorrect'));
+      document.querySelectorAll('.explanation-box').forEach(e => e.style.display = 'none');
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      essayInput.value = '';
+      document.getElementById('charCount').innerText = '0';
+      document.getElementById('sentenceCount').innerText = '0';
+
+      part3Data.forEach(q => resetWordOrder(q.id));
+      updateProgress();
+
+      timeLeft = 45 * 60;
+      clearInterval(timerInterval);
+      startTimer();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // KHÔI PHỤC ĐÁP ÁN TỪ LOCALSTORAGE (khi chuyển qua lại giữa các phần)
+    function restoreState() {
+      try {
+        const savedAns = JSON.parse(localStorage.getItem(LS_ANS) || '{}');
+        const savedOrd = JSON.parse(localStorage.getItem(LS_ORD) || '{}');
+        const savedEssay = localStorage.getItem(LS_ESSAY) || '';
+
+        Object.keys(savedAns).forEach(qId => {
+          const val = savedAns[qId];
+          userAnswers[qId] = val;
+          if (val === 'D' || val === 'S') {
+            const btn = document.querySelector(`#item-${qId} .tf-btn.btn-${val === 'D' ? 'true' : 'false'}`);
+            if (btn) btn.classList.add('selected');
+          } else {
+            const inp = document.querySelector(`input[name="${qId}"][value="${val}"]`);
+            if (inp) {
+              inp.checked = true;
+              const lbl = inp.closest('.option-label');
+              if (lbl) lbl.classList.add('selected');
+            }
+          }
+        });
+
+        Object.keys(savedOrd).forEach(qId => {
+          const words = savedOrd[qId] || [];
+          userOrderAnswers[qId] = [];
+          words.forEach(w => {
+            const chips = document.querySelectorAll(`#bank-${qId} .word-chip:not(.used)`);
+            for (const c of chips) {
+              if (c.textContent.trim() === w) {
+                c.classList.add('used');
+                userOrderAnswers[qId].push({ word: w, chipId: c.id });
+                break;
+              }
+            }
+          });
+          renderSlot(qId);
+        });
+
+        if (savedEssay) {
+          essayInput.value = savedEssay;
+          essayInput.dispatchEvent(new Event('input'));
+        }
+      } catch(e) {}
+    }
+
+    // INIT
+    window.addEventListener('DOMContentLoaded', () => {
+      // Chế độ một phần: chỉ hiện đúng section được chọn, ẩn nav/footer/timer
+      if (ONLY_PART) {
+        document.querySelectorAll('.section-card').forEach(card => {
+          if (card.id !== 'sec-' + ONLY_PART) card.style.display = 'none';
+        });
+        document.querySelectorAll('.section-nav').forEach(el => el.style.display = 'none');
+        const tb = document.querySelector('.timer-box');
+        if (tb) tb.style.display = 'none';
+        // Riêng phần IX (viết đoạn văn): giữ thanh Nộp bài nhưng để trong luồng,
+        // nằm cuối tài liệu — không nổi đè che nội dung
+        if (ONLY_PART === '9') {
+          const bb9 = document.querySelector('.bottom-bar');
+          if (bb9) bb9.style.position = 'static';
+        } else {
+          const bb = document.querySelector('.bottom-bar');
+          if (bb) bb.style.display = 'none';
+        }
+      }
+
+      renderPart1();
+      renderPart2();
+      renderPart3();
+      renderPart4();
+      renderPart5();
+      renderPart8();
+      restoreState();
+      if (!ONLY_PART) startTimer();
+      updateProgress();
+    });
+  </script>
+</body>
+</html>
