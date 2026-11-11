@@ -314,6 +314,105 @@ def _exam2_full_width():
         .exam2-zh {
             font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
         }
+        [class*="st-key-e2order_"] iframe {
+            width: 118px !important;
+            min-width: 118px;
+        }
+        [class*="st-key-e2order_"] {
+            max-width: 760px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 18px !important;
+            padding: 16px 18px 12px 18px !important;
+            margin: 0 0 16px 0;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+        }
+        .exam2-order-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.5;
+            margin-bottom: 2px;
+        }
+        .exam2-order-title span {
+            display: inline-block;
+            background: #1d4ed8;
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 2px 10px;
+            margin-right: 8px;
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+        }
+        .exam2-order-preview {
+            font-size: 1.85rem;
+            font-weight: 800;
+            line-height: 1.55;
+            color: #0f172a;
+            background: #f8fbff;
+            border: 1.5px solid #dbeafe;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin: 8px 0 4px 0;
+        }
+        .exam2-order-joined {
+            color: #64748b;
+            font-size: 1.02rem;
+            margin: 0 2px 8px 2px;
+        }
+        .exam2-order-empty {
+            color: #64748b;
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 16px;
+            margin: 8px 0 10px 0;
+            line-height: 1.5;
+        }
+        .exam2-order-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin: 8px 0 2px 0;
+        }
+        [class*="st-key-e2slot_"] [data-testid="stHorizontalBlock"],
+        [class*="st-key-e2bank_"] [data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        [class*="st-key-e2slot_"] [data-testid="stColumn"],
+        [class*="st-key-e2bank_"] [data-testid="stColumn"] {
+            width: fit-content !important;
+            flex: 0 0 auto !important;
+        }
+        [class*="st-key-e2slot_"] div.stButton > button,
+        [class*="st-key-e2bank_"] div.stButton > button {
+            width: auto !important;
+            min-height: 48px;
+            border-radius: 12px !important;
+            font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            padding: 0.3rem 0.95rem !important;
+            white-space: nowrap;
+        }
+        [class*="st-key-e2slot_"] div.stButton > button {
+            background: #eff6ff !important;
+            color: #1e3a8a !important;
+            border: 1.5px solid #60a5fa !important;
+        }
+        [class*="st-key-e2bank_"] div.stButton > button {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 1.5px solid #cbd5e1 !important;
+        }
+        [class*="st-key-e2bank_"] div.stButton > button:hover,
+        [class*="st-key-e2slot_"] div.stButton > button:hover {
+            border-color: #2563eb !important;
+            background: #f8fafc !important;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -524,6 +623,9 @@ def _render_exam2_tf(questions, work, attempt_id):
                     _exam2_pick(work, qid, "S")
 
 
+_EXAM2_ORDER_MARKS = "①②③④⑤⑥⑦⑧⑨⑩"
+
+
 def _render_exam2_order(questions, work, attempt_id):
     banks = work.setdefault("banks", {})
     orders = work.setdefault("orders", {})
@@ -532,35 +634,50 @@ def _render_exam2_order(questions, work, attempt_id):
         bank = banks.get(qid) or list(q.get("tokens") or [])
         banks[qid] = bank
         picked = list(orders.get(qid) or [])
-        with st.container(border=True):
-            head, audio = st.columns([8, 2])
+        words = [bank[n] for n in picked if isinstance(n, int) and 0 <= n < len(bank)]
+        with st.container(border=True, key=f"e2order_{qid}"):
+            head, audio = st.columns([5.2, 1.3])
             with head:
-                st.markdown(f"**{i}.** Nhấp từ bên dưới để xếp thành câu.")
+                st.markdown(
+                    f"<div class='exam2-order-title'><span>Câu {i}</span>Xếp các từ thành một câu hoàn chỉnh</div>",
+                    unsafe_allow_html=True,
+                )
             with audio:
-                render_play_button(q.get("correct") or "", "🔊 Nghe câu chuẩn", key=f"e2_audio_{attempt_id}_{qid}", height=42)
-            sentence = "".join(bank[n] for n in picked if isinstance(n, int) and 0 <= n < len(bank))
-            st.markdown(
-                f"<div class='exam2-zh' style='font-size:1.4rem;font-weight:700;min-height:2rem;'>{sentence or 'Chưa chọn từ nào'}</div>",
-                unsafe_allow_html=True,
-            )
+                render_play_button(q.get("correct") or "", "🔊 Nghe", key=f"e2_audio_{attempt_id}_{qid}", height=42)
+            if words:
+                st.markdown(
+                    f"<div class='exam2-order-preview exam2-zh'>{'　'.join(words)}</div>"
+                    f"<div class='exam2-order-joined exam2-zh'>Câu liền: {''.join(words)}</div>",
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    "<div class='exam2-order-empty'>Chưa xếp từ nào. Bấm các từ trong kho theo đúng thứ tự.</div>",
+                    unsafe_allow_html=True,
+                )
             if picked:
-                cols = st.columns(len(picked))
-                for pos, bank_i in enumerate(picked):
-                    with cols[pos]:
-                        if st.button(bank[bank_i], key=f"e2rm_{attempt_id}_{qid}_{pos}", use_container_width=True):
-                            picked.pop(pos)
-                            orders[qid] = picked
-                            st.rerun()
+                st.markdown("<div class='exam2-order-label'>Đã xếp — bấm để bỏ từ</div>", unsafe_allow_html=True)
+                with st.container(key=f"e2slot_{qid}"):
+                    cols = st.columns(len(picked))
+                    for pos, bank_i in enumerate(picked):
+                        mark = _EXAM2_ORDER_MARKS[pos] if pos < len(_EXAM2_ORDER_MARKS) else f"{pos + 1}."
+                        with cols[pos]:
+                            if st.button(f"{mark} {bank[bank_i]}", key=f"e2rm_{attempt_id}_{qid}_{pos}"):
+                                picked.pop(pos)
+                                orders[qid] = picked
+                                st.rerun()
             remain = [n for n in range(len(bank)) if n not in picked]
             if remain:
-                cols = st.columns(min(4, len(remain)))
-                for n, bank_i in enumerate(remain):
-                    with cols[n % len(cols)]:
-                        if st.button(bank[bank_i], key=f"e2add_{attempt_id}_{qid}_{bank_i}", use_container_width=True):
-                            picked.append(bank_i)
-                            orders[qid] = picked
-                            st.rerun()
-            if picked and st.button("🔄 Xếp lại câu này", key=f"e2reset_{attempt_id}_{qid}"):
+                st.markdown("<div class='exam2-order-label'>Kho từ — bấm để thêm vào cuối câu</div>", unsafe_allow_html=True)
+                with st.container(key=f"e2bank_{qid}"):
+                    cols = st.columns(len(remain))
+                    for n, bank_i in enumerate(remain):
+                        with cols[n]:
+                            if st.button(bank[bank_i], key=f"e2add_{attempt_id}_{qid}_{bank_i}"):
+                                picked.append(bank_i)
+                                orders[qid] = picked
+                                st.rerun()
+            if picked and st.button("Xếp lại từ đầu", key=f"e2reset_{attempt_id}_{qid}"):
                 orders[qid] = []
                 st.rerun()
 
