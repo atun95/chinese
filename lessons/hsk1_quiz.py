@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
-import streamlit.components.v1 as components
 import random
 import csv
 import json
@@ -275,6 +274,426 @@ def popup_submit_score(score_display, questions, save_progress, save_score_row_h
             st.rerun()
 
 
+EXAM2_PARTS = [
+    ("1", "I. Từ vựng (10 câu)", "I. Chọn nghĩa đúng của từ vựng", "10 câu • 10 điểm"),
+    ("2", "II. Đúng / Sai (10 câu)", "II. Đọc câu và chọn Đúng hoặc Sai", "10 câu • 10 điểm"),
+    ("3", "III. Sắp xếp câu (10 câu)", "III. Sắp xếp từ thành câu", "10 câu • 10 điểm"),
+    ("4", "IV. Đúng / Sai (10 câu)", "IV. Đối chiếu nghĩa Trung - Việt", "10 câu • 10 điểm"),
+    ("5", "V. Đọc hiểu đoạn văn (5 câu)", "V. Đọc hiểu đoạn văn", "5 câu • 5 điểm"),
+    ("8", "VI. Ngữ pháp (10 câu)", "VI. Chọn từ thích hợp điền vào chỗ trống", "10 câu • 10 điểm"),
+    ("9", "VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "VII. Viết đoạn văn ngắn giới thiệu bản thân", "Tự luận • 5 điểm"),
+    ("full", "🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "Toàn bộ đề", ""),
+]
+EXAM2_LABEL_BY_KEY = {key: label for key, label, _title, _meta in EXAM2_PARTS}
+EXAM2_ORDER = [key for key, _label, _title, _meta in EXAM2_PARTS]
+EXAM2_PASSAGE_PINYIN = (
+    "Wǒ jiào Lǐ Míng, jīnnián èrshí suì, shì yì míng dàxuéshēng. "
+    "Wǒ zài Běijīng de yì suǒ dàxué xuéxí Hànyǔ. Wǒ de zhuānyè shì Zhōngwén, "
+    "wǒ hěn xǐhuan Hànyǔ hé Zhōngguó wénhuà. Wǒ de jiā yǒu sì kǒu rén: bàba, māma, "
+    "wǒ hé mèimei. Wǒ de mèimei jīnnián shíwǔ suì, shì yì míng zhōngxuéshēng. "
+    "Tā yě xǐhuan xuéxí Hànyǔ. Wǒmen chángcháng yìqǐ kàn diànyǐng, tīng yīnyuè, "
+    "yǒu shíhou yě qù gōngyuán sànbù. Zhōumò wǒ xǐhuan qù túshūguǎn kàn shū, "
+    "huòzhě hé péngyou qù dǎ lánqiú."
+)
+EXAM2_SAMPLE_ESSAY = """你好！我叫阮明，今年二十一岁，是一名大学生。
+我很喜欢学习汉语，也喜欢看中国电影。
+我家有四口人：爸爸、妈妈、哥哥和我。
+周末我常常和朋友去图书馆看书，有时候也去公园散步。
+很高兴认识大家！"""
+
+
+def _exam2_full_width():
+    st.markdown(
+        """
+        <style>
+        .block-container, [data-testid="stMainBlockContainer"] {
+            max-width: 100% !important;
+            padding-left: 0.75rem !important;
+            padding-right: 0.75rem !important;
+        }
+        .exam2-zh {
+            font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _fresh_exam2_work(data, attempt_id):
+    banks = {}
+    for q in data.get("part3Data") or []:
+        tokens = list(q.get("tokens") or [])
+        random.Random(f"{attempt_id}:{q.get('id')}").shuffle(tokens)
+        banks[q.get("id")] = tokens
+    return {"attempt_id": attempt_id, "choices": {}, "orders": {}, "banks": banks}
+
+
+def _exam2_work(data, attempt_id):
+    work = st.session_state.get("hsk1_exam2_work")
+    if not isinstance(work, dict) or work.get("attempt_id") != attempt_id:
+        work = _fresh_exam2_work(data, attempt_id)
+        st.session_state.hsk1_exam2_work = work
+    return work
+
+
+def _exam2_mcq_correct(q, user):
+    if q.get("id") == "8_6":
+        return user in (1, 3)
+    if q.get("id") == "8_8":
+        return user == 3
+    return user == q.get("ans")
+
+
+def _exam2_scores(data, work):
+    choices = work.get("choices") or {}
+    orders = work.get("orders") or {}
+    banks = work.get("banks") or {}
+
+    def count_mcq(questions):
+        return sum(1 for q in questions if _exam2_mcq_correct(q, choices.get(q.get("id"))))
+
+    def count_tf(questions):
+        return sum(1 for q in questions if choices.get(q.get("id")) == q.get("ans"))
+
+    p3 = 0
+    for q in data.get("part3Data") or []:
+        picked = orders.get(q.get("id")) or []
+        bank = banks.get(q.get("id")) or []
+        built = "".join(bank[i] for i in picked if isinstance(i, int) and 0 <= i < len(bank))
+        target = (q.get("correct") or "").replace(" ", "")
+        if built and built.replace(" ", "") == target:
+            p3 += 1
+    return {
+        "p1": count_mcq(data.get("part1Data") or []),
+        "p2": count_tf(data.get("part2Data") or []),
+        "p3": p3,
+        "p4": count_tf(data.get("part4Data") or []),
+        "p5": count_mcq(data.get("part5Data") or []),
+        "p8": count_mcq(data.get("part8Data") or []),
+    }
+
+
+def _exam2_export(data, work):
+    choices = work.get("choices") or {}
+    saved = {}
+    for q in (data.get("part1Data") or []) + (data.get("part5Data") or []) + (data.get("part8Data") or []):
+        idx = choices.get(q.get("id"))
+        options = q.get("options") or []
+        if isinstance(idx, int) and 0 <= idx < len(options):
+            saved[q["id"]] = {"type": "mcq", "index": idx, "text": options[idx]}
+    for q in (data.get("part2Data") or []) + (data.get("part4Data") or []):
+        val = choices.get(q.get("id"))
+        if val in ("D", "S"):
+            saved[q["id"]] = {"type": "tf", "value": val, "text": "Đúng (Đ)" if val == "D" else "Sai (S)"}
+    orders = {}
+    banks = work.get("banks") or {}
+    for q in data.get("part3Data") or []:
+        picked = (work.get("orders") or {}).get(q.get("id")) or []
+        bank = banks.get(q.get("id")) or []
+        words = [bank[i] for i in picked if isinstance(i, int) and 0 <= i < len(bank)]
+        if words:
+            orders[q["id"]] = words
+    return saved, orders
+
+
+def _save_exam2_submission(student_name):
+    data = _load_exam2_data()
+    work = st.session_state.get("hsk1_exam2_work") or {}
+    client = supabase_client.get_supabase_client()
+    if not client:
+        return False, "Chưa kết nối được nơi lưu bài."
+    scores = _exam2_scores(data, work)
+    saved_choices, saved_orders = _exam2_export(data, work)
+    attempt_id = work.get("attempt_id") or _query_param("hsk1_exam2")
+    essay_key = f"hsk1e2_essay_{attempt_id}"
+    essay = st.session_state.get(essay_key, "")
+    total = sum(scores.values())
+    payload = {
+        "student_name": student_name,
+        "score": total,
+        "max_score": 55,
+        "part_scores": scores,
+        "answers": {
+            "v": 2,
+            "attempt_id": attempt_id,
+            "status": "submitted",
+            "display_name": student_name,
+            "choices": saved_choices,
+        },
+        "order_answers": saved_orders,
+        "essay": essay,
+        "submitted_at": datetime.now(timezone.utc).isoformat(),
+    }
+    try:
+        client.table("hsk1_exam2_answers").insert(payload).execute()
+        return True, ""
+    except Exception as exc:
+        return False, f"Chưa lưu được bài: {exc}"
+
+
+def _dismiss_exam2_dialog():
+    st.session_state.hsk1_exam2_open_submit = False
+
+
+@st.dialog("Nộp bài", on_dismiss=_dismiss_exam2_dialog)
+def _exam2_submit_dialog():
+    st.markdown("Điền họ và tên học viên để lưu bài làm.")
+    name = st.text_input("Họ và tên học viên *", placeholder="Nguyễn Văn A", key="hsk1_exam2_modal_name")
+    if st.button("💾 Lưu đáp án & điểm", type="primary", use_container_width=True, key="hsk1_exam2_modal_save"):
+        clean = (name or "").strip()
+        if not clean:
+            st.error("Vui lòng điền họ và tên trước khi lưu.")
+            return
+        ok, message = _save_exam2_submission(clean)
+        if ok:
+            st.session_state.hsk1_exam2_open_submit = False
+            st.session_state.hsk1_exam2_notice = "Đã lưu bài làm."
+            st.rerun()
+        st.error(message)
+
+
+def _exam2_center_button(label, key):
+    _left, mid, _right = st.columns([1, 2, 1])
+    with mid:
+        return st.button(label, type="primary", key=key, use_container_width=True)
+
+
+def _exam2_pick(work, qid, value):
+    work.setdefault("choices", {})[qid] = value
+    st.rerun()
+
+
+def _render_exam2_mcq(questions, work, attempt_id, stem_fn):
+    choices = work.setdefault("choices", {})
+    for i, q in enumerate(questions, 1):
+        qid = q.get("id")
+        with st.container(border=True):
+            left, right = st.columns([8, 2])
+            with left:
+                st.markdown(stem_fn(i, q), unsafe_allow_html=True)
+            with right:
+                sound = q.get("zh") or q.get("q_zh") or q.get("q") or ""
+                if sound:
+                    render_play_button(sound, "🔊 Nghe", key=f"e2_audio_{attempt_id}_{qid}", height=42)
+            options = q.get("options") or []
+            cols = st.columns(2)
+            for oi, opt in enumerate(options):
+                with cols[oi % 2]:
+                    picked = choices.get(qid) == oi
+                    if st.button(
+                        opt,
+                        key=f"e2opt_{attempt_id}_{qid}_{oi}",
+                        type="primary" if picked else "secondary",
+                        use_container_width=True,
+                    ):
+                        _exam2_pick(work, qid, oi)
+
+
+def _render_exam2_tf(questions, work, attempt_id):
+    choices = work.setdefault("choices", {})
+    for i, q in enumerate(questions, 1):
+        qid = q.get("id")
+        with st.container(border=True):
+            left, right = st.columns([8, 2])
+            with left:
+                st.markdown(
+                    f"<div class='exam2-zh' style='font-size:1.35rem;font-weight:800;'>{i}. {q.get('zh','')}</div>"
+                    f"<div style='color:#64748b;margin:4px 0 8px 0;'>{q.get('py','')}</div>"
+                    f"<div style='font-size:1.05rem;'>{q.get('vi','')}</div>",
+                    unsafe_allow_html=True,
+                )
+            with right:
+                render_play_button(q.get("zh") or "", "🔊 Nghe", key=f"e2_audio_{attempt_id}_{qid}", height=42)
+            yes, no = st.columns(2)
+            with yes:
+                if st.button(
+                    "Đúng (Đ)",
+                    key=f"e2tf_{attempt_id}_{qid}_D",
+                    type="primary" if choices.get(qid) == "D" else "secondary",
+                    use_container_width=True,
+                ):
+                    _exam2_pick(work, qid, "D")
+            with no:
+                if st.button(
+                    "Sai (S)",
+                    key=f"e2tf_{attempt_id}_{qid}_S",
+                    type="primary" if choices.get(qid) == "S" else "secondary",
+                    use_container_width=True,
+                ):
+                    _exam2_pick(work, qid, "S")
+
+
+def _render_exam2_order(questions, work, attempt_id):
+    banks = work.setdefault("banks", {})
+    orders = work.setdefault("orders", {})
+    for i, q in enumerate(questions, 1):
+        qid = q.get("id")
+        bank = banks.get(qid) or list(q.get("tokens") or [])
+        banks[qid] = bank
+        picked = list(orders.get(qid) or [])
+        with st.container(border=True):
+            head, audio = st.columns([8, 2])
+            with head:
+                st.markdown(f"**{i}.** Nhấp từ bên dưới để xếp thành câu.")
+            with audio:
+                render_play_button(q.get("correct") or "", "🔊 Nghe câu chuẩn", key=f"e2_audio_{attempt_id}_{qid}", height=42)
+            sentence = "".join(bank[n] for n in picked if isinstance(n, int) and 0 <= n < len(bank))
+            st.markdown(
+                f"<div class='exam2-zh' style='font-size:1.4rem;font-weight:700;min-height:2rem;'>{sentence or 'Chưa chọn từ nào'}</div>",
+                unsafe_allow_html=True,
+            )
+            if picked:
+                cols = st.columns(len(picked))
+                for pos, bank_i in enumerate(picked):
+                    with cols[pos]:
+                        if st.button(bank[bank_i], key=f"e2rm_{attempt_id}_{qid}_{pos}", use_container_width=True):
+                            picked.pop(pos)
+                            orders[qid] = picked
+                            st.rerun()
+            remain = [n for n in range(len(bank)) if n not in picked]
+            if remain:
+                cols = st.columns(min(4, len(remain)))
+                for n, bank_i in enumerate(remain):
+                    with cols[n % len(cols)]:
+                        if st.button(bank[bank_i], key=f"e2add_{attempt_id}_{qid}_{bank_i}", use_container_width=True):
+                            picked.append(bank_i)
+                            orders[qid] = picked
+                            st.rerun()
+            if picked and st.button("🔄 Xếp lại câu này", key=f"e2reset_{attempt_id}_{qid}"):
+                orders[qid] = []
+                st.rerun()
+
+
+def _render_exam2_essay(attempt_id):
+    st.markdown(
+        """
+        **Gợi ý dàn ý**
+        - Tên, tuổi (我叫..., 今年...岁)
+        - Nghề nghiệp hoặc là học sinh, sinh viên
+        - Gia đình có mấy người
+        - Sở thích
+        - Hoạt động hằng ngày hoặc cuối tuần
+        """
+    )
+    essay = st.text_area(
+        "Bài viết",
+        height=260,
+        placeholder="Nhập bài viết bằng chữ Hán tại đây (ví dụ: 你好！我叫王华，今年二十岁...)",
+        key=f"hsk1e2_essay_{attempt_id}",
+        label_visibility="collapsed",
+    )
+    compact = "".join((essay or "").split())
+    marked = essay or ""
+    for sep in "。？！.?!":
+        marked = marked.replace(sep, "|")
+    sentences = len([part for part in marked.split("|") if part.strip()]) if (essay or "").strip() else 0
+    st.caption(f"Số ký tự: {len(compact)} chữ | Ước tính: {sentences} câu")
+    with st.expander("Xem đoạn văn mẫu tham khảo"):
+        st.markdown(f"<div class='exam2-zh' style='font-size:1.2rem;line-height:1.8;'>{EXAM2_SAMPLE_ESSAY.replace(chr(10), '<br>')}</div>", unsafe_allow_html=True)
+        st.caption("Xin chào! Tôi tên là Nguyễn Minh, năm nay 21 tuổi, là sinh viên đại học. Tôi rất thích học tiếng Trung, cũng thích xem phim Trung Quốc. Nhà tôi có 4 người: bố, mẹ, anh trai và tôi. Cuối tuần tôi thường cùng bạn đến thư viện đọc sách, thỉnh thoảng cũng đi công viên dạo bộ. Rất vui được làm quen với mọi người!")
+
+
+def _render_exam2_section(part_key, data, work, attempt_id):
+    if part_key == "1":
+        _render_exam2_mcq(
+            data.get("part1Data") or [],
+            work,
+            attempt_id,
+            lambda i, q: (
+                f"<div class='exam2-zh' style='font-size:1.7rem;font-weight:800;'>{i}. {q.get('zh','')}</div>"
+                f"<div style='color:#64748b;margin-top:4px;'>{q.get('py','')}</div>"
+            ),
+        )
+    elif part_key == "2":
+        _render_exam2_tf(data.get("part2Data") or [], work, attempt_id)
+    elif part_key == "3":
+        _render_exam2_order(data.get("part3Data") or [], work, attempt_id)
+    elif part_key == "4":
+        _render_exam2_tf(data.get("part4Data") or [], work, attempt_id)
+    elif part_key == "5":
+        passage = data.get("passageText") or ""
+        st.markdown(
+            f"<div style='background:#fff9db;border:1px solid #ffe066;border-left:6px solid #f59f00;border-radius:12px;padding:16px 18px;'>"
+            f"<div style='font-weight:800;color:#d9480f;margin-bottom:8px;'>Đoạn văn</div>"
+            f"<div class='exam2-zh' style='font-size:1.25rem;line-height:1.9;'>{passage}</div>"
+            f"<div style='color:#64748b;margin-top:8px;'>{EXAM2_PASSAGE_PINYIN}</div></div>",
+            unsafe_allow_html=True,
+        )
+        render_play_button(passage, "🔊 Nghe bài đọc", key=f"e2_passage_{attempt_id}", height=42)
+        _render_exam2_mcq(
+            data.get("part5Data") or [],
+            work,
+            attempt_id,
+            lambda i, q: (
+                f"<div class='exam2-zh' style='font-size:1.3rem;font-weight:800;'>{i}. {q.get('q_zh','')}</div>"
+                f"<div style='color:#64748b;margin-top:4px;'>{q.get('q_py','')}</div>"
+            ),
+        )
+    elif part_key == "8":
+        _render_exam2_mcq(
+            data.get("part8Data") or [],
+            work,
+            attempt_id,
+            lambda i, q: f"<div class='exam2-zh' style='font-size:1.45rem;font-weight:800;letter-spacing:1px;'>{i}. {q.get('q','')}</div>",
+        )
+    elif part_key == "9":
+        _render_exam2_essay(attempt_id)
+
+
+def _show_hsk1_exam2(attempt_id):
+    _exam2_full_width()
+    data = _load_exam2_data()
+    if not data:
+        st.error("Không đọc được dữ liệu Đề 2.")
+        return
+    work = _exam2_work(data, attempt_id)
+    notice = st.session_state.pop("hsk1_exam2_notice", None)
+    if notice:
+        st.success(notice)
+
+    labels = [label for _key, label, _title, _meta in EXAM2_PARTS]
+    pending = st.session_state.pop("hsk1_exam2_pending", None)
+    if pending in labels:
+        st.session_state.hsk1_exam2_part = pending
+    part_label = st.selectbox(
+        "Chọn phần của bài test:",
+        labels,
+        key="hsk1_exam2_part",
+    )
+    part_key = dict((label, key) for key, label, _title, _meta in EXAM2_PARTS)[part_label]
+    title = dict((key, title) for key, _label, title, _meta in EXAM2_PARTS)[part_key]
+    meta = dict((key, meta) for key, _label, _title, meta in EXAM2_PARTS)[part_key]
+
+    idx = EXAM2_ORDER.index(part_key)
+    if part_key != "full" and idx + 1 < len(EXAM2_ORDER) and EXAM2_ORDER[idx + 1] != "full":
+        nxt = EXAM2_ORDER[idx + 1]
+        if _exam2_center_button("➡️ Sang phần tiếp theo", f"hsk1_next_{part_key}"):
+            st.session_state.hsk1_exam2_pending = EXAM2_LABEL_BY_KEY[nxt]
+            st.rerun()
+    elif _exam2_center_button("✅ Nộp bài & Chấm điểm", f"hsk1_submit_{part_key}"):
+        st.session_state.hsk1_exam2_open_submit = True
+
+    done = len(work.get("choices") or {}) + sum(1 for words in (work.get("orders") or {}).values() if words)
+    st.caption(f"Đã làm {done}/55 câu trắc nghiệm")
+    if part_key != "full":
+        st.markdown(f"### {title}")
+        if meta:
+            st.caption(meta)
+        _render_exam2_section(part_key, data, work, attempt_id)
+    else:
+        for key, _label, section_title, section_meta in EXAM2_PARTS:
+            if key == "full":
+                continue
+            st.markdown(f"### {section_title}")
+            if section_meta:
+                st.caption(section_meta)
+            _render_exam2_section(key, data, work, attempt_id)
+
+    if st.session_state.get("hsk1_exam2_open_submit"):
+        _exam2_submit_dialog()
+
+
 def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
     # CSS Styles cao cấp
     st.markdown("""
@@ -462,136 +881,27 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                         sel = rows[labels.index(pick)]
                         st.markdown("**Bài tự luận (Phần VII):**")
                         st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_menu")
-                        st.markdown("#### 📝 Chi tiết đáp án & chấm từng câu")
-                        frag = render_exam2_review(sel)
-                        review_page = f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><style>
-body {{ font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; padding: 18px; margin: 0; color: #1f2937; }}
-.zh {{ font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif; }}
-h4 {{ margin: 22px 0 10px 0; }}
-</style></head><body>{frag}
-<script>
-(function(){{
-  function fit(){{
-    try{{
-      var h = document.body ? document.body.scrollHeight : 0;
-      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
-    }}catch(e){{}}
-  }}
-  window.addEventListener('load', function(){{ setTimeout(fit, 100); }});
-  var t = setInterval(fit, 500);
-  setTimeout(function(){{ clearInterval(t); }}, 5000);
-}})();
-</script>
-</body></html>"""
-                        components.html(review_page, height=1200, scrolling=True)
+                        st.markdown("#### Chi tiết đáp án và chấm từng câu")
+                        st.markdown(
+                            "<style>.zh{font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;}</style>"
+                            + render_exam2_review(sel),
+                            unsafe_allow_html=True,
+                        )
                 else:
                     st.warning("Chưa kết nối được Supabase.")
             except Exception as e:
                 st.error(f"Lỗi tải bài nộp: {e}")
         return
 
-    # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
+    # ================= ĐỀ 2: BÀI TEST HSK 1 =================
     if exam_view == "exam2":
         attempt_id = _query_param("hsk1_exam2")
         if not attempt_id:
             attempt_id = uuid.uuid4().hex
             st.query_params["hsk1_exam2"] = attempt_id
             st.rerun()
-
-        part_options = [
-            ("I. Từ vựng (10 câu)", "1"),
-            ("II. Đúng / Sai (10 câu)", "2"),
-            ("III. Sắp xếp câu (10 câu)", "3"),
-            ("IV. Đúng / Sai (10 câu)", "4"),
-            ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
-            ("VI. Ngữ pháp (10 câu)", "8"),
-            ("VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "9"),
-            ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
-        ]
-        part_labels = [p[0] for p in part_options]
-        # Áp dụng điều hướng từ nút Trước/Sau (phải set TRƯỚC khi selectbox render)
-        pending_part = st.session_state.pop("hsk1_exam2_pending", None)
-        if pending_part in part_labels:
-            st.session_state.hsk1_exam2_part = pending_part
-        part_choice = st.selectbox(
-            "Chọn phần của bài test:",
-            part_labels,
-            key="hsk1_exam2_part",
-            help="Mỗi đáp án được ghi ngay lên hệ thống. Chuyển phần không làm mất bài."
-        )
-        only_part = dict(part_options)[part_choice]
-
-        html_path = Path(__file__).resolve().parent.parent / "bai_test_hsk1.html"
-        if html_path.exists():
-            html_content = html_path.read_text(encoding="utf-8")
-            inject_parts = ["<style>body{padding-bottom:0 !important;}</style>"]
-            # Inject cấu hình Supabase để đề thi tự lưu đáp án
-            try:
-                sb_cfg = supabase_client.get_supabase_config()
-                inject_parts.append(
-                    f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
-                    f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
-                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
-                    f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
-                )
-            except Exception:
-                pass
-            if st.session_state.pop("hsk1_exam2_submit", False):
-                inject_parts.append("<script>window.__EXAM_AUTO_SUBMIT__=true;</script>")
-            if only_part != "full":
-                inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
-            else:
-                # Bản full không cuộn trong khung -> đưa thanh nộp bài về cuối tài liệu
-                inject_parts.append("<style>.bottom-bar{position:static !important;}</style>")
-            # Script tự chỉnh chiều cao iframe sát nội dung (hết khoảng trắng thừa)
-            inject_parts.append("""
-<script>
-(function(){
-  function fit(){
-    try{
-      var h = document.body ? document.body.scrollHeight : 0;
-      if (!h || h < 100) h = document.documentElement.scrollHeight;
-      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
-    }catch(e){}
-  }
-  window.addEventListener('load', function(){ setTimeout(fit, 100); });
-  window.addEventListener('resize', fit);
-  var t = setInterval(fit, 500);
-  setTimeout(function(){ clearInterval(t); }, 5000);
-})();
-</script>""")
-            html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
-
-            # ================= NÚT ĐIỀU HƯỚNG (đặt trên đầu đề) =================
-            order_keys = ["1", "2", "3", "4", "5", "8", "9", "full"]
-            label_by_key = {v: k for k, v in part_options}
-            idx = order_keys.index(only_part)
-
-            def render_nav_buttons(suffix):
-                if only_part == "full":
-                    return
-                _, mid_col, _ = st.columns([1, 2, 1])
-                with mid_col:
-                    next_key = order_keys[idx + 1]
-                    if next_key != "full":
-                        next_label = label_by_key[next_key]
-                        if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
-                            st.session_state.hsk1_exam2_pending = next_label
-                            st.rerun()
-                    elif st.button("✅ Nộp bài & Chấm điểm", type="primary", key=f"hsk1_submit_{only_part}{suffix}", use_container_width=True):
-                        st.session_state.hsk1_exam2_submit = True
-                        st.rerun()
-
-            render_nav_buttons("_top")
-            st.markdown("<br/>", unsafe_allow_html=True)
-
-            components.html(html_content, height=900, scrolling=True)
-
-            if only_part == "full":
-                st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
-        else:
-            st.error(f"Không tìm thấy file đề thi: {html_path}")
+        st.session_state.pop("hsk1_exam2_submit", None)
+        _show_hsk1_exam2(attempt_id)
         return
 
     # Đề thi mặc định cho toàn bộ phần này là quiz_exam_50
