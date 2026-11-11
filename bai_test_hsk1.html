@@ -788,6 +788,7 @@
           <label for="studentName" style="font-size: 0.85rem; font-weight: 600;">Họ tên:</label>
           <input type="text" id="studentName" placeholder="Nhập tên học viên...">
         </div>
+        <div id="saveStatus" style="font-size: 0.8rem; font-weight: 700; color: #64748b; white-space: nowrap;">Đang mở bài...</div>
         <div class="timer-box">
           <span>⏱️</span>
           <span id="timerDisplay">45:00</span>
@@ -1139,29 +1140,171 @@
 
     // LƯU TRỮ TRẠNG THÁI BÀI THI
     let userAnswers = {};
-    let userOrderAnswers = {}; // { '3_1': ['我', '是', '学生。'] }
+    let userOrderAnswers = {}; // { '3_1': [{word, chipId}] }
     let scoreP1_global = 0, scoreP2_global = 0, scoreP3_global = 0,
       scoreP4_global = 0, scoreP5_global = 0, scoreP8_global = 0;
 
     // Chế độ chia phần: Streamlit có thể truyền window.__EXAM_ONLY_PART__ = '1'|'2'|'3'|'4'|'5'|'8'|'9'
     const ONLY_PART = window.__EXAM_ONLY_PART__ || null;
+    const ATTEMPT_ID = window.__EXAM_ATTEMPT_ID__ || '';
 
-    // Lưu đáp án vào localStorage để chuyển qua lại giữa các phần không mất bài
-    const LS_ANS = 'hsk1x_answers';
-    const LS_ORD = 'hsk1x_order';
-    const LS_ESSAY = 'hsk1x_essay';
+    // Mỗi lần đổi đáp án ghi một bản đầy đủ lên Supabase.
+    // Khung đề không dùng được localStorage, và bảng không cho phép sửa dòng cũ.
+    let hydrated = false;
+    let suspendSave = false;
+    let lastSavedKey = '';
+    let draftTimer = null;
+
+    function setSaveStatus(text, color) {
+      const el = document.getElementById('saveStatus');
+      if (!el) return;
+      el.textContent = text;
+      el.style.color = color || '#64748b';
+    }
+
+    function collectChoices() {
+      const choices = {};
+      [...part1Data, ...part5Data, ...part8Data].forEach(q => {
+        const idx = userAnswers[q.id];
+        if (idx === undefined || idx === null || idx === '') return;
+        choices[q.id] = {
+          type: 'mcq',
+          index: idx,
+          text: (q.options && q.options[idx]) || ''
+        };
+      });
+      [...part2Data, ...part4Data].forEach(q => {
+        const val = userAnswers[q.id];
+        if (val !== 'D' && val !== 'S') return;
+        choices[q.id] = {
+          type: 'tf',
+          value: val,
+          text: val === 'D' ? 'Đúng (Đ)' : 'Sai (S)'
+        };
+      });
+      return choices;
+    }
+
+    function collectOrders() {
+      const orders = {};
+      part3Data.forEach(q => {
+        const words = (userOrderAnswers[q.id] || []).map(x => x.word).filter(Boolean);
+        if (words.length) orders[q.id] = words;
+      });
+      return orders;
+    }
+
+    function currentDisplayName(status) {
+      const headerName = (document.getElementById('studentName').value || '').trim();
+      const modalEl = document.getElementById('modalStudentName');
+      const modalName = modalEl ? (modalEl.value || '').trim() : '';
+      if (status === 'submitted') return modalName || headerName;
+      return headerName;
+    }
+
+    function buildPayload(status) {
+      const displayName = currentDisplayName(status);
+      const choices = collectChoices();
+      const orders = collectOrders();
+      const essay = essayInput ? essayInput.value : '';
+      const payload = {
+        student_name: status === 'submitted' ? (displayName || 'Ẩn danh') : (displayName || 'Đang làm'),
+        score: status === 'submitted' ? lastTotalScore : 0,
+        max_score: 55,
+        part_scores: status === 'submitted' ? {
+          p1: scoreP1_global, p2: scoreP2_global, p3: scoreP3_global,
+          p4: scoreP4_global, p5: scoreP5_global, p8: scoreP8_global
+        } : {},
+        answers: {
+          v: 2,
+          attempt_id: ATTEMPT_ID,
+          status: status,
+          display_name: displayName,
+          choices: choices
+        },
+        order_answers: orders,
+        essay: essay,
+        submitted_at: new Date().toISOString()
+      };
+      const key = JSON.stringify({
+        status: status,
+        displayName: displayName,
+        choices: choices,
+        orders: orders,
+        essay: essay,
+        score: payload.score,
+        part_scores: payload.part_scores
+      });
+      return { payload, key };
+    }
+
+    function payloadHasWork(payload) {
+      const answers = payload.answers || {};
+      return Object.keys(answers.choices || {}).length > 0
+        || Object.keys(payload.order_answers || {}).length > 0
+        || !!(payload.essay || '').trim()
+        || !!(answers.display_name || '').trim();
+    }
+
+    async function postSnapshot(payload) {
+      const url = window.__SUPABASE_URL__;
+      const key = window.__SUPABASE_KEY__;
+      const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
+      if (!url || !key || !ATTEMPT_ID) {
+        throw new Error('Chưa có kết nối lưu bài');
+      }
+      const res = await fetch(url + '/rest/v1/' + table, {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          'apikey': key,
+          'Authorization': 'Bearer ' + key,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        let msg = '';
+        try { msg = await res.text(); } catch (e) { }
+        throw new Error(msg || ('HTTP ' + res.status));
+      }
+    }
+
+    async function persist(status, force) {
+      if (!hydrated && !force) return false;
+      const built = buildPayload(status || 'draft');
+      if (!force && !payloadHasWork(built.payload)) return true;
+      if (!force && built.key === lastSavedKey) return true;
+      const previous = lastSavedKey;
+      lastSavedKey = built.key;
+      setSaveStatus(status === 'submitted' ? 'Đang nộp bài...' : 'Đang lưu bài làm...', '#d9480f');
+      try {
+        await postSnapshot(built.payload);
+        setSaveStatus(status === 'submitted' ? 'Đã nộp bài' : 'Đã lưu bài làm', '#2b8a3e');
+        return true;
+      } catch (err) {
+        if (lastSavedKey === built.key) lastSavedKey = previous;
+        setSaveStatus('Lưu thất bại', '#e03131');
+        throw err;
+      }
+    }
 
     function saveAnswers() {
-      try { localStorage.setItem(LS_ANS, JSON.stringify(userAnswers)); } catch (e) { }
+      if (suspendSave) return;
+      persist('draft', false).catch(() => { });
     }
     function saveOrder() {
-      try {
-        const simple = {};
-        Object.keys(userOrderAnswers).forEach(qId => {
-          simple[qId] = (userOrderAnswers[qId] || []).map(x => x.word);
-        });
-        localStorage.setItem(LS_ORD, JSON.stringify(simple));
-      } catch (e) { }
+      if (suspendSave) return;
+      persist('draft', false).catch(() => { });
+    }
+    function scheduleDraftSave() {
+      if (!hydrated) return;
+      clearTimeout(draftTimer);
+      setSaveStatus('Đang lưu bài làm...', '#d9480f');
+      draftTimer = setTimeout(() => {
+        persist('draft', false).catch(() => { });
+      }, 400);
     }
 
     // TTS PHÁT ÂM TIẾNG TRUNG
@@ -1463,7 +1606,7 @@
       const sentences = text.length > 0 ? text.split(/[。？！.?!]+/).filter(s => s.trim().length > 0).length : 0;
       document.getElementById('charCount').innerText = chars;
       document.getElementById('sentenceCount').innerText = sentences;
-      try { localStorage.setItem(LS_ESSAY, essayInput.value); } catch (e) { }
+      scheduleDraftSave();
     });
 
     function toggleSampleEssay() {
@@ -1472,50 +1615,6 @@
     }
 
     let lastTotalScore = 0;
-    let scoreSaved = false;
-
-    // LƯU ĐÁP ÁN LÊN SUPABASE
-    async function saveSubmissionToSupabase(totalScore, studentName) {
-      try {
-        const url = window.__SUPABASE_URL__;
-        const key = window.__SUPABASE_KEY__;
-        const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
-        if (!url || !key) return;
-
-        const name = (studentName || document.getElementById('studentName').value || 'Ẩn danh').trim();
-        const orderSimple = {};
-        Object.keys(userOrderAnswers).forEach(qId => {
-          orderSimple[qId] = (userOrderAnswers[qId] || []).map(x => x.word);
-        });
-
-        const payload = {
-          student_name: name,
-          score: totalScore,
-          max_score: 55,
-          part_scores: {
-            p1: scoreP1_global, p2: scoreP2_global, p3: scoreP3_global,
-            p4: scoreP4_global, p5: scoreP5_global, p8: scoreP8_global
-          },
-          answers: userAnswers,
-          order_answers: orderSimple,
-          essay: essayInput.value,
-          submitted_at: new Date().toISOString()
-        };
-
-        await fetch(url + '/rest/v1/' + table, {
-          method: 'POST',
-          headers: {
-            'apikey': key,
-            'Authorization': 'Bearer ' + key,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch (e) {
-        console.warn('Không lưu được đáp án lên Supabase:', e);
-      }
-    }
 
     // CHẤM ĐIỂM
     function submitExam() {
@@ -1637,7 +1736,6 @@
       scoreP1_global = scoreP1; scoreP2_global = scoreP2; scoreP3_global = scoreP3;
       scoreP4_global = scoreP4; scoreP5_global = scoreP5; scoreP8_global = scoreP8;
       lastTotalScore = totalScore;
-      scoreSaved = false;
 
       // Cập nhật Modal
       document.getElementById('modalFinalScore').innerText = totalScore;
@@ -1682,11 +1780,19 @@
       saveBtn.disabled = true;
       saveBtn.innerText = '⏳ Đang lưu...';
       saveBtn.style.opacity = '0.6';
-      await saveSubmissionToSupabase(lastTotalScore, name);
-      scoreSaved = true;
-      saveBtn.innerText = '✅ Đã lưu đáp án & điểm';
-      saveBtn.style.opacity = '1';
-      document.getElementById('modalCandidateName').innerText = `Học viên: ${name}`;
+      document.getElementById('studentName').value = name;
+      try {
+        await persist('submitted', true);
+        lastSavedKey = buildPayload('draft').key;
+        saveBtn.innerText = '✅ Đã lưu đáp án & điểm';
+        saveBtn.style.opacity = '1';
+        document.getElementById('modalCandidateName').innerText = `Học viên: ${name}`;
+      } catch (err) {
+        saveBtn.disabled = false;
+        saveBtn.innerText = '💾 Lưu lại';
+        saveBtn.style.opacity = '1';
+        document.getElementById('modalCandidateName').innerText = 'Chưa lưu được. Kiểm tra mạng rồi bấm lưu lại.';
+      }
     }
 
     function closeModal() {
@@ -1699,9 +1805,9 @@
     }
 
     function resetExam() {
-      if (!confirm('Bạn có chắc chắn muốn làm lại từ đầu không?')) return;
+      if (!confirm('Xóa đáp án đang làm trên bài này? Bài đã nộp vẫn được giữ.')) return;
+      suspendSave = true;
       userAnswers = {};
-      userOrderAnswers = {};
       document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
       document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
       document.querySelectorAll('.question-item').forEach(i => i.classList.remove('is-correct', 'is-incorrect'));
@@ -1712,58 +1818,102 @@
       document.getElementById('sentenceCount').innerText = '0';
 
       part3Data.forEach(q => resetWordOrder(q.id));
+      document.getElementById('studentName').value = '';
       updateProgress();
+      suspendSave = false;
+      lastSavedKey = '';
+      persist('draft', true).catch(() => setSaveStatus('Chưa xóa được bài lưu', '#e03131'));
 
       timeLeft = 45 * 60;
       clearInterval(timerInterval);
-      startTimer();
+      if (!ONLY_PART) startTimer();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // KHÔI PHỤC ĐÁP ÁN TỪ LOCALSTORAGE (khi chuyển qua lại giữa các phần)
-    function restoreState() {
-      try {
-        const savedAns = JSON.parse(localStorage.getItem(LS_ANS) || '{}');
-        const savedOrd = JSON.parse(localStorage.getItem(LS_ORD) || '{}');
-        const savedEssay = localStorage.getItem(LS_ESSAY) || '';
+    function refreshEssayCount() {
+      const text = (essayInput.value || '').trim();
+      const chars = text.replace(/\s+/g, '').length;
+      const sentences = text.length > 0 ? text.split(/[。？！.?!]+/).filter(s => s.trim().length > 0).length : 0;
+      document.getElementById('charCount').innerText = chars;
+      document.getElementById('sentenceCount').innerText = sentences;
+    }
 
-        Object.keys(savedAns).forEach(qId => {
-          const val = savedAns[qId];
-          userAnswers[qId] = val;
-          if (val === 'D' || val === 'S') {
-            const btn = document.querySelector(`#item-${qId} .tf-btn.btn-${val === 'D' ? 'true' : 'false'}`);
-            if (btn) btn.classList.add('selected');
-          } else {
-            const inp = document.querySelector(`input[name="${qId}"][value="${val}"]`);
-            if (inp) {
-              inp.checked = true;
-              const lbl = inp.closest('.option-label');
-              if (lbl) lbl.classList.add('selected');
+    function applySavedRow(row) {
+      const blob = row.answers || {};
+      const choices = blob.choices || {};
+      Object.keys(choices).forEach(qId => {
+        const choice = choices[qId] || {};
+        if (choice.type === 'tf' || choice.value === 'D' || choice.value === 'S') {
+          userAnswers[qId] = choice.value;
+          const btn = document.querySelector(`#item-${qId} .tf-btn.btn-${choice.value === 'D' ? 'true' : 'false'}`);
+          if (btn) btn.classList.add('selected');
+          return;
+        }
+        if (choice.index === undefined || choice.index === null) return;
+        userAnswers[qId] = choice.index;
+        const inp = document.querySelector(`input[name="${qId}"][value="${choice.index}"]`);
+        if (inp) {
+          inp.checked = true;
+          const lbl = inp.closest('.option-label');
+          if (lbl) lbl.classList.add('selected');
+        }
+      });
+
+      const savedOrd = row.order_answers || {};
+      Object.keys(savedOrd).forEach(qId => {
+        const words = savedOrd[qId] || [];
+        if (!Array.isArray(words) || !words.length) return;
+        userOrderAnswers[qId] = [];
+        words.forEach(w => {
+          const chips = document.querySelectorAll(`#bank-${qId} .word-chip:not(.used)`);
+          for (const c of chips) {
+            if (c.textContent.trim() === w) {
+              c.classList.add('used');
+              userOrderAnswers[qId].push({ word: w, chipId: c.id });
+              break;
             }
           }
         });
+        renderSlot(qId);
+      });
 
-        Object.keys(savedOrd).forEach(qId => {
-          const words = savedOrd[qId] || [];
-          userOrderAnswers[qId] = [];
-          words.forEach(w => {
-            const chips = document.querySelectorAll(`#bank-${qId} .word-chip:not(.used)`);
-            for (const c of chips) {
-              if (c.textContent.trim() === w) {
-                c.classList.add('used');
-                userOrderAnswers[qId].push({ word: w, chipId: c.id });
-                break;
-              }
-            }
-          });
-          renderSlot(qId);
-        });
+      essayInput.value = row.essay || '';
+      refreshEssayCount();
+      document.getElementById('studentName').value = blob.display_name || '';
+      lastSavedKey = buildPayload('draft').key;
+    }
 
-        if (savedEssay) {
-          essayInput.value = savedEssay;
-          essayInput.dispatchEvent(new Event('input'));
-        }
+    async function restoreState() {
+      try {
+        localStorage.removeItem('hsk1x_answers');
+        localStorage.removeItem('hsk1x_order');
+        localStorage.removeItem('hsk1x_essay');
       } catch (e) { }
+
+      const url = window.__SUPABASE_URL__;
+      const key = window.__SUPABASE_KEY__;
+      const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
+      if (!url || !key || !ATTEMPT_ID) return false;
+
+      const query = 'answers-%3E%3Eattempt_id=eq.' + encodeURIComponent(ATTEMPT_ID)
+        + '&select=answers,order_answers,essay&order=id.desc&limit=1';
+      const res = await fetch(url + '/rest/v1/' + table + '?' + query, {
+        headers: {
+          'apikey': key,
+          'Authorization': 'Bearer ' + key
+        }
+      });
+      if (!res.ok) {
+        throw new Error(await res.text());
+      }
+      const rows = await res.json();
+      if (!rows || !rows.length) return false;
+      applySavedRow(rows[0]);
+      const blob = rows[0].answers || {};
+      return Object.keys(blob.choices || {}).length > 0
+        || Object.keys(rows[0].order_answers || {}).length > 0
+        || !!(rows[0].essay || '').trim()
+        || !!(blob.display_name || '').trim();
     }
 
     // INIT
@@ -1793,9 +1943,29 @@
       renderPart4();
       renderPart5();
       renderPart8();
-      restoreState();
+      document.body.style.pointerEvents = 'none';
+      setSaveStatus('Đang mở bài làm đã lưu...', '#64748b');
+      restoreState().then(found => {
+        setSaveStatus(found ? 'Đã khôi phục bài làm' : 'Bài làm sẽ tự lưu', '#2b8a3e');
+      }).catch(() => {
+        setSaveStatus('Chưa tải được bài đã lưu', '#e03131');
+      }).finally(() => {
+        hydrated = true;
+        document.body.style.pointerEvents = '';
+        updateProgress();
+      });
       if (!ONLY_PART) startTimer();
-      updateProgress();
+
+      const nameInput = document.getElementById('studentName');
+      if (nameInput) nameInput.addEventListener('input', scheduleDraftSave);
+      window.addEventListener('pagehide', () => {
+        clearTimeout(draftTimer);
+        if (!hydrated) return;
+        const built = buildPayload('draft');
+        if (!payloadHasWork(built.payload) || built.key === lastSavedKey) return;
+        lastSavedKey = built.key;
+        postSnapshot(built.payload).catch(() => { });
+      });
     });
   </script>
 </body>

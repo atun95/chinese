@@ -4,6 +4,7 @@ import streamlit.components.v1 as components
 import random
 import csv
 import json
+import uuid
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from ui_utils import render_lesson_intro, render_play_button
@@ -33,11 +34,84 @@ def _load_exam2_data():
         return {}
 
 
+def _as_dict(value):
+    if isinstance(value, dict):
+        return value
+    if isinstance(value, str) and value.strip().startswith("{"):
+        try:
+            parsed = json.loads(value)
+            return parsed if isinstance(parsed, dict) else {}
+        except Exception:
+            return {}
+    return {}
+
+
+def _exam2_choice(sel, qid):
+    blob = _as_dict(sel.get("answers"))
+    choices = blob.get("choices") if isinstance(blob.get("choices"), dict) else {}
+    item = choices.get(qid)
+    if isinstance(item, dict):
+        return item
+    legacy = blob.get(qid)
+    if isinstance(legacy, int) or (isinstance(legacy, str) and str(legacy).isdigit()):
+        return {"type": "mcq", "index": int(legacy)}
+    if legacy in ("D", "S"):
+        return {"type": "tf", "value": legacy}
+    return {}
+
+
+def _exam2_order(sel, qid):
+    raw = _as_dict(sel.get("order_answers")).get(qid) or []
+    if not isinstance(raw, list):
+        return []
+    return [str(word) for word in raw if isinstance(word, str) and word]
+
+
+def _accepted_indexes(q):
+    if q.get("id") == "8_6":
+        return {1, 3}
+    ans = q.get("ans")
+    return {ans} if isinstance(ans, int) else set()
+
+
+def _query_param(name):
+    value = st.query_params.get(name, "")
+    if isinstance(value, (list, tuple)):
+        value = value[0] if value else ""
+    return str(value or "")
+
+
+def _load_exam2_submissions(limit=50):
+    client = supabase_client.get_supabase_client()
+    if not client:
+        return []
+    columns = "id,student_name,score,max_score,part_scores,answers,order_answers,essay,submitted_at"
+    try:
+        res = (
+            client.table("hsk1_exam2_answers")
+            .select(columns)
+            .eq("answers->>status", "submitted")
+            .eq("answers->>v", "2")
+            .order("id", desc=True)
+            .limit(limit)
+            .execute()
+        )
+        rows = res.data or []
+    except Exception:
+        res = client.table("hsk1_exam2_answers").select(columns).order("id", desc=True).limit(300).execute()
+        rows = []
+        for row in res.data or []:
+            blob = _as_dict(row.get("answers"))
+            if blob.get("v") == 2 and blob.get("status") == "submitted":
+                rows.append(row)
+            if len(rows) >= limit:
+                break
+    return rows
+
+
 def render_exam2_review(sel):
     """Render bài làm của học viên (từ Supabase) dạng chấm điểm, không phải JSON."""
     data = _load_exam2_data()
-    answers = sel.get("answers") or {}
-    order_ans = sel.get("order_answers") or {}
     out = []
 
     def qcard(inner):
@@ -47,10 +121,13 @@ def render_exam2_review(sel):
         </div>"""
 
     def mcq_html(q, stem_html, note=""):
-        user = answers.get(q["id"])
+        user = _exam2_choice(sel, q["id"]).get("index")
+        if isinstance(user, str) and user.isdigit():
+            user = int(user)
+        accepted = _accepted_indexes(q)
         opts = ""
         for oi, opt in enumerate(q.get("options", [])):
-            if oi == q.get("ans"):
+            if oi in accepted:
                 mark, bg, bd, color = "✅", "#f0fdf4", "#22c55e", "#14532d"
             elif user == oi:
                 mark, bg, bd, color = "❌", "#fef2f2", "#ef4444", "#7f1d1d"
@@ -66,7 +143,7 @@ def render_exam2_review(sel):
         """)
 
     def tf_html(q, idx):
-        user = answers.get(q["id"])
+        user = _exam2_choice(sel, q["id"]).get("value")
         correct = "Đúng (Đ)" if q.get("ans") == "D" else "Sai (S)"
         user_txt = "Đúng (Đ)" if user == "D" else ("Sai (S)" if user == "S" else "(bỏ trống)")
         ok = user == q.get("ans")
@@ -99,7 +176,7 @@ def render_exam2_review(sel):
     if qs:
         out.append("<h4 style='color:#1d4ed8;margin:18px 0 8px 0;'>Phần III. Sắp xếp từ thành câu</h4>")
         for i, q in enumerate(qs, 1):
-            user_words = order_ans.get(q["id"]) or []
+            user_words = _exam2_order(sel, q["id"])
             user_sent = "".join(user_words).replace(" ", "")
             target = (q.get("correct") or "").replace(" ", "")
             ok = user_sent == target and bool(user_sent)
@@ -359,15 +436,13 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             try:
                 sb_client = supabase_client.get_supabase_client()
                 if sb_client:
-                    res = sb_client.table("hsk1_exam2_answers").select(
-                        "id,student_name,score,max_score,part_scores,answers,order_answers,essay,submitted_at"
-                    ).order("submitted_at", desc=True).limit(50).execute()
-                    rows = res.data or []
+                    rows = _load_exam2_submissions()
                     if not rows:
-                        st.info("Chưa có bài nộp nào trong database.")
+                        st.info("Chưa có bài nộp nào. Đáp án mới được lưu khi học viên bấm Lưu đáp án & điểm.")
                     else:
                         overview = [{
                             "Học viên": r.get("student_name", "Ẩn danh"),
+                            "Đã làm": len((_as_dict(r.get("answers")).get("choices") or {})) + len(_as_dict(r.get("order_answers"))),
                             "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
                             "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
                             "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
@@ -421,6 +496,19 @@ h4 {{ margin: 22px 0 10px 0; }}
 
     # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
     if exam_view == "exam2":
+        attempt_id = _query_param("hsk1_exam2")
+        if not attempt_id:
+            attempt_id = uuid.uuid4().hex
+            st.query_params["hsk1_exam2"] = attempt_id
+            st.rerun()
+
+        new_col, _spacer = st.columns([1, 3])
+        with new_col:
+            if st.button("🆕 Làm bài mới", key="hsk1_exam2_new_attempt", use_container_width=True,
+                         help="Mở một bài trống. Bài đã nộp vẫn nằm trong danh sách."):
+                st.query_params["hsk1_exam2"] = uuid.uuid4().hex
+                st.rerun()
+
         part_options = [
             ("I. Từ vựng (10 câu)", "1"),
             ("II. Đúng / Sai (10 câu)", "2"),
@@ -440,7 +528,7 @@ h4 {{ margin: 22px 0 10px 0; }}
             "Chọn phần của bài test:",
             part_labels,
             key="hsk1_exam2_part",
-            help="Đáp án đã chọn được tự động lưu — bạn có thể chuyển qua lại giữa các phần mà không mất bài."
+            help="Mỗi đáp án được ghi ngay lên hệ thống. Chuyển phần không làm mất bài."
         )
         only_part = dict(part_options)[part_choice]
 
@@ -454,7 +542,8 @@ h4 {{ margin: 22px 0 10px 0; }}
                 inject_parts.append(
                     f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
                     f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
-                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';</script>"
+                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
+                    f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
                 )
             except Exception:
                 pass
