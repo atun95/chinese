@@ -491,12 +491,6 @@ h4 {{ margin: 22px 0 10px 0; }}
                 st.error(f"Lỗi tải bài nộp: {e}")
         return
 
-    # ================= NÚT QUAY LẠI DANH SÁCH ĐỀ =================
-    if st.button("⬅️ Quay lại danh sách đề", key="hsk1_back_to_menu", use_container_width=False):
-        st.session_state.hsk1_exam_view = "menu"
-        st.rerun()
-    st.markdown("---")
-
     # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
     if exam_view == "exam2":
         attempt_id = _query_param("hsk1_exam2")
@@ -504,13 +498,6 @@ h4 {{ margin: 22px 0 10px 0; }}
             attempt_id = uuid.uuid4().hex
             st.query_params["hsk1_exam2"] = attempt_id
             st.rerun()
-
-        new_col, _spacer = st.columns([1, 3])
-        with new_col:
-            if st.button("🆕 Làm bài mới", key="hsk1_exam2_new_attempt", use_container_width=True,
-                         help="Mở một bài trống. Bài đã nộp vẫn nằm trong danh sách."):
-                st.query_params["hsk1_exam2"] = uuid.uuid4().hex
-                st.rerun()
 
         part_options = [
             ("I. Từ vựng (10 câu)", "1"),
