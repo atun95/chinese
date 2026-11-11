@@ -1889,15 +1889,8 @@
         document.querySelectorAll('.section-nav').forEach(el => el.style.display = 'none');
         const tb = document.querySelector('.timer-box');
         if (tb) tb.style.display = 'none';
-        // Riêng phần IX (viết đoạn văn): giữ thanh Nộp bài nhưng để trong luồng,
-        // nằm cuối tài liệu — không nổi đè che nội dung
-        if (ONLY_PART === '9') {
-          const bb9 = document.querySelector('.bottom-bar');
-          if (bb9) bb9.style.position = 'static';
-        } else {
-          const bb = document.querySelector('.bottom-bar');
-          if (bb) bb.style.display = 'none';
-        }
+        const bb = document.querySelector('.bottom-bar');
+        if (bb) bb.style.display = 'none';
       }
 
       renderPart1();
@@ -1908,7 +1901,10 @@
       renderPart8();
       document.body.style.pointerEvents = 'none';
       setSaveStatus('Đang mở bài làm đã lưu...', '#64748b');
-      restoreState().then(found => {
+      const savedPromise = window.__EXAM_AUTO_SUBMIT__
+        ? new Promise(resolve => setTimeout(resolve, 350)).then(() => restoreState())
+        : restoreState();
+      savedPromise.then(found => {
         setSaveStatus(found ? 'Đã khôi phục bài làm' : 'Bài làm sẽ tự lưu', '#2b8a3e');
       }).catch(() => {
         setSaveStatus('Chưa tải được bài đã lưu', '#e03131');
@@ -1916,6 +1912,7 @@
         hydrated = true;
         document.body.style.pointerEvents = '';
         updateProgress();
+        if (window.__EXAM_AUTO_SUBMIT__) submitExam();
       });
       if (!ONLY_PART) startTimer();
 

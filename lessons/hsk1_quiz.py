@@ -537,6 +537,8 @@ h4 {{ margin: 22px 0 10px 0; }}
                 )
             except Exception:
                 pass
+            if st.session_state.pop("hsk1_exam2_submit", False):
+                inject_parts.append("<script>window.__EXAM_AUTO_SUBMIT__=true;</script>")
             if only_part != "full":
                 inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
             else:
@@ -569,20 +571,17 @@ h4 {{ margin: 22px 0 10px 0; }}
             def render_nav_buttons(suffix):
                 if only_part == "full":
                     return
-                prev_col, next_col = st.columns([1, 2])
-                with prev_col:
-                    if idx > 0:
-                        prev_label = label_by_key[order_keys[idx - 1]]
-                        if st.button("⬅️ Phần trước", key=f"hsk1_prev_{only_part}{suffix}", use_container_width=True):
-                            st.session_state.hsk1_exam2_pending = prev_label
-                            st.rerun()
-                with next_col:
+                _, mid_col, _ = st.columns([1, 2, 1])
+                with mid_col:
                     next_key = order_keys[idx + 1]
                     if next_key != "full":
                         next_label = label_by_key[next_key]
                         if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
                             st.session_state.hsk1_exam2_pending = next_label
                             st.rerun()
+                    elif st.button("✅ Nộp bài & Chấm điểm", type="primary", key=f"hsk1_submit_{only_part}{suffix}", use_container_width=True):
+                        st.session_state.hsk1_exam2_submit = True
+                        st.rerun()
 
             render_nav_buttons("_top")
             st.markdown("<br/>", unsafe_allow_html=True)
