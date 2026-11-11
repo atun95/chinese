@@ -428,6 +428,9 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             if st.button(f"🚀 Bắt đầu làm bài", key=f"hsk1_open_{key}", type="primary", use_container_width=True):
                 st.session_state.hsk1_exam_view = key
                 st.session_state.hsk1_exam_choice = key
+                if key == "exam2":
+                    st.query_params["hsk1_exam2"] = uuid.uuid4().hex
+                    st.session_state.hsk1_exam2_part = "I. Từ vựng (10 câu)"
                 st.rerun()
             st.markdown("<br/>", unsafe_allow_html=True)
 
