@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
+import streamlit.components.v1 as components
 import random
 import csv
 import json
@@ -1010,15 +1011,99 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
                 st.error(f"Lỗi tải bài nộp: {e}")
         return
 
-    # ================= ĐỀ 2: BÀI TEST HSK 1 =================
+    # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
     if exam_view == "exam2":
         attempt_id = _query_param("hsk1_exam2")
         if not attempt_id:
             attempt_id = uuid.uuid4().hex
             st.query_params["hsk1_exam2"] = attempt_id
             st.rerun()
-        st.session_state.pop("hsk1_exam2_submit", None)
-        _show_hsk1_exam2(attempt_id)
+
+        part_options = [
+            ("I. Từ vựng (10 câu)", "1"),
+            ("II. Đúng / Sai (10 câu)", "2"),
+            ("III. Sắp xếp câu (10 câu)", "3"),
+            ("IV. Đúng / Sai (10 câu)", "4"),
+            ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
+            ("VI. Ngữ pháp (10 câu)", "8"),
+            ("VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "9"),
+            ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
+        ]
+        part_labels = [p[0] for p in part_options]
+        pending_part = st.session_state.pop("hsk1_exam2_pending", None)
+        if pending_part in part_labels:
+            st.session_state.hsk1_exam2_part = pending_part
+        part_choice = st.selectbox(
+            "Chọn phần của bài test:",
+            part_labels,
+            key="hsk1_exam2_part",
+        )
+        only_part = dict(part_options)[part_choice]
+
+        html_path = Path(__file__).resolve().parent.parent / "bai_test_hsk1.html"
+        if html_path.exists():
+            html_content = html_path.read_text(encoding="utf-8")
+            inject_parts = ["<style>body{padding-bottom:0 !important;}</style>"]
+            try:
+                sb_cfg = supabase_client.get_supabase_config()
+                inject_parts.append(
+                    f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
+                    f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
+                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
+                    f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
+                )
+            except Exception:
+                pass
+            if st.session_state.pop("hsk1_exam2_submit", False):
+                inject_parts.append("<script>window.__EXAM_AUTO_SUBMIT__=true;</script>")
+            if only_part != "full":
+                inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
+            else:
+                inject_parts.append("<style>.bottom-bar{position:static !important;}</style>")
+            inject_parts.append("""
+<script>
+(function(){
+  function fit(){
+    try{
+      var h = document.body ? document.body.scrollHeight : 0;
+      if (!h || h < 100) h = document.documentElement.scrollHeight;
+      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
+    }catch(e){}
+  }
+  window.addEventListener('load', function(){ setTimeout(fit, 100); });
+  window.addEventListener('resize', fit);
+  var t = setInterval(fit, 500);
+  setTimeout(function(){ clearInterval(t); }, 5000);
+})();
+</script>""")
+            html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
+
+            order_keys = ["1", "2", "3", "4", "5", "8", "9", "full"]
+            label_by_key = {v: k for k, v in part_options}
+            idx = order_keys.index(only_part)
+
+            def render_nav_buttons(suffix):
+                if only_part == "full":
+                    return
+                _, mid_col, _ = st.columns([1, 2, 1])
+                with mid_col:
+                    next_key = order_keys[idx + 1]
+                    if next_key != "full":
+                        next_label = label_by_key[next_key]
+                        if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
+                            st.session_state.hsk1_exam2_pending = next_label
+                            st.rerun()
+                    elif st.button("✅ Nộp bài & Chấm điểm", type="primary", key=f"hsk1_submit_{only_part}{suffix}", use_container_width=True):
+                        st.session_state.hsk1_exam2_submit = True
+                        st.rerun()
+
+            render_nav_buttons("_top")
+            st.markdown("<br/>", unsafe_allow_html=True)
+            components.html(html_content, height=900, scrolling=True)
+            if only_part == "full":
+                st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
+        else:
+            st.error(f"Không tìm thấy file đề thi: {html_path}")
         return
 
     # Đề thi mặc định cho toàn bộ phần này là quiz_exam_50
