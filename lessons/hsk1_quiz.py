@@ -1244,25 +1244,6 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
             save_progress()
             st.rerun()
 
-        # Bảng xếp hạng điểm học viên
-        st.markdown("---")
-        st.markdown("### 🏆 Bảng xếp hạng nộp bài")
-        scores_data = []
-        if supabase_client.is_supabase_configured():
-            scores_data = supabase_client.load_scores_from_supabase()
-        if not scores_data:
-            raw_csv = load_all_scores_hsk1_consolidated()
-            for r in raw_csv:
-                scores_data.append({
-                    "Thời gian": r.get("thời gian", ""),
-                    "Học viên": r.get("học viên", ""),
-                    "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
-                })
-
-        if scores_data:
-            st.dataframe(scores_data, use_container_width=True)
-        else:
-            st.info("Chưa có lượt nộp điểm nào. Hãy bấm bắt đầu để làm bài ôn tập và lưu điểm!")
 
     # ================= 2. GIAO DIỆN LÀM BÀI =================
     else:
@@ -1410,22 +1391,4 @@ def show_quiz_results(questions, save_progress, save_score_row_hsk1_consolidated
         save_progress()
         st.rerun()
 
-    # Bảng xếp hạng nộp bài
-    st.markdown("---")
-    st.markdown("### 🏆 Bảng xếp hạng nộp bài")
-    scores_data = []
-    if supabase_client.is_supabase_configured():
-        scores_data = supabase_client.load_scores_from_supabase()
-    if not scores_data:
-        raw_csv = load_all_scores_hsk1_consolidated()
-        for r in raw_csv:
-            scores_data.append({
-                "Thời gian": r.get("thời gian", ""),
-                "Học viên": r.get("học viên", ""),
-                "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
-            })
 
-    if scores_data:
-        st.dataframe(scores_data, use_container_width=True)
-    else:
-        st.info("Chưa có lượt nộp điểm nào.")
