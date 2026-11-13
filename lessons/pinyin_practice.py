@@ -19,24 +19,15 @@ if _ROOT_DIR not in sys.path:
     sys.path.insert(0, _ROOT_DIR)
 
 try:
-    from ui_utils import inject_tts_to_parent, _TTS_JS_CORE
+    from ui_utils import inject_tts_to_parent, _TTS_PARENT_JS
 except (ImportError, AttributeError):
     try:
         import ui_utils
         import importlib
         importlib.reload(ui_utils)
-        from ui_utils import inject_tts_to_parent, _TTS_JS_CORE
+        from ui_utils import inject_tts_to_parent, _TTS_PARENT_JS
     except Exception:
-        _TTS_JS_CORE = """
-<script>
-(function(){
-  window.chineseTTS = function(txt) {
-    if (!txt) return;
-    window.parent.postMessage({type:'CHINESE_TTS', text: String(txt).trim()}, '*');
-  };
-})();
-</script>
-"""
+        _TTS_PARENT_JS = ""
         def inject_tts_to_parent():
             pass
 
@@ -665,10 +656,6 @@ def show_pinyin_practice():
                     Tự do ghép <b>Thanh mẫu + Vận mẫu + Thanh điệu</b>. Hệ thống tự động kiểm tra quy tắc ngữ âm & phát âm chuẩn tiếng Trung!
                 </p>
             </div>
-            <div style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4);
-                        padding: 8px 16px; border-radius: 999px; font-size: 0.85rem; color: #60a5fa; font-weight: 600;">
-                ✨ Kiểm tra quy tắc Real-time
-            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -772,12 +759,12 @@ def show_pinyin_practice():
         </div>
         """, unsafe_allow_html=True)
 
-        # Nút bấm phát âm to rõ (dùng postMessage tới TTS parent)
+        # Phát ngay trong iframe (cùng cú click) để trình duyệt không chặn tiếng.
         safe_toned = json.dumps(toned_pinyin, ensure_ascii=False)
         components.html(
             f"""
-            {_TTS_JS_CORE}
-            <div style="display: flex; justify-content: center; margin: 0 0 16px;">
+            {_TTS_PARENT_JS}
+            <div style="display: flex; justify-content: center; margin: 0;">
                 <button id="main-speak-btn" onclick="playCurrent()"
                     style="display: inline-flex; align-items: center; justify-content: center; gap: 10px;
                            background: linear-gradient(135deg, #059669 0%, #047857 100%);
@@ -792,54 +779,18 @@ def show_pinyin_practice():
             <script>
             function playCurrent() {{
                 const txt = {safe_toned};
-                if (window.chineseTTS) {{
-                    window.chineseTTS(txt);
+                if (window.chineseTTSParent) {{
+                    window.chineseTTSParent(txt);
                 }}
             }}
             </script>
             """,
-            height=60,
+            height=68,
         )
 
         # Ghi chú quy tắc chính tả nếu có
         if rule_note:
             st.info(f"📌 **Quy tắc chính tả:** {rule_note}")
-
-        # Bảng 4 thanh điệu của âm tiết này
-        st.markdown("#### 🎧 Nghe 4 thanh điệu của âm tiết này:")
-        tone_cols = st.columns(4)
-        for t_idx in range(1, 5):
-            t_syl = add_tone(base_pinyin, t_idx)
-            with tone_cols[t_idx - 1]:
-                t_info = next(t for t in TONES_DATA if t["val"] == t_idx)
-                st.markdown(f"""
-                <div style="text-align: center; background: #ffffff; border: 1.5px solid #e2e8f0;
-                            border-radius: 12px; padding: 12px 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: #64748b;">{t_info['name'].split('(')[0]}</div>
-                    <div style="font-size: 1.8rem; font-weight: 800; color: #1e293b; margin: 4px 0; font-family: 'Georgia', serif;">
-                        {t_syl}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-                # Nút phát âm mini cho từng thanh
-                safe_t = json.dumps(t_syl, ensure_ascii=False)
-                components.html(
-                    f"""
-                    {_TTS_JS_CORE}
-                    <button onclick="playT()"
-                        style="width: 100%; margin-top: 4px; padding: 6px 0; background: #f8fafc;
-                               border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem;
-                               color: #047857; font-weight: 700; cursor: pointer; transition: all 0.2s;">
-                        🔊 Nghe
-                    </button>
-                    <script>
-                    function playT() {{
-                        if (window.chineseTTS) window.chineseTTS({safe_t});
-                    }}
-                    </script>
-                    """,
-                    height=38,
-                )
 
         # Chữ Hán ví dụ thông dụng
         if examples:

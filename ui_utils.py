@@ -444,18 +444,16 @@ _TTS_PARENT_JS = r"""
     const hanzi = P2H[numbered] || P2H[numbered.replace(/\d/,'')] || null;
 
     if (hanzi) {
-      // Ưu tiên 1: Web Speech API với chữ Hán zh-CN (đọc đúng âm Mandarin)
-      const v = getZhVoice();
-      if (v) {
-        const u = new SpeechSynthesisUtterance(hanzi);
-        u.voice=v; u.lang='zh-CN'; u.rate=0.75;
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
-        return;
-      }
-      // Ưu tiên 2: Youdao với chữ Hán
+      // File âm thanh trước (Web Speech trong iframe/postMessage thường bị chặn nên im).
       playUrl('https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(hanzi)+'&le=zh', () => {
-        // Ưu tiên 3: writtenchinese.com
+        const v = getZhVoice();
+        if (v) {
+          const u = new SpeechSynthesisUtterance(hanzi);
+          u.voice=v; u.lang='zh-CN'; u.rate=0.75;
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(u);
+          return;
+        }
         playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', null);
       });
     } else {
