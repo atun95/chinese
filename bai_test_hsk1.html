@@ -1747,7 +1747,10 @@
       try {
         await persist('submitted', true);
         lastSavedKey = buildPayload('draft').key;
-        closeModal();
+        if (!returnToReviewMenu()) {
+          closeModal();
+          setSaveStatus('Đã lưu bài. Bấm nút quay lại trang ôn tập phía trên.', '#2b8a3e');
+        }
       } catch (err) {
         saveBtn.disabled = false;
         saveBtn.innerText = '💾 Lưu lại';
@@ -1756,6 +1759,23 @@
         msg.style.color = '#e03131';
         msg.innerText = 'Chưa lưu được. Kiểm tra mạng rồi bấm lưu lại.';
       }
+    }
+
+    function returnToReviewMenu() {
+      const docs = [];
+      try { if (window.parent && window.parent.document) docs.push(window.parent.document); } catch (e) {}
+      try {
+        if (window.top && window.top.document && docs.indexOf(window.top.document) === -1) {
+          docs.push(window.top.document);
+        }
+      } catch (e) {}
+      for (const doc of docs) {
+        const btn = doc.querySelector('.st-key-hsk1_exam2_saved_back button');
+        if (!btn) continue;
+        btn.click();
+        return true;
+      }
+      return false;
     }
 
     function closeModal() {

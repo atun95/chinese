@@ -582,9 +582,65 @@ def _exam2_submit_dialog():
         ok, message = _save_exam2_submission(clean)
         if ok:
             st.session_state.hsk1_exam2_open_submit = False
-            st.session_state.hsk1_exam2_notice = "Đã lưu bài làm."
+            _return_to_hsk1_review_menu(saved=True)
             st.rerun()
         st.error(message)
+
+
+def _return_to_hsk1_review_menu(saved=False):
+    st.session_state.hsk1_exam_view = "menu"
+    if saved:
+        st.session_state.hsk1_exam2_notice = "Đã lưu bài làm."
+    if "hsk1_exam2" in st.query_params:
+        del st.query_params["hsk1_exam2"]
+
+
+def _render_exam2_back_button():
+    st.markdown(
+        """
+        <style>
+        div.st-key-hsk1_exam2_back_menu {
+            position: sticky;
+            top: 3.4rem;
+            z-index: 999;
+            background: #ffffff;
+            padding: 8px 0 10px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        div.st-key-hsk1_exam2_back_menu button {
+            background: #eff6ff !important;
+            color: #1e3a8a !important;
+            border: 1.5px solid #93c5fd !important;
+            font-weight: 700 !important;
+        }
+        div.st-key-hsk1_exam2_back_menu button:hover {
+            background: #dbeafe !important;
+            border-color: #2563eb !important;
+            color: #1e3a8a !important;
+        }
+        div.st-key-hsk1_exam2_saved_back {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    if st.button(
+        "⬅️ Quay lại 📝 Trắc nghiệm Tổng hợp HSK 1 - Ôn tập bài cũ",
+        key="hsk1_exam2_back_menu",
+        use_container_width=True,
+    ):
+        _return_to_hsk1_review_menu(saved=False)
+        st.rerun()
+    if st.button("Đã lưu, quay lại", key="hsk1_exam2_saved_back"):
+        _return_to_hsk1_review_menu(saved=True)
+        st.rerun()
 
 
 def _exam2_center_button(label, key):
@@ -795,6 +851,7 @@ def _render_exam2_section(part_key, data, work, attempt_id):
 
 def _show_hsk1_exam2(attempt_id):
     _exam2_full_width()
+    _render_exam2_back_button()
     data = _load_exam2_data()
     if not data:
         st.error("Không đọc được dữ liệu Đề 2.")
@@ -972,6 +1029,9 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
     exam_view = st.session_state.get("hsk1_exam_view", "menu")
 
     if exam_view == "menu":
+        notice = st.session_state.pop("hsk1_exam2_notice", None)
+        if notice:
+            st.success(notice)
         exams = [
             (
                 "exam1",
@@ -1043,6 +1103,7 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
 
     # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
     if exam_view == "exam2":
+        _render_exam2_back_button()
         attempt_id = _query_param("hsk1_exam2")
         if not attempt_id:
             attempt_id = uuid.uuid4().hex
