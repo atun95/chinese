@@ -632,7 +632,7 @@ def _render_exam2_back_button():
         unsafe_allow_html=True,
     )
     if st.button(
-        "⬅️ Quay lại 📝 Trắc nghiệm Tổng hợp HSK 1 - Ôn tập bài cũ",
+        "⬅️ Quay lại 📝 bài tập trắc nghiệm",
         key="hsk1_exam2_back_menu",
         use_container_width=True,
     ):
@@ -1023,7 +1023,7 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
     </style>
     """, unsafe_allow_html=True)
 
-    render_lesson_intro("📝 Trắc nghiệm Tổng hợp HSK 1 - Ôn tập bài cũ")
+    render_lesson_intro("📝 bài tập trắc nghiệm")
 
     # ================= TRANG DANH SÁCH ĐỀ (2 BÀI KIỂM TRA HSK 1) =================
     exam_view = st.session_state.get("hsk1_exam_view", "menu")

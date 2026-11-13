@@ -152,7 +152,7 @@ def show_consolidated_flashcards():
                 return
 
     # Render Header without description
-    render_lesson_intro("🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG")
+    render_lesson_intro("THẺ TỪ ÔN TẬP TỰ VỰNG")
 
     # Embed Flashcard_Offline.html using Streamlit components
     try:
@@ -562,9 +562,9 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "📚 Lý thuyết & Bài học",
     "🔊 Luyện tập Ghép âm",
     "🗣️ Thực hành trên lớp",
-    "📝 Trắc nghiệm Tổng hợp HSK 1",
+    "📝 bài tập trắc nghiệm",
     "📄 Đề thi thử HSK 1",
-    "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG"
+    "THẺ TỪ ÔN TẬP TỰ VỰNG"
 ])
 
 menu = None
@@ -626,10 +626,10 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 9.3 - Hội thoại đổi tiền"
     ])
 
-if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
+if mode == "THẺ TỪ ÔN TẬP TỰ VỰNG":
     show_consolidated_flashcards()
 
-elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
+elif mode == "📝 bài tập trắc nghiệm":
     hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
 
 elif mode == "📄 Đề thi thử HSK 1":
