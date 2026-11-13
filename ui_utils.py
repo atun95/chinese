@@ -419,7 +419,11 @@ _TTS_PARENT_JS = r"""
     a.oncanplay = () => clearTimeout(t);
     a.src = url;
     a.load();
-    a.play().then(()=>clearTimeout(t)).catch(()=>{clearTimeout(t);fail();});
+    a.play().then(()=>clearTimeout(t)).catch((err)=>{
+      clearTimeout(t);
+      if (err && err.name === 'AbortError') return;
+      fail();
+    });
   }
 
   function speakText(txt) {
@@ -440,9 +444,11 @@ _TTS_PARENT_JS = r"""
       return;
     }
 
-    // Pinyin: chuyển sang chữ Hán tương ứng
+    // Pinyin: file âm tiết (1–4 và 5 = thanh nhẹ). Chữ Hán chỉ là phương án dự phòng.
     const numbered = py2num(txt);
-    const hanzi = P2H[numbered] || P2H[numbered.replace(/\d/,'')] || null;
+    let fileKey = numbered;
+    if (!/[1-5]$/.test(fileKey)) fileKey += '5';
+    const hanzi = P2H[fileKey] || P2H[numbered] || P2H[fileKey.replace(/\d/,'')] || null;
 
     function speakHanzi() {
       if (!hanzi) return;
@@ -456,27 +462,7 @@ _TTS_PARENT_JS = r"""
       });
     }
 
-    // Thanh 3: file âm tiết đọc đủ đường 214. Chữ Hán thường bị đọc nửa thanh nên nghe chưa chuẩn.
-    if (numbered.endsWith('3')) {
-      playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', speakHanzi);
-      return;
-    }
-
-    if (hanzi) {
-      playUrl('https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(hanzi)+'&le=zh', () => {
-        const v = getZhVoice();
-        if (v) {
-          const u = new SpeechSynthesisUtterance(hanzi);
-          u.voice=v; u.lang='zh-CN'; u.rate=0.75;
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(u);
-          return;
-        }
-        playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', null);
-      });
-    } else {
-      playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', null);
-    }
+    playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(fileKey)+'.mp3', speakHanzi);
   }
 
   // Lắng nghe postMessage từ các iframe con
