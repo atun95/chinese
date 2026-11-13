@@ -658,6 +658,7 @@
       display: none;
       align-items: center;
       justify-content: center;
+      overflow-y: auto;
       z-index: 1000;
       padding: 20px;
     }
@@ -668,6 +669,7 @@
       width: 100%;
       max-width: 580px;
       padding: 28px;
+      margin: auto;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       text-align: center;
       animation: modalFadeIn 0.3s ease;
@@ -988,14 +990,23 @@
   <!-- Modal Score Result -->
   <div class="modal-overlay" id="resultModal" onclick="if(event.target===this)closeModal()">
     <div class="modal-box">
-      <h2 style="color: var(--gray-900); margin: 0 0 8px 0;">Nộp bài</h2>
-      <p style="color: var(--gray-600); font-size: 0.95rem; margin: 0 0 14px 0;">Điền họ và tên học viên để lưu bài làm.</p>
-      <input id="modalStudentName" type="text" placeholder="Họ và tên học viên *"
-        style="width: 100%; padding: 10px 14px; border: 2px solid var(--gray-300); border-radius: 8px; font-size: 1rem; outline: none;"
-        onfocus="this.style.borderColor='var(--secondary)'">
-      <p id="modalSaveMsg" style="min-height: 1.2em; margin: 8px 0 0 0; font-size: 0.9rem; color: #e03131;"></p>
-      <div style="display: flex; gap: 12px; justify-content: center; margin-top: 14px;">
-        <button class="btn btn-submit" id="saveScoreBtn" onclick="saveScoreFromModal()">💾 Lưu đáp án & điểm</button>
+      <div id="modalForm">
+        <h2 style="color: var(--gray-900); margin: 0 0 8px 0;">Nộp bài</h2>
+        <p style="color: var(--gray-600); font-size: 0.95rem; margin: 0 0 14px 0;">Điền họ và tên học viên để lưu bài làm.</p>
+        <input id="modalStudentName" type="text" placeholder="Họ và tên học viên *"
+          style="width: 100%; padding: 10px 14px; border: 2px solid var(--gray-300); border-radius: 8px; font-size: 1rem; outline: none;"
+          onfocus="this.style.borderColor='var(--secondary)'">
+        <p id="modalSaveMsg" style="min-height: 1.2em; margin: 8px 0 0 0; font-size: 0.9rem; color: #e03131;"></p>
+        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 14px;">
+          <button class="btn btn-submit" id="saveScoreBtn" onclick="saveScoreFromModal()">💾 Lưu đáp án & điểm</button>
+        </div>
+      </div>
+      <div id="modalSuccess" style="display: none;">
+        <h2 style="color: var(--gray-900); margin: 0 0 10px 0;">Cảm ơn <span id="modalSuccessName"></span>!</h2>
+        <p style="color: var(--gray-600); font-size: 1rem; line-height: 1.7; margin: 0 0 18px 0;">
+          Bài của <strong id="modalSuccessNameBody"></strong> đã được nộp và lưu ở phần <strong>Bảng điểm</strong>.
+        </p>
+        <button class="btn btn-submit" onclick="closeModal()">Đóng</button>
       </div>
     </div>
   </div>
@@ -1134,6 +1145,7 @@
     let suspendSave = false;
     let lastSavedKey = '';
     let draftTimer = null;
+    let modalSuccessTimer = null;
 
     function setSaveStatus(text, color) {
       const el = document.getElementById('saveStatus');
@@ -1725,9 +1737,74 @@
       saveBtn.disabled = false;
       saveBtn.innerText = '💾 Lưu đáp án & điểm';
       saveBtn.style.opacity = '1';
+      const modalForm = document.getElementById('modalForm');
+      const modalSuccess = document.getElementById('modalSuccess');
+      if (modalForm) modalForm.style.display = 'block';
+      if (modalSuccess) modalSuccess.style.display = 'none';
 
-      document.getElementById('resultModal').style.display = 'flex';
+      const resultModal = document.getElementById('resultModal');
+      resultModal.style.display = 'flex';
+      syncResultModalViewport();
+      requestAnimationFrame(syncResultModalViewport);
       clearInterval(timerInterval);
+    }
+
+    function syncResultModalViewport() {
+      const modal = document.getElementById('resultModal');
+      if (!modal || modal.style.display !== 'flex') return;
+
+      let frame = null;
+      let parentWin = null;
+      try {
+        frame = window.frameElement;
+        if (frame && window.parent && window.parent !== window) parentWin = window.parent;
+      } catch (e) { }
+
+      if (!frame || !parentWin) {
+        modal.style.top = '0px';
+        modal.style.height = '';
+        modal.style.bottom = '';
+        return;
+      }
+
+      try {
+        const frameRect = frame.getBoundingClientRect();
+        const parentHeight = parentWin.innerHeight || parentWin.document.documentElement.clientHeight || window.innerHeight;
+        const visibleTop = Math.max(0, frameRect.top);
+        const visibleBottom = Math.min(parentHeight, frameRect.bottom);
+        const top = Math.max(0, visibleTop - frameRect.top);
+        const bottom = Math.min(frameRect.height, visibleBottom - frameRect.top);
+        const height = Math.max(0, bottom - top);
+        modal.style.top = top + 'px';
+        modal.style.height = height + 'px';
+        modal.style.bottom = 'auto';
+      } catch (e) {
+        modal.style.top = '0px';
+        modal.style.height = '100%';
+        modal.style.bottom = 'auto';
+      }
+    }
+
+    function showModalSuccess(studentName) {
+      const modalForm = document.getElementById('modalForm');
+      const modalSuccess = document.getElementById('modalSuccess');
+      const nameEl = document.getElementById('modalSuccessName');
+      const nameBodyEl = document.getElementById('modalSuccessNameBody');
+      if (nameEl) nameEl.textContent = studentName;
+      if (nameBodyEl) nameBodyEl.textContent = studentName;
+      if (modalForm) modalForm.style.display = 'none';
+      if (modalSuccess) modalSuccess.style.display = 'block';
+      syncResultModalViewport();
+      clearTimeout(modalSuccessTimer);
+      modalSuccessTimer = setTimeout(finishModalAfterSave, 4000);
+    }
+
+    function finishModalAfterSave() {
+      modalSuccessTimer = null;
+      closeModal();
+      if (!returnToReviewMenu()) {
+        setSaveStatus('Đã lưu bài. Bài của bạn có trong phần Bảng điểm.', '#2b8a3e');
+      }
     }
 
     // Nút Lưu trong modal: yêu cầu nhập tên rồi mới gửi Supabase
@@ -1747,10 +1824,7 @@
       try {
         await persist('submitted', true);
         lastSavedKey = buildPayload('draft').key;
-        if (!returnToReviewMenu()) {
-          closeModal();
-          setSaveStatus('Đã lưu bài. Bấm nút quay lại trang ôn tập phía trên.', '#2b8a3e');
-        }
+        showModalSuccess(name);
       } catch (err) {
         saveBtn.disabled = false;
         saveBtn.innerText = '💾 Lưu lại';
@@ -1779,6 +1853,8 @@
     }
 
     function closeModal() {
+      clearTimeout(modalSuccessTimer);
+      modalSuccessTimer = null;
       document.getElementById('resultModal').style.display = 'none';
     }
 
@@ -1919,6 +1995,17 @@
           if (bb) bb.style.display = 'none';
         }
       }
+
+      window.addEventListener('resize', syncResultModalViewport);
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.addEventListener('scroll', syncResultModalViewport, true);
+          window.parent.addEventListener('resize', syncResultModalViewport);
+          if (window.parent.document) {
+            window.parent.document.addEventListener('scroll', syncResultModalViewport, true);
+          }
+        }
+      } catch (e) { }
 
       renderPart1();
       renderPart2();
