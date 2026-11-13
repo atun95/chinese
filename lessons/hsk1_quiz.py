@@ -632,7 +632,7 @@ def _render_exam2_back_button():
         unsafe_allow_html=True,
     )
     if st.button(
-        "⬅️ Quay lại 📝 bài tập trắc nghiệm",
+        "⬅️ Quay lại 📝 Bài Tập Trắc Nghiệm",
         key="hsk1_exam2_back_menu",
         use_container_width=True,
     ):

@@ -152,7 +152,7 @@ def show_consolidated_flashcards():
                 return
 
     # Render Header without description
-    render_lesson_intro("THẺ TỪ ÔN TẬP TỰ VỰNG")
+    render_lesson_intro("Flashcard ÔN TẬP TỰ VỰNG")
 
     # Embed Flashcard_Offline.html using Streamlit components
     try:
