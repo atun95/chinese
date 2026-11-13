@@ -1241,7 +1241,7 @@
     async function postSnapshot(payload) {
       const url = window.__SUPABASE_URL__;
       const key = window.__SUPABASE_KEY__;
-      const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
+      const table = window.__EXAM2_TABLE__ || 'de2';
       if (!url || !key || !ATTEMPT_ID) {
         throw new Error('Chưa có kết nối lưu bài');
       }
@@ -1881,7 +1881,7 @@
 
       const url = window.__SUPABASE_URL__;
       const key = window.__SUPABASE_KEY__;
-      const table = window.__EXAM2_TABLE__ || 'hsk1_exam2_answers';
+      const table = window.__EXAM2_TABLE__ || 'de2';
       if (!url || !key || !ATTEMPT_ID) return false;
 
       const query = 'answers-%3E%3Eattempt_id=eq.' + encodeURIComponent(ATTEMPT_ID)

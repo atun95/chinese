@@ -26,6 +26,7 @@ except ImportError:
     from lessons.hsk1_quizzes_data import QUIZZES_DATA
 
 EXAM2_DATA_PATH = Path(__file__).resolve().parent / "hsk1_exam2_data.json"
+EXAM2_ANSWERS_TABLE = "de2"
 
 
 def _load_exam2_data():
@@ -89,7 +90,7 @@ def _load_exam2_submissions(limit=50):
     columns = "id,student_name,score,max_score,part_scores,answers,order_answers,essay,submitted_at"
     try:
         res = (
-            client.table("hsk1_exam2_answers")
+            client.table(EXAM2_ANSWERS_TABLE)
             .select(columns)
             .eq("answers->>status", "submitted")
             .eq("answers->>v", "2")
@@ -99,7 +100,7 @@ def _load_exam2_submissions(limit=50):
         )
         rows = res.data or []
     except Exception:
-        res = client.table("hsk1_exam2_answers").select(columns).order("id", desc=True).limit(300).execute()
+        res = client.table(EXAM2_ANSWERS_TABLE).select(columns).order("id", desc=True).limit(300).execute()
         rows = []
         for row in res.data or []:
             blob = _as_dict(row.get("answers"))
@@ -560,7 +561,7 @@ def _save_exam2_submission(student_name):
         "submitted_at": datetime.now(timezone.utc).isoformat(),
     }
     try:
-        client.table("hsk1_exam2_answers").insert(payload).execute()
+        client.table(EXAM2_ANSWERS_TABLE).insert(payload).execute()
         return True, ""
     except Exception as exc:
         return False, f"Chưa lưu được bài: {exc}"
@@ -967,7 +968,7 @@ def _show_exam2_section():
             inject_parts.append(
                 f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
                 f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
-                f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
+                f"window.__EXAM2_TABLE__='{EXAM2_ANSWERS_TABLE}';"
                 f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
             )
         except Exception:

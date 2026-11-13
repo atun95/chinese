@@ -25,7 +25,7 @@ SECRETS_FILE = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
 DEFAULT_URL = "https://gibrwrsnpzdyaqwxpyil.supabase.co"
 DEFAULT_KEY = "sb_publishable_BBPNaOhqv1BL-kJTLi-amQ_88OlPndR"
 FALLBACK_SECRET_KEY = "sb_secret_sxAqm-PXRd-tO0Bo87ZUGw_l_FlfXID"
-DEFAULT_TABLE = "student_scores"
+DEFAULT_TABLE = "de1"
 
 
 def get_supabase_config():
@@ -217,7 +217,7 @@ def save_score_to_supabase(student_name: str, score_str: str):
 
 def save_hsk_exam_score(exam_label: str, student_name: str, listening: int, reading: int, total: int, listen_max: int = 20, read_max: int = 20):
     """
-    Lưu điểm một đề HSK. Bảng student_scores chỉ có cột name và score,
+    Lưu điểm một đề HSK. Bảng de1 chỉ có cột name và score,
     nên đề, nghe, đọc và tổng được ghi thành một dòng trong cột score.
     """
     score_str = (
