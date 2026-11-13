@@ -74,11 +74,13 @@ def _build_valid_combinations():
     """Xây dựng cơ sở dữ liệu các tổ hợp pinyin chuẩn ngữ âm Hán ngữ."""
     combos = {}
 
-    def add(init, final, pinyin_written, note=None, examples=None):
+    def add(init, final, pinyin_written, note=None, examples=None, tones=None):
         combos[(init, final)] = {
             "pinyin": pinyin_written,
             "note": note,
-            "examples": examples or []
+            "examples": examples or [],
+            # None = mọi thanh đều có. List = chỉ những thanh thực sự có trong Hán ngữ chuẩn.
+            "tones": tones,
         }
 
     # ── b ─────────────────────────────────────────────────────────────────────
@@ -152,7 +154,7 @@ def _build_valid_combinations():
 
     # ── d ─────────────────────────────────────────────────────────────────────
     add("d", "a", "da", examples=["搭 (dā - dựng)", "达 (dá - đạt)", "打 (dǎ - đánh)", "大 (dà - to lớn)"])
-    add("d", "e", "de", examples=["得 (dé - được)", "德 (dé - đạo đức)", "的 (de - của)"])
+    add("d", "e", "de", tones=[2, 0], examples=["得 (dé - được)", "德 (dé - đạo đức)", "的 (de - của)"])
     add("d", "ai", "dai", examples=["呆 (dāi - ngây ngô)", "带 (dài - mang theo)", "袋 (dài - cái túi)"])
     add("d", "ei", "dei", examples=["得 (děi - phải làm gì)"])
     add("d", "ao", "dao", examples=["刀 (dāo - con dao)", "岛 (dǎo - hòn đảo)", "到 (dào - đến)"])
@@ -177,7 +179,7 @@ def _build_valid_combinations():
 
     # ── t ─────────────────────────────────────────────────────────────────────
     add("t", "a", "ta", examples=["他 (tā - anh ấy)", "她 (tā - cô ấy)", "塔 (tǎ - cái tháp)", "踏 (tà - giẫm)"])
-    add("t", "e", "te", examples=["特 (tè - đặc biệt)"])
+    add("t", "e", "te", tones=[4], examples=["特 (tè - đặc biệt)"])
     add("t", "ai", "tai", examples=["胎 (tāi - thai)", "台 (tái - đài/bệ)", "太 (tài - quá)"])
     add("t", "ao", "tao", examples=["掏 (tāo - móc)", "桃 (táo - quả đào)", "套 (tào - bộ/áo khoác)"])
     add("t", "ou", "tou", examples=["偷 (tōu - trộm)", "头 (tóu - đầu)", "透 (tòu - thấu)"])
@@ -699,7 +701,10 @@ def show_pinyin_practice():
 
     # ── XỬ LÝ GHÉP VÀ KIỂM TRA HỢP LỆ ────────────────────────────────────────
     key_pair = (selected_initial, selected_final)
-    is_valid = key_pair in VALID_COMBINATIONS
+    combo = VALID_COMBINATIONS.get(key_pair)
+    allowed_tones = combo.get("tones") if combo else None
+    tone_allowed = combo is not None and (not allowed_tones or selected_tone_idx in allowed_tones)
+    is_valid = tone_allowed
 
     # Công thức ghép
     init_display = "Ø" if selected_initial == "(Không có)" else selected_initial
@@ -725,7 +730,7 @@ def show_pinyin_practice():
     # TRƯỜNG HỢP 1: TỔ HỢP HỢP LỆ TRONG TIẾNG TRUNG
     # ─────────────────────────────────────────────────────────────────────────
     if is_valid:
-        data = VALID_COMBINATIONS[key_pair]
+        data = combo
         base_pinyin = data["pinyin"]
         toned_pinyin = add_tone(base_pinyin, selected_tone_idx)
         rule_note = data.get("note")
@@ -808,6 +813,10 @@ def show_pinyin_practice():
     # TRƯỜNG HỢP 2: TỔ HỢP KHÔNG TỒN TẠI TRONG TIẾNG TRUNG
     # ─────────────────────────────────────────────────────────────────────────
     else:
+        if combo is not None:
+            missing_syllable = add_tone(combo["pinyin"], selected_tone_idx)
+        else:
+            missing_syllable = f"{init_display}{selected_final}"
         st.markdown(f"""
         <div style="background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
                     border: 2px solid #fca5a5; border-radius: 18px; padding: 28px;
@@ -819,14 +828,15 @@ def show_pinyin_practice():
                     ✕ TỔ HỢP NÀY KHÔNG TỒN TẠI TRONG TIẾNG TRUNG
                 </span>
                 <span style="color: #991b1b; font-size: 0.9rem; font-weight: 600;">
-                    Không có âm: <b>{init_display}{selected_final}</b>
+                    Không có âm: <b>{missing_syllable}</b>
                 </span>
             </div>
             <div style="text-align: center; padding: 15px 0;">
-                <div style="font-size: 3.8rem; font-weight: 900; color: #dc2626;
-                            font-family: 'Georgia', serif; text-decoration: line-through;
+                <div style="font-size: 3.8rem; font-weight: 600; color: #dc2626;
+                            font-family: 'Segoe UI', 'Arial', sans-serif; font-synthesis: none;
+                            line-height: 1.4; text-decoration: line-through;
                             text-decoration-color: #ef4444; opacity: 0.7;">
-                    {init_display}{selected_final}
+                    {missing_syllable}
                 </div>
                 <div style="color: #991b1b; font-size: 1.15rem; font-weight: 700; margin-top: 12px;">
                     ⚠️ Không thể phát âm vì đây là âm tiết không hợp lệ trong tiếng Hán chuẩn!
@@ -835,23 +845,40 @@ def show_pinyin_practice():
         </div>
         """, unsafe_allow_html=True)
 
-        # Giải thích chi tiết nguyên nhân
-        explanation = get_invalid_explanation(selected_initial, selected_final)
-        st.warning(explanation)
-
-        # Gợi ý các vận mẫu hợp lệ mà thanh mẫu này CÓ THỂ kết hợp được
-        valid_finals_for_initial = [
-            f for (i, f) in VALID_COMBINATIONS.keys()
-            if i == selected_initial
-        ]
-
-        if valid_finals_for_initial:
-            st.markdown(f"#### 💡 Thanh mẫu **'{init_display}'** CÓ THỂ kết hợp với các vận mẫu sau:")
+        if combo is not None and allowed_tones:
+            st.warning(
+                f"Âm **{combo['pinyin']}** có trong tiếng Hán chuẩn, nhưng không có thanh này. "
+                + "Chỉ có: " + ", ".join(
+                    f"**{add_tone(combo['pinyin'], tone_val)}**"
+                    + (" (thanh nhẹ)" if tone_val == 0 else f" (thanh {tone_val})")
+                    for tone_val in allowed_tones
+                )
+                + "."
+            )
+            st.markdown("#### 💡 Các thanh có thật của âm này:")
             chips_html = "".join([
                 f"<span style='display:inline-block; background:#eff6ff; border:1px solid #bfdbfe; "
                 f"color:#1d4ed8; font-weight:700; border-radius:8px; padding:6px 12px; margin:4px; "
-                f"font-size:0.92rem; font-family:monospace;'>{f} ➔ <b>{VALID_COMBINATIONS[(selected_initial, f)]['pinyin']}</b></span>"
-                for f in valid_finals_for_initial
+                f"font-size:0.92rem;'>{add_tone(combo['pinyin'], tone_val)}</span>"
+                for tone_val in allowed_tones
             ])
             st.markdown(f"<div style='margin-top: 10px; margin-bottom: 20px;'>{chips_html}</div>", unsafe_allow_html=True)
-            st.caption("👉 Hãy chọn một trong các vận mẫu gợi ý phía trên để ghép thành âm tiết hợp lệ!")
+        else:
+            explanation = get_invalid_explanation(selected_initial, selected_final)
+            st.warning(explanation)
+
+            valid_finals_for_initial = [
+                f for (i, f) in VALID_COMBINATIONS.keys()
+                if i == selected_initial
+            ]
+
+            if valid_finals_for_initial:
+                st.markdown(f"#### 💡 Thanh mẫu **'{init_display}'** CÓ THỂ kết hợp với các vận mẫu sau:")
+                chips_html = "".join([
+                    f"<span style='display:inline-block; background:#eff6ff; border:1px solid #bfdbfe; "
+                    f"color:#1d4ed8; font-weight:700; border-radius:8px; padding:6px 12px; margin:4px; "
+                    f"font-size:0.92rem; font-family:monospace;'>{f} ➔ <b>{VALID_COMBINATIONS[(selected_initial, f)]['pinyin']}</b></span>"
+                    for f in valid_finals_for_initial
+                ])
+                st.markdown(f"<div style='margin-top: 10px; margin-bottom: 20px;'>{chips_html}</div>", unsafe_allow_html=True)
+                st.caption("👉 Hãy chọn một trong các vận mẫu gợi ý phía trên để ghép thành âm tiết hợp lệ!")
