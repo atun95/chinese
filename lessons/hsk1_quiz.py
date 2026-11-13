@@ -991,7 +991,6 @@ def _show_exam2_section():
 </script>""")
         html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
         components.html(html_content, height=900, scrolling=True)
-        st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
     else:
         st.error(f"Không tìm thấy file đề thi: {html_path}")
 
