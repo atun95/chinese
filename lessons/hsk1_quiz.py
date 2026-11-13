@@ -631,16 +631,7 @@ def _render_exam2_back_button():
         """,
         unsafe_allow_html=True,
     )
-    if st.button(
-        "⬅️ Quay lại 📝 Bài Tập Trắc Nghiệm",
-        key="hsk1_exam2_back_menu",
-        use_container_width=True,
-    ):
-        _return_to_hsk1_review_menu(saved=False)
-        st.rerun()
-    if st.button("Đã lưu, quay lại", key="hsk1_exam2_saved_back"):
-        _return_to_hsk1_review_menu(saved=True)
-        st.rerun()
+  
 
 
 def _exam2_center_button(label, key):
