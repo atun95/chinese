@@ -15,12 +15,12 @@ _TTS_PARENT_JS = r"""
   const P2H = {
     'a1':'啊','a2':'阿','a3':'啊','a4':'啊',
     'o1':'哦','o2':'哦','o3':'哦','o4':'哦',
-    'e1':'鹅','e2':'鹅','e3':'鹅','e4':'鹅',
-    'ai1':'哎','ai2':'哎','ai3':'哎','ai4':'哎',
+    'e1':'鹅','e2':'鹅','e3':'恶','e4':'鹅',
+    'ai1':'哎','ai2':'哎','ai3':'矮','ai4':'哎',
     'ei1':'欸','ei2':'欸','ei3':'欸','ei4':'欸',
     'ao1':'熬','ao2':'熬','ao3':'袄','ao4':'奥',
     'ou1':'欧','ou2':'欧','ou3':'呕','ou4':'偶',
-    'an1':'安','an2':'安','an3':'安','an4':'暗',
+    'an1':'安','an2':'安','an3':'俺','an4':'暗',
     'en1':'恩','en2':'恩','en3':'恩','en4':'恩',
     'ang1':'昂','ang2':'昂','ang3':'昂','ang4':'昂',
     'eng1':'嗯','eng2':'嗯','eng3':'嗯','eng4':'嗯',
@@ -29,7 +29,7 @@ _TTS_PARENT_JS = r"""
     'wu1':'乌','wu2':'吴','wu3':'五','wu4':'物',
     'yu1':'淤','yu2':'鱼','yu3':'语','yu4':'玉',
     'ba1':'巴','ba2':'拔','ba3':'把','ba4':'爸',
-    'bo1':'波','bo2':'伯','bo3':'钵','bo4':'薄',
+    'bo1':'波','bo2':'伯','bo3':'跛','bo4':'薄',
     'bi1':'逼','bi2':'鼻','bi3':'比','bi4':'必',
     'bu1':'逋','bu2':'步','bu3':'补','bu4':'布',
     'bai1':'掰','bai2':'白','bai3':'百','bai4':'败',
@@ -46,7 +46,7 @@ _TTS_PARENT_JS = r"""
     'bing1':'冰','bing2':'瓶','bing3':'饼','bing4':'病',
     'pa1':'趴','pa2':'爬','pa3':'爬','pa4':'怕',
     'po1':'泼','po2':'婆','po3':'颇','po4':'破',
-    'pi1':'批','pi2':'皮','pi3':'屁','pi4':'屁',
+    'pi1':'批','pi2':'皮','pi3':'匹','pi4':'屁',
     'pu1':'扑','pu2':'葡','pu3':'普','pu4':'铺',
     'pai1':'拍','pai2':'排','pai4':'派',
     'pei1':'胚','pei2':'培','pei4':'配',
@@ -62,7 +62,7 @@ _TTS_PARENT_JS = r"""
     'ping1':'乒','ping2':'平','ping3':'屏','ping4':'评',
     'ma1':'妈','ma2':'麻','ma3':'马','ma4':'骂',
     'mi1':'眯','mi2':'迷','mi3':'米','mi4':'密',
-    'mo1':'摸','mo2':'摩','mo3':'摩','mo4':'末',
+    'mo1':'摸','mo2':'摩','mo3':'抹','mo4':'末',
     'mu1':'亩','mu2':'木','mu3':'母','mu4':'木',
     'mai1':'埋','mai2':'埋','mai3':'买','mai4':'卖',
     'mei1':'没','mei2':'没','mei3':'美','mei4':'妹',
@@ -94,7 +94,7 @@ _TTS_PARENT_JS = r"""
     'dou1':'都','dou2':'豆','dou3':'斗','dou4':'豆',
     'dan1':'单','dan2':'淡','dan3':'胆','dan4':'淡',
     'deng1':'灯','deng2':'等','deng3':'等','deng4':'瞪',
-    'dang1':'当','dang2':'党','dang3':'当','dang4':'挡',
+    'dang1':'当','dang2':'党','dang3':'党','dang4':'挡',
     'dong1':'东','dong2':'同','dong3':'懂','dong4':'动',
     'dian1':'颠','dian2':'甜','dian3':'点','dian4':'店',
     'diao1':'刁','diao2':'吊','diao4':'吊',
@@ -104,7 +104,7 @@ _TTS_PARENT_JS = r"""
     'duan1':'端','duan2':'段','duan3':'短','duan4':'段',
     'dui1':'堆','dui4':'对',
     'dun1':'敦','dun2':'吨','dun4':'盾',
-    'ta1':'他','ta2':'他','ta3':'她','ta4':'踏',
+    'ta1':'他','ta2':'他','ta3':'塔','ta4':'踏',
     'ti1':'踢','ti2':'题','ti3':'体','ti4':'替',
     'tu1':'凸','tu2':'图','tu3':'土','tu4':'吐',
     'tai1':'胎','tai2':'台','tai3':'太','tai4':'太',
@@ -121,10 +121,11 @@ _TTS_PARENT_JS = r"""
     'tuan1':'团','tuan2':'团',
     'tui1':'推','tui3':'腿','tui4':'退',
     'tun1':'吞','tun2':'臀',
-    'na1':'拿','na2':'拿','na3':'那','na4':'那',
+    'na1':'拿','na2':'拿','na3':'哪','na4':'那',
     'ne1':'呢','ne2':'呢',
     'ni1':'泥','ni2':'泥','ni3':'你','ni4':'逆',
     'nu1':'奴','nu2':'奴','nu3':'努','nu4':'怒',
+    'nv3':'女','lv3':'吕',
     'nai1':'奶','nai2':'奶','nai3':'乃','nai4':'耐',
     'nei1':'内','nei4':'内',
     'nao1':'挠','nao2':'挠','nao3':'脑','nao4':'闹',
@@ -140,12 +141,12 @@ _TTS_PARENT_JS = r"""
     'ning1':'拧','ning2':'宁','ning3':'拧','ning4':'泞',
     'niu1':'纽','niu2':'牛','niu3':'扭','niu4':'纽',
     'nuan3':'暖',
-    'la1':'拉','la2':'蜡','la3':'辣','la4':'辣',
+    'la1':'拉','la2':'蜡','la3':'喇','la4':'辣',
     'le1':'了','le2':'了',
     'li1':'里','li2':'离','li3':'里','li4':'力',
-    'lu1':'路','lu2':'炉','lu3':'旅','lu4':'路',
+    'lu1':'路','lu2':'炉','lu3':'鲁','lu4':'路',
     'lai1':'来','lai2':'来','lai3':'来','lai4':'赖',
-    'lei1':'类','lei2':'雷','lei3':'类','lei4':'类',
+    'lei1':'类','lei2':'雷','lei3':'蕾','lei4':'类',
     'lao1':'捞','lao2':'老','lao3':'老','lao4':'烙',
     'lou1':'楼','lou2':'楼','lou3':'搂','lou4':'露',
     'lan1':'兰','lan2':'蓝','lan3':'懒','lan4':'烂',
@@ -161,7 +162,7 @@ _TTS_PARENT_JS = r"""
     'luan1':'乱','luan2':'卵','luan4':'乱',
     'lun1':'轮','lun2':'轮','lun4':'论',
     'ga1':'嘎','ga2':'尬','ga4':'嘎',
-    'ge1':'歌','ge2':'格','ge3':'个','ge4':'个',
+    'ge1':'歌','ge2':'格','ge3':'葛','ge4':'个',
     'gu1':'估','gu2':'骨','gu3':'古','gu4':'故',
     'gai1':'该','gai2':'改','gai3':'改','gai4':'盖',
     'gei3':'给',
@@ -171,7 +172,7 @@ _TTS_PARENT_JS = r"""
     'gen1':'根','gen2':'亘','gen4':'根',
     'gang1':'钢','gang2':'肛','gang3':'港','gang4':'钢',
     'geng1':'更','geng2':'耕','geng4':'更',
-    'gong1':'工','gong2':'共','gong3':'弓','gong4':'共',
+    'gong1':'工','gong2':'共','gong3':'巩','gong4':'共',
     'guan1':'关','guan2':'观','guan3':'管','guan4':'惯',
     'guai1':'乖','guai2':'拐','guai3':'拐','guai4':'怪',
     'guo1':'锅','guo2':'国','guo3':'果','guo4':'过',
@@ -192,7 +193,7 @@ _TTS_PARENT_JS = r"""
     'kuan1':'宽','kuan3':'款',
     'kuai1':'快','kuai2':'筷','kuai4':'快',
     'kuo1':'扩','kuo4':'阔',
-    'kui1':'亏','kui2':'愧','kui3':'魁','kui4':'愧',
+    'kui1':'亏','kui2':'愧','kui3':'傀','kui4':'愧',
     'kun1':'昆','kun2':'困','kun3':'捆','kun4':'困',
     'kuang1':'筐','kuang2':'狂','kuang3':'矿','kuang4':'旷',
     'ha1':'哈','ha2':'哈','ha3':'哈','ha4':'哈',
@@ -202,7 +203,7 @@ _TTS_PARENT_JS = r"""
     'hei1':'黑',
     'hao1':'好','hao2':'好','hao3':'好','hao4':'好',
     'hou1':'后','hou2':'喉','hou3':'吼','hou4':'后',
-    'han1':'寒','han2':'汉','han3':'汉','han4':'汉',
+    'han1':'寒','han2':'汉','han3':'喊','han4':'汉',
     'hen1':'很','hen2':'很','hen3':'很','hen4':'恨',
     'hang1':'航','hang2':'行',
     'heng1':'哼','heng2':'横',
@@ -210,7 +211,7 @@ _TTS_PARENT_JS = r"""
     'huan1':'欢','huan2':'环','huan3':'缓','huan4':'换',
     'huai1':'怀','huai2':'怀','huai4':'坏',
     'huo1':'豁','huo2':'活','huo3':'火','huo4':'货',
-    'hui1':'灰','hui2':'回','hui3':'汇','hui4':'会',
+    'hui1':'灰','hui2':'回','hui3':'毁','hui4':'会',
     'hun1':'婚','hun2':'魂','hun4':'混',
     'huang1':'慌','huang2':'黄','huang3':'谎','huang4':'晃',
     'ji1':'鸡','ji2':'及','ji3':'几','ji4':'计',
@@ -302,7 +303,7 @@ _TTS_PARENT_JS = r"""
     'shao1':'烧','shao2':'勺','shao3':'少','shao4':'哨',
     'shou1':'收','shou2':'手','shou3':'手','shou4':'售',
     'shan1':'山','shan2':'善','shan3':'闪','shan4':'善',
-    'shen1':'深','shen2':'什','shen3':'神','shen4':'渗',
+    'shen1':'深','shen2':'什','shen3':'审','shen4':'渗',
     'shang1':'商','shang4':'上',
     'sheng1':'生','sheng2':'省','sheng3':'省','sheng4':'胜',
     'shuan4':'涮',
@@ -443,8 +444,25 @@ _TTS_PARENT_JS = r"""
     const numbered = py2num(txt);
     const hanzi = P2H[numbered] || P2H[numbered.replace(/\d/,'')] || null;
 
+    function speakHanzi() {
+      if (!hanzi) return;
+      playUrl('https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(hanzi)+'&le=zh', () => {
+        const v = getZhVoice();
+        if (!v) return;
+        const u = new SpeechSynthesisUtterance(hanzi);
+        u.voice=v; u.lang='zh-CN'; u.rate=0.75;
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+      });
+    }
+
+    // Thanh 3: file âm tiết đọc đủ đường 214. Chữ Hán thường bị đọc nửa thanh nên nghe chưa chuẩn.
+    if (numbered.endsWith('3')) {
+      playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', speakHanzi);
+      return;
+    }
+
     if (hanzi) {
-      // File âm thanh trước (Web Speech trong iframe/postMessage thường bị chặn nên im).
       playUrl('https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(hanzi)+'&le=zh', () => {
         const v = getZhVoice();
         if (v) {
@@ -457,7 +475,6 @@ _TTS_PARENT_JS = r"""
         playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', null);
       });
     } else {
-      // Không có map: thử writtenchinese.com
       playUrl('https://dictionary.writtenchinese.com/sounds/'+encodeURIComponent(numbered)+'.mp3', null);
     }
   }

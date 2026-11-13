@@ -747,9 +747,10 @@ def show_pinyin_practice():
                 </span>
             </div>
             <div style="text-align: center; padding: 10px 0 20px;">
-                <div style="font-size: 4.8rem; font-weight: 900; color: #065f46;
-                            font-family: 'Georgia', 'Noto Serif SC', serif; line-height: 1.1;
-                            text-shadow: 0 2px 8px rgba(0,0,0,0.05); letter-spacing: 1px;">
+                <div style="font-size: 4.8rem; font-weight: 600; color: #065f46;
+                            font-family: 'Segoe UI', 'Arial', 'Noto Sans', sans-serif;
+                            font-synthesis: none; line-height: 1.45; letter-spacing: 1px;
+                            padding: 10px 0 4px; overflow: visible;">
                     {toned_pinyin}
                 </div>
                 <div style="color: #047857; font-size: 1.05rem; font-weight: 600; margin-top: 8px;">
