@@ -626,7 +626,7 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 9.3 - Hội thoại đổi tiền"
     ])
 
-if mode == "🏆Flashcard Ôn Tập Từ Vựng":
+if mode == "🏆 Flashcard Ôn Tập Từ Vựng":
     show_consolidated_flashcards()
 
 elif mode == "📝 Bài Tập Trắc Nghiệm":
