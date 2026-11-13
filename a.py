@@ -538,7 +538,7 @@ if "initialized" not in st.session_state:
 
 
 
-st.sidebar.header("Danh mục giáo án")
+
 
 # Kiểm tra kết nối THỰC TẾ với Supabase (Live database ping)
 is_live_ok, live_conn_msg = supabase_client.check_real_connection()
@@ -630,7 +630,8 @@ if mode == "Flashcard Ôn Tập Từ Vựng":
     show_consolidated_flashcards()
 
 elif mode == "📝 Bài Tập Trắc Nghiệm":
-    hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
+    quiz_pick = st.sidebar.radio("Chọn đề:", ["Đề 1", "Đề 2", "Bảng điểm"])
+    hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated, quiz_pick=quiz_pick)
 
 elif mode == "📄 Đề thi thử HSK 1":
     exam_pick = st.sidebar.radio("Chọn đề:", ["Đề 1", "Đề 2", "Đề 3", "Bảng điểm"])

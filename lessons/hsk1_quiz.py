@@ -903,7 +903,161 @@ def _show_hsk1_exam2(attempt_id):
         _exam2_submit_dialog()
 
 
-def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated):
+def _show_scoreboard_quiz(load_all_scores_hsk1_consolidated):
+    """Hiển thị bảng điểm tổng hợp cả Đề 1 và Đề 2."""
+    st.subheader("🏆 Bảng điểm tổng hợp")
+    # --- Đề 2 Supabase ---
+    with st.expander("📋 Bài làm đã nộp - Đề 2 (Bài test HSK 1)", expanded=True):
+        try:
+            sb_client = supabase_client.get_supabase_client()
+            if sb_client:
+                rows = _load_exam2_submissions()
+                if not rows:
+                    st.info("Chưa có bài nộp nào (Đề 2).")
+                else:
+                    overview = [{
+                        "Học viên": r.get("student_name", "Ẩn danh"),
+                        "Đã làm": len((_as_dict(r.get("answers")).get("choices") or {})) + len(_as_dict(r.get("order_answers"))),
+                        "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
+                        "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
+                        "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
+                        "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
+                        "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
+                        "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
+                        "Phần VI": (r.get("part_scores") or {}).get("p8", "-"),
+                        "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
+                    } for r in rows]
+                    st.dataframe(overview, use_container_width=True)
+                    labels = [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows]
+                    pick = st.selectbox("Chọn bài để xem chi tiết:", labels, key="hsk1_exam2_pick_scoreboard")
+                    sel = rows[labels.index(pick)]
+                    st.markdown("**Bài tự luận (Phần VII):**")
+                    st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_scoreboard")
+                    st.markdown("#### Chi tiết đáp án và chấm từng câu")
+                    st.html(render_exam2_review(sel))
+            else:
+                st.warning("Chưa kết nối được Supabase.")
+        except Exception as e:
+            st.error(f"Lỗi tải bài nộp: {e}")
+    # --- Đề 1 CSV ---
+    with st.expander("📊 Bảng điểm Đề 1 (50 câu trắc nghiệm)", expanded=False):
+        scores_data = []
+        if supabase_client.is_supabase_configured():
+            scores_data = supabase_client.load_scores_from_supabase()
+        if not scores_data:
+            raw_csv = load_all_scores_hsk1_consolidated()
+            for r in raw_csv:
+                scores_data.append({
+                    "Thời gian": r.get("thời gian", ""),
+                    "Học viên": r.get("học viên", ""),
+                    "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
+                })
+        if scores_data:
+            st.dataframe(scores_data, use_container_width=True)
+        else:
+            st.info("Chưa có lượt nộp điểm nào (Đề 1).")
+
+
+def _show_exam2_section():
+    """Hiển thị Đề 2 - Bài test HSK 1 (55 câu + tự luận) trực tiếp từ sidebar."""
+    _render_exam2_back_button()
+    attempt_id = _query_param("hsk1_exam2")
+    if not attempt_id:
+        attempt_id = uuid.uuid4().hex
+        st.query_params["hsk1_exam2"] = attempt_id
+        st.rerun()
+
+    part_options = [
+        ("I. Từ vựng (10 câu)", "1"),
+        ("II. Đúng / Sai (10 câu)", "2"),
+        ("III. Sắp xếp câu (10 câu)", "3"),
+        ("IV. Đúng / Sai (10 câu)", "4"),
+        ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
+        ("VI. Ngữ pháp (10 câu)", "8"),
+        ("VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "9"),
+        ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
+    ]
+    part_labels = [p[0] for p in part_options]
+    pending_part = st.session_state.pop("hsk1_exam2_pending", None)
+    if pending_part in part_labels:
+        st.session_state.hsk1_exam2_part = pending_part
+    part_choice = st.selectbox(
+        "Chọn phần của bài test:",
+        part_labels,
+        key="hsk1_exam2_part",
+    )
+    only_part = dict(part_options)[part_choice]
+
+    html_path = Path(__file__).resolve().parent.parent / "bai_test_hsk1.html"
+    if html_path.exists():
+        html_content = html_path.read_text(encoding="utf-8")
+        inject_parts = ["<style>body{padding-bottom:0 !important;}</style>"]
+        try:
+            sb_cfg = supabase_client.get_supabase_config()
+            inject_parts.append(
+                f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
+                f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
+                f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
+                f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
+            )
+        except Exception:
+            pass
+        if st.session_state.pop("hsk1_exam2_submit", False):
+            inject_parts.append("<script>window.__EXAM_AUTO_SUBMIT__=true;</script>")
+        if only_part != "full":
+            inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
+        else:
+            inject_parts.append("<style>.bottom-bar{position:static !important;}</style>")
+        inject_parts.append("""
+<script>
+(function(){
+  function fit(){
+    try{
+      var h = document.body ? document.body.scrollHeight : 0;
+      if (!h || h < 100) h = document.documentElement.scrollHeight;
+      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
+    }catch(e){}
+  }
+  window.addEventListener('load', function(){ setTimeout(fit, 100); });
+  window.addEventListener('resize', fit);
+  var t = setInterval(fit, 500);
+  setTimeout(function(){ clearInterval(t); }, 5000);
+})();
+</script>""")
+        html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
+
+        order_keys = ["1", "2", "3", "4", "5", "8", "9", "full"]
+        label_by_key = {v: k for k, v in part_options}
+        idx = order_keys.index(only_part)
+
+        def render_nav_buttons(suffix):
+            if only_part == "full":
+                return
+            _, mid_col, _ = st.columns([1, 2, 1])
+            with mid_col:
+                next_key = order_keys[idx + 1]
+                if next_key != "full":
+                    next_label = label_by_key[next_key]
+                    if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
+                        st.session_state.hsk1_exam2_pending = next_label
+                        st.rerun()
+                elif st.button("✅ Nộp bài & Chấm điểm", type="primary", key=f"hsk1_submit_{only_part}{suffix}", use_container_width=True):
+                    st.session_state.hsk1_exam2_submit = True
+                    st.rerun()
+
+        render_nav_buttons("_top")
+        st.markdown("<br/>", unsafe_allow_html=True)
+        components.html(html_content, height=900, scrolling=True)
+        if only_part == "full":
+            st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
+    else:
+        st.error(f"Không tìm thấy file đề thi: {html_path}")
+
+    if st.session_state.get("hsk1_exam2_open_submit"):
+        _exam2_submit_dialog()
+
+
+def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated, quiz_pick="Đề 1"):
     # CSS Styles cao cấp
     st.markdown("""
     <style>
@@ -1025,177 +1179,17 @@ def show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated,
 
     render_lesson_intro("📝 bài tập trắc nghiệm")
 
-    # ================= TRANG DANH SÁCH ĐỀ (2 BÀI KIỂM TRA HSK 1) =================
-    exam_view = st.session_state.get("hsk1_exam_view", "menu")
-
-    if exam_view == "menu":
-        notice = st.session_state.pop("hsk1_exam2_notice", None)
-        if notice:
-            st.success(notice)
-        exams = [
-            (
-                "exam1",
-                "📝",
-                "Đề 1: Ôn tập bài cũ (50 câu trắc nghiệm)",
-                "50 câu trắc nghiệm ôn tập toàn diện: ngữ âm, chữ Hán, từ vựng, ngữ pháp, lượng từ, tìm lỗi sai, sắp xếp câu và đối thoại.",
-                "#3b82f6"
-            ),
-            (
-                "exam2",
-                "🎓",
-                "Đề 2: Bài test HSK 1 (55 câu + tự luận)",
-                "Bài kiểm tra tổng hợp 6 phần: từ vựng, đúng/sai, sắp xếp câu, đọc hiểu, ngữ pháp và viết đoạn văn. Có nghe phát âm tiếng Trung và đồng hồ 45 phút.",
-                "#c92a2a"
-            ),
-        ]
-        for key, icon, title, desc, color in exams:
-            st.markdown(f"""
-            <div style="background: white; border: 2px solid #e2e8f0; border-left: 6px solid {color}; border-radius: 18px; padding: 24px 28px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
-                <div style="font-size: 2rem; margin-bottom: 6px;">{icon}</div>
-                <div style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-bottom: 6px;">{title}</div>
-                <div style="color: #475569; font-size: 0.95rem; line-height: 1.6;">{desc}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button(f"🚀 Bắt đầu làm bài", key=f"hsk1_open_{key}", type="primary", use_container_width=True):
-                st.session_state.hsk1_exam_view = key
-                st.session_state.hsk1_exam_choice = key
-                if key == "exam2":
-                    st.query_params["hsk1_exam2"] = uuid.uuid4().hex
-                    st.session_state.hsk1_exam2_part = "I. Từ vựng (10 câu)"
-                st.rerun()
-            st.markdown("<br/>", unsafe_allow_html=True)
-
-        # ================= XEM LẠI BÀI ĐÃ NỘP (SUPABASE) =================
-        with st.expander("📋 Xem bài làm học viên đã nộp (Đề 2 - Bài test HSK 1)"):
-            try:
-                sb_client = supabase_client.get_supabase_client()
-                if sb_client:
-                    rows = _load_exam2_submissions()
-                    if not rows:
-                        st.info("Chưa có bài nộp nào. Đáp án mới được lưu khi học viên bấm Lưu đáp án & điểm.")
-                    else:
-                        overview = [{
-                            "Học viên": r.get("student_name", "Ẩn danh"),
-                            "Đã làm": len((_as_dict(r.get("answers")).get("choices") or {})) + len(_as_dict(r.get("order_answers"))),
-                            "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
-                            "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
-                            "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
-                            "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
-                            "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
-                            "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
-                            "Phần VI": (r.get("part_scores") or {}).get("p8", "-"),
-                            "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
-                        } for r in rows]
-                        st.dataframe(overview, use_container_width=True)
-
-                        labels = [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows]
-                        pick = st.selectbox("Chọn bài để xem chi tiết:", labels, key="hsk1_exam2_pick_menu")
-                        sel = rows[labels.index(pick)]
-                        st.markdown("**Bài tự luận (Phần VII):**")
-                        st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_menu")
-                        st.markdown("#### Chi tiết đáp án và chấm từng câu")
-                        st.html(render_exam2_review(sel))
-                else:
-                    st.warning("Chưa kết nối được Supabase.")
-            except Exception as e:
-                st.error(f"Lỗi tải bài nộp: {e}")
+    # ================= PHÂN NHÁNH THEO ĐỀ (sidebar radio) =================
+    if quiz_pick == "Bảng điểm":
+        _show_scoreboard_quiz(load_all_scores_hsk1_consolidated)
         return
 
-    # ================= ĐỀ 2: BÀI TEST HSK 1 (HTML) =================
-    if exam_view == "exam2":
-        _render_exam2_back_button()
-        attempt_id = _query_param("hsk1_exam2")
-        if not attempt_id:
-            attempt_id = uuid.uuid4().hex
-            st.query_params["hsk1_exam2"] = attempt_id
-            st.rerun()
-
-        part_options = [
-            ("I. Từ vựng (10 câu)", "1"),
-            ("II. Đúng / Sai (10 câu)", "2"),
-            ("III. Sắp xếp câu (10 câu)", "3"),
-            ("IV. Đúng / Sai (10 câu)", "4"),
-            ("V. Đọc hiểu đoạn văn (5 câu)", "5"),
-            ("VI. Ngữ pháp (10 câu)", "8"),
-            ("VII. Viết đoạn văn ngắn giới thiệu bản thân (tự luận)", "9"),
-            ("🏁 Nộp bài & Xem kết quả (toàn bộ đề)", "full"),
-        ]
-        part_labels = [p[0] for p in part_options]
-        pending_part = st.session_state.pop("hsk1_exam2_pending", None)
-        if pending_part in part_labels:
-            st.session_state.hsk1_exam2_part = pending_part
-        part_choice = st.selectbox(
-            "Chọn phần của bài test:",
-            part_labels,
-            key="hsk1_exam2_part",
-        )
-        only_part = dict(part_options)[part_choice]
-
-        html_path = Path(__file__).resolve().parent.parent / "bai_test_hsk1.html"
-        if html_path.exists():
-            html_content = html_path.read_text(encoding="utf-8")
-            inject_parts = ["<style>body{padding-bottom:0 !important;}</style>"]
-            try:
-                sb_cfg = supabase_client.get_supabase_config()
-                inject_parts.append(
-                    f"<script>window.__SUPABASE_URL__='{sb_cfg['url']}';"
-                    f"window.__SUPABASE_KEY__='{sb_cfg['key']}';"
-                    f"window.__EXAM2_TABLE__='hsk1_exam2_answers';"
-                    f"window.__EXAM_ATTEMPT_ID__='{attempt_id}';</script>"
-                )
-            except Exception:
-                pass
-            if st.session_state.pop("hsk1_exam2_submit", False):
-                inject_parts.append("<script>window.__EXAM_AUTO_SUBMIT__=true;</script>")
-            if only_part != "full":
-                inject_parts.append(f"<script>window.__EXAM_ONLY_PART__='{only_part}';</script>")
-            else:
-                inject_parts.append("<style>.bottom-bar{position:static !important;}</style>")
-            inject_parts.append("""
-<script>
-(function(){
-  function fit(){
-    try{
-      var h = document.body ? document.body.scrollHeight : 0;
-      if (!h || h < 100) h = document.documentElement.scrollHeight;
-      if (window.frameElement && h > 0) window.frameElement.style.height = h + 'px';
-    }catch(e){}
-  }
-  window.addEventListener('load', function(){ setTimeout(fit, 100); });
-  window.addEventListener('resize', fit);
-  var t = setInterval(fit, 500);
-  setTimeout(function(){ clearInterval(t); }, 5000);
-})();
-</script>""")
-            html_content = html_content.replace("</head>", "".join(inject_parts) + "</head>", 1)
-
-            order_keys = ["1", "2", "3", "4", "5", "8", "9", "full"]
-            label_by_key = {v: k for k, v in part_options}
-            idx = order_keys.index(only_part)
-
-            def render_nav_buttons(suffix):
-                if only_part == "full":
-                    return
-                _, mid_col, _ = st.columns([1, 2, 1])
-                with mid_col:
-                    next_key = order_keys[idx + 1]
-                    if next_key != "full":
-                        next_label = label_by_key[next_key]
-                        if st.button("➡️ Sang phần tiếp theo", type="primary", key=f"hsk1_next_{only_part}{suffix}", use_container_width=True):
-                            st.session_state.hsk1_exam2_pending = next_label
-                            st.rerun()
-                    elif st.button("✅ Nộp bài & Chấm điểm", type="primary", key=f"hsk1_submit_{only_part}{suffix}", use_container_width=True):
-                        st.session_state.hsk1_exam2_submit = True
-                        st.rerun()
-
-            render_nav_buttons("_top")
-            st.markdown("<br/>", unsafe_allow_html=True)
-            components.html(html_content, height=900, scrolling=True)
-            if only_part == "full":
-                st.info("Kiểm tra lại toàn bộ đề, sau đó kéo xuống **cuối khung đề thi** và bấm **✅ Nộp bài & Chấm điểm**.")
-        else:
-            st.error(f"Không tìm thấy file đề thi: {html_path}")
+    if quiz_pick == "Đề 2":
+        _show_exam2_section()
         return
+
+    # Đề 1: quiz 50 câu (mặc định)
+    # ================= ĐỀ 1: QUIZ 50 CÂU ÔN TẬP =================
 
     # Đề thi mặc định cho toàn bộ phần này là quiz_exam_50
     active_key = "quiz_exam_50"
