@@ -49,6 +49,7 @@ if 'lesson9_game' in sys.modules:
 import lessons.lesson9 as lesson9
 import lessons.lesson10 as lesson10
 import lessons.hsk1_quiz as hsk1_quiz
+import lessons.hsk1_sample_exam as hsk1_sample_exam
 import supabase_client
 import lessons.hsk1_quizzes_data as hsk1_quizzes_data
 
@@ -562,6 +563,7 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "🔊 Luyện tập Ghép âm",
     "🗣️ Thực hành trên lớp",
     "📝 Trắc nghiệm Tổng hợp HSK 1",
+    "📄 Đề thi thử HSK 1",
     "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG"
 ])
 
@@ -629,6 +631,10 @@ if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
 
 elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
     hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
+
+elif mode == "📄 Đề thi thử HSK 1":
+    exam_pick = st.sidebar.radio("Chọn đề:", ["Đề 1", "Đề 2", "Đề 3", "Bảng điểm"])
+    hsk1_sample_exam.show_exam(exam_pick)
 
 
 elif menu == "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":

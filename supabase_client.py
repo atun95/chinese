@@ -215,6 +215,57 @@ def save_score_to_supabase(student_name: str, score_str: str):
             return False, f"Lỗi lưu Supabase: {e1}"
 
 
+def save_hsk_exam_score(exam_label: str, student_name: str, listening: int, reading: int, total: int, listen_max: int = 20, read_max: int = 20):
+    """
+    Lưu điểm một đề HSK. Bảng student_scores chỉ có cột name và score,
+    nên đề, nghe, đọc và tổng được ghi thành một dòng trong cột score.
+    """
+    score_str = (
+        f"{exam_label} | Nghe {listening}/{listen_max} | "
+        f"Đọc {reading}/{read_max} | Tổng {total}/{listen_max + read_max}"
+    )
+    return save_score_to_supabase(student_name, score_str)
+
+
+def load_hsk_exam_scores(limit: int = 100):
+    """Đọc các dòng điểm đề thi và tách lại thành Đề, tên, nghe, đọc, tổng."""
+    client = get_supabase_client()
+    if not client:
+        return [], "Chưa kết nối Supabase."
+
+    cfg = get_supabase_config()
+    try:
+        try:
+            res = client.table(cfg["table"]).select("*").order("created_at", desc=True).limit(limit).execute()
+        except Exception:
+            res = client.table(cfg["table"]).select("*").limit(limit).execute()
+    except Exception as e:
+        return [], f"Không đọc được điểm: {e}"
+
+    rows = []
+    for r in res.data or []:
+        score = str(r.get("score") or "")
+        parts = [p.strip() for p in score.split("|")]
+        if len(parts) != 4 or not parts[0].startswith("Đề"):
+            continue
+        when = r.get("created_at") or ""
+        if "T" in str(when):
+            try:
+                dt = datetime.fromisoformat(str(when).replace("Z", "+00:00"))
+                when = (dt.astimezone(timezone(timedelta(hours=7)))).strftime("%Y-%m-%d %H:%M")
+            except Exception:
+                when = str(when).split(".")[0].replace("T", " ")
+        rows.append({
+            "Thời gian": when,
+            "Đề": parts[0],
+            "Tên học viên": r.get("name") or "",
+            "Nghe": parts[1].replace("Nghe", "").strip(),
+            "Đọc": parts[2].replace("Đọc", "").strip(),
+            "Tổng điểm": parts[3].replace("Tổng", "").strip(),
+        })
+    return rows, ""
+
+
 def load_scores_from_supabase(limit: int = 50):
     """
     Tải danh sách điểm học viên từ Supabase ordered by latest first.
