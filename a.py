@@ -152,7 +152,7 @@ def show_consolidated_flashcards():
                 return
 
     # Render Header without description
-    render_lesson_intro("Flashcard Ôn Tập Từ Vựng")
+    render_lesson_intro("🏆Flashcard Ôn Tập Từ Vựng")
 
     # Embed Flashcard_Offline.html using Streamlit components
     try:
@@ -564,7 +564,7 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "🗣️ Thực hành trên lớp",
     "📝 Bài Tập Trắc Nghiệm",
     "📄 Đề thi thử HSK 1",
-    "   Flashcard Ôn Tập Từ Vựng"
+    "🏆 Flashcard Ôn Tập Từ Vựng"
 ])
 
 menu = None
@@ -626,7 +626,7 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 9.3 - Hội thoại đổi tiền"
     ])
 
-if mode == "Flashcard Ôn Tập Từ Vựng":
+if mode == "🏆Flashcard Ôn Tập Từ Vựng":
     show_consolidated_flashcards()
 
 elif mode == "📝 Bài Tập Trắc Nghiệm":
