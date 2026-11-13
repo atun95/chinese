@@ -559,10 +559,8 @@ else:
 
 mode = st.sidebar.selectbox("Khu vực học tập:", [
     "📚 Lý thuyết & Bài học",
-    "📖 Hệ thống từ vựng",
     "🔊 Luyện tập Ghép âm",
     "🗣️ Thực hành trên lớp",
-    "📝 Hệ thống bài tập",
     "📝 Trắc nghiệm Tổng hợp HSK 1",
     "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG"
 ])
@@ -604,16 +602,6 @@ if mode == "📚 Lý thuyết & Bài học":
         "Bài 10.2 - Các loại từ",
         "Bài 10.3 - Cách dùng 呢 (ne)"
     ])
-elif mode == "📖 Hệ thống từ vựng":
-    menu = st.sidebar.radio("Chọn bảng từ vựng:", [
-        "Bài 1 - TỪ VỰNG CƠ BẢN", 
-        "Bài 3 - TỪ VỰNG",
-        "Bài 4 - TỪ VỰNG",
-        "Bài 4.1 - Từ vựng mở rộng",
-        "Bài 5 - TỪ VỰNG",
-        "Bài 6 - TỪ VỰNG",
-        "Bài 7 - TỪ VỰNG"
-    ])
 elif mode == "🔊 Luyện tập Ghép âm":
     pinyin_practice.show_pinyin_practice()
 
@@ -628,22 +616,6 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 9.1 - Game Ôn tập Quốc gia & Tiền tệ",
         "Bài 9.2 - Bài tập Giao tiếp Trên lớp",
         "Bài 9.3 - Hội thoại đổi tiền"
-    ])
-elif mode == "📝 Hệ thống bài tập":
-    menu = st.sidebar.radio("Chọn bài tập:", [
-        "Bài tập Bài 1",
-        "Bài tập Bài 2",
-        "Bài tập Bài 3",
-        "Bài tập Bài 4",
-        "Bài tập Bài 5",
-        "Bài tập Bài 6.1",
-        "Bài tập Bài 6.2",
-        "Bài tập Bài 7.1",
-        "Bài tập Bài 7.2",
-        "Bài tập Bài 7.3",
-        "Bài tập Bài 7.4",
-        "Bài tập Bài 7.5",
-        "Bài tập Bài 7.6"
     ])
 
 if mode == "🎴 HSK 1 - THẺ TỪ ÔN TẬP TỰ VỰNG":
