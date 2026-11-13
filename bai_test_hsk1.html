@@ -1614,96 +1614,34 @@
 
       // P1: Từ vựng (10 câu)
       part1Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
-        if (userAnswers[q.id] === q.ans) {
-          scoreP1++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (userAnswers[q.id] === q.ans) scoreP1++;
       });
 
       // P2: Đúng / Sai (10 câu)
       part2Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
-        if (userAnswers[q.id] === q.ans) {
-          scoreP2++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (userAnswers[q.id] === q.ans) scoreP2++;
       });
 
       // P3: Sắp xếp câu (10 câu)
       part3Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
         const userBuilt = (userOrderAnswers[q.id] || []).map(x => x.word).join('');
-        // Làm sạch khoảng trắng để so sánh
         const cleanUser = userBuilt.replace(/\s+/g, '');
         const cleanTarget = q.correct.replace(/\s+/g, '');
-
-        if (cleanUser === cleanTarget) {
-          scoreP3++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (cleanUser === cleanTarget) scoreP3++;
       });
 
       // P4: Đúng / Sai (10 câu)
       part4Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
-        if (userAnswers[q.id] === q.ans) {
-          scoreP4++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (userAnswers[q.id] === q.ans) scoreP4++;
       });
 
       // P5: Đọc hiểu (5 câu)
       part5Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
-        if (userAnswers[q.id] === q.ans) {
-          scoreP5++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (userAnswers[q.id] === q.ans) scoreP5++;
       });
 
       // P8: Ngữ pháp (10 câu)
       part8Data.forEach(q => {
-        const item = document.getElementById(`item-${q.id}`);
-        const exp = document.getElementById(`exp-${q.id}`);
-        if (!item || !exp) return;
-        exp.style.display = 'block';
-
         let isCorrect = false;
         // Câu 8_6 xử lý linh hoạt: B (在) hoặc D (去)
         if (q.id === "8_6") {
@@ -1713,15 +1651,7 @@
         } else {
           isCorrect = (userAnswers[q.id] === q.ans);
         }
-
-        if (isCorrect) {
-          scoreP8++;
-          item.classList.add('is-correct');
-          item.classList.remove('is-incorrect');
-        } else {
-          item.classList.add('is-incorrect');
-          item.classList.remove('is-correct');
-        }
+        if (isCorrect) scoreP8++;
       });
 
       const totalScore = scoreP1 + scoreP2 + scoreP3 + scoreP4 + scoreP5 + scoreP8;
