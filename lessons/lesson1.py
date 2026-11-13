@@ -4,7 +4,7 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson1_summary_table():
-    render_lesson_intro("📊 Bài 1.1: Bảng tổng hợp Thanh mẫu & Vận mẫu", "Tổng hợp toàn bộ hệ thống phiên âm tiếng Trung (Thanh mẫu & Vận mẫu) đầy đủ, trực quan nhất.")
+    render_lesson_intro("📊 Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu", "Tổng hợp toàn bộ hệ thống phiên âm tiếng Trung (Thanh mẫu & Vận mẫu) đầy đủ, trực quan nhất.")
     
     html_content = """<style>
 .summary-section-title {
@@ -259,7 +259,7 @@ def show_lesson1_summary_table():
     st.markdown(html_content.replace("\n", " "), unsafe_allow_html=True)
 
 def show_lesson1_intro():
-    render_lesson_intro("📚 Bài 1.2: Phiên âm cơ bản", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
+    render_lesson_intro("📚 Bài 2 - Thanh mẫu và vận mẫu đơn", "Nắm thanh mẫu cơ bản, vận mẫu đơn, 5 thanh điệu và biến điệu thanh 3.")
     st.subheader("1. Thanh mẫu đơn")
     # Build HTML grid for initials — dùng inline styles vì Streamlit strip <style> tag
     CARD_WRAP = 'display:inline-block; vertical-align:top; width:calc(25% - 10px); min-width:150px; box-sizing:border-box;'

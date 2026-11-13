@@ -88,7 +88,7 @@ def show_lesson9_1_countries_currency():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "🌍 Bài 9.1: Quốc gia, Quốc tịch và Tiền tệ",
+        "🌍 Bài 20 - Quốc gia, Quốc tịch và Tiền tệ",
         "Học cách gọi tên các quốc gia, hỏi đáp về quốc tịch và nhận biết tiền tệ của các quốc gia nổi tiếng."
     )
 
@@ -633,7 +633,7 @@ def show_lesson9_2_bu_mei():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "⚖️ Bài 9.2 - So sánh 不 (bù) và 没 (méi)",
+        "⚖️ Bài 33 - So sánh 不 (bù) và 没 (méi)",
         "Hai từ phủ định quan trọng nhất tiếng Trung — dùng sai là câu sai nghĩa hoàn toàn!"
     )
 
@@ -1445,7 +1445,7 @@ def show_lesson9_3_zi():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "🌿 Bài 9.3 - Hậu tố 子 (zi)",
+        "🌿 Bài 27 - Cách dùng 子 (zi)",
         "Tìm hiểu nghĩa gốc của 子, lý do tồn tại của hậu tố này và khi nào cần (hoặc không cần) thêm vào danh từ."
     )
 
@@ -2202,7 +2202,7 @@ def show_lesson9_4_er_liang():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "⚖️ Bài 9.4 - So sánh 二 (èr) và 两 (liǎng)",
+        "⚖️ Bài 34 - So sánh 二 (èr) và 两 (liǎng)",
         "二 là chữ số trên giấy. 两 là số 2 khi đang đếm đồ."
     )
 

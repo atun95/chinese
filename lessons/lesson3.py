@@ -4,7 +4,7 @@ from lessons_data import *
 from ui_utils import *
 
 def show_lesson3_pinyin():
-    render_lesson_intro("🔒 Bài 3: Thanh mẫu & Biến điệu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
+    render_lesson_intro("🔒 Bài 3 - Thanh mẫu", "Học các thanh mẫu khó (Âm mặt lưỡi, đầu lưỡi) và quy tắc biến điệu của 不.")
     for g in B2_THANH_MAU_DATA:
         st.markdown(f"#### {g['ten']}")
         cols = st.columns(4)
@@ -159,7 +159,7 @@ def show_lesson3_pinyin():
         st.write("- Chī **bù chī**? (吃不吃: Ăn không?)")
 
 def show_lesson3_pinyin_rules():
-    render_lesson_intro("📚 Bài 3: Quy tắc viết Pinyin", "Nắm vững các quy tắc biến đổi chữ viết của i, u, ü trong bính âm.")
+    render_lesson_intro("📚 Bài 9 - Quy tắc viết Pinyin", "Nắm vững các quy tắc biến đổi chữ viết của i, u, ü trong bính âm.")
     
     st.subheader("1. Quy tắc phát âm chữ 'i'")
     st.write("Chữ 'i' có 2 cách đọc chính tùy thuộc vào chữ cái đi trước nó.")
@@ -296,7 +296,7 @@ def show_lesson3_vocab():
     st.table(names_data)
 
 def show_lesson3_culture_grammar():
-    render_lesson_intro("📚 Bài 3: Văn hóa gọi tên & Cấu trúc câu", "Tìm hiểu các nét văn hóa thú vị trong cách xưng hô thân mật của người Trung Quốc và làm chủ hai cấu trúc ngữ pháp quan trọng nhất: Động từ 是 (là) và 有 (có).")
+    render_lesson_intro("📚 Bài 16 - Văn hóa gọi tên & Cấu trúc câu", "Tìm hiểu các nét văn hóa thú vị trong cách xưng hô thân mật của người Trung Quốc và làm chủ hai cấu trúc ngữ pháp quan trọng nhất: Động từ 是 (là) và 有 (có).")
     
     st.subheader("1. Văn hóa & Cách gọi tên thân mật (阿, 小, 老...)")
     st.write("Trong đời sống hàng ngày, người Trung Quốc hiếm khi gọi trực tiếp tên đầy đủ của bạn bè, người thân mà hay dùng các tiền tố thân mật hoặc lặp lại tên để thể hiện sự gần gũi.")

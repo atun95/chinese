@@ -88,7 +88,7 @@ def check_spelling_rule(initial, final, tone_idx):
     return res, None
 
 def show_lesson4_finals():
-    render_lesson_intro("📚 Bài 4: Vận mẫu kép mở rộng", "Học các vận mẫu kép mở rộng và quy tắc ghép âm nâng cao.")
+    render_lesson_intro("📚 Bài 5 - Vận mẫu kép mở rộng", "Học các vận mẫu kép mở rộng và quy tắc ghép âm nâng cao.")
     
     st.markdown(
         """
@@ -1738,7 +1738,7 @@ def show_lesson4_hanzi():
 
 def show_lesson4_female_comparison(save_progress):
     render_lesson_intro(
-        "📚 Bài 4: Phân biệt từ vựng chỉ Nữ giới", 
+        "📚 Bài 17 - Phân biệt từ vựng chỉ Nữ giới", 
         "Học cách phân biệt 7 từ vựng chỉ nữ giới phổ biến dựa trên độ tuổi, sắc thái biểu đạt và văn cảnh giao tiếp."
     )
     

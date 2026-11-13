@@ -223,7 +223,7 @@ LARGE_NUMBERS_DATA = [
 ]
 
 def show_lesson5_numbers():
-    render_lesson_intro("🔢 Bài 5.1: Số đếm từ 0 đến 10", "Học phát âm, chữ Hán và cử chỉ ngón tay đếm số của người Trung Quốc.")
+    render_lesson_intro("🔢 Bài 19 - Số đếm từ 0 đến 10", "Học phát âm, chữ Hán và cử chỉ ngón tay đếm số của người Trung Quốc.")
     
     st.markdown("""
     <style>
@@ -522,7 +522,7 @@ def check_nasal_spelling_rule(initial, final, tone_idx):
     return res, None
 
 def show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_all_scores_b5):
-    render_lesson_intro("📚 Bài 5.2: Vận mẫu mũi (Nasal Finals)", "Học phát âm, phân biệt và thực hành ghép âm 7 vận mẫu mũi: an, ang, ong, en, eng, in, ing.")
+    render_lesson_intro("📚 Bài 6 - Vận mẫu mũi", "Học phát âm, phân biệt và thực hành ghép âm 7 vận mẫu mũi: an, ang, ong, en, eng, in, ing.")
     
     st.markdown(
         """
@@ -1093,7 +1093,7 @@ def show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_sco
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        title="Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
+        title="Bài 25 - Cách dùng 很 (hěn)",
         objective="Nắm vững cách dùng phó từ 很 (hěn) trong câu vị ngữ tính từ và mở rộng các phó từ chỉ mức độ: 非常, 太...了, 特别, 挺...的, 比较, 极了"
     )
 
@@ -1568,7 +1568,7 @@ Dùng để diễn tả một hành động đã hoàn thành, hoặc một tr�
 
 def show_lesson5_duanwu():
     render_lesson_intro(
-        title="Bài 5.4 - Tết Đoan Ngọ (端午节)",
+        title="Bài 18 - Tết Đoan Ngọ (端午节)",
         objective="Tìm hiểu nguồn gốc, truyền thuyết về nhà thơ Khuất Nguyên, học từ vựng cốt lõi và các phong tục độc đáo ngày Tết Đoan Ngọ."
     )
 

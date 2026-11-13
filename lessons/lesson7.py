@@ -76,7 +76,7 @@ def show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_s
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.1: Các từ để hỏi",
+        "📚 Bài 22 - Các từ để hỏi",
         "Làm chủ hệ thống đại từ và trợ từ nghi vấn trong HSK 1 để hỏi về người, vật, địa điểm, số lượng, phương thức và trạng thái."
     )
 
@@ -614,7 +614,7 @@ def show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.2: Cách dùng chữ 的 (de)",
+        "📚 Bài 26 - Cách dùng 的 (de)",
         "Quy tắc cốt lõi nhất cần nhớ: Cái quan trọng, chính yếu hơn đứng sau; cái phụ trợ, bổ nghĩa đứng trước. Nắm vững 3 cấu trúc cốt lõi cùng quy tắc giản lược chữ 的."
     )
 
@@ -1093,7 +1093,7 @@ def show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.3: Cặp từ 这 và 那",
+        "📚 Bài 32 - So sánh 这 (zhè) và 那 (nà)",
         "Làm chủ cách sử dụng đại từ chỉ định 这 (Đây/Này), 那 (Kia/Đó), cách kết hợp lượng từ (这个, 那个), câu hỏi lựa chọn 哪个, và từ đệm giao tiếp."
     )
 
@@ -1485,7 +1485,7 @@ def show_lesson7_4_zai(save_progress, save_score_row_b7_4, load_all_scores_b7_4)
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.4: Từ 在 (zài)",
+        "📚 Bài 23 - Cách dùng 在 (zài)",
         "Làm chủ cách sử dụng từ đa năng 在 (zài) trong tiếng Trung với 3 vai trò quan trọng: Động từ (Ở), Giới từ (Tại), và Phó từ (Đang)."
     )
 
@@ -1857,7 +1857,7 @@ def show_lesson7_5_qu(save_progress, save_score_row_b7_5, load_all_scores_b7_5):
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.5: Từ 去 (qù)",
+        "📚 Bài 24 - Cách dùng 去 (qù)",
         "Làm chủ cách sử dụng từ chỉ phương hướng và hành động 去 (qù) trong tiếng Trung từ cơ bản đến cấu trúc liên động và bổ ngữ xu hướng."
     )
 
@@ -2404,7 +2404,7 @@ def show_lesson7_6_xie_dian(save_progress, save_score_row_b7_6, load_all_scores_
     ''', unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 7.6: Cặp từ 些 và 点",
+        "📚 Bài 31 - So sánh 些 (xiē) và 点 (diǎn)",
         "Làm chủ cách sử dụng 2 từ chỉ số lượng cơ bản nhất trong HSK 1: 一些 (một vài) và 一点儿 (một chút)."
     )
 

@@ -118,7 +118,7 @@ def show_lesson10_1_ba():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "💬 Bài 10.1 - Cách dùng 吧 (ba)",
+        "💬 Bài 28 - Cách dùng 吧 (ba)",
         "吧 đứng cuối câu, thanh nhẹ. Nó không có nghĩa riêng: thêm vào để rủ, chịu, hoặc đoán."
     )
 
@@ -525,7 +525,7 @@ def show_lesson10_2_constituents():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "🧩 Bài 10.2 - Các loại từ",
+        "🧩 Bài 21 - Các loại từ",
         "Câu bắt đầu bằng chủ ngữ và vị ngữ. Các phần còn lại gắn dần vào hai phần này, càng xuống càng nhỏ."
     )
 
@@ -910,7 +910,7 @@ def show_lesson10_3_ne():
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "💬 Bài 10.3 - Cách dùng 呢 (ne)",
+        "💬 Bài 29 - Cách dùng 呢 (ne)",
         "呢 đọc ngang thanh, đứng cuối câu hoặc sau chủ ngữ. Nó hỏi ngược lại, hỏi thân mật, hoặc nhấn mạnh “đang... đấy”."
     )
 
@@ -1266,6 +1266,321 @@ def show_lesson10_3_ne():
                 msg = "Đọc lại phần Lý thuyết rồi làm lại."
             st.markdown(f"""
             <div style="background:linear-gradient(135deg,#1e3a8a,#065f46);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
+                <div>{pct}% đúng</div>
+                <div style="margin-top:8px;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+
+def show_lesson10_4_yixia():
+    st.markdown("""
+    <style>
+    .b104-hero {
+        background: linear-gradient(145deg, #ecfdf5, #d1fae5);
+        border: 2px solid #6ee7b7;
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        margin-bottom: 8px;
+    }
+    .b104-char { font-size: 4.2rem; font-weight: 900; color: #047857; line-height: 1.15; }
+    .b104-py { font-family: monospace; font-size: 1.6rem; font-weight: 800; color: #065f46; margin-top: 6px; }
+    .b104-tag {
+        display: inline-block; margin-top: 10px; background: #6ee7b7; color: #064e3b;
+        font-weight: 800; padding: 4px 14px; border-radius: 999px;
+    }
+    .b104-rule {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+        padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .b104-rule h4 { margin: 0 0 6px 0; }
+    .b104-desc { color: #334155; font-size: 0.95rem; line-height: 1.6; margin: 0 0 12px 0; }
+    .b104-formula {
+        background: #1e293b; border-radius: 10px; padding: 12px 18px;
+        display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+    }
+    .b104-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .b104-table th { text-align: left; padding: 8px 10px; font-weight: 800; }
+    .b104-table td { padding: 8px 10px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b104-han { font-size: 1.12rem; font-weight: 800; color: #0f172a; }
+    .b104-py2 { font-family: monospace; font-weight: 700; }
+    .b104-vi { font-style: italic; color: #475569; }
+    .b104-note { color: #64748b; font-size: 0.85rem; }
+    .b104-pair { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 20px; margin-bottom: 14px; }
+    .b104-pair-title { font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+    .b104-line { border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+    .b104-line .han { font-size: 1.2rem; font-weight: 800; color: #0f172a; }
+    .b104-line .meta { font-size: 0.88rem; color: #64748b; }
+    .b104-dlg { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 20px; margin-top: 8px; }
+    .b104-turn { margin-bottom: 12px; }
+    .b104-who { display: inline-block; font-weight: 800; font-size: 0.8rem; padding: 2px 8px; border-radius: 8px; margin-bottom: 4px; }
+    .b104-who.a { background: #d1fae5; color: #065f46; }
+    .b104-who.b { background: #dbeafe; color: #1e3a8a; }
+    .b104-tip { background: linear-gradient(135deg, #fefce8, #fef9c3); border: 2px solid #fde047; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
+    .b104-trap { background: #fff1f2; border: 2px solid #fda4af; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+    .b104-key { background: linear-gradient(135deg, #0f172a, #065f46); color: white; border-radius: 16px; padding: 20px 22px; margin-top: 16px; }
+    .b104-key table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .b104-key td { padding: 8px 10px; border-top: 1px solid rgba(255,255,255,0.15); vertical-align: top; }
+    .b104-bad { color: #be123c; text-decoration: line-through; }
+    .b104-ok { color: #166534; font-weight: 700; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "💬 Bài 30 - Cách dùng 一下 (yíxià)",
+        "一下 đứng sau động từ. Nó biến việc thành một lần ngắn, nhẹ, và làm câu nhờ bớt cứng."
+    )
+
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
+        "📚 Lý thuyết",
+        "📝 Ví dụ đối chiếu",
+        "⚠️ Lưu ý & Mẹo nhớ",
+        "🎮 Luyện tập"
+    ])
+
+    cases = [
+        {
+            "color": "#059669",
+            "bg": "#ecfdf5",
+            "title": "1. Làm một lần, làm rất ngắn",
+            "desc": "Động từ chỉ hành động, rồi thêm 一下. Việc chỉ xảy ra một chốc, không kéo dài.",
+            "formula": [("Động từ", "#6ee7b7"), ("+", "#94a3b8"), ("一下", "#6ee7b7", True), ("。", "#e2e8f0")],
+            "rows": [
+                ("等一下。", "Děng yíxià.", "Đợi một chút.", "Câu rất hay gặp"),
+                ("看一下。", "Kàn yíxià.", "Xem một chút.", "Nhờ, không ra lệnh"),
+                ("听一下。", "Tīng yíxià.", "Nghe một chút.", "Làm rất ngắn"),
+                ("试一下。", "Shì yíxià.", "Thử một chút.", "Làm một lần cho biết"),
+                ("说一下。", "Shuō yíxià.", "Nói một chút.", "Nhờ nói ngắn"),
+                ("问一下。", "Wèn yíxià.", "Hỏi một câu.", "Hỏi cho xong"),
+            ],
+        },
+        {
+            "color": "#2563eb",
+            "bg": "#eff6ff",
+            "title": "2. Có tân ngữ thì 一下 đứng trước tân ngữ",
+            "desc": "Tân ngữ là người hoặc vật mà hành động hướng tới. Không để 一下 ra sau tân ngữ.",
+            "formula": [("Động từ", "#93c5fd"), ("+", "#94a3b8"), ("一下", "#93c5fd", True), ("+", "#94a3b8"), ("Tân ngữ", "#93c5fd")],
+            "rows": [
+                ("请你介绍一下。", "Qǐng nǐ jièshào yíxià.", "Bạn giới thiệu một chút.", "Chưa cần nêu giới thiệu cái gì"),
+                ("你看一下这本书。", "Nǐ kàn yíxià zhè běn shū.", "Bạn xem qua quyển sách này.", "书 là tân ngữ"),
+                ("我问一下老师。", "Wǒ wèn yíxià lǎoshī.", "Tôi hỏi thầy một câu.", "老师 là người được hỏi"),
+                ("请你等一下我。", "Qǐng nǐ děng yíxià wǒ.", "Bạn đợi tôi một chút.", "我 là người được đợi"),
+            ],
+        },
+        {
+            "color": "#d97706",
+            "bg": "#fffbeb",
+            "title": "3. Nhờ cho nhẹ, không ra lệnh",
+            "desc": "Cùng một việc, thêm 一下 thì giọng mềm hơn. Thêm 请你 nữa thì thành câu nhờ.",
+            "formula": [("请你", "#fcd34d"), ("+", "#94a3b8"), ("Động từ", "#fcd34d"), ("+", "#94a3b8"), ("一下", "#fcd34d", True)],
+            "rows": [
+                ("你看。", "Nǐ kàn.", "Bạn xem.", "Khô, giống ra lệnh"),
+                ("你看一下。", "Nǐ kàn yíxià.", "Bạn xem một chút.", "Nhẹ hơn"),
+                ("请你看一下。", "Qǐng nǐ kàn yíxià.", "Bạn xem giúp một chút.", "Nhờ lịch sự"),
+            ],
+        },
+    ]
+
+    with tab_theory:
+        st.markdown("""
+        <div class="b104-hero">
+            <div class="b104-char">一下</div>
+            <div class="b104-py">yíxià · thanh 2 + thanh 4</div>
+            <div class="b104-tag">Đứng sau động từ</div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.info("**一** trong **一下** đọc **yí**, không đọc yī. Vì **下** là thanh 4, **一** đổi thành thanh 2.")
+
+        for case in cases:
+            spans = ""
+            for part in case["formula"]:
+                text, color = part[0], part[1]
+                big = len(part) > 2 and part[2]
+                size = "2rem" if big else "1.05rem"
+                spans += f'<span style="color:{color};font-size:{size};font-weight:800;margin:0 4px;">{text}</span>'
+            rows = ""
+            for han, py, vi, note in case["rows"]:
+                rows += f"""
+                <tr>
+                    <td class="b104-han">{han}</td>
+                    <td class="b104-py2" style="color:{case['color']};">{py}</td>
+                    <td class="b104-vi">{vi}</td>
+                    <td class="b104-note">{note}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div class="b104-rule" style="border-left:5px solid {case['color']};background:{case['bg']};">
+                <h4 style="color:{case['color']};">{case['title']}</h4>
+                <p class="b104-desc">{case['desc']}</p>
+                <div class="b104-formula">{spans}</div>
+                <table class="b104-table">
+                    <thead>
+                        <tr style="color:{case['color']};">
+                            <th>Chữ Hán</th><th>Pinyin</th><th>Nghĩa</th><th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with tab_examples:
+        st.markdown("### Ba câu cùng một việc, ba giọng khác nhau")
+        st.markdown("""
+        <div class="b104-pair">
+            <div class="b104-pair-title">Nhờ người xem</div>
+            <div class="b104-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">你看。</div>
+                <div class="meta">Nǐ kàn. — Bạn xem. <b>Khô, giống ra lệnh.</b></div>
+            </div>
+            <div class="b104-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">你看一下。</div>
+                <div class="meta">Nǐ kàn yíxià. — Bạn xem một chút. <b>Nhẹ hơn.</b></div>
+            </div>
+            <div class="b104-line" style="background:#fffbeb;border-left:4px solid #d97706;">
+                <div class="han">请你看一下。</div>
+                <div class="meta">Qǐng nǐ kàn yíxià. — Bạn xem giúp một chút. <b>Nhờ lịch sự.</b></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### 一下 đi với việc làm · 一点 đi với lượng hoặc mức độ")
+        st.markdown("""
+        <div class="b104-pair">
+            <div class="b104-pair-title">Cả hai đều có thể dịch là “một chút”, nhưng không thay nhau</div>
+            <div class="b104-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">等一下。 / 看一下。 / 说一下。</div>
+                <div class="meta">Děng yíxià. / Kàn yíxià. / Shuō yíxià. — <b>一下</b> đi với việc làm.</div>
+            </div>
+            <div class="b104-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">一点水。 / 好一点。 / 快一点。</div>
+                <div class="meta">Yìdiǎn shuǐ. / Hǎo yìdiǎn. / Kuài yìdiǎn. — <b>一点</b> đi với lượng hoặc mức độ.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.caption("Muốn bảo “đợi một chút” thì nói **等一下**, không nói 等一点.")
+
+        st.markdown("### Hội thoại ngắn")
+        st.markdown("""
+        <div class="b104-dlg">
+            <div class="b104-turn">
+                <div class="b104-who a">A</div>
+                <div class="han">你等一下。我买水。</div>
+                <div class="meta">Nǐ děng yíxià. Wǒ mǎi shuǐ. — Bạn đợi một chút. Tôi mua nước.</div>
+            </div>
+            <div class="b104-turn">
+                <div class="b104-who b">B</div>
+                <div class="han">好的。</div>
+                <div class="meta">Hǎo de. — Được.</div>
+            </div>
+        </div>
+        <div class="b104-dlg" style="margin-top:12px;">
+            <div class="b104-turn">
+                <div class="b104-who a">A</div>
+                <div class="han">请你介绍一下你的老师。</div>
+                <div class="meta">Qǐng nǐ jièshào yíxià nǐ de lǎoshī. — Bạn giới thiệu một chút về thầy của bạn.</div>
+            </div>
+            <div class="b104-turn">
+                <div class="b104-who b">B</div>
+                <div class="han">她是中国人，她教汉语。</div>
+                <div class="meta">Tā shì Zhōngguó rén, tā jiāo Hànyǔ. — Cô ấy là người Trung Quốc, cô dạy tiếng Hán.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_tips:
+        st.markdown("""
+        <div class="b104-tip">
+            <div style="font-weight:800;font-size:1.05rem;color:#713f12;margin-bottom:8px;">Một câu để nhớ</div>
+            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Việc ngắn, nhờ nhẹ → 一下 &nbsp;·&nbsp; Lượng hoặc mức độ → 一点 &nbsp;·&nbsp; Đọc yíxià, không đọc yīxià</div>
+        </div>
+        """, unsafe_allow_html=True)
+        traps = [
+            ("一 đổi thanh khi đứng trước 下", "下 là thanh 4, nên 一 đọc <b>yí</b>. Viết yíxià. Không đọc yīxià."),
+            ("一下 đứng sau động từ, trước tân ngữ", "Đúng: <span class='b104-ok'>看一下这本书</span>. Không nói <span class='b104-bad'>看这本书一下</span>."),
+            ("一下 không thay 一点", "等<b>一下</b> = đợi một chút. 一点水 = một chút nước. <span class='b104-bad'>等一点</span> không dùng để bảo người khác đợi."),
+            ("Chỉ dùng với động từ chỉ hành động", "看, 听, 吃, 说, 问, 等 thì được. Không nói <span class='b104-bad'>高一下</span>, <span class='b104-bad'>是一下</span>, <span class='b104-bad'>很一下</span>."),
+        ]
+        for title, body in traps:
+            st.markdown(f"""
+            <div class="b104-trap">
+                <div style="font-weight:800;color:#9f1239;margin-bottom:4px;">⚠️ {title}</div>
+                <div style="color:#334155;line-height:1.55;">{body}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="b104-key">
+            <div style="font-weight:800;font-size:1.05rem;">Bảng chọn nhanh</div>
+            <table>
+                <tr><td style="width:38%;font-weight:700;">Muốn nói</td><td>Câu</td></tr>
+                <tr><td>Làm một lần, rất ngắn</td><td>看一下。 / 听一下。 / 试一下。</td></tr>
+                <tr><td>Có người hoặc vật đi kèm</td><td>看一下这本书。 / 问一下老师。</td></tr>
+                <tr><td>Nhờ cho lịch sự</td><td>请你看一下。 / 请你介绍一下。</td></tr>
+                <tr><td>Một chút nước, tốt hơn, nhanh hơn</td><td>一点水。 / 好一点。 / 快一点。</td></tr>
+            </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.markdown("Chọn câu hoặc chữ đúng. Nộp bài để xem giải thích.")
+        quiz_data = [
+            {"q": "“Đợi một chút.”", "options": ["等一下。", "等一点。", "一下等。"], "answer": "等一下。", "explain": "Đợi là một việc làm, dùng 一下 sau động từ. 一点 không dùng trong câu này."},
+            {"q": "“Bạn xem qua quyển sách này.”", "options": ["你看一下这本书。", "你看这本书一下。", "你一下看这本书。"], "answer": "你看一下这本书。", "explain": "一下 đứng ngay sau động từ, trước tân ngữ 这本书."},
+            {"q": "Câu nào là lời nhờ lịch sự?", "options": ["你看。", "你看一下。", "请你看一下。"], "answer": "请你看一下。", "explain": "请你 + động từ + 一下 là câu nhờ. 你看 khô hơn. 你看一下 đã nhẹ, nhưng chưa có 请."},
+            {"q": "一下 đọc thế nào?", "options": ["yīxià", "yíxià", "yìxià"], "answer": "yíxià", "explain": "下 là thanh 4, nên 一 đổi thành thanh 2: yí."},
+            {"q": "Câu nào đúng khi muốn nói “một chút nước”?", "options": ["一下水", "一点水", "水一下"], "answer": "一点水", "explain": "Lượng thì dùng 一点. 一下 chỉ đi với việc làm."},
+            {"q": "Câu nào sai?", "options": ["听一下。", "吃一下。", "是一下。"], "answer": "是一下。", "explain": "是 không phải động từ chỉ hành động, không thêm 一下. 听 và 吃 thì được."},
+        ]
+        if "b104_submitted" not in st.session_state:
+            st.session_state.b104_submitted = False
+        if "b104_answers" not in st.session_state:
+            st.session_state.b104_answers = {}
+        for i, q in enumerate(quiz_data):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Câu {i+1}. {q['q']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b104_a{i}"
+            st.radio(f"Chọn đáp án câu {i+1}:", q["options"], key=key, horizontal=True, disabled=st.session_state.b104_submitted, label_visibility="collapsed")
+            if st.session_state.b104_submitted:
+                user_ans = st.session_state.b104_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"Đúng. {q['explain']}")
+                else:
+                    st.error(f"Đáp án đúng: **{q['answer']}**. {q['explain']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b104_submitted:
+                if st.button("Nộp bài", use_container_width=True, key="b104_submit", type="primary"):
+                    st.session_state.b104_answers = {f"b104_a{i}": st.session_state.get(f"b104_a{i}") for i in range(len(quiz_data))}
+                    st.session_state.b104_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b104_submitted:
+                if st.button("Làm lại", use_container_width=True, key="b104_reset"):
+                    st.session_state.b104_submitted = False
+                    st.session_state.b104_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b104_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+        if st.session_state.b104_submitted:
+            correct = sum(1 for i, q in enumerate(quiz_data) if st.session_state.b104_answers.get(f"b104_a{i}") == q["answer"])
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "Nắm vững cách dùng 一下."
+            elif pct >= 70:
+                msg = "Xem lại chỗ 一下 khác 一点, và vị trí của 一下."
+            else:
+                msg = "Đọc lại phần Lý thuyết rồi làm lại."
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#064e3b,#1e3a8a);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
                 <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
                 <div>{pct}% đúng</div>
                 <div style="margin-top:8px;font-weight:700;">{msg}</div>

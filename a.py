@@ -568,39 +568,45 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
 menu = None
 if mode == "📚 Lý thuyết & Bài học":
     menu = st.sidebar.radio("Chọn bài học:", [
-        "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
-        "Bài 1.2 - Thanh mẫu và vận mẫu đơn",
-        "Bài 2.1 - Vận mẫu kép",
-        "Bài 3.1 - Thanh mẫu", 
-        "Bài 3.2 - Quy tắc viết Pinyin",
-        "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu",
-        "Bài 4.1 - Vận mẫu kép",
-        "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 5.1 - Số đếm từ 0 đến 10",
-        "Bài 5.2 - Vận mẫu mũi",
-        "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ",
-        "Bài 5.4 - Tết Đoan Ngọ (端午节)",
-        "Bài 6.1 - Các vận mẫu mũi còn lại",
-        "Bài 6.2 - Vận mẫu đứng một mình",
-        "Bài 7.1 - Các từ để hỏi",
-        "Bài 7.2 - Cách dùng chữ 的 (de)",
-        "Bài 7.3 - Cặp từ 这 và 那",
-        "Bài 7.4 - Từ 在 (zài)",
-        "Bài 7.5 - Từ 去 (qù)",
-        "Bài 7.6 - Cặp từ 些 và 点",
-        "Bài 8.1 - Tổng quan Chữ Hán",
-        "Bài 8.2 - Hệ thống Nét viết",
-        "Bài 8.3 - Quy tắc Bút thuận",
-        "Bài 8.4 - Hệ thống Bộ thủ",
-        "Bài 8.5 - Đơn thể & Hợp thể",
-        "Bài 8.6 - Các bộ thủ thông dụng",
-        "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ",
-        "Bài 9.2 - So sánh 不 và 没",
-        "Bài 9.3 - Hậu tố 子 (zi)",
-        "Bài 9.4 - So sánh 二 và 两",
-        "Bài 10.1 - Cách dùng 吧 (ba)",
-        "Bài 10.2 - Các loại từ",
-        "Bài 10.3 - Cách dùng 呢 (ne)"
+        # Phiên âm
+        "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
+        "Bài 2 - Thanh mẫu và vận mẫu đơn",
+        "Bài 3 - Thanh mẫu",
+        "Bài 4 - Vận mẫu kép",
+        "Bài 5 - Vận mẫu kép mở rộng",
+        "Bài 6 - Vận mẫu mũi",
+        "Bài 7 - Các vận mẫu mũi còn lại",
+        "Bài 8 - Vận mẫu đứng một mình",
+        "Bài 9 - Quy tắc viết Pinyin",
+        # Chữ Hán
+        "Bài 10 - Tổng quan Chữ Hán",
+        "Bài 11 - Hệ thống Nét viết",
+        "Bài 12 - Quy tắc Bút thuận",
+        "Bài 13 - Hệ thống Bộ thủ",
+        "Bài 14 - Đơn thể & Hợp thể",
+        "Bài 15 - Các bộ thủ thông dụng",
+        # Văn hóa và từ vựng chủ đề
+        "Bài 16 - Văn hóa gọi tên & Cấu trúc câu",
+        "Bài 17 - Phân biệt từ vựng chỉ Nữ giới",
+        "Bài 18 - Tết Đoan Ngọ (端午节)",
+        "Bài 19 - Số đếm từ 0 đến 10",
+        "Bài 20 - Quốc gia, Quốc tịch và Tiền tệ",
+        # Cách dùng từ
+        "Bài 21 - Các loại từ",
+        "Bài 22 - Các từ để hỏi",
+        "Bài 23 - Cách dùng 在 (zài)",
+        "Bài 24 - Cách dùng 去 (qù)",
+        "Bài 25 - Cách dùng 很 (hěn)",
+        "Bài 26 - Cách dùng 的 (de)",
+        "Bài 27 - Cách dùng 子 (zi)",
+        "Bài 28 - Cách dùng 吧 (ba)",
+        "Bài 29 - Cách dùng 呢 (ne)",
+        "Bài 30 - Cách dùng 一下 (yíxià)",
+        # So sánh
+        "Bài 31 - So sánh 些 (xiē) và 点 (diǎn)",
+        "Bài 32 - So sánh 这 (zhè) và 那 (nà)",
+        "Bài 33 - So sánh 不 (bù) và 没 (méi)",
+        "Bài 34 - So sánh 二 (èr) và 两 (liǎng)",
     ])
 elif mode == "🔊 Luyện tập Ghép âm":
     pinyin_practice.show_pinyin_practice()
@@ -625,10 +631,10 @@ elif mode == "📝 Trắc nghiệm Tổng hợp HSK 1":
     hsk1_quiz.show_hsk1_consolidated_quiz(save_progress, save_score_row_hsk1_consolidated, load_all_scores_hsk1_consolidated)
 
 
-elif menu == "Bài 1.1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
+elif menu == "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
     lesson1.show_lesson1_summary_table()
 
-elif menu == "Bài 1.2 - Thanh mẫu và vận mẫu đơn":
+elif menu == "Bài 2 - Thanh mẫu và vận mẫu đơn":
     lesson1.show_lesson1_intro()
 
 elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
@@ -637,16 +643,16 @@ elif menu == "Bài 1 - TỪ VỰNG CƠ BẢN":
 elif menu == "Bài tập Bài 1":
     lesson1.show_lesson1_exercises(save_progress, save_score_row, load_all_scores)
 
-elif menu == "Bài 2.1 - Vận mẫu kép":
+elif menu == "Bài 4 - Vận mẫu kép":
     lesson2.show_lesson2_intro(add_tones)
 
 elif menu == "Bài tập Bài 2":
     lesson2.show_lesson2_exercises(save_progress, save_score_row_b2, load_all_scores_b2)
 
-elif menu == "Bài 3.1 - Thanh mẫu":
+elif menu == "Bài 3 - Thanh mẫu":
     lesson3.show_lesson3_pinyin()
 
-elif menu == "Bài 3.2 - Quy tắc viết Pinyin":
+elif menu == "Bài 9 - Quy tắc viết Pinyin":
     lesson3.show_lesson3_pinyin_rules()
 
 elif menu == "Bài 3 - TỪ VỰNG":
@@ -669,7 +675,7 @@ elif menu == "Bài 7 - TỪ VỰNG":
 
 
 
-elif menu == "Bài 3.3 - Văn hóa gọi tên & Cấu trúc câu":
+elif menu == "Bài 16 - Văn hóa gọi tên & Cấu trúc câu":
     lesson3.show_lesson3_culture_grammar()
 
 elif menu == "Bài 3.1 - Hội thoại thực hành":
@@ -678,10 +684,10 @@ elif menu == "Bài 3.1 - Hội thoại thực hành":
 elif menu == "Bài tập Bài 3":
     lesson3.show_lesson3_exercises(save_progress, save_score_row_b3, load_all_scores_b3)
 
-elif menu == "Bài 4.1 - Vận mẫu kép":
+elif menu == "Bài 5 - Vận mẫu kép mở rộng":
     lesson4.show_lesson4_finals()
 
-elif menu == "Bài 4.2 - Phân biệt từ vựng chỉ Nữ giới":
+elif menu == "Bài 17 - Phân biệt từ vựng chỉ Nữ giới":
     lesson4.show_lesson4_female_comparison(save_progress)
 
 elif menu == "Bài 4.1 - Đấu trường Luyện tập":
@@ -709,79 +715,82 @@ elif menu == "Bài 9.2 - Bài tập Giao tiếp Trên lớp":
 elif menu == "Bài 9.3 - Hội thoại đổi tiền":
     lesson9.show_lesson9_3_classroom_practice()
 
-elif menu == "Bài 6.2 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
+elif menu == "Bài 8 - Vận mẫu đứng một mình" or menu == "Bài tập Bài 6.2":
     lesson6.show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_all_scores_b6_2)
 
-elif menu == "Bài 6.1 - Các vận mẫu mũi còn lại" or menu == "Bài tập Bài 6.1":
+elif menu == "Bài 7 - Các vận mẫu mũi còn lại" or menu == "Bài tập Bài 6.1":
     lesson6.show_lesson6_1_nasal_finals(save_progress, save_score_row_b6_1, load_all_scores_b6_1)
 
-elif menu == "Bài 7.1 - Các từ để hỏi" or menu == "Bài tập Bài 7.1":
+elif menu == "Bài 22 - Các từ để hỏi" or menu == "Bài tập Bài 7.1":
     lesson7.show_lesson7_1_question_words(save_progress, save_score_row_b7_1, load_all_scores_b7_1)
 
-elif menu == "Bài 7.2 - Cách dùng chữ 的 (de)" or menu == "Bài tập Bài 7.2":
+elif menu == "Bài 26 - Cách dùng 的 (de)" or menu == "Bài tập Bài 7.2":
     lesson7.show_lesson7_2_word_de(save_progress, save_score_row_b7_2, load_all_scores_b7_2)
 
-elif menu == "Bài 7.3 - Cặp từ 这 và 那" or menu == "Bài tập Bài 7.3":
+elif menu == "Bài 32 - So sánh 这 (zhè) và 那 (nà)" or menu == "Bài tập Bài 7.3":
     lesson7.show_lesson7_3_zhe_na(save_progress, save_score_row_b7_3, load_all_scores_b7_3)
 
-elif menu == "Bài 7.4 - Từ 在 (zài)" or menu == "Bài tập Bài 7.4":
+elif menu == "Bài 23 - Cách dùng 在 (zài)" or menu == "Bài tập Bài 7.4":
     lesson7.show_lesson7_4_zai(save_progress, save_score_row_b7_4, load_all_scores_b7_4)
 
-elif menu == "Bài 7.5 - Từ 去 (qù)" or menu == "Bài tập Bài 7.5":
+elif menu == "Bài 24 - Cách dùng 去 (qù)" or menu == "Bài tập Bài 7.5":
     lesson7.show_lesson7_5_qu(save_progress, save_score_row_b7_5, load_all_scores_b7_5)
 
-elif menu == "Bài 7.6 - Cặp từ 些 và 点" or menu == "Bài tập Bài 7.6":
+elif menu == "Bài 31 - So sánh 些 (xiē) và 点 (diǎn)" or menu == "Bài tập Bài 7.6":
     lesson7.show_lesson7_6_xie_dian(save_progress, save_score_row_b7_6, load_all_scores_b7_6)
 
-elif menu == "Bài 8.1 - Tổng quan Chữ Hán":
+elif menu == "Bài 10 - Tổng quan Chữ Hán":
     lesson8.show_lesson8_1_overview()
 
-elif menu == "Bài 8.2 - Hệ thống Nét viết":
+elif menu == "Bài 11 - Hệ thống Nét viết":
     lesson8.show_lesson8_2_strokes()
 
-elif menu == "Bài 8.3 - Quy tắc Bút thuận":
+elif menu == "Bài 12 - Quy tắc Bút thuận":
     lesson8.show_lesson8_3_rules()
 
-elif menu == "Bài 8.4 - Hệ thống Bộ thủ":
+elif menu == "Bài 13 - Hệ thống Bộ thủ":
     lesson8.show_lesson8_4_radicals()
 
-elif menu == "Bài 8.5 - Đơn thể & Hợp thể":
+elif menu == "Bài 14 - Đơn thể & Hợp thể":
     lesson8.show_lesson8_5_structures()
 
-elif menu == "Bài 8.6 - Các bộ thủ thông dụng":
+elif menu == "Bài 15 - Các bộ thủ thông dụng":
     lesson8.show_lesson8_6_radicals_common()
     
-elif menu == "Bài 9.1 - Quốc gia, Quốc tịch và Tiền tệ":
+elif menu == "Bài 20 - Quốc gia, Quốc tịch và Tiền tệ":
     lesson9.show_lesson9_1_countries_currency()
 
-elif menu == "Bài 9.2 - So sánh 不 và 没":
+elif menu == "Bài 33 - So sánh 不 (bù) và 没 (méi)":
     lesson9.show_lesson9_2_bu_mei()
 
-elif menu == "Bài 9.3 - Hậu tố 子 (zi)":
+elif menu == "Bài 27 - Cách dùng 子 (zi)":
     lesson9.show_lesson9_3_zi()
 
-elif menu == "Bài 9.4 - So sánh 二 và 两":
+elif menu == "Bài 34 - So sánh 二 (èr) và 两 (liǎng)":
     lesson9.show_lesson9_4_er_liang()
 
-elif menu == "Bài 10.1 - Cách dùng 吧 (ba)":
+elif menu == "Bài 28 - Cách dùng 吧 (ba)":
     lesson10.show_lesson10_1_ba()
 
-elif menu == "Bài 10.2 - Các loại từ":
+elif menu == "Bài 21 - Các loại từ":
     lesson10.show_lesson10_2_constituents()
 
-elif menu == "Bài 10.3 - Cách dùng 呢 (ne)":
+elif menu == "Bài 29 - Cách dùng 呢 (ne)":
     lesson10.show_lesson10_3_ne()
 
-elif menu == "Bài 5.1 - Số đếm từ 0 đến 10":
+elif menu == "Bài 30 - Cách dùng 一下 (yíxià)":
+    lesson10.show_lesson10_4_yixia()
+
+elif menu == "Bài 19 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
 
-elif menu == "Bài 5.2 - Vận mẫu mũi":
+elif menu == "Bài 6 - Vận mẫu mũi":
     lesson5.show_lesson5_nasal_finals(add_tones, save_progress, save_score_row_b5, load_all_scores_b5)
 
-elif menu == "Bài 5.3 - Cách dùng 很 (hěn) & Phó từ chỉ mức độ":
+elif menu == "Bài 25 - Cách dùng 很 (hěn)":
     lesson5.show_lesson5_degree_adverbs(save_progress, save_score_row_b5_3, load_all_scores_b5_3)
 
-elif menu == "Bài 5.4 - Tết Đoan Ngọ (端午节)":
+elif menu == "Bài 18 - Tết Đoan Ngọ (端午节)":
     lesson5.show_lesson5_duanwu()
 
 elif menu == "Bài tập Bài 5":

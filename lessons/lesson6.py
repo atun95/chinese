@@ -158,7 +158,7 @@ def show_lesson6_1_nasal_finals(save_progress, save_score_row_b6_1, load_all_sco
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 6.1: Các vận mẫu mũi còn lại",
+        "📚 Bài 7 - Các vận mẫu mũi còn lại",
         "Học phát âm, phân biệt và thực hành ghép âm 8 vận mẫu mũi phức hợp: ian, iang, iong, uan, uang, un, ün, üan."
     )
 
@@ -486,7 +486,7 @@ def show_lesson6_2_standalone_finals(save_progress, save_score_row_b6_2, load_al
     """, unsafe_allow_html=True)
 
     render_lesson_intro(
-        "📚 Bài 6.2: Quy tắc biến đổi Vận mẫu khi đứng độc lập",
+        "📚 Bài 8 - Vận mẫu đứng một mình",
         "Tổng hợp tất cả các vận mẫu thay đổi cách viết Pinyin khi đứng một mình (không đi kèm thanh mẫu)."
     )
 

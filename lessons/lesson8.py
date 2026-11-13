@@ -182,7 +182,7 @@ def inject_lesson8_css():
 def show_lesson8_1_overview():
     inject_lesson8_css()
     render_lesson_intro(
-        "📚 Bài 8.1 - Tổng quan Chữ Hán",
+        "📚 Bài 10 - Tổng quan Chữ Hán",
         "Tìm hiểu bản chất chữ biểu ý và các phương thức cấu tạo chữ Hán cơ bản."
     )
     st.subheader("1. Bản chất chữ Hán")
@@ -246,7 +246,7 @@ def show_lesson8_1_overview():
 def show_lesson8_2_strokes():
     inject_lesson8_css()
     render_lesson_intro(
-        "✍️ Bài 8.2 - Hệ thống Nét viết",
+        "✍️ Bài 11 - Hệ thống Nét viết",
         "Luyện tập 8 nét cơ bản cấu tạo nên chữ Hán."
     )
     st.subheader("1. 8 Nét Cơ Bản Trong Chữ Hán (Vĩnh Tự Bát Pháp)")
@@ -308,7 +308,7 @@ def show_lesson8_2_strokes():
 def show_lesson8_3_rules():
     inject_lesson8_css()
     render_lesson_intro(
-        "📐 Bài 8.3 - Quy tắc Bút thuận",
+        "📐 Bài 12 - Quy tắc Bút thuận",
         "Quy tắc thứ tự viết các nét trong chữ Hán từ trước ra sau."
     )
     st.subheader("7 Quy tắc viết chữ Hán (Bút thuận)")
@@ -344,7 +344,7 @@ def show_lesson8_3_rules():
 def show_lesson8_4_radicals():
     inject_lesson8_css()
     render_lesson_intro(
-        "🧩 Bài 8.4 - Hệ thống Bộ thủ",
+        "🧩 Bài 13 - Hệ thống Bộ thủ",
         "Học 8 bộ thủ cơ bản HSK 1 qua thẻ ghi nhớ (Flashcards) tương tác."
     )
 
@@ -415,7 +415,7 @@ def show_lesson8_4_radicals():
 def show_lesson8_5_structures():
     inject_lesson8_css()
     render_lesson_intro(
-        "🧱 Bài 8.5 - Đơn thể & Hợp thể",
+        "🧱 Bài 14 - Đơn thể & Hợp thể",
         "Phân loại cấu trúc chữ Hán thành chữ độc lập (đơn thể) và chữ ghép (hợp thể)."
     )
     st.subheader("1. Chữ Đơn thể")
@@ -447,7 +447,7 @@ def show_lesson8_5_structures():
 def show_lesson8_6_radicals_common():
     inject_lesson8_css()
     render_lesson_intro(
-        "🌟 Bài 8.6 - Hệ thống Bộ thủ",
+        "🌟 Bài 15 - Các bộ thủ thông dụng",
         "Bộ thủ là linh hồn của chữ Hán. Nắm vững bộ thủ giúp bạn đoán nghĩa, dễ nhớ chữ và tra từ điển nhanh chóng."
     )
     
