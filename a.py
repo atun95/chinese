@@ -174,7 +174,7 @@ st.set_page_config(page_title="Học Tiếng Trung", page_icon="🇨🇳", layou
 st.markdown(
     """
     <style>
-    .block-container { padding-top: 1.1rem; }
+    .block-container { padding-top: 2.8rem; }
     .lesson-card {
         border: 1px solid #e5e7eb; border-radius: 12px;
         padding: 12px 14px; margin-bottom: 10px; background-color: #fafafa;

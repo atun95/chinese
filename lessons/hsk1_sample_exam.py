@@ -4,6 +4,7 @@ from pathlib import Path
 import streamlit as st
 
 import supabase_client
+from ui_utils import render_lesson_intro
 
 _ASSET = Path(__file__).resolve().parent.parent / "assets" / "h10000"
 _AUDIO = _ASSET / "H10000.mp3"
@@ -119,6 +120,17 @@ def _reset_attempt():
 
 
 def show_exam(exam_label="Đề 1"):
+    # Đảm bảo phần đầu trang có khoảng cách đủ, không bị thanh header của Streamlit che khuất 1 nửa
+    st.markdown("""
+    <style>
+    .block-container, [data-testid="stMainBlockContainer"] {
+        padding-top: 3.2rem !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro("📄 Đề thi thử HSK 1")
+
     if exam_label == "Bảng điểm":
         _show_scoreboard()
         return
