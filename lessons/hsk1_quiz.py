@@ -1030,7 +1030,7 @@ def _show_scoreboard_quiz(load_all_scores_hsk1_consolidated):
             st.info("Chưa có lượt nộp điểm nào cho Bài Tập Trắc Nghiệm (Đề 1).")
 
     # --- Đề 2 Supabase (mặc định đóng, khi bấm mới xổ ra) ---
-    with st.expander("📋 Bài làm đã nộp - Đề 2 (Bài test HSK 1)", expanded=False):
+    with st.expander("📋 Bảng điểm Đề 2", expanded=False):
         render_exam2_submissions_scoreboard(key_suffix="quiz")
 
 
