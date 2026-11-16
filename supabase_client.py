@@ -266,9 +266,10 @@ def load_hsk_exam_scores(limit: int = 100):
     return rows, ""
 
 
-def load_scores_from_supabase(limit: int = 50):
+def load_quiz_scores_from_supabase(limit: int = 100):
     """
-    Tải danh sách điểm học viên từ Supabase ordered by latest first.
+    Tải danh sách điểm học viên phần 📝 Bài Tập Trắc Nghiệm từ Supabase.
+    Tự động loại bỏ các dòng kết quả của đề thi thử HSK (có dấu | hoặc bắt đầu bằng Đề).
     """
     client = get_supabase_client()
     if not client:
@@ -286,11 +287,19 @@ def load_scores_from_supabase(limit: int = 50):
         rows = res.data or []
         formatted = []
         for r in rows:
+            score = str(r.get("score") or r.get("điểm") or "").strip()
+            # Bỏ qua các dòng điểm đề thi thử HSK
+            if " | " in score or score.startswith("Đề ") or score.startswith("Đề 1"):
+                continue
+
             time_val = r.get("created_at") or r.get("submitted_at") or r.get("thời gian") or ""
             if "T" in str(time_val):
-                time_val = str(time_val).split(".")[0].replace("T", " ")
+                try:
+                    dt = datetime.fromisoformat(str(time_val).replace("Z", "+00:00"))
+                    time_val = dt.astimezone(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M")
+                except Exception:
+                    time_val = str(time_val).split(".")[0].replace("T", " ")
             student = r.get("name") or r.get("student_name") or r.get("học viên") or "Ẩn danh"
-            score = r.get("score") or r.get("điểm") or ""
 
             formatted.append({
                 "Thời gian": time_val,
@@ -299,5 +308,12 @@ def load_scores_from_supabase(limit: int = 50):
             })
         return formatted
     except Exception as e:
-        logging.error(f"Error loading scores from Supabase: {e}")
+        logging.error(f"Error loading quiz scores from Supabase: {e}")
         return []
+
+
+def load_scores_from_supabase(limit: int = 50):
+    """
+    Tải danh sách điểm học viên từ Supabase (mặc định lấy điểm trắc nghiệm).
+    """
+    return load_quiz_scores_from_supabase(limit=limit)

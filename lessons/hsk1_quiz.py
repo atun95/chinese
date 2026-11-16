@@ -895,47 +895,127 @@ def _show_hsk1_exam2(attempt_id):
         _exam2_submit_dialog()
 
 
+def render_exam2_submissions_scoreboard(key_suffix="quiz"):
+    """Hiển thị danh sách bài làm đã nộp Đề 2 (Bài test HSK 1) với chọn học viên mượt mà, không bị kẹt."""
+    try:
+        sb_client = supabase_client.get_supabase_client()
+        if not sb_client:
+            st.warning("Chưa kết nối được Supabase.")
+            return
+
+        rows = _load_exam2_submissions()
+        if not rows:
+            st.info("Chưa có bài nộp nào (Đề 2).")
+            return
+
+        def _format_time(raw_t):
+            if not raw_t:
+                return ""
+            try:
+                dt = datetime.fromisoformat(str(raw_t).replace("Z", "+00:00"))
+                return dt.astimezone(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M")
+            except Exception:
+                return str(raw_t).split(".")[0].replace("T", " ")
+
+        overview = [{
+            "Mã bài": f"#{r.get('id', '')}",
+            "Học viên": r.get("student_name", "Ẩn danh"),
+            "Đã làm": len((_as_dict(r.get("answers")).get("choices") or {})) + len(_as_dict(r.get("order_answers"))),
+            "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
+            "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
+            "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
+            "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
+            "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
+            "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
+            "Phần VI": (r.get("part_scores") or {}).get("p8", "-"),
+            "Thời gian": _format_time(r.get("submitted_at", "")),
+        } for r in rows]
+
+        table_state_key = f"hsk1_exam2_df_select_{key_suffix}"
+        pick_key = f"hsk1_exam2_pick_idx_{key_suffix}"
+        last_row_key = f"hsk1_exam2_last_table_row_{key_suffix}"
+
+        # Bảng tổng quan có hỗ trợ bấm chọn từng dòng
+        df_event = st.dataframe(
+            overview,
+            use_container_width=True,
+            hide_index=True,
+            selection_mode="single-row",
+            on_select="rerun",
+            key=table_state_key
+        )
+
+        # Đồng bộ khi người dùng click vào dòng trong bảng
+        if df_event and hasattr(df_event, "selection") and df_event.selection:
+            sel_rows = getattr(df_event.selection, "rows", [])
+            if sel_rows and len(sel_rows) > 0:
+                clicked_idx = sel_rows[0]
+                if clicked_idx != st.session_state.get(last_row_key):
+                    st.session_state[last_row_key] = clicked_idx
+                    st.session_state[pick_key] = clicked_idx
+
+        curr_idx = st.session_state.get(pick_key, 0)
+        if not (0 <= curr_idx < len(rows)):
+            curr_idx = 0
+
+        options = list(range(len(rows)))
+        def _make_label(i):
+            item = rows[i]
+            t = _format_time(item.get("submitted_at", ""))
+            return f"Bài #{item.get('id', '')} — {item.get('student_name', 'Ẩn danh')} — {item.get('score', 0)}/{item.get('max_score', 55)} điểm ({t})"
+
+        pick_idx = st.selectbox(
+            "🔍 Chọn bài làm để xem chi tiết bài thi & bài tự luận:",
+            options=options,
+            index=curr_idx,
+            format_func=_make_label,
+            key=pick_key
+        )
+        sel = rows[pick_idx]
+
+        # Header thông tin học viên đang được chọn
+        st.markdown(f"""
+        <div style="background:#eff6ff; border:1.5px solid #bfdbfe; border-radius:12px; padding:12px 18px; margin: 15px 0 12px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="font-size:1.05rem; font-weight:700; color:#1e3a8a;">
+                👤 Học viên: <b style="color:#2563eb;">{_exam2_esc(sel.get('student_name', 'Ẩn danh'))}</b>
+            </span>
+            <span style="font-size:1.05rem; font-weight:800; color:#15803d;">
+                🏆 Điểm: {sel.get('score', 0)}/{sel.get('max_score', 55)}
+            </span>
+            <span style="font-size:0.9rem; color:#64748b;">
+                🕒 Nộp lúc: {_format_time(sel.get('submitted_at', ''))}
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Bài tự luận (Phần VII) - Card hiển thị trực tiếp theo bài học viên đã chọn
+        st.markdown("**✍️ Bài tự luận (Phần VII):**")
+        essay_text = (sel.get("essay") or "").strip()
+        if essay_text:
+            st.markdown(f"""
+            <div style="background-color: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 16px; margin-bottom: 20px; font-size: 1.05rem; line-height: 1.7; color: #1e293b; white-space: pre-wrap; font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;">
+{html.escape(essay_text)}
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.info("(Học viên không nộp bài viết tự luận)")
+
+        st.markdown("#### 📝 Chi tiết đáp án và chấm từng câu")
+        st.html(render_exam2_review(sel))
+
+    except Exception as e:
+        st.error(f"Lỗi tải bài nộp: {e}")
+
+
 def _show_scoreboard_quiz(load_all_scores_hsk1_consolidated):
-    """Hiển thị bảng điểm tổng hợp cả Đề 1 và Đề 2."""
-    st.subheader("🏆 Bảng điểm tổng hợp")
-    # --- Đề 2 Supabase ---
-    with st.expander("📋 Bài làm đã nộp - Đề 2 (Bài test HSK 1)", expanded=True):
-        try:
-            sb_client = supabase_client.get_supabase_client()
-            if sb_client:
-                rows = _load_exam2_submissions()
-                if not rows:
-                    st.info("Chưa có bài nộp nào (Đề 2).")
-                else:
-                    overview = [{
-                        "Học viên": r.get("student_name", "Ẩn danh"),
-                        "Đã làm": len((_as_dict(r.get("answers")).get("choices") or {})) + len(_as_dict(r.get("order_answers"))),
-                        "Điểm": f"{r.get('score', 0)}/{r.get('max_score', 55)}",
-                        "Phần I": (r.get("part_scores") or {}).get("p1", "-"),
-                        "Phần II": (r.get("part_scores") or {}).get("p2", "-"),
-                        "Phần III": (r.get("part_scores") or {}).get("p3", "-"),
-                        "Phần IV": (r.get("part_scores") or {}).get("p4", "-"),
-                        "Phần V": (r.get("part_scores") or {}).get("p5", "-"),
-                        "Phần VI": (r.get("part_scores") or {}).get("p8", "-"),
-                        "Thời gian": str(r.get("submitted_at", "")).split(".")[0].replace("T", " "),
-                    } for r in rows]
-                    st.dataframe(overview, use_container_width=True)
-                    labels = [f"{r.get('student_name','Ẩn danh')} — {r.get('score',0)}/{r.get('max_score',55)} — {str(r.get('submitted_at','')).split('T')[0]}" for r in rows]
-                    pick = st.selectbox("Chọn bài để xem chi tiết:", labels, key="hsk1_exam2_pick_scoreboard")
-                    sel = rows[labels.index(pick)]
-                    st.markdown("**Bài tự luận (Phần VII):**")
-                    st.text_area("Essay", value=sel.get("essay") or "(không có)", height=180, disabled=True, key="hsk1_essay_view_scoreboard")
-                    st.markdown("#### Chi tiết đáp án và chấm từng câu")
-                    st.html(render_exam2_review(sel))
-            else:
-                st.warning("Chưa kết nối được Supabase.")
-        except Exception as e:
-            st.error(f"Lỗi tải bài nộp: {e}")
-    # --- Đề 1 CSV ---
-    with st.expander("📊 Bảng điểm Đề 1 (50 câu trắc nghiệm)", expanded=False):
+    """Hiển thị bảng điểm riêng của 📝 Bài Tập Trắc Nghiệm."""
+    st.subheader("🏆 Bảng điểm 📝 Bài Tập Trắc Nghiệm")
+
+    # --- Đề 1 CSV & Supabase ---
+    with st.expander("📊 Bảng điểm Đề 1 (50 câu trắc nghiệm ôn tập)", expanded=True):
         scores_data = []
         if supabase_client.is_supabase_configured():
-            scores_data = supabase_client.load_scores_from_supabase()
+            scores_data = supabase_client.load_quiz_scores_from_supabase()
         if not scores_data:
             raw_csv = load_all_scores_hsk1_consolidated()
             for r in raw_csv:
@@ -945,9 +1025,13 @@ def _show_scoreboard_quiz(load_all_scores_hsk1_consolidated):
                     "Điểm": r.get("Kết quả") or r.get("tổng điểm", "")
                 })
         if scores_data:
-            st.dataframe(scores_data, use_container_width=True)
+            st.dataframe(scores_data, use_container_width=True, hide_index=True)
         else:
-            st.info("Chưa có lượt nộp điểm nào (Đề 1).")
+            st.info("Chưa có lượt nộp điểm nào cho Bài Tập Trắc Nghiệm (Đề 1).")
+
+    # --- Đề 2 Supabase (mặc định đóng, khi bấm mới xổ ra) ---
+    with st.expander("📋 Bài làm đã nộp - Đề 2 (Bài test HSK 1)", expanded=False):
+        render_exam2_submissions_scoreboard(key_suffix="quiz")
 
 
 def _show_exam2_section():

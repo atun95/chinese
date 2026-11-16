@@ -101,15 +101,25 @@ def _save_once(name, listening, reading, total):
 
 
 def _show_scoreboard():
-    st.subheader("Bảng điểm")
-    rows, err = supabase_client.load_hsk_exam_scores()
-    if err:
-        st.error(err)
-        return
-    if not rows:
-        st.info("Chưa có điểm nào được lưu.")
-        return
-    st.dataframe(rows, width="stretch", hide_index=True)
+    st.subheader("🏆 Bảng điểm 📄 Đề thi thử HSK 1")
+
+    # 1. Bảng điểm Đề 1 (H10000)
+    with st.expander("📊 Bảng điểm Đề 1 (Đề thi mẫu H10000 - Nghe & Đọc 40 câu)", expanded=True):
+        rows, err = supabase_client.load_hsk_exam_scores()
+        if err:
+            st.error(err)
+        elif not rows:
+            st.info("Chưa có điểm nào được lưu cho Đề 1.")
+        else:
+            st.dataframe(rows, width="stretch", hide_index=True)
+
+    # 2. Bảng điểm Đề 2 (Bài test HSK 1) - mặc định đóng, bấm mới xổ ra
+    with st.expander("📋 Bài làm đã nộp - Đề 2 (Bài test HSK 1)", expanded=False):
+        try:
+            from lessons.hsk1_quiz import render_exam2_submissions_scoreboard
+            render_exam2_submissions_scoreboard(key_suffix="exam")
+        except Exception as e:
+            st.error(f"Lỗi hiển thị bài nộp Đề 2: {e}")
 
 
 def _reset_attempt():
@@ -122,9 +132,16 @@ def show_exam(exam_label="Đề 1"):
     if exam_label == "Bảng điểm":
         _show_scoreboard()
         return
+    if exam_label == "Đề 2":
+        try:
+            from lessons.hsk1_quiz import _show_exam2_section
+            _show_exam2_section()
+        except Exception as e:
+            st.error(f"Lỗi hiển thị Đề 2: {e}")
+        return
     if exam_label != "Đề 1":
         st.subheader(exam_label)
-        st.info("Đề này chưa có nội dung. Học viên hãy làm Đề 1 trước.")
+        st.info(f"{exam_label} hiện chưa có nội dung. Học viên hãy làm Đề 1 hoặc Đề 2 trước.")
         return
 
     st.session_state.setdefault(_k("phase"), "cover")

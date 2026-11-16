@@ -76,6 +76,11 @@ except Exception as e:
     pass
 
 try:
+    importlib.reload(hsk1_sample_exam)
+except Exception as e:
+    pass
+
+try:
     importlib.reload(lesson1)
 except Exception as e:
     pass
