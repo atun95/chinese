@@ -1389,14 +1389,14 @@ def show_lesson10_4_yixia():
             "color": "#7c3aed",
             "bg": "#f5f3ff",
             "title": "4. Làm lượng từ: đếm số lần",
-            "use": "<b>下</b> là lượng từ của động từ, đứng sau động từ để đếm lần. Một lần viết <b>一下</b>. Hai lần, ba lần thì đổi số và bỏ 一: <b>两下</b>, <b>三下</b>. Việc đã xong thì thêm <b>了</b>: động từ + 了 + 一下 / 两下 / 三下.",
-            "mean": "Đếm một hành động ngắn xảy ra mấy cái, mấy tiếng. 一下 = một cái, một lần. Khác trường hợp 1: ở đây nhấn vào số lần, nên nói được một cái, hai cái, ba cái.",
-            "formula": [("Động từ", "#c4b5fd"), ("+", "#94a3b8"), ("了", "#c4b5fd"), ("+", "#94a3b8"), ("一下 / 两下 / 三下", "#c4b5fd", True)],
+            "use": "Chỉ dùng với <b>động từ chỉ động tác ngắn</b>: động tác xảy ra một cái rồi kết thúc ngay, nên đếm từng cái được. Gồm <b>拍</b> vỗ, <b>敲</b> gõ, <b>打</b> đánh, <b>踢</b> đá, <b>点</b> gật, <b>摇</b> lắc, <b>响</b> kêu. Công thức: động từ chỉ động tác ngắn + 一下 / 两下 / 三下.",
+            "mean": "Đếm động tác đó xảy ra mấy cái, mấy tiếng. 一下 = một cái. 等, 想, 看, 听, 说, 休息 là động từ chỉ việc làm một lát, chỉ dùng ở trường hợp 1, không đếm thành 两下, 三下.",
+            "formula": [("Động từ chỉ động tác ngắn", "#c4b5fd"), ("+", "#94a3b8"), ("一下 / 两下 / 三下", "#c4b5fd", True)],
             "rows": [
-                ("他拍了一下桌子。", "Tā pāi le yíxià zhuōzi.", "Anh ấy vỗ bàn một cái.", "一下 = đúng một lần"),
-                ("请你敲一下门。", "Qǐng nǐ qiāo yíxià mén.", "Bạn gõ cửa một cái.", "Gõ một cái rồi thôi"),
-                ("门响了两下。", "Mén xiǎng le liǎng xià.", "Cửa kêu hai tiếng.", "Hai lần viết 两下, không viết 两一下"),
-                ("钟敲了三下。", "Zhōng qiāo le sān xià.", "Chuông gõ ba tiếng.", "Ba lần viết 三下"),
+                ("拍一下。", "Pāi yíxià.", "Vỗ một cái.", "拍 là động từ chỉ động tác ngắn: vỗ"),
+                ("敲一下门。", "Qiāo yíxià mén.", "Gõ cửa một cái.", "敲 là động từ chỉ động tác ngắn: gõ"),
+                ("响两下。", "Xiǎng liǎng xià.", "Kêu hai tiếng.", "响 là động từ chỉ động tác ngắn: kêu"),
+                ("打三下。", "Dǎ sān xià.", "Đánh ba cái.", "打 là động từ chỉ động tác ngắn: đánh"),
             ],
         },
     ]
@@ -1491,7 +1491,7 @@ def show_lesson10_4_yixia():
             </div>
             <div class="b104-line" style="background:#f5f3ff;border-left:4px solid #7c3aed;">
                 <div class="han">拍一下。 / 拍两下。 / 敲三下。</div>
-                <div class="meta">Pāi yíxià. / Pāi liǎng xià. / Qiāo sān xià. — Vỗ một cái, vỗ hai cái, gõ ba cái. <b>下 là lượng từ</b>, đổi được số.</div>
+                <div class="meta">Pāi yíxià. / Pāi liǎng xià. / Qiāo sān xià. — Vỗ một cái, vỗ hai cái, gõ ba cái. <b>拍, 敲 là động từ chỉ động tác ngắn</b>, nên đếm được bằng 下.</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -1548,6 +1548,7 @@ def show_lesson10_4_yixia():
             ("一下 đứng sau động từ, trước tân ngữ", "Đúng: <span class='b104-ok'>看一下这本书</span>. Không nói <span class='b104-bad'>看这本书一下</span>."),
             ("一下 không thay 一点", "等<b>一下</b> = đợi một chút. 一点水 = một chút nước. <span class='b104-bad'>等一点</span> không dùng để bảo người khác đợi."),
             ("Đếm nhiều lần thì Số + 下", "Một lần: <b>一下</b>. Hai lần: <b>两下</b>. Ba lần: <b>三下</b>. Không viết <span class='b104-bad'>两一下</span>, <span class='b104-bad'>三一下</span>."),
+            ("Trường hợp 4 chỉ dùng động từ chỉ động tác ngắn", "<b>拍</b> vỗ, <b>敲</b> gõ, <b>打</b> đánh, <b>踢</b> đá, <b>点</b> gật, <b>摇</b> lắc, <b>响</b> kêu. 等, 想, 休息 là làm một lát. Không nói <span class='b104-bad'>等三下</span>, <span class='b104-bad'>想两下</span>, <span class='b104-bad'>休息三下</span>."),
             ("Chỉ dùng với động từ chỉ hành động", "看, 听, 拍, 敲, 说, 等 thì được. Không nói <span class='b104-bad'>高一下</span>, <span class='b104-bad'>是一下</span>, <span class='b104-bad'>很一下</span>."),
         ]
         for title, body in traps:
@@ -1565,7 +1566,7 @@ def show_lesson10_4_yixia():
                 <tr><td>Làm một lần, rất ngắn</td><td>看一下。 / 听一下。 / 试一下。</td></tr>
                 <tr><td>Có người hoặc vật đi kèm</td><td>看一下这本书。 / 问一下老师。</td></tr>
                 <tr><td>Nhờ cho lịch sự</td><td>请你看一下。 / 请你介绍一下。</td></tr>
-                <tr><td>Đếm một cái, hai cái, ba cái</td><td>拍了一下。 / 响了两下。 / 敲了三下。</td></tr>
+                <tr><td>Động từ chỉ động tác ngắn: đếm một cái, hai cái, ba cái</td><td>拍一下。 / 响两下。 / 敲三下。</td></tr>
                 <tr><td>Một chút nước, tốt hơn, nhanh hơn</td><td>一点水。 / 好一点。 / 快一点。</td></tr>
             </table>
         </div>
