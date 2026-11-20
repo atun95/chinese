@@ -1296,7 +1296,8 @@ def show_lesson10_4_yixia():
         padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
     .b104-rule h4 { margin: 0 0 6px 0; }
-    .b104-desc { color: #334155; font-size: 0.95rem; line-height: 1.6; margin: 0 0 12px 0; }
+    .b104-use, .b104-mean { color: #334155; font-size: 0.95rem; line-height: 1.65; margin: 0 0 8px 0; }
+    .b104-use b, .b104-mean b { color: #0f172a; }
     .b104-formula {
         background: #1e293b; border-radius: 10px; padding: 12px 18px;
         display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
@@ -1330,7 +1331,7 @@ def show_lesson10_4_yixia():
 
     render_lesson_intro(
         "💬 Bài 30 - Cách dùng 一下 (yíxià)",
-        "一下 đứng sau động từ. Nó biến việc thành một lần ngắn, nhẹ, và làm câu nhờ bớt cứng."
+        "一下 đứng sau động từ. Có khi là làm một lát, có khi làm câu nhờ nhẹ hơn, có khi là lượng từ để đếm số lần."
     )
 
     tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
@@ -1344,41 +1345,58 @@ def show_lesson10_4_yixia():
         {
             "color": "#059669",
             "bg": "#ecfdf5",
-            "title": "1. Làm một lần, làm rất ngắn",
-            "desc": "Động từ chỉ hành động, rồi thêm 一下. Việc chỉ xảy ra một chốc, không kéo dài.",
-            "formula": [("Động từ", "#6ee7b7"), ("+", "#94a3b8"), ("一下", "#6ee7b7", True), ("。", "#e2e8f0")],
+            "title": "1. Làm rất ngắn, chỉ một lát",
+            "use": "Lấy động từ chỉ hành động, thêm <b>一下</b> ngay phía sau. Câu không cần tân ngữ.",
+            "mean": "Việc chỉ xảy ra một chốc rồi thôi, không kéo dài. Nghĩa là “một chút”, “một lát”, “làm qua một lần”.",
+            "formula": [("Động từ", "#6ee7b7"), ("+", "#94a3b8"), ("一下", "#6ee7b7", True)],
             "rows": [
-                ("等一下。", "Děng yíxià.", "Đợi một chút.", "Câu rất hay gặp"),
-                ("看一下。", "Kàn yíxià.", "Xem một chút.", "Nhờ, không ra lệnh"),
-                ("听一下。", "Tīng yíxià.", "Nghe một chút.", "Làm rất ngắn"),
-                ("试一下。", "Shì yíxià.", "Thử một chút.", "Làm một lần cho biết"),
-                ("说一下。", "Shuō yíxià.", "Nói một chút.", "Nhờ nói ngắn"),
-                ("问一下。", "Wèn yíxià.", "Hỏi một câu.", "Hỏi cho xong"),
+                ("等一下。", "Děng yíxià.", "Đợi một lát.", "Đợi trong chốc lát, không đợi lâu"),
+                ("看一下。", "Kàn yíxià.", "Xem một chút.", "Xem qua, không xem kỹ"),
+                ("听一下。", "Tīng yíxià.", "Nghe một chút.", "Nghe thoáng qua"),
+                ("试一下。", "Shì yíxià.", "Thử một lần.", "Làm thử cho biết kết quả"),
+                ("说一下。", "Shuō yíxià.", "Nói một chút.", "Nói ngắn, nói qua việc đó"),
+                ("想一下。", "Xiǎng yíxià.", "Nghĩ một lát.", "Suy nghĩ trong chốc lát"),
             ],
         },
         {
             "color": "#2563eb",
             "bg": "#eff6ff",
             "title": "2. Có tân ngữ thì 一下 đứng trước tân ngữ",
-            "desc": "Tân ngữ là người hoặc vật mà hành động hướng tới. Không để 一下 ra sau tân ngữ.",
+            "use": "Viết <b>động từ + 一下 + tân ngữ</b>. Tân ngữ là người hoặc vật mà hành động hướng tới. Không đưa 一下 ra sau tân ngữ.",
+            "mean": "Vẫn là làm một lát hoặc làm một lần, và nói rõ làm với ai, với cái gì.",
             "formula": [("Động từ", "#93c5fd"), ("+", "#94a3b8"), ("一下", "#93c5fd", True), ("+", "#94a3b8"), ("Tân ngữ", "#93c5fd")],
             "rows": [
-                ("请你介绍一下。", "Qǐng nǐ jièshào yíxià.", "Bạn giới thiệu một chút.", "Chưa cần nêu giới thiệu cái gì"),
-                ("你看一下这本书。", "Nǐ kàn yíxià zhè běn shū.", "Bạn xem qua quyển sách này.", "书 là tân ngữ"),
+                ("你看一下这本书。", "Nǐ kàn yíxià zhè běn shū.", "Bạn xem qua quyển sách này.", "这本书 là vật được xem"),
                 ("我问一下老师。", "Wǒ wèn yíxià lǎoshī.", "Tôi hỏi thầy một câu.", "老师 là người được hỏi"),
-                ("请你等一下我。", "Qǐng nǐ děng yíxià wǒ.", "Bạn đợi tôi một chút.", "我 là người được đợi"),
+                ("请你介绍一下你的老师。", "Qǐng nǐ jièshào yíxià nǐ de lǎoshī.", "Bạn giới thiệu một chút về thầy của bạn.", "你的老师 là người được giới thiệu"),
+                ("我们听一下这首歌。", "Wǒmen tīng yíxià zhè shǒu gē.", "Chúng ta nghe qua bài hát này.", "这首歌 là vật được nghe"),
             ],
         },
         {
             "color": "#d97706",
             "bg": "#fffbeb",
-            "title": "3. Nhờ cho nhẹ, không ra lệnh",
-            "desc": "Cùng một việc, thêm 一下 thì giọng mềm hơn. Thêm 请你 nữa thì thành câu nhờ.",
+            "title": "3. Làm lời nhờ nhẹ hơn",
+            "use": "Giữ nguyên động từ, thêm <b>一下</b> phía sau. Muốn nhờ lịch sự hơn thì thêm <b>请你</b> ở đầu câu.",
+            "mean": "Việc cần làm không đổi. 一下 chỉ làm câu bớt khô, bớt giống ra lệnh. Có 请你 thì thành lời nhờ.",
             "formula": [("请你", "#fcd34d"), ("+", "#94a3b8"), ("Động từ", "#fcd34d"), ("+", "#94a3b8"), ("一下", "#fcd34d", True)],
             "rows": [
                 ("你看。", "Nǐ kàn.", "Bạn xem.", "Khô, giống ra lệnh"),
-                ("你看一下。", "Nǐ kàn yíxià.", "Bạn xem một chút.", "Nhẹ hơn"),
-                ("请你看一下。", "Qǐng nǐ kàn yíxià.", "Bạn xem giúp một chút.", "Nhờ lịch sự"),
+                ("你看一下。", "Nǐ kàn yíxià.", "Bạn xem một chút.", "Cùng một việc, giọng đã nhẹ hơn"),
+                ("请你看一下。", "Qǐng nǐ kàn yíxià.", "Bạn xem giúp một chút.", "Lời nhờ lịch sự"),
+            ],
+        },
+        {
+            "color": "#7c3aed",
+            "bg": "#f5f3ff",
+            "title": "4. Làm lượng từ: đếm số lần",
+            "use": "<b>下</b> là lượng từ của động từ, đứng sau động từ để đếm lần. Một lần viết <b>一下</b>. Hai lần, ba lần thì đổi số và bỏ 一: <b>两下</b>, <b>三下</b>. Việc đã xong thì thêm <b>了</b>: động từ + 了 + 一下 / 两下 / 三下.",
+            "mean": "Đếm một hành động ngắn xảy ra mấy cái, mấy tiếng. 一下 = một cái, một lần. Khác trường hợp 1: ở đây nhấn vào số lần, nên nói được một cái, hai cái, ba cái.",
+            "formula": [("Động từ", "#c4b5fd"), ("+", "#94a3b8"), ("了", "#c4b5fd"), ("+", "#94a3b8"), ("一下 / 两下 / 三下", "#c4b5fd", True)],
+            "rows": [
+                ("他拍了一下桌子。", "Tā pāi le yíxià zhuōzi.", "Anh ấy vỗ bàn một cái.", "一下 = đúng một lần"),
+                ("请你敲一下门。", "Qǐng nǐ qiāo yíxià mén.", "Bạn gõ cửa một cái.", "Gõ một cái rồi thôi"),
+                ("门响了两下。", "Mén xiǎng le liǎng xià.", "Cửa kêu hai tiếng.", "Hai lần viết 两下, không viết 两一下"),
+                ("钟敲了三下。", "Zhōng qiāo le sān xià.", "Chuông gõ ba tiếng.", "Ba lần viết 三下"),
             ],
         },
     ]
@@ -1388,7 +1406,7 @@ def show_lesson10_4_yixia():
         <div class="b104-hero">
             <div class="b104-char">一下</div>
             <div class="b104-py">yíxià · thanh 2 + thanh 4</div>
-            <div class="b104-tag">Đứng sau động từ</div>
+            <div class="b104-tag">Đứng sau động từ · bốn cách dùng</div>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br/>", unsafe_allow_html=True)
@@ -1413,7 +1431,8 @@ def show_lesson10_4_yixia():
             st.markdown(f"""
             <div class="b104-rule" style="border-left:5px solid {case['color']};background:{case['bg']};">
                 <h4 style="color:{case['color']};">{case['title']}</h4>
-                <p class="b104-desc">{case['desc']}</p>
+                <p class="b104-use"><b>Cách dùng:</b> {case['use']}</p>
+                <p class="b104-mean"><b>Nghĩa:</b> {case['mean']}</p>
                 <div class="b104-formula">{spans}</div>
                 <table class="b104-table">
                     <thead>
@@ -1462,6 +1481,21 @@ def show_lesson10_4_yixia():
         """, unsafe_allow_html=True)
         st.caption("Muốn bảo “đợi một chút” thì nói **等一下**, không nói 等一点.")
 
+        st.markdown("### 一下 “một lát” khác 一下 “một cái”")
+        st.markdown("""
+        <div class="b104-pair">
+            <div class="b104-pair-title">Cùng viết 一下, nhưng một bên là thời gian ngắn, một bên là lượng từ đếm lần</div>
+            <div class="b104-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">休息一下。 / 想一下。</div>
+                <div class="meta">Xiūxi yíxià. / Xiǎng yíxià. — Nghỉ một lát, nghĩ một lát. <b>Không đếm.</b> Không nói 休息三下 để bảo nghỉ ba lần.</div>
+            </div>
+            <div class="b104-line" style="background:#f5f3ff;border-left:4px solid #7c3aed;">
+                <div class="han">拍一下。 / 拍两下。 / 敲三下。</div>
+                <div class="meta">Pāi yíxià. / Pāi liǎng xià. / Qiāo sān xià. — Vỗ một cái, vỗ hai cái, gõ ba cái. <b>下 là lượng từ</b>, đổi được số.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
         st.markdown("### Hội thoại ngắn")
         st.markdown("""
         <div class="b104-dlg">
@@ -1488,20 +1522,33 @@ def show_lesson10_4_yixia():
                 <div class="meta">Tā shì Zhōngguó rén, tā jiāo Hànyǔ. — Cô ấy là người Trung Quốc, cô dạy tiếng Hán.</div>
             </div>
         </div>
+        <div class="b104-dlg" style="margin-top:12px;">
+            <div class="b104-turn">
+                <div class="b104-who a">A</div>
+                <div class="han">你听，门响了两下。</div>
+                <div class="meta">Nǐ tīng, mén xiǎng le liǎng xià. — Bạn nghe này, cửa kêu hai tiếng. <b>两下</b> đếm số lần.</div>
+            </div>
+            <div class="b104-turn">
+                <div class="b104-who b">B</div>
+                <div class="han">我去看一下。</div>
+                <div class="meta">Wǒ qù kàn yíxià. — Tôi đi xem một chút. <b>一下</b> ở đây là làm một lát, không phải đếm.</div>
+            </div>
+        </div>
         """, unsafe_allow_html=True)
 
     with tab_tips:
         st.markdown("""
         <div class="b104-tip">
             <div style="font-weight:800;font-size:1.05rem;color:#713f12;margin-bottom:8px;">Một câu để nhớ</div>
-            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Việc ngắn, nhờ nhẹ → 一下 &nbsp;·&nbsp; Lượng hoặc mức độ → 一点 &nbsp;·&nbsp; Đọc yíxià, không đọc yīxià</div>
+            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Làm một lát hoặc nhờ nhẹ → 一下 &nbsp;·&nbsp; Đếm một cái, hai cái → 下 là lượng từ &nbsp;·&nbsp; Lượng hoặc mức độ → 一点</div>
         </div>
         """, unsafe_allow_html=True)
         traps = [
             ("一 đổi thanh khi đứng trước 下", "下 là thanh 4, nên 一 đọc <b>yí</b>. Viết yíxià. Không đọc yīxià."),
             ("一下 đứng sau động từ, trước tân ngữ", "Đúng: <span class='b104-ok'>看一下这本书</span>. Không nói <span class='b104-bad'>看这本书一下</span>."),
             ("一下 không thay 一点", "等<b>一下</b> = đợi một chút. 一点水 = một chút nước. <span class='b104-bad'>等一点</span> không dùng để bảo người khác đợi."),
-            ("Chỉ dùng với động từ chỉ hành động", "看, 听, 吃, 说, 问, 等 thì được. Không nói <span class='b104-bad'>高一下</span>, <span class='b104-bad'>是一下</span>, <span class='b104-bad'>很一下</span>."),
+            ("Đếm nhiều lần thì Số + 下", "Một lần: <b>一下</b>. Hai lần: <b>两下</b>. Ba lần: <b>三下</b>. Không viết <span class='b104-bad'>两一下</span>, <span class='b104-bad'>三一下</span>."),
+            ("Chỉ dùng với động từ chỉ hành động", "看, 听, 拍, 敲, 说, 等 thì được. Không nói <span class='b104-bad'>高一下</span>, <span class='b104-bad'>是一下</span>, <span class='b104-bad'>很一下</span>."),
         ]
         for title, body in traps:
             st.markdown(f"""
@@ -1518,6 +1565,7 @@ def show_lesson10_4_yixia():
                 <tr><td>Làm một lần, rất ngắn</td><td>看一下。 / 听一下。 / 试一下。</td></tr>
                 <tr><td>Có người hoặc vật đi kèm</td><td>看一下这本书。 / 问一下老师。</td></tr>
                 <tr><td>Nhờ cho lịch sự</td><td>请你看一下。 / 请你介绍一下。</td></tr>
+                <tr><td>Đếm một cái, hai cái, ba cái</td><td>拍了一下。 / 响了两下。 / 敲了三下。</td></tr>
                 <tr><td>Một chút nước, tốt hơn, nhanh hơn</td><td>一点水。 / 好一点。 / 快一点。</td></tr>
             </table>
         </div>
@@ -1530,8 +1578,10 @@ def show_lesson10_4_yixia():
             {"q": "“Bạn xem qua quyển sách này.”", "options": ["你看一下这本书。", "你看这本书一下。", "你一下看这本书。"], "answer": "你看一下这本书。", "explain": "一下 đứng ngay sau động từ, trước tân ngữ 这本书."},
             {"q": "Câu nào là lời nhờ lịch sự?", "options": ["你看。", "你看一下。", "请你看一下。"], "answer": "请你看一下。", "explain": "请你 + động từ + 一下 là câu nhờ. 你看 khô hơn. 你看一下 đã nhẹ, nhưng chưa có 请."},
             {"q": "一下 đọc thế nào?", "options": ["yīxià", "yíxià", "yìxià"], "answer": "yíxià", "explain": "下 là thanh 4, nên 一 đổi thành thanh 2: yí."},
-            {"q": "Câu nào đúng khi muốn nói “một chút nước”?", "options": ["一下水", "一点水", "水一下"], "answer": "一点水", "explain": "Lượng thì dùng 一点. 一下 chỉ đi với việc làm."},
+            {"q": "Câu nào đúng khi muốn nói “một chút nước”?", "options": ["一下水", "一点水", "水一下"], "answer": "一点水", "explain": "Nước là lượng, dùng 一点. 一下 không đứng trước danh từ để chỉ “một chút nước”."},
             {"q": "Câu nào sai?", "options": ["听一下。", "吃一下。", "是一下。"], "answer": "是一下。", "explain": "是 không phải động từ chỉ hành động, không thêm 一下. 听 và 吃 thì được."},
+            {"q": "Câu nào dùng 下 làm lượng từ, để đếm số lần?", "options": ["休息一下。", "他拍了一下桌子。", "好一点。"], "answer": "他拍了一下桌子。", "explain": "拍了一下 = vỗ một cái. 下 đếm số lần. 休息一下 là nghỉ một lát, không đếm. 好一点 dùng 一点."},
+            {"q": "“Chuông gõ ba tiếng.”", "options": ["钟敲了三下。", "钟敲了三一下。", "钟三下敲了。"], "answer": "钟敲了三下。", "explain": "Đếm ba lần thì viết 三下, đứng sau động từ. Không viết 三一下, cũng không đưa 三下 lên trước động từ."},
         ]
         if "b104_submitted" not in st.session_state:
             st.session_state.b104_submitted = False
@@ -1576,7 +1626,7 @@ def show_lesson10_4_yixia():
             if pct == 100:
                 msg = "Nắm vững cách dùng 一下."
             elif pct >= 70:
-                msg = "Xem lại chỗ 一下 khác 一点, và vị trí của 一下."
+                msg = "Xem lại chỗ 一下 khác 一点, vị trí của 一下, và lúc 下 là lượng từ đếm lần."
             else:
                 msg = "Đọc lại phần Lý thuyết rồi làm lại."
             st.markdown(f"""
