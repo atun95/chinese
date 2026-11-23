@@ -572,49 +572,99 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "🏆 Flashcard Ôn Tập Từ Vựng"
 ])
 
+LESSON_GROUPS = [
+    {
+        "id": "pinyin_hanzi",
+        "title": "Phiên âm & Chữ Hán",
+        "span": "Bài 1 – 15",
+        "lessons": [
+            "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
+            "Bài 2 - Thanh mẫu và vận mẫu đơn",
+            "Bài 3 - Thanh mẫu",
+            "Bài 4 - Vận mẫu kép",
+            "Bài 5 - Vận mẫu kép mở rộng",
+            "Bài 6 - Vận mẫu mũi",
+            "Bài 7 - Các vận mẫu mũi còn lại",
+            "Bài 8 - Vận mẫu đứng một mình",
+            "Bài 9 - Quy tắc viết Pinyin",
+            "Bài 10 - Tổng quan Chữ Hán",
+            "Bài 11 - Hệ thống Nét viết",
+            "Bài 12 - Quy tắc Bút thuận",
+            "Bài 13 - Hệ thống Bộ thủ",
+            "Bài 14 - Đơn thể & Hợp thể",
+            "Bài 15 - Các bộ thủ thông dụng",
+        ],
+    },
+    {
+        "id": "word_use",
+        "title": "Cách dùng từ",
+        "span": "Bài 21 – 30, 35, 36",
+        "lessons": [
+            "Bài 21 - Các loại từ",
+            "Bài 22 - Các từ để hỏi",
+            "Bài 23 - Cách dùng 在 (zài)",
+            "Bài 24 - Cách dùng 去 (qù)",
+            "Bài 25 - Cách dùng 很 (hěn)",
+            "Bài 26 - Cách dùng 的 (de)",
+            "Bài 27 - Cách dùng 子 (zi)",
+            "Bài 28 - Cách dùng 吧 (ba)",
+            "Bài 29 - Cách dùng 呢 (ne)",
+            "Bài 30 - Cách dùng 一下 (yíxià)",
+            "Bài 35 - Cách dùng 好 / 难 + động từ",
+            "Bài 36 - Cách dùng 俩 (liǎ)",
+        ],
+    },
+    {
+        "id": "word_pairs",
+        "title": "Phân biệt cặp từ",
+        "span": "Bài 31 – 34",
+        "lessons": [
+            "Bài 31 - So sánh 些 (xiē) và 点 (diǎn)",
+            "Bài 32 - So sánh 这 (zhè) và 那 (nà)",
+            "Bài 33 - So sánh 不 (bù) và 没 (méi)",
+            "Bài 34 - So sánh 二 (èr) và 两 (liǎng)",
+        ],
+    },
+    {
+        "id": "reading",
+        "title": "Đọc thêm",
+        "span": "Bài 16 – 20",
+        "lessons": [
+            "Bài 16 - Văn hóa gọi tên & Cấu trúc câu",
+            "Bài 17 - Phân biệt từ vựng chỉ Nữ giới",
+            "Bài 18 - Tết Đoan Ngọ (端午节)",
+            "Bài 19 - Số đếm từ 0 đến 10",
+            "Bài 20 - Quốc gia, Quốc tịch và Tiền tệ",
+        ],
+    },
+]
+
 menu = None
 if mode == "📚 Lý thuyết & Bài học":
-    menu = st.sidebar.radio("Chọn bài học:", [
-        # Phiên âm
-        "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu",
-        "Bài 2 - Thanh mẫu và vận mẫu đơn",
-        "Bài 3 - Thanh mẫu",
-        "Bài 4 - Vận mẫu kép",
-        "Bài 5 - Vận mẫu kép mở rộng",
-        "Bài 6 - Vận mẫu mũi",
-        "Bài 7 - Các vận mẫu mũi còn lại",
-        "Bài 8 - Vận mẫu đứng một mình",
-        "Bài 9 - Quy tắc viết Pinyin",
-        # Chữ Hán
-        "Bài 10 - Tổng quan Chữ Hán",
-        "Bài 11 - Hệ thống Nét viết",
-        "Bài 12 - Quy tắc Bút thuận",
-        "Bài 13 - Hệ thống Bộ thủ",
-        "Bài 14 - Đơn thể & Hợp thể",
-        "Bài 15 - Các bộ thủ thông dụng",
-        # Văn hóa và từ vựng chủ đề
-        "Bài 16 - Văn hóa gọi tên & Cấu trúc câu",
-        "Bài 17 - Phân biệt từ vựng chỉ Nữ giới",
-        "Bài 18 - Tết Đoan Ngọ (端午节)",
-        "Bài 19 - Số đếm từ 0 đến 10",
-        "Bài 20 - Quốc gia, Quốc tịch và Tiền tệ",
-        # Cách dùng từ
-        "Bài 21 - Các loại từ",
-        "Bài 22 - Các từ để hỏi",
-        "Bài 23 - Cách dùng 在 (zài)",
-        "Bài 24 - Cách dùng 去 (qù)",
-        "Bài 25 - Cách dùng 很 (hěn)",
-        "Bài 26 - Cách dùng 的 (de)",
-        "Bài 27 - Cách dùng 子 (zi)",
-        "Bài 28 - Cách dùng 吧 (ba)",
-        "Bài 29 - Cách dùng 呢 (ne)",
-        "Bài 30 - Cách dùng 一下 (yíxià)",
-        # So sánh
-        "Bài 31 - So sánh 些 (xiē) và 点 (diǎn)",
-        "Bài 32 - So sánh 这 (zhè) và 那 (nà)",
-        "Bài 33 - So sánh 不 (bù) và 没 (méi)",
-        "Bài 34 - So sánh 二 (èr) và 两 (liǎng)",
-    ])
+    st.sidebar.markdown("**Chọn phần**")
+    if "lesson_group" not in st.session_state:
+        st.session_state.lesson_group = None
+    for group in LESSON_GROUPS:
+        is_open = st.session_state.lesson_group == group["id"]
+        arrow = "▾" if is_open else "▸"
+        if st.sidebar.button(
+            f"{arrow}  {group['title']}",
+            key=f"grp_btn_{group['id']}",
+            width="stretch",
+            type="primary" if is_open else "secondary",
+            help=group["span"],
+        ):
+            st.session_state.lesson_group = None if is_open else group["id"]
+            st.rerun()
+        if is_open:
+            st.sidebar.caption(group["span"])
+            menu = st.sidebar.radio(
+                group["title"],
+                group["lessons"],
+                key=f"grp_radio_{group['id']}",
+                index=None,
+                label_visibility="collapsed",
+            )
 elif mode == "🔊 Luyện tập Ghép âm":
     pinyin_practice.show_pinyin_practice()
 
@@ -793,6 +843,12 @@ elif menu == "Bài 29 - Cách dùng 呢 (ne)":
 elif menu == "Bài 30 - Cách dùng 一下 (yíxià)":
     lesson10.show_lesson10_4_yixia()
 
+elif menu == "Bài 35 - Cách dùng 好 / 难 + động từ":
+    lesson10.show_lesson10_5_hao_verb()
+
+elif menu == "Bài 36 - Cách dùng 俩 (liǎ)":
+    lesson10.show_lesson10_6_lia()
+
 elif menu == "Bài 19 - Số đếm từ 0 đến 10":
     lesson5.show_lesson5_numbers()
 
@@ -810,6 +866,18 @@ elif menu == "Bài tập Bài 5":
 
 elif menu == "Bài tập Bài 4":
     lesson4.show_lesson4_exercises(save_progress, save_score_row_b4, load_all_scores_b4)
+
+elif mode == "📚 Lý thuyết & Bài học":
+    st.markdown(
+        """
+        <div style="border:1px solid #bbf7d0;border-radius:18px;padding:36px 28px;background:linear-gradient(145deg,#f0fdf4,#ecfdf5);margin-top:12px;text-align:center;">
+            <div style="font-size:2rem;font-weight:900;color:#047857;letter-spacing:0.04em;">活到老，学到老。</div>
+            <div style="margin-top:10px;font-family:monospace;font-size:1.05rem;color:#065f46;">Huó dào lǎo, xué dào lǎo.</div>
+            <div style="margin-top:8px;color:#475569;font-size:1rem;">Sống đến già, học đến già.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.sidebar.markdown("---")
 st.sidebar.write("加油! (Jiā yóu! - Cố lên!)")

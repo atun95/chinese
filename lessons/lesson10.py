@@ -1637,3 +1637,651 @@ def show_lesson10_4_yixia():
                 <div style="margin-top:8px;font-weight:700;">{msg}</div>
             </div>
             """, unsafe_allow_html=True)
+
+
+def show_lesson10_5_hao_verb():
+    st.markdown("""
+    <style>
+    .b105-hero {
+        background: linear-gradient(145deg, #ecfdf5, #d1fae5);
+        border: 2px solid #6ee7b7;
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        margin-bottom: 8px;
+    }
+    .b105-char { font-size: 3.4rem; font-weight: 900; color: #047857; line-height: 1.15; }
+    .b105-py { font-family: monospace; font-size: 1.35rem; font-weight: 800; color: #065f46; margin-top: 6px; }
+    .b105-tag {
+        display: inline-block; margin-top: 10px; background: #6ee7b7; color: #064e3b;
+        font-weight: 800; padding: 4px 14px; border-radius: 999px;
+    }
+    .b105-rule {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+        padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .b105-rule h4 { margin: 0 0 6px 0; }
+    .b105-use, .b105-mean { color: #334155; font-size: 0.95rem; line-height: 1.65; margin: 0 0 8px 0; }
+    .b105-use b, .b105-mean b { color: #0f172a; }
+    .b105-formula {
+        background: #1e293b; border-radius: 10px; padding: 12px 18px;
+        display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+    }
+    .b105-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .b105-table th { text-align: left; padding: 8px 10px; font-weight: 800; }
+    .b105-table td { padding: 8px 10px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b105-han { font-size: 1.12rem; font-weight: 800; color: #0f172a; }
+    .b105-py2 { font-family: monospace; font-weight: 700; }
+    .b105-vi { font-style: italic; color: #475569; }
+    .b105-note { color: #64748b; font-size: 0.85rem; }
+    .b105-pair { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 20px; margin-bottom: 14px; }
+    .b105-pair-title { font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+    .b105-line { border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+    .b105-line .han { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
+    .b105-line .meta { font-size: 0.88rem; color: #64748b; }
+    .b105-tip { background: linear-gradient(135deg, #fefce8, #fef9c3); border: 2px solid #fde047; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
+    .b105-trap { background: #fff1f2; border: 2px solid #fda4af; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+    .b105-key { background: linear-gradient(135deg, #0f172a, #065f46); color: white; border-radius: 16px; padding: 20px 22px; margin-top: 16px; }
+    .b105-key table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .b105-key td { padding: 8px 10px; border-top: 1px solid rgba(255,255,255,0.15); vertical-align: top; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "💬 Bài 35 - Cách dùng 好 / 难 + động từ",
+        "好 và 难 đứng trước động từ. Cả cụm dùng như tính từ: nhận xét vật đẹp hay xấu, ngon hay dở, dễ làm hay khó làm."
+    )
+
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
+        "📚 Lý thuyết",
+        "📝 Ví dụ đối chiếu",
+        "⚠️ Lưu ý & Mẹo nhớ",
+        "🎮 Luyện tập"
+    ])
+
+    cases = [
+        {
+            "color": "#059669",
+            "bg": "#ecfdf5",
+            "title": "1. Động từ giác quan và trải nghiệm",
+            "use": "<b>好</b> hoặc <b>难</b> đứng trước động từ gắn với giác quan hoặc một hoạt động có thể đánh giá cảm giác: <b>看</b> nhìn, xem, đọc; <b>吃</b> ăn; <b>喝</b> uống; <b>听</b> nghe; <b>闻</b> ngửi; <b>玩</b> chơi.",
+            "mean": "<b>好</b> là đẹp, ngon, hay, vui. <b>难</b> là xấu, dở, khó nghe, hôi. Với <b>玩</b>, <b>难玩</b> là khó chơi.",
+            "formula": [("Chủ ngữ", "#6ee7b7"), ("+", "#94a3b8"), ("很 / 真", "#6ee7b7"), ("+", "#94a3b8"), ("好 / 难", "#6ee7b7", True), ("+", "#94a3b8"), ("Động từ", "#6ee7b7")],
+            "rows": [
+                ("好看 / 难看", "hǎokàn / nánkàn", "đẹp, hay / xấu", "看 nhìn, xem, đọc"),
+                ("好吃 / 难吃", "hǎochī / nánchī", "ngon / dở", "吃 ăn"),
+                ("好喝 / 难喝", "hǎohē / nánhē", "ngon / dở (đồ uống)", "喝 uống"),
+                ("好听 / 难听", "hǎotīng / nántīng", "hay, êm tai / khó nghe", "听 nghe"),
+                ("好闻 / 难闻", "hǎowén / nánwén", "thơm, dễ chịu / hôi, khó ngửi", "闻 ngửi"),
+                ("好玩 / 难玩", "hǎowán / nánwán", "vui, thú vị / khó chơi", "玩 chơi"),
+            ],
+        },
+        {
+            "color": "#2563eb",
+            "bg": "#eff6ff",
+            "title": "2. Động từ thao tác và nhận thức",
+            "use": "<b>好</b> hoặc <b>难</b> đứng trước động từ chỉ một hành động có thể đánh giá mức độ dễ hay khó: <b>学</b> học, <b>用</b> dùng, <b>写</b> viết, <b>懂</b> hiểu, <b>记</b> nhớ, <b>找</b> tìm, <b>做</b> làm.",
+            "mean": "<b>好</b> là dễ làm việc đó. <b>难</b> là khó làm việc đó.",
+            "formula": [("Chủ ngữ", "#93c5fd"), ("+", "#94a3b8"), ("很", "#93c5fd"), ("+", "#94a3b8"), ("好 / 难", "#93c5fd", True), ("+", "#94a3b8"), ("Động từ", "#93c5fd")],
+            "rows": [
+                ("好学 / 难学", "hǎoxué / nánxué", "dễ học / khó học", "学 học"),
+                ("好用 / 难用", "hǎoyòng / nányòng", "dễ dùng / khó dùng", "用 dùng"),
+                ("好写 / 难写", "hǎoxiě / nánxiě", "dễ viết / khó viết", "写 viết"),
+                ("好懂 / 难懂", "hǎodǒng / nándǒng", "dễ hiểu / khó hiểu", "懂 hiểu"),
+                ("好记 / 难记", "hǎojì / nánjì", "dễ nhớ / khó nhớ", "记 nhớ"),
+                ("好找 / 难找", "hǎozhǎo / nánzhǎo", "dễ tìm / khó tìm", "找 tìm"),
+                ("好做 / 难做", "hǎozuò / nánzuò", "dễ làm / khó làm", "做 làm"),
+            ],
+        },
+        {
+            "color": "#d97706",
+            "bg": "#fffbeb",
+            "title": "3. Phủ định, mức độ, câu hỏi",
+            "use": "Phủ định của <b>好</b> dùng <b>不</b>, đứng trước cả cụm: <b>不好吃, 不好看, 不好写</b>. Mức độ <b>很, 真, 太……了, 非常</b> cũng đứng trước cả cụm <b>好</b> hoặc <b>难</b>.",
+            "mean": "Câu hỏi có hai cách: thêm <b>吗</b>, hoặc lặp <b>好不 + 好 + động từ</b>.",
+            "formula": [("不 / 很 / 真 / 太 / 非常", "#fcd34d"), ("+", "#94a3b8"), ("好 / 难", "#fcd34d", True), ("+", "#94a3b8"), ("Động từ", "#fcd34d")],
+            "rows": [
+                ("这个菜不好吃。", "Zhège cài bù hǎochī.", "Món này không ngon.", "不 đứng trước 好吃"),
+                ("这个菜很好吃。", "Zhège cài hěn hǎochī.", "Món này rất ngon.", "很 đứng trước 好吃"),
+                ("这首歌真好听。", "Zhè shǒu gē zhēn hǎotīng.", "Bài hát này hay thật.", "真 đứng trước 好听"),
+                ("这首歌太好听了。", "Zhè shǒu gē tài hǎotīng le.", "Bài hát này hay quá.", "太……了 bao cả cụm"),
+                ("这个手机非常好用。", "Zhège shǒujī fēicháng hǎoyòng.", "Điện thoại này rất dễ dùng.", "非常 đứng trước 好用"),
+                ("这个字很难写。", "Zhège zì hěn nánxiě.", "Chữ này rất khó viết.", "很 đứng trước 难写"),
+                ("好吃吗？", "Hǎochī ma?", "Ngon không?", "Thêm 吗"),
+                ("好不好吃？", "Hǎo bu hǎochī?", "Có ngon không?", "Lặp 好不好"),
+                ("这个字难写吗？", "Zhège zì nánxiě ma?", "Chữ này khó viết không?", "难 + động từ + 吗"),
+            ],
+        },
+    ]
+
+    with tab_theory:
+        st.markdown("""
+        <div class="b105-hero">
+            <div class="b105-char">好 / 难 + động từ</div>
+            <div class="b105-py">hǎo / nán · đứng trước động từ</div>
+            <div class="b105-tag">Cả cụm dùng như một tính từ</div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.info("Khi nói, **好** gặp động từ thanh 3 thì đọc thành thanh 2. Chữ vẫn viết **hǎo**: **好写** nói *háo xiě*, **好懂** nói *háo dǒng*, **好找** nói *háo zhǎo*. **难** là thanh 2, đọc **nán**.")
+
+        for case in cases:
+            spans = ""
+            for part in case["formula"]:
+                text, color = part[0], part[1]
+                big = len(part) > 2 and part[2]
+                size = "1.7rem" if big else "1.02rem"
+                spans += f'<span style="color:{color};font-size:{size};font-weight:800;margin:0 4px;">{text}</span>'
+            rows = ""
+            for han, py, vi, note in case["rows"]:
+                rows += f"""
+                <tr>
+                    <td class="b105-han">{han}</td>
+                    <td class="b105-py2" style="color:{case['color']};">{py}</td>
+                    <td class="b105-vi">{vi}</td>
+                    <td class="b105-note">{note}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div class="b105-rule" style="border-left:5px solid {case['color']};background:{case['bg']};">
+                <h4 style="color:{case['color']};">{case['title']}</h4>
+                <p class="b105-use"><b>Cách dùng:</b> {case['use']}</p>
+                <p class="b105-mean"><b>Nghĩa:</b> {case['mean']}</p>
+                <div class="b105-formula">{spans}</div>
+                <table class="b105-table">
+                    <thead>
+                        <tr style="color:{case['color']};">
+                            <th>Chữ Hán</th><th>Pinyin</th><th>Nghĩa</th><th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with tab_examples:
+        st.markdown("### Nhóm giác quan: đẹp, ngon, hay — và ngược lại")
+        st.markdown("""
+        <div class="b105-pair">
+            <div class="b105-pair-title">好 là cảm giác dễ chịu · 难 là cảm giác ngược lại</div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">这件衣服很好看。</div>
+                <div class="meta">Zhè jiàn yīfu hěn hǎokàn. — Áo này rất đẹp.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这件衣服很难看。</div>
+                <div class="meta">Zhè jiàn yīfu hěn nánkàn. — Áo này rất xấu.</div>
+            </div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">这个菜很好吃。</div>
+                <div class="meta">Zhège cài hěn hǎochī. — Món này rất ngon.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这个菜很难吃。</div>
+                <div class="meta">Zhège cài hěn nánchī. — Món này rất dở.</div>
+            </div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">绿茶很好喝。</div>
+                <div class="meta">Lǜchá hěn hǎohē. — Trà xanh rất ngon.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这杯水很难喝。</div>
+                <div class="meta">Zhè bēi shuǐ hěn nánhē. — Cốc nước này rất dở.</div>
+            </div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">这首歌真好听。</div>
+                <div class="meta">Zhè shǒu gē zhēn hǎotīng. — Bài hát này hay thật.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这句话真难听。</div>
+                <div class="meta">Zhè jù huà zhēn nántīng. — Câu này khó nghe thật.</div>
+            </div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">这朵花真好闻。</div>
+                <div class="meta">Zhè duǒ huā zhēn hǎowén. — Hoa này thơm thật.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这个味道很难闻。</div>
+                <div class="meta">Zhège wèidào hěn nánwén. — Mùi này rất hôi.</div>
+            </div>
+            <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
+                <div class="han">这个游戏很好玩。</div>
+                <div class="meta">Zhège yóuxì hěn hǎowán. — Trò này rất vui.</div>
+            </div>
+            <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
+                <div class="han">这个游戏很难玩。</div>
+                <div class="meta">Zhège yóuxì hěn nánwán. — Trò này khó chơi.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### Nhóm thao tác: dễ làm và khó làm")
+        st.markdown("""
+        <div class="b105-pair">
+            <div class="b105-pair-title">好 là dễ · 难 là khó</div>
+            <div class="b105-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">汉语很好学。</div>
+                <div class="meta">Hànyǔ hěn hǎoxué. — Tiếng Hán dễ học.</div>
+            </div>
+            <div class="b105-line" style="background:#fff7ed;border-left:4px solid #ea580c;">
+                <div class="han">这个汉字很难写。</div>
+                <div class="meta">Zhège Hànzì hěn nánxiě. — Chữ Hán này khó viết.</div>
+            </div>
+            <div class="b105-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">这个手机很好用。</div>
+                <div class="meta">Zhège shǒujī hěn hǎoyòng. — Điện thoại này dễ dùng.</div>
+            </div>
+            <div class="b105-line" style="background:#fff7ed;border-left:4px solid #ea580c;">
+                <div class="han">这句话很难懂。</div>
+                <div class="meta">Zhè jù huà hěn nándǒng. — Câu này khó hiểu.</div>
+            </div>
+            <div class="b105-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">这个名字好记。</div>
+                <div class="meta">Zhège míngzi hǎojì. — Tên này dễ nhớ.</div>
+            </div>
+            <div class="b105-line" style="background:#fff7ed;border-left:4px solid #ea580c;">
+                <div class="han">他家很难找。</div>
+                <div class="meta">Tā jiā hěn nánzhǎo. — Nhà cậu ấy khó tìm.</div>
+            </div>
+            <div class="b105-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">这个字很好写。</div>
+                <div class="meta">Zhège zì hěn hǎoxiě. — Chữ này dễ viết.</div>
+            </div>
+            <div class="b105-line" style="background:#fff7ed;border-left:4px solid #ea580c;">
+                <div class="han">这个菜很难做。</div>
+                <div class="meta">Zhège cài hěn nánzuò. — Món này khó làm.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_tips:
+        st.markdown("""
+        <div class="b105-tip">
+            <div style="font-weight:800;font-size:1.05rem;color:#713f12;margin-bottom:8px;">Một câu để nhớ</div>
+            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Nhìn, ăn, nghe → 好 là ngon, đẹp, hay · Làm một việc → 好 là dễ, 难 là khó</div>
+        </div>
+        """, unsafe_allow_html=True)
+        traps = [
+            ("Chủ ngữ là vật được nhận xét", "这个菜很好吃。 Món đứng trước. Người ăn không đứng vào chỗ chủ ngữ của mẫu này."),
+            ("好 gặp thanh 3 thì khi nói đổi thành thanh 2", "好写 nói háo xiě, 好懂 nói háo dǒng, 好找 nói háo zhǎo. Chữ vẫn viết hǎo. 难 luôn đọc nán."),
+            ("是, 有, 在, 死 không đi vào mẫu này", "Những động từ này không có mức độ dễ hay khó, cũng không phải cảm nhận khi nhìn, ăn, nghe."),
+            ("Phủ định của 好 là 不", "不好吃, 不好看, 不好写. 不 đứng trước cả cụm."),
+            ("难玩 là khó chơi", "好玩 là vui. 难玩 là khó chơi, không phải “không vui”."),
+        ]
+        for title, body in traps:
+            st.markdown(f"""
+            <div class="b105-trap">
+                <div style="font-weight:800;color:#9f1239;margin-bottom:4px;">⚠️ {title}</div>
+                <div style="color:#334155;line-height:1.55;">{body}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="b105-key">
+            <div style="font-weight:800;font-size:1.05rem;">Bảng chọn nhanh</div>
+            <table>
+                <tr><td style="width:42%;font-weight:700;">Muốn nói</td><td>Câu</td></tr>
+                <tr><td>Ngon, đẹp, hay, vui</td><td>好吃 · 好看 · 好听 · 好玩</td></tr>
+                <tr><td>Dở, xấu, khó nghe, hôi</td><td>难吃 · 难看 · 难听 · 难闻</td></tr>
+                <tr><td>Dễ học, dễ viết, dễ tìm</td><td>好学 · 好写 · 好找</td></tr>
+                <tr><td>Khó viết, khó hiểu, khó làm</td><td>难写 · 难懂 · 难做</td></tr>
+                <tr><td>Không ngon</td><td>不好吃</td></tr>
+                <tr><td>Hỏi</td><td>好吃吗？ · 好不好吃？ · 难写吗？</td></tr>
+            </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.markdown("Chọn câu hoặc chữ đúng. Nộp bài để xem giải thích.")
+        quiz_data = [
+            {"q": "“Món này rất ngon.”", "options": ["这个菜很好吃。", "这个菜吃很好。", "这个菜好很吃。"], "answer": "这个菜很好吃。", "explain": "好吃 là ngon. 很 đứng trước cả cụm 好吃."},
+            {"q": "“Chữ này khó viết.”", "options": ["这个字很难写。", "这个字写很难。", "这个字难很写。"], "answer": "这个字很难写。", "explain": "Nhóm thao tác: 难 + 写 = khó viết. 难 đứng trước động từ."},
+            {"q": "“Bài hát này hay quá.”", "options": ["这首歌太好听了。", "这首歌好听太了。", "这首歌太听好了。"], "answer": "这首歌太好听了。", "explain": "太……了 bao ngoài cụm 好听. 好 đứng trước 听."},
+            {"q": "“Áo này rất xấu.”", "options": ["这件衣服很难看。", "这件衣服看很难。", "这件衣服好难看不。"], "answer": "这件衣服很难看。", "explain": "Nhóm giác quan: 难看 là xấu. 难 đứng trước 看."},
+            {"q": "“Câu này khó hiểu.”", "options": ["这句话很难懂。", "这句话懂很难。", "这句话好难懂不。"], "answer": "这句话很难懂。", "explain": "难懂 là khó hiểu. 懂 là động từ nhận thức, đứng sau 难."},
+            {"q": "Câu nào là phủ định của “ngon”?", "options": ["这个菜不好吃。", "这个菜没好吃。", "这个菜好吃不。"], "answer": "这个菜不好吃。", "explain": "Phủ định của 好 dùng 不: 不好吃."},
+            {"q": "Động từ nào không đứng sau 好 theo mẫu này?", "options": ["写", "吃", "是"], "answer": "是", "explain": "是 không có mức độ dễ hay khó, cũng không phải cảm nhận. 写 và 吃 thì dùng được: 好写, 好吃."},
+            {"q": "好写 khi nói đọc thế nào?", "options": ["hǎo xiě", "háo xiě", "hào xiě"], "answer": "háo xiě", "explain": "写 là thanh 3, nên 好 khi nói đổi thành thanh 2. Chữ vẫn viết hǎo."},
+        ]
+        if "b105_submitted" not in st.session_state:
+            st.session_state.b105_submitted = False
+        if "b105_answers" not in st.session_state:
+            st.session_state.b105_answers = {}
+        for i, q in enumerate(quiz_data):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Câu {i+1}. {q['q']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b105_a{i}"
+            st.radio(f"Chọn đáp án câu {i+1}:", q["options"], key=key, horizontal=True, disabled=st.session_state.b105_submitted, label_visibility="collapsed")
+            if st.session_state.b105_submitted:
+                user_ans = st.session_state.b105_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"Đúng. {q['explain']}")
+                else:
+                    st.error(f"Đáp án đúng: **{q['answer']}**. {q['explain']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b105_submitted:
+                if st.button("Nộp bài", width="stretch", key="b105_submit", type="primary"):
+                    st.session_state.b105_answers = {f"b105_a{i}": st.session_state.get(f"b105_a{i}") for i in range(len(quiz_data))}
+                    st.session_state.b105_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b105_submitted:
+                if st.button("Làm lại", width="stretch", key="b105_reset"):
+                    st.session_state.b105_submitted = False
+                    st.session_state.b105_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b105_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+        if st.session_state.b105_submitted:
+            correct = sum(1 for i, q in enumerate(quiz_data) if st.session_state.b105_answers.get(f"b105_a{i}") == q["answer"])
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "Nắm vững cách dùng 好 và 难 đứng trước động từ."
+            elif pct >= 70:
+                msg = "Xem lại nhóm giác quan và nhóm dễ hay khó."
+            else:
+                msg = "Đọc lại phần Lý thuyết rồi làm lại."
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#064e3b,#1e3a8a);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
+                <div>{pct}% đúng</div>
+                <div style="margin-top:8px;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+
+def show_lesson10_6_lia():
+    st.markdown("""
+    <style>
+    .b106-hero {
+        background: linear-gradient(145deg, #fff7ed, #ffedd5);
+        border: 2px solid #fdba74;
+        border-radius: 18px;
+        padding: 28px 24px;
+        text-align: center;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        margin-bottom: 8px;
+    }
+    .b106-char { font-size: 4.2rem; font-weight: 900; color: #c2410c; line-height: 1.15; }
+    .b106-py { font-family: monospace; font-size: 1.45rem; font-weight: 800; color: #9a3412; margin-top: 6px; }
+    .b106-tag {
+        display: inline-block; margin-top: 10px; background: #fdba74; color: #7c2d12;
+        font-weight: 800; padding: 4px 14px; border-radius: 999px;
+    }
+    .b106-rule {
+        background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px;
+        padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .b106-rule h4 { margin: 0 0 6px 0; }
+    .b106-use, .b106-mean { color: #334155; font-size: 0.95rem; line-height: 1.65; margin: 0 0 8px 0; }
+    .b106-use b, .b106-mean b { color: #0f172a; }
+    .b106-formula {
+        background: #1e293b; border-radius: 10px; padding: 12px 18px;
+        display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+    }
+    .b106-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .b106-table th { text-align: left; padding: 8px 10px; font-weight: 800; }
+    .b106-table td { padding: 8px 10px; border-top: 1px solid #e2e8f0; vertical-align: top; }
+    .b106-han { font-size: 1.12rem; font-weight: 800; color: #0f172a; }
+    .b106-py2 { font-family: monospace; font-weight: 700; }
+    .b106-vi { font-style: italic; color: #475569; }
+    .b106-note { color: #64748b; font-size: 0.85rem; }
+    .b106-pair { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 18px 20px; margin-bottom: 14px; }
+    .b106-pair-title { font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+    .b106-line { border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+    .b106-line .han { font-size: 1.15rem; font-weight: 800; color: #0f172a; }
+    .b106-line .meta { font-size: 0.88rem; color: #64748b; }
+    .b106-tip { background: linear-gradient(135deg, #fefce8, #fef9c3); border: 2px solid #fde047; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; }
+    .b106-trap { background: #fff1f2; border: 2px solid #fda4af; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+    .b106-key { background: linear-gradient(135deg, #7c2d12, #c2410c); color: white; border-radius: 16px; padding: 20px 22px; margin-top: 16px; }
+    .b106-key table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .b106-key td { padding: 8px 10px; border-top: 1px solid rgba(255,255,255,0.18); vertical-align: top; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    render_lesson_intro(
+        "💬 Bài 36 - Cách dùng 俩 (liǎ)",
+        "俩 là cách nói gọn của 两个, dùng cho người. Trong 俩 đã có sẵn 个, nên phía sau không thêm lượng từ."
+    )
+
+    tab_theory, tab_examples, tab_tips, tab_quiz = st.tabs([
+        "📚 Lý thuyết",
+        "📝 Ví dụ đối chiếu",
+        "⚠️ Lưu ý & Mẹo nhớ",
+        "🎮 Luyện tập"
+    ])
+
+    cases = [
+        {
+            "color": "#c2410c",
+            "bg": "#fff7ed",
+            "title": "1. Đứng sau đại từ",
+            "use": "Đại từ số nhiều chỉ người, rồi thêm <b>俩</b>.",
+            "mean": "Đúng hai người trong nhóm đó. <b>我们俩</b> là hai chúng tôi, bằng <b>我们两个人</b>.",
+            "formula": [("我们 / 你们 / 他们 / 咱们", "#fdba74"), ("+", "#94a3b8"), ("俩", "#fdba74", True)],
+            "rows": [
+                ("我们俩。", "Wǒmen liǎ.", "Hai chúng tôi.", "我们两个人"),
+                ("你们俩。", "Nǐmen liǎ.", "Hai bạn.", "你们两个人"),
+                ("他们俩。", "Tāmen liǎ.", "Hai người họ.", "他们两个人"),
+                ("咱们俩。", "Zánmen liǎ.", "Hai chúng ta.", "咱们两个人"),
+            ],
+        },
+        {
+            "color": "#2563eb",
+            "bg": "#eff6ff",
+            "title": "2. Đi với danh từ chỉ người",
+            "use": "<b>俩</b> đứng trước danh từ chỉ người. Không viết <b>个</b> ở giữa. Với cặp người thân, danh từ đứng trước và <b>俩</b> đứng sau: <b>兄弟俩, 姐妹俩, 夫妻俩</b>.",
+            "mean": "Hai người ấy.",
+            "formula": [("俩", "#93c5fd", True), ("+", "#94a3b8"), ("Danh từ chỉ người", "#93c5fd")],
+            "rows": [
+                ("俩人。", "Liǎ rén.", "Hai người.", "两个人"),
+                ("俩学生。", "Liǎ xuésheng.", "Hai học sinh.", "两个学生"),
+                ("俩孩子。", "Liǎ háizi.", "Hai đứa trẻ.", "两个孩子"),
+                ("兄弟俩。", "Xiōngdì liǎ.", "Hai anh em.", "俩 đứng sau cặp người thân"),
+                ("姐妹俩。", "Jiěmèi liǎ.", "Hai chị em.", "俩 đứng sau"),
+                ("夫妻俩。", "Fūqī liǎ.", "Hai vợ chồng.", "俩 đứng sau"),
+                ("父子俩。", "Fùzǐ liǎ.", "Hai bố con.", "俩 đứng sau"),
+                ("母女俩。", "Mǔnǚ liǎ.", "Hai mẹ con.", "俩 đứng sau"),
+                ("俩口子。", "Liǎ kǒuzi.", "Hai vợ chồng.", "Khi nói: liá kǒuzi"),
+            ],
+        },
+    ]
+
+    with tab_theory:
+        st.markdown("""
+        <div class="b106-hero">
+            <div class="b106-char">俩</div>
+            <div class="b106-py">liǎ · thanh 3</div>
+            <div class="b106-tag">两个 đã gộp lại · chỉ người</div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br/>", unsafe_allow_html=True)
+        st.info("Khi nói, **俩** gặp chữ thanh 3 thì đọc thành thanh 2. Chữ vẫn viết **liǎ**: **俩口子** nói *liá kǒuzi*.")
+
+        for case in cases:
+            spans = ""
+            for part in case["formula"]:
+                text, color = part[0], part[1]
+                big = len(part) > 2 and part[2]
+                size = "1.7rem" if big else "1.02rem"
+                spans += f'<span style="color:{color};font-size:{size};font-weight:800;margin:0 4px;">{text}</span>'
+            rows = ""
+            for han, py, vi, note in case["rows"]:
+                rows += f"""
+                <tr>
+                    <td class="b106-han">{han}</td>
+                    <td class="b106-py2" style="color:{case['color']};">{py}</td>
+                    <td class="b106-vi">{vi}</td>
+                    <td class="b106-note">{note}</td>
+                </tr>"""
+            st.markdown(f"""
+            <div class="b106-rule" style="border-left:5px solid {case['color']};background:{case['bg']};">
+                <h4 style="color:{case['color']};">{case['title']}</h4>
+                <p class="b106-use"><b>Cách dùng:</b> {case['use']}</p>
+                <p class="b106-mean"><b>Nghĩa:</b> {case['mean']}</p>
+                <div class="b106-formula">{spans}</div>
+                <table class="b106-table">
+                    <thead>
+                        <tr style="color:{case['color']};">
+                            <th>Chữ Hán</th><th>Pinyin</th><th>Nghĩa</th><th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
+            """, unsafe_allow_html=True)
+
+    with tab_examples:
+        st.markdown("### Cùng một nghĩa, hai cách nói")
+        st.markdown("""
+        <div class="b106-pair">
+            <div class="b106-pair-title">Nói đủ bằng 两个 · nói gọn bằng 俩</div>
+            <div class="b106-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">我们两个人。</div>
+                <div class="meta">Wǒmen liǎng gè rén. — Hai chúng tôi. <b>Nói đủ.</b></div>
+            </div>
+            <div class="b106-line" style="background:#fff7ed;border-left:4px solid #c2410c;">
+                <div class="han">我们俩。</div>
+                <div class="meta">Wǒmen liǎ. — Hai chúng tôi. <b>Nói gọn.</b></div>
+            </div>
+            <div class="b106-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">两个人。</div>
+                <div class="meta">Liǎng gè rén. — Hai người.</div>
+            </div>
+            <div class="b106-line" style="background:#fff7ed;border-left:4px solid #c2410c;">
+                <div class="han">俩人。</div>
+                <div class="meta">Liǎ rén. — Hai người.</div>
+            </div>
+            <div class="b106-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">两个孩子。</div>
+                <div class="meta">Liǎng gè háizi. — Hai đứa trẻ.</div>
+            </div>
+            <div class="b106-line" style="background:#fff7ed;border-left:4px solid #c2410c;">
+                <div class="han">俩孩子。</div>
+                <div class="meta">Liǎ háizi. — Hai đứa trẻ.</div>
+            </div>
+            <div class="b106-line" style="background:#f8fafc;border-left:4px solid #64748b;">
+                <div class="han">夫妻两个人。</div>
+                <div class="meta">Fūqī liǎng gè rén. — Hai vợ chồng.</div>
+            </div>
+            <div class="b106-line" style="background:#fff7ed;border-left:4px solid #c2410c;">
+                <div class="han">夫妻俩。</div>
+                <div class="meta">Fūqī liǎ. — Hai vợ chồng.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("### Đồ vật vẫn dùng 两")
+        st.markdown("""
+        <div class="b106-pair">
+            <div class="b106-pair-title">俩 chỉ người · đồ vật dùng 两 + lượng từ</div>
+            <div class="b106-line" style="background:#eff6ff;border-left:4px solid #2563eb;">
+                <div class="han">两本书。 · 两个苹果。 · 两杯茶。</div>
+                <div class="meta">Liǎng běn shū. · Liǎng gè píngguǒ. · Liǎng bēi chá. — Hai quyển sách, hai quả táo, hai chén trà.</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_tips:
+        st.markdown("""
+        <div class="b106-tip">
+            <div style="font-weight:800;font-size:1.05rem;color:#713f12;margin-bottom:8px;">Một câu để nhớ</div>
+            <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">俩 = 两个, chỉ người, và 个 đã nằm trong chữ 俩</div>
+        </div>
+        """, unsafe_allow_html=True)
+        traps = [
+            ("俩 chỉ người", "Đồ vật vẫn dùng <b>两 + lượng từ</b>: 两本书, 两个苹果, 两杯茶."),
+            ("Không thêm lượng từ sau 俩", "Hai người viết <b>俩人</b> hoặc <b>两个人</b>."),
+            ("二, 两, 俩 mỗi chữ một chỗ", "<b>二</b> là chữ số: 十二, 第二. <b>两</b> là số lượng trước lượng từ: 两个人. <b>俩</b> là 两个 đã gộp lại, chỉ người: 我们俩."),
+            ("俩口子 khi nói đổi thanh", "口 là thanh 3, nên 俩 nói thành thanh 2: liá kǒuzi. Chữ vẫn viết liǎ."),
+            ("Còn một âm liǎng", "Trong từ <b>伎俩</b> (jìliǎng, thủ đoạn), 俩 đọc liǎng. Bài này chỉ học âm liǎ."),
+        ]
+        for title, body in traps:
+            st.markdown(f"""
+            <div class="b106-trap">
+                <div style="font-weight:800;color:#9f1239;margin-bottom:4px;">⚠️ {title}</div>
+                <div style="color:#334155;line-height:1.55;">{body}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div class="b106-key">
+            <div style="font-weight:800;font-size:1.05rem;">Bảng chọn nhanh</div>
+            <table>
+                <tr><td style="width:42%;font-weight:700;">Muốn nói</td><td>Câu</td></tr>
+                <tr><td>Hai chúng tôi, hai bạn, hai người họ</td><td>我们俩 · 你们俩 · 他们俩</td></tr>
+                <tr><td>Hai người, hai học sinh, hai đứa trẻ</td><td>俩人 · 俩学生 · 俩孩子</td></tr>
+                <tr><td>Hai anh em, hai chị em, hai vợ chồng</td><td>兄弟俩 · 姐妹俩 · 夫妻俩</td></tr>
+                <tr><td>Hai quyển sách, hai quả táo</td><td>两本书 · 两个苹果</td></tr>
+            </table>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with tab_quiz:
+        st.markdown("Chọn câu hoặc chữ đúng. Nộp bài để xem giải thích.")
+        quiz_data = [
+            {"q": "“Hai chúng tôi.”", "options": ["我们俩。", "我们两个俩。", "我们二俩。"], "answer": "我们俩。", "explain": "Đại từ số nhiều rồi thêm 俩. 我们俩 = 我们两个人."},
+            {"q": "“Hai người.”", "options": ["俩个人。", "俩人。", "二人个。"], "answer": "俩人。", "explain": "俩 đã gồm 个, nên viết 俩人. Muốn nói đủ thì dùng 两个人."},
+            {"q": "“Hai quyển sách.”", "options": ["俩书。", "俩本书。", "两本书。"], "answer": "两本书。", "explain": "Sách là đồ vật. Dùng 两 + lượng từ: 两本书."},
+            {"q": "兄弟俩 nghĩa là", "options": ["anh em thứ hai", "hai anh em", "hai quyển sách"], "answer": "hai anh em", "explain": "兄弟 là anh em. 俩 đứng sau, nghĩa là hai người trong cặp đó."},
+            {"q": "俩口子 khi nói đọc thế nào?", "options": ["liǎ kǒuzi", "liá kǒuzi", "liǎng kǒuzi"], "answer": "liá kǒuzi", "explain": "口 là thanh 3, nên 俩 khi nói đổi thành thanh 2. Chữ vẫn viết liǎ."},
+        ]
+        if "b106_submitted" not in st.session_state:
+            st.session_state.b106_submitted = False
+        if "b106_answers" not in st.session_state:
+            st.session_state.b106_answers = {}
+        for i, q in enumerate(quiz_data):
+            st.markdown(f"""
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:4px;">
+                <div style="font-size:1.15rem;font-weight:800;color:#0f172a;">Câu {i+1}. {q['q']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            key = f"b106_a{i}"
+            st.radio(f"Chọn đáp án câu {i+1}:", q["options"], key=key, horizontal=True, disabled=st.session_state.b106_submitted, label_visibility="collapsed")
+            if st.session_state.b106_submitted:
+                user_ans = st.session_state.b106_answers.get(key)
+                if user_ans == q["answer"]:
+                    st.success(f"Đúng. {q['explain']}")
+                else:
+                    st.error(f"Đáp án đúng: **{q['answer']}**. {q['explain']}")
+            st.markdown("<br/>", unsafe_allow_html=True)
+        col_submit, col_reset = st.columns([1, 1])
+        with col_submit:
+            if not st.session_state.b106_submitted:
+                if st.button("Nộp bài", width="stretch", key="b106_submit", type="primary"):
+                    st.session_state.b106_answers = {f"b106_a{i}": st.session_state.get(f"b106_a{i}") for i in range(len(quiz_data))}
+                    st.session_state.b106_submitted = True
+                    st.rerun()
+        with col_reset:
+            if st.session_state.b106_submitted:
+                if st.button("Làm lại", width="stretch", key="b106_reset"):
+                    st.session_state.b106_submitted = False
+                    st.session_state.b106_answers = {}
+                    for i in range(len(quiz_data)):
+                        key = f"b106_a{i}"
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    st.rerun()
+        if st.session_state.b106_submitted:
+            correct = sum(1 for i, q in enumerate(quiz_data) if st.session_state.b106_answers.get(f"b106_a{i}") == q["answer"])
+            total = len(quiz_data)
+            pct = int(correct / total * 100)
+            if pct == 100:
+                msg = "Nắm vững cách dùng 俩."
+            elif pct >= 70:
+                msg = "Xem lại chỗ 俩 chỉ người và không thêm 个."
+            else:
+                msg = "Đọc lại phần Lý thuyết rồi làm lại."
+            st.markdown(f"""
+            <div style="background:linear-gradient(135deg,#7c2d12,#1e3a8a);color:white;border-radius:16px;padding:28px;text-align:center;margin-top:12px;">
+                <div style="font-size:3.2rem;font-weight:900;">{correct}/{total}</div>
+                <div>{pct}% đúng</div>
+                <div style="margin-top:8px;font-weight:700;">{msg}</div>
+            </div>
+            """, unsafe_allow_html=True)
