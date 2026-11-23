@@ -1706,8 +1706,8 @@ def show_lesson10_5_hao_verb():
             "bg": "#ecfdf5",
             "title": "1. Động từ giác quan và trải nghiệm",
             "use": "<b>好</b> hoặc <b>难</b> đứng trước động từ gắn với giác quan hoặc một hoạt động có thể đánh giá cảm giác: <b>看</b> nhìn, xem, đọc; <b>吃</b> ăn; <b>喝</b> uống; <b>听</b> nghe; <b>闻</b> ngửi; <b>玩</b> chơi.",
-            "mean": "<b>好</b> là đẹp, ngon, hay, vui. <b>难</b> là xấu, dở, khó nghe, hôi. Với <b>玩</b>, <b>难玩</b> là khó chơi.",
-            "formula": [("Chủ ngữ", "#6ee7b7"), ("+", "#94a3b8"), ("很 / 真", "#6ee7b7"), ("+", "#94a3b8"), ("好 / 难", "#6ee7b7", True), ("+", "#94a3b8"), ("Động từ", "#6ee7b7")],
+            "mean": "<b>好</b> là đẹp, ngon, hay, vui. <b>难</b> là xấu, dở, khó nghe, hôi.",
+            "formula": [("Chủ ngữ", "#6ee7b7"), ("+", "#94a3b8"), ("很", "#6ee7b7"), ("+", "#94a3b8"), ("好 / 难", "#6ee7b7", True), ("+", "#94a3b8"), ("Động từ", "#6ee7b7")],
             "rows": [
                 ("好看 / 难看", "hǎokàn / nánkàn", "đẹp, hay / xấu", "看 nhìn, xem, đọc"),
                 ("好吃 / 难吃", "hǎochī / nánchī", "ngon / dở", "吃 ăn"),
@@ -1737,20 +1737,16 @@ def show_lesson10_5_hao_verb():
         {
             "color": "#d97706",
             "bg": "#fffbeb",
-            "title": "3. Phủ định, mức độ, câu hỏi",
-            "use": "Phủ định của <b>好</b> dùng <b>不</b>, đứng trước cả cụm: <b>不好吃, 不好看, 不好写</b>. Mức độ <b>很, 真, 太……了, 非常</b> cũng đứng trước cả cụm <b>好</b> hoặc <b>难</b>.",
-            "mean": "Câu hỏi có hai cách: thêm <b>吗</b>, hoặc lặp <b>好不 + 好 + động từ</b>.",
-            "formula": [("不 / 很 / 真 / 太 / 非常", "#fcd34d"), ("+", "#94a3b8"), ("好 / 难", "#fcd34d", True), ("+", "#94a3b8"), ("Động từ", "#fcd34d")],
+            "title": "3. Phủ định với 不",
+            "use": "Phủ định của <b>好</b> chỉ dùng <b>不</b>. <b>不</b> đứng trước cả cụm <b>好 + động từ</b>.",
+            "mean": "<b>不好吃</b> là không ngon, <b>不好看</b> là không đẹp, <b>不好写</b> là không dễ viết.",
+            "formula": [("Chủ ngữ", "#fcd34d"), ("+", "#94a3b8"), ("不", "#fcd34d", True), ("+", "#94a3b8"), ("好", "#fcd34d"), ("+", "#94a3b8"), ("Động từ", "#fcd34d")],
             "rows": [
                 ("这个菜不好吃。", "Zhège cài bù hǎochī.", "Món này không ngon.", "不 đứng trước 好吃"),
-                ("这个菜很好吃。", "Zhège cài hěn hǎochī.", "Món này rất ngon.", "很 đứng trước 好吃"),
-                ("这首歌真好听。", "Zhè shǒu gē zhēn hǎotīng.", "Bài hát này hay thật.", "真 đứng trước 好听"),
-                ("这首歌太好听了。", "Zhè shǒu gē tài hǎotīng le.", "Bài hát này hay quá.", "太……了 bao cả cụm"),
-                ("这个手机非常好用。", "Zhège shǒujī fēicháng hǎoyòng.", "Điện thoại này rất dễ dùng.", "非常 đứng trước 好用"),
-                ("这个字很难写。", "Zhège zì hěn nánxiě.", "Chữ này rất khó viết.", "很 đứng trước 难写"),
-                ("好吃吗？", "Hǎochī ma?", "Ngon không?", "Thêm 吗"),
-                ("好不好吃？", "Hǎo bu hǎochī?", "Có ngon không?", "Lặp 好不好"),
-                ("这个字难写吗？", "Zhège zì nánxiě ma?", "Chữ này khó viết không?", "难 + động từ + 吗"),
+                ("这件衣服不好看。", "Zhè jiàn yīfu bù hǎokàn.", "Áo này không đẹp.", "不 đứng trước 好看"),
+                ("这首歌不好听。", "Zhè shǒu gē bù hǎotīng.", "Bài hát này không hay.", "不 đứng trước 好听"),
+                ("这个字不好写。", "Zhège zì bù hǎoxiě.", "Chữ này không dễ viết.", "不 đứng trước 好写"),
+                ("这句话不好懂。", "Zhè jù huà bù hǎodǒng.", "Câu này không dễ hiểu.", "不 đứng trước 好懂"),
             ],
         },
     ]
@@ -1764,7 +1760,6 @@ def show_lesson10_5_hao_verb():
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br/>", unsafe_allow_html=True)
-        st.info("Khi nói, **好** gặp động từ thanh 3 thì đọc thành thanh 2. Chữ vẫn viết **hǎo**: **好写** nói *háo xiě*, **好懂** nói *háo dǒng*, **好找** nói *háo zhǎo*. **难** là thanh 2, đọc **nán**.")
 
         for case in cases:
             spans = ""
@@ -1829,16 +1824,16 @@ def show_lesson10_5_hao_verb():
                 <div class="meta">Zhè bēi shuǐ hěn nánhē. — Cốc nước này rất dở.</div>
             </div>
             <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
-                <div class="han">这首歌真好听。</div>
-                <div class="meta">Zhè shǒu gē zhēn hǎotīng. — Bài hát này hay thật.</div>
+                <div class="han">这首歌很好听。</div>
+                <div class="meta">Zhè shǒu gē hěn hǎotīng. — Bài hát này rất hay.</div>
             </div>
             <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
-                <div class="han">这句话真难听。</div>
-                <div class="meta">Zhè jù huà zhēn nántīng. — Câu này khó nghe thật.</div>
+                <div class="han">这句话很难听。</div>
+                <div class="meta">Zhè jù huà hěn nántīng. — Câu này rất khó nghe.</div>
             </div>
             <div class="b105-line" style="background:#ecfdf5;border-left:4px solid #059669;">
-                <div class="han">这朵花真好闻。</div>
-                <div class="meta">Zhè duǒ huā zhēn hǎowén. — Hoa này thơm thật.</div>
+                <div class="han">这朵花很好闻。</div>
+                <div class="meta">Zhè duǒ huā hěn hǎowén. — Hoa này rất thơm.</div>
             </div>
             <div class="b105-line" style="background:#fff1f2;border-left:4px solid #e11d48;">
                 <div class="han">这个味道很难闻。</div>
@@ -1903,10 +1898,8 @@ def show_lesson10_5_hao_verb():
         """, unsafe_allow_html=True)
         traps = [
             ("Chủ ngữ là vật được nhận xét", "这个菜很好吃。 Món đứng trước. Người ăn không đứng vào chỗ chủ ngữ của mẫu này."),
-            ("好 gặp thanh 3 thì khi nói đổi thành thanh 2", "好写 nói háo xiě, 好懂 nói háo dǒng, 好找 nói háo zhǎo. Chữ vẫn viết hǎo. 难 luôn đọc nán."),
             ("是, 有, 在, 死 không đi vào mẫu này", "Những động từ này không có mức độ dễ hay khó, cũng không phải cảm nhận khi nhìn, ăn, nghe."),
-            ("Phủ định của 好 là 不", "不好吃, 不好看, 不好写. 不 đứng trước cả cụm."),
-            ("难玩 là khó chơi", "好玩 là vui. 难玩 là khó chơi, không phải “không vui”."),
+            ("Phủ định của 好 là 不", "不好吃, 不好看, 不好写. 不 đứng trước cả cụm 好 + động từ."),
         ]
         for title, body in traps:
             st.markdown(f"""
@@ -1924,8 +1917,7 @@ def show_lesson10_5_hao_verb():
                 <tr><td>Dở, xấu, khó nghe, hôi</td><td>难吃 · 难看 · 难听 · 难闻</td></tr>
                 <tr><td>Dễ học, dễ viết, dễ tìm</td><td>好学 · 好写 · 好找</td></tr>
                 <tr><td>Khó viết, khó hiểu, khó làm</td><td>难写 · 难懂 · 难做</td></tr>
-                <tr><td>Không ngon</td><td>不好吃</td></tr>
-                <tr><td>Hỏi</td><td>好吃吗？ · 好不好吃？ · 难写吗？</td></tr>
+                <tr><td>Không ngon, không đẹp, không dễ viết</td><td>不好吃 · 不好看 · 不好写</td></tr>
             </table>
         </div>
         """, unsafe_allow_html=True)
@@ -1935,12 +1927,12 @@ def show_lesson10_5_hao_verb():
         quiz_data = [
             {"q": "“Món này rất ngon.”", "options": ["这个菜很好吃。", "这个菜吃很好。", "这个菜好很吃。"], "answer": "这个菜很好吃。", "explain": "好吃 là ngon. 很 đứng trước cả cụm 好吃."},
             {"q": "“Chữ này khó viết.”", "options": ["这个字很难写。", "这个字写很难。", "这个字难很写。"], "answer": "这个字很难写。", "explain": "Nhóm thao tác: 难 + 写 = khó viết. 难 đứng trước động từ."},
-            {"q": "“Bài hát này hay quá.”", "options": ["这首歌太好听了。", "这首歌好听太了。", "这首歌太听好了。"], "answer": "这首歌太好听了。", "explain": "太……了 bao ngoài cụm 好听. 好 đứng trước 听."},
+            {"q": "“Áo này không đẹp.”", "options": ["这件衣服不好看。", "这件衣服看不好。", "这件衣服不看好。"], "answer": "这件衣服不好看。", "explain": "Phủ định dùng 不 đứng trước 好看."},
             {"q": "“Áo này rất xấu.”", "options": ["这件衣服很难看。", "这件衣服看很难。", "这件衣服好难看不。"], "answer": "这件衣服很难看。", "explain": "Nhóm giác quan: 难看 là xấu. 难 đứng trước 看."},
             {"q": "“Câu này khó hiểu.”", "options": ["这句话很难懂。", "这句话懂很难。", "这句话好难懂不。"], "answer": "这句话很难懂。", "explain": "难懂 là khó hiểu. 懂 là động từ nhận thức, đứng sau 难."},
             {"q": "Câu nào là phủ định của “ngon”?", "options": ["这个菜不好吃。", "这个菜没好吃。", "这个菜好吃不。"], "answer": "这个菜不好吃。", "explain": "Phủ định của 好 dùng 不: 不好吃."},
             {"q": "Động từ nào không đứng sau 好 theo mẫu này?", "options": ["写", "吃", "是"], "answer": "是", "explain": "是 không có mức độ dễ hay khó, cũng không phải cảm nhận. 写 và 吃 thì dùng được: 好写, 好吃."},
-            {"q": "好写 khi nói đọc thế nào?", "options": ["hǎo xiě", "háo xiě", "hào xiě"], "answer": "háo xiě", "explain": "写 là thanh 3, nên 好 khi nói đổi thành thanh 2. Chữ vẫn viết hǎo."},
+            {"q": "“Chữ này không dễ viết.”", "options": ["这个字不好写。", "这个字好不写。", "这个字不字好写。"], "answer": "这个字不好写。", "explain": "不 đứng trước 好写."},
         ]
         if "b105_submitted" not in st.session_state:
             st.session_state.b105_submitted = False
