@@ -136,7 +136,7 @@ except Exception as e:
     pass
 
 
-def show_consolidated_flashcards():
+def show_consolidated_flashcards(level=None):
     import streamlit as st
     import random
     # existing code unchanged
@@ -156,14 +156,22 @@ def show_consolidated_flashcards():
                 st.error(f"Lỗi khi khởi tạo thẻ từ: {e}")
                 return
 
-    # Render Header without description
-    render_lesson_intro("🏆Flashcard Ôn Tập Từ Vựng")
+    title = "🏆 Flashcard Từ Vựng HSK"
+    if level:
+        title += " · " + level.replace(" ", "").lower()
+    render_lesson_intro(title)
 
     # Embed Flashcard_Offline.html using Streamlit components
     try:
         with open(app_path, "r", encoding="utf-8") as f:
             html_content = f.read()
-        
+        if level:
+            html_content = html_content.replace(
+                "let currentLevel = 'HSK 1';",
+                f"let currentLevel = '{level}';",
+                1,
+            )
+
         components.html(html_content, height=850, scrolling=True)
     except Exception as e:
         st.error(f"Lỗi khi hiển thị ứng dụng: {e}")
@@ -569,7 +577,7 @@ mode = st.sidebar.selectbox("Khu vực học tập:", [
     "🗣️ Thực hành trên lớp",
     "📝 Bài Tập Trắc Nghiệm",
     "📄 Đề thi thử HSK 1",
-    "🏆 Flashcard Ôn Tập Từ Vựng"
+    "🏆 Flashcard Từ Vựng HSK"
 ])
 
 LESSON_GROUPS = [
@@ -681,7 +689,7 @@ elif mode == "🗣️ Thực hành trên lớp":
         "Bài 9.3 - Hội thoại đổi tiền"
     ])
 
-if mode == "🏆 Flashcard Ôn Tập Từ Vựng":
+if mode == "🏆 Flashcard Từ Vựng HSK":
     show_consolidated_flashcards()
 
 elif mode == "📝 Bài Tập Trắc Nghiệm":
@@ -691,7 +699,6 @@ elif mode == "📝 Bài Tập Trắc Nghiệm":
 elif mode == "📄 Đề thi thử HSK 1":
     exam_pick = st.sidebar.radio("Chọn đề:", ["Đề 1", "Đề 2", "Đề 3", "Bảng điểm"])
     hsk1_sample_exam.show_exam(exam_pick)
-
 
 elif menu == "Bài 1 - Bảng tổng hợp Thanh mẫu & Vận mẫu":
     lesson1.show_lesson1_summary_table()
