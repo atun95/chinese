@@ -1008,9 +1008,9 @@ components.html("""
                 var w = chunk.slice(i, j);
                 if(wordDict[w]){ hit = wordDict[w]; hitLen = j - i; break; }
             }
-            var piece = hit || pyDict[chunk[i]] || chunk[i];
+            var piece = hit || pyDict[chunk[i]] || '';
             if(!hit) hitLen = 1;
-            var addSpace = (hit || pyDict[chunk[i]]) && out && /[a-zA-Z\u00C0-\u024F]$/.test(out);
+            var addSpace = piece && out && /[a-zA-Z\u00C0-\u024F]$/.test(out);
             if(addSpace) out += ' ';
             out += piece;
             i += hitLen;
@@ -1061,24 +1061,39 @@ components.html("""
         return out;
     }
 
+    function onlyPinyin(py){
+        return py.split(/\\s+/).filter(function(tok){
+            return tok && !/[\\u3400-\\u9fff]/.test(tok);
+        }).join(' ');
+    }
+
     function renderPy(){
         var inp=el('pg-py-inp'), out=el('pg-py-out'); if(!inp||!out) return;
         var txt=inp.value; ss('pg_py_txt',txt);
         if(!txt.trim()){out.innerHTML='<span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin</span>'; out._pyText=''; return;}
-        var result = '';
-        var buf = '';
-        function flush(){
-            if(!buf) return;
-            result += phrasePinyin(buf);
-            buf = '';
+        var lines = txt.split(/\\n/);
+        var lineResults = [];
+        for(var li=0; li<lines.length; li++){
+            var line = lines[li];
+            var linePy = '';
+            var buf = '';
+            function flushLine(){
+                if(!buf) return;
+                var py = onlyPinyin(phrasePinyin(buf));
+                if(py){
+                    if(linePy) linePy += ' ';
+                    linePy += py;
+                }
+                buf = '';
+            }
+            for(var i=0;i<line.length;i++){
+                if(isZh(line[i])) buf += line[i];
+                else flushLine();
+            }
+            flushLine();
+            lineResults.push(linePy);
         }
-        for(var i=0;i<txt.length;i++){
-            var c = txt[i];
-            if(isZh(c)) buf += c;
-            else { flush(); result += c; }
-        }
-        flush();
-        result = result.replace(/[ \\t]+\\n/g, '\\n').replace(/\\n[ \\t]+/g, '\\n').trim();
+        var result = lineResults.join('\\n').replace(/[ \\t]+\\n/g, '\\n').replace(/\\n[ \\t]+/g, '\\n').trim();
         out._pyText = result;
         out.innerHTML = result.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\\n/g,'<br>').replace(/ /g,'&nbsp;');
     }
