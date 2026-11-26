@@ -911,8 +911,8 @@ components.html("""
         "#pg-fab-pinyin{bottom:84px;right:24px;background:linear-gradient(135deg,#0284c7,#0369a1);}",
         "#pg-fab-note:hover,#pg-fab-pinyin:hover{transform:scale(1.12);}",
         "#pg-popup-note,#pg-popup-pinyin{position:fixed!important;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden;z-index:2147483646!important;pointer-events:auto!important;resize:both;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}",
-        "#pg-popup-note{top:80px;right:24px;width:340px;height:260px;min-width:240px;min-height:44px;border:2px solid #e11d48;background:#fff;}",
-        "#pg-popup-pinyin{bottom:148px;right:24px;width:340px;height:280px;min-width:260px;min-height:44px;border:2px solid #0284c7;background:#fff;}",
+        "#pg-popup-note{top:80px;right:24px;width:340px;height:300px;min-width:240px;min-height:44px;border:2px solid #e11d48;background:#fff;}",
+        "#pg-popup-pinyin{bottom:148px;right:24px;width:340px;height:328px;min-width:260px;min-height:44px;border:2px solid #0284c7;background:#fff;}",
         "#pg-popup-note.pg-min,#pg-popup-pinyin.pg-min{height:44px!important;resize:none!important;}",
         ".pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 10px;height:44px;min-height:44px;cursor:move;user-select:none;flex-shrink:0;color:#fff;font-weight:700;font-size:13px;}",
         "#pg-popup-note .pg-hdr{background:#e11d48;}",
@@ -921,7 +921,13 @@ components.html("""
         ".pg-hdr button{background:rgba(255,255,255,.18);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .15s;pointer-events:auto!important;}",
         ".pg-hdr button:hover{background:rgba(255,255,255,.38);}",
         ".pg-body{flex:1;display:flex;flex-direction:column;overflow:hidden;}",
-        "#pg-note-ta{flex:1;width:100%;height:100%;border:none;outline:none;resize:none;padding:10px 12px;font-size:15px;line-height:1.6;color:#1e293b;font-family:inherit;background:#fff;}",
+        ".pg-fmt{display:flex;align-items:center;gap:5px;padding:5px 8px;flex-shrink:0;background:#f8fafc;border-bottom:1px solid #e2e8f0;}",
+        ".pg-fmt button{border:1px solid #cbd5e1;background:#fff;color:#1e293b;border-radius:6px;height:24px;min-width:24px;padding:0 6px;cursor:pointer;font-size:12px;font-weight:700;line-height:1;pointer-events:auto!important;}",
+        ".pg-fmt button.on{background:#0f172a;color:#fff;border-color:#0f172a;}",
+        ".pg-fmt .pg-swatch{width:16px;height:16px;min-width:16px;padding:0;border-radius:50%;border:1px solid rgba(15,23,42,.28);}",
+        ".pg-fmt .pg-swatch.on{box-shadow:0 0 0 2px #fff,0 0 0 3px #0284c7;}",
+        "#pg-note-ta{flex:1;width:100%;min-height:0;border:none;outline:none;padding:10px 12px;font-size:15px;line-height:1.6;color:#1e293b;font-family:inherit;background:#fff;overflow-y:auto;white-space:pre-wrap;word-break:break-word;}",
+        "#pg-note-ta.pg-empty:before{content:attr(data-ph);color:#94a3b8;}",
         ".pg-py-body{flex:1;display:flex;flex-direction:column;padding:8px;gap:6px;overflow:hidden;}",
         "#pg-py-inp{flex:1;width:100%;min-height:60px;border:1.5px solid #cbd5e1;border-radius:7px;padding:7px 10px;font-size:14px;font-family:inherit;outline:none;resize:none;box-sizing:border-box;transition:border-color .15s;}",
         "#pg-py-inp:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.12);}",
@@ -947,7 +953,19 @@ components.html("""
         '      <button id="pg-n-cls">✕</button>',
         '    </div>',
         '  </div>',
-        '  <div class="pg-body"><textarea id="pg-note-ta" placeholder="Nhập ghi chú tại đây..."></textarea></div>',
+        '  <div class="pg-body">',
+        '    <div class="pg-fmt">',
+        '      <button type="button" id="pg-n-bold" title="Đậm">B</button>',
+        '      <button type="button" id="pg-n-light" title="Nhạt" style="font-weight:300">Nhạt</button>',
+        '      <button type="button" class="pg-swatch" data-c="#1e293b" style="background:#1e293b" title="Đen"></button>',
+        '      <button type="button" class="pg-swatch" data-c="#dc2626" style="background:#dc2626" title="Đỏ"></button>',
+        '      <button type="button" class="pg-swatch" data-c="#ea580c" style="background:#ea580c" title="Cam"></button>',
+        '      <button type="button" class="pg-swatch" data-c="#16a34a" style="background:#16a34a" title="Xanh lá"></button>',
+        '      <button type="button" class="pg-swatch" data-c="#0284c7" style="background:#0284c7" title="Xanh dương"></button>',
+        '      <button type="button" class="pg-swatch" data-c="#7c3aed" style="background:#7c3aed" title="Tím"></button>',
+        '    </div>',
+        '    <div id="pg-note-ta" contenteditable="true" data-ph="Nhập ghi chú tại đây..."></div>',
+        '  </div>',
         '</div>',
         '<div id="pg-popup-pinyin">',
         '  <div class="pg-hdr" id="pg-hdr-pinyin">',
@@ -961,6 +979,16 @@ components.html("""
         '  </div>',
         '  <div class="pg-body">',
         '    <div class="pg-py-body">',
+        '      <div class="pg-fmt">',
+        '        <button type="button" id="pg-py-bold" title="Đậm">B</button>',
+        '        <button type="button" id="pg-py-light" title="Nhạt" style="font-weight:300">Nhạt</button>',
+        '        <button type="button" class="pg-swatch" data-c="#1e293b" style="background:#1e293b" title="Đen"></button>',
+        '        <button type="button" class="pg-swatch" data-c="#dc2626" style="background:#dc2626" title="Đỏ"></button>',
+        '        <button type="button" class="pg-swatch" data-c="#ea580c" style="background:#ea580c" title="Cam"></button>',
+        '        <button type="button" class="pg-swatch" data-c="#16a34a" style="background:#16a34a" title="Xanh lá"></button>',
+        '        <button type="button" class="pg-swatch" data-c="#0284c7" style="background:#0284c7" title="Xanh dương"></button>',
+        '        <button type="button" class="pg-swatch" data-c="#7c3aed" style="background:#7c3aed" title="Tím"></button>',
+        '      </div>',
         '      <textarea id="pg-py-inp" placeholder="Nhập cả từ, ví dụ: 音乐 快乐"></textarea>',
         '      <div id="pg-py-out"><span style="color:#94a3b8;font-style:italic;font-size:12px;">Pinyin </span></div>',
         '      <div id="pg-py-copy-row"><button id="pg-py-copy">📋 Copy Pinyin</button></div>',
@@ -1144,16 +1172,98 @@ components.html("""
     makeDrag(el('pg-hdr-note'),   el('pg-popup-note'));
     makeDrag(el('pg-hdr-pinyin'), el('pg-popup-pinyin'));
 
-    /* ---- NOTE TEXTAREA ---- */
+    /* ---- NOTE ---- */
     var ta=el('pg-note-ta');
+    function saveNote(){
+        if(!ta) return;
+        if(!ta.textContent.trim()) ta.classList.add('pg-empty');
+        else ta.classList.remove('pg-empty');
+        ss('pg_note_txt', ta.innerHTML);
+    }
     if(ta){
-        ta.value=ls('pg_note_txt','');
+        var savedNote=ls('pg_note_txt','');
+        if(/<(span|b|strong|font|div|br)\\b/i.test(savedNote)) ta.innerHTML=savedNote;
+        else ta.textContent=savedNote;
         var fs=parseInt(ls('pg_note_fs','15'));
         ta.style.fontSize=fs+'px';
-        ta.addEventListener('input', function(){ss('pg_note_txt',ta.value);});
+        ta.addEventListener('input', saveNote);
+        if(!ta.textContent.trim()) ta.classList.add('pg-empty');
     }
     el('pg-n-inc').addEventListener('click', function(){if(!ta)return;var f=Math.min(32,(parseInt(ta.style.fontSize)||15)+2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
     el('pg-n-dec').addEventListener('click', function(){if(!ta)return;var f=Math.max(10,(parseInt(ta.style.fontSize)||15)-2);ta.style.fontSize=f+'px';ss('pg_note_fs',f);});
+
+    function styleSelection(root, cssText){
+        var sel = PD.getSelection();
+        if(!sel || !sel.rangeCount || sel.isCollapsed) return false;
+        var node = sel.anchorNode;
+        if(!node || !root.contains(node)) return false;
+        if(node.nodeType===1 && (node.tagName==='TEXTAREA' || node.tagName==='INPUT')) return false;
+        var range = sel.getRangeAt(0);
+        var span = PD.createElement('span');
+        span.style.cssText = cssText;
+        try{ range.surroundContents(span); }
+        catch(err){
+            span.appendChild(range.extractContents());
+            range.insertNode(span);
+        }
+        return true;
+    }
+
+    function bindWeightColor(opts){
+        var bold=el(opts.bold), light=el(opts.light);
+        var sw=[].slice.call(PD.querySelectorAll(opts.swatch));
+        function mark(){
+            var w=ls(opts.wk,'400');
+            var c=ls(opts.ck,'');
+            if(bold) bold.classList.toggle('on', w==='700');
+            if(light) light.classList.toggle('on', w==='300');
+            for(var i=0;i<sw.length;i++) sw[i].classList.toggle('on', sw[i].getAttribute('data-c')===c);
+        }
+        function applyWhole(){
+            opts.apply(ls(opts.wk,'400'), ls(opts.ck,''));
+            mark();
+        }
+        function hold(e){ e.preventDefault(); }
+        function anchorCss(prop){
+            var sel=PD.getSelection();
+            if(!sel || !sel.anchorNode || !opts.rich || !opts.rich.contains(sel.anchorNode)) return '';
+            var n=sel.anchorNode.nodeType===1 ? sel.anchorNode : sel.anchorNode.parentNode;
+            return P.getComputedStyle(n)[prop];
+        }
+        function selOpen(){
+            var sel=PD.getSelection();
+            return !!(sel && sel.rangeCount && !sel.isCollapsed);
+        }
+        function setW(next){
+            if(opts.rich && selOpen()){
+                var curW=anchorCss('fontWeight');
+                var use=(curW===next || curW==='bold' && next==='700')?'400':next;
+                if(styleSelection(opts.rich, 'font-weight:'+use)){ if(opts.onrich) opts.onrich(); return; }
+            }
+            ss(opts.wk, ls(opts.wk,'400')===next ? '400' : next);
+            applyWhole();
+        }
+        function setC(color){
+            if(opts.rich && selOpen() && styleSelection(opts.rich, 'color:'+color)){ if(opts.onrich) opts.onrich(); return; }
+            ss(opts.ck, color);
+            applyWhole();
+        }
+        if(bold){ bold.addEventListener('mousedown', hold); bold.addEventListener('click', function(){ setW('700'); }); }
+        if(light){ light.addEventListener('mousedown', hold); light.addEventListener('click', function(){ setW('300'); }); }
+        for(var i=0;i<sw.length;i++){
+            (function(btn){
+                btn.addEventListener('mousedown', hold);
+                btn.addEventListener('click', function(){ setC(btn.getAttribute('data-c')); });
+            })(sw[i]);
+        }
+        applyWhole();
+    }
+
+    bindWeightColor({
+        bold:'pg-n-bold', light:'pg-n-light', swatch:'#pg-popup-note .pg-swatch',
+        wk:'pg_note_w', ck:'pg_note_c', rich:ta, onrich:saveNote,
+        apply:function(w,c){ if(!ta) return; ta.style.fontWeight=w; if(c) ta.style.color=c; }
+    });
 
     /* ---- PINYIN INPUT & ZOOM ---- */
     var pi=el('pg-py-inp'), po=el('pg-py-out');
@@ -1165,6 +1275,14 @@ components.html("""
         pi.addEventListener('input',renderPy); 
         renderPy(); 
     }
+    bindWeightColor({
+        bold:'pg-py-bold', light:'pg-py-light', swatch:'#pg-popup-pinyin .pg-swatch',
+        wk:'pg_py_w', ck:'pg_py_c', rich:null,
+        apply:function(w,c){
+            if(pi){ pi.style.fontWeight=w; if(c) pi.style.color=c; }
+            if(po){ po.style.fontWeight=w; if(c) po.style.color=c; }
+        }
+    });
     el('pg-py-inc').addEventListener('click', function(){
         if(!pi || !po) return;
         var f = Math.min(48, (parseInt(pi.style.fontSize) || 14) + 2);
