@@ -2095,7 +2095,6 @@ def show_lesson10_6_lia():
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br/>", unsafe_allow_html=True)
-        st.info("Khi nói, **俩** gặp chữ thanh 3 thì đọc thành thanh 2. Chữ vẫn viết **liǎ**: **俩口子** nói *liá kǒuzi*.")
 
         for case in cases:
             spans = ""
