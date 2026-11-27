@@ -2068,20 +2068,30 @@ def show_lesson10_6_lia():
         {
             "color": "#2563eb",
             "bg": "#eff6ff",
-            "title": "2. Đi với danh từ chỉ người",
-            "use": "<b>俩</b> đứng trước danh từ chỉ người. Không viết <b>个</b> ở giữa. Với cặp người thân, danh từ đứng trước và <b>俩</b> đứng sau: <b>兄弟俩, 姐妹俩, 夫妻俩</b>.",
-            "mean": "Hai người ấy.",
+            "title": "2a. Danh từ chỉ người thường",
+            "use": "Danh từ chỉ loại người bình thường, đếm được. <b>俩</b> là <b>两个</b> đã gộp, nên đứng trước danh từ. Không viết <b>个</b> ở giữa. <b>口子</b> cũng đi theo kiểu này: <b>俩口子</b>.",
+            "mean": "Hai người thuộc loại đó.",
             "formula": [("俩", "#93c5fd", True), ("+", "#94a3b8"), ("Danh từ chỉ người", "#93c5fd")],
             "rows": [
                 ("俩人。", "Liǎ rén.", "Hai người.", "两个人"),
                 ("俩学生。", "Liǎ xuésheng.", "Hai học sinh.", "两个学生"),
                 ("俩孩子。", "Liǎ háizi.", "Hai đứa trẻ.", "两个孩子"),
-                ("兄弟俩。", "Xiōngdì liǎ.", "Hai anh em.", "俩 đứng sau cặp người thân"),
+                ("俩口子。", "Liǎ kǒuzi.", "Hai vợ chồng.", "Khi nói: liá kǒuzi. Không nói 口子俩"),
+            ],
+        },
+        {
+            "color": "#0f766e",
+            "bg": "#f0fdfa",
+            "title": "2b. Cặp người thân",
+            "use": "Danh từ đã là một cặp thân thuộc cố định. <b>俩</b> đứng sau, cùng kiểu với <b>我们俩</b>. Không áp dụng cho người thường: không nói <b>学生俩</b>, <b>孩子俩</b>.",
+            "mean": "Đúng hai người trong cặp đó.",
+            "formula": [("Cặp người thân", "#5eead4"), ("+", "#94a3b8"), ("俩", "#5eead4", True)],
+            "rows": [
+                ("兄弟俩。", "Xiōngdì liǎ.", "Hai anh em.", "Cặp thân thuộc + 俩"),
                 ("姐妹俩。", "Jiěmèi liǎ.", "Hai chị em.", "俩 đứng sau"),
                 ("夫妻俩。", "Fūqī liǎ.", "Hai vợ chồng.", "俩 đứng sau"),
                 ("父子俩。", "Fùzǐ liǎ.", "Hai bố con.", "俩 đứng sau"),
                 ("母女俩。", "Mǔnǚ liǎ.", "Hai mẹ con.", "俩 đứng sau"),
-                ("俩口子。", "Liǎ kǒuzi.", "Hai vợ chồng.", "Khi nói: liá kǒuzi"),
             ],
         },
     ]
@@ -2091,7 +2101,6 @@ def show_lesson10_6_lia():
         <div class="b106-hero">
             <div class="b106-char">俩</div>
             <div class="b106-py">liǎ · thanh 3</div>
-            <div class="b106-tag">两个 đã gộp lại · chỉ người</div>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("<br/>", unsafe_allow_html=True)
@@ -2189,6 +2198,7 @@ def show_lesson10_6_lia():
         """, unsafe_allow_html=True)
         traps = [
             ("俩 chỉ người", "Đồ vật vẫn dùng <b>两 + lượng từ</b>: 两本书, 两个苹果, 两杯茶."),
+            ("Chọn đúng chỗ của 俩", "Người thường, đang đếm: <b>俩</b> đứng trước — 俩人, 俩学生, 俩孩子, 俩口子. Cặp thân thuộc: <b>俩</b> đứng sau — 兄弟俩, 姐妹俩, 夫妻俩. Không nói 学生俩, không nói 口子俩."),
             ("Không thêm lượng từ sau 俩", "Hai người viết <b>俩人</b> hoặc <b>两个人</b>."),
             ("二, 两, 俩 mỗi chữ một chỗ", "<b>二</b> là chữ số: 十二, 第二. <b>两</b> là số lượng trước lượng từ: 两个人. <b>俩</b> là 两个 đã gộp lại, chỉ người: 我们俩."),
             ("俩口子 khi nói đổi thanh", "口 là thanh 3, nên 俩 nói thành thanh 2: liá kǒuzi. Chữ vẫn viết liǎ."),
